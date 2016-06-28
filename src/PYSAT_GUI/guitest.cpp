@@ -42,10 +42,8 @@ void GuiTest::on_toolButton_4_clicked()
     ui->lineEdit_4->setText(file_name);
 }
 
-
-
-
 void GuiTest::on_actionExit_triggered()
 {
     this->close();
 }
+
