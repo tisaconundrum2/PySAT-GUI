@@ -22,7 +22,7 @@ private slots:
     void on_toolButton_3_clicked();
     void on_toolButton_4_clicked();
     void on_actionExit_triggered();
-
+    void on_pushButton_13_clicked();
 
 private:
     Ui::GuiTest *ui;

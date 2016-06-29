@@ -456,6 +456,52 @@ QGroupBox::title {
          </widget>
         </item>
         <item>
+         <widget class="QGroupBox" name="CrossValidation">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="title">
+           <string>Setup</string>
+          </property>
+          <layout class="QVBoxLayout" name="CrossValid">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_11">
+               <item>
+                <widget class="QLabel" name="label_14">
+                 <property name="text">
+                  <string>Element Name</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_15">
+                 <property name="text">
+                  <string>nfolds_test</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_12">
+               <item>
+                <widget class="QLineEdit" name="lineEdit_5"/>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="spinBox_7"/>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
          <widget class="QGroupBox" name="CompRanges">
           <property name="font">
            <font>
@@ -1003,6 +1049,7 @@ QGroupBox::title {
        </layout>
        <zorder>Files</zorder>
        <zorder>OK</zorder>
+       <zorder>CrossValidation</zorder>
        <zorder>CompRanges</zorder>
        <zorder>CreateModels</zorder>
        <zorder>Normalization</zorder>

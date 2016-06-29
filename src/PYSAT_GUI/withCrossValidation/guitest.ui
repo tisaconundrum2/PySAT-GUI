@@ -24,9 +24,9 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>0</y>
-         <width>564</width>
-         <height>827</height>
+         <y>-66</y>
+         <width>547</width>
+         <height>928</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -456,6 +456,72 @@ QGroupBox::title {
          </widget>
         </item>
         <item>
+         <widget class="QGroupBox" name="CrossValidation">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="title">
+           <string>Cross Validation</string>
+          </property>
+          <layout class="QVBoxLayout" name="CrossValid">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_11">
+               <item>
+                <widget class="QLabel" name="label_14">
+                 <property name="text">
+                  <string>Element Name</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_15">
+                 <property name="text">
+                  <string>nfolds_test</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_16">
+                 <property name="text">
+                  <string>nfolds_cv</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_17">
+                 <property name="text">
+                  <string>testfolds_cv</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_12">
+               <item>
+                <widget class="QLineEdit" name="lineEdit_5"/>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="spinBox_7"/>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="spinBox_8"/>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="spinBox_9"/>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
          <widget class="QGroupBox" name="CompRanges">
           <property name="font">
            <font>
@@ -793,6 +859,30 @@ QGroupBox::title {
          </widget>
         </item>
         <item>
+         <widget class="QGroupBox" name="MaxNumComp">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="title">
+           <string>Max Number of Components</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_9">
+           <item>
+            <widget class="QSpinBox" name="spinBox_17">
+             <property name="minimum">
+              <number>-100</number>
+             </property>
+             <property name="maximum">
+              <number>1000</number>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
          <widget class="QGroupBox" name="CreateModels">
           <property name="font">
            <font>
@@ -1003,6 +1093,8 @@ QGroupBox::title {
        </layout>
        <zorder>Files</zorder>
        <zorder>OK</zorder>
+       <zorder>CrossValidation</zorder>
+       <zorder>MaxNumComp</zorder>
        <zorder>CompRanges</zorder>
        <zorder>CreateModels</zorder>
        <zorder>Normalization</zorder>

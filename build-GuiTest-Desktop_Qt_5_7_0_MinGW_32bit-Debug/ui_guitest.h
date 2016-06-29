@@ -82,12 +82,12 @@ public:
     QAction *actionExit;
     QAction *actionNormalization;
     QWidget *centralWidget;
-    QVBoxLayout *verticalLayout_2;
+    QVBoxLayout *verticalLayout_28;
     QScrollArea *scrollArea;
     QWidget *scrollAreaWidgetContents_2;
-    QVBoxLayout *verticalLayout_7;
-    QGroupBox *files;
-    QVBoxLayout *Files;
+    QVBoxLayout *verticalLayout_29;
+    QGroupBox *Files;
+    QVBoxLayout *files;
     QSplitter *splitter_2;
     QWidget *layoutWidget;
     QHBoxLayout *horizontalLayout;
@@ -106,29 +106,52 @@ public:
     QToolButton *toolButton_2;
     QToolButton *toolButton_3;
     QToolButton *toolButton_4;
-    QGroupBox *Norm3;
-    QVBoxLayout *Ranges3;
-    QHBoxLayout *horizontalLayout_12;
-    QVBoxLayout *verticalLayout_4;
-    QLabel *label_5;
-    QLabel *label_6;
-    QLabel *label_7;
-    QLabel *label_8;
-    QVBoxLayout *verticalLayout_3;
-    QSpinBox *spinBox;
-    QSpinBox *spinBox_2;
-    QSpinBox *spinBox_3;
-    QSpinBox *spinBox_4;
-    QGroupBox *Norm1;
-    QVBoxLayout *Ranges1;
-    QVBoxLayout *verticalLayout_15;
-    QHBoxLayout *horizontalLayout_10;
-    QVBoxLayout *verticalLayout_10;
-    QLabel *label_12;
-    QLabel *label_49;
-    QVBoxLayout *verticalLayout_8;
-    QSpinBox *spinBox_6;
-    QSpinBox *spinBox_18;
+    QGroupBox *Normalization;
+    QVBoxLayout *verticalLayout_27;
+    QVBoxLayout *verticalLayout_26;
+    QVBoxLayout *verticalLayout_2;
+    QHBoxLayout *horizontalLayout_2;
+    QLabel *norm_label;
+    QSpinBox *norm_spinBox_9;
+    QSpinBox *norm_spinBox;
+    QVBoxLayout *verticalLayout_16;
+    QHBoxLayout *horizontalLayout_18;
+    QLabel *norm_label_2;
+    QSpinBox *norm_spinBox_10;
+    QSpinBox *norm_spinBox_2;
+    QVBoxLayout *verticalLayout_20;
+    QHBoxLayout *horizontalLayout_20;
+    QLabel *norm_label_3;
+    QSpinBox *norm_spinBox_11;
+    QSpinBox *norm_spinBox_3;
+    QVBoxLayout *verticalLayout_21;
+    QHBoxLayout *horizontalLayout_22;
+    QLabel *norm_label_4;
+    QSpinBox *norm_spinBox_12;
+    QSpinBox *norm_spinBox_4;
+    QVBoxLayout *verticalLayout_23;
+    QHBoxLayout *horizontalLayout_26;
+    QLabel *norm_label_5;
+    QSpinBox *norm_spinBox_13;
+    QSpinBox *norm_spinBox_5;
+    QVBoxLayout *verticalLayout_25;
+    QHBoxLayout *horizontalLayout_30;
+    QLabel *norm_label_6;
+    QSpinBox *norm_spinBox_14;
+    QSpinBox *norm_spinBox_6;
+    QVBoxLayout *verticalLayout_24;
+    QHBoxLayout *horizontalLayout_28;
+    QLabel *norm_label_7;
+    QSpinBox *norm_spinBox_15;
+    QSpinBox *norm_spinBox_7;
+    QVBoxLayout *verticalLayout_22;
+    QHBoxLayout *horizontalLayout_24;
+    QLabel *norm_label_8;
+    QSpinBox *norm_spinBox_16;
+    QSpinBox *norm_spinBox_8;
+    QHBoxLayout *horizontalLayout_25;
+    QSpacerItem *horizontalSpacer_6;
+    QPushButton *pushButton_13;
     QGroupBox *CrossValidation;
     QVBoxLayout *CrossValid;
     QHBoxLayout *horizontalLayout_4;
@@ -206,8 +229,8 @@ public:
     QLabel *label_89;
     QLabel *label_90;
     QLabel *label_91;
-    QGroupBox *ok;
-    QHBoxLayout *OK;
+    QGroupBox *OK;
+    QHBoxLayout *ok;
     QSpacerItem *horizontalSpacer_5;
     QPushButton *pushButton;
     QMenuBar *menuBar;
@@ -226,7 +249,7 @@ public:
     {
         if (GuiTest->objectName().isEmpty())
             GuiTest->setObjectName(QStringLiteral("GuiTest"));
-        GuiTest->resize(584, 500);
+        GuiTest->resize(584, 900);
         actionLoad_Refence_Data = new QAction(GuiTest);
         actionLoad_Refence_Data->setObjectName(QStringLiteral("actionLoad_Refence_Data"));
         actionLoad_Unknown_Data = new QAction(GuiTest);
@@ -317,16 +340,16 @@ public:
         actionNormalization->setObjectName(QStringLiteral("actionNormalization"));
         centralWidget = new QWidget(GuiTest);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        verticalLayout_2 = new QVBoxLayout(centralWidget);
-        verticalLayout_2->setSpacing(6);
-        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        verticalLayout_28 = new QVBoxLayout(centralWidget);
+        verticalLayout_28->setSpacing(6);
+        verticalLayout_28->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_28->setObjectName(QStringLiteral("verticalLayout_28"));
         scrollArea = new QScrollArea(centralWidget);
         scrollArea->setObjectName(QStringLiteral("scrollArea"));
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents_2 = new QWidget();
         scrollAreaWidgetContents_2->setObjectName(QStringLiteral("scrollAreaWidgetContents_2"));
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, -402, 547, 845));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, -66, 547, 928));
         scrollAreaWidgetContents_2->setStyleSheet(QLatin1String("QGroupBox {\n"
 "  border: 2px solid gray;\n"
 "  border-radius: 6px;\n"
@@ -339,20 +362,20 @@ public:
 "  padding-left: 8px;\n"
 "}\n"
 ""));
-        verticalLayout_7 = new QVBoxLayout(scrollAreaWidgetContents_2);
-        verticalLayout_7->setSpacing(6);
-        verticalLayout_7->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_7->setObjectName(QStringLiteral("verticalLayout_7"));
-        files = new QGroupBox(scrollAreaWidgetContents_2);
-        files->setObjectName(QStringLiteral("files"));
+        verticalLayout_29 = new QVBoxLayout(scrollAreaWidgetContents_2);
+        verticalLayout_29->setSpacing(6);
+        verticalLayout_29->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_29->setObjectName(QStringLiteral("verticalLayout_29"));
+        Files = new QGroupBox(scrollAreaWidgetContents_2);
+        Files->setObjectName(QStringLiteral("Files"));
         QFont font;
         font.setPointSize(10);
-        files->setFont(font);
-        Files = new QVBoxLayout(files);
-        Files->setSpacing(6);
-        Files->setContentsMargins(11, 11, 11, 11);
-        Files->setObjectName(QStringLiteral("Files"));
-        splitter_2 = new QSplitter(files);
+        Files->setFont(font);
+        files = new QVBoxLayout(Files);
+        files->setSpacing(6);
+        files->setContentsMargins(11, 11, 11, 11);
+        files->setObjectName(QStringLiteral("files"));
+        splitter_2 = new QSplitter(Files);
         splitter_2->setObjectName(QStringLiteral("splitter_2"));
         splitter_2->setOrientation(Qt::Horizontal);
         layoutWidget = new QWidget(splitter_2);
@@ -446,138 +469,273 @@ public:
 
         splitter_2->addWidget(layoutWidget);
 
-        Files->addWidget(splitter_2);
+        files->addWidget(splitter_2);
 
 
-        verticalLayout_7->addWidget(files);
+        verticalLayout_29->addWidget(Files);
 
-        Norm3 = new QGroupBox(scrollAreaWidgetContents_2);
-        Norm3->setObjectName(QStringLiteral("Norm3"));
-        Norm3->setFont(font);
-        Ranges3 = new QVBoxLayout(Norm3);
-        Ranges3->setSpacing(6);
-        Ranges3->setContentsMargins(11, 11, 11, 11);
-        Ranges3->setObjectName(QStringLiteral("Ranges3"));
-        horizontalLayout_12 = new QHBoxLayout();
-        horizontalLayout_12->setSpacing(6);
-        horizontalLayout_12->setObjectName(QStringLiteral("horizontalLayout_12"));
-        verticalLayout_4 = new QVBoxLayout();
-        verticalLayout_4->setSpacing(6);
-        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
-        label_5 = new QLabel(Norm3);
-        label_5->setObjectName(QStringLiteral("label_5"));
+        Normalization = new QGroupBox(scrollAreaWidgetContents_2);
+        Normalization->setObjectName(QStringLiteral("Normalization"));
+        Normalization->setFont(font);
+        verticalLayout_27 = new QVBoxLayout(Normalization);
+        verticalLayout_27->setSpacing(6);
+        verticalLayout_27->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_27->setObjectName(QStringLiteral("verticalLayout_27"));
+        verticalLayout_26 = new QVBoxLayout();
+        verticalLayout_26->setSpacing(6);
+        verticalLayout_26->setObjectName(QStringLiteral("verticalLayout_26"));
+        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        norm_label = new QLabel(Normalization);
+        norm_label->setObjectName(QStringLiteral("norm_label"));
 
-        verticalLayout_4->addWidget(label_5);
+        horizontalLayout_2->addWidget(norm_label);
 
-        label_6 = new QLabel(Norm3);
-        label_6->setObjectName(QStringLiteral("label_6"));
+        norm_spinBox_9 = new QSpinBox(Normalization);
+        norm_spinBox_9->setObjectName(QStringLiteral("norm_spinBox_9"));
+        norm_spinBox_9->setMaximum(1000);
 
-        verticalLayout_4->addWidget(label_6);
+        horizontalLayout_2->addWidget(norm_spinBox_9);
 
-        label_7 = new QLabel(Norm3);
-        label_7->setObjectName(QStringLiteral("label_7"));
+        norm_spinBox = new QSpinBox(Normalization);
+        norm_spinBox->setObjectName(QStringLiteral("norm_spinBox"));
+        norm_spinBox->setMaximum(1000);
 
-        verticalLayout_4->addWidget(label_7);
-
-        label_8 = new QLabel(Norm3);
-        label_8->setObjectName(QStringLiteral("label_8"));
-
-        verticalLayout_4->addWidget(label_8);
-
-
-        horizontalLayout_12->addLayout(verticalLayout_4);
-
-        verticalLayout_3 = new QVBoxLayout();
-        verticalLayout_3->setSpacing(6);
-        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
-        spinBox = new QSpinBox(Norm3);
-        spinBox->setObjectName(QStringLiteral("spinBox"));
-        spinBox->setMaximum(1000);
-
-        verticalLayout_3->addWidget(spinBox);
-
-        spinBox_2 = new QSpinBox(Norm3);
-        spinBox_2->setObjectName(QStringLiteral("spinBox_2"));
-        spinBox_2->setMaximum(1000);
-
-        verticalLayout_3->addWidget(spinBox_2);
-
-        spinBox_3 = new QSpinBox(Norm3);
-        spinBox_3->setObjectName(QStringLiteral("spinBox_3"));
-        spinBox_3->setMaximum(1000);
-
-        verticalLayout_3->addWidget(spinBox_3);
-
-        spinBox_4 = new QSpinBox(Norm3);
-        spinBox_4->setObjectName(QStringLiteral("spinBox_4"));
-        spinBox_4->setMaximum(1000);
-
-        verticalLayout_3->addWidget(spinBox_4);
+        horizontalLayout_2->addWidget(norm_spinBox);
 
 
-        horizontalLayout_12->addLayout(verticalLayout_3);
+        verticalLayout_2->addLayout(horizontalLayout_2);
 
 
-        Ranges3->addLayout(horizontalLayout_12);
+        verticalLayout_26->addLayout(verticalLayout_2);
+
+        verticalLayout_16 = new QVBoxLayout();
+        verticalLayout_16->setSpacing(6);
+        verticalLayout_16->setObjectName(QStringLiteral("verticalLayout_16"));
+        horizontalLayout_18 = new QHBoxLayout();
+        horizontalLayout_18->setSpacing(6);
+        horizontalLayout_18->setObjectName(QStringLiteral("horizontalLayout_18"));
+        norm_label_2 = new QLabel(Normalization);
+        norm_label_2->setObjectName(QStringLiteral("norm_label_2"));
+
+        horizontalLayout_18->addWidget(norm_label_2);
+
+        norm_spinBox_10 = new QSpinBox(Normalization);
+        norm_spinBox_10->setObjectName(QStringLiteral("norm_spinBox_10"));
+        norm_spinBox_10->setMaximum(1000);
+
+        horizontalLayout_18->addWidget(norm_spinBox_10);
+
+        norm_spinBox_2 = new QSpinBox(Normalization);
+        norm_spinBox_2->setObjectName(QStringLiteral("norm_spinBox_2"));
+        norm_spinBox_2->setMaximum(1000);
+
+        horizontalLayout_18->addWidget(norm_spinBox_2);
 
 
-        verticalLayout_7->addWidget(Norm3);
-
-        Norm1 = new QGroupBox(scrollAreaWidgetContents_2);
-        Norm1->setObjectName(QStringLiteral("Norm1"));
-        Norm1->setFont(font);
-        Ranges1 = new QVBoxLayout(Norm1);
-        Ranges1->setSpacing(6);
-        Ranges1->setContentsMargins(11, 11, 11, 11);
-        Ranges1->setObjectName(QStringLiteral("Ranges1"));
-        verticalLayout_15 = new QVBoxLayout();
-        verticalLayout_15->setSpacing(6);
-        verticalLayout_15->setObjectName(QStringLiteral("verticalLayout_15"));
-        horizontalLayout_10 = new QHBoxLayout();
-        horizontalLayout_10->setSpacing(6);
-        horizontalLayout_10->setObjectName(QStringLiteral("horizontalLayout_10"));
-        verticalLayout_10 = new QVBoxLayout();
-        verticalLayout_10->setSpacing(6);
-        verticalLayout_10->setObjectName(QStringLiteral("verticalLayout_10"));
-        label_12 = new QLabel(Norm1);
-        label_12->setObjectName(QStringLiteral("label_12"));
-
-        verticalLayout_10->addWidget(label_12);
-
-        label_49 = new QLabel(Norm1);
-        label_49->setObjectName(QStringLiteral("label_49"));
-
-        verticalLayout_10->addWidget(label_49);
+        verticalLayout_16->addLayout(horizontalLayout_18);
 
 
-        horizontalLayout_10->addLayout(verticalLayout_10);
+        verticalLayout_26->addLayout(verticalLayout_16);
 
-        verticalLayout_8 = new QVBoxLayout();
-        verticalLayout_8->setSpacing(6);
-        verticalLayout_8->setObjectName(QStringLiteral("verticalLayout_8"));
-        spinBox_6 = new QSpinBox(Norm1);
-        spinBox_6->setObjectName(QStringLiteral("spinBox_6"));
-        spinBox_6->setMaximum(1000);
+        verticalLayout_20 = new QVBoxLayout();
+        verticalLayout_20->setSpacing(6);
+        verticalLayout_20->setObjectName(QStringLiteral("verticalLayout_20"));
+        horizontalLayout_20 = new QHBoxLayout();
+        horizontalLayout_20->setSpacing(6);
+        horizontalLayout_20->setObjectName(QStringLiteral("horizontalLayout_20"));
+        norm_label_3 = new QLabel(Normalization);
+        norm_label_3->setObjectName(QStringLiteral("norm_label_3"));
 
-        verticalLayout_8->addWidget(spinBox_6);
+        horizontalLayout_20->addWidget(norm_label_3);
 
-        spinBox_18 = new QSpinBox(Norm1);
-        spinBox_18->setObjectName(QStringLiteral("spinBox_18"));
-        spinBox_18->setMaximum(1000);
+        norm_spinBox_11 = new QSpinBox(Normalization);
+        norm_spinBox_11->setObjectName(QStringLiteral("norm_spinBox_11"));
+        norm_spinBox_11->setMaximum(1000);
 
-        verticalLayout_8->addWidget(spinBox_18);
+        horizontalLayout_20->addWidget(norm_spinBox_11);
 
+        norm_spinBox_3 = new QSpinBox(Normalization);
+        norm_spinBox_3->setObjectName(QStringLiteral("norm_spinBox_3"));
+        norm_spinBox_3->setMaximum(1000);
 
-        horizontalLayout_10->addLayout(verticalLayout_8);
-
-
-        verticalLayout_15->addLayout(horizontalLayout_10);
-
-
-        Ranges1->addLayout(verticalLayout_15);
+        horizontalLayout_20->addWidget(norm_spinBox_3);
 
 
-        verticalLayout_7->addWidget(Norm1);
+        verticalLayout_20->addLayout(horizontalLayout_20);
+
+
+        verticalLayout_26->addLayout(verticalLayout_20);
+
+        verticalLayout_21 = new QVBoxLayout();
+        verticalLayout_21->setSpacing(6);
+        verticalLayout_21->setObjectName(QStringLiteral("verticalLayout_21"));
+        horizontalLayout_22 = new QHBoxLayout();
+        horizontalLayout_22->setSpacing(6);
+        horizontalLayout_22->setObjectName(QStringLiteral("horizontalLayout_22"));
+        norm_label_4 = new QLabel(Normalization);
+        norm_label_4->setObjectName(QStringLiteral("norm_label_4"));
+
+        horizontalLayout_22->addWidget(norm_label_4);
+
+        norm_spinBox_12 = new QSpinBox(Normalization);
+        norm_spinBox_12->setObjectName(QStringLiteral("norm_spinBox_12"));
+        norm_spinBox_12->setMaximum(1000);
+
+        horizontalLayout_22->addWidget(norm_spinBox_12);
+
+        norm_spinBox_4 = new QSpinBox(Normalization);
+        norm_spinBox_4->setObjectName(QStringLiteral("norm_spinBox_4"));
+        norm_spinBox_4->setMaximum(1000);
+
+        horizontalLayout_22->addWidget(norm_spinBox_4);
+
+
+        verticalLayout_21->addLayout(horizontalLayout_22);
+
+
+        verticalLayout_26->addLayout(verticalLayout_21);
+
+        verticalLayout_23 = new QVBoxLayout();
+        verticalLayout_23->setSpacing(6);
+        verticalLayout_23->setObjectName(QStringLiteral("verticalLayout_23"));
+        horizontalLayout_26 = new QHBoxLayout();
+        horizontalLayout_26->setSpacing(6);
+        horizontalLayout_26->setObjectName(QStringLiteral("horizontalLayout_26"));
+        norm_label_5 = new QLabel(Normalization);
+        norm_label_5->setObjectName(QStringLiteral("norm_label_5"));
+
+        horizontalLayout_26->addWidget(norm_label_5);
+
+        norm_spinBox_13 = new QSpinBox(Normalization);
+        norm_spinBox_13->setObjectName(QStringLiteral("norm_spinBox_13"));
+        norm_spinBox_13->setMaximum(1000);
+
+        horizontalLayout_26->addWidget(norm_spinBox_13);
+
+        norm_spinBox_5 = new QSpinBox(Normalization);
+        norm_spinBox_5->setObjectName(QStringLiteral("norm_spinBox_5"));
+        norm_spinBox_5->setMaximum(1000);
+
+        horizontalLayout_26->addWidget(norm_spinBox_5);
+
+
+        verticalLayout_23->addLayout(horizontalLayout_26);
+
+
+        verticalLayout_26->addLayout(verticalLayout_23);
+
+        verticalLayout_25 = new QVBoxLayout();
+        verticalLayout_25->setSpacing(6);
+        verticalLayout_25->setObjectName(QStringLiteral("verticalLayout_25"));
+        horizontalLayout_30 = new QHBoxLayout();
+        horizontalLayout_30->setSpacing(6);
+        horizontalLayout_30->setObjectName(QStringLiteral("horizontalLayout_30"));
+        norm_label_6 = new QLabel(Normalization);
+        norm_label_6->setObjectName(QStringLiteral("norm_label_6"));
+
+        horizontalLayout_30->addWidget(norm_label_6);
+
+        norm_spinBox_14 = new QSpinBox(Normalization);
+        norm_spinBox_14->setObjectName(QStringLiteral("norm_spinBox_14"));
+        norm_spinBox_14->setMaximum(1000);
+
+        horizontalLayout_30->addWidget(norm_spinBox_14);
+
+        norm_spinBox_6 = new QSpinBox(Normalization);
+        norm_spinBox_6->setObjectName(QStringLiteral("norm_spinBox_6"));
+        norm_spinBox_6->setMaximum(1000);
+
+        horizontalLayout_30->addWidget(norm_spinBox_6);
+
+
+        verticalLayout_25->addLayout(horizontalLayout_30);
+
+
+        verticalLayout_26->addLayout(verticalLayout_25);
+
+        verticalLayout_24 = new QVBoxLayout();
+        verticalLayout_24->setSpacing(6);
+        verticalLayout_24->setObjectName(QStringLiteral("verticalLayout_24"));
+        horizontalLayout_28 = new QHBoxLayout();
+        horizontalLayout_28->setSpacing(6);
+        horizontalLayout_28->setObjectName(QStringLiteral("horizontalLayout_28"));
+        norm_label_7 = new QLabel(Normalization);
+        norm_label_7->setObjectName(QStringLiteral("norm_label_7"));
+
+        horizontalLayout_28->addWidget(norm_label_7);
+
+        norm_spinBox_15 = new QSpinBox(Normalization);
+        norm_spinBox_15->setObjectName(QStringLiteral("norm_spinBox_15"));
+        norm_spinBox_15->setMaximum(1000);
+
+        horizontalLayout_28->addWidget(norm_spinBox_15);
+
+        norm_spinBox_7 = new QSpinBox(Normalization);
+        norm_spinBox_7->setObjectName(QStringLiteral("norm_spinBox_7"));
+        norm_spinBox_7->setMaximum(1000);
+
+        horizontalLayout_28->addWidget(norm_spinBox_7);
+
+
+        verticalLayout_24->addLayout(horizontalLayout_28);
+
+
+        verticalLayout_26->addLayout(verticalLayout_24);
+
+        verticalLayout_22 = new QVBoxLayout();
+        verticalLayout_22->setSpacing(6);
+        verticalLayout_22->setObjectName(QStringLiteral("verticalLayout_22"));
+        horizontalLayout_24 = new QHBoxLayout();
+        horizontalLayout_24->setSpacing(6);
+        horizontalLayout_24->setObjectName(QStringLiteral("horizontalLayout_24"));
+        norm_label_8 = new QLabel(Normalization);
+        norm_label_8->setObjectName(QStringLiteral("norm_label_8"));
+
+        horizontalLayout_24->addWidget(norm_label_8);
+
+        norm_spinBox_16 = new QSpinBox(Normalization);
+        norm_spinBox_16->setObjectName(QStringLiteral("norm_spinBox_16"));
+        norm_spinBox_16->setMaximum(1000);
+
+        horizontalLayout_24->addWidget(norm_spinBox_16);
+
+        norm_spinBox_8 = new QSpinBox(Normalization);
+        norm_spinBox_8->setObjectName(QStringLiteral("norm_spinBox_8"));
+        norm_spinBox_8->setMaximum(1000);
+
+        horizontalLayout_24->addWidget(norm_spinBox_8);
+
+
+        verticalLayout_22->addLayout(horizontalLayout_24);
+
+        horizontalLayout_25 = new QHBoxLayout();
+        horizontalLayout_25->setSpacing(6);
+        horizontalLayout_25->setObjectName(QStringLiteral("horizontalLayout_25"));
+        horizontalSpacer_6 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_25->addItem(horizontalSpacer_6);
+
+        pushButton_13 = new QPushButton(Normalization);
+        pushButton_13->setObjectName(QStringLiteral("pushButton_13"));
+
+        horizontalLayout_25->addWidget(pushButton_13);
+
+
+        verticalLayout_22->addLayout(horizontalLayout_25);
+
+
+        verticalLayout_26->addLayout(verticalLayout_22);
+
+
+        verticalLayout_27->addLayout(verticalLayout_26);
+
+
+        verticalLayout_29->addWidget(Normalization);
 
         CrossValidation = new QGroupBox(scrollAreaWidgetContents_2);
         CrossValidation->setObjectName(QStringLiteral("CrossValidation"));
@@ -645,7 +803,7 @@ public:
         CrossValid->addLayout(horizontalLayout_4);
 
 
-        verticalLayout_7->addWidget(CrossValidation);
+        verticalLayout_29->addWidget(CrossValidation);
 
         CompRanges = new QGroupBox(scrollAreaWidgetContents_2);
         CompRanges->setObjectName(QStringLiteral("CompRanges"));
@@ -848,7 +1006,7 @@ public:
         verticalLayout_14->addLayout(horizontalLayout_9);
 
 
-        verticalLayout_7->addWidget(CompRanges);
+        verticalLayout_29->addWidget(CompRanges);
 
         MaxNumComp = new QGroupBox(scrollAreaWidgetContents_2);
         MaxNumComp->setObjectName(QStringLiteral("MaxNumComp"));
@@ -865,7 +1023,7 @@ public:
         verticalLayout_9->addWidget(spinBox_17);
 
 
-        verticalLayout_7->addWidget(MaxNumComp);
+        verticalLayout_29->addWidget(MaxNumComp);
 
         CreateModels = new QGroupBox(scrollAreaWidgetContents_2);
         CreateModels->setObjectName(QStringLiteral("CreateModels"));
@@ -1009,41 +1167,48 @@ public:
         verticalLayout_17->addLayout(horizontalLayout_15);
 
 
-        verticalLayout_7->addWidget(CreateModels);
+        verticalLayout_29->addWidget(CreateModels);
 
-        ok = new QGroupBox(scrollAreaWidgetContents_2);
-        ok->setObjectName(QStringLiteral("ok"));
-        OK = new QHBoxLayout(ok);
-        OK->setSpacing(6);
-        OK->setContentsMargins(11, 11, 11, 11);
+        OK = new QGroupBox(scrollAreaWidgetContents_2);
         OK->setObjectName(QStringLiteral("OK"));
+        ok = new QHBoxLayout(OK);
+        ok->setSpacing(6);
+        ok->setContentsMargins(11, 11, 11, 11);
+        ok->setObjectName(QStringLiteral("ok"));
         horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        OK->addItem(horizontalSpacer_5);
+        ok->addItem(horizontalSpacer_5);
 
-        pushButton = new QPushButton(ok);
+        pushButton = new QPushButton(OK);
         pushButton->setObjectName(QStringLiteral("pushButton"));
         pushButton->setFont(font);
         pushButton->setMouseTracking(false);
 
-        OK->addWidget(pushButton);
+        ok->addWidget(pushButton);
 
 
-        verticalLayout_7->addWidget(ok);
+        verticalLayout_29->addWidget(OK);
 
         scrollArea->setWidget(scrollAreaWidgetContents_2);
-        files->raise();
+        Files->raise();
+        OK->raise();
         CrossValidation->raise();
         MaxNumComp->raise();
         CompRanges->raise();
-        ok->raise();
-        Norm1->raise();
-        Norm3->raise();
         CreateModels->raise();
+        Normalization->raise();
 
-        verticalLayout_2->addWidget(scrollArea);
+        verticalLayout_28->addWidget(scrollArea);
 
         GuiTest->setCentralWidget(centralWidget);
+        scrollArea->raise();
+        norm_label->raise();
+        norm_spinBox->raise();
+        OK->raise();
+        norm_label->raise();
+        norm_spinBox->raise();
+        norm_label->raise();
+        norm_spinBox->raise();
         menuBar = new QMenuBar(GuiTest);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 584, 21));
@@ -1184,7 +1349,7 @@ public:
         actionAbout_QtCreator->setText(QApplication::translate("GuiTest", "About QtCreator...", 0));
         actionExit->setText(QApplication::translate("GuiTest", "Exit", 0));
         actionNormalization->setText(QApplication::translate("GuiTest", "Normalization", 0));
-        files->setTitle(QApplication::translate("GuiTest", "Files", 0));
+        Files->setTitle(QApplication::translate("GuiTest", "Files", 0));
         label_3->setText(QApplication::translate("GuiTest", "Maskfile", 0));
         label->setText(QApplication::translate("GuiTest", "Unknown Data", 0));
         label_2->setText(QApplication::translate("GuiTest", "Full Database", 0));
@@ -1197,14 +1362,16 @@ public:
         toolButton_2->setText(QApplication::translate("GuiTest", "...", 0));
         toolButton_3->setText(QApplication::translate("GuiTest", "...", 0));
         toolButton_4->setText(QApplication::translate("GuiTest", "...", 0));
-        Norm3->setTitle(QApplication::translate("GuiTest", "Normalization 3", 0));
-        label_5->setText(QApplication::translate("GuiTest", "Value 1", 0));
-        label_6->setText(QApplication::translate("GuiTest", "Value 2", 0));
-        label_7->setText(QApplication::translate("GuiTest", "Value 3", 0));
-        label_8->setText(QApplication::translate("GuiTest", "Value 4", 0));
-        Norm1->setTitle(QApplication::translate("GuiTest", "Normalization 1", 0));
-        label_12->setText(QApplication::translate("GuiTest", "TextLabel", 0));
-        label_49->setText(QApplication::translate("GuiTest", "TextLabel", 0));
+        Normalization->setTitle(QApplication::translate("GuiTest", "Normalization", 0));
+        norm_label->setText(QApplication::translate("GuiTest", "Value 1", 0));
+        norm_label_2->setText(QApplication::translate("GuiTest", "Value 2", 0));
+        norm_label_3->setText(QApplication::translate("GuiTest", "Value 3", 0));
+        norm_label_4->setText(QApplication::translate("GuiTest", "Value 4", 0));
+        norm_label_5->setText(QApplication::translate("GuiTest", "Value 5", 0));
+        norm_label_6->setText(QApplication::translate("GuiTest", "Value 6", 0));
+        norm_label_7->setText(QApplication::translate("GuiTest", "Value 7", 0));
+        norm_label_8->setText(QApplication::translate("GuiTest", "Value 8", 0));
+        pushButton_13->setText(QApplication::translate("GuiTest", "Add Value", 0));
         CrossValidation->setTitle(QApplication::translate("GuiTest", "Cross Validation", 0));
         label_14->setText(QApplication::translate("GuiTest", "Element Name", 0));
         label_15->setText(QApplication::translate("GuiTest", "nfolds_test", 0));
