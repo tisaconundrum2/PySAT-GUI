@@ -24,10 +24,24 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>0</y>
+         <y>-402</y>
          <width>547</width>
-         <height>915</height>
+         <height>845</height>
         </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QGroupBox {
+  border: 2px solid gray;
+  border-radius: 6px;
+  margin-top: 0.5em;
+}
+
+QGroupBox::title {
+
+  padding-top: -14px;
+  padding-left: 8px;
+}
+</string>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_7">
         <item>
@@ -304,7 +318,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QGroupBox" name="groupBox">
+         <widget class="QGroupBox" name="CrossValidation">
           <property name="font">
            <font>
             <pointsize>10</pointsize>
@@ -940,7 +954,7 @@
         </item>
        </layout>
        <zorder>files</zorder>
-       <zorder>groupBox</zorder>
+       <zorder>CrossValidation</zorder>
        <zorder>MaxNumComp</zorder>
        <zorder>CompRanges</zorder>
        <zorder>ok</zorder>

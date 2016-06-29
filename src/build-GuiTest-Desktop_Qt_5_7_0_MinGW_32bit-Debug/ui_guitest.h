@@ -86,7 +86,7 @@ public:
     QScrollArea *scrollArea;
     QWidget *scrollAreaWidgetContents_2;
     QVBoxLayout *verticalLayout_7;
-    QGroupBox *Files_2;
+    QGroupBox *files;
     QVBoxLayout *Files;
     QSplitter *splitter_2;
     QWidget *layoutWidget;
@@ -129,7 +129,7 @@ public:
     QVBoxLayout *verticalLayout_8;
     QSpinBox *spinBox_6;
     QSpinBox *spinBox_18;
-    QGroupBox *groupBox;
+    QGroupBox *CrossValidation;
     QVBoxLayout *CrossValid;
     QHBoxLayout *horizontalLayout_4;
     QVBoxLayout *verticalLayout_11;
@@ -326,21 +326,33 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents_2 = new QWidget();
         scrollAreaWidgetContents_2->setObjectName(QStringLiteral("scrollAreaWidgetContents_2"));
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, -370, 547, 932));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, -402, 547, 845));
+        scrollAreaWidgetContents_2->setStyleSheet(QLatin1String("QGroupBox {\n"
+"  border: 2px solid gray;\n"
+"  border-radius: 6px;\n"
+"  margin-top: 0.5em;\n"
+"}\n"
+"\n"
+"QGroupBox::title {\n"
+"\n"
+"  padding-top: -14px;\n"
+"  padding-left: 8px;\n"
+"}\n"
+""));
         verticalLayout_7 = new QVBoxLayout(scrollAreaWidgetContents_2);
         verticalLayout_7->setSpacing(6);
         verticalLayout_7->setContentsMargins(11, 11, 11, 11);
         verticalLayout_7->setObjectName(QStringLiteral("verticalLayout_7"));
-        Files_2 = new QGroupBox(scrollAreaWidgetContents_2);
-        Files_2->setObjectName(QStringLiteral("Files_2"));
+        files = new QGroupBox(scrollAreaWidgetContents_2);
+        files->setObjectName(QStringLiteral("files"));
         QFont font;
         font.setPointSize(10);
-        Files_2->setFont(font);
-        Files = new QVBoxLayout(Files_2);
+        files->setFont(font);
+        Files = new QVBoxLayout(files);
         Files->setSpacing(6);
         Files->setContentsMargins(11, 11, 11, 11);
         Files->setObjectName(QStringLiteral("Files"));
-        splitter_2 = new QSplitter(Files_2);
+        splitter_2 = new QSplitter(files);
         splitter_2->setObjectName(QStringLiteral("splitter_2"));
         splitter_2->setOrientation(Qt::Horizontal);
         layoutWidget = new QWidget(splitter_2);
@@ -437,7 +449,7 @@ public:
         Files->addWidget(splitter_2);
 
 
-        verticalLayout_7->addWidget(Files_2);
+        verticalLayout_7->addWidget(files);
 
         Norm3 = new QGroupBox(scrollAreaWidgetContents_2);
         Norm3->setObjectName(QStringLiteral("Norm3"));
@@ -567,10 +579,10 @@ public:
 
         verticalLayout_7->addWidget(Norm1);
 
-        groupBox = new QGroupBox(scrollAreaWidgetContents_2);
-        groupBox->setObjectName(QStringLiteral("groupBox"));
-        groupBox->setFont(font);
-        CrossValid = new QVBoxLayout(groupBox);
+        CrossValidation = new QGroupBox(scrollAreaWidgetContents_2);
+        CrossValidation->setObjectName(QStringLiteral("CrossValidation"));
+        CrossValidation->setFont(font);
+        CrossValid = new QVBoxLayout(CrossValidation);
         CrossValid->setSpacing(6);
         CrossValid->setContentsMargins(11, 11, 11, 11);
         CrossValid->setObjectName(QStringLiteral("CrossValid"));
@@ -580,22 +592,22 @@ public:
         verticalLayout_11 = new QVBoxLayout();
         verticalLayout_11->setSpacing(6);
         verticalLayout_11->setObjectName(QStringLiteral("verticalLayout_11"));
-        label_14 = new QLabel(groupBox);
+        label_14 = new QLabel(CrossValidation);
         label_14->setObjectName(QStringLiteral("label_14"));
 
         verticalLayout_11->addWidget(label_14);
 
-        label_15 = new QLabel(groupBox);
+        label_15 = new QLabel(CrossValidation);
         label_15->setObjectName(QStringLiteral("label_15"));
 
         verticalLayout_11->addWidget(label_15);
 
-        label_16 = new QLabel(groupBox);
+        label_16 = new QLabel(CrossValidation);
         label_16->setObjectName(QStringLiteral("label_16"));
 
         verticalLayout_11->addWidget(label_16);
 
-        label_17 = new QLabel(groupBox);
+        label_17 = new QLabel(CrossValidation);
         label_17->setObjectName(QStringLiteral("label_17"));
 
         verticalLayout_11->addWidget(label_17);
@@ -606,22 +618,22 @@ public:
         verticalLayout_12 = new QVBoxLayout();
         verticalLayout_12->setSpacing(6);
         verticalLayout_12->setObjectName(QStringLiteral("verticalLayout_12"));
-        lineEdit_5 = new QLineEdit(groupBox);
+        lineEdit_5 = new QLineEdit(CrossValidation);
         lineEdit_5->setObjectName(QStringLiteral("lineEdit_5"));
 
         verticalLayout_12->addWidget(lineEdit_5);
 
-        spinBox_7 = new QSpinBox(groupBox);
+        spinBox_7 = new QSpinBox(CrossValidation);
         spinBox_7->setObjectName(QStringLiteral("spinBox_7"));
 
         verticalLayout_12->addWidget(spinBox_7);
 
-        spinBox_8 = new QSpinBox(groupBox);
+        spinBox_8 = new QSpinBox(CrossValidation);
         spinBox_8->setObjectName(QStringLiteral("spinBox_8"));
 
         verticalLayout_12->addWidget(spinBox_8);
 
-        spinBox_9 = new QSpinBox(groupBox);
+        spinBox_9 = new QSpinBox(CrossValidation);
         spinBox_9->setObjectName(QStringLiteral("spinBox_9"));
 
         verticalLayout_12->addWidget(spinBox_9);
@@ -633,22 +645,11 @@ public:
         CrossValid->addLayout(horizontalLayout_4);
 
 
-        verticalLayout_7->addWidget(groupBox);
+        verticalLayout_7->addWidget(CrossValidation);
 
         CompRanges = new QGroupBox(scrollAreaWidgetContents_2);
         CompRanges->setObjectName(QStringLiteral("CompRanges"));
         CompRanges->setFont(font);
-        CompRanges->setStyleSheet(QLatin1String("QGroupBox::title { \n"
-"    background-color: transparent;\n"
-"     subcontrol-position: top left; /* position at the top left*/ \n"
-"     padding:2 13px;\n"
-"\n"
-" } \n"
-"\n"
-"QGroupBox { \n"
-"     border: 2px solid gray; \n"
-"     border-radius: 3px; \n"
-" } "));
         verticalLayout_14 = new QVBoxLayout(CompRanges);
         verticalLayout_14->setSpacing(6);
         verticalLayout_14->setContentsMargins(11, 11, 11, 11);
@@ -1031,8 +1032,8 @@ public:
         verticalLayout_7->addWidget(ok);
 
         scrollArea->setWidget(scrollAreaWidgetContents_2);
-        Files_2->raise();
-        groupBox->raise();
+        files->raise();
+        CrossValidation->raise();
         MaxNumComp->raise();
         CompRanges->raise();
         ok->raise();
@@ -1183,7 +1184,7 @@ public:
         actionAbout_QtCreator->setText(QApplication::translate("GuiTest", "About QtCreator...", 0));
         actionExit->setText(QApplication::translate("GuiTest", "Exit", 0));
         actionNormalization->setText(QApplication::translate("GuiTest", "Normalization", 0));
-        Files_2->setTitle(QApplication::translate("GuiTest", "Files", 0));
+        files->setTitle(QApplication::translate("GuiTest", "Files", 0));
         label_3->setText(QApplication::translate("GuiTest", "Maskfile", 0));
         label->setText(QApplication::translate("GuiTest", "Unknown Data", 0));
         label_2->setText(QApplication::translate("GuiTest", "Full Database", 0));
@@ -1204,7 +1205,7 @@ public:
         Norm1->setTitle(QApplication::translate("GuiTest", "Normalization 1", 0));
         label_12->setText(QApplication::translate("GuiTest", "TextLabel", 0));
         label_49->setText(QApplication::translate("GuiTest", "TextLabel", 0));
-        groupBox->setTitle(QApplication::translate("GuiTest", "Cross Validation", 0));
+        CrossValidation->setTitle(QApplication::translate("GuiTest", "Cross Validation", 0));
         label_14->setText(QApplication::translate("GuiTest", "Element Name", 0));
         label_15->setText(QApplication::translate("GuiTest", "nfolds_test", 0));
         label_16->setText(QApplication::translate("GuiTest", "nfolds_cv", 0));
