@@ -12,6 +12,8 @@
 int push = 0;
 
 
+//###### Setup GUI Here
+
 GuiTest::GuiTest(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::GuiTest){
     ui->setupUi(this);
@@ -20,6 +22,7 @@ GuiTest::GuiTest(QWidget *parent) :
     QRect rec = QApplication::desktop()->screenGeometry();
     int height = rec.height();
     int width = rec.width();
+    this->resize(this->width(), height*0.9);
     qDebug() << height << width;
 //#########################################################################################
 
