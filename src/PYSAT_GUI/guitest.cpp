@@ -20,7 +20,6 @@ GuiTest::GuiTest(QWidget *parent) :
     QRect rec = QApplication::desktop()->screenGeometry();
     int height = rec.height();
     int width = rec.width();
-    this->resize(this->width(), height-100);
     qDebug() << height << width;
 //#########################################################################################
 
