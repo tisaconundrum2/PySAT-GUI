@@ -242,7 +242,7 @@ public:
     {
         if (GuiTest->objectName().isEmpty())
             GuiTest->setObjectName(QStringLiteral("GuiTest"));
-        GuiTest->resize(584, 900);
+        GuiTest->resize(584, 500);
         actionLoad_Refence_Data = new QAction(GuiTest);
         actionLoad_Refence_Data->setObjectName(QStringLiteral("actionLoad_Refence_Data"));
         actionLoad_Unknown_Data = new QAction(GuiTest);
@@ -342,7 +342,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents_2 = new QWidget();
         scrollAreaWidgetContents_2->setObjectName(QStringLiteral("scrollAreaWidgetContents_2"));
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 564, 827));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 547, 810));
         scrollAreaWidgetContents_2->setStyleSheet(QLatin1String("QGroupBox {\n"
 "  border: 2px solid gray;\n"
 "  border-radius: 6px;\n"
@@ -1156,14 +1156,6 @@ public:
         verticalLayout_28->addWidget(scrollArea);
 
         GuiTest->setCentralWidget(centralWidget);
-        scrollArea->raise();
-        norm_label->raise();
-        norm_spinBox->raise();
-        OK->raise();
-        norm_label->raise();
-        norm_spinBox->raise();
-        norm_label->raise();
-        norm_spinBox->raise();
         menuBar = new QMenuBar(GuiTest);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 584, 21));

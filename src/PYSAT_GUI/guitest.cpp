@@ -21,7 +21,6 @@ GuiTest::GuiTest(QWidget *parent) :
     //######TODO: fix sizing issue, this will allow any computer to have a nicely sized window
     QRect rec = QApplication::desktop()->screenGeometry();
     int height = rec.height();
-    int width = rec.width();
     this->resize(this->width(), height*0.9);
     qDebug() << height << width;
     //#########################################################################################
