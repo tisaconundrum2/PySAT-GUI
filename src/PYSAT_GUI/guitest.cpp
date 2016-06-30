@@ -6,6 +6,8 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QDebug>
+#include <QRect>
+#include <QDesktopWidget>
 
 int push = 0;
 
@@ -14,6 +16,16 @@ GuiTest::GuiTest(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::GuiTest){
     ui->setupUi(this);
 
+//######TODO: fix sizing issue, this will allow any computer to have a nicely sized window
+    QRect rec = QApplication::desktop()->screenGeometry();
+    int height = rec.height();
+    int width = rec.width();
+    this->resize(this->width(), height-100);
+    qDebug() << height << width;
+//#########################################################################################
+
+//#####TODO: add the ability to show buttons for normalization these are a bunch of lists that parse
+//    each item and then will be setVisibile to false so they aren't there until you click a button
     auto labels = {ui->norm_label_2,
                          ui->norm_label_3,
                          ui->norm_label_4,
@@ -39,6 +51,7 @@ GuiTest::GuiTest(QWidget *parent) :
     for (auto label : labels) label->setVisible(false);
     for (auto spinr : spinright) spinr->setVisible(false);
     for (auto spinl : spinleft) spinl->setVisible(false);
+//#########################################################################################
 }
 
 GuiTest::~GuiTest()
