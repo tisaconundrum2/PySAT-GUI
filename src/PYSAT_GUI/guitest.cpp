@@ -39,10 +39,10 @@ GuiTest::GuiTest(QWidget *parent) :
      *    |-------------------------------------------|    python file.
      */
 
-    QLabel* labl[7] = labels();
-    QSpinBox* spinr[7] = spinright();
-    QSpinBox* spinl[7] = spinleft();
-
+    QLabel* labl[7] = {labels()};
+    QSpinBox* spinr[7] = {spinright()};
+    QSpinBox* spinl[7] = {spinleft()};
+    spinl[0]->setVisible();
 
 
 
@@ -134,9 +134,9 @@ void GuiTest::on_pushButton_13_clicked()
     if (push > 6){
         QMessageBox::critical(this, "Warning", "Cannot add anymore values");
     } else {
-        QLabel** labl[7] = {labels()};
-        QSpinBox** spinr[7] = {spinright()};
-        QSpinBox** spinl[7] = {spinleft()};
+        QLabel* labl[7] = {labels()};
+        QSpinBox* spinr[7] = {spinright()};
+        QSpinBox* spinl[7] = {spinleft()};
         push++;
     }
 }
