@@ -43,52 +43,52 @@ GuiTest::GuiTest(QWidget *parent) :
     QSpinBox* spinr[7] = {spinright()};
     QSpinBox* spinl[7] = {spinleft()};
     for (int i = 0; i < 7; i++){
-        labels[i]->setVisible(false);
-        spinleft[i]->setVisible(false);
-        spinright[i]->setVisible(false);
+        labl[i]->setVisible(false);
+        spinr[i]->setVisible(false);
+        spinl[i]->setVisible(false);
     }
     //#########################################################################################
+}
 
+QLabel* GuiTest::labels(){
+    QLabel* labels[7] = {ui->norm_label_2,
+                         ui->norm_label_3,
+                         ui->norm_label_4,
+                         ui->norm_label_5,
+                         ui->norm_label_6,
+                         ui->norm_label_7,
+                         ui->norm_label_8};
+    return labels[7];
+}
 
-    QLabel* GuiTest::labels(){
-        QLabel* labels[7] = {ui->norm_label_2,
-                             ui->norm_label_3,
-                             ui->norm_label_4,
-                             ui->norm_label_5,
-                             ui->norm_label_6,
-                             ui->norm_label_7,
-                             ui->norm_label_8};
-        return labels[7];
-    }
+QSpinBox* GuiTest::spinright(){
+    QSpinBox* spinright[7] = {ui->norm_spinBox_2,
+                              ui->norm_spinBox_3,
+                              ui->norm_spinBox_4,
+                              ui->norm_spinBox_5,
+                              ui->norm_spinBox_6,
+                              ui->norm_spinBox_7,
+                              ui->norm_spinBox_8};
+    return spinright[7];
+}
 
-    QSpinBox* GuiTest::spinright(){
-        QSpinBox* spinright[7] = {ui->norm_spinBox_2,
-                                  ui->norm_spinBox_3,
-                                  ui->norm_spinBox_4,
-                                  ui->norm_spinBox_5,
-                                  ui->norm_spinBox_6,
-                                  ui->norm_spinBox_7,
-                                  ui->norm_spinBox_8};
-        return spinright[7];
-    }
+QSpinBox* GuiTest::spinleft(){
+    QSpinBox* spinleft[7] = {ui->norm_spinBox_10,
+                             ui->norm_spinBox_11,
+                             ui->norm_spinBox_12,
+                             ui->norm_spinBox_13,
+                             ui->norm_spinBox_14,
+                             ui->norm_spinBox_15,
+                             ui->norm_spinBox_16};
+    return spinleft[7];
+}
 
-    QSpinBox* GuiTest::spinleft(){
-        QSpinBox* spinleft[7] = {ui->norm_spinBox_10,
-                                 ui->norm_spinBox_11,
-                                 ui->norm_spinBox_12,
-                                 ui->norm_spinBox_13,
-                                 ui->norm_spinBox_14,
-                                 ui->norm_spinBox_15,
-                                 ui->norm_spinBox_16};
-        return spinleft[7];
-    }
+GuiTest::~GuiTest()
+{
+    delete ui;
+}
 
-    GuiTest::~GuiTest()
-    {
-        delete ui;
-    }
-
-    /*************** GUI Interface **************
+/*************** GUI Interface **************
  *     |-----------------------------------|
  *     |   Maskfile                        | <- on_toolButton_clicked  ; this will open a dialog to look for the .csv mask file
  *     |   Unknown Data                    | <- on_toolButton_2_clicked; this will open a dialog to look for the .csv unknown data file
@@ -101,48 +101,48 @@ GuiTest::GuiTest(QWidget *parent) :
  *
  */
 
-    void GuiTest::on_toolButton_clicked()
-    {
-        const QString &file_name = QFileDialog::getOpenFileName(this, "Open New File", QDir::homePath());
-        ui->lineEdit->setText(file_name);
-    }
+void GuiTest::on_toolButton_clicked()
+{
+    const QString &file_name = QFileDialog::getOpenFileName(this, "Open New File", QDir::homePath());
+    ui->lineEdit->setText(file_name);
+}
 
-    void GuiTest::on_toolButton_2_clicked()
-    {
-        const QString &file_name = QFileDialog::getOpenFileName(this, "Open New File", QDir::homePath());
-        ui->lineEdit_2->setText(file_name);
-    }
+void GuiTest::on_toolButton_2_clicked()
+{
+    const QString &file_name = QFileDialog::getOpenFileName(this, "Open New File", QDir::homePath());
+    ui->lineEdit_2->setText(file_name);
+}
 
-    void GuiTest::on_toolButton_3_clicked()
-    {
-        const QString &file_name = QFileDialog::getOpenFileName(this, "Open New File", QDir::homePath());
-        ui->lineEdit_3->setText(file_name);
-    }
+void GuiTest::on_toolButton_3_clicked()
+{
+    const QString &file_name = QFileDialog::getOpenFileName(this, "Open New File", QDir::homePath());
+    ui->lineEdit_3->setText(file_name);
+}
 
-    void GuiTest::on_toolButton_4_clicked()
-    {
-        const QString &file_name = QFileDialog::getExistingDirectory(this, "Open New Directory", QDir::homePath());
-        ui->lineEdit_4->setText(file_name);
-    }
+void GuiTest::on_toolButton_4_clicked()
+{
+    const QString &file_name = QFileDialog::getExistingDirectory(this, "Open New Directory", QDir::homePath());
+    ui->lineEdit_4->setText(file_name);
+}
 
-    void GuiTest::on_actionExit_triggered()
-    {
-        this->close();
-    }
+void GuiTest::on_actionExit_triggered()
+{
+    this->close();
+}
 
-    void GuiTest::on_pushButton_13_clicked()
-    {
-        if (push > 6){
-            QMessageBox::critical(this, "Warning", "Cannot add anymore values");
-        } else {
-            QLabel* labl[7] = {labels()};
-            QSpinBox* spinr[7] = {spinright()};
-            QSpinBox* spinl[7] = {spinleft()};
-            push++;
-        }
+void GuiTest::on_pushButton_13_clicked()
+{
+    if (push > 6){
+        QMessageBox::critical(this, "Warning", "Cannot add anymore values");
+    } else {
+        QLabel* labl[7] = {labels()};
+        QSpinBox* spinr[7] = {spinright()};
+        QSpinBox* spinl[7] = {spinleft()};
+        push++;
     }
+}
 
-    void GuiTest::on_pushButton_clicked()
-    {
+void GuiTest::on_pushButton_clicked()
+{
 
-    }
+}
