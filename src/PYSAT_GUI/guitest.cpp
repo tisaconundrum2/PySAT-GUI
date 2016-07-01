@@ -42,7 +42,7 @@ GuiTest::GuiTest(QWidget *parent) :
     QLabel** labl[7] = {labels()};
     QSpinBox** spinr[7] = {spinright()};
     QSpinBox** spinl[7] = {spinleft()};
-    *(*(labl + 1))->setVisible(false);
+
 
 
 
@@ -50,7 +50,7 @@ GuiTest::GuiTest(QWidget *parent) :
 }
 
 QLabel** GuiTest::labels(){
-    auto labels[7] = {ui->norm_label_2,
+    QLabel* labels[7] = {ui->norm_label_2,
                          ui->norm_label_3,
                          ui->norm_label_4,
                          ui->norm_label_5,

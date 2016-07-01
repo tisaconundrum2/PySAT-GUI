@@ -24,9 +24,9 @@ private slots:
     void on_actionExit_triggered();
     void on_pushButton_13_clicked();
     void on_pushButton_clicked();
-    QLabel labels();
-    QSpinBox spinright();
-    QSpinBox spinleft();
+    QLabel** labels();
+    QSpinBox** spinright();
+    QSpinBox** spinleft();
 
 private:
     Ui::GuiTest *ui;
