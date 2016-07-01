@@ -49,7 +49,7 @@ GuiTest::GuiTest(QWidget *parent) :
     //#########################################################################################
 }
 
-QLabel** GuiTest::labels(){
+QLabel* labels(GuiTest::Ui *ui){
     QLabel* labels[7] = {ui->norm_label_2,
                          ui->norm_label_3,
                          ui->norm_label_4,
@@ -60,7 +60,7 @@ QLabel** GuiTest::labels(){
     return labels;
 }
 
-QSpinBox** GuiTest::spinright(){
+QSpinBox* spinright(GuiTest::Ui *ui){
     QSpinBox* spinright[7] = {ui->norm_spinBox_2,
                               ui->norm_spinBox_3,
                               ui->norm_spinBox_4,
@@ -71,7 +71,7 @@ QSpinBox** GuiTest::spinright(){
     return spinright;
 }
 
-QSpinBox** GuiTest::spinleft(){
+QSpinBox* spinleft(GuiTest::Ui *ui){
     QSpinBox* spinleft[7] = {ui->norm_spinBox_10,
                              ui->norm_spinBox_11,
                              ui->norm_spinBox_12,
