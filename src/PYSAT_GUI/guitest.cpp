@@ -40,9 +40,9 @@ GuiTest::GuiTest(QWidget *parent) :
      */
 
     int size = 6;
-    QLabel* labl[size] = {labels(&size)};
-    QSpinBox* spinr[size] = {spinright(&size)};
-    QSpinBox* spinl[size] = {spinleft(&size)};
+    QLabel* labl[size] = {labels(size)};
+    QSpinBox* spinr[size] = {spinright(size)};
+    QSpinBox* spinl[size] = {spinleft(size)};
     for (int i = 0; i < size; i++){
         labl[i]->setVisible(false);
         spinr[i]->setVisible(false);
