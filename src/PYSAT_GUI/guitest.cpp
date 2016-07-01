@@ -42,7 +42,7 @@ GuiTest::GuiTest(QWidget *parent) :
     QLabel* labl[7] = {labels()};
     QSpinBox* spinr[7] = {spinright()};
     QSpinBox* spinl[7] = {spinleft()};
-    spinl[0]->setVisible();
+    spinl[1]->setVisible(false);
 
 
 
