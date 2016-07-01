@@ -39,9 +39,9 @@ GuiTest::GuiTest(QWidget *parent) :
      *    |-------------------------------------------|    python file.
      */
 
-    QLabel** labl[7] = {labels()};
-    QSpinBox** spinr[7] = {spinright()};
-    QSpinBox** spinl[7] = {spinleft()};
+    QLabel* labl[7] = {labels()};
+    QSpinBox* spinr[7] = {spinright()};
+    QSpinBox* spinl[7] = {spinleft()};
 
 
 
@@ -50,36 +50,36 @@ GuiTest::GuiTest(QWidget *parent) :
 }
 
 QLabel* labels(Ui::GuiTest *ui){
-    QLabel labels[7] = {ui->norm_label_2,
+    QLabel* labels[7] = {ui->norm_label_2,
                          ui->norm_label_3,
                          ui->norm_label_4,
                          ui->norm_label_5,
                          ui->norm_label_6,
                          ui->norm_label_7,
                          ui->norm_label_8};
-    return labels;
+    return labels[7];
 }
 
 QSpinBox* spinright(Ui::GuiTest *ui){
-    QSpinBox spinright[7] = {ui->norm_spinBox_2,
+    QSpinBox* spinright[7] = {ui->norm_spinBox_2,
                               ui->norm_spinBox_3,
                               ui->norm_spinBox_4,
                               ui->norm_spinBox_5,
                               ui->norm_spinBox_6,
                               ui->norm_spinBox_7,
                               ui->norm_spinBox_8};
-    return spinright;
+    return spinright[7];
 }
 
 QSpinBox* spinleft(Ui::GuiTest *ui){
-    QSpinBox spinleft[7] = {ui->norm_spinBox_10,
+    QSpinBox* spinleft[7] = {ui->norm_spinBox_10,
                              ui->norm_spinBox_11,
                              ui->norm_spinBox_12,
                              ui->norm_spinBox_13,
                              ui->norm_spinBox_14,
                              ui->norm_spinBox_15,
                              ui->norm_spinBox_16};
-    return spinleft;
+    return spinleft[7];
 }
 
 GuiTest::~GuiTest()
