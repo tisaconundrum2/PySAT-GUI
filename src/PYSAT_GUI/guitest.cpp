@@ -49,6 +49,8 @@ GuiTest::GuiTest(QWidget *parent) :
     //#########################################################################################
 }
 
+QLabel** GuiTest::labels(){
+    auto labels[7] = {ui->norm_label_2,
                          ui->norm_label_3,
                          ui->norm_label_4,
                          ui->norm_label_5,
