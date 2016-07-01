@@ -39,9 +39,9 @@ GuiTest::GuiTest(QWidget *parent) :
      *    |-------------------------------------------|    python file.
      */
 
-    QLabel* labl[7] = {labels()};
-    QSpinBox* spinr[7] = {spinright()};
-    QSpinBox* spinl[7] = {spinleft()};
+    QLabel* labl[7] = labels();
+    QSpinBox* spinr[7] = spinright();
+    QSpinBox* spinl[7] = spinleft();
 
 
 
