@@ -2,7 +2,8 @@
 #define GUITEST_H
 
 #include <QMainWindow>
-
+#include <QLabel>
+#include <QSpinBox>
 namespace Ui {
 class GuiTest;
 }
@@ -22,6 +23,9 @@ private slots:
     void on_toolButton_4_clicked();
     void on_actionExit_triggered();
     void on_pushButton_13_clicked();
+    void on_pushButton_clicked();
+    QSpinBox** spinright();
+    QSpinBox** spinleft();
 
 private:
     Ui::GuiTest *ui;

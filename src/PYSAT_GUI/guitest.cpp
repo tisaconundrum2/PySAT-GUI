@@ -10,9 +10,8 @@
 #include <QDesktopWidget>
 
 int push = 0;
-
-
 //###### Setup GUI Here
+
 
 GuiTest::GuiTest(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::GuiTest){
@@ -22,43 +21,82 @@ GuiTest::GuiTest(QWidget *parent) :
     QRect rec = QApplication::desktop()->screenGeometry();
     int height = rec.height();
     this->resize(this->width(), height*0.9);
-    qDebug() << height << width;
     //#########################################################################################
 
     //#####TODO: add the ability to show buttons for normalization these are a bunch of lists that parse
     //    each item and then will be setVisibile to false so they aren't there until you click a button
-    auto labels = {ui->norm_label_2,
-                   ui->norm_label_3,
-                   ui->norm_label_4,
-                   ui->norm_label_5,
-                   ui->norm_label_6,
-                   ui->norm_label_7,
-                   ui->norm_label_8};
-    auto spinright = {ui->norm_spinBox_2,
-                      ui->norm_spinBox_3,
-                      ui->norm_spinBox_4,
-                      ui->norm_spinBox_5,
-                      ui->norm_spinBox_6,
-                      ui->norm_spinBox_7,
-                      ui->norm_spinBox_8};
-    auto spinleft = {ui->norm_spinBox_10,
-                     ui->norm_spinBox_11,
-                     ui->norm_spinBox_12,
-                     ui->norm_spinBox_13,
-                     ui->norm_spinBox_14,
-                     ui->norm_spinBox_15,
-                     ui->norm_spinBox_16};
+    /*
+     *
+     *           |--------------------------------------- this is a label it doesn't do anything
+     *           |        |------------------------------ this value will be spinleft it will have values ranging from 0 to 99
+     *           |        |            |----------------- this value will be spinright it will have values ranging from 0 to 99
+     *           v        v            v
+     *    |-------------------------------------------|
+     *    |    value1 [         ] [         ]         | <- There are 8 of each; label, spinleft, spinright.
+     *    |                         add value         | <- each of these fields are hidden until the user hits the add value button
+     *    |                                           | -> Personal Note: Check to see if the user has increased "push++"
+     *    |                                           |    if they had, then take the values entered in the boxes and write it to the
+     *    |-------------------------------------------|    python file.
+     */
 
-    for (auto label : labels) label->setVisible(false);
-    for (auto spinr : spinright) spinr->setVisible(false);
-    for (auto spinl : spinleft) spinl->setVisible(false);
+    QLabel** labl[7] = {labels()};
+    QSpinBox** spinr[7] = {spinright()};
+    QSpinBox** spinl[7] = {spinleft()};
+    *(*(labl + 1))->setVisible(false);
+
+
+
     //#########################################################################################
+}
+
+                         ui->norm_label_3,
+                         ui->norm_label_4,
+                         ui->norm_label_5,
+                         ui->norm_label_6,
+                         ui->norm_label_7,
+                         ui->norm_label_8};
+    return labels;
+}
+
+QSpinBox** GuiTest::spinright(){
+    QSpinBox* spinright[7] = {ui->norm_spinBox_2,
+                              ui->norm_spinBox_3,
+                              ui->norm_spinBox_4,
+                              ui->norm_spinBox_5,
+                              ui->norm_spinBox_6,
+                              ui->norm_spinBox_7,
+                              ui->norm_spinBox_8};
+    return spinright;
+}
+
+QSpinBox** GuiTest::spinleft(){
+    QSpinBox* spinleft[7] = {ui->norm_spinBox_10,
+                             ui->norm_spinBox_11,
+                             ui->norm_spinBox_12,
+                             ui->norm_spinBox_13,
+                             ui->norm_spinBox_14,
+                             ui->norm_spinBox_15,
+                             ui->norm_spinBox_16};
+    return spinleft;
 }
 
 GuiTest::~GuiTest()
 {
     delete ui;
 }
+
+/*************** GUI Interface **************
+ *     |-----------------------------------|
+ *     |   Maskfile                        | <- on_toolButton_clicked  ; this will open a dialog to look for the .csv mask file
+ *     |   Unknown Data                    | <- on_toolButton_2_clicked; this will open a dialog to look for the .csv unknown data file
+ *     |   Full Database                   | <- on_toolButton_3_clicked; this will open a dialog to look for the .csv full database file
+ *     |   Output Location                 | <- on_toolButton_4_clicked; this will open a dialog to look for a directory that you'd like
+ *     |                                   |                             to output your images to
+ *     |                                   |
+ *     .                                   .
+ *     |-----------------------------------|
+ *
+ */
 
 void GuiTest::on_toolButton_clicked()
 {
@@ -89,37 +127,19 @@ void GuiTest::on_actionExit_triggered()
     this->close();
 }
 
-
 void GuiTest::on_pushButton_13_clicked()
 {
     if (push > 6){
         QMessageBox::critical(this, "Warning", "Cannot add anymore values");
     } else {
-        QLabel* labels[7] = {ui->norm_label_2,
-                       ui->norm_label_3,
-                       ui->norm_label_4,
-                       ui->norm_label_5,
-                       ui->norm_label_6,
-                       ui->norm_label_7,
-                       ui->norm_label_8};
-        QSpinBox* spinright[7] = {ui->norm_spinBox_2,
-                          ui->norm_spinBox_3,
-                          ui->norm_spinBox_4,
-                          ui->norm_spinBox_5,
-                          ui->norm_spinBox_6,
-                          ui->norm_spinBox_7,
-                          ui->norm_spinBox_8};
-        QSpinBox* spinleft[7] = {ui->norm_spinBox_10,
-                         ui->norm_spinBox_11,
-                         ui->norm_spinBox_12,
-                         ui->norm_spinBox_13,
-                         ui->norm_spinBox_14,
-                         ui->norm_spinBox_15,
-                         ui->norm_spinBox_16};
-
-        labels[push]->setVisible(true);
-        spinright[push]->setVisible(true);
-        spinleft[push]->setVisible(true);
+        QLabel** labl[7] = {labels()};
+        QSpinBox** spinr[7] = {spinright()};
+        QSpinBox** spinl[7] = {spinleft()};
         push++;
     }
+}
+
+void GuiTest::on_pushButton_clicked()
+{
+
 }
