@@ -39,9 +39,10 @@ GuiTest::GuiTest(QWidget *parent) :
      *    |-------------------------------------------|    python file.
      */
 
-    QLabel* labl[6] = {labels()};
-    QSpinBox* spinr[6] = {spinright()};
-    QSpinBox* spinl[6] = {spinleft()};
+    int size = 6;
+    QLabel* labl[size] = {labels(size)};
+    QSpinBox* spinr[size] = {spinright(size)};
+    QSpinBox* spinl[size] = {spinleft(size)};
     for (int i = 0; i < 6; i++){
         labl[i]->setVisible(false);
         spinr[i]->setVisible(false);
@@ -50,8 +51,7 @@ GuiTest::GuiTest(QWidget *parent) :
     //#########################################################################################
 }
 
-QLabel* GuiTest::labels(){
-    int size = 8;
+QLabel* GuiTest::labels(int size){
     QLabel* labels[size] = {ui->norm_label_2,
                          ui->norm_label_3,
                          ui->norm_label_4,
@@ -62,8 +62,7 @@ QLabel* GuiTest::labels(){
     return labels[size];
 }
 
-QSpinBox* GuiTest::spinright(){
-    int size = 8;
+QSpinBox* GuiTest::spinright(int size){
     QSpinBox* spinright[size] = {ui->norm_spinBox_2,
                               ui->norm_spinBox_3,
                               ui->norm_spinBox_4,
@@ -74,8 +73,7 @@ QSpinBox* GuiTest::spinright(){
     return spinright[size];
 }
 
-QSpinBox* GuiTest::spinleft(){
-    int size = 8;
+QSpinBox* GuiTest::spinleft(int size){
     QSpinBox* spinleft[size] = {ui->norm_spinBox_10,
                              ui->norm_spinBox_11,
                              ui->norm_spinBox_12,
