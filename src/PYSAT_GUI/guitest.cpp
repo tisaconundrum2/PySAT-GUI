@@ -51,36 +51,39 @@ GuiTest::GuiTest(QWidget *parent) :
 }
 
 QLabel* GuiTest::labels(){
-    QLabel* labels[7] = {ui->norm_label_2,
+    int size = 6;
+    QLabel* labels[size] = {ui->norm_label_2,
                          ui->norm_label_3,
                          ui->norm_label_4,
                          ui->norm_label_5,
                          ui->norm_label_6,
                          ui->norm_label_7,
                          ui->norm_label_8};
-    return labels[7];
+    return labels[size];
 }
 
 QSpinBox* GuiTest::spinright(){
-    QSpinBox* spinright[7] = {ui->norm_spinBox_2,
+    int size = 6;
+    QSpinBox* spinright[size] = {ui->norm_spinBox_2,
                               ui->norm_spinBox_3,
                               ui->norm_spinBox_4,
                               ui->norm_spinBox_5,
                               ui->norm_spinBox_6,
                               ui->norm_spinBox_7,
                               ui->norm_spinBox_8};
-    return spinright[7];
+    return spinright[size];
 }
 
 QSpinBox* GuiTest::spinleft(){
-    QSpinBox* spinleft[7] = {ui->norm_spinBox_10,
+    int size = 6;
+    QSpinBox* spinleft[size] = {ui->norm_spinBox_10,
                              ui->norm_spinBox_11,
                              ui->norm_spinBox_12,
                              ui->norm_spinBox_13,
                              ui->norm_spinBox_14,
                              ui->norm_spinBox_15,
                              ui->norm_spinBox_16};
-    return spinleft[7];
+    return spinleft[size];
 }
 
 GuiTest::~GuiTest()
