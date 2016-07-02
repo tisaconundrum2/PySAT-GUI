@@ -18,3 +18,6 @@ SOURCES += main.cpp\
 HEADERS  += guitest.h
 
 FORMS    += guitest.ui
+
+DISTFILES += \
+    recylce
