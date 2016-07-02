@@ -84,10 +84,10 @@ void GuiTest::on_actionExit_triggered(){
 /*************** GUI Interface **************/
 
 void GuiTest::on_pushButton_13_clicked(){
-    if (push > norm_size){
+    if (norm_push > norm_size){
         QMessageBox::critical(this, "Warning", "Cannot add anymore values");
     } else {
-
+        auto labels = findChildren<QLabel*>();
         norm_push++;
     }
 }
