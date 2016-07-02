@@ -88,6 +88,7 @@ void GuiTest::on_pushButton_13_clicked(){
         QMessageBox::critical(this, "Warning", "Cannot add anymore values");
     } else {
         auto labels = findChildren<QLabel*>();
+        for (auto label : labels) label->setVisible(false);
         norm_push++;
     }
 }

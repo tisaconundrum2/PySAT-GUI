@@ -145,7 +145,6 @@ void GuiTest::on_pushButton_13_clicked()
     }
 }
 
-void GuiTest::on_pushButton_clicked()
-{
+void GuiTest::on_pushButton_clicked(){
 
 }
