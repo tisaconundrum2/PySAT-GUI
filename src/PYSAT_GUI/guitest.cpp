@@ -91,3 +91,7 @@ void GuiTest::on_pushButton_13_clicked(){
         norm_push++;
     }
 }
+
+void GuiTest::on_pushButton_clicked(){
+
+}
