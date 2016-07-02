@@ -39,8 +39,8 @@ GuiTest::GuiTest(QWidget *parent) :
      *    |-------------------------------------------|    python file.
      */
 
-    int size = 6;
-    QLabel* labl[size] = {labels(size)};
+    int size = 7;
+    QLabel* labl = {labels(size)};
     QSpinBox* spinr[size] = {spinright(size)};
     QSpinBox* spinl[size] = {spinleft(size)};
     for (int i = 0; i < size; i++){
@@ -136,9 +136,9 @@ void GuiTest::on_pushButton_13_clicked()
     if (push > 6){
         QMessageBox::critical(this, "Warning", "Cannot add anymore values");
     } else {
-        QLabel* labl[7] = {labels()};
-        QSpinBox* spinr[7] = {spinright()};
-        QSpinBox* spinl[7] = {spinleft()};
+//        QLabel* labl[7] = {labels();
+//        QSpinBox* spinr[7] = {spinright()};
+//        QSpinBox* spinl[7] = {spinleft()};
         push++;
     }
 }
