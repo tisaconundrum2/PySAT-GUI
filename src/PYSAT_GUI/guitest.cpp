@@ -21,12 +21,7 @@ GuiTest::GuiTest (QWidget *parent):
     int height = rect.height();
     this->resize(this->width(), height*0.9);
 
-    for (int i = 0; i < ui->verticalLayout_26->count(); i++){
-        QWidget *widget = ui->verticalLayout_26->itemAt(i)->widget();
-        if (widget!= NULL){
-            widget->setVisible(false);
-        }
-    }
+
 }
 
 GuiTest::~GuiTest(){
