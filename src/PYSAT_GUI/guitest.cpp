@@ -15,31 +15,29 @@ int push = 0;
 GuiTest::GuiTest (QWidget *parent):
     QMainWindow(parent), ui(new Ui::GuiTest){
     ui->setupUi(this);
-
-    //    TODO: fix sizing issues, this will allow any computer to have a nicely sized window
+    //TODO: fix sizing issues, this will allow any computer to have a nicely sized window
     QRect rect = QApplication::desktop()->screenGeometry();
     int height = rect.height();
     this->resize(this->width(), height*0.9);
-    //    #######################
-
-    /*
-     *
-     *           |--------------------------------------- this is a label it doesn't do anything
-     *           |        |------------------------------ this value will be spinleft it will have values ranging from 0 to 99
-     *           |        |            |----------------- this value will be spinright it will have values ranging from 0 to 99
-     *           v        v            v
-     *    |-------------------------------------------|
-     *    |    value1 [         ] [         ]         | <- There are 8 of each; label, spinleft, spinright.
-     *    |                         add value         | <- each of these fields are hidden until the user hits the add value button
-     *    |                                           | -> Personal Note: Check to see if the user has increased "push++"
-     *    |                                           |    if they had, then take the values entered in the boxes and write it to the
-     *    |-------------------------------------------|    python file.
-     *
-     *    TODO: add the ability to show buttons for normalization these are a bunch of lists that parse
-     *    each item and then will be setVisibile to false so they aren't there until you click a button
-     */
-
 }
+
+
+/*
+ *
+ *           |--------------------------------------- this is a label it doesn't do anything
+ *           |        |------------------------------ this value will be spinleft it will have values ranging from 0 to 99
+ *           |        |            |----------------- this value will be spinright it will have values ranging from 0 to 99
+ *           v        v            v
+ *    |-------------------------------------------|
+ *    |    value1 [         ] [         ]         | <- There are 8 of each; label, spinleft, spinright.
+ *    |                         add value         | <- each of these fields are hidden until the user hits the add value button
+ *    |                                           | -> Personal Note: Check to see if the user has increased "push++"
+ *    |                                           |    if they had, then take the values entered in the boxes and write it to the
+ *    |-------------------------------------------|    python file.
+ *
+ *    TODO: add the ability to show buttons for normalization these are a bunch of lists that parse
+ *    each item and then will be setVisibile to false so they aren't there until you click a button
+ */
 
 GuiTest::~GuiTest(){
     delete ui;
@@ -53,6 +51,7 @@ GuiTest::~GuiTest(){
  *     |   Output Location                 | <- on_toolButton_4_clicked; this will open a dialog to look for a directory that you'd like
  *     |                                   |                             to output your images to
  *     |                                   |
+ *     .                                   .
  *     .                                   .
  *     |-----------------------------------|
  *
@@ -81,6 +80,7 @@ void GuiTest::on_toolButton_4_clicked(){
 void GuiTest::on_actionExit_triggered(){
     this->close();
 }
+
 /*************** GUI Interface **************/
 
 void GuiTest::on_pushButton_13_clicked()
