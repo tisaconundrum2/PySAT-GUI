@@ -40,7 +40,7 @@ GuiTest::GuiTest(QWidget *parent) :
      */
 
     int size = 7;
-    QLabel* labl = {labels(size)};
+    QLabel* labl[size] = {labels(size)};
     QSpinBox* spinr[size] = {spinright(size)};
     QSpinBox* spinl[size] = {spinleft(size)};
     for (int i = 0; i < size; i++){
