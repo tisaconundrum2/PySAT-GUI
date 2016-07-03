@@ -131,9 +131,11 @@ void GuiTest::on_pushButton_13_clicked(){
         setSpinleftVisible(norm_push, true);
         setSpinrightVisible(norm_push, true);
         setLabelsVisible(norm_push, true);
-
         norm_push++;
     }
+    //TODO: When a button is pressed, two value boxes appear, have those values from these boxes added into the file.
+    //BUT only when the button has been pressed!
+
 }
 
 void GuiTest::on_pushButton_clicked(){
