@@ -11,7 +11,7 @@
 
 //Global variables
 int norm_push = 0;      // this variable measures how many time's the normalization button has been pushed
-int norm_size = 0;      // this variable measures the size of arrays in the normalization section
+int norm_size = 7;      // this variable measures the size of arrays in the normalization section
 
 GuiTest::GuiTest (QWidget *parent):
     QMainWindow(parent), ui(new Ui::GuiTest){
@@ -20,6 +20,11 @@ GuiTest::GuiTest (QWidget *parent):
     QRect rect = QApplication::desktop()->screenGeometry();
     int height = rect.height();
     this->resize(this->width(), height*0.9);
+    for (int i = 0; i < norm_size; i++){
+        setSpinleftVisible(i, false);
+        setSpinrightVisible(i, false);
+        setLabelsVisible(i, false);
+    }
 
 
 }
@@ -61,7 +66,7 @@ GuiTest::~GuiTest(){
 
 
 void GuiTest::setLabelsVisible(int i, bool visible){
-    QLabel* labels[size] = {ui->norm_label_2,
+    QLabel* labels[norm_size] = {ui->norm_label_2,
                             ui->norm_label_3,
                             ui->norm_label_4,
                             ui->norm_label_5,
@@ -72,7 +77,7 @@ void GuiTest::setLabelsVisible(int i, bool visible){
 }
 
 void GuiTest::setSpinrightVisible(int i, bool visible){
-    QSpinBox* spinright[size] = {ui->norm_spinBox_2,
+    QSpinBox* spinright[norm_size] = {ui->norm_spinBox_2,
                                  ui->norm_spinBox_3,
                                  ui->norm_spinBox_4,
                                  ui->norm_spinBox_5,
@@ -83,14 +88,14 @@ void GuiTest::setSpinrightVisible(int i, bool visible){
 }
 
 void GuiTest::setSpinleftVisible(int i, bool visible){
-    QSpinBox* spinleft[size] = {ui->norm_spinBox_10,
-                             ui->norm_spinBox_11,
-                             ui->norm_spinBox_12,
-                             ui->norm_spinBox_13,
-                             ui->norm_spinBox_14,
-                             ui->norm_spinBox_15,
-                             ui->norm_spinBox_16};
-    spinleft[i] = setVisible(visible);
+    QSpinBox* spinleft[norm_size] = {ui->norm_spinBox_10,
+                                ui->norm_spinBox_11,
+                                ui->norm_spinBox_12,
+                                ui->norm_spinBox_13,
+                                ui->norm_spinBox_14,
+                                ui->norm_spinBox_15,
+                                ui->norm_spinBox_16};
+    spinleft[i]->setVisible(visible);
 }
 
 void GuiTest::on_toolButton_clicked(){
@@ -120,9 +125,12 @@ void GuiTest::on_actionExit_triggered(){
 /*************** GUI Interface **************/
 
 void GuiTest::on_pushButton_13_clicked(){
-    if (norm_push > norm_size){
+    if (norm_push >= norm_size){
         QMessageBox::critical(this, "Warning", "Cannot add anymore values");
     } else {
+        setSpinleftVisible(norm_push, true);
+        setSpinrightVisible(norm_push, true);
+        setLabelsVisible(norm_push, true);
 
         norm_push++;
     }
