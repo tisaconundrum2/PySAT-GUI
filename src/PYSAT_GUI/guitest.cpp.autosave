@@ -74,6 +74,20 @@ void GuiTest::setLabelsVisible(bool visible){
     }
 }
 
+void GuiTest::setSpinrightVisible(bool visible){
+    QSpinBox* spinright[size] = {ui->norm_spinBox_2,
+                              ui->norm_spinBox_3,
+                              ui->norm_spinBox_4,
+                              ui->norm_spinBox_5,
+                              ui->norm_spinBox_6,
+                              ui->norm_spinBox_7,
+                              ui->norm_spinBox_8};
+    if (visible){
+        for (int i = 0; i < size; i++)
+            spinright[i]->setVisible(visible);
+    }
+}
+
 
 void GuiTest::on_toolButton_clicked(){
     const QString &file_name = QFileDialog::getOpenFileName(this, "Open New File", QDir::homePath());
