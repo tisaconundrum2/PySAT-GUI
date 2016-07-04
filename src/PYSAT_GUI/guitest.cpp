@@ -126,7 +126,7 @@ void GuiTest::on_actionExit_triggered(){
 
 void GuiTest::on_pushButton_13_clicked(){
     if (norm_push >= norm_size){
-        QMessageBox::critical(this, "Warning", "Cannot add anymore values");
+        QMessageBox::critical(this, "Error", "Cannot add anymore values");
     } else {
         setSpinleftVisible(norm_push, true);
         setSpinrightVisible(norm_push, true);
