@@ -59,7 +59,7 @@ GuiTest::~GuiTest(){
  *     |                                   |                             to output your images to
  *     |                                   |
  *     .                                   .
- *     .                                   .
+ *     .                            [ok]   . <- on_pushButton_clicked; this will create the final py file
  *     |-----------------------------------|
  *
  */
