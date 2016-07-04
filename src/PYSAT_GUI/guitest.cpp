@@ -65,7 +65,7 @@ GuiTest::~GuiTest(){
  */
 
 
-void GuiTest::setLabelsVisible(int i, bool visible){
+void GuiTest::setLabelsVisible(int index, bool visible){
     QLabel* labels[norm_size] = {ui->norm_label_2,
                             ui->norm_label_3,
                             ui->norm_label_4,
@@ -73,10 +73,10 @@ void GuiTest::setLabelsVisible(int i, bool visible){
                             ui->norm_label_6,
                             ui->norm_label_7,
                             ui->norm_label_8};
-    labels[i]->setVisible(visible);
+    labels[index]->setVisible(visible);
 }
 
-void GuiTest::setSpinrightVisible(int i, bool visible){
+void GuiTest::setSpinrightVisible(int index, bool visible){
     QSpinBox* spinright[norm_size] = {ui->norm_spinBox_2,
                                  ui->norm_spinBox_3,
                                  ui->norm_spinBox_4,
@@ -84,10 +84,10 @@ void GuiTest::setSpinrightVisible(int i, bool visible){
                                  ui->norm_spinBox_6,
                                  ui->norm_spinBox_7,
                                  ui->norm_spinBox_8};
-    spinright[i]->setVisible(visible);
+    spinright[index]->setVisible(visible);
 }
 
-void GuiTest::setSpinleftVisible(int i, bool visible){
+void GuiTest::setSpinleftVisible(int index, bool visible){
     QSpinBox* spinleft[norm_size] = {ui->norm_spinBox_10,
                                 ui->norm_spinBox_11,
                                 ui->norm_spinBox_12,
@@ -95,7 +95,7 @@ void GuiTest::setSpinleftVisible(int i, bool visible){
                                 ui->norm_spinBox_14,
                                 ui->norm_spinBox_15,
                                 ui->norm_spinBox_16};
-    spinleft[i]->setVisible(visible);
+    spinleft[index]->setVisible(visible);
 }
 
 void GuiTest::on_toolButton_clicked(){
