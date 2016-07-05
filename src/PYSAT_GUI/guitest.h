@@ -27,7 +27,7 @@ private slots:
     void on_actionExit_triggered();
     void on_pushButton_13_clicked();
     void SpinBoxChanged(QWidget *wSp);
-    void spinboxWrite(int i);
+    void spinboxWrite(QWidget* i);
 
 
 private:

@@ -159,5 +159,6 @@ void GuiTest::SpinBoxChanged(QWidget *wSp){
 }
 
 void GuiTest::spinboxWrite(QWidget* i){
-    qDebug() << i;
+    qDebug() << i->si;
+    qDebug;
 }
