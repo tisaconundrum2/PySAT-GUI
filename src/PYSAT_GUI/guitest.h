@@ -26,6 +26,9 @@ private slots:
     void on_toolButton_4_clicked();
     void on_actionExit_triggered();
     void on_pushButton_13_clicked();
+    void on_norm_spinBox_9_valueChanged(int arg1);
+
+    void on_norm_spinBox_valueChanged(int arg1);
 
 private:
     Ui::GuiTest *ui;

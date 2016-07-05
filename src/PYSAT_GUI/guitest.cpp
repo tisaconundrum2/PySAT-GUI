@@ -25,12 +25,6 @@ GuiTest::GuiTest (QWidget *parent):
         setSpinrightVisible(i, false);
         setLabelsVisible(i, false);
     }
-    for (int i = 0; i < norm_size+1; i++){
-        getSpinrightValue(i);
-        getSpinleftValue(i);
-    }
-
-
 }
 
 GuiTest::~GuiTest(){
@@ -143,6 +137,11 @@ void GuiTest::on_pushButton_13_clicked(){
 
 void GuiTest::on_norm_spinBox_9_valueChanged(int arg1)
 {
-
+    qDebug() << "[" << arg1 << ",";
 }
 
+
+void GuiTest::on_norm_spinBox_valueChanged(int arg1)
+{
+    qDebug() << arg1 << "]";
+}
