@@ -113,7 +113,7 @@ void GuiTest::getSpinrightValue(int index){
                                         ui->norm_spinBox_7,
                                         ui->norm_spinBox_8
                                        };
-    QObject::connect(spinright[index], SIGNAL(valueChanged(int)), this, SLOT(spinboxWrite(int)));
+    QObject::connect(spinright[index], SIGNAL(valueChanged(int)), this, SLOT(spinboxWrite(int, index)));
 }
 
 void GuiTest::getSpinleftValue(int index){
@@ -125,7 +125,7 @@ void GuiTest::getSpinleftValue(int index){
                                        ui->norm_spinBox_14,
                                        ui->norm_spinBox_15,
                                        ui->norm_spinBox_16};
-    QObject::connect(spinleft[index], SIGNAL(valueChanged(int)), this, SLOT(spinboxWrite(int)));
+    QObject::connect(spinleft[index], SIGNAL(valueChanged(int)), this, SLOT(spinboxWrite(int, index)));
 }
 
 void GuiTest::on_toolButton_clicked(){
@@ -172,6 +172,9 @@ void GuiTest::on_pushButton_clicked(){
 
 }
 
-void GuiTest::spinboxWrite(int arg1){
-    qDebug() << arg1;
+void GuiTest::spinboxWrite(int arg1, int index){
+    int norm_list[16];
+    norm_list[0] = 1;
+    norm_list[index] = arg1;
+    qDebug() << norm_list;
 }

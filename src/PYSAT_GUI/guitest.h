@@ -31,7 +31,7 @@ private slots:
     void on_actionExit_triggered();
     void on_pushButton_13_clicked();
     void on_pushButton_clicked();
-    void spinboxWrite(int arg1);
+    void spinboxWrite(int arg1, int index);
 
 
 private:
