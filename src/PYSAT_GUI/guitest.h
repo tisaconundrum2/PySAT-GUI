@@ -17,6 +17,13 @@ public:
     ~GuiTest();
 
 private slots:
+    void setLabelsVisible(int index, bool visible);
+    void setSpinrightVisible(int index, bool visible);
+    void setSpinleftVisible(int index, bool visible);
+
+    void getSpinrightValue(int index);
+    void getSpinleftValue(int index);
+
     void on_toolButton_clicked();
     void on_toolButton_2_clicked();
     void on_toolButton_3_clicked();
@@ -24,14 +31,8 @@ private slots:
     void on_actionExit_triggered();
     void on_pushButton_13_clicked();
     void on_pushButton_clicked();
-    void setLabelsVisible(int i, bool visible);
-    void setSpinrightVisible(int i, bool visible);
-    void setSpinleftVisible(int i, bool visible);
+    void spinboxWrite(int arg1);
 
-
-    void on_norm_spinBox_9_valueChanged(int arg1);
-
-    void on_norm_spinBox_valueChanged(int arg1);
 
 private:
     Ui::GuiTest *ui;

@@ -25,6 +25,10 @@ GuiTest::GuiTest (QWidget *parent):
         setSpinrightVisible(i, false);
         setLabelsVisible(i, false);
     }
+    for (int i = 0; i < norm_size+1; i++){
+        getSpinrightValue(i);
+        getSpinleftValue(i);
+    }
 
 
 }
@@ -67,35 +71,46 @@ GuiTest::~GuiTest(){
 
 void GuiTest::setLabelsVisible(int index, bool visible){
     QLabel* labels[norm_size] = {ui->norm_label_2,
-                            ui->norm_label_3,
-                            ui->norm_label_4,
-                            ui->norm_label_5,
-                            ui->norm_label_6,
-                            ui->norm_label_7,
-                            ui->norm_label_8};
+                                 ui->norm_label_3,
+                                 ui->norm_label_4,
+                                 ui->norm_label_5,
+                                 ui->norm_label_6,
+                                 ui->norm_label_7,
+                                 ui->norm_label_8};
     labels[index]->setVisible(visible);
 }
 
 void GuiTest::setSpinrightVisible(int index, bool visible){
     QSpinBox* spinright[norm_size] = {ui->norm_spinBox_2,
-                                 ui->norm_spinBox_3,
-                                 ui->norm_spinBox_4,
-                                 ui->norm_spinBox_5,
-                                 ui->norm_spinBox_6,
-                                 ui->norm_spinBox_7,
-                                 ui->norm_spinBox_8};
+                                      ui->norm_spinBox_3,
+                                      ui->norm_spinBox_4,
+                                      ui->norm_spinBox_5,
+                                      ui->norm_spinBox_6,
+                                      ui->norm_spinBox_7,
+                                      ui->norm_spinBox_8};
     spinright[index]->setVisible(visible);
 }
 
 void GuiTest::setSpinleftVisible(int index, bool visible){
     QSpinBox* spinleft[norm_size] = {ui->norm_spinBox_10,
-                                ui->norm_spinBox_11,
-                                ui->norm_spinBox_12,
-                                ui->norm_spinBox_13,
-                                ui->norm_spinBox_14,
-                                ui->norm_spinBox_15,
-                                ui->norm_spinBox_16};
+                                     ui->norm_spinBox_11,
+                                     ui->norm_spinBox_12,
+                                     ui->norm_spinBox_13,
+                                     ui->norm_spinBox_14,
+                                     ui->norm_spinBox_15,
+                                     ui->norm_spinBox_16};
     spinleft[index]->setVisible(visible);
+}
+
+
+void GuiTest::getSpinrightValue(int index){
+    QSpinBox* spinright[norm_size+1] = {ui->norm_spinBox,
+    QObject::connect(spinright[index], SIGNAL(valueChanged(int)), this, SLOT(spinboxWrite(int)));
+}
+
+void GuiTest::getSpinleftValue(int index){
+    QSpinBox* spinleft[norm_size+1] = {ui->norm_spinBox_9,
+    QObject::connect(spinleft[index], SIGNAL(valueChanged(int)), this, SLOT(spinboxWrite(int)));
 }
 
 void GuiTest::on_toolButton_clicked(){
@@ -142,12 +157,6 @@ void GuiTest::on_pushButton_clicked(){
 
 }
 
-void GuiTest::on_norm_spinBox_9_valueChanged(int arg1)
-{
-    qDebug() << arg1;
-}
-
-void GuiTest::on_norm_spinBox_valueChanged(int arg1)
-{
+void GuiTest::spinboxWrite(int arg1){
     qDebug() << arg1;
 }
