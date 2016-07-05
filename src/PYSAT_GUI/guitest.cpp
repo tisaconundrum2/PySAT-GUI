@@ -8,10 +8,11 @@
 #include <QDebug>
 #include <QRect>
 #include <QDesktopWidget>
+#include <QSignalMapper>
 
 //Global variables
-int norm_push = 0;      // this variable measures how many time's the normalization button has been pushed
-int norm_size = 7;      // this variable measures the size of arrays in the normalization section
+int norm_push = 0;                              // this variable measures how many time's the normalization button has been pushed
+int norm_size = 7;                              // this variable measures the size of arrays in the normalization section
 
 GuiTest::GuiTest (QWidget *parent):
     QMainWindow(parent), ui(new Ui::GuiTest){
@@ -20,11 +21,24 @@ GuiTest::GuiTest (QWidget *parent):
     QRect rect = QApplication::desktop()->screenGeometry();
     int height = rect.height();
     this->resize(this->width(), height*0.9);
-    for (int i = 0; i < norm_size; i++){
+    for (int i = 0; i < norm_size; i++){        //setting up visibility
         setSpinleftVisible(i, false);
         setSpinrightVisible(i, false);
         setLabelsVisible(i, false);
     }
+
+    QList<QSpinBox*> spinBoxes= findChildren<QSpinBox*>();
+    //create the QSignalMapper object
+    QSignalMapper* signalMapper= new QSignalMapper(this);
+    //loop through your spinboxes list
+    QSpinBox* spinBox;
+    foreach(spinBox, spinBoxes){
+        //setup mapping for each spin box
+        connect(spinBox, SIGNAL(valueChanged(int)), signalMapper, SLOT(map()));
+        signalMapper->setMapping(spinBox, spinBox);
+    }
+    //connect the unified mapped(QWidget*) signal to your spinboxWrite slot
+    connect(signalMapper, SIGNAL(mapped(QWidget*)), this, SLOT(spinboxWrite(QWidget*)));
 }
 
 GuiTest::~GuiTest(){
@@ -135,82 +149,16 @@ void GuiTest::on_pushButton_13_clicked(){
 }
 
 
-void GuiTest::on_norm_spinBox_valueChanged(int arg1)
-{
-    qDebug() << arg1 << "]";
+void GuiTest::SpinBoxChanged(QWidget *wSp){
+    QSpinBox* sp= (QSpinBox*)wSp;
+    int value = sp->value();
+    qDebug() << value;
+    //now sp is a pointer to the QSpinBox that emitted the valueChanged signal
+    //and value is its value after the change
+    //do whatever you want to do with them here. . .
+
 }
 
-void GuiTest::on_norm_spinBox_2_valueChanged(int arg1)
-{
-    qDebug() << arg1 << "]";
-}
-
-void GuiTest::on_norm_spinBox_3_valueChanged(int arg1)
-{
-    qDebug() << arg1 << "]";
-}
-
-void GuiTest::on_norm_spinBox_4_valueChanged(int arg1)
-{
-    qDebug() << arg1 << "]";
-}
-
-void GuiTest::on_norm_spinBox_5_valueChanged(int arg1)
-{
-    qDebug() << arg1 << "]";
-}
-
-void GuiTest::on_norm_spinBox_6_valueChanged(int arg1)
-{
-    qDebug() << arg1 << "]";
-}
-
-void GuiTest::on_norm_spinBox_7_valueChanged(int arg1)
-{
-    qDebug() << arg1 << "]";
-}
-
-void GuiTest::on_norm_spinBox_8_valueChanged(int arg1)
-{
-    qDebug() << arg1 << "]";
-}
-
-void GuiTest::on_norm_spinBox_9_valueChanged(int arg1)
-{
-    qDebug() << "[" << arg1 << ",";
-}
-
-void GuiTest::on_norm_spinBox_10_valueChanged(int arg1)
-{
-    qDebug() << ", [" << arg1 << ",";
-}
-
-void GuiTest::on_norm_spinBox_11_valueChanged(int arg1)
-{
-    qDebug() << ", [" << arg1 << ",";
-}
-
-void GuiTest::on_norm_spinBox_12_valueChanged(int arg1)
-{
-    qDebug() << ", [" << arg1 << ",";
-}
-
-void GuiTest::on_norm_spinBox_13_valueChanged(int arg1)
-{
-    qDebug() << ", [" << arg1 << ",";
-}
-
-void GuiTest::on_norm_spinBox_14_valueChanged(int arg1)
-{
-    qDebug() << ", [" << arg1 << ",";
-}
-
-void GuiTest::on_norm_spinBox_15_valueChanged(int arg1)
-{
-    qDebug() << ", [" << arg1 << ",";
-}
-
-void GuiTest::on_norm_spinBox_16_valueChanged(int arg1)
-{
-    qDebug() << ", [" << arg1 << ",";
+void GuiTest::spinboxWrite(int i){
+    qDebug() << i;
 }
