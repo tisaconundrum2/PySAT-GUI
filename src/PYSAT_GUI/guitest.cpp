@@ -155,9 +155,9 @@ void GuiTest::SpinBoxChanged(QWidget *wSp){
     //now sp is a pointer to the QSpinBox that emitted the valueChanged signal
     //and value is its value after the change
     //do whatever you want to do with them here. . .
-
+    qDebug() << value;
 }
 
-void GuiTest::spinboxWrite(QWidget* i){
-    qDebug() << i;
+void GuiTest::spinboxWrite(QWidget* e){
+    qDebug() << e;
 }
