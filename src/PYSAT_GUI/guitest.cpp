@@ -103,31 +103,6 @@ void GuiTest::setSpinleftVisible(int index, bool visible){
 }
 
 
-void GuiTest::getSpinrightValue(int index){
-    QSpinBox* spinright[norm_size+1] = {ui->norm_spinBox,
-                                        ui->norm_spinBox_2,
-                                        ui->norm_spinBox_3,
-                                        ui->norm_spinBox_4,
-                                        ui->norm_spinBox_5,
-                                        ui->norm_spinBox_6,
-                                        ui->norm_spinBox_7,
-                                        ui->norm_spinBox_8
-                                       };
-    QObject::connect(spinright[index], SIGNAL(valueChanged(int)), this, SLOT(spinboxWrite(int, index)));
-}
-
-void GuiTest::getSpinleftValue(int index){
-    QSpinBox* spinleft[norm_size+1] = {ui->norm_spinBox_9,
-                                       ui->norm_spinBox_10,
-                                       ui->norm_spinBox_11,
-                                       ui->norm_spinBox_12,
-                                       ui->norm_spinBox_13,
-                                       ui->norm_spinBox_14,
-                                       ui->norm_spinBox_15,
-                                       ui->norm_spinBox_16};
-    QObject::connect(spinleft[index], SIGNAL(valueChanged(int)), this, SLOT(spinboxWrite(int, index)));
-}
-
 void GuiTest::on_toolButton_clicked(){
     const QString &file_name = QFileDialog::getOpenFileName(this, "Open New File", QDir::homePath());
     ui->lineEdit->setText(file_name);
@@ -163,16 +138,11 @@ void GuiTest::on_pushButton_13_clicked(){
         setLabelsVisible(norm_push, true);
         norm_push++;
     }
-    //TODO: When a button is pressed, two value boxes appear, have those values from these boxes added into the file.
-    //BUT only when the button has been pressed!
-
 }
 
-void GuiTest::on_pushButton_clicked(){
-
-}
 
 void GuiTest::on_norm_spinBox_9_valueChanged(int arg1)
 {
 
 }
+
