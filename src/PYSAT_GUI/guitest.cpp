@@ -174,7 +174,6 @@ void GuiTest::on_pushButton_clicked(){
 
 void GuiTest::spinboxWrite(int arg1, int index){
     int norm_list[16];
-    norm_list[0] = 1;
-    norm_list[index] = arg1;
-    qDebug() << norm_list;
+    qDebug() << arg1;
+    qDebug() << index;
 }
