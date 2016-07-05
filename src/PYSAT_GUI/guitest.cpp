@@ -135,13 +135,85 @@ void GuiTest::on_pushButton_13_clicked(){
 }
 
 
+void GuiTest::on_norm_spinBox_valueChanged(int arg1)
+{
+    qDebug() << arg1 << "]";
+}
+
+void GuiTest::on_norm_spinBox_2_valueChanged(int arg1)
+{
+    qDebug() << arg1 << "]";
+}
+
+void GuiTest::on_norm_spinBox_3_valueChanged(int arg1)
+{
+    qDebug() << arg1 << "]";
+}
+
+void GuiTest::on_norm_spinBox_4_valueChanged(int arg1)
+{
+    qDebug() << arg1 << "]";
+}
+
+void GuiTest::on_norm_spinBox_5_valueChanged(int arg1)
+{
+    qDebug() << arg1 << "]";
+}
+
+void GuiTest::on_norm_spinBox_6_valueChanged(int arg1)
+{
+    qDebug() << arg1 << "]";
+}
+
+void GuiTest::on_norm_spinBox_7_valueChanged(int arg1)
+{
+    qDebug() << arg1 << "]";
+}
+
+void GuiTest::on_norm_spinBox_8_valueChanged(int arg1)
+{
+    qDebug() << arg1 << "]";
+}
+
 void GuiTest::on_norm_spinBox_9_valueChanged(int arg1)
 {
     qDebug() << "[" << arg1 << ",";
 }
 
-
-void GuiTest::on_norm_spinBox_valueChanged(int arg1)
+void GuiTest::on_norm_spinBox_10_valueChanged(int arg1)
 {
-    qDebug() << arg1 << "]";
+    qDebug() << ", [" << arg1 << ",";
 }
+
+void GuiTest::on_norm_spinBox_11_valueChanged(int arg1)
+{
+    qDebug() << ", [" << arg1 << ",";
+}
+
+void GuiTest::on_norm_spinBox_12_valueChanged(int arg1)
+{
+    qDebug() << ", [" << arg1 << ",";
+}
+
+void GuiTest::on_norm_spinBox_13_valueChanged(int arg1)
+{
+    qDebug() << ", [" << arg1 << ",";
+}
+
+void GuiTest::on_norm_spinBox_14_valueChanged(int arg1)
+{
+    qDebug() << ", [" << arg1 << ",";
+}
+
+void GuiTest::on_norm_spinBox_15_valueChanged(int arg1)
+{
+    qDebug() << ", [" << arg1 << ",";
+}
+
+void GuiTest::on_norm_spinBox_16_valueChanged(int arg1)
+{
+    qDebug() << ", [" << arg1 << ",";
+}
+
+
+
