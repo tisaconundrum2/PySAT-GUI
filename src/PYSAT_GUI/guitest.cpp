@@ -152,12 +152,13 @@ void GuiTest::on_pushButton_13_clicked(){
 void GuiTest::SpinBoxChanged(QWidget *wSp){
     QSpinBox* sp= (QSpinBox*)wSp;
     int value = sp->value();
+    qDebug() << value;
     //now sp is a pointer to the QSpinBox that emitted the valueChanged signal
     //and value is its value after the change
     //do whatever you want to do with them here. . .
-    qDebug() << value;
 }
 
 void GuiTest::spinboxWrite(QWidget* e){
+    SpinBoxChanged(e);
     qDebug() << e;
 }
