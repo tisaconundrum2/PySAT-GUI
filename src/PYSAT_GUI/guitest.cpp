@@ -105,11 +105,26 @@ void GuiTest::setSpinleftVisible(int index, bool visible){
 
 void GuiTest::getSpinrightValue(int index){
     QSpinBox* spinright[norm_size+1] = {ui->norm_spinBox,
+                                        ui->norm_spinBox_2,
+                                        ui->norm_spinBox_3,
+                                        ui->norm_spinBox_4,
+                                        ui->norm_spinBox_5,
+                                        ui->norm_spinBox_6,
+                                        ui->norm_spinBox_7,
+                                        ui->norm_spinBox_8
+                                       };
     QObject::connect(spinright[index], SIGNAL(valueChanged(int)), this, SLOT(spinboxWrite(int)));
 }
 
 void GuiTest::getSpinleftValue(int index){
     QSpinBox* spinleft[norm_size+1] = {ui->norm_spinBox_9,
+                                       ui->norm_spinBox_10,
+                                       ui->norm_spinBox_11,
+                                       ui->norm_spinBox_12,
+                                       ui->norm_spinBox_13,
+                                       ui->norm_spinBox_14,
+                                       ui->norm_spinBox_15,
+                                       ui->norm_spinBox_16};
     QObject::connect(spinleft[index], SIGNAL(valueChanged(int)), this, SLOT(spinboxWrite(int)));
 }
 
