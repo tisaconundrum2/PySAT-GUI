@@ -33,7 +33,6 @@ private slots:
     void on_pushButton_clicked();
     void spinboxWrite(int arg1, int index);
 
-
 private:
     Ui::GuiTest *ui;
 };
