@@ -24,7 +24,7 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>-177</y>
+         <y>-117</y>
          <width>550</width>
          <height>958</height>
         </rect>
@@ -1485,12 +1485,12 @@ QGroupBox::title {
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>157</x>
-     <y>917</y>
+     <x>436</x>
+     <y>673</y>
     </hint>
     <hint type="destinationlabel">
-     <x>142</x>
-     <y>1027</y>
+     <x>352</x>
+     <y>780</y>
     </hint>
    </hints>
   </connection>
@@ -1501,12 +1501,12 @@ QGroupBox::title {
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>187</x>
-     <y>950</y>
+     <x>466</x>
+     <y>701</y>
     </hint>
     <hint type="destinationlabel">
-     <x>161</x>
-     <y>1023</y>
+     <x>398</x>
+     <y>780</y>
     </hint>
    </hints>
   </connection>
@@ -1517,12 +1517,12 @@ QGroupBox::title {
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>196</x>
-     <y>972</y>
+     <x>475</x>
+     <y>729</y>
     </hint>
     <hint type="destinationlabel">
-     <x>185</x>
-     <y>1017</y>
+     <x>444</x>
+     <y>780</y>
     </hint>
    </hints>
   </connection>
@@ -1533,12 +1533,28 @@ QGroupBox::title {
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>208</x>
-     <y>992</y>
+     <x>487</x>
+     <y>757</y>
     </hint>
     <hint type="destinationlabel">
-     <x>206</x>
-     <y>1019</y>
+     <x>491</x>
+     <y>780</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>norm_spinBox_9</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>norm_spinBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>292</x>
+     <y>114</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>506</x>
+     <y>116</y>
     </hint>
    </hints>
   </connection>

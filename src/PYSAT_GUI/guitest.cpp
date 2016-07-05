@@ -214,6 +214,3 @@ void GuiTest::on_norm_spinBox_16_valueChanged(int arg1)
 {
     qDebug() << ", [" << arg1 << ",";
 }
-
-
-
