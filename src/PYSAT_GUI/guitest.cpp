@@ -152,9 +152,8 @@ void GuiTest::on_pushButton_13_clicked(){
 void GuiTest::SpinBoxChanged(QWidget *wSp){
     QSpinBox* sp= (QSpinBox*)wSp;
     int value = sp->value();
-    const auto name = sp->winId();
+    const auto name = sp->suffix();
     qDebug() << value;
-    qDebug() << name;
     //now sp is a pointer to the QSpinBox that emitted the valueChanged signal
     //and value is its value after the change
     //do whatever you want to do with them here. . .
