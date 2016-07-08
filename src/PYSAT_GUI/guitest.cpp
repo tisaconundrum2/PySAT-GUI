@@ -170,6 +170,7 @@ void GuiTest::spinboxWrite(QWidget* e){
     QString value = e->objectName();                //get the name of each spinbox this will help in identifying who's being manipulated
     qDebug() << value << spinNum;
 
+
 }
 
 void GuiTest::on_pushButton_clicked()
