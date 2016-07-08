@@ -169,8 +169,8 @@ void GuiTest::SpinBoxChanged(QWidget* wSp){
 
 void GuiTest::spinboxWrite(QWidget* e){
     SpinBoxChanged(e);
-    QString* value = (QString*)e;
-    qDebug() << e << value << " SpinBoxWrite";
+    QString value = e->objectName();
+    qDebug() << value << " SpinBoxWrite";
 
 }
 
