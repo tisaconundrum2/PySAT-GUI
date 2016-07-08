@@ -131,6 +131,14 @@ void GuiTest::on_toolButton_4_clicked(){
     ui->lineEdit_4->setText(file_name);
 }
 
+void GuiTest::on_toolButton_5_clicked()
+{
+    const QString &file_name = QFileDialog::getOpenFileName(this, "Open New File", QDir::root());
+
+}
+
+
+
 void GuiTest::on_actionExit_triggered(){
     this->close();
 }
@@ -164,4 +172,6 @@ void GuiTest::spinboxWrite(QWidget* e){
     QString* value = (QString*)e;
     qDebug() << value;
     qDebug() << "spinBoxWrite";
+}
+
 }
