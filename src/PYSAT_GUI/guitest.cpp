@@ -168,7 +168,10 @@ int GuiTest::SpinBoxChanged(QWidget* wSp){
 void GuiTest::spinboxWrite(QWidget* e){
     int spinNum = SpinBoxChanged(e);
     QString value = e->objectName();                //get the name of each spinbox this will help in identifying who's being manipulated
+    std::string value1 = value;
+//    value = value.toInt();
     qDebug() << value << spinNum;
+
 
 
 }
