@@ -525,7 +525,7 @@ QGroupBox::title {
                 <widget class="QLineEdit" name="lineEdit_5"/>
                </item>
                <item>
-                <widget class="QSpinBox" name="spinBox_7"/>
+                <widget class="QSpinBox" name="nfolds_test"/>
                </item>
               </layout>
              </item>
@@ -572,7 +572,7 @@ QGroupBox::title {
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_8">
              <item>
-              <widget class="QSpinBox" name="spinBox_5">
+              <widget class="QSpinBox" name="comp_range">
                <property name="minimum">
                 <number>-100</number>
                </property>
@@ -582,49 +582,49 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QSpinBox" name="spinBox_10">
+              <widget class="QSpinBox" name="comp_range_2">
                <property name="maximum">
                 <number>1000</number>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QSpinBox" name="spinBox_11">
+              <widget class="QSpinBox" name="comp_range_3">
                <property name="maximum">
                 <number>1000</number>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QSpinBox" name="spinBox_12">
+              <widget class="QSpinBox" name="comp_range_4">
                <property name="maximum">
                 <number>1000</number>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QSpinBox" name="spinBox_13">
+              <widget class="QSpinBox" name="comp_range_5">
                <property name="maximum">
                 <number>1000</number>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QSpinBox" name="spinBox_14">
+              <widget class="QSpinBox" name="comp_range_6">
                <property name="maximum">
                 <number>1000</number>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QSpinBox" name="spinBox_15">
+              <widget class="QSpinBox" name="comp_range_7">
                <property name="maximum">
                 <number>1000</number>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QSpinBox" name="spinBox_16">
+              <widget class="QSpinBox" name="comp_range_8">
                <property name="maximum">
                 <number>1000</number>
                </property>
@@ -967,28 +967,28 @@ QGroupBox::title {
              <item>
               <layout class="QVBoxLayout" name="verticalLayout_19">
                <item>
-                <widget class="QSpinBox" name="spinBox_19">
+                <widget class="QSpinBox" name="create_model_spin">
                  <property name="maximum">
                   <number>20</number>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QSpinBox" name="spinBox_20">
+                <widget class="QSpinBox" name="create_model_spin_2">
                  <property name="maximum">
                   <number>20</number>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QSpinBox" name="spinBox_21">
+                <widget class="QSpinBox" name="create_model_spin_3">
                  <property name="maximum">
                   <number>20</number>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QSpinBox" name="spinBox_22">
+                <widget class="QSpinBox" name="create_model_spin_4">
                  <property name="maximum">
                   <number>20</number>
                  </property>
@@ -1503,7 +1503,7 @@ QGroupBox::title {
  <resources/>
  <connections>
   <connection>
-   <sender>spinBox_19</sender>
+   <sender>create_model_spin</sender>
    <signal>valueChanged(int)</signal>
    <receiver>label_77</receiver>
    <slot>setNum(int)</slot>
@@ -1519,7 +1519,7 @@ QGroupBox::title {
    </hints>
   </connection>
   <connection>
-   <sender>spinBox_20</sender>
+   <sender>create_model_spin_2</sender>
    <signal>valueChanged(int)</signal>
    <receiver>label_79</receiver>
    <slot>setNum(int)</slot>
@@ -1535,7 +1535,7 @@ QGroupBox::title {
    </hints>
   </connection>
   <connection>
-   <sender>spinBox_21</sender>
+   <sender>create_model_spin_3</sender>
    <signal>valueChanged(int)</signal>
    <receiver>label_84</receiver>
    <slot>setNum(int)</slot>
@@ -1551,7 +1551,7 @@ QGroupBox::title {
    </hints>
   </connection>
   <connection>
-   <sender>spinBox_22</sender>
+   <sender>create_model_spin_4</sender>
    <signal>valueChanged(int)</signal>
    <receiver>label_89</receiver>
    <slot>setNum(int)</slot>

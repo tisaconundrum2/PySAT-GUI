@@ -26,7 +26,7 @@ private slots:
     void on_toolButton_4_clicked();
     void on_actionExit_triggered();
     void on_pushButton_13_clicked();
-    void SpinBoxChanged(QWidget *wSp);
+    int SpinBoxChanged(QWidget *wSp);
     void spinboxWrite(QWidget* i);
     void on_toolButton_5_clicked();
 
