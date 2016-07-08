@@ -164,14 +164,14 @@ void GuiTest::SpinBoxChanged(QWidget* wSp){
     int value = sp->value();                        //and value is its value after the change
 
     //do whatever you want to do with them here. . .
-    qDebug("%d, %s \n", value, "SpinBoxChanged");
+    qDebug() << value << "SpinBoxChanged";
 }
 
 void GuiTest::spinboxWrite(QWidget* e){
     SpinBoxChanged(e);
     QString* value = (QString*)e;
-    qDebug("%s, %s, %s", e, value, "SpinBoxWrite");
-//    qDebug(e + value + " SpinBoxWrite");
+//    qDebug("%s, %s, %s", qPrintable(e), qPrintable(value), "SpinBoxWrite");
+    qDebug() << e << value << " SpinBoxWrite";
 
 }
 
