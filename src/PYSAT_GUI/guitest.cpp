@@ -13,7 +13,8 @@
 //Global variables
 int norm_push = 0;                              // this variable measures how many time's the normalization button has been pushed
 int norm_size = 7;                              // this variable measures the size of arrays in the normalization section
-const QString &python_file = "C:/";
+QString python_file = "";
+QString output_location = "";
 
 GuiTest::GuiTest (QWidget *parent):
     QMainWindow(parent), ui(new Ui::GuiTest){
@@ -113,23 +114,23 @@ void GuiTest::setSpinleftVisible(int index, bool visible){
 
 
 void GuiTest::on_toolButton_clicked(){
-    const QString &file_name = QFileDialog::getOpenFileName(this, "Open New File", QDir::homePath());
+    const QString &file_name = QFileDialog::getOpenFileName(this, "Select Maskfile", QDir::homePath());
     ui->lineEdit->setText(file_name);
 }
 
 void GuiTest::on_toolButton_2_clicked(){
-    const QString &file_name = QFileDialog::getOpenFileName(this, "Open New File", QDir::homePath());
+    const QString &file_name = QFileDialog::getOpenFileName(this, "Select Unknwon Data File", QDir::homePath());
     ui->lineEdit_2->setText(file_name);
 }
 
 void GuiTest::on_toolButton_3_clicked(){
-    const QString &file_name = QFileDialog::getOpenFileName(this, "Open New File", QDir::homePath());
+    const QString &file_name = QFileDialog::getOpenFileName(this, "Select Database File", QDir::homePath());
     ui->lineEdit_3->setText(file_name);
 }
 
 void GuiTest::on_toolButton_4_clicked(){
-    const QString &file_name = QFileDialog::getExistingDirectory(this, "Open New Directory", QDir::homePath());
-    ui->lineEdit_4->setText(file_name);
+    output_location = QFileDialog::getExistingDirectory(this, "Select Output Directory", QDir::homePath());
+    ui->lineEdit_4->setText(output_location);
 }
 
 void GuiTest::on_toolButton_5_clicked()
