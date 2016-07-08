@@ -171,6 +171,7 @@ void GuiTest::spinboxWrite(QWidget* e){
     SpinBoxChanged(e);
     QString* value = (QString*)e;
     qDebug("%s, %s, %s", e, value, "SpinBoxWrite");
+    std::cout << e << value, "SpinBoxWrite"
 //    qDebug(e + value + " SpinBoxWrite");
 
 }
