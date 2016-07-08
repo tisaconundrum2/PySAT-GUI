@@ -170,7 +170,6 @@ void GuiTest::SpinBoxChanged(QWidget* wSp){
 void GuiTest::spinboxWrite(QWidget* e){
     SpinBoxChanged(e);
     QString* value = (QString*)e;
-//    qDebug("%s, %s, %s", qPrintable(e), qPrintable(value), "SpinBoxWrite");
     qDebug() << e << value << " SpinBoxWrite";
 
 }
