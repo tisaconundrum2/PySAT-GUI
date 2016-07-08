@@ -175,3 +175,8 @@ void GuiTest::spinboxWrite(QWidget* e){
     qDebug() << value;
     qDebug() << "spinBoxWrite";
 }
+
+void GuiTest::on_pushButton_clicked()
+{
+    system(qPrintable(pythonProcess + " " + output_location+"pls_sm_test"));
+}
