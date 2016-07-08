@@ -30,6 +30,8 @@ private slots:
     void spinboxWrite(QWidget* i);
     void on_toolButton_5_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::GuiTest *ui;
 };

@@ -160,23 +160,21 @@ void GuiTest::on_pushButton_13_clicked(){
 
 
 void GuiTest::SpinBoxChanged(QWidget* wSp){
-    QSpinBox* sp= (QSpinBox*)wSp;
-    int value = sp->value();
-    qDebug() << value;
-    qDebug() << "SpinBoxChanged";
-    //now sp is a pointer to the QSpinBox that emitted the valueChanged signal
-    //and value is its value after the change
+    QSpinBox* sp= (QSpinBox*)wSp;                   //now sp is a pointer to the QSpinBox that emitted the valueChanged signal
+    int value = sp->value();                        //and value is its value after the change
+
     //do whatever you want to do with them here. . .
+    qDebug("%d, %s \n", value, "SpinBoxChanged");
 }
 
 void GuiTest::spinboxWrite(QWidget* e){
     SpinBoxChanged(e);
     QString* value = (QString*)e;
-    qDebug() << value;
-    qDebug() << "spinBoxWrite";
+    qDebug("%d, %s, %s", e, value, "SpinBoxWrite");
+
 }
 
 void GuiTest::on_pushButton_clicked()
 {
-    system(qPrintable(pythonProcess + " " + output_location+"pls_sm_test"));
+    system(qPrintable(python_file + " " + output_location+"pls_sm_test"));
 }
