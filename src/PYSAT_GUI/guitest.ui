@@ -24,9 +24,9 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>-117</y>
+         <y>0</y>
          <width>550</width>
-         <height>958</height>
+         <height>986</height>
         </rect>
        </property>
        <property name="font">
@@ -97,6 +97,13 @@ QGroupBox::title {
                    </property>
                   </widget>
                  </item>
+                 <item>
+                  <widget class="QLabel" name="label_5">
+                   <property name="text">
+                    <string>Python exe Location</string>
+                   </property>
+                  </widget>
+                 </item>
                 </layout>
                </item>
                <item>
@@ -141,6 +148,16 @@ QGroupBox::title {
                    </property>
                   </widget>
                  </item>
+                 <item>
+                  <widget class="QLineEdit" name="lineEdit_6">
+                   <property name="text">
+                    <string extracomment="Make this change whenever a new folder is selected">*python.exe</string>
+                   </property>
+                   <property name="readOnly">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
                 </layout>
                </item>
                <item>
@@ -168,6 +185,13 @@ QGroupBox::title {
                  </item>
                  <item>
                   <widget class="QToolButton" name="toolButton_4">
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QToolButton" name="toolButton_5">
                    <property name="text">
                     <string>...</string>
                    </property>
