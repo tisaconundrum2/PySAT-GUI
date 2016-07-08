@@ -13,7 +13,7 @@
 //Global variables
 int norm_push = 0;                              // this variable measures how many time's the normalization button has been pushed
 int norm_size = 7;                              // this variable measures the size of arrays in the normalization section
-const QString &python_file = "";
+const QString &python_file = "C:/";
 
 GuiTest::GuiTest (QWidget *parent):
     QMainWindow(parent), ui(new Ui::GuiTest){
@@ -134,7 +134,7 @@ void GuiTest::on_toolButton_4_clicked(){
 
 void GuiTest::on_toolButton_5_clicked()
 {
-    &python_file = QFileDialog::getOpenFileName(this, "Python .exe File", QDir::rootPath());
+    python_file = QFileDialog::getOpenFileName(this, "Python .exe File", QDir::rootPath());
     ui->lineEdit_6->setText(python_file);
 }
 
