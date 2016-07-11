@@ -39,6 +39,7 @@ unknown_data.mask(maskfile)
 def get_ranges(r0, r1, r2, r3):
     return [(r0, r1), (r1, r2), (r2, r3)]
 ranges3 = get_ranges(0, 350, 470, 1000)
+ranges3 = [(0, 350), (350, 470), (470, 1000)]
 ranges1 = [(0, 1000)]
 
 data3 = data
