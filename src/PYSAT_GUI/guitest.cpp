@@ -161,24 +161,18 @@ void GuiTest::on_pushButton_13_clicked(){
 
 
 int GuiTest::SpinBoxChanged(QWidget* wSp){
-    QSpinBox* sp= (QSpinBox*)wSp;                   //now sp is a pointer to the QSpinBox that emitted the valueChanged signal
-    int value = sp->value();                        //and value is its value after the change
+    QSpinBox* sp= (QSpinBox*)wSp;                                   //now sp is a pointer to the QSpinBox that emitted the valueChanged signal
+    int value = sp->value();                                        //and value is its value after the change
     return value;
 }
 
 void GuiTest::spinboxWrite(QWidget* e){
     int spinArray[16];
     int spinNum = SpinBoxChanged(e);
-    QString value = e->objectName();                //get the name of each spinbox this will help in identifying who's being manipulated
+    char* value = (char* )e->objectName();                                //get the name of each spinbox this will help in identifying who's being manipulated
     qDebug() << value << spinNum;
-
-    QString string="string";
-    std::string stdstring="string";
-    qDebug()<< (string.toStdString()==stdstring); // true
-
-
-    string="string";
-    qDebug()<< (string==QString::fromStdString("std string")); // false
+    qDebug() << std::stoi(value);
+    qDebug()<< (value == QString::fromStdString("norm_spinBox_9"));
 
 }
 
