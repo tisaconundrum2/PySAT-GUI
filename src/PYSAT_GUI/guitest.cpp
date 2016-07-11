@@ -1,3 +1,4 @@
+using System;
 #include "guitest.h"
 #include "ui_guitest.h"
 #include <QString>
@@ -171,7 +172,7 @@ void GuiTest::spinboxWrite(QWidget* e){
     int spinNum = SpinBoxChanged(e);
     QString value = e->objectName();                                //get the name of each spinbox this will help in identifying who's being manipulated
     qDebug() << value << spinNum;
-    qDebug() << value.toInt(&conversionSucceded,10);
+    qDebug() << value.toInt();
     qDebug()<< (value == QString::fromStdString("norm_spinBox_9"));
 
 }
