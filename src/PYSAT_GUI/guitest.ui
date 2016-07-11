@@ -24,7 +24,7 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>-3</y>
+         <y>-173</y>
          <width>550</width>
          <height>1015</height>
         </rect>
@@ -1587,6 +1587,22 @@ QGroupBox::title {
     <hint type="destinationlabel">
      <x>491</x>
      <y>780</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>norm_spinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>norm_spinBox_10</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>404</x>
+     <y>118</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>307</x>
+     <y>150</y>
     </hint>
    </hints>
   </connection>
