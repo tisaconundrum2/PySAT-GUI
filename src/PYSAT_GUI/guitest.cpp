@@ -169,9 +169,9 @@ int GuiTest::SpinBoxChanged(QWidget* wSp){
 void GuiTest::spinboxWrite(QWidget* e){
     int spinArray[16];
     int spinNum = SpinBoxChanged(e);
-    char* value = (char* )e->objectName();                                //get the name of each spinbox this will help in identifying who's being manipulated
+    QString value = e->objectName();                                //get the name of each spinbox this will help in identifying who's being manipulated
     qDebug() << value << spinNum;
-    qDebug() << std::stoi(value);
+    qDebug() << value.toInt(&conversionSucceded,10);
     qDebug()<< (value == QString::fromStdString("norm_spinBox_9"));
 
 }
