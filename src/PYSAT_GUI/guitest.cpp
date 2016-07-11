@@ -1,4 +1,3 @@
-using System;
 #include "guitest.h"
 #include "ui_guitest.h"
 #include <QString>
