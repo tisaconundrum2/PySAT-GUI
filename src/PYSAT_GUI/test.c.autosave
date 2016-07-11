@@ -19,3 +19,11 @@ enum StringValue {norm_label,
                   norm_spinBox_15,
                   norm_spinBox_16
                  };
+static std::map<std::string, StringValue> s_mapStringValues;
+static char szInput[_MAX_PATH];
+static void Initialize();
+
+int main(){
+    Initialize();
+    while
+}
