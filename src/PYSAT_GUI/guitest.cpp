@@ -141,6 +141,7 @@ void GuiTest::on_toolButton_5_clicked()
 
 
 
+
 void GuiTest::on_actionExit_triggered(){
     this->close();
 }
@@ -168,7 +169,6 @@ int GuiTest::SpinBoxChanged(QWidget* wSp){
 void GuiTest::spinboxWrite(QWidget* e){
     int spinNum = SpinBoxChanged(e);
     QString value = e->objectName();                //get the name of each spinbox this will help in identifying who's being manipulated
-    std::string value1 = value;
 //    value = value.toInt();
     qDebug() << value << spinNum;
 
@@ -180,3 +180,4 @@ void GuiTest::on_pushButton_clicked()
 {
     system(qPrintable(python_file + " " + output_location+"pls_sm_test"));
 }
+
