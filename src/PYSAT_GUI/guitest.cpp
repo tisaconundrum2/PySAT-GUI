@@ -15,6 +15,7 @@ int norm_push = 0;                              // this variable measures how ma
 int norm_size = 7;                              // this variable measures the size of arrays in the normalization section
 int spinArray1[7] = {0,0,0,0,0,0,0};
 int spinArray2[7] = {0,0,0,0,0,0,0};
+int wait = 0;
 QString python_file = "";
 QString output_location = "";
 
@@ -191,7 +192,8 @@ void GuiTest::spinboxWrite(QWidget* e){
     if (spinArray1 == spinArray2){
         qDebug() << spinArray1 << spinArray2;
     }
-    qDebug() << value;
+    wait++;
+    qDebug() << value << wait;
 
 }
 
