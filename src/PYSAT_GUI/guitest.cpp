@@ -13,6 +13,10 @@
 //Global variables
 int norm_push = 0;                              // this variable measures how many time's the normalization button has been pushed
 int norm_size = 7;                              // this variable measures the size of arrays in the normalization section
+int spinArray[16] = {0,0,0,0,
+                     0,0,0,0,
+                     0,0,0,0,
+                     0,0,0,0};
 QString python_file = "";
 QString output_location = "";
 
@@ -167,7 +171,6 @@ int GuiTest::SpinBoxChanged(QWidget* wSp){
 }
 
 void GuiTest::spinboxWrite(QWidget* e){
-    int spinArray[16] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     int spinNum = SpinBoxChanged(e);
     QString value = e->objectName();                                //get the name of each spinbox this will help in identifying who's being manipulated
 
