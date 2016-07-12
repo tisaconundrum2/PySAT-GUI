@@ -171,8 +171,9 @@ int GuiTest::SpinBoxChanged(QWidget* wSp){
 
 void GuiTest::spinboxWrite(QWidget* e){
     int spinNum = SpinBoxChanged(e);
-    QString value = e->objectName();                                //get the name of each spinbox this will help in identifying who's being manipulated
-
+    //get the name of each spinbox this will help in identifying who's being manipulated
+    QString value = e->objectName();
+    wait++;
 
     if ((value == QString::fromStdString("norm_spinBox"))){           spinArray1[0] = spinNum;
     } else if ((value == QString::fromStdString("norm_spinBox_2"))){  spinArray1[1] = spinNum;
@@ -189,10 +190,13 @@ void GuiTest::spinboxWrite(QWidget* e){
     } else if ((value == QString::fromStdString("norm_spinBox_15"))){ spinArray2[5] = spinNum;
     } else if ((value == QString::fromStdString("norm_spinBox_16"))){ spinArray2[6] = spinNum;
     }
-    if (spinArray1 == spinArray2){
-        qDebug() << spinArray1 << spinArray2;
+    if (wait == 2){
+        for (int i = 0; i < 7; i++){
+            if (spinArray1[i] != spinArray2[i]){
+
+            }
+        }
     }
-    wait++;
     qDebug() << value << wait;
 
 }
