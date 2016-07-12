@@ -191,7 +191,7 @@ void GuiTest::spinboxWrite(QWidget* e){
     } else if ((value == QString::fromStdString("norm_spinBox_15"))){ spinArray2[6] = spinNum;
     }
 
-    for (int i = 1; i < 15; i++){
+    for (int i = 1; i < 16; i++){
         qDebug() << spinArray1[i] << spinArray2[i + 1];
 //        if (spinArray[i] == spinArray[i+9]){
 //            QMessageBox::critical(this, "Warning", "Your values are not the same!");
