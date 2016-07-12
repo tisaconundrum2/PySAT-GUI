@@ -194,9 +194,9 @@ void GuiTest::spinboxWrite(QWidget* e){
     }
 
     for (int i = 0; i < 16; i++){
-        if (spinArray[i] != spinArray[i+9]){
-            QMessageBox::critical(this, "Warning", "Your values are not the same!");
-        }
+//        if (spinArray[i] != spinArray[i+9]){
+//            QMessageBox::critical(this, "Warning", "Your values are not the same!");
+//        }
         qDebug() << spinArray[i];
     }
     qDebug() << value;
