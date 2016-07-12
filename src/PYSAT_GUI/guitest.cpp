@@ -175,27 +175,29 @@ void GuiTest::spinboxWrite(QWidget* e){
     QString value = e->objectName();                                //get the name of each spinbox this will help in identifying who's being manipulated
 
 
-    if ((value == QString::fromStdString("norm_spinBox_2"))){  spinArray1[0] = spinNum;
-    } else if ((value == QString::fromStdString("norm_spinBox_3"))){  spinArray1[1] = spinNum;
-    } else if ((value == QString::fromStdString("norm_spinBox_4"))){  spinArray1[2] = spinNum;
-    } else if ((value == QString::fromStdString("norm_spinBox_5"))){  spinArray1[3] = spinNum;
-    } else if ((value == QString::fromStdString("norm_spinBox_6"))){  spinArray1[4] = spinNum;
-    } else if ((value == QString::fromStdString("norm_spinBox_7"))){  spinArray1[5] = spinNum;
-    } else if ((value == QString::fromStdString("norm_spinBox_8"))){  spinArray1[6] = spinNum;
-    } else if ((value == QString::fromStdString("norm_spinBox_9"))){  spinArray2[0] = spinNum;
-    } else if ((value == QString::fromStdString("norm_spinBox_10"))){ spinArray2[1] = spinNum;
-    } else if ((value == QString::fromStdString("norm_spinBox_11"))){ spinArray2[2] = spinNum;
-    } else if ((value == QString::fromStdString("norm_spinBox_12"))){ spinArray2[3] = spinNum;
-    } else if ((value == QString::fromStdString("norm_spinBox_13"))){ spinArray2[4] = spinNum;
-    } else if ((value == QString::fromStdString("norm_spinBox_14"))){ spinArray2[5] = spinNum;
-    } else if ((value == QString::fromStdString("norm_spinBox_15"))){ spinArray2[6] = spinNum;
+    if ((value == QString::fromStdString("norm_spinBox"))){           spinArray[0] = spinNum;
+    } else if ((value == QString::fromStdString("norm_spinBox_2"))){  spinArray[1] = spinNum;
+    } else if ((value == QString::fromStdString("norm_spinBox_3"))){  spinArray[2] = spinNum;
+    } else if ((value == QString::fromStdString("norm_spinBox_4"))){  spinArray[3] = spinNum;
+    } else if ((value == QString::fromStdString("norm_spinBox_5"))){  spinArray[4] = spinNum;
+    } else if ((value == QString::fromStdString("norm_spinBox_6"))){  spinArray[5] = spinNum;
+    } else if ((value == QString::fromStdString("norm_spinBox_7"))){  spinArray[6] = spinNum;
+    } else if ((value == QString::fromStdString("norm_spinBox_8"))){  spinArray[7] = spinNum;
+    } else if ((value == QString::fromStdString("norm_spinBox_9"))){  spinArray[8] = spinNum;
+    } else if ((value == QString::fromStdString("norm_spinBox_10"))){ spinArray[9] = spinNum;
+    } else if ((value == QString::fromStdString("norm_spinBox_11"))){ spinArray[10] = spinNum;
+    } else if ((value == QString::fromStdString("norm_spinBox_12"))){ spinArray[11] = spinNum;
+    } else if ((value == QString::fromStdString("norm_spinBox_13"))){ spinArray[12] = spinNum;
+    } else if ((value == QString::fromStdString("norm_spinBox_14"))){ spinArray[13] = spinNum;
+    } else if ((value == QString::fromStdString("norm_spinBox_15"))){ spinArray[14] = spinNum;
+    } else if ((value == QString::fromStdString("norm_spinBox_16"))){ spinArray[15] = spinNum;
     }
 
-    for (int i = 1; i < 15; i++){
-        qDebug() << spinArray1[i] << spinArray2[i + 1];
-//        if (spinArray[i] == spinArray[i+9]){
-//            QMessageBox::critical(this, "Warning", "Your values are not the same!");
-//        }
+    for (int i = 1; i < 16; i++){
+        qDebug() << spinArray1[i] << spinArray2[i];
+        //        if (spinArray[i] == spinArray[i+9]){
+        //            QMessageBox::critical(this, "Warning", "Your values are not the same!");
+        //        }
     }
     qDebug() << value;
 
