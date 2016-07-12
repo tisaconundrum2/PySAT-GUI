@@ -170,34 +170,25 @@ void GuiTest::spinboxWrite(QWidget* e){
     int spinArray[16];
     int spinNum = SpinBoxChanged(e);
     QString value = e->objectName();                                //get the name of each spinbox this will help in identifying who's being manipulated
-    qDebug() << value << spinNum;
-    qDebug() << value.toInt();
-    int c[10] = {0,1,2,3,4,5,6,7,8,9};
-    if ((value == QString::fromStdString("norm_spinBox"))){
-        qDebug() << c++;
-    } else if ((value == QString::fromStdString("norm_spinBox_2"))){
-        qDebug() << c++;
-    } else if ((value == QString::fromStdString("norm_spinBox_3"))){
-        qDebug() << c++;
-    } else if ((value == QString::fromStdString("norm_spinBox_4"))){
-        qDebug() << c++;
-    } else if ((value == QString::fromStdString("norm_spinBox_5"))){
-        qDebug() << c++;
-    } else if ((value == QString::fromStdString("norm_spinBox_6"))){
-        qDebug() << c++;
-    } else if ((value == QString::fromStdString("norm_spinBox_7"))){
-        qDebug() << c++;
-    } else if ((value == QString::fromStdString("norm_spinBox_8"))){
-        qDebug() << c++;
-    } else if ((value == QString::fromStdString("norm_spinBox_9"))){
-        qDebug() << c++;
-    } else if ((value == QString::fromStdString("norm_spinBox_10"))){
-        qDebug() << c++;
+
+
+    if ((value == QString::fromStdString("norm_spinBox"))){                 qDebug() << value << spinNum << "1";
+    } else if ((value == QString::fromStdString("norm_spinBox_2"))){        qDebug() << value << spinNum << "2";
+    } else if ((value == QString::fromStdString("norm_spinBox_3"))){        qDebug() << value << spinNum << "3";
+    } else if ((value == QString::fromStdString("norm_spinBox_4"))){        qDebug() << value << spinNum << "4";
+    } else if ((value == QString::fromStdString("norm_spinBox_5"))){        qDebug() << value << spinNum << "5";
+    } else if ((value == QString::fromStdString("norm_spinBox_6"))){        qDebug() << value << spinNum << "6";
+    } else if ((value == QString::fromStdString("norm_spinBox_7"))){        qDebug() << value << spinNum << "7";
+    } else if ((value == QString::fromStdString("norm_spinBox_8"))){        qDebug() << value << spinNum << "8";
+    } else if ((value == QString::fromStdString("norm_spinBox_9"))){        qDebug() << value << spinNum << "9";
+    } else if ((value == QString::fromStdString("norm_spinBox_10"))){       qDebug() << value << spinNum << "10";
+    } else if ((value == QString::fromStdString("norm_spinBox_11"))){       qDebug() << value << spinNum << "11";
+    } else if ((value == QString::fromStdString("norm_spinBox_12"))){       qDebug() << value << spinNum << "12";
+    } else if ((value == QString::fromStdString("norm_spinBox_13"))){       qDebug() << value << spinNum << "13";
+    } else if ((value == QString::fromStdString("norm_spinBox_14"))){       qDebug() << value << spinNum << "14";
+    } else if ((value == QString::fromStdString("norm_spinBox_15"))){       qDebug() << value << spinNum << "15";
+    } else if ((value == QString::fromStdString("norm_spinBox_16"))){       qDebug() << value << spinNum << "16";
     }
-
-
-
-
 }
 
 void GuiTest::on_pushButton_clicked()

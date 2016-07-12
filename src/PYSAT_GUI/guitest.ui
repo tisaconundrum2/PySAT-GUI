@@ -24,7 +24,7 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>-173</y>
+         <y>-178</y>
          <width>550</width>
          <height>1015</height>
         </rect>
@@ -1533,12 +1533,12 @@ QGroupBox::title {
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>436</x>
-     <y>673</y>
+     <x>537</x>
+     <y>648</y>
     </hint>
     <hint type="destinationlabel">
      <x>352</x>
-     <y>780</y>
+     <y>776</y>
     </hint>
    </hints>
   </connection>
@@ -1549,12 +1549,12 @@ QGroupBox::title {
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>466</x>
-     <y>701</y>
+     <x>537</x>
+     <y>676</y>
     </hint>
     <hint type="destinationlabel">
      <x>398</x>
-     <y>780</y>
+     <y>776</y>
     </hint>
    </hints>
   </connection>
@@ -1565,12 +1565,12 @@ QGroupBox::title {
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>475</x>
-     <y>729</y>
+     <x>537</x>
+     <y>704</y>
     </hint>
     <hint type="destinationlabel">
      <x>444</x>
-     <y>780</y>
+     <y>776</y>
     </hint>
    </hints>
   </connection>
@@ -1581,12 +1581,12 @@ QGroupBox::title {
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>487</x>
-     <y>757</y>
+     <x>537</x>
+     <y>732</y>
     </hint>
     <hint type="destinationlabel">
      <x>491</x>
-     <y>780</y>
+     <y>776</y>
     </hint>
    </hints>
   </connection>
@@ -1597,12 +1597,108 @@ QGroupBox::title {
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>404</x>
-     <y>118</y>
+     <x>536</x>
+     <y>101</y>
     </hint>
     <hint type="destinationlabel">
-     <x>307</x>
-     <y>150</y>
+     <x>366</x>
+     <y>133</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>norm_spinBox_2</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>norm_spinBox_11</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>431</x>
+     <y>145</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>323</x>
+     <y>171</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>norm_spinBox_3</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>norm_spinBox_12</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>435</x>
+     <y>179</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>298</x>
+     <y>207</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>norm_spinBox_4</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>norm_spinBox_13</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>432</x>
+     <y>214</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>337</x>
+     <y>241</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>norm_spinBox_5</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>norm_spinBox_14</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>457</x>
+     <y>240</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>348</x>
+     <y>276</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>norm_spinBox_6</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>norm_spinBox_15</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>480</x>
+     <y>275</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>334</x>
+     <y>296</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>norm_spinBox_7</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>norm_spinBox_16</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>433</x>
+     <y>299</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>338</x>
+     <y>338</y>
     </hint>
    </hints>
   </connection>
