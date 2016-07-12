@@ -43,5 +43,4 @@ int main(){
     case norm_spinBox_15:
     case norm_spinBox_16:
     }
-
 }

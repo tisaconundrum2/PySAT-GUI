@@ -172,7 +172,31 @@ void GuiTest::spinboxWrite(QWidget* e){
     QString value = e->objectName();                                //get the name of each spinbox this will help in identifying who's being manipulated
     qDebug() << value << spinNum;
     qDebug() << value.toInt();
-    qDebug()<< (value == QString::fromStdString("norm_spinBox_9"));
+
+    if ((value == QString::fromStdString("norm_spinBox"))){
+        qDebug() << "1";
+    } else if ((value == QString::fromStdString("norm_spinBox_2"))){
+        qDebug() << "1";
+    } else if ((value == QString::fromStdString("norm_spinBox_3"))){
+        qDebug() << "1";
+    } else if ((value == QString::fromStdString("norm_spinBox_4"))){
+        qDebug() << "1";
+    } else if ((value == QString::fromStdString("norm_spinBox_5"))){
+        qDebug() << "1";
+    } else if ((value == QString::fromStdString("norm_spinBox_6"))){
+        qDebug() << "1";
+    } else if ((value == QString::fromStdString("norm_spinBox_7"))){
+        qDebug() << "1";
+    } else if ((value == QString::fromStdString("norm_spinBox_8"))){
+        qDebug() << "1";
+    } else if ((value == QString::fromStdString("norm_spinBox_9"))){
+        qDebug() << "1";
+    } else if ((value == QString::fromStdString("norm_spinBox_10"))){
+        qDebug() << "1";
+    }
+
+
+
 
 }
 
