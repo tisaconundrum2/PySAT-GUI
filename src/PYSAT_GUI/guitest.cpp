@@ -15,7 +15,6 @@ int norm_push = 0;                              // this variable measures how ma
 int norm_size = 7;                              // this variable measures the size of arrays in the normalization section
 int spinArray1[7] = {0,0,0,0,0,0,0};
 int spinArray2[7] = {0,0,0,0,0,0,0};
-int wait = 0;
 QString python_file = "";
 QString output_location = "";
 
@@ -136,14 +135,10 @@ void GuiTest::on_toolButton_4_clicked(){
     ui->lineEdit_4->setText(output_location);
 }
 
-void GuiTest::on_toolButton_5_clicked()
-{
+void GuiTest::on_toolButton_5_clicked(){
     python_file = QFileDialog::getOpenFileName(this, "Python .exe File", QDir::rootPath());
     ui->lineEdit_6->setText(python_file);
 }
-
-
-
 
 void GuiTest::on_actionExit_triggered(){
     this->close();
@@ -173,37 +168,23 @@ void GuiTest::spinboxWrite(QWidget* e){
     int spinNum = SpinBoxChanged(e);
     //get the name of each spinbox this will help in identifying who's being manipulated
     QString value = e->objectName();
-    wait++;
 
-    if ((value == QString::fromStdString("norm_spinBox"))){           spinArray1[0] = spinNum;
-    } else if ((value == QString::fromStdString("norm_spinBox_2"))){  spinArray1[1] = spinNum;
-    } else if ((value == QString::fromStdString("norm_spinBox_3"))){  spinArray1[2] = spinNum;
-    } else if ((value == QString::fromStdString("norm_spinBox_4"))){  spinArray1[3] = spinNum;
-    } else if ((value == QString::fromStdString("norm_spinBox_5"))){  spinArray1[4] = spinNum;
-    } else if ((value == QString::fromStdString("norm_spinBox_6"))){  spinArray1[5] = spinNum;
-    } else if ((value == QString::fromStdString("norm_spinBox_7"))){  spinArray1[6] = spinNum;
-    } else if ((value == QString::fromStdString("norm_spinBox_10"))){ spinArray2[0] = spinNum;
-    } else if ((value == QString::fromStdString("norm_spinBox_11"))){ spinArray2[1] = spinNum;
-    } else if ((value == QString::fromStdString("norm_spinBox_12"))){ spinArray2[2] = spinNum;
-    } else if ((value == QString::fromStdString("norm_spinBox_13"))){ spinArray2[3] = spinNum;
-    } else if ((value == QString::fromStdString("norm_spinBox_14"))){ spinArray2[4] = spinNum;
-    } else if ((value == QString::fromStdString("norm_spinBox_15"))){ spinArray2[5] = spinNum;
-    } else if ((value == QString::fromStdString("norm_spinBox_16"))){ spinArray2[6] = spinNum;
-    }
-    if (wait >= 2){
-        for (int i = 0; i < 7; i++){
-            if (spinArray1[i] != spinArray2[i]){
-                QMessageBox::critical(this, "Warning", "Your values are not the same!");
-            }
-            qDebug() << spinArray1[i] << spinArray2[i+1];
-//            if (spinArray1[i] < spinArray2[i+1]){
-//                QMessageBox::critical(this, "Warning", "This Value cannot be lower than the value on the left!");
-//            }
-        }
-        wait = 0;
-    }
-    qDebug() << value << wait;
 
+    if ((value == QString::fromStdString("norm_spinBox"))){           ui->norm_spinBox_10->setMinimum(spinNum);
+    } else if ((value == QString::fromStdString("norm_spinBox_2"))){  ui->norm_spinBox_11->setMinimum(spinNum);
+    } else if ((value == QString::fromStdString("norm_spinBox_3"))){  ui->norm_spinBox_12->setMinimum(spinNum);
+    } else if ((value == QString::fromStdString("norm_spinBox_4"))){  ui->norm_spinBox_13->setMinimum(spinNum);
+    } else if ((value == QString::fromStdString("norm_spinBox_5"))){  ui->norm_spinBox_14->setMinimum(spinNum);
+    } else if ((value == QString::fromStdString("norm_spinBox_6"))){  ui->norm_spinBox_15->setMinimum(spinNum);
+    } else if ((value == QString::fromStdString("norm_spinBox_7"))){  ui->norm_spinBox_16->setMinimum(spinNum);
+    } else if ((value == QString::fromStdString("norm_spinBox_10"))){ ui->norm_spinBox_2->setMinimum(spinNum);
+    } else if ((value == QString::fromStdString("norm_spinBox_11"))){ ui->norm_spinBox_3->setMinimum(spinNum);
+    } else if ((value == QString::fromStdString("norm_spinBox_12"))){ ui->norm_spinBox_4->setMinimum(spinNum);
+    } else if ((value == QString::fromStdString("norm_spinBox_13"))){ ui->norm_spinBox_5->setMinimum(spinNum);
+    } else if ((value == QString::fromStdString("norm_spinBox_14"))){ ui->norm_spinBox_6->setMinimum(spinNum);
+    } else if ((value == QString::fromStdString("norm_spinBox_15"))){ ui->norm_spinBox_7->setMinimum(spinNum);
+    } else if ((value == QString::fromStdString("norm_spinBox_16"))){ ui->norm_spinBox_8->setMinimum(spinNum);
+    }
 }
 
 void GuiTest::on_pushButton_clicked()
