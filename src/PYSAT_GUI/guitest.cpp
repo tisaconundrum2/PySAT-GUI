@@ -190,12 +190,17 @@ void GuiTest::spinboxWrite(QWidget* e){
     } else if ((value == QString::fromStdString("norm_spinBox_15"))){ spinArray2[5] = spinNum;
     } else if ((value == QString::fromStdString("norm_spinBox_16"))){ spinArray2[6] = spinNum;
     }
-    if (wait == 2){
+    if (wait >= 2){
         for (int i = 0; i < 7; i++){
             if (spinArray1[i] != spinArray2[i]){
-
+                QMessageBox::critical(this, "Warning", "Your values are not the same!");
             }
+            qDebug() << spinArray1[i] << spinArray2[i+1];
+//            if (spinArray1[i] < spinArray2[i+1]){
+//                QMessageBox::critical(this, "Warning", "This Value cannot be lower than the value on the left!");
+//            }
         }
+        wait = 0;
     }
     qDebug() << value << wait;
 
