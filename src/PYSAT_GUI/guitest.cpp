@@ -189,6 +189,9 @@ void GuiTest::spinboxWrite(QWidget* e){
     } else if ((value == QString::fromStdString("norm_spinBox_15"))){ ui->norm_spinBox_7->setMinimum(spinNum);  spinArray1[14] = spinNum;
     } else if ((value == QString::fromStdString("norm_spinBox_16"))){ ui->norm_spinBox_8->setMinimum(spinNum);  spinArray1[15] = spinNum;
     }
+    for (int i = 0; i < 16; i++){
+        qDebug() << spinArray1[i];
+    }
 }
 
 void GuiTest::on_pushButton_clicked()

@@ -24,9 +24,9 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>-578</y>
+         <y>-394</y>
          <width>547</width>
-         <height>999</height>
+         <height>991</height>
         </rect>
        </property>
        <property name="font">
@@ -623,7 +623,7 @@ QGroupBox::title {
                <item>
                 <widget class="QLabel" name="label_85">
                  <property name="text">
-                  <string>Value 4</string>
+                  <string>Full Model Value</string>
                  </property>
                 </widget>
                </item>
