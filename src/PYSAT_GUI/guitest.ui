@@ -6,15 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>584</width>
-    <height>1200</height>
+    <width>581</width>
+    <height>500</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>PYSAT</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QVBoxLayout" name="verticalLayout_28">
+   <layout class="QVBoxLayout" name="verticalLayout_9">
     <item>
      <widget class="QScrollArea" name="scrollArea">
       <property name="widgetResizable">
@@ -24,9 +24,9 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>0</y>
-         <width>564</width>
-         <height>1121</height>
+         <y>-578</y>
+         <width>547</width>
+         <height>999</height>
         </rect>
        </property>
        <property name="font">
@@ -48,7 +48,7 @@ QGroupBox::title {
 }
 </string>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout_29">
+       <layout class="QVBoxLayout" name="verticalLayout_8">
         <item>
          <widget class="QGroupBox" name="Files">
           <property name="font">
@@ -537,67 +537,111 @@ QGroupBox::title {
           <property name="title">
            <string>Composition Ranges</string>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_14">
+          <layout class="QVBoxLayout" name="verticalLayout_7">
            <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_8">
+            <layout class="QVBoxLayout" name="verticalLayout_4">
              <item>
-              <widget class="QSpinBox" name="comp_range">
-               <property name="minimum">
-                <number>-100</number>
-               </property>
-               <property name="maximum">
-                <number>1000</number>
-               </property>
-              </widget>
+              <layout class="QHBoxLayout" name="horizontalLayout_3">
+               <item>
+                <widget class="QLabel" name="label_80">
+                 <property name="text">
+                  <string>Value 1</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="comp_range">
+                 <property name="minimum">
+                  <number>-100</number>
+                 </property>
+                 <property name="maximum">
+                  <number>1000</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="comp_range_2">
+                 <property name="maximum">
+                  <number>1000</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
              <item>
-              <widget class="QSpinBox" name="comp_range_2">
-               <property name="maximum">
-                <number>1000</number>
-               </property>
-              </widget>
+              <layout class="QHBoxLayout" name="horizontalLayout_5">
+               <item>
+                <widget class="QLabel" name="label_81">
+                 <property name="text">
+                  <string>Value 2</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="comp_range_5">
+                 <property name="maximum">
+                  <number>1000</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="comp_range_6">
+                 <property name="maximum">
+                  <number>1000</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
              <item>
-              <widget class="QSpinBox" name="comp_range_3">
-               <property name="maximum">
-                <number>1000</number>
-               </property>
-              </widget>
+              <layout class="QHBoxLayout" name="horizontalLayout_7">
+               <item>
+                <widget class="QLabel" name="label_82">
+                 <property name="text">
+                  <string>Value 3</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="comp_range_3">
+                 <property name="maximum">
+                  <number>1000</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="comp_range_4">
+                 <property name="maximum">
+                  <number>1000</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
              <item>
-              <widget class="QSpinBox" name="comp_range_4">
-               <property name="maximum">
-                <number>1000</number>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QSpinBox" name="comp_range_5">
-               <property name="maximum">
-                <number>1000</number>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QSpinBox" name="comp_range_6">
-               <property name="maximum">
-                <number>1000</number>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QSpinBox" name="comp_range_7">
-               <property name="maximum">
-                <number>1000</number>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QSpinBox" name="comp_range_8">
-               <property name="maximum">
-                <number>1000</number>
-               </property>
-              </widget>
+              <layout class="QHBoxLayout" name="horizontalLayout_10">
+               <item>
+                <widget class="QLabel" name="label_85">
+                 <property name="text">
+                  <string>Value 4</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="comp_range_7">
+                 <property name="maximum">
+                  <number>1000</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="comp_range_8">
+                 <property name="maximum">
+                  <number>1000</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </item>
@@ -1076,9 +1120,9 @@ QGroupBox::title {
        <zorder>Files</zorder>
        <zorder>OK</zorder>
        <zorder>CrossValidation</zorder>
-       <zorder>CompRanges</zorder>
        <zorder>CreateModels</zorder>
        <zorder>Normalization</zorder>
+       <zorder>CompRanges</zorder>
       </widget>
      </widget>
     </item>
@@ -1089,7 +1133,7 @@ QGroupBox::title {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>584</width>
+     <width>581</width>
      <height>20</height>
     </rect>
    </property>
