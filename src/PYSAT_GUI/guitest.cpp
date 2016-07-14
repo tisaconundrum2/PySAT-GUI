@@ -151,7 +151,7 @@ void GuiTest::on_toolButton_clicked(){
     const QString &file_name = QFileDialog::getOpenFileName(this, "Select Maskfile", QDir::homePath());
     ui->lineEdit->setText(file_name);
     QTextStream out(&file);
-    out << "maskfile  = \"" << file_name << "\"\n";
+    out << "maskfile = \"" << file_name << "\"\n";
 
 }
 
@@ -160,7 +160,7 @@ void GuiTest::on_toolButton_2_clicked(){
     ui->lineEdit_2->setText(file_name);
     //    numberOfNewlines(1);
     QTextStream out(&file);
-    out << "unknowndatacsv  = \"" << file_name << "\"\n";
+    out << "unknowndatacsv = \"" << file_name << "\"\n";
 }
 
 void GuiTest::on_toolButton_3_clicked(){
@@ -168,7 +168,7 @@ void GuiTest::on_toolButton_3_clicked(){
     ui->lineEdit_3->setText(file_name);
     //    numberOfNewlines(2);
     QTextStream out(&file);
-    out << "db  = \"" << file_name << "\"\n";
+    out << "db = \"" << file_name << "\"\n";
 }
 
 void GuiTest::on_toolButton_4_clicked(){
@@ -176,7 +176,7 @@ void GuiTest::on_toolButton_4_clicked(){
     ui->lineEdit_4->setText(output_location);
     //    numberOfNewlines(3);
     QTextStream out(&file);
-    out << "outpath  = \"" << output_location << "\"\n";
+    out << "outpath = \"" << output_location << "\"\n";
 }
 
 void GuiTest::on_toolButton_5_clicked(){

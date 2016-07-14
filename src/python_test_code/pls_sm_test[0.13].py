@@ -1,45 +1,21 @@
-"""
-Created on Tue May 10 12:09:29 2016
-
-@author: rbanderson
-"""
-###################################################
-# import all preprocessors
-###################################################
 from pysat.spectral.spectral_data import spectral_data
 from pysat.regression.pls_sm import pls_sm
 import pandas as pd
 
-###################################################
-# General setup
-###################################################
 outpath = r'C:\Users\User\Desktop\Output'
 db = r"C:\Users\User\Desktop\full_db_mars_corrected_dopedTiO2_pandas_format.csv"
 unknowndatacsv = r"C:\Users\User\Desktop\lab_data_averages_pandas_format.csv"
 maskfile = r"C:\Users\User\Desktop\mask_minors_noise.csv"
 
-###################################################
-# Spectral setup
-# spectral analysis data
-###################################################
 data = pd.read_csv(db, header=[0, 1])
 data = spectral_data(data)
 unknown_data = pd.read_csv(unknowndatacsv, header=[0, 1])
 unknown_data = spectral_data(unknown_data)
 unknown_data.interp(data.df['wvl'].columns)
-
 data.mask(maskfile)
 unknown_data.mask(maskfile)
 
-###################################################
-# Normalizing Data and getting Ranges
-# range3: equivalent to norm3
-# range1: equivalent to norm1
-###################################################
-def get_ranges(r0, r1, r2, r3):
-    return [(r0, r1), (r1, r2), (r2, r3)]
 ranges3 = get_ranges(0, 350, 470, 1000)
-ranges3 = [(0, 350), (350, 470), (470, 1000)]
 ranges1 = [(0, 1000)]
 
 data3 = data
