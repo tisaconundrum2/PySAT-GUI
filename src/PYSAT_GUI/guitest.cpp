@@ -23,24 +23,18 @@ int spinArray1[16] = {0,0,0,0,
 QString python_file = "";
 QString output_location = "";
 QFile file("out.txt");
+QTextStream out(&file);
 
 
 GuiTest::GuiTest (QWidget *parent):
     QMainWindow(parent), ui(new Ui::GuiTest){
     ui->setupUi(this);
+
     SetupNiceWindow();
-    QList<QSpinBox*> spinBoxes= findChildren<QSpinBox*>();
-    //create the QSignalMapper object
-    QSignalMapper* signalMapper= new QSignalMapper(this);
-    //loop through your spinboxes list
-    QSpinBox* spinBox;
-    foreach(spinBox, spinBoxes){
-        //setup mapping for each spin box
-        connect(spinBox, SIGNAL(valueChanged(int)), signalMapper, SLOT(map()));
-        signalMapper->setMapping(spinBox, spinBox);
-    }
-    //connect the unified mapped(QWidget*) signal to your spinboxWrite slot
-    connect(signalMapper, SIGNAL(mapped(QWidget*)), this, SLOT(spinboxWrite(QWidget*)));
+
+    SetupQSpinWidgets();
+
+    SetupOutFile();
 }
 
 GuiTest::~GuiTest(){
@@ -78,6 +72,23 @@ GuiTest::~GuiTest(){
  *
  */
 
+
+void GuiTest::SetupQSpinWidgets(){
+    QList<QSpinBox*> spinBoxes= findChildren<QSpinBox*>();
+    //create the QSignalMapper object
+    QSignalMapper* signalMapper= new QSignalMapper(this);
+    //loop through your spinboxes list
+    QSpinBox* spinBox;
+    foreach(spinBox, spinBoxes){
+        //setup mapping for each spin box
+        connect(spinBox, SIGNAL(valueChanged(int)), signalMapper, SLOT(map()));
+        signalMapper->setMapping(spinBox, spinBox);
+    }
+    //connect the unified mapped(QWidget*) signal to your spinboxWrite slot
+    connect(signalMapper, SIGNAL(mapped(QWidget*)), this, SLOT(spinboxWrite(QWidget*)));
+}
+
+
 void GuiTest::SetupNiceWindow(){
     //TODO: fix sizing issues, this will allow any computer to have a nicely sized window
     QRect rect = QApplication::desktop()->screenGeometry();
@@ -92,11 +103,12 @@ void GuiTest::SetupNiceWindow(){
 }
 
 
-void GuiTest::Setup(){
+void GuiTest::SetupOutFile(){
+    file.open(QIODevice::WriteOnly | QIODevice::Text);
     QTextStream out(&file);
-    out << "from pysat.spectral.spectral_data import spectral_data";
-    out << "from pysat.regression.pls_sm import pls_sm";
-    out << "import pandas as pd";
+    out << "from pysat.spectral.spectral_data import spectral_data\n";
+    out << "from pysat.regression.pls_sm import pls_sm\n";
+    out << "import pandas as pd\n";
 }
 
 void GuiTest::setLabelsVisible(int index, bool visible){
@@ -142,7 +154,6 @@ void GuiTest::numberOfNewlines(int n){
 void GuiTest::on_toolButton_clicked(){
     const QString &file_name = QFileDialog::getOpenFileName(this, "Select Maskfile", QDir::homePath());
     ui->lineEdit->setText(file_name);
-    file.open(QIODevice::WriteOnly | QIODevice::Text);
     QTextStream out(&file);
     out << "outpath = \"" << file_name << "\"\n";
 
