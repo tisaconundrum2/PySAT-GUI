@@ -143,7 +143,7 @@ void GuiTest::setSpinleftVisible(int index, bool visible){
 void GuiTest::numberOfNewlines(int n){
     QTextStream out(&file);
     for (int i = 0; i < n; i++){
-        out << "\n";
+        out << "";
     }
 }
 

@@ -15,7 +15,7 @@ unknown_data.interp(data.df['wvl'].columns)
 data.mask(maskfile)
 unknown_data.mask(maskfile)
 
-ranges3 = get_ranges(0, 350, 470, 1000)
+ranges3 = [(0, 350), (350, 470), (470, 1000)]
 ranges1 = [(0, 1000)]
 
 data3 = data
