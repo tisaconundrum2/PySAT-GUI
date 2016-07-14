@@ -17,6 +17,8 @@ public:
     ~GuiTest();
 
 private slots:
+    void SetupNiceWindow();
+    void Setup();
     void setLabelsVisible(int index, bool visible);
     void setSpinrightVisible(int index, bool visible);
     void setSpinleftVisible(int index, bool visible);

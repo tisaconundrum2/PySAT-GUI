@@ -1,2 +1,1 @@
-C:/Users/nicholas/.bash_history
-C:/Users/nicholas/.gitconfig
+outpath = "C:/Users/nicholas/.bash_history"

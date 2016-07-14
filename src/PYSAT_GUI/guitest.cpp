@@ -28,16 +28,7 @@ QFile file("out.txt");
 GuiTest::GuiTest (QWidget *parent):
     QMainWindow(parent), ui(new Ui::GuiTest){
     ui->setupUi(this);
-    //TODO: fix sizing issues, this will allow any computer to have a nicely sized window
-    QRect rect = QApplication::desktop()->screenGeometry();
-    int height = rect.height();
-    this->resize(this->width(), height*0.9);
-    for (int i = 0; i < norm_size; i++){        //setting up visibility
-        setSpinleftVisible(i, false);
-        setSpinrightVisible(i, false);
-        setLabelsVisible(i, false);
-    }
-
+    SetupNiceWindow();
     QList<QSpinBox*> spinBoxes= findChildren<QSpinBox*>();
     //create the QSignalMapper object
     QSignalMapper* signalMapper= new QSignalMapper(this);
@@ -87,6 +78,26 @@ GuiTest::~GuiTest(){
  *
  */
 
+void GuiTest::SetupNiceWindow(){
+    //TODO: fix sizing issues, this will allow any computer to have a nicely sized window
+    QRect rect = QApplication::desktop()->screenGeometry();
+    int height = rect.height();
+    this->resize(this->width(), height*0.9);
+    for (int i = 0; i < norm_size; i++){        //setting up visibility
+        setSpinleftVisible(i, false);
+        setSpinrightVisible(i, false);
+        setLabelsVisible(i, false);
+    }
+
+}
+
+
+void GuiTest::Setup(){
+    QTextStream out(&file);
+    out << "from pysat.spectral.spectral_data import spectral_data";
+    out << "from pysat.regression.pls_sm import pls_sm";
+    out << "import pandas as pd";
+}
 
 void GuiTest::setLabelsVisible(int index, bool visible){
     QLabel* labels[norm_size] = {ui->norm_label_2,
@@ -133,32 +144,32 @@ void GuiTest::on_toolButton_clicked(){
     ui->lineEdit->setText(file_name);
     file.open(QIODevice::WriteOnly | QIODevice::Text);
     QTextStream out(&file);
-    out << file_name;
+    out << "outpath = \"" << file_name << "\"\n";
 
 }
 
 void GuiTest::on_toolButton_2_clicked(){
     const QString &file_name = QFileDialog::getOpenFileName(this, "Select Unknwon Data File", QDir::homePath());
     ui->lineEdit_2->setText(file_name);
-    numberOfNewlines(1);
+    //    numberOfNewlines(1);
     QTextStream out(&file);
-    out << file_name;
+    out << file_name << "\n";
 }
 
 void GuiTest::on_toolButton_3_clicked(){
     const QString &file_name = QFileDialog::getOpenFileName(this, "Select Database File", QDir::homePath());
     ui->lineEdit_3->setText(file_name);
-    numberOfNewlines(2);
+    //    numberOfNewlines(2);
     QTextStream out(&file);
-    out << file_name;
+    out << file_name << "\n";
 }
 
 void GuiTest::on_toolButton_4_clicked(){
     output_location = QFileDialog::getExistingDirectory(this, "Select Output Directory", QDir::homePath());
     ui->lineEdit_4->setText(output_location);
-    numberOfNewlines(3);
+    //    numberOfNewlines(3);
     QTextStream out(&file);
-    out << file_name;
+    out << output_location << "\n";
 }
 
 void GuiTest::on_toolButton_5_clicked(){
@@ -224,6 +235,6 @@ void GuiTest::on_pushButton_clicked(){
 
     // optional, as QFile destructor will already do it:
     file.close();
-//    system(qPrintable(python_file + " " + output_location+"pls_sm_test"));
+    //    system(qPrintable(python_file + " " + output_location+"pls_sm_test"));
 }
 
