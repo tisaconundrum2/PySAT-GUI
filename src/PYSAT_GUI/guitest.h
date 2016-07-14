@@ -18,6 +18,7 @@ public:
 
 private slots:
     void SetupNiceWindow();
+    void SetupQSpinWidgets();
     void Setup();
     void setLabelsVisible(int index, bool visible);
     void setSpinrightVisible(int index, bool visible);
