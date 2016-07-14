@@ -1,4 +1,7 @@
 from pysat.spectral.spectral_data import spectral_data
 from pysat.regression.pls_sm import pls_sm
 import pandas as pd
-C:/Users/nicholas/VirtualBox VMs
+outpath = "C:/Users/nicholas/.bash_history"
+C:/Users/nicholas/.gitconfig
+C:/Users/nicholas/lifecynical.swf
+C:/Users/nicholas/Pictures

@@ -29,11 +29,8 @@ QTextStream out(&file);
 GuiTest::GuiTest (QWidget *parent):
     QMainWindow(parent), ui(new Ui::GuiTest){
     ui->setupUi(this);
-
     SetupNiceWindow();
-
     SetupQSpinWidgets();
-
     SetupOutFile();
 }
 
@@ -99,7 +96,6 @@ void GuiTest::SetupNiceWindow(){
         setSpinrightVisible(i, false);
         setLabelsVisible(i, false);
     }
-
 }
 
 
