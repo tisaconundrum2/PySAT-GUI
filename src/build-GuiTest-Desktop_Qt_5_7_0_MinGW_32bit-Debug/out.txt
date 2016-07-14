@@ -1,1 +1,2 @@
-delete it all
+C:/Users/nicholas/.bash_history
+C:/Users/nicholas/.gitconfig

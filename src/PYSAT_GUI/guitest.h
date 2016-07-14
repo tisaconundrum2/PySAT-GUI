@@ -30,6 +30,7 @@ private slots:
     void spinboxWrite(QWidget* i);
     void on_toolButton_5_clicked();
     void on_pushButton_clicked();
+    void numberOfNewlines(int n);
 
 
 private:

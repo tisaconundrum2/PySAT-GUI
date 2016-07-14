@@ -22,6 +22,8 @@ int spinArray1[16] = {0,0,0,0,
                      };
 QString python_file = "";
 QString output_location = "";
+QFile file("out.txt");
+
 
 GuiTest::GuiTest (QWidget *parent):
     QMainWindow(parent), ui(new Ui::GuiTest){
@@ -119,30 +121,50 @@ void GuiTest::setSpinleftVisible(int index, bool visible){
     spinleft[index]->setVisible(visible);
 }
 
+void GuiTest::numberOfNewlines(int n){
+    QTextStream out(&file);
+    for (int i = 0; i < n; i++){
+        out << "\n";
+    }
+}
 
 void GuiTest::on_toolButton_clicked(){
     const QString &file_name = QFileDialog::getOpenFileName(this, "Select Maskfile", QDir::homePath());
     ui->lineEdit->setText(file_name);
+    file.open(QIODevice::WriteOnly | QIODevice::Text);
+    QTextStream out(&file);
+    out << file_name;
+
 }
 
 void GuiTest::on_toolButton_2_clicked(){
     const QString &file_name = QFileDialog::getOpenFileName(this, "Select Unknwon Data File", QDir::homePath());
     ui->lineEdit_2->setText(file_name);
+    numberOfNewlines(1);
+    QTextStream out(&file);
+    out << file_name;
 }
 
 void GuiTest::on_toolButton_3_clicked(){
     const QString &file_name = QFileDialog::getOpenFileName(this, "Select Database File", QDir::homePath());
     ui->lineEdit_3->setText(file_name);
+    numberOfNewlines(2);
+    QTextStream out(&file);
+    out << file_name;
 }
 
 void GuiTest::on_toolButton_4_clicked(){
     output_location = QFileDialog::getExistingDirectory(this, "Select Output Directory", QDir::homePath());
     ui->lineEdit_4->setText(output_location);
+    numberOfNewlines(3);
+    QTextStream out(&file);
+    out << file_name;
 }
 
 void GuiTest::on_toolButton_5_clicked(){
     python_file = QFileDialog::getOpenFileName(this, "Python .exe File", QDir::rootPath());
     ui->lineEdit_6->setText(python_file);
+
 }
 
 void GuiTest::on_actionExit_triggered(){
