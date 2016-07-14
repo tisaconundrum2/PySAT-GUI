@@ -127,6 +127,8 @@ Makefile: ../PYSAT_GUI/GuiTest.pro C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/win32-g+
 		C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/modules/qt_lib_positioning_private.pri \
 		C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/modules/qt_lib_printsupport.pri \
 		C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/modules/qt_lib_printsupport_private.pri \
+		C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/modules/qt_lib_purchasing.pri \
+		C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/modules/qt_lib_purchasing_private.pri \
 		C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/modules/qt_lib_qml.pri \
 		C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/modules/qt_lib_qml_private.pri \
 		C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/modules/qt_lib_qmldebug_private.pri \
@@ -180,7 +182,6 @@ Makefile: ../PYSAT_GUI/GuiTest.pro C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/win32-g+
 		C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/features/win32/qt_config.prf \
 		C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/win32-g++/qmake.conf \
 		C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/features/exclusive_builds.prf \
 		C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/features/default_pre.prf \
 		C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/features/win32/default_pre.prf \
@@ -276,6 +277,8 @@ C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/modules/qt_lib_positioning.pri:
 C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/modules/qt_lib_positioning_private.pri:
 C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/modules/qt_lib_printsupport.pri:
 C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/modules/qt_lib_printsupport_private.pri:
+C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/modules/qt_lib_purchasing.pri:
+C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/modules/qt_lib_purchasing_private.pri:
 C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/modules/qt_lib_qml.pri:
 C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/modules/qt_lib_qml_private.pri:
 C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/modules/qt_lib_qmldebug_private.pri:
@@ -329,7 +332,6 @@ C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/features/qt_config.prf:
 C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/features/win32/qt_config.prf:
 C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/win32-g++/qmake.conf:
 C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/features/spec_post.prf:
-.qmake.stash:
 C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/features/exclusive_builds.prf:
 C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/features/default_pre.prf:
 C:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/features/win32/default_pre.prf:
