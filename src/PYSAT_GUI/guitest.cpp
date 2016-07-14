@@ -22,7 +22,7 @@ int spinArray1[16] = {0,0,0,0,
                      };
 QString python_file = "";
 QString output_location = "";
-QFile file("out.txt");
+QFile file("out.py");
 QTextStream out(&file);
 
 
@@ -143,7 +143,7 @@ void GuiTest::setSpinleftVisible(int index, bool visible){
 void GuiTest::numberOfNewlines(int n){
     QTextStream out(&file);
     for (int i = 0; i < n; i++){
-        out << "";
+        out << "\n";
     }
 }
 
@@ -158,7 +158,6 @@ void GuiTest::on_toolButton_clicked(){
 void GuiTest::on_toolButton_2_clicked(){
     const QString &file_name = QFileDialog::getOpenFileName(this, "Select Unknwon Data File", QDir::homePath());
     ui->lineEdit_2->setText(file_name);
-    //    numberOfNewlines(1);
     QTextStream out(&file);
     out << "unknowndatacsv = \"" << file_name << "\"\n";
 }
@@ -166,7 +165,6 @@ void GuiTest::on_toolButton_2_clicked(){
 void GuiTest::on_toolButton_3_clicked(){
     const QString &file_name = QFileDialog::getOpenFileName(this, "Select Database File", QDir::homePath());
     ui->lineEdit_3->setText(file_name);
-    //    numberOfNewlines(2);
     QTextStream out(&file);
     out << "db = \"" << file_name << "\"\n";
 }
@@ -174,7 +172,6 @@ void GuiTest::on_toolButton_3_clicked(){
 void GuiTest::on_toolButton_4_clicked(){
     output_location = QFileDialog::getExistingDirectory(this, "Select Output Directory", QDir::homePath());
     ui->lineEdit_4->setText(output_location);
-    //    numberOfNewlines(3);
     QTextStream out(&file);
     out << "outpath = \"" << output_location << "\"\n";
 }
@@ -235,8 +232,7 @@ void GuiTest::spinboxWrite(QWidget* e){
 }
 
 void GuiTest::on_pushButton_clicked(){
-    QFile file("out.txt");
-    file.open(QIODevice::WriteOnly | QIODevice::Text);
+    QFile file("out.py");
     QTextStream out(&file);
     out << "delete it all";
 
