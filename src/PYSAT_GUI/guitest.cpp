@@ -232,12 +232,8 @@ void GuiTest::spinboxWrite(QWidget* e){
 }
 
 void GuiTest::on_pushButton_clicked(){
-    QFile file("out.py");
-    QTextStream out(&file);
-    out << "delete it all";
-
-    // optional, as QFile destructor will already do it:
     file.close();
-    //    system(qPrintable(python_file + " " + output_location+"pls_sm_test"));
+//    system(qPrintable(python_file + " " + output_location+"pls_sm_test"));
+    system(qPrintable(python_file + " " + "out.py"));
 }
 
