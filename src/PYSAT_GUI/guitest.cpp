@@ -13,6 +13,7 @@
 #include <QTextStream>
 
 //Global variables
+int isNormFilled = 0;
 int norm_push = 0;                              // this variable measures how many time's the normalization button has been pushed
 int norm_size = 7;                              // this variable measures the size of arrays in the normalization section
 int spinArray1[16] = {0,0,0,0,
