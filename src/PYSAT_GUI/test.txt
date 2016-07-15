@@ -14,14 +14,14 @@ int main()
     cout<<"Write the path of the file."<<endl;
     cin>>path;
     ifstream File(path);
-    
+
     if(File.is_open())
     {
         while(getline(File,line))
         {
             cout<<line<<endl;
         }
-        
+
         cout<<"Write the word you're searching for."<<endl;
         cin>>word;
         while(!File.eof())

@@ -251,7 +251,7 @@ void GuiTest::on_pushButton_clicked(){
 void GuiTest::on_lineEdit_5_editingFinished()
 {
     if (isNormFilled < 4 && isSpinBoxFilled < 16){
-        QMessageBox::critical(this, "Error", "There are items missing. Please fill these out.");
+        QMessageBox::critical(this, "Error", "There are items missing above. Please fill these out first.");
         return;
     }
 }
