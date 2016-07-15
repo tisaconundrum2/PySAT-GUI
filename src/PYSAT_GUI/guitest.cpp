@@ -14,6 +14,7 @@
 
 //Global variables
 int isNormFilled = 0;
+int isSpinBoxFilled = 0;
 int norm_push = 0;                              // this variable measures how many time's the normalization button has been pushed
 int norm_size = 7;                              // this variable measures the size of arrays in the normalization section
 int spinArray1[16] = {0,0,0,0,
@@ -237,7 +238,7 @@ void GuiTest::spinboxWrite(QWidget* e){
     } else if ((value == QString::fromStdString("norm_spinBox_15"))){ ui->norm_spinBox_7->setMinimum(spinNum);  spinArray1[14] = spinNum;
     } else if ((value == QString::fromStdString("norm_spinBox_16"))){ ui->norm_spinBox_8->setMinimum(spinNum);  spinArray1[15] = spinNum;
     }
-
+    qDebug() << isSpinBoxFilled++;
 }
 
 void GuiTest::on_pushButton_clicked(){
@@ -246,3 +247,11 @@ void GuiTest::on_pushButton_clicked(){
     system(qPrintable(python_file + " " + "out.py"));
 }
 
+
+void GuiTest::on_lineEdit_5_editingFinished()
+{
+    if (isNormFilled < 4 && isSpinBoxFilled < 16){
+        QMessageBox::critical(this, "Error", "There are items missing. Please fill these out.");
+        return;
+    }
+}

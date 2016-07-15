@@ -36,6 +36,8 @@ private slots:
     void numberOfNewlines(int n);
 
 
+    void on_lineEdit_5_editingFinished();
+
 private:
     Ui::GuiTest *ui;
 };

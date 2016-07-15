@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_GuiTest_t {
-    QByteArrayData data[25];
-    char stringdata0[377];
+    QByteArrayData data[26];
+    char stringdata0[407];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -53,7 +53,8 @@ QT_MOC_LITERAL(20, 310, 1), // "i"
 QT_MOC_LITERAL(21, 312, 23), // "on_toolButton_5_clicked"
 QT_MOC_LITERAL(22, 336, 21), // "on_pushButton_clicked"
 QT_MOC_LITERAL(23, 358, 16), // "numberOfNewlines"
-QT_MOC_LITERAL(24, 375, 1) // "n"
+QT_MOC_LITERAL(24, 375, 1), // "n"
+QT_MOC_LITERAL(25, 377, 29) // "on_lineEdit_5_editingFinished"
 
     },
     "GuiTest\0SetupNiceWindow\0\0SetupQSpinWidgets\0"
@@ -65,7 +66,7 @@ QT_MOC_LITERAL(24, 375, 1) // "n"
     "on_pushButton_13_clicked\0SpinBoxChanged\0"
     "QWidget*\0wSp\0spinboxWrite\0i\0"
     "on_toolButton_5_clicked\0on_pushButton_clicked\0"
-    "numberOfNewlines\0n"
+    "numberOfNewlines\0n\0on_lineEdit_5_editingFinished"
 };
 #undef QT_MOC_LITERAL
 
@@ -75,7 +76,7 @@ static const uint qt_meta_data_GuiTest[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      17,   14, // methods
+      18,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -83,23 +84,24 @@ static const uint qt_meta_data_GuiTest[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   99,    2, 0x08 /* Private */,
-       3,    0,  100,    2, 0x08 /* Private */,
-       4,    0,  101,    2, 0x08 /* Private */,
-       5,    2,  102,    2, 0x08 /* Private */,
-       8,    2,  107,    2, 0x08 /* Private */,
-       9,    2,  112,    2, 0x08 /* Private */,
-      10,    0,  117,    2, 0x08 /* Private */,
-      11,    0,  118,    2, 0x08 /* Private */,
-      12,    0,  119,    2, 0x08 /* Private */,
-      13,    0,  120,    2, 0x08 /* Private */,
-      14,    0,  121,    2, 0x08 /* Private */,
-      15,    0,  122,    2, 0x08 /* Private */,
-      16,    1,  123,    2, 0x08 /* Private */,
-      19,    1,  126,    2, 0x08 /* Private */,
-      21,    0,  129,    2, 0x08 /* Private */,
-      22,    0,  130,    2, 0x08 /* Private */,
-      23,    1,  131,    2, 0x08 /* Private */,
+       1,    0,  104,    2, 0x08 /* Private */,
+       3,    0,  105,    2, 0x08 /* Private */,
+       4,    0,  106,    2, 0x08 /* Private */,
+       5,    2,  107,    2, 0x08 /* Private */,
+       8,    2,  112,    2, 0x08 /* Private */,
+       9,    2,  117,    2, 0x08 /* Private */,
+      10,    0,  122,    2, 0x08 /* Private */,
+      11,    0,  123,    2, 0x08 /* Private */,
+      12,    0,  124,    2, 0x08 /* Private */,
+      13,    0,  125,    2, 0x08 /* Private */,
+      14,    0,  126,    2, 0x08 /* Private */,
+      15,    0,  127,    2, 0x08 /* Private */,
+      16,    1,  128,    2, 0x08 /* Private */,
+      19,    1,  131,    2, 0x08 /* Private */,
+      21,    0,  134,    2, 0x08 /* Private */,
+      22,    0,  135,    2, 0x08 /* Private */,
+      23,    1,  136,    2, 0x08 /* Private */,
+      25,    0,  139,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -119,6 +121,7 @@ static const uint qt_meta_data_GuiTest[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,   24,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -147,6 +150,7 @@ void GuiTest::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 14: _t->on_toolButton_5_clicked(); break;
         case 15: _t->on_pushButton_clicked(); break;
         case 16: _t->numberOfNewlines((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 17: _t->on_lineEdit_5_editingFinished(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -195,13 +199,13 @@ int GuiTest::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 17)
+        if (_id < 18)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 17;
+        _id -= 18;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 17)
+        if (_id < 18)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 17;
+        _id -= 18;
     }
     return _id;
 }
