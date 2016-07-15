@@ -153,7 +153,7 @@ void GuiTest::on_toolButton_clicked(){
     ui->lineEdit->setText(file_name);
     QTextStream out(&file);
     out << "maskfile = \"" << file_name << "\"\n";
-
+    isNormFilled++;
 }
 
 void GuiTest::on_toolButton_2_clicked(){
@@ -161,6 +161,7 @@ void GuiTest::on_toolButton_2_clicked(){
     ui->lineEdit_2->setText(file_name);
     QTextStream out(&file);
     out << "unknowndatacsv = \"" << file_name << "\"\n";
+    isNormFilled++;
 }
 
 void GuiTest::on_toolButton_3_clicked(){
@@ -168,6 +169,7 @@ void GuiTest::on_toolButton_3_clicked(){
     ui->lineEdit_3->setText(file_name);
     QTextStream out(&file);
     out << "db = \"" << file_name << "\"\n";
+    isNormFilled++;
 }
 
 void GuiTest::on_toolButton_4_clicked(){
@@ -175,6 +177,7 @@ void GuiTest::on_toolButton_4_clicked(){
     ui->lineEdit_4->setText(output_location);
     QTextStream out(&file);
     out << "outpath = \"" << output_location << "\"\n";
+    isNormFilled++;
 }
 
 void GuiTest::on_toolButton_5_clicked(){
@@ -189,7 +192,7 @@ void GuiTest::on_actionExit_triggered(){
 
 /*************** GUI Interface **************/
 
-void GuiTest::on_pushButton_13_clicked(){
+void GuiTest::on_pushButton_13_clicked(){ //Norm Add Value
     if (norm_push >= norm_size){
         QMessageBox::critical(this, "Warning", "Cannot add anymore values");
     } else {
@@ -211,6 +214,7 @@ void GuiTest::spinboxWrite(QWidget* e){
     int spinNum = SpinBoxChanged(e);
     //get the name of each spinbox this will help in identifying who's being manipulated
     QString value = e->objectName();
+    if (isNormFilled < 4){QMessageBox::critical(this, "Error", "Please add all Files");}
 
     if ((value == QString::fromStdString("norm_spinBox"))){           ui->norm_spinBox_10->setMinimum(spinNum); spinArray1[0] = spinNum;
     } else if ((value == QString::fromStdString("norm_spinBox_2"))){  ui->norm_spinBox_11->setMinimum(spinNum); spinArray1[1] = spinNum;
