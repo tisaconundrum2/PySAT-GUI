@@ -149,10 +149,16 @@ void GuiTest::numberOfNewlines(int n){
     }
 }
 
+
+
+
+//outpath = r'C:\Users\User\Desktop\Output'
+//db = r"C:\Users\User\Desktop\full_db_mars_corrected_dopedTiO2_pandas_format.csv"
+//unknowndatacsv = r"C:\Users\User\Desktop\lab_data_averages_pandas_format.csv"
+//maskfile = r"C:\Users\User\Desktop\mask_minors_noise.csv"
 void GuiTest::on_toolButton_clicked(){
     const QString &file_name = QFileDialog::getOpenFileName(this, "Select Maskfile", QDir::homePath());
     ui->lineEdit->setText(file_name);
-    QTextStream out(&file);
     out << "maskfile = \"" << file_name << "\"\n";
     isNormFilled++;
 }
@@ -160,7 +166,6 @@ void GuiTest::on_toolButton_clicked(){
 void GuiTest::on_toolButton_2_clicked(){
     const QString &file_name = QFileDialog::getOpenFileName(this, "Select Unknwon Data File", QDir::homePath());
     ui->lineEdit_2->setText(file_name);
-    QTextStream out(&file);
     out << "unknowndatacsv = \"" << file_name << "\"\n";
     isNormFilled++;
 }
@@ -168,7 +173,6 @@ void GuiTest::on_toolButton_2_clicked(){
 void GuiTest::on_toolButton_3_clicked(){
     const QString &file_name = QFileDialog::getOpenFileName(this, "Select Database File", QDir::homePath());
     ui->lineEdit_3->setText(file_name);
-    QTextStream out(&file);
     out << "db = \"" << file_name << "\"\n";
     isNormFilled++;
 }
@@ -176,7 +180,6 @@ void GuiTest::on_toolButton_3_clicked(){
 void GuiTest::on_toolButton_4_clicked(){
     output_location = QFileDialog::getExistingDirectory(this, "Select Output Directory", QDir::homePath());
     ui->lineEdit_4->setText(output_location);
-    QTextStream out(&file);
     out << "outpath = \"" << output_location << "\"\n";
     isNormFilled++;
 }
@@ -211,16 +214,23 @@ int GuiTest::SpinBoxChanged(QWidget* wSp){
     return value;
 }
 
-void GuiTest::spinboxWrite(QWidget* e){
+void GuiTest::spinboxWrite(QWidget* e){ //    ranges3 = [(0, 350), (350, 470), (470, 1000)]
     int spinNum = SpinBoxChanged(e);
     //get the name of each spinbox this will help in identifying who's being manipulated
     QString value = e->objectName();
     if (isNormFilled < 4){
         QMessageBox::critical(this, "Error", "Please add all Files");
         return;
+    } else {
+        out << "data = pd.read_csv(db, header=[0, 1])\n";
+        out << "data = spectral_data(data)\n";
+        out << "unknown_data = pd.read_csv(unknowndatacsv, header=[0, 1])\n";
+        out << "unknown_data = spectral_data(unknown_data)\n";
+        out << "unknown_data.interp(data.df['wvl'].columns)\n";
+        out << "data.mask(maskfile)\n";
+        out << "unknown_data.mask(maskfile)\n";
     }
 
-//    if (isNormFilled < 4 || n != 1){QMessageBox::critical(this, "Error", "Please add all Files"); n = 1;}
     if ((value == QString::fromStdString("norm_spinBox"))){           ui->norm_spinBox_10->setMinimum(spinNum); spinArray1[0] = spinNum;
     } else if ((value == QString::fromStdString("norm_spinBox_2"))){  ui->norm_spinBox_11->setMinimum(spinNum); spinArray1[1] = spinNum;
     } else if ((value == QString::fromStdString("norm_spinBox_3"))){  ui->norm_spinBox_12->setMinimum(spinNum); spinArray1[2] = spinNum;
