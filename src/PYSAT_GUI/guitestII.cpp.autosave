@@ -1,0 +1,62 @@
+#include "guitest.h"
+#include "ui_guitest.h"
+#include <QString>
+#include <QFile>
+#include <QDir>
+#include <QMessageBox>
+#include <QFileDialog>
+#include <QDebug>
+#include <QRect>
+#include <QDesktopWidget>
+#include <QSignalMapper>
+#include <QFile>
+#include <QTextStream>
+
+
+int isNormalizationFilled = 0,
+        isSpinBoxFilled = 0,
+        normalizationBtnCnt = 0,
+        normalizationSize = 0,
+        spinArray[16] = {0,0,0,0,
+                        0,0,0,0,
+                        0,0,0,0};
+
+QString pythonProgrmaFile = "";
+QString outputDirectory = "";
+QFile file("pls_sm_output.py");
+QTextStream output(&file);
+
+GuiTest::GuiTest (QWidget *parent){
+    QMainWindow(parent), ui(new Ui::GuiTest){
+        ui->setupUi(this);
+        setSizeOfWindow();
+        setQSpinWidgets();
+        setOutputFile();
+    }
+}
+
+GuiTest::~GuiTest()(){
+    delete ui;
+}
+
+void setSizeOfWindow(){
+    QRect currentWindowSize = QApplication::desktop()->screenGeometry();
+    int height = currentWindowSize.height();
+    this->resize(this->width(), height*0.9);
+    for (int i = 0; i < norm_size; i++){        //setting up visibility
+        setSpinleftVisible(i, false);
+        setSpinrightVisible(i, false);
+        setLabelsVisible(i, false);
+    }
+}
+
+void GuiTest::setQSpinWidgets(){
+    QList<QSpinBox*> allChildSpinBoxes = findChildren<QSpinBox*>();
+    QSignalMapper* signalMapper = new QSignalMapper(this);
+    QSpinBox oneChildSpinbox;
+    foreach(oneChildSpinbox, allChildSpinBoxes){
+        connect(oneChildSpinbox, SIGNAL(valueChanged(int)), signalMapper, SLOT(map()));
+        signalMapper->setMapping(oneChildSpinbox, oneChildSpinbox);
+    }
+    connect
+}
