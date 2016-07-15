@@ -210,12 +210,17 @@ int GuiTest::SpinBoxChanged(QWidget* wSp){
     return value;
 }
 
+int n = 0;
 void GuiTest::spinboxWrite(QWidget* e){
     int spinNum = SpinBoxChanged(e);
     //get the name of each spinbox this will help in identifying who's being manipulated
     QString value = e->objectName();
-    if (isNormFilled < 4){QMessageBox::critical(this, "Error", "Please add all Files");}
+    if (isNormFilled < 4 || n > 1){
+        QMessageBox::critical(this, "Error", "Please add all Files");
+        n++;
+    }
 
+//    if (isNormFilled < 4 || n != 1){QMessageBox::critical(this, "Error", "Please add all Files"); n = 1;}
     if ((value == QString::fromStdString("norm_spinBox"))){           ui->norm_spinBox_10->setMinimum(spinNum); spinArray1[0] = spinNum;
     } else if ((value == QString::fromStdString("norm_spinBox_2"))){  ui->norm_spinBox_11->setMinimum(spinNum); spinArray1[1] = spinNum;
     } else if ((value == QString::fromStdString("norm_spinBox_3"))){  ui->norm_spinBox_12->setMinimum(spinNum); spinArray1[2] = spinNum;
