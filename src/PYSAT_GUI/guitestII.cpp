@@ -68,7 +68,7 @@ void GuiTest::SetupOutFile(){
     output << "import pandas as pd\n";
 }
 
-void GuiTest::setLabelSpinVisible(int index, bool visible){
+void GuiTest::setLabelAndSpinVisible(int index, bool visible){
     int arraySize = 7;
     QLabel* labels[arraySize] = {ui->norm_label_2,
                                  ui->norm_label_3,
@@ -93,4 +93,37 @@ void GuiTest::setLabelSpinVisible(int index, bool visible){
                                      ui->norm_spinBox_16
                                     };
     labels[index]->setVisible(visible);
+    spinBoxL[index]->setVisible(visible);
+    spinBoxR[index]->setVisible(visible);
 }
+
+void GuiTest::on_maskFileButton_clicked(){
+
+}
+
+void GuiTest::on_unknownDataButton_clicked(){
+
+}
+
+void GuiTest::on_fullDataBaseButton_clicked(){
+
+}
+
+void GuiTest::on_outPutLocation_clicked(){
+
+}
+
+void GuiTest::on_pythonButton_clicked(){
+
+}
+
+void GuiTest::on_NormValuebutton_clicked(){
+
+}
+
+int GuiTest::getSpinValue(){
+    QSpinBox* spinValue = (QSpinBox*)widgetSpinValue;
+    int valueofSpin = spinValue->value();
+    return value;
+}
+
