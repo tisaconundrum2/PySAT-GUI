@@ -13,7 +13,7 @@
 #include <QTextStream>
 
 
-int isNormalizationFilled = 0,
+int normSize = 0,
 isSpinBoxFilled = 0,
 normalizationBtnCnt = 0,
 spinArray[16] = {0,0,0,0,
@@ -127,3 +127,12 @@ int GuiTest::getSpinValue(){
     return value;
 }
 
+void GuiTest::getSpinboxValue(QWidget* e){
+    int spinNum = SpinBoxChanged(e);
+    QString spinboxObjectName = e->objectName();
+    if (!isBoxesSet(4))
+}
+
+bool isNormFilled(){
+
+}
