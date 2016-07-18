@@ -13,8 +13,8 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        guitest.cpp \
-    guitestII.cpp
+    guitestI.cpp \
+    guitest.cpp
 
 HEADERS  += guitest.h
 
