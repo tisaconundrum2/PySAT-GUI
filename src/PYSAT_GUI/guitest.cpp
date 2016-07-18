@@ -57,7 +57,6 @@ int spinArray1[16] = {0,0,0,0,
                      };
 QString python_file = "";
 QString output_location = "";
-QString output_python_file = "";
 QFile file("out.py");
 QTextStream out(&file);
 
@@ -172,6 +171,7 @@ void GuiTest::on_pythonButton_clicked(){
 void GuiTest::on_NormValuebutton_clicked(){ //Norm Add Value
     if (norm_push >= norm_size){
         QMessageBox::critical(this, "Warning", "Cannot add anymore values");
+        return;
     } else {
         setNormValuesVisible(norm_push, true);
         norm_push++;
@@ -202,6 +202,7 @@ void GuiTest::spinboxWrite(QWidget* e){ //    ranges3 = [(0, 350), (350, 470), (
         out << "unknown_data.mask(maskfile)\n";
     }
 
+    //This really needs to get fixed... Please figure out a way to get these if statements cleaned up.
     if ((value == QString::fromStdString("norm_spinBox"))){           ui->norm_spinBox_10->setMinimum(spinNum); spinArray1[0] = spinNum;
     } else if ((value == QString::fromStdString("norm_spinBox_2"))){  ui->norm_spinBox_11->setMinimum(spinNum); spinArray1[1] = spinNum;
     } else if ((value == QString::fromStdString("norm_spinBox_3"))){  ui->norm_spinBox_12->setMinimum(spinNum); spinArray1[2] = spinNum;
@@ -222,13 +223,6 @@ void GuiTest::spinboxWrite(QWidget* e){ //    ranges3 = [(0, 350), (350, 470), (
     qDebug() << isSpinBoxFilled++;
 }
 
-void GuiTest::on_okButton_clicked(){
-    file.close();
-    //    system(qPrintable(python_file + " " + output_location+"pls_sm_test"));
-    system(qPrintable(python_file + " " + "out.py"));
-}
-
-
 void GuiTest::on_elementNameLine_editingFinished()
 {
     if (isNormFilled < 4 && isSpinBoxFilled < 16){
@@ -236,6 +230,13 @@ void GuiTest::on_elementNameLine_editingFinished()
         return;
     }
 }
+
+void GuiTest::on_okButton_clicked(){
+    file.close();
+    //    system(qPrintable(python_file + " " + output_location+"pls_sm_test"));
+    system(qPrintable(python_file + " " + "out.py"));
+}
+
 void GuiTest::on_actionExit_triggered(){
     this->close();
 }
