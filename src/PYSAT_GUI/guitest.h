@@ -31,7 +31,8 @@ private slots:
     void spinboxWrite(QWidget* i);
     void on_pythonButton_clicked();
     void on_okButton_clicked();
-    void on_elementNameLine_editingFinished();
+    void on_nfolds_test_valueChanged(int arg1);
+    void on_elementNameLine_textChanged(const QString &arg1);
 
 private:
     Ui::GuiTest *ui;

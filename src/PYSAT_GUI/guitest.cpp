@@ -1,4 +1,11 @@
-/*
+
+
+/* Author: ngf4
+ * This program will make it easier to analyze data
+ * This program will take away the need to have terminal to do all the work
+ * However, it should be noted that the program will output a terminal window
+ * in which work will be done through, however it will not require user input
+ * unless otherwise told.
  *
  *           |--------------------------------------- this is a label it doesn't do anything
  *           |        |------------------------------ this value will be spinleft it will have values ranging from 0 to 99
@@ -223,20 +230,28 @@ void GuiTest::spinboxWrite(QWidget* e){ //    ranges3 = [(0, 350), (350, 470), (
     qDebug() << isSpinBoxFilled++;
 }
 
-void GuiTest::on_elementNameLine_editingFinished()
-{
+void GuiTest::on_elementNameLine_textChanged(const QString &arg1){
     if (isNormFilled < 4 && isSpinBoxFilled < 16){
         QMessageBox::critical(this, "Error", "There are items missing above. Please fill these out first.");
         return;
+    } else {
+        //TODO: add output to file from the data collected from element name
+        out << "el = \'"<< arg1 << "\'";
     }
 }
 
+void GuiTest::on_nfolds_test_valueChanged(int arg1){
+    //TODO: get nfolds data from the qspinbox
+}
+
+
 void GuiTest::on_okButton_clicked(){
     file.close();
-    //    system(qPrintable(python_file + " " + output_location+"pls_sm_test"));
     system(qPrintable(python_file + " " + "out.py"));
 }
 
 void GuiTest::on_actionExit_triggered(){
     this->close();
 }
+
+
