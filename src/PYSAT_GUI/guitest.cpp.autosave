@@ -247,7 +247,7 @@ void GuiTest::on_elementNameLine_editingFinished()
 
 void GuiTest::on_nfolds_test_valueChanged(int arg1){
     //TODO: get nfolds data from the qspinbox
-    out 
+    out << 
 }
 
 
