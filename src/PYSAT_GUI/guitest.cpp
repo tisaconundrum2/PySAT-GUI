@@ -230,13 +230,14 @@ void GuiTest::spinboxWrite(QWidget* e){ //    ranges3 = [(0, 350), (350, 470), (
     qDebug() << isSpinBoxFilled++;
 }
 
-void GuiTest::on_elementNameLine_textChanged(const QString &arg1){
+void GuiTest::on_elementNameLine_editingFinished()
+{
     if (isNormFilled < 4 && isSpinBoxFilled < 16){
         QMessageBox::critical(this, "Error", "There are items missing above. Please fill these out first.");
         return;
     } else {
         //TODO: add output to file from the data collected from element name
-        out << "el = \'"<< arg1 << "\'";
+        out << "el = \'"<< ui->elementNameLine->text() << "\'";
     }
 }
 
@@ -253,5 +254,4 @@ void GuiTest::on_okButton_clicked(){
 void GuiTest::on_actionExit_triggered(){
     this->close();
 }
-
 
