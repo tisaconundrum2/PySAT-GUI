@@ -62,8 +62,6 @@ void GuiTest::setupQSpinWidgets(){
 }
 
 void GuiTest::SetupOutFile(){
-    file.open(QIODevice::WriteOnly | QIODevice::Text);
-    QTextStream output(&file);
     output << "from pysat.spectral.spectral_data import spectral_data\n";
     output << "from pysat.regression.pls_sm import pls_sm\n";
     output << "import pandas as pd\n";
