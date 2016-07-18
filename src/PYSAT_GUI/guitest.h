@@ -29,6 +29,7 @@ private slots:
     void on_NormAddValuebutton_clicked();
     int getSpinValue();
     void getSpinboxValue(QWidget* e);
+    void on_okButton_clicked();
 
 private:
     Ui::GuiTest *ui;

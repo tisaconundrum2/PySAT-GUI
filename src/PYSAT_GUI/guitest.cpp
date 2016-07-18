@@ -27,16 +27,16 @@ QString outputDirectory = "";
 QFile file("pls_sm_output.py");
 QTextStream output(&file);
 
-GuiTest::GuiTest (QWidget *parent){
+GuiTest::GuiTest (QWidget *parent):
     QMainWindow(parent), ui(new Ui::GuiTest){
-        ui->setupUi(this);
-        setSizeOfWindow();
-        setQSpinWidgets();
-        setOutputFile();
-    }
+    ui->setupUi(this);
+    setSizeOfWindow();
+    setQSpinWidgets();
+    setOutputFile();
 }
 
-GuiTest::~GuiTest()(){
+
+GuiTest::~GuiTest(){
     delete ui;
 }
 
@@ -102,34 +102,34 @@ void GuiTest::setLabelAndSpinVisible(int index, bool visible){
 void GuiTest::on_maskFileButton_clicked(){
     const QString &file_name = QFileDialog::getOpenFileName(this, "Select Maskfile", QDir::homePath());
     ui->lineEdit->setText(file_name);
-    out << "maskfile = \"" << file_name << "\"\n";
+    file << "maskfile = \"" << file_name << "\"\n";
     isNormFilled++;
 }
 
 void GuiTest::on_unknownDataButton_clicked(){
     const QString &file_name = QFileDialog::getOpenFileName(this, "Select Unknwon Data File", QDir::homePath());
     ui->lineEdit_2->setText(file_name);
-    out << "unknowndatacsv = \"" << file_name << "\"\n";
+    file << "unknowndatacsv = \"" << file_name << "\"\n";
     isNormFilled++;
 }
 
 void GuiTest::on_fullDataBaseButton_clicked(){
     const QString &file_name = QFileDialog::getOpenFileName(this, "Select Database File", QDir::homePath());
     ui->lineEdit_3->setText(file_name);
-    out << "db = \"" << file_name << "\"\n";
+    file << "db = \"" << file_name << "\"\n";
     isNormFilled++;
 }
 
 void GuiTest::on_outPutLocation_clicked(){
-    output_location = QFileDialog::getExistingDirectory(this, "Select Output Directory", QDir::homePath());
-    ui->lineEdit_4->setText(output_location);
-    out << "outpath = \"" << output_location << "\"\n";
+    outputDirectory = QFileDialog::getExistingDirectory(this, "Select Output Directory", QDir::homePath());
+    ui->lineEdit_4->setText(outputDirectory);
+    file << "outpath = \"" << outputDirectory << "\"\n";
     isNormFilled++;
 }
 
 void GuiTest::on_pythonButton_clicked(){
-    python_file = QFileDialog::getOpenFileName(this, "Python .exe File", QDir::rootPath());
-    ui->lineEdit_6->setText(python_file);
+    pythonProgrmaFile = QFileDialog::getOpenFileName(this, "Python .exe File", QDir::rootPath());
+    ui->lineEdit_6->setText(pythonProgrmaFile);
 }
 
 void GuiTest::on_NormAddValuebutton_clicked(){
@@ -154,14 +154,37 @@ void GuiTest::getSpinboxValue(QWidget* e){
         QMessageBox::critical(this, "Error", "Please add all Files");
         return;
     } else {
-        out << "data = pd.read_csv(db, header=[0, 1])\n";
-        out << "data = spectral_data(data)\n";
-        out << "unknown_data = pd.read_csv(unknowndatacsv, header=[0, 1])\n";
-        out << "unknown_data = spectral_data(unknown_data)\n";
-        out << "unknown_data.interp(data.df['wvl'].columns)\n";
-        out << "data.mask(maskfile)\n";
-        out << "unknown_data.mask(maskfile)\n";
+        file << "data = pd.read_csv(db, header=[0, 1])\n";
+        file << "data = spectral_data(data)\n";
+        file << "unknown_data = pd.read_csv(unknowndatacsv, header=[0, 1])\n";
+        file << "unknown_data = spectral_data(unknown_data)\n";
+        file << "unknown_data.interp(data.df['wvl'].columns)\n";
+        file << "data.mask(maskfile)\n";
+        file << "unknown_data.mask(maskfile)\n";
     }
+    if ((value == QString::fromStdString("norm_spinBox"))){           ui->norm_spinBox_10->setMinimum(spinNum); spinArray1[0] = spinNum;
+    } else if ((value == QString::fromStdString("norm_spinBox_2"))){  ui->norm_spinBox_11->setMinimum(spinNum); spinArray1[1] = spinNum;
+    } else if ((value == QString::fromStdString("norm_spinBox_3"))){  ui->norm_spinBox_12->setMinimum(spinNum); spinArray1[2] = spinNum;
+    } else if ((value == QString::fromStdString("norm_spinBox_4"))){  ui->norm_spinBox_13->setMinimum(spinNum); spinArray1[3] = spinNum;
+    } else if ((value == QString::fromStdString("norm_spinBox_5"))){  ui->norm_spinBox_14->setMinimum(spinNum); spinArray1[4] = spinNum;
+    } else if ((value == QString::fromStdString("norm_spinBox_6"))){  ui->norm_spinBox_15->setMinimum(spinNum); spinArray1[5] = spinNum;
+    } else if ((value == QString::fromStdString("norm_spinBox_7"))){  ui->norm_spinBox_16->setMinimum(spinNum); spinArray1[6] = spinNum;
+    } else if ((value == QString::fromStdString("norm_spinBox_8"))){                                            spinArray1[7] = spinNum;
+    } else if ((value == QString::fromStdString("norm_spinBox_9"))){  ui->norm_spinBox->setMinimum(spinNum);    spinArray1[8] = spinNum;
+    } else if ((value == QString::fromStdString("norm_spinBox_10"))){ ui->norm_spinBox_2->setMinimum(spinNum);  spinArray1[9] = spinNum;
+    } else if ((value == QString::fromStdString("norm_spinBox_11"))){ ui->norm_spinBox_3->setMinimum(spinNum);  spinArray1[10] = spinNum;
+    } else if ((value == QString::fromStdString("norm_spinBox_12"))){ ui->norm_spinBox_4->setMinimum(spinNum);  spinArray1[11] = spinNum;
+    } else if ((value == QString::fromStdString("norm_spinBox_13"))){ ui->norm_spinBox_5->setMinimum(spinNum);  spinArray1[12] = spinNum;
+    } else if ((value == QString::fromStdString("norm_spinBox_14"))){ ui->norm_spinBox_6->setMinimum(spinNum);  spinArray1[13] = spinNum;
+    } else if ((value == QString::fromStdString("norm_spinBox_15"))){ ui->norm_spinBox_7->setMinimum(spinNum);  spinArray1[14] = spinNum;
+    } else if ((value == QString::fromStdString("norm_spinBox_16"))){ ui->norm_spinBox_8->setMinimum(spinNum);  spinArray1[15] = spinNum;
+    }
+}
 
+
+void GuiTest::on_okButton_clicked(){
+    file.close();
+    //    system(qPrintable(python_file + " " + output_location+"pls_sm_test"));
+    system(qPrintable(python_file + " " + "out.py"));
 }
 
