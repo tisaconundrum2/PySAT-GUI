@@ -192,14 +192,15 @@ int GuiTest::SpinBoxChanged(QWidget* wSp){
     return value;
 }
 
-void GuiTest::spinboxWrite(QWidget* e){ //    ranges3 = [(0, 350), (350, 470), (470, 1000)]
+int flag = 0;
+void GuiTest::spinboxWrite(QWidget* e){
     int spinNum = SpinBoxChanged(e);
-    //get the name of each spinbox this will help in identifying who's being manipulated
     QString value = e->objectName();
     if (isNormFilled < 4){
         QMessageBox::critical(this, "Error", "Please add all Files");
         return;
-    } else {
+    } else if (flag != 1) {
+        //TODO fix this, it keeps writing over and over
         out << "data = pd.read_csv(db, header=[0, 1])\n";
         out << "data = spectral_data(data)\n";
         out << "unknown_data = pd.read_csv(unknowndatacsv, header=[0, 1])\n";
@@ -207,9 +208,10 @@ void GuiTest::spinboxWrite(QWidget* e){ //    ranges3 = [(0, 350), (350, 470), (
         out << "unknown_data.interp(data.df['wvl'].columns)\n";
         out << "data.mask(maskfile)\n";
         out << "unknown_data.mask(maskfile)\n";
+        flag = 1;
     }
 
-    //This really needs to get fixed... Please figure out a way to get these if statements cleaned up.
+    //TODO This really needs to get fixed... Please figure out a way to get these if statements cleaned up.
     if ((value == QString::fromStdString("norm_spinBox"))){           ui->norm_spinBox_10->setMinimum(spinNum); spinArray1[0] = spinNum;
     } else if ((value == QString::fromStdString("norm_spinBox_2"))){  ui->norm_spinBox_11->setMinimum(spinNum); spinArray1[1] = spinNum;
     } else if ((value == QString::fromStdString("norm_spinBox_3"))){  ui->norm_spinBox_12->setMinimum(spinNum); spinArray1[2] = spinNum;
@@ -237,7 +239,7 @@ void GuiTest::on_elementNameLine_editingFinished()
         return;
     } else {
         //TODO: add output to file from the data collected from element name
-        out << "el = \'"<< ui->elementNameLine->text() << "\'";
+        qDebug() << "el = \'"<< ui->elementNameLine->text() << "\'";
     }
 }
 
