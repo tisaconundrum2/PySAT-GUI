@@ -13,10 +13,10 @@ import pandas as pd
 ###################################################
 # General setup
 ###################################################
-outpath = r'C:\Users\User\Desktop\Output'
-db = r"C:\Users\User\Desktop\full_db_mars_corrected_dopedTiO2_pandas_format.csv"
-unknowndatacsv = r"C:\Users\User\Desktop\lab_data_averages_pandas_format.csv"
-maskfile = r"C:\Users\User\Desktop\mask_minors_noise.csv"
+maskfile = "C:/Users/nicholas/Desktop/mask_minors_noise.csv"
+unknowndatacsv = "C:/Users/nicholas/Desktop/lab_data_averages_pandas_format.csv"
+db = "C:/Users/nicholas/Desktop/full_db_mars_corrected_dopedTiO2_pandas_format.csv"
+outpath = "C:/Users/nicholas/Desktop/Output"
 
 ###################################################
 # Spectral setup
