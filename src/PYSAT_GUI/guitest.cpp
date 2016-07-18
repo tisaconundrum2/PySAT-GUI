@@ -240,15 +240,14 @@ void GuiTest::on_elementNameLine_editingFinished()
         return;
     } else if (flagEl != 1){
         //TODO: add output to file from the data collected from element name
-        out << "el = \'"<< ui->elementNameLine->text() << "\'";
+        out << "el = \'"<< ui->elementNameLine->text() << "\'\n";
         flagEl = 1;
     }
 }
 
-void GuiTest::on_nfolds_test_valueChanged(int arg1){
-    //TODO: get nfolds data from the qspinbox
+void GuiTest::on_nfolds_test_editingFinished(){
+    out << "nfolds_test = " << ui->nfolds_test->text();
 }
-
 
 void GuiTest::on_okButton_clicked(){
     file.close();
@@ -258,4 +257,5 @@ void GuiTest::on_okButton_clicked(){
 void GuiTest::on_actionExit_triggered(){
     this->close();
 }
+
 

@@ -30,9 +30,10 @@ private slots:
      int SpinBoxChanged(QWidget* wSp);
     void spinboxWrite(QWidget* e);
     void on_elementNameLine_editingFinished();
-    void on_nfolds_test_valueChanged(int arg1);
+    void on_nfolds_test_editingFinished();
     void on_okButton_clicked();
     void on_actionExit_triggered();
+
 
 
 private:
