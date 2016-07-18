@@ -162,6 +162,6 @@ void GuiTest::getSpinboxValue(QWidget* e){
         out << "data.mask(maskfile)\n";
         out << "unknown_data.mask(maskfile)\n";
     }
-
+    
 }
 
