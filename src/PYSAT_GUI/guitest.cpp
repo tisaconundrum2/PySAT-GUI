@@ -192,14 +192,14 @@ int GuiTest::SpinBoxChanged(QWidget* wSp){
     return value;
 }
 
-int flag = 0;
+int flagBox = 0;
 void GuiTest::spinboxWrite(QWidget* e){
     int spinNum = SpinBoxChanged(e);
     QString value = e->objectName();
     if (isNormFilled < 4){
         QMessageBox::critical(this, "Error", "Please add all Files");
         return;
-    } else if (flag != 1) {
+    } else if (flagBox != 1) {
         //TODO fix this, it keeps writing over and over
         out << "data = pd.read_csv(db, header=[0, 1])\n";
         out << "data = spectral_data(data)\n";
@@ -208,7 +208,7 @@ void GuiTest::spinboxWrite(QWidget* e){
         out << "unknown_data.interp(data.df['wvl'].columns)\n";
         out << "data.mask(maskfile)\n";
         out << "unknown_data.mask(maskfile)\n";
-        flag = 1;
+        flagBox = 1;
     }
 
     //TODO This really needs to get fixed... Please figure out a way to get these if statements cleaned up.
@@ -232,14 +232,16 @@ void GuiTest::spinboxWrite(QWidget* e){
     qDebug() << isSpinBoxFilled++;
 }
 
+int flagEl = 0;
 void GuiTest::on_elementNameLine_editingFinished()
 {
     if (isNormFilled < 4 && isSpinBoxFilled < 16){
         QMessageBox::critical(this, "Error", "There are items missing above. Please fill these out first.");
         return;
-    } else {
+    } else if (flagEl != 1){
         //TODO: add output to file from the data collected from element name
         qDebug() << "el = \'"<< ui->elementNameLine->text() << "\'";
+        flagEl = 1;
     }
 }
 
