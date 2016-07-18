@@ -31,9 +31,9 @@ QTextStream out(&file);
 GuiTest::GuiTest (QWidget *parent):
     QMainWindow(parent), ui(new Ui::GuiTest){
     ui->setupUi(this);
-    SetupNiceWindow();
-    SetupQSpinWidgets();
-    SetupOutFile();
+    setSizeOfWindow();
+    setupQSpinWidgets();
+    setupOutFile();
 }
 
 GuiTest::~GuiTest(){
@@ -72,7 +72,7 @@ GuiTest::~GuiTest(){
  */
 
 
-void GuiTest::SetupQSpinWidgets(){
+void GuiTest::setupQSpinWidgets(){
     QList<QSpinBox*> spinBoxes= findChildren<QSpinBox*>();
     //create the QSignalMapper object
     QSignalMapper* signalMapper= new QSignalMapper(this);
@@ -88,20 +88,18 @@ void GuiTest::SetupQSpinWidgets(){
 }
 
 
-void GuiTest::SetupNiceWindow(){
+void GuiTest::setSizeOfWindow(){
     //TODO: fix sizing issues, this will allow any computer to have a nicely sized window
     QRect rect = QApplication::desktop()->screenGeometry();
     int height = rect.height();
     this->resize(this->width(), height*0.9);
     for (int i = 0; i < norm_size; i++){        //setting up visibility
-        setSpinleftVisible(i, false);
-        setSpinrightVisible(i, false);
-        setLabelsVisible(i, false);
+        setNormValuesVisible(i, false);
     }
 }
 
 
-void GuiTest::SetupOutFile(){
+void GuiTest::setupOutFile(){
     file.open(QIODevice::WriteOnly | QIODevice::Text);
     QTextStream out(&file);
     out << "from pysat.spectral.spectral_data import spectral_data\n";
@@ -109,7 +107,7 @@ void GuiTest::SetupOutFile(){
     out << "import pandas as pd\n";
 }
 
-void GuiTest::setLabelsVisible(int index, bool visible){
+void GuiTest::setNormValuesVisible(int index, bool visible){
     QLabel* labels[norm_size] = {ui->norm_label_2,
                                  ui->norm_label_3,
                                  ui->norm_label_4,
@@ -117,10 +115,6 @@ void GuiTest::setLabelsVisible(int index, bool visible){
                                  ui->norm_label_6,
                                  ui->norm_label_7,
                                  ui->norm_label_8};
-    labels[index]->setVisible(visible);
-}
-
-void GuiTest::setSpinrightVisible(int index, bool visible){
     QSpinBox* spinright[norm_size] = {ui->norm_spinBox_2,
                                       ui->norm_spinBox_3,
                                       ui->norm_spinBox_4,
@@ -128,10 +122,6 @@ void GuiTest::setSpinrightVisible(int index, bool visible){
                                       ui->norm_spinBox_6,
                                       ui->norm_spinBox_7,
                                       ui->norm_spinBox_8};
-    spinright[index]->setVisible(visible);
-}
-
-void GuiTest::setSpinleftVisible(int index, bool visible){
     QSpinBox* spinleft[norm_size] = {ui->norm_spinBox_10,
                                      ui->norm_spinBox_11,
                                      ui->norm_spinBox_12,
@@ -139,7 +129,10 @@ void GuiTest::setSpinleftVisible(int index, bool visible){
                                      ui->norm_spinBox_14,
                                      ui->norm_spinBox_15,
                                      ui->norm_spinBox_16};
+    labels[index]->setVisible(visible);
+    spinright[index]->setVisible(visible);
     spinleft[index]->setVisible(visible);
+
 }
 
 void GuiTest::numberOfNewlines(int n){
@@ -200,9 +193,7 @@ void GuiTest::on_pushButton_13_clicked(){ //Norm Add Value
     if (norm_push >= norm_size){
         QMessageBox::critical(this, "Warning", "Cannot add anymore values");
     } else {
-        setSpinleftVisible(norm_push, true);
-        setSpinrightVisible(norm_push, true);
-        setLabelsVisible(norm_push, true);
+        setNormValuesVisible(norm_push, true);
         norm_push++;
     }
 }
@@ -253,7 +244,7 @@ void GuiTest::spinboxWrite(QWidget* e){ //    ranges3 = [(0, 350), (350, 470), (
 
 void GuiTest::on_pushButton_clicked(){
     file.close();
-//    system(qPrintable(python_file + " " + output_location+"pls_sm_test"));
+    //    system(qPrintable(python_file + " " + output_location+"pls_sm_test"));
     system(qPrintable(python_file + " " + "out.py"));
 }
 

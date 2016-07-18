@@ -17,12 +17,10 @@ public:
     ~GuiTest();
 
 private slots:
-    void SetupNiceWindow();
-    void SetupQSpinWidgets();
-    void SetupOutFile();
-    void setLabelsVisible(int index, bool visible);
-    void setSpinrightVisible(int index, bool visible);
-    void setSpinleftVisible(int index, bool visible);
+    void setSizeOfWindow();
+    void setupQSpinWidgets();
+    void setupOutFile();
+    void setNormValuesVisible(int index, bool visible);
     void on_toolButton_clicked();
     void on_toolButton_2_clicked();
     void on_toolButton_3_clicked();
