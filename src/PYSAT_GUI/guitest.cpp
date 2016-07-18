@@ -29,8 +29,8 @@ GuiTest::GuiTest (QWidget *parent):
     QMainWindow(parent), ui(new Ui::GuiTest){
     ui->setupUi(this);
     setSizeOfWindow();
-    setQSpinWidgets();
-    setOutputFile();
+    setupQSpinWidgets();
+    setupOutFile();
 }
 
 
@@ -61,9 +61,7 @@ void GuiTest::setupQSpinWidgets(){
     connect(signalMapper, SIGNAL(mapped(QWidget*)), this, SLOT(getSpinboxValue(QWidget*)));
 }
 
-void GuiTest::SetupOutFile(){
-    file.open(QIODevice::WriteOnly | QIODevice::Text);
-    QTextStream output(&file);
+void GuiTest::setupOutFile(){
     output << "from pysat.spectral.spectral_data import spectral_data\n";
     output << "from pysat.regression.pls_sm import pls_sm\n";
     output << "import pandas as pd\n";

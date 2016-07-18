@@ -19,7 +19,7 @@ public:
 private slots:
     void setSizeOfWindow();
     void setupQSpinWidgets();
-    void SetupOutFile();
+    void setupOutFile();
     void setLabelAndSpinVisible(int index, bool visible);
     void on_maskFileButton_clicked();
     void on_unknownDataButton_clicked();
