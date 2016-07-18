@@ -57,6 +57,7 @@ int spinArray1[16] = {0,0,0,0,
                      };
 QString python_file = "";
 QString output_location = "";
+QString output_python_file = "";
 QFile file("out.py");
 QTextStream out(&file);
 
@@ -87,11 +88,10 @@ void GuiTest::setupQSpinWidgets(){
 
 
 void GuiTest::setSizeOfWindow(){
-    //TODO: fix sizing issues, this will allow any computer to have a nicely sized window
     QRect rect = QApplication::desktop()->screenGeometry();
     int height = rect.height();
     this->resize(this->width(), height*0.9);
-    for (int i = 0; i < norm_size; i++){        //setting up visibility
+    for (int i = 0; i < norm_size; i++){
         setNormValuesVisible(i, false);
     }
 }
@@ -180,8 +180,8 @@ void GuiTest::on_NormValuebutton_clicked(){ //Norm Add Value
 
 
 int GuiTest::SpinBoxChanged(QWidget* wSp){
-    QSpinBox* sp= (QSpinBox*)wSp;                                   //now sp is a pointer to the QSpinBox that emitted the valueChanged signal
-    int value = sp->value();                                        //and value is its value after the change
+    QSpinBox* sp= (QSpinBox*)wSp;
+    int value = sp->value();
     return value;
 }
 
