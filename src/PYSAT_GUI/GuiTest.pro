@@ -13,7 +13,7 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-    guitest.cpp
+        guitest.cpp
 
 HEADERS  += guitest.h
 
@@ -21,5 +21,4 @@ FORMS    += guitest.ui
 
 DISTFILES += \
     recylce \
-    test.txt \
-    guitestI.txt
+    test.txt

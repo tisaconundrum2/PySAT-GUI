@@ -50,8 +50,7 @@ OBJECTS       = debug/main.o \
 		debug/moc_guitest.o
 
 DIST          = recylce \
-		test.txt \
-		guitestI.txt ..\PYSAT_GUI\guitest.h ..\PYSAT_GUI\main.cpp \
+		test.txt ..\PYSAT_GUI\guitest.h ..\PYSAT_GUI\main.cpp \
 		..\PYSAT_GUI\guitest.cpp
 QMAKE_TARGET  = GuiTest
 DESTDIR        = debug\ #avoid trailing-slash linebreak

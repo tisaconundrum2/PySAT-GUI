@@ -17,19 +17,26 @@ public:
     ~GuiTest();
 
 private slots:
-    void setSizeOfWindow();
-    void setupQSpinWidgets();
-    void setupOutFile();
-    void setLabelAndSpinVisible(int index, bool visible);
-    void on_maskFileButton_clicked();
-    void on_unknownDataButton_clicked();
-    void on_fullDataBaseButton_clicked();
-    void on_outPutLocation_clicked();
-    void on_pythonButton_clicked();
-    void on_NormAddValuebutton_clicked();
-    int getSpinValue();
-    void getSpinboxValue(QWidget* e);
-    void on_okButton_clicked();
+    void SetupNiceWindow();
+    void SetupQSpinWidgets();
+    void SetupOutFile();
+    void setLabelsVisible(int index, bool visible);
+    void setSpinrightVisible(int index, bool visible);
+    void setSpinleftVisible(int index, bool visible);
+    void on_toolButton_clicked();
+    void on_toolButton_2_clicked();
+    void on_toolButton_3_clicked();
+    void on_toolButton_4_clicked();
+    void on_actionExit_triggered();
+    void on_pushButton_13_clicked();
+    int SpinBoxChanged(QWidget *wSp);
+    void spinboxWrite(QWidget* i);
+    void on_toolButton_5_clicked();
+    void on_pushButton_clicked();
+    void numberOfNewlines(int n);
+
+
+    void on_lineEdit_5_editingFinished();
 
 private:
     Ui::GuiTest *ui;

@@ -104,11 +104,11 @@ public:
     QLineEdit *lineEdit_4;
     QLineEdit *lineEdit_6;
     QVBoxLayout *verticalLayout;
-    QToolButton *maskFileButton;
-    QToolButton *unknownDataButton;
-    QToolButton *fullDataBaseButton;
-    QToolButton *outPutLocation;
-    QToolButton *pythonButton;
+    QToolButton *toolButton;
+    QToolButton *toolButton_2;
+    QToolButton *toolButton_3;
+    QToolButton *toolButton_4;
+    QToolButton *toolButton_5;
     QGroupBox *Normalization;
     QVBoxLayout *verticalLayout_27;
     QVBoxLayout *verticalLayout_26;
@@ -353,7 +353,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents_2 = new QWidget();
         scrollAreaWidgetContents_2->setObjectName(QStringLiteral("scrollAreaWidgetContents_2"));
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 547, 991));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, -394, 547, 991));
         QFont font;
         font.setPointSize(8);
         scrollAreaWidgetContents_2->setFont(font);
@@ -462,30 +462,30 @@ public:
         verticalLayout = new QVBoxLayout();
         verticalLayout->setSpacing(6);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        maskFileButton = new QToolButton(layoutWidget);
-        maskFileButton->setObjectName(QStringLiteral("maskFileButton"));
+        toolButton = new QToolButton(layoutWidget);
+        toolButton->setObjectName(QStringLiteral("toolButton"));
 
-        verticalLayout->addWidget(maskFileButton);
+        verticalLayout->addWidget(toolButton);
 
-        unknownDataButton = new QToolButton(layoutWidget);
-        unknownDataButton->setObjectName(QStringLiteral("unknownDataButton"));
+        toolButton_2 = new QToolButton(layoutWidget);
+        toolButton_2->setObjectName(QStringLiteral("toolButton_2"));
 
-        verticalLayout->addWidget(unknownDataButton);
+        verticalLayout->addWidget(toolButton_2);
 
-        fullDataBaseButton = new QToolButton(layoutWidget);
-        fullDataBaseButton->setObjectName(QStringLiteral("fullDataBaseButton"));
+        toolButton_3 = new QToolButton(layoutWidget);
+        toolButton_3->setObjectName(QStringLiteral("toolButton_3"));
 
-        verticalLayout->addWidget(fullDataBaseButton);
+        verticalLayout->addWidget(toolButton_3);
 
-        outPutLocation = new QToolButton(layoutWidget);
-        outPutLocation->setObjectName(QStringLiteral("outPutLocation"));
+        toolButton_4 = new QToolButton(layoutWidget);
+        toolButton_4->setObjectName(QStringLiteral("toolButton_4"));
 
-        verticalLayout->addWidget(outPutLocation);
+        verticalLayout->addWidget(toolButton_4);
 
-        pythonButton = new QToolButton(layoutWidget);
-        pythonButton->setObjectName(QStringLiteral("pythonButton"));
+        toolButton_5 = new QToolButton(layoutWidget);
+        toolButton_5->setObjectName(QStringLiteral("toolButton_5"));
 
-        verticalLayout->addWidget(pythonButton);
+        verticalLayout->addWidget(toolButton_5);
 
 
         horizontalLayout->addLayout(verticalLayout);
@@ -1385,11 +1385,11 @@ public:
         lineEdit_3->setText(QApplication::translate("GuiTest", "*.csv", 0));
         lineEdit_4->setText(QApplication::translate("GuiTest", "*/*", 0));
         lineEdit_6->setText(QApplication::translate("GuiTest", "*python.exe", 0));
-        maskFileButton->setText(QApplication::translate("GuiTest", "...", 0));
-        unknownDataButton->setText(QApplication::translate("GuiTest", "...", 0));
-        fullDataBaseButton->setText(QApplication::translate("GuiTest", "...", 0));
-        outPutLocation->setText(QApplication::translate("GuiTest", "...", 0));
-        pythonButton->setText(QApplication::translate("GuiTest", "...", 0));
+        toolButton->setText(QApplication::translate("GuiTest", "...", 0));
+        toolButton_2->setText(QApplication::translate("GuiTest", "...", 0));
+        toolButton_3->setText(QApplication::translate("GuiTest", "...", 0));
+        toolButton_4->setText(QApplication::translate("GuiTest", "...", 0));
+        toolButton_5->setText(QApplication::translate("GuiTest", "...", 0));
         Normalization->setTitle(QApplication::translate("GuiTest", "Normalization", 0));
         norm_label->setText(QApplication::translate("GuiTest", "Value 1", 0));
         norm_label_2->setText(QApplication::translate("GuiTest", "Value 2", 0));
