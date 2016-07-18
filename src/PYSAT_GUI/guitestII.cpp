@@ -13,7 +13,9 @@
 #include <QTextStream>
 
 
-int normSize = 0,
+int
+normSize = 0,
+norm_push = 0,
 isSpinBoxFilled = 0,
 normalizationBtnCnt = 0,
 spinArray[16] = {0,0,0,0,
@@ -49,7 +51,7 @@ void setSizeOfWindow(){
     }
 }
 
-void GuiTest::setQSpinWidgets(){
+void GuiTest::setupQSpinWidgets(){
     QList<QSpinBox*> allChildSpinBoxes = findChildren<QSpinBox*>();
     QSignalMapper* signalMapper = new QSignalMapper(this);
     QSpinBox oneChildSpinbox;
@@ -98,27 +100,40 @@ void GuiTest::setLabelAndSpinVisible(int index, bool visible){
 }
 
 void GuiTest::on_maskFileButton_clicked(){
-
+    const QString &file_name = QFileDialog::getOpenFileName(this, "Select Maskfile", QDir::homePath());
+    ui->lineEdit->setText(file_name);
+    out << "maskfile = \"" << file_name << "\"\n";
+    isNormFilled++;
 }
 
 void GuiTest::on_unknownDataButton_clicked(){
-
+    const QString &file_name = QFileDialog::getOpenFileName(this, "Select Unknwon Data File", QDir::homePath());
+    ui->lineEdit_2->setText(file_name);
+    out << "unknowndatacsv = \"" << file_name << "\"\n";
+    isNormFilled++;
 }
 
 void GuiTest::on_fullDataBaseButton_clicked(){
-
+    const QString &file_name = QFileDialog::getOpenFileName(this, "Select Database File", QDir::homePath());
+    ui->lineEdit_3->setText(file_name);
+    out << "db = \"" << file_name << "\"\n";
+    isNormFilled++;
 }
 
 void GuiTest::on_outPutLocation_clicked(){
-
+    output_location = QFileDialog::getExistingDirectory(this, "Select Output Directory", QDir::homePath());
+    ui->lineEdit_4->setText(output_location);
+    out << "outpath = \"" << output_location << "\"\n";
+    isNormFilled++;
 }
 
 void GuiTest::on_pythonButton_clicked(){
-
+    python_file = QFileDialog::getOpenFileName(this, "Python .exe File", QDir::rootPath());
+    ui->lineEdit_6->setText(python_file);
 }
 
-void GuiTest::on_NormValuebutton_clicked(){
-
+void GuiTest::on_NormAddValuebutton_clicked(){
+    if ()
 }
 
 int GuiTest::getSpinValue(){
@@ -130,7 +145,7 @@ int GuiTest::getSpinValue(){
 void GuiTest::getSpinboxValue(QWidget* e){
     int spinNum = SpinBoxChanged(e);
     QString spinboxObjectName = e->objectName();
-    if (!isBoxesSet(4))
+    if (!isBoxesSet(4));
 }
 
 bool isNormFilled(){
