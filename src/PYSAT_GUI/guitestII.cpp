@@ -13,9 +13,9 @@
 #include <QTextStream>
 
 
-int
-normSize = 0,
-norm_push = 0,
+int normSize = 0,
+normPushValue = 0,
+isNormFilled = 0,
 isSpinBoxFilled = 0,
 normalizationBtnCnt = 0,
 spinArray[16] = {0,0,0,0,
@@ -133,7 +133,12 @@ void GuiTest::on_pythonButton_clicked(){
 }
 
 void GuiTest::on_NormAddValuebutton_clicked(){
-    if ()
+    if (normPushValue >= normSize){
+        QMessageBox::critical(this, "Warning", "Cannot add anymore values");
+    } else {
+        setLabelAndSpinVisible(normPushValue, true);
+        normPushValue++;
+    }
 }
 
 int GuiTest::getSpinValue(){
@@ -145,9 +150,17 @@ int GuiTest::getSpinValue(){
 void GuiTest::getSpinboxValue(QWidget* e){
     int spinNum = SpinBoxChanged(e);
     QString spinboxObjectName = e->objectName();
-    if (!isBoxesSet(4));
+    if (isNormFilled < 4){
+        QMessageBox::critical(this, "Error", "Please add all Files");
+        return;
+    } else {
+        out << "data = pd.read_csv(db, header=[0, 1])\n";
+        out << "data = spectral_data(data)\n";
+        out << "unknown_data = pd.read_csv(unknowndatacsv, header=[0, 1])\n";
+        out << "unknown_data = spectral_data(unknown_data)\n";
+        out << "unknown_data.interp(data.df['wvl'].columns)\n";
+        out << "data.mask(maskfile)\n";
+        out << "unknown_data.mask(maskfile)\n";
+    }
 }
 
-bool isNormFilled(){
-
-}
