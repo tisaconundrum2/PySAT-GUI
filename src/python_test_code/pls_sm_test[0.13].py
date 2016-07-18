@@ -1,27 +1,12 @@
-"""
-Created on Tue May 10 12:09:29 2016
-
-@author: rbanderson
-"""
-###################################################
-# import all preprocessors
-###################################################
 from pysat.spectral.spectral_data import spectral_data
 from pysat.regression.pls_sm import pls_sm
 import pandas as pd
 
-###################################################
-# General setup
-###################################################
 maskfile = "C:/Users/nicholas/Desktop/mask_minors_noise.csv"
 unknowndatacsv = "C:/Users/nicholas/Desktop/lab_data_averages_pandas_format.csv"
 db = "C:/Users/nicholas/Desktop/full_db_mars_corrected_dopedTiO2_pandas_format.csv"
 outpath = "C:/Users/nicholas/Desktop/Output"
 
-###################################################
-# Spectral setup
-# spectral analysis data
-###################################################
 data = pd.read_csv(db, header=[0, 1])
 data = spectral_data(data)
 unknown_data = pd.read_csv(unknowndatacsv, header=[0, 1])
@@ -31,13 +16,7 @@ unknown_data.interp(data.df['wvl'].columns)
 data.mask(maskfile)
 unknown_data.mask(maskfile)
 
-###################################################
-# Normalizing Data and getting Ranges
-# range3: equivalent to norm3
-# range1: equivalent to norm1
-###################################################
 ranges3 = [(0, 350), (350, 470), (470, 1000)]
-ranges1 = [(0, 1000)]
 
 data3 = data
 data3.norm(ranges3)
@@ -45,9 +24,7 @@ unknown_data3 = unknown_data
 unknown_data3.norm(ranges3)
 
 data1 = data
-data1.norm(ranges1)
 unknown_data1 = unknown_data
-unknown_data1.norm(ranges1)
 
 ###################################################
 # nfolds: the number of folds to divide data into to extract an overall test set
