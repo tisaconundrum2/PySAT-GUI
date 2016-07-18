@@ -1,45 +1,3 @@
-#include "guitest.h"
-#include "ui_guitest.h"
-#include <QString>
-#include <QFile>
-#include <QDir>
-#include <QMessageBox>
-#include <QFileDialog>
-#include <QDebug>
-#include <QRect>
-#include <QDesktopWidget>
-#include <QSignalMapper>
-#include <QFile>
-#include <QTextStream>
-
-//Global variables
-int isNormFilled = 0;
-int isSpinBoxFilled = 0;
-int norm_push = 0;                              // this variable measures how many time's the normalization button has been pushed
-int norm_size = 7;                              // this variable measures the size of arrays in the normalization section
-int spinArray1[16] = {0,0,0,0,
-                      0,0,0,0,
-                      0,0,0,0,
-                      0,0,0,0
-                     };
-QString python_file = "";
-QString output_location = "";
-QFile file("out.py");
-QTextStream out(&file);
-
-
-GuiTest::GuiTest (QWidget *parent):
-    QMainWindow(parent), ui(new Ui::GuiTest){
-    ui->setupUi(this);
-    setSizeOfWindow();
-    setupQSpinWidgets();
-    setupOutFile();
-}
-
-GuiTest::~GuiTest(){
-    delete ui;
-}
-
 /*
  *
  *           |--------------------------------------- this is a label it doesn't do anything
@@ -72,18 +30,58 @@ GuiTest::~GuiTest(){
  */
 
 
+
+#include "guitest.h"
+#include "ui_guitest.h"
+#include <QString>
+#include <QFile>
+#include <QDir>
+#include <QMessageBox>
+#include <QFileDialog>
+#include <QDebug>
+#include <QRect>
+#include <QDesktopWidget>
+#include <QSignalMapper>
+#include <QFile>
+#include <QTextStream>
+
+//Global variables
+int isNormFilled = 0;
+int isSpinBoxFilled = 0;
+int norm_push = 0;
+int norm_size = 7;
+int spinArray1[16] = {0,0,0,0,
+                      0,0,0,0,
+                      0,0,0,0,
+                      0,0,0,0
+                     };
+QString python_file = "";
+QString output_location = "";
+QFile file("out.py");
+QTextStream out(&file);
+
+
+GuiTest::GuiTest (QWidget *parent):
+    QMainWindow(parent), ui(new Ui::GuiTest){
+    ui->setupUi(this);
+    setSizeOfWindow();
+    setupQSpinWidgets();
+    setupOutFile();
+}
+
+GuiTest::~GuiTest(){
+    delete ui;
+}
+
+
 void GuiTest::setupQSpinWidgets(){
     QList<QSpinBox*> spinBoxes= findChildren<QSpinBox*>();
-    //create the QSignalMapper object
     QSignalMapper* signalMapper= new QSignalMapper(this);
-    //loop through your spinboxes list
     QSpinBox* spinBox;
     foreach(spinBox, spinBoxes){
-        //setup mapping for each spin box
         connect(spinBox, SIGNAL(valueChanged(int)), signalMapper, SLOT(map()));
         signalMapper->setMapping(spinBox, spinBox);
     }
-    //connect the unified mapped(QWidget*) signal to your spinboxWrite slot
     connect(signalMapper, SIGNAL(mapped(QWidget*)), this, SLOT(spinboxWrite(QWidget*)));
 }
 
@@ -135,61 +133,43 @@ void GuiTest::setNormValuesVisible(int index, bool visible){
 
 }
 
-void GuiTest::numberOfNewlines(int n){
-    QTextStream out(&file);
-    for (int i = 0; i < n; i++){
-        out << "\n";
-    }
-}
-
-
-
-
-//outpath = r'C:\Users\User\Desktop\Output'
-//db = r"C:\Users\User\Desktop\full_db_mars_corrected_dopedTiO2_pandas_format.csv"
-//unknowndatacsv = r"C:\Users\User\Desktop\lab_data_averages_pandas_format.csv"
-//maskfile = r"C:\Users\User\Desktop\mask_minors_noise.csv"
-void GuiTest::on_toolButton_clicked(){
+void GuiTest::on_maskFileButton_clicked(){
     const QString &file_name = QFileDialog::getOpenFileName(this, "Select Maskfile", QDir::homePath());
     ui->lineEdit->setText(file_name);
     out << "maskfile = \"" << file_name << "\"\n";
     isNormFilled++;
 }
 
-void GuiTest::on_toolButton_2_clicked(){
+void GuiTest::on_unknownDataButton_clicked(){
     const QString &file_name = QFileDialog::getOpenFileName(this, "Select Unknwon Data File", QDir::homePath());
     ui->lineEdit_2->setText(file_name);
     out << "unknowndatacsv = \"" << file_name << "\"\n";
     isNormFilled++;
 }
 
-void GuiTest::on_toolButton_3_clicked(){
+void GuiTest::on_fullDataBaseButton_clicked(){
     const QString &file_name = QFileDialog::getOpenFileName(this, "Select Database File", QDir::homePath());
     ui->lineEdit_3->setText(file_name);
     out << "db = \"" << file_name << "\"\n";
     isNormFilled++;
 }
 
-void GuiTest::on_toolButton_4_clicked(){
+void GuiTest::on_outPutLocationButton_clicked(){
     output_location = QFileDialog::getExistingDirectory(this, "Select Output Directory", QDir::homePath());
     ui->lineEdit_4->setText(output_location);
     out << "outpath = \"" << output_location << "\"\n";
     isNormFilled++;
 }
 
-void GuiTest::on_toolButton_5_clicked(){
+void GuiTest::on_pythonButton_clicked(){
     python_file = QFileDialog::getOpenFileName(this, "Python .exe File", QDir::rootPath());
     ui->lineEdit_6->setText(python_file);
 
 }
 
-void GuiTest::on_actionExit_triggered(){
-    this->close();
-}
-
 /*************** GUI Interface **************/
 
-void GuiTest::on_pushButton_13_clicked(){ //Norm Add Value
+void GuiTest::on_NormValuebutton_clicked(){ //Norm Add Value
     if (norm_push >= norm_size){
         QMessageBox::critical(this, "Warning", "Cannot add anymore values");
     } else {
@@ -242,17 +222,20 @@ void GuiTest::spinboxWrite(QWidget* e){ //    ranges3 = [(0, 350), (350, 470), (
     qDebug() << isSpinBoxFilled++;
 }
 
-void GuiTest::on_pushButton_clicked(){
+void GuiTest::on_okButton_clicked(){
     file.close();
     //    system(qPrintable(python_file + " " + output_location+"pls_sm_test"));
     system(qPrintable(python_file + " " + "out.py"));
 }
 
 
-void GuiTest::on_lineEdit_5_editingFinished()
+void GuiTest::on_elementNameLine_editingFinished()
 {
     if (isNormFilled < 4 && isSpinBoxFilled < 16){
         QMessageBox::critical(this, "Error", "There are items missing above. Please fill these out first.");
         return;
     }
+}
+void GuiTest::on_actionExit_triggered(){
+    this->close();
 }

@@ -21,20 +21,17 @@ private slots:
     void setupQSpinWidgets();
     void setupOutFile();
     void setNormValuesVisible(int index, bool visible);
-    void on_toolButton_clicked();
-    void on_toolButton_2_clicked();
-    void on_toolButton_3_clicked();
-    void on_toolButton_4_clicked();
+    void on_maskFileButton_clicked();
+    void on_unknownDataButton_clicked();
+    void on_fullDataBaseButton_clicked();
+    void on_outPutLocationButton_clicked();
     void on_actionExit_triggered();
-    void on_pushButton_13_clicked();
+    void on_NormValuebutton_clicked();
     int SpinBoxChanged(QWidget *wSp);
     void spinboxWrite(QWidget* i);
-    void on_toolButton_5_clicked();
-    void on_pushButton_clicked();
-    void numberOfNewlines(int n);
-
-
-    void on_lineEdit_5_editingFinished();
+    void on_pythonButton_clicked();
+    void on_okButton_clicked();
+    void on_elementNameLine_editingFinished();
 
 private:
     Ui::GuiTest *ui;
