@@ -255,16 +255,20 @@ void GuiTest::on_okButton_clicked(){
 }
 
 void GuiTest::on_actionExit_triggered(){
-    this->close();
+    QMessageBox::StandardButton reply = QMessageBox::warning(this, "Warning", "Did you remember to save your work?",
+                                                             QMessageBox::Yes | QMessageBox::No);
+    if (reply == QMessageBox::Yes){
+        this->close();
+    }
 }
 
 
 
 void GuiTest::on_actionSave_Current_Workflow_triggered(){
     QLineEdit* normalizationLines[4] = {ui->lineEdit,
-                                       ui->lineEdit_2,
-                                       ui->lineEdit_3,
-                                       ui->lineEdit_4};
+                                        ui->lineEdit_2,
+                                        ui->lineEdit_3,
+                                        ui->lineEdit_4};
     getAllDataLineEdit(normalizationLines, 4);
 
 }
