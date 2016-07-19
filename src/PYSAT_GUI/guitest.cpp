@@ -265,11 +265,11 @@ void GuiTest::on_actionSave_Current_Workflow_triggered(){
                                        ui->lineEdit_2,
                                        ui->lineEdit_3,
                                        ui->lineEdit_4};
-    getAllDataLineEdit(normalizationLines);
+    getAllDataLineEdit(normalizationLines, 4);
 
 }
 
-void GuiTest::getAllDataLineEdit(QLineEdit* text[]){
+void GuiTest::getAllDataLineEdit(QLineEdit* text[], int size){
     QString file_name = QFileDialog::getSaveFileName(this, "Save this Current Workflow");
     QFile file(file_name);
     if(!file.open(QFile::WriteOnly | QFile::Text)){
@@ -277,7 +277,6 @@ void GuiTest::getAllDataLineEdit(QLineEdit* text[]){
         return;
     }
     QTextStream out(&file);
-    int size = (sizeof(text)/sizeof(*text));
     for (int i = 0; i < size; i++){
         QString qtext = text[i]->text();
         out << qtext;

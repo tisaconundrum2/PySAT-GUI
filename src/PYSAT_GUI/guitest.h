@@ -37,7 +37,7 @@ private slots:
 
 
     void on_actionSave_Current_Workflow_triggered();
-    void getAllDataLineEdit(QLineEdit* text[]);
+    void getAllDataLineEdit(QLineEdit* text[], int size);
 
 private:
     Ui::GuiTest *ui;
