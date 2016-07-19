@@ -269,6 +269,7 @@ void GuiTest::on_actionSave_Current_Workflow_triggered(){
 
 }
 
+//Added save workflow feature
 void GuiTest::getAllDataLineEdit(QLineEdit* text[], int size){
     QString file_name = QFileDialog::getSaveFileName(this, "Save this Current Workflow");
     QFile file(file_name);
