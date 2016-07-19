@@ -51,6 +51,7 @@
 #include <QSignalMapper>
 #include <QFile>
 #include <QTextStream>
+#include <QCloseEvent>
 
 //Global variables
 int isNormFilled = 0;
@@ -76,14 +77,20 @@ GuiTest::GuiTest (QWidget *parent):
     setupOutFile();
 }
 
-GuiTest::~GuiTest(){
+void GuiTest::closeEvent(QCloseEvent *event){
     QMessageBox::StandardButton reply = QMessageBox::warning(this, "Warning", "Did you remember to save your work?",
                                                              QMessageBox::Yes | QMessageBox::No);
     if (reply == QMessageBox::Yes){
-        delete ui;
+        event->accept();
     } else {
         on_actionSave_Current_Workflow_triggered();
+        event->ignore();
     }
+
+}
+
+
+GuiTest::~GuiTest(){
 }
 
 
