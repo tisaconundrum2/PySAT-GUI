@@ -261,24 +261,5 @@ void GuiTest::on_actionExit_triggered(){
 
 
 void GuiTest::on_actionSave_Current_Workflow_triggered(){
-    getAllDataLineEdit({lineEdit,
-                        lineEdit_2,
-                        lineEdit_3,
-                        lineEdit_4
-                       });
-}
 
-void GuiTest::getAllDataQLineEdit(QLineEdit text[]){
-    QString file_name = QFileDialog::getSaveFileName(this, "Open the file");
-    QFile file(file_name);
-    if(!file.open(QFile::WriteOnly | QFile::Text)){
-        QMessageBox::Warning(this,"..", "file not open");
-        return;
-    }
-    std::string text;
-    for (int i = 0; i < (sizeof(a)/sizeof(*text)); i++){
-        QTextStream out(&file);
-        text.append(text[i]->text());
-
-    }
 }

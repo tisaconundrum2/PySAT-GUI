@@ -37,7 +37,6 @@ private slots:
 
 
     void on_actionSave_Current_Workflow_triggered();
-    void getAllDataLineEdit(QString text[]){
 
 private:
     Ui::GuiTest *ui;
