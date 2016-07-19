@@ -261,9 +261,11 @@ void GuiTest::on_actionExit_triggered(){
 
 
 void GuiTest::on_actionSave_Current_Workflow_triggered(){
-    QTextStream out(&file);
-    //get all normalization data
-    out << text;
+    getAllDataLineEdit({lineEdit,
+                        lineEdit_2,
+                        lineEdit_3,
+                        lineEdit_4
+                       });
 }
 
 void GuiTest::getAllDataQLineEdit(QLineEdit text[]){
@@ -273,7 +275,10 @@ void GuiTest::getAllDataQLineEdit(QLineEdit text[]){
         QMessageBox::Warning(this,"..", "file not open");
         return;
     }
+    std::string text;
     for (int i = 0; i < (sizeof(a)/sizeof(*text)); i++){
-        QString
+        QTextStream out(&file);
+        text.append(text[i]->text());
+
     }
 }
