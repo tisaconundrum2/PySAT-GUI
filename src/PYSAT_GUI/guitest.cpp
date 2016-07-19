@@ -77,7 +77,13 @@ GuiTest::GuiTest (QWidget *parent):
 }
 
 GuiTest::~GuiTest(){
-    delete ui;
+    QMessageBox::StandardButton reply = QMessageBox::warning(this, "Warning", "Did you remember to save your work?",
+                                                             QMessageBox::Yes | QMessageBox::No);
+    if (reply == QMessageBox::Yes){
+        delete ui;
+    } else {
+        on_actionSave_Current_Workflow_triggered();
+    }
 }
 
 
@@ -259,6 +265,8 @@ void GuiTest::on_actionExit_triggered(){
                                                              QMessageBox::Yes | QMessageBox::No);
     if (reply == QMessageBox::Yes){
         this->close();
+    } else {
+        on_actionSave_Current_Workflow_triggered();
     }
 }
 
