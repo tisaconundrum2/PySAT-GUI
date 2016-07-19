@@ -262,5 +262,12 @@ void GuiTest::on_actionExit_triggered(){
 
 void GuiTest::on_actionSave_Current_Workflow_triggered()
 {
-
+    QString file_name = QFileDialog::getSaveFileName(this, "Open the file");
+    QFile file(file_name);
+    if(!file.open(QFile::WriteOnly | QFile::Text)){
+        QMessageBox::Warning(this,"..", "file not open");
+        return;
+    }
+    QTextStream out(&file);
+    QString text = ui->li
 }
