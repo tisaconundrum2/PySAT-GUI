@@ -261,5 +261,26 @@ void GuiTest::on_actionExit_triggered(){
 
 
 void GuiTest::on_actionSave_Current_Workflow_triggered(){
+    QLineEdit* normalizationLines[4] = {ui->lineEdit,
+                                       ui->lineEdit_2,
+                                       ui->lineEdit_3,
+                                       ui->lineEdit_4};
+    getAllDataLineEdit(normalizationLines);
 
+}
+
+void GuiTest::getAllDataLineEdit(QLineEdit* text[]){
+    QString file_name = QFileDialog::getSaveFileName(this, "Open the file");
+    QFile file(file_name);
+    if(!file.open(QFile::WriteOnly | QFile::Text)){
+        QMessageBox::warning(this,"..", "file not openn");
+        return;
+    }
+    QTextStream out(&file);
+    for (int i = 0; i < (sizeof(text)/sizeof(*text)); i++){
+        QString qtext = text[i]->text();
+        out << qtext;
+    }
+    file.flush();
+    file.close();
 }
