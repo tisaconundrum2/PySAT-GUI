@@ -1,0 +1,1599 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>581</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>PYSAT</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QVBoxLayout" name="verticalLayout_9">
+    <item>
+     <widget class="QScrollArea" name="scrollArea">
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents_2">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>547</width>
+         <height>991</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QGroupBox {
+  border: 2px solid gray;
+  border-radius: 6px;
+  margin-top: 0.5em;
+}
+
+QGroupBox::title {
+
+  padding-top: -14px;
+  padding-left: 8px;
+}
+</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_8">
+        <item>
+         <widget class="QGroupBox" name="Files">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="title">
+           <string>Files</string>
+          </property>
+          <layout class="QVBoxLayout" name="files">
+           <item>
+            <widget class="QSplitter" name="splitter_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <widget class="QWidget" name="layoutWidget">
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <item>
+                <layout class="QVBoxLayout" name="verticalLayout_6">
+                 <item>
+                  <widget class="QLabel" name="label_3">
+                   <property name="text">
+                    <string>Maskfile</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="label">
+                   <property name="text">
+                    <string>Unknown Data</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="label_2">
+                   <property name="text">
+                    <string>Full Database</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="label_4">
+                   <property name="text">
+                    <string>Output Location</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="label_5">
+                   <property name="text">
+                    <string>Python exe Location</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QVBoxLayout" name="verticalLayout_5">
+                 <item>
+                  <widget class="QLineEdit" name="lineEdit">
+                   <property name="text">
+                    <string extracomment="Make this change whenever a new file is selected">*.csv</string>
+                   </property>
+                   <property name="readOnly">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="lineEdit_2">
+                   <property name="text">
+                    <string extracomment="Make this change whenever a new file is selected">*.csv</string>
+                   </property>
+                   <property name="readOnly">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="lineEdit_3">
+                   <property name="text">
+                    <string extracomment="Make this change whenever a new file is selected">*.csv</string>
+                   </property>
+                   <property name="readOnly">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="lineEdit_4">
+                   <property name="text">
+                    <string extracomment="Make this change whenever a new folder is selected">*/*</string>
+                   </property>
+                   <property name="readOnly">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="lineEdit_6">
+                   <property name="text">
+                    <string extracomment="Make this change whenever a new folder is selected">*python.exe</string>
+                   </property>
+                   <property name="readOnly">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QVBoxLayout" name="verticalLayout">
+                 <item>
+                  <widget class="QToolButton" name="maskFileButton">
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QToolButton" name="unknownDataButton">
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QToolButton" name="fullDataBaseButton">
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QToolButton" name="outPutLocationButton">
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QToolButton" name="pythonButton">
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="Normalization">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="title">
+           <string>Normalization</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_27">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_26">
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_2">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_2">
+                 <item>
+                  <widget class="QLabel" name="norm_label">
+                   <property name="text">
+                    <string>Value 1</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="norm_spinBox_9">
+                   <property name="maximum">
+                    <number>1000</number>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="norm_spinBox">
+                   <property name="maximum">
+                    <number>1000</number>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_16">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_18">
+                 <item>
+                  <widget class="QLabel" name="norm_label_2">
+                   <property name="text">
+                    <string>Value 2</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="norm_spinBox_10">
+                   <property name="maximum">
+                    <number>1000</number>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="norm_spinBox_2">
+                   <property name="maximum">
+                    <number>1000</number>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_20">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_20">
+                 <item>
+                  <widget class="QLabel" name="norm_label_3">
+                   <property name="text">
+                    <string>Value 3</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="norm_spinBox_11">
+                   <property name="maximum">
+                    <number>1000</number>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="norm_spinBox_3">
+                   <property name="maximum">
+                    <number>1000</number>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_21">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_22">
+                 <item>
+                  <widget class="QLabel" name="norm_label_4">
+                   <property name="text">
+                    <string>Value 4</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="norm_spinBox_12">
+                   <property name="maximum">
+                    <number>1000</number>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="norm_spinBox_4">
+                   <property name="maximum">
+                    <number>1000</number>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_23">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_26">
+                 <item>
+                  <widget class="QLabel" name="norm_label_5">
+                   <property name="text">
+                    <string>Value 5</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="norm_spinBox_13">
+                   <property name="maximum">
+                    <number>1000</number>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="norm_spinBox_5">
+                   <property name="maximum">
+                    <number>1000</number>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_25">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_30">
+                 <item>
+                  <widget class="QLabel" name="norm_label_6">
+                   <property name="text">
+                    <string>Value 6</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="norm_spinBox_14">
+                   <property name="maximum">
+                    <number>1000</number>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="norm_spinBox_6">
+                   <property name="maximum">
+                    <number>1000</number>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_24">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_28">
+                 <item>
+                  <widget class="QLabel" name="norm_label_7">
+                   <property name="text">
+                    <string>Value 7</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="norm_spinBox_15">
+                   <property name="maximum">
+                    <number>1000</number>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="norm_spinBox_7">
+                   <property name="maximum">
+                    <number>1000</number>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_22">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_24">
+                 <item>
+                  <widget class="QLabel" name="norm_label_8">
+                   <property name="text">
+                    <string>Value 8</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="norm_spinBox_16">
+                   <property name="maximum">
+                    <number>1000</number>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="norm_spinBox_8">
+                   <property name="maximum">
+                    <number>1000</number>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_25">
+                 <item>
+                  <spacer name="horizontalSpacer_6">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="NormValuebutton">
+                   <property name="text">
+                    <string>Add Value</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+          </layout>
+          <zorder></zorder>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="CrossValidation">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="title">
+           <string>Setup</string>
+          </property>
+          <layout class="QVBoxLayout" name="CrossValid">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_11">
+               <item>
+                <widget class="QLabel" name="label_14">
+                 <property name="text">
+                  <string>Element Name</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_15">
+                 <property name="text">
+                  <string>nfolds_test</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_12">
+               <item>
+                <widget class="QLineEdit" name="elementNameLine"/>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="nfolds_test"/>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="CompRanges">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="title">
+           <string>Composition Ranges</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_7">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_3">
+               <item>
+                <widget class="QLabel" name="label_80">
+                 <property name="text">
+                  <string>Value 1</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="comp_range">
+                 <property name="minimum">
+                  <number>-100</number>
+                 </property>
+                 <property name="maximum">
+                  <number>1000</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="comp_range_2">
+                 <property name="maximum">
+                  <number>1000</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_5">
+               <item>
+                <widget class="QLabel" name="label_81">
+                 <property name="text">
+                  <string>Value 2</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="comp_range_5">
+                 <property name="maximum">
+                  <number>1000</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="comp_range_6">
+                 <property name="maximum">
+                  <number>1000</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_7">
+               <item>
+                <widget class="QLabel" name="label_82">
+                 <property name="text">
+                  <string>Value 3</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="comp_range_3">
+                 <property name="maximum">
+                  <number>1000</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="comp_range_4">
+                 <property name="maximum">
+                  <number>1000</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_10">
+               <item>
+                <widget class="QLabel" name="label_85">
+                 <property name="text">
+                  <string>Full Model Value</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="comp_range_7">
+                 <property name="maximum">
+                  <number>1000</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="comp_range_8">
+                 <property name="maximum">
+                  <number>1000</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_9">
+             <item>
+              <widget class="QLabel" name="label_40">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>compranges</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_6">
+               <item>
+                <widget class="QLabel" name="label_20">
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>[</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_21">
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>0</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_22">
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>,</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_23">
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>0</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_24">
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>]</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_27">
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>[</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_29">
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>0</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_28">
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>,</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_26">
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>0</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_25">
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>]</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_32">
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>[</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_30">
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>0</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_33">
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>,</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_34">
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>0</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_31">
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>]</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_39">
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>[</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_36">
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>0</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_37">
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>,</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_35">
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>0</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_38">
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>]</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="CreateModels">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="title">
+           <string>Create Models</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_17">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_14">
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_18">
+               <item>
+                <widget class="QLabel" name="label_70">
+                 <property name="text">
+                  <string>Value 1</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_71">
+                 <property name="text">
+                  <string>Value 2</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_72">
+                 <property name="text">
+                  <string>Value 3</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_73">
+                 <property name="text">
+                  <string>Value 4</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_19">
+               <item>
+                <widget class="QSpinBox" name="create_model_spin">
+                 <property name="maximum">
+                  <number>20</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="create_model_spin_2">
+                 <property name="maximum">
+                  <number>20</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="create_model_spin_3">
+                 <property name="maximum">
+                  <number>20</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="create_model_spin_4">
+                 <property name="maximum">
+                  <number>20</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_15">
+             <item>
+              <widget class="QLabel" name="label_74">
+               <property name="text">
+                <string>ncs</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_16">
+               <item>
+                <widget class="QLabel" name="label_75">
+                 <property name="text">
+                  <string>[</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_76">
+                 <property name="text">
+                  <string>(</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_77">
+                 <property name="text">
+                  <string>0</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_78">
+                 <property name="text">
+                  <string>,</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_79">
+                 <property name="text">
+                  <string>0</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_83">
+                 <property name="text">
+                  <string>,</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_84">
+                 <property name="text">
+                  <string>0</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_88">
+                 <property name="text">
+                  <string>,</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_89">
+                 <property name="text">
+                  <string>0</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_90">
+                 <property name="text">
+                  <string>)</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_91">
+                 <property name="text">
+                  <string>]</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="OK">
+          <layout class="QHBoxLayout" name="ok">
+           <item>
+            <spacer name="horizontalSpacer_5">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="okButton">
+             <property name="font">
+              <font>
+               <pointsize>8</pointsize>
+              </font>
+             </property>
+             <property name="mouseTracking">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>OK</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+       <zorder>Files</zorder>
+       <zorder>OK</zorder>
+       <zorder>CrossValidation</zorder>
+       <zorder>CreateModels</zorder>
+       <zorder>Normalization</zorder>
+       <zorder>CompRanges</zorder>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>581</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionLoad_Refence_Data"/>
+    <addaction name="actionLoad_Unknown_Data"/>
+    <addaction name="separator"/>
+    <addaction name="actionSave_Current_Plots"/>
+    <addaction name="actionSave_Current_Data"/>
+    <addaction name="separator"/>
+    <addaction name="actionCreate_New_Workflow"/>
+    <addaction name="actionSave_Current_Workflow"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuPreprocessing">
+    <property name="title">
+     <string>Preprocessing</string>
+    </property>
+    <widget class="QMenu" name="menuBaseline_Removal">
+     <property name="title">
+      <string>Baseline Removal</string>
+     </property>
+     <addaction name="actionALS"/>
+     <addaction name="actionDietrich"/>
+     <addaction name="actionPolyFit"/>
+     <addaction name="actionAirPLS"/>
+     <addaction name="actionFABC"/>
+     <addaction name="actionKK"/>
+     <addaction name="actionMario"/>
+     <addaction name="actionMedian"/>
+     <addaction name="actionRubberband"/>
+     <addaction name="actionUndecimated_Wavelet"/>
+    </widget>
+    <widget class="QMenu" name="menuCalibration_Transfer">
+     <property name="title">
+      <string>Calibration Transfer</string>
+     </property>
+     <addaction name="actionRatio"/>
+     <addaction name="actionTommy_s_Methgod"/>
+     <addaction name="actionPiecewise_Direct_Standardization"/>
+     <addaction name="actionOthers_3"/>
+    </widget>
+    <addaction name="actionNormalization"/>
+    <addaction name="actionNoise_Reduction"/>
+    <addaction name="actionApply_Mask"/>
+    <addaction name="actionInterpolate"/>
+    <addaction name="actionInstrument_Response"/>
+    <addaction name="menuCalibration_Transfer"/>
+    <addaction name="menuBaseline_Removal"/>
+   </widget>
+   <widget class="QMenu" name="menuVisualization">
+    <property name="title">
+     <string>Visualization</string>
+    </property>
+    <widget class="QMenu" name="menuClustering">
+     <property name="title">
+      <string>Clustering</string>
+     </property>
+     <addaction name="actionK_Means"/>
+     <addaction name="actionHierarchical"/>
+     <addaction name="actionOthers"/>
+     <addaction name="actionOthers_2"/>
+    </widget>
+    <addaction name="actionPCA"/>
+    <addaction name="actionICA"/>
+    <addaction name="menuClustering"/>
+   </widget>
+   <widget class="QMenu" name="menuRegression">
+    <property name="title">
+     <string>Regression</string>
+    </property>
+    <addaction name="actionPLS"/>
+    <addaction name="actionSM_PLS"/>
+    <addaction name="actionICA_Regression"/>
+    <addaction name="actionGaussian_Process"/>
+    <addaction name="actionMLP"/>
+    <addaction name="actionSVM"/>
+    <addaction name="actionOthers_4"/>
+    <addaction name="actionOthers_5"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionIndex"/>
+    <addaction name="actionContent_2"/>
+    <addaction name="separator"/>
+    <addaction name="actionAbout"/>
+    <addaction name="actionAbout_QtCreator"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuPreprocessing"/>
+   <addaction name="menuVisualization"/>
+   <addaction name="menuRegression"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionLoad_Refence_Data">
+   <property name="text">
+    <string>Load Refence Data</string>
+   </property>
+  </action>
+  <action name="actionLoad_Unknown_Data">
+   <property name="text">
+    <string>Load Unknown Data</string>
+   </property>
+  </action>
+  <action name="actionSave_Current_Workflow">
+   <property name="text">
+    <string>Save Current Workflow</string>
+   </property>
+  </action>
+  <action name="actionSave_Current_Plots">
+   <property name="text">
+    <string>Save Current Plots</string>
+   </property>
+  </action>
+  <action name="actionSave_Current_Data">
+   <property name="text">
+    <string>Save Current Data</string>
+   </property>
+  </action>
+  <action name="actionCreate_New_Workflow">
+   <property name="text">
+    <string>Create New Workflow</string>
+   </property>
+  </action>
+  <action name="actionNoise_Reduction">
+   <property name="text">
+    <string>Noise Reduction</string>
+   </property>
+  </action>
+  <action name="actionApply_Mask">
+   <property name="text">
+    <string>Apply Mask</string>
+   </property>
+  </action>
+  <action name="actionInterpolate">
+   <property name="text">
+    <string>Interpolate</string>
+   </property>
+  </action>
+  <action name="actionInstrument_Response">
+   <property name="text">
+    <string>Instrument Response</string>
+   </property>
+  </action>
+  <action name="actionALS">
+   <property name="text">
+    <string>ALS</string>
+   </property>
+  </action>
+  <action name="actionDietrich">
+   <property name="text">
+    <string>Dietrich</string>
+   </property>
+  </action>
+  <action name="actionPolyFit">
+   <property name="text">
+    <string>PolyFit</string>
+   </property>
+  </action>
+  <action name="actionAirPLS">
+   <property name="text">
+    <string>AirPLS</string>
+   </property>
+  </action>
+  <action name="actionFABC">
+   <property name="text">
+    <string>FABC</string>
+   </property>
+  </action>
+  <action name="actionKK">
+   <property name="text">
+    <string>KK</string>
+   </property>
+  </action>
+  <action name="actionMario">
+   <property name="text">
+    <string>Mario</string>
+   </property>
+  </action>
+  <action name="actionMedian">
+   <property name="text">
+    <string>Median</string>
+   </property>
+  </action>
+  <action name="actionRubberband">
+   <property name="text">
+    <string>Rubberband</string>
+   </property>
+  </action>
+  <action name="actionUndecimated_Wavelet">
+   <property name="text">
+    <string>Undecimated Wavelet</string>
+   </property>
+  </action>
+  <action name="actionRatio">
+   <property name="text">
+    <string>Ratio</string>
+   </property>
+  </action>
+  <action name="actionTommy_s_Methgod">
+   <property name="text">
+    <string>Tommy's Method</string>
+   </property>
+  </action>
+  <action name="actionPiecewise_Direct_Standardization">
+   <property name="text">
+    <string>Piecewise Direct Standardization</string>
+   </property>
+  </action>
+  <action name="actionPCA">
+   <property name="text">
+    <string>PCA</string>
+   </property>
+  </action>
+  <action name="actionICA">
+   <property name="text">
+    <string>ICA</string>
+   </property>
+  </action>
+  <action name="actionK_Means">
+   <property name="text">
+    <string>K-Means</string>
+   </property>
+  </action>
+  <action name="actionHierarchical">
+   <property name="text">
+    <string>Hierarchical</string>
+   </property>
+  </action>
+  <action name="actionOthers">
+   <property name="text">
+    <string>Others...</string>
+   </property>
+  </action>
+  <action name="actionOthers_2">
+   <property name="text">
+    <string>Others...</string>
+   </property>
+  </action>
+  <action name="actionOthers_3">
+   <property name="text">
+    <string>Others...</string>
+   </property>
+  </action>
+  <action name="actionPLS">
+   <property name="text">
+    <string>PLS</string>
+   </property>
+  </action>
+  <action name="actionSM_PLS">
+   <property name="text">
+    <string>SM-PLS</string>
+   </property>
+  </action>
+  <action name="actionICA_Regression">
+   <property name="text">
+    <string>ICA Regression</string>
+   </property>
+  </action>
+  <action name="actionGaussian_Process">
+   <property name="text">
+    <string>Gaussian Process</string>
+   </property>
+  </action>
+  <action name="actionMLP">
+   <property name="text">
+    <string>MLP</string>
+   </property>
+  </action>
+  <action name="actionSVM">
+   <property name="text">
+    <string>SVM</string>
+   </property>
+  </action>
+  <action name="actionOthers_4">
+   <property name="text">
+    <string>Others...</string>
+   </property>
+  </action>
+  <action name="actionOthers_5">
+   <property name="text">
+    <string>Others...</string>
+   </property>
+  </action>
+  <action name="actionIndex">
+   <property name="text">
+    <string>Index</string>
+   </property>
+  </action>
+  <action name="actionContent_2">
+   <property name="text">
+    <string>Content</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About...</string>
+   </property>
+  </action>
+  <action name="actionAbout_QtCreator">
+   <property name="text">
+    <string>About QtCreator...</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionNormalization">
+   <property name="text">
+    <string>Normalization</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>comp_range</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>label_21</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>260</x>
+     <y>89</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>306</x>
+     <y>221</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comp_range_2</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>label_23</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>405</x>
+     <y>82</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>329</x>
+     <y>218</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comp_range_5</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>label_29</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>288</x>
+     <y>111</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>368</x>
+     <y>212</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comp_range_6</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>label_26</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>445</x>
+     <y>116</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>394</x>
+     <y>215</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comp_range_3</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>label_30</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>318</x>
+     <y>141</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>431</x>
+     <y>215</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comp_range_4</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>label_34</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>453</x>
+     <y>152</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>457</x>
+     <y>215</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comp_range_7</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>label_36</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>305</x>
+     <y>178</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>494</x>
+     <y>215</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comp_range_8</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>label_35</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>504</x>
+     <y>184</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>518</x>
+     <y>210</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
