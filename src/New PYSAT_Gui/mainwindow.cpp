@@ -51,11 +51,6 @@ MainWindow::~MainWindow()
 }
 
 
-/* if we're missing data then there will be a 0 among us
- * we want to check if there is a 0 in the list of items.
- * if we are missing data then return true
- * if we aren't missing any data then return false
- */
 bool MainWindow::isMissingData(){
     for (int i = 0; i < sizeof(isFalse)/sizeof(int) - 1; i++){
         if (isFalse[i] > 0)
