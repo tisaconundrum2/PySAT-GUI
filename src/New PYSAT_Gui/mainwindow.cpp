@@ -54,13 +54,11 @@ MainWindow::~MainWindow()
  * if we aren't missing any data then return false
  */
 bool MainWindow::isMissingData(){
-    for (int i = 0; i < sizeof(isFalse)/sizeof(isFalse) - 1; i++){
-        //if there is a 1 in the list then QMessageBox
-        if (isFalse[i] > 0){
-            QMessageBox::critical(this, "Warning", "There is missing information please make sure to fill all data in");
-        }
-        //else keep iterating
+    for (int i = 0; i < sizeof(isFalse)/sizeof(int) - 1; i++){
+        if (isFalse[i] > 0)
+            return false;
     }
+    return true;
 }
 
 void MainWindow::on_maskFileButton_clicked(){
@@ -174,6 +172,10 @@ void MainWindow::on_elementNameLine_editingFinished(){
 }
 
 void MainWindow::on_okButton_clicked(){
+    if (isMissingData()){
+        QMessageBox::critical(this, "Warning", "There is missing information please make sure to fill all data in");
+        return;
+    }
     //    file.close();
     //    system(qPrintable(python_file + " " + "out.py"));
 }
