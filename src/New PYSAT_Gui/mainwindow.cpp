@@ -53,7 +53,7 @@ MainWindow::~MainWindow()
 
 bool MainWindow::isMissingData(){
     int count = 0;
-    for (int i = 0; i < sizeof(isFalse)/sizeof(int) - 1; i++){
+    for (int i = 0; i < sizeof(isFalse)/sizeof(int); i++){
         if (isFalse[i] == 0)
             count++;
     }
