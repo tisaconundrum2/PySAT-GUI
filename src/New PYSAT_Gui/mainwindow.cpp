@@ -178,6 +178,7 @@ void MainWindow::on_okButton_clicked(){
         QMessageBox::critical(this, "Warning", "There is missing information please make sure to fill all data in");
         return;
     }
+    qDebug() << ui->lineEdit->text();
     //    file.close();
     //    system(qPrintable(python_file + " " + "out.py"));
 }
