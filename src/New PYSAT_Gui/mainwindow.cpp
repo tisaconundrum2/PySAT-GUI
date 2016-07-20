@@ -63,6 +63,12 @@ bool MainWindow::isMissingData(){
         return false;
 }
 
+void MainWindow::printObjects(auto array[]){
+    for (int i = 0; i < sizeof(array)/sizeof(auto); i++){
+
+    }
+}
+
 void MainWindow::on_maskFileButton_clicked(){
     const QString &file_name = QFileDialog::getOpenFileName(this, "Select Maskfile", QDir::homePath());
     ui->lineEdit->setText(file_name);
@@ -178,7 +184,13 @@ void MainWindow::on_okButton_clicked(){
         QMessageBox::critical(this, "Warning", "There is missing information please make sure to fill all data in");
         return;
     }
-    qDebug() << ui->lineEdit->text();
+
+    QLineEdit* lineEdits[5] = {ui->lineEdit,
+                               ui->lineEdit_2,
+                               ui->lineEdit_3,
+                               ui->lineEdit_4,
+                               ui->lineEdit_6};
+    for
     //    file.close();
     //    system(qPrintable(python_file + " " + "out.py"));
 }
