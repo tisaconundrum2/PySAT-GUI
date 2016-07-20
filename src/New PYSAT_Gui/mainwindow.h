@@ -16,7 +16,7 @@ public:
     ~MainWindow();
 
 private slots:
-    bool isMissingData();
+    void isMissingData();
     void on_maskFileButton_clicked();
     void on_unknownDataButton_clicked();
     void on_fullDataBaseButton_clicked();

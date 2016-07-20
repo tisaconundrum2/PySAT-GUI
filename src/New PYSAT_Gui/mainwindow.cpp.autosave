@@ -53,7 +53,7 @@ MainWindow::~MainWindow()
  * if we are missing data then return true
  * if we aren't missing any data then return false
  */
-bool MainWindow::isMissingData(){
+void MainWindow::isMissingData(){
     for (int i = 0; i < sizeof(isFalse)/sizeof(isFalse) - 1; i++){
         //if there is a 1 in the list then QMessageBox
         if (isFalse[i] > 0){
