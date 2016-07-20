@@ -52,11 +52,15 @@ MainWindow::~MainWindow()
 
 
 bool MainWindow::isMissingData(){
+    int count = 0;
     for (int i = 0; i < sizeof(isFalse)/sizeof(int) - 1; i++){
-        if (isFalse[i] > 0)
-            return false;
+        if (isFalse[i] == 0)
+            count++;
     }
-    return true;
+    if (count > 0)
+        return true;
+    else
+        return false;
 }
 
 void MainWindow::on_maskFileButton_clicked(){
