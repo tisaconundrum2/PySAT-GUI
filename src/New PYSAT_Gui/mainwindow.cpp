@@ -14,9 +14,6 @@
 #include <QCloseEvent>
 
 int isFalse[13];
-int *pEnd = isFalse + sizeof(isFalse)/sizeof(int) - 1;
-int *p = isFalse;
-
 int norm_size = 7;
 int spinArray1[16];
 
@@ -40,8 +37,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(signalMapper, SIGNAL(mapped(QWidget*)), this, SLOT(spinboxWrite(QWidget*)));
 
     //Allocate by Zeroing out and false
-    while (*p <= pEnd){
-        *p = 0;
+    for (int i = 0; i < sizeof(isFalse)/sizeof(int) - 1; i++){
+        isFalse[i] = 0;
     }
 }
 
@@ -57,10 +54,9 @@ MainWindow::~MainWindow()
  * if we aren't missing any data then return false
  */
 bool MainWindow::isMissingData(){
-    pEnd = nums + sizeof(nums)/sizeof(int) - 1; // point to last element
-    p = nums;
-    while (p <= pEnd && *p == 0){
-        return true;
+    for (int i = 0; i < sizeof(isFalse)/sizeof(isFalse) - 1; i++){
+        if (isFalse[i] == 1)
+            return true;
     }
     return false;
 }
