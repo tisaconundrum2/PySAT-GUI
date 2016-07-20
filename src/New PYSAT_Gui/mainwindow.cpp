@@ -55,10 +55,10 @@ MainWindow::~MainWindow()
  */
 bool MainWindow::isMissingData(){
     for (int i = 0; i < sizeof(isFalse)/sizeof(isFalse) - 1; i++){
-        if (isFalse[i] == 1)
-            return true;
+        if (isFalse[i] == 0)
+            return false;
     }
-    return false;
+    return true;
 }
 
 void MainWindow::on_maskFileButton_clicked(){
@@ -168,16 +168,13 @@ void MainWindow::spinboxWrite(QWidget* e){
 
 void MainWindow::on_elementNameLine_editingFinished(){
     int i = 0;
-    while (isFalse[i++] != NULL){
-        if (isFalse[i] == false){
-            QMessageBox::critical(this, "Error", "There are items missing above. Please fill these out first.");
-            return;
-        }
-    }
-    isFalse[7] = 1;
+    isFalse[6] = 1;
 }
 
 void MainWindow::on_okButton_clicked(){
+    if (isMissingData()){
+        QMessageBox::critical(this, "Warning", "There is missing information please make sure to fill all data in");
+    }
     //    file.close();
     //    system(qPrintable(python_file + " " + "out.py"));
 }
