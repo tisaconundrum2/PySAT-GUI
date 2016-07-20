@@ -22,6 +22,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    QRect rect = QApplication::desktop()->screenGeometry();
+    int height = rect.height();
+    this->resize(this->width(), height*0.9);
     for (int i = 0; i < norm_size; i++){
         setNormValuesVisible(i, false);
     }
