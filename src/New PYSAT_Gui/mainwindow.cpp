@@ -13,7 +13,7 @@
 #include <QTextStream>
 #include <QCloseEvent>
 
-int isFalse[13];
+int isFalse[7];
 int norm_size = 7;
 int spinArray1[16];
 
@@ -55,7 +55,7 @@ MainWindow::~MainWindow()
  */
 bool MainWindow::isMissingData(){
     for (int i = 0; i < sizeof(isFalse)/sizeof(isFalse) - 1; i++){
-        if (isFalse[i] == 0)
+        if (isFalse[i] > 0)
             return false;
     }
     return true;
@@ -174,6 +174,7 @@ void MainWindow::on_elementNameLine_editingFinished(){
 void MainWindow::on_okButton_clicked(){
     if (isMissingData()){
         QMessageBox::critical(this, "Warning", "There is missing information please make sure to fill all data in");
+        return;
     }
     //    file.close();
     //    system(qPrintable(python_file + " " + "out.py"));
