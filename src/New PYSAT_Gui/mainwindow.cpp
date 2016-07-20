@@ -57,10 +57,12 @@ MainWindow::~MainWindow()
  * if we aren't missing any data then return false
  */
 bool MainWindow::isMissingData(){
-    while (*p <= pEnd && *p == 0){
-        return false;
+    pEnd = nums + sizeof(nums)/sizeof(int) - 1; // point to last element
+    p = nums;
+    while (p <= pEnd && *p == 0){
+        return true;
     }
-    return true;
+    return false;
 }
 
 void MainWindow::on_maskFileButton_clicked(){
@@ -78,19 +80,19 @@ void MainWindow::on_unknownDataButton_clicked(){
 void MainWindow::on_fullDataBaseButton_clicked(){
     const QString &file_name = QFileDialog::getOpenFileName(this, "Select Database File", QDir::homePath());
     ui->lineEdit_3->setText(file_name);
-    isFalse[2] = true;
+    isFalse[2] = 1;
 }
 
 void MainWindow::on_outPutLocationButton_clicked(){
     const QString &file_name = QFileDialog::getExistingDirectory(this, "Select Output Directory", QDir::homePath());
     ui->lineEdit_4->setText(file_name);
-    isFalse[3] = true;
+    isFalse[3] = 1;
 }
 
 void MainWindow::on_pythonButton_clicked(){
     const QString &file_name = QFileDialog::getOpenFileName(this, "Python .exe File", QDir::rootPath());
     ui->lineEdit_6->setText(file_name);
-    isFalse[4] = true;
+    isFalse[4] = 1;
 }
 
 
@@ -164,7 +166,7 @@ void MainWindow::spinboxWrite(QWidget* e){
     } else if ((value == QString::fromStdString("norm_spinBox_16"))){ ui->norm_spinBox_8->setMinimum(spinNum);  spinArray1[15] = spinNum;
     }
     qDebug() << value << "\n";
-    isFalse[5] = true;
+    isFalse[5] = 1;
 
 }
 
@@ -176,10 +178,10 @@ void MainWindow::on_elementNameLine_editingFinished(){
             return;
         }
     }
-    isFalse[7] = true;
+    isFalse[7] = 1;
 }
 
 void MainWindow::on_okButton_clicked(){
-//    file.close();
-//    system(qPrintable(python_file + " " + "out.py"));
+    //    file.close();
+    //    system(qPrintable(python_file + " " + "out.py"));
 }
