@@ -131,7 +131,7 @@ void MainWindow::on_NormValuebutton_clicked(){ //Norm Add Value
     } else {
         setNormValuesVisible(norm_push, true);
         norm_push++;
-        qDebug() << norm_push;
+        qDebug() << (norm_push+1)*2;
     }
 }
 
@@ -196,6 +196,12 @@ void MainWindow::on_okButton_clicked(){
     qDebug() << "unknown_data.interp(data.df['wvl'].columns)\n"                                          ;
     qDebug() << "data.mask(maskfile)\n"                                                                  ;
     qDebug() << "unknown_data.mask(maskfile)\n"                                                          ;
+
+    qDebug() << "ranges3 = [";
+    for (int i = 0; i <  (norm_push+1); i++){
+        qDebug() << "(" << spinArray1[i-1] << ", "<< spinArray1[i] <<")";
+    }
+    qDebug() << "]\n";
 
     qDebug() << "ranges3 = [(0, 350), (350, 470), (470, 1000)]\n"                                        ;
     qDebug() << "ranges1 = [(0, 1000)]\n"                                                                ;
