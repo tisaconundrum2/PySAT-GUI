@@ -101,7 +101,7 @@ void MainWindow::on_pythonButton_clicked(){
 
 
 void MainWindow::setNormValuesVisible(int index, bool visible){
-    QLabel* labels[norm_size] = {ui->norm_label_2,
+    auto* labels[norm_size] = {ui->norm_label_2,
                                  ui->norm_label_3,
                                  ui->norm_label_4,
                                  ui->norm_label_5,
@@ -190,7 +190,6 @@ void MainWindow::on_okButton_clicked(){
                                ui->lineEdit_3,
                                ui->lineEdit_4,
                                ui->lineEdit_6};
-    for
     //    file.close();
     //    system(qPrintable(python_file + " " + "out.py"));
 }
