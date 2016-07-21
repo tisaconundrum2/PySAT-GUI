@@ -1490,8 +1490,8 @@ QGroupBox::title {
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>405</x>
-     <y>82</y>
+     <x>534</x>
+     <y>84</y>
     </hint>
     <hint type="destinationlabel">
      <x>329</x>
@@ -1506,8 +1506,8 @@ QGroupBox::title {
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>288</x>
-     <y>111</y>
+     <x>364</x>
+     <y>114</y>
     </hint>
     <hint type="destinationlabel">
      <x>368</x>
@@ -1538,8 +1538,8 @@ QGroupBox::title {
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>318</x>
-     <y>141</y>
+     <x>364</x>
+     <y>144</y>
     </hint>
     <hint type="destinationlabel">
      <x>431</x>
@@ -1592,6 +1592,70 @@ QGroupBox::title {
     <hint type="destinationlabel">
      <x>518</x>
      <y>210</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>create_model_spin_2</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>label_79</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>399</x>
+     <y>307</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>383</x>
+     <y>383</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>create_model_spin</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>label_77</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>336</x>
+     <y>268</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>338</x>
+     <y>385</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>create_model_spin_3</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>label_84</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>443</x>
+     <y>329</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>430</x>
+     <y>386</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>create_model_spin_4</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>label_89</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>485</x>
+     <y>356</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>473</x>
+     <y>378</y>
     </hint>
    </hints>
   </connection>

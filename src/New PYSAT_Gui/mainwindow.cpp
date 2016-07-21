@@ -185,8 +185,9 @@ void MainWindow::on_okButton_clicked(){
     qDebug() << "import pandas as pd\n"                                                                  ;
     qDebug() << "maskfile = " << ui->lineEdit->text() << "\n";
     qDebug() << "unknowndatacsv = " << ui->lineEdit_2 << "\n";
-    qDebug() << "db = \"C:/Users/nicholas/Desktop/full_db_mars_corrected_dopedTiO2_pandas_format.csv\"\n";
-    qDebug() << "outpath = \"C:/Users/nicholas/Desktop/Output\"\n"                                       ;
+    qDebug() << "db = " << ui->lineEdit_3 << "\n";
+    qDebug() << "outpath = " << ui->lineEdit_3 << "\n";
+
     qDebug() << "data = pd.read_csv(db, header=[0, 1])\n"                                                ;
     qDebug() << "data = spectral_data(data)\n"                                                           ;
     qDebug() << "unknown_data = pd.read_csv(unknowndatacsv, header=[0, 1])\n"                            ;
@@ -194,8 +195,10 @@ void MainWindow::on_okButton_clicked(){
     qDebug() << "unknown_data.interp(data.df['wvl'].columns)\n"                                          ;
     qDebug() << "data.mask(maskfile)\n"                                                                  ;
     qDebug() << "unknown_data.mask(maskfile)\n"                                                          ;
+
     qDebug() << "ranges3 = [(0, 350), (350, 470), (470, 1000)]\n"                                        ;
     qDebug() << "ranges1 = [(0, 1000)]\n"                                                                ;
+
     qDebug() << "data3 = data\n"                                                                         ;
     qDebug() << "data3.norm(ranges3)\n"                                                                  ;
     qDebug() << "unknown_data3 = unknown_data\n"                                                         ;
@@ -204,31 +207,36 @@ void MainWindow::on_okButton_clicked(){
     qDebug() << "data1.norm(ranges1)\n"                                                                  ;
     qDebug() << "unknown_data1 = unknown_data\n"                                                         ;
     qDebug() << "unknown_data1.norm(ranges1)\n"                                                          ;
+
     qDebug() << "el = 'SiO2'\n"                                                                          ;
     qDebug() << "nfolds_test = 6\n"                                                                      ;
     qDebug() << "testfold_test = 4\n"                                                                    ;
     qDebug() << "nfolds_cv = 5\n"                                                                        ;
     qDebug() << "testfold_cv = 3\n"                                                                      ;
-    qDebug() << "compranges = [[-20, 50], [30, 70], [60, 100], [0, 120]]\n"                              ;
+
+    qDebug() << "compranges = [[" ui->comp_range ", "ui->comp_range_2"], ["ui->comp_range_3", "ui->comp_range_4"], ["ui->comp_range_5", "ui->comp_range_6"], ["ui->comp_range_7", "ui->comp_range_8"]]\n"                              ;
     qDebug() << "nc = 20\n"                                                                              ;
+
     qDebug() << "data3.stratified_folds(nfolds=nfolds_test, sortby=('meta', el))\n"                      ;
     qDebug() << "data3_train = data3.rows_match(('meta', 'Folds'), [testfold_test], invert=True)\n"      ;
     qDebug() << "data3_test = data3.rows_match(('meta', 'Folds'), [testfold_test])\n"                    ;
     qDebug() << "data1.stratified_folds(nfolds=nfolds_test, sortby=('meta', el))\n"                      ;
     qDebug() << "data1_train = data1.rows_match(('meta', 'Folds'), [testfold_test], invert=True)\n"      ;
     qDebug() << "data1_test = data1.rows_match(('meta', 'Folds'), [testfold_test])\n"                    ;
+
     qDebug() << "ncs = [7, 7, 5, 9]\n"                                                                   ;
+
     qDebug() << "traindata = [data3_train.df, data3_train.df, data1_train.df, data3_train.df]\n"         ;
     qDebug() << "testdata = [data3_test.df, data3_test.df, data1_test.df, data3_test.df]\n"              ;
     qDebug() << "unkdata = [unknown_data3.df, unknown_data3.df, unknown_data1.df, unknown_data3.df]\n"   ;
-    qDebug() << "\n"                                                                           ;
+
     qDebug() << "sm = pls_sm()\n"                                                              ;
     qDebug() << "sm.fit(traindata, compranges, ncs, el, figpath=outpath)\n"                    ;
     qDebug() << "predictions_train = sm.predict(traindata)\n"                                  ;
     qDebug() << "predictions_test = sm.predict(testdata)\n"                                    ;
     qDebug() << "blended_train = sm.do_blend(predictions_train, traindata[0]['meta'][el])\n"   ;
     qDebug() << "blended_test = sm.do_blend(predictions_test)\n"                               ;
-    qDebug() << "\n"                                                                           ;
+
     qDebug() << "sm.final(testdata[0]['meta'][el],\n"                                          ;
     qDebug() << "blended_test,\n"                                                              ;
     qDebug() << "el=el,\n"                                                                     ;
