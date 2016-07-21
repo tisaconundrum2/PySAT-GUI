@@ -178,10 +178,10 @@ void MainWindow::on_elementNameLine_editingFinished(){
 }
 
 void MainWindow::on_okButton_clicked(){
-//    if (isMissingData()){
-//        QMessageBox::critical(this, "Warning", "There is missing information please make sure to fill all data in");
-//        return;
-//    }
+    if (isMissingData()){
+        QMessageBox::critical(this, "Warning", "There is missing information please make sure to fill all data in");
+        return;
+    }
     file.open(QIODevice::WriteOnly | QIODevice::Text);
     QTextStream out(&file);
 
