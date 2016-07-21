@@ -131,6 +131,7 @@ void MainWindow::on_NormValuebutton_clicked(){ //Norm Add Value
     } else {
         setNormValuesVisible(norm_push, true);
         norm_push++;
+        qDebug() << norm_push;
     }
 }
 
