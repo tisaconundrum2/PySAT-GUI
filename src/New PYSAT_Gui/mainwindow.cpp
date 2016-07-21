@@ -67,26 +67,26 @@ bool MainWindow::isMissingData(){
 
 
 void MainWindow::on_maskFileButton_clicked(){
-    const QString &file_name = QFileDialog::getOpenFileName(this, "Select Maskfile", QDir::homePath());
-    ui->lineEdit->setText(file_name);
+    const QString &file_name = QFileDialog::getOpenFileName(this, "Select Maskfile");
+    ui->lineEdit->setText(QDir::toNativeSeparators(file_name));
     isFalse[0] = 1;
 }
 
 void MainWindow::on_unknownDataButton_clicked(){
-    const QString &file_name = QFileDialog::getOpenFileName(this, "Select Unknwon Data File", QDir::homePath());
-    ui->lineEdit_2->setText(file_name);
+    const QString &file_name = QFileDialog::getOpenFileName(this, "Select Unknwon Data File");
+    ui->lineEdit_2->setText(QDir::toNativeSeparators(file_name));
     isFalse[1] = 1;
 }
 
 void MainWindow::on_fullDataBaseButton_clicked(){
-    const QString &file_name = QFileDialog::getOpenFileName(this, "Select Database File", QDir::homePath());
+    const QString &file_name = QFileDialog::getOpenFileName(this, "Select Database File");
     ui->lineEdit_3->setText(QDir::toNativeSeparators(file_name));
     isFalse[2] = 1;
 }
 
 void MainWindow::on_outPutLocationButton_clicked(){
-    const QString &file_name = QFileDialog::getExistingDirectory(this, "Select Output Directory", QDir::homePath());
-    ui->lineEdit_4->setText(file_name);
+    const QString &file_name = QFileDialog::getExistingDirectory(this, "Select Output Directory");
+    ui->lineEdit_4->setText(QDir::toNativeSeparators(file_name));
     isFalse[3] = 1;
 }
 
@@ -188,10 +188,10 @@ void MainWindow::on_okButton_clicked(){
     out << "from pysat.spectral.spectral_data import spectral_data\n"                               ;
     out << "from pysat.regression.pls_sm import pls_sm\n"                                           ;
     out << "import pandas as pd\n"                                                                  ;
-    out << "maskfile = \"" << ui->lineEdit->text() << "\"\n";
-    out << "unknowndatacsv = \"" << ui->lineEdit_2->text() << "\"\n";
-    out << "db = \"" << ui->lineEdit_3->text() << "\"\n";
-    out << "outpath = \"" << ui->lineEdit_3->text() << "\"\n";
+    out << "maskfile = r\"" << ui->lineEdit->text() << "\"\n";
+    out << "unknowndatacsv = r\"" << ui->lineEdit_2->text() << "\"\n";
+    out << "db = r\"" << ui->lineEdit_3->text() << "\"\n";
+    out << "outpath = r\"" << ui->lineEdit_3->text() << "\"\n";
 
     out << "data = pd.read_csv(db, header=[0, 1])\n"                                                ;
     out << "data = spectral_data(data)\n"                                                           ;
