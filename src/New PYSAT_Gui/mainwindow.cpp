@@ -209,12 +209,11 @@ void MainWindow::on_okButton_clicked(){
     qDebug() << "unknown_data1.norm(ranges1)\n"                                                          ;
 
     qDebug() << "el = '" << ui->elementNameLine->text() << "'\n"                                                                          ;
-    qDebug() << "nfolds_test = 6\n"                                                                      ;
+    qDebug() << "nfolds_test = "<< ui->nfolds_test->value()<<"\n"                                                                      ;
     qDebug() << "testfold_test = 4\n"                                                                    ;
     qDebug() << "nfolds_cv = 5\n"                                                                        ;
     qDebug() << "testfold_cv = 3\n"                                                                      ;
-    int temp = ui->comp_range->text();
-    qDebug() << "compranges = [[" << ui->comp_range->text() << ", " << ui->comp_range_2->text() << "], [" << ui->comp_range_3->text() << ", " << ui->comp_range_4->text() << "], [" << ui->comp_range_5->text() << ", " << ui->comp_range_6->text() << "], [" << ui->comp_range_7->text() << ", " << ui->comp_range_8->text() << "]]\n"                              ;
+    qDebug() << "compranges = [[" << ui->comp_range->value() << ", " << ui->comp_range_2->value() << "], [" << ui->comp_range_3->value() << ", " << ui->comp_range_4->value() << "], [" << ui->comp_range_5->value() << ", " << ui->comp_range_6->value() << "], [" << ui->comp_range_7->value() << ", " << ui->comp_range_8->value() << "]]\n"                              ;
     qDebug() << "nc = 20\n"                                                                              ;
 
     qDebug() << "data3.stratified_folds(nfolds=nfolds_test, sortby=('meta', el))\n"                      ;
@@ -224,7 +223,7 @@ void MainWindow::on_okButton_clicked(){
     qDebug() << "data1_train = data1.rows_match(('meta', 'Folds'), [testfold_test], invert=True)\n"      ;
     qDebug() << "data1_test = data1.rows_match(('meta', 'Folds'), [testfold_test])\n"                    ;
 
-    qDebug() << "ncs = [" << ui->create_model_spin->text() << ", " << ui->create_model_spin_2->text() << ", " << ui->create_model_spin_3->text() << ", " << ui->create_model_spin_4->text() << "]\n"                                                                   ;
+    qDebug() << "ncs = [" << ui->create_model_spin->value() << ", " << ui->create_model_spin_2->value() << ", " << ui->create_model_spin_3->value() << ", " << ui->create_model_spin_4->value() << "]\n"                                                                   ;
 
     qDebug() << "traindata = [data3_train.df, data3_train.df, data1_train.df, data3_train.df]\n"         ;
     qDebug() << "testdata = [data3_test.df, data3_test.df, data1_test.df, data3_test.df]\n"              ;
