@@ -178,20 +178,20 @@ void MainWindow::on_elementNameLine_editingFinished(){
 }
 
 void MainWindow::on_okButton_clicked(){
-    if (isMissingData()){
-        QMessageBox::critical(this, "Warning", "There is missing information please make sure to fill all data in");
-        return;
-    }
+//    if (isMissingData()){
+//        QMessageBox::critical(this, "Warning", "There is missing information please make sure to fill all data in");
+//        return;
+//    }
     file.open(QIODevice::WriteOnly | QIODevice::Text);
     QTextStream out(&file);
 
     out << "from pysat.spectral.spectral_data import spectral_data\n"                               ;
     out << "from pysat.regression.pls_sm import pls_sm\n"                                           ;
     out << "import pandas as pd\n"                                                                  ;
-    out << "maskfile = " << ui->lineEdit->text() << "\n";
-    out << "unknowndatacsv = " << ui->lineEdit_2->text() << "\n";
-    out << "db = " << ui->lineEdit_3->text() << "\n";
-    out << "outpath = " << ui->lineEdit_3->text() << "\n";
+    out << "maskfile = \"" << ui->lineEdit->text() << "\"\n";
+    out << "unknowndatacsv = \"" << ui->lineEdit_2->text() << "\"\n";
+    out << "db = \"" << ui->lineEdit_3->text() << "\"\n";
+    out << "outpath = \"" << ui->lineEdit_3->text() << "\"\n";
 
     out << "data = pd.read_csv(db, header=[0, 1])\n"                                                ;
     out << "data = spectral_data(data)\n"                                                           ;
@@ -203,11 +203,13 @@ void MainWindow::on_okButton_clicked(){
 
     out << "ranges3 = [";
     for (int i = 0; i <  (norm_push+1); i++){
-        out << "(" << spinArray1[i-1] << ", "<< spinArray1[i] <<"),";
+        out << "(" << spinArray1[i-1] << ", "<< spinArray1[i] <<")";
+        //if i at the end stop adding commas
+        if (i+1 < norm_push+1)
+            out << ",";
     }
     out << "]\n";
 
-    out << "ranges3 = [(0, 350), (350, 470), (470, 1000)]\n"                                        ;
     out << "ranges1 = [(0, 1000)]\n"                                                                ;
 
     out << "data3 = data\n"                                                                         ;
