@@ -184,9 +184,9 @@ void MainWindow::on_okButton_clicked(){
     qDebug() << "from pysat.regression.pls_sm import pls_sm\n"                                           ;
     qDebug() << "import pandas as pd\n"                                                                  ;
     qDebug() << "maskfile = " << ui->lineEdit->text() << "\n";
-    qDebug() << "unknowndatacsv = " << ui->lineEdit_2 << "\n";
-    qDebug() << "db = " << ui->lineEdit_3 << "\n";
-    qDebug() << "outpath = " << ui->lineEdit_3 << "\n";
+    qDebug() << "unknowndatacsv = " << ui->lineEdit_2->text() << "\n";
+    qDebug() << "db = " << ui->lineEdit_3->text() << "\n";
+    qDebug() << "outpath = " << ui->lineEdit_3->text() << "\n";
 
     qDebug() << "data = pd.read_csv(db, header=[0, 1])\n"                                                ;
     qDebug() << "data = spectral_data(data)\n"                                                           ;
@@ -208,13 +208,13 @@ void MainWindow::on_okButton_clicked(){
     qDebug() << "unknown_data1 = unknown_data\n"                                                         ;
     qDebug() << "unknown_data1.norm(ranges1)\n"                                                          ;
 
-    qDebug() << "el = '" << ui->elementNameLine << "'\n"                                                                          ;
+    qDebug() << "el = '" << ui->elementNameLine->text() << "'\n"                                                                          ;
     qDebug() << "nfolds_test = 6\n"                                                                      ;
     qDebug() << "testfold_test = 4\n"                                                                    ;
     qDebug() << "nfolds_cv = 5\n"                                                                        ;
     qDebug() << "testfold_cv = 3\n"                                                                      ;
 
-    qDebug() << "compranges = [[" << ui->comp_range << ", " << ui->comp_range_2 << "], [" << ui->comp_range_3 << ", " << ui->comp_range_4 << "], [" << ui->comp_range_5 << ", " << ui->comp_range_6 << "], [" << ui->comp_range_7 << ", " << ui->comp_range_8 << "]]\n"                              ;
+    qDebug() << "compranges = [[" << ui->comp_range->text() << ", " << ui->comp_range_2->text() << "], [" << ui->comp_range_3->text() << ", " << ui->comp_range_4->text() << "], [" << ui->comp_range_5->text() << ", " << ui->comp_range_6->text() << "], [" << ui->comp_range_7->text() << ", " << ui->comp_range_8->text() << "]]\n"                              ;
     qDebug() << "nc = 20\n"                                                                              ;
 
     qDebug() << "data3.stratified_folds(nfolds=nfolds_test, sortby=('meta', el))\n"                      ;
@@ -224,7 +224,7 @@ void MainWindow::on_okButton_clicked(){
     qDebug() << "data1_train = data1.rows_match(('meta', 'Folds'), [testfold_test], invert=True)\n"      ;
     qDebug() << "data1_test = data1.rows_match(('meta', 'Folds'), [testfold_test])\n"                    ;
 
-    qDebug() << "ncs = [" << ui->create_model_spin << ", " << ui->create_model_spin_2 << ", " << ui->create_model_spin_3 << ", " << ui->create_model_spin_4 << "]\n"                                                                   ;
+    qDebug() << "ncs = [" << ui->create_model_spin->text() << ", " << ui->create_model_spin_2->text() << ", " << ui->create_model_spin_3->text() << ", " << ui->create_model_spin_4->text() << "]\n"                                                                   ;
 
     qDebug() << "traindata = [data3_train.df, data3_train.df, data1_train.df, data3_train.df]\n"         ;
     qDebug() << "testdata = [data3_test.df, data3_test.df, data1_test.df, data3_test.df]\n"              ;
