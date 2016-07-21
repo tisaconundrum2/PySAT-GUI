@@ -191,7 +191,7 @@ void MainWindow::on_okButton_clicked(){
     out << "maskfile = r\"" << ui->lineEdit->text() << "\"\n";
     out << "unknowndatacsv = r\"" << ui->lineEdit_2->text() << "\"\n";
     out << "db = r\"" << ui->lineEdit_3->text() << "\"\n";
-    out << "outpath = r\"" << ui->lineEdit_3->text() << "\"\n";
+    out << "outpath = r\"" << ui->lineEdit_4->text() << "\"\n";
 
     out << "data = pd.read_csv(db, header=[0, 1])\n"                                                ;
     out << "data = spectral_data(data)\n"                                                           ;
@@ -257,5 +257,5 @@ void MainWindow::on_okButton_clicked(){
     out << "figpath=outpath)\n";
     file.flush();
     file.close();
-
+    system(qPrintable(ui->lineEdit_6->text() + " " + "out.py"));
 }
