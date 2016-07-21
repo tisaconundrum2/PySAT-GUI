@@ -213,7 +213,7 @@ void MainWindow::on_okButton_clicked(){
     qDebug() << "testfold_test = 4\n"                                                                    ;
     qDebug() << "nfolds_cv = 5\n"                                                                        ;
     qDebug() << "testfold_cv = 3\n"                                                                      ;
-
+    int temp = ui->comp_range->text();
     qDebug() << "compranges = [[" << ui->comp_range->text() << ", " << ui->comp_range_2->text() << "], [" << ui->comp_range_3->text() << ", " << ui->comp_range_4->text() << "], [" << ui->comp_range_5->text() << ", " << ui->comp_range_6->text() << "], [" << ui->comp_range_7->text() << ", " << ui->comp_range_8->text() << "]]\n"                              ;
     qDebug() << "nc = 20\n"                                                                              ;
 
