@@ -16,6 +16,8 @@
 int isFalse[7];
 int norm_size = 7;
 int spinArray1[16];
+QFile file("out.py");
+QTextStream out(&file);
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -180,75 +182,78 @@ void MainWindow::on_okButton_clicked(){
         QMessageBox::critical(this, "Warning", "There is missing information please make sure to fill all data in");
         return;
     }
+    file.open(QIODevice::WriteOnly | QIODevice::Text);
+    QTextStream out(&file);
 
-    qDebug() << "from pysat.spectral.spectral_data import spectral_data\n"                               ;
-    qDebug() << "from pysat.regression.pls_sm import pls_sm\n"                                           ;
-    qDebug() << "import pandas as pd\n"                                                                  ;
-    qDebug() << "maskfile = " << ui->lineEdit->text() << "\n";
-    qDebug() << "unknowndatacsv = " << ui->lineEdit_2->text() << "\n";
-    qDebug() << "db = " << ui->lineEdit_3->text() << "\n";
-    qDebug() << "outpath = " << ui->lineEdit_3->text() << "\n";
+    out << "from pysat.spectral.spectral_data import spectral_data\n"                               ;
+    out << "from pysat.regression.pls_sm import pls_sm\n"                                           ;
+    out << "import pandas as pd\n"                                                                  ;
+    out << "maskfile = " << ui->lineEdit->text() << "\n";
+    out << "unknowndatacsv = " << ui->lineEdit_2->text() << "\n";
+    out << "db = " << ui->lineEdit_3->text() << "\n";
+    out << "outpath = " << ui->lineEdit_3->text() << "\n";
 
-    qDebug() << "data = pd.read_csv(db, header=[0, 1])\n"                                                ;
-    qDebug() << "data = spectral_data(data)\n"                                                           ;
-    qDebug() << "unknown_data = pd.read_csv(unknowndatacsv, header=[0, 1])\n"                            ;
-    qDebug() << "unknown_data = spectral_data(unknown_data)\n"                                           ;
-    qDebug() << "unknown_data.interp(data.df['wvl'].columns)\n"                                          ;
-    qDebug() << "data.mask(maskfile)\n"                                                                  ;
-    qDebug() << "unknown_data.mask(maskfile)\n"                                                          ;
+    out << "data = pd.read_csv(db, header=[0, 1])\n"                                                ;
+    out << "data = spectral_data(data)\n"                                                           ;
+    out << "unknown_data = pd.read_csv(unknowndatacsv, header=[0, 1])\n"                            ;
+    out << "unknown_data = spectral_data(unknown_data)\n"                                           ;
+    out << "unknown_data.interp(data.df['wvl'].columns)\n"                                          ;
+    out << "data.mask(maskfile)\n"                                                                  ;
+    out << "unknown_data.mask(maskfile)\n"                                                          ;
 
-    qDebug() << "ranges3 = [";
+    out << "ranges3 = [";
     for (int i = 0; i <  (norm_push+1); i++){
-        qDebug() << "(" << spinArray1[i-1] << ", "<< spinArray1[i] <<")";
+        out << "(" << spinArray1[i-1] << ", "<< spinArray1[i] <<"),";
     }
-    qDebug() << "]\n";
+    out << "]\n";
 
-    qDebug() << "ranges3 = [(0, 350), (350, 470), (470, 1000)]\n"                                        ;
-    qDebug() << "ranges1 = [(0, 1000)]\n"                                                                ;
+    out << "ranges3 = [(0, 350), (350, 470), (470, 1000)]\n"                                        ;
+    out << "ranges1 = [(0, 1000)]\n"                                                                ;
 
-    qDebug() << "data3 = data\n"                                                                         ;
-    qDebug() << "data3.norm(ranges3)\n"                                                                  ;
-    qDebug() << "unknown_data3 = unknown_data\n"                                                         ;
-    qDebug() << "unknown_data3.norm(ranges3)\n"                                                          ;
-    qDebug() << "data1 = data\n"                                                                         ;
-    qDebug() << "data1.norm(ranges1)\n"                                                                  ;
-    qDebug() << "unknown_data1 = unknown_data\n"                                                         ;
-    qDebug() << "unknown_data1.norm(ranges1)\n"                                                          ;
+    out << "data3 = data\n"                                                                         ;
+    out << "data3.norm(ranges3)\n"                                                                  ;
+    out << "unknown_data3 = unknown_data\n"                                                         ;
+    out << "unknown_data3.norm(ranges3)\n"                                                          ;
+    out << "data1 = data\n"                                                                         ;
+    out << "data1.norm(ranges1)\n"                                                                  ;
+    out << "unknown_data1 = unknown_data\n"                                                         ;
+    out << "unknown_data1.norm(ranges1)\n"                                                          ;
 
-    qDebug() << "el = '" << ui->elementNameLine->text() << "'\n"                                                                          ;
-    qDebug() << "nfolds_test = "<< ui->nfolds_test->value()<<"\n"                                                                      ;
-    qDebug() << "testfold_test = 4\n"                                                                    ;
-    qDebug() << "nfolds_cv = 5\n"                                                                        ;
-    qDebug() << "testfold_cv = 3\n"                                                                      ;
-    qDebug() << "compranges = [[" << ui->comp_range->value() << ", " << ui->comp_range_2->value() << "], [" << ui->comp_range_3->value() << ", " << ui->comp_range_4->value() << "], [" << ui->comp_range_5->value() << ", " << ui->comp_range_6->value() << "], [" << ui->comp_range_7->value() << ", " << ui->comp_range_8->value() << "]]\n"                              ;
-    qDebug() << "nc = 20\n"                                                                              ;
+    out << "el = '" << ui->elementNameLine->text() << "'\n"                                                                          ;
+    out << "nfolds_test = "<< ui->nfolds_test->value()<<"\n"                                                                      ;
+    out << "testfold_test = 4\n"                                                                    ;
+    out << "nfolds_cv = 5\n"                                                                        ;
+    out << "testfold_cv = 3\n"                                                                      ;
+    out << "compranges = [[" << ui->comp_range->value() << ", " << ui->comp_range_2->value() << "], [" << ui->comp_range_3->value() << ", " << ui->comp_range_4->value() << "], [" << ui->comp_range_5->value() << ", " << ui->comp_range_6->value() << "], [" << ui->comp_range_7->value() << ", " << ui->comp_range_8->value() << "]]\n"                              ;
+    out << "nc = 20\n"                                                                              ;
 
-    qDebug() << "data3.stratified_folds(nfolds=nfolds_test, sortby=('meta', el))\n"                      ;
-    qDebug() << "data3_train = data3.rows_match(('meta', 'Folds'), [testfold_test], invert=True)\n"      ;
-    qDebug() << "data3_test = data3.rows_match(('meta', 'Folds'), [testfold_test])\n"                    ;
-    qDebug() << "data1.stratified_folds(nfolds=nfolds_test, sortby=('meta', el))\n"                      ;
-    qDebug() << "data1_train = data1.rows_match(('meta', 'Folds'), [testfold_test], invert=True)\n"      ;
-    qDebug() << "data1_test = data1.rows_match(('meta', 'Folds'), [testfold_test])\n"                    ;
+    out << "data3.stratified_folds(nfolds=nfolds_test, sortby=('meta', el))\n"                      ;
+    out << "data3_train = data3.rows_match(('meta', 'Folds'), [testfold_test], invert=True)\n"      ;
+    out << "data3_test = data3.rows_match(('meta', 'Folds'), [testfold_test])\n"                    ;
+    out << "data1.stratified_folds(nfolds=nfolds_test, sortby=('meta', el))\n"                      ;
+    out << "data1_train = data1.rows_match(('meta', 'Folds'), [testfold_test], invert=True)\n"      ;
+    out << "data1_test = data1.rows_match(('meta', 'Folds'), [testfold_test])\n"                    ;
 
-    qDebug() << "ncs = [" << ui->create_model_spin->value() << ", " << ui->create_model_spin_2->value() << ", " << ui->create_model_spin_3->value() << ", " << ui->create_model_spin_4->value() << "]\n"                                                                   ;
+    out << "ncs = [" << ui->create_model_spin->value() << ", " << ui->create_model_spin_2->value() << ", " << ui->create_model_spin_3->value() << ", " << ui->create_model_spin_4->value() << "]\n"                                                                   ;
 
-    qDebug() << "traindata = [data3_train.df, data3_train.df, data1_train.df, data3_train.df]\n"         ;
-    qDebug() << "testdata = [data3_test.df, data3_test.df, data1_test.df, data3_test.df]\n"              ;
-    qDebug() << "unkdata = [unknown_data3.df, unknown_data3.df, unknown_data1.df, unknown_data3.df]\n"   ;
+    out << "traindata = [data3_train.df, data3_train.df, data1_train.df, data3_train.df]\n"         ;
+    out << "testdata = [data3_test.df, data3_test.df, data1_test.df, data3_test.df]\n"              ;
+    out << "unkdata = [unknown_data3.df, unknown_data3.df, unknown_data1.df, unknown_data3.df]\n"   ;
 
-    qDebug() << "sm = pls_sm()\n"                                                              ;
-    qDebug() << "sm.fit(traindata, compranges, ncs, el, figpath=outpath)\n"                    ;
-    qDebug() << "predictions_train = sm.predict(traindata)\n"                                  ;
-    qDebug() << "predictions_test = sm.predict(testdata)\n"                                    ;
-    qDebug() << "blended_train = sm.do_blend(predictions_train, traindata[0]['meta'][el])\n"   ;
-    qDebug() << "blended_test = sm.do_blend(predictions_test)\n"                               ;
+    out << "sm = pls_sm()\n"                                                              ;
+    out << "sm.fit(traindata, compranges, ncs, el, figpath=outpath)\n"                    ;
+    out << "predictions_train = sm.predict(traindata)\n"                                  ;
+    out << "predictions_test = sm.predict(testdata)\n"                                    ;
+    out << "blended_train = sm.do_blend(predictions_train, traindata[0]['meta'][el])\n"   ;
+    out << "blended_test = sm.do_blend(predictions_test)\n"                               ;
 
-    qDebug() << "sm.final(testdata[0]['meta'][el],\n"                                          ;
-    qDebug() << "blended_test,\n"                                                              ;
-    qDebug() << "el=el,\n"                                                                     ;
-    qDebug() << "xcol='Ref Comp Wt. %',\n"                                                     ;
-    qDebug() << "ycol='Predicted Comp Wt. %',\n"                                               ;
-    qDebug() << "figpath=outpath)\n";
-
+    out << "sm.final(testdata[0]['meta'][el],\n"                                          ;
+    out << "blended_test,\n"                                                              ;
+    out << "el=el,\n"                                                                     ;
+    out << "xcol='Ref Comp Wt. %',\n"                                                     ;
+    out << "ycol='Predicted Comp Wt. %',\n"                                               ;
+    out << "figpath=outpath)\n";
+    file.flush();
+    file.close();
 
 }
