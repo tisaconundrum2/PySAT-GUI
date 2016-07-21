@@ -80,7 +80,7 @@ void MainWindow::on_unknownDataButton_clicked(){
 
 void MainWindow::on_fullDataBaseButton_clicked(){
     const QString &file_name = QFileDialog::getOpenFileName(this, "Select Database File", QDir::homePath());
-    ui->lineEdit_3->setText(file_name);
+    ui->lineEdit_3->setText(QDir::toNativeSeparators(file_name));
     isFalse[2] = 1;
 }
 
