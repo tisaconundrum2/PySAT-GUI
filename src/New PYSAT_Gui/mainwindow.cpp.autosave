@@ -63,6 +63,10 @@ bool MainWindow::isMissingData(){
         return false;
 }
 
+void MainWindow::writeDataToFile(){
+    
+}
+
 void MainWindow::on_maskFileButton_clicked(){
     const QString &file_name = QFileDialog::getOpenFileName(this, "Select Maskfile", QDir::homePath());
     ui->lineEdit->setText(file_name);
@@ -192,4 +196,5 @@ void MainWindow::on_okButton_clicked(){
                                ui->comp_range_6,
                                ui->comp_range_7,
                                ui->comp_range_8};
+    
 }
