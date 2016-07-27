@@ -1,6 +1,6 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
-import sys
+import sys, time
 
 class Main(QMainWindow):
     def __init__(self, parent=None):
@@ -76,7 +76,7 @@ class Main(QMainWindow):
 
         self.ExitAction = QAction("Exit", self)
         self.ExitAction.triggered.connect(self.exit)
-        self.ExitAction.setShortcut("ctrl+Q")
+        self.ExitAction.setShortcut("ctrl+W")
 
         self.NormalizaAction = QAction("Normalization", self)
         self.NoiseReduAction = QAction("Noise Reduction", self)
@@ -133,8 +133,17 @@ class Main(QMainWindow):
 
 def main():
     app = QApplication(sys.argv)
+
+    splash_pix = QPixmap('splash.png')
+    splash = QSplashScreen(splash_pix, Qt.WindowStaysOnTopHint)
+    splash.setMask(splash_pix.mask())
+    splash.show()
+    app.processEvents()
+    time.sleep(1.3)
+
     main_window = Main()
     main_window.show()
+    splash.finish(main_window)
     app.exec_()
 
 if __name__ == "__main__":
