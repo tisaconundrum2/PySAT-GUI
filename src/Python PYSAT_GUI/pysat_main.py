@@ -18,6 +18,7 @@ class Main(QMainWindow):
         file.addSeparator()
         file.addAction(self.CreaNWorkAction)
         file.addAction(self.SaveCWorkAction)
+        file.addAction(self.OpenNWorkAction)
         file.addSeparator()
         file.addAction(self.ExitAction)
 
@@ -60,6 +61,7 @@ class Main(QMainWindow):
         self.LoadUDataAction = QAction("Load Unknown Data", self)
         self.SaveCPlotAction = QAction("Save Current Plots", self)
         self.SaveCDataAction = QAction("Save Current Data", self)
+
         self.CreaNWorkAction = QAction("Create New Worwflow", self)
         self.CreaNWorkAction.triggered.connect(self.new)
         self.CreaNWorkAction.setShortcut("ctrl+N")
@@ -67,6 +69,10 @@ class Main(QMainWindow):
         self.SaveCWorkAction = QAction("Save Current Workflow", self)
         self.SaveCWorkAction.triggered.connect(self.save)
         self.SaveCWorkAction.setShortcut("ctrl+S")
+
+        self.OpenNWorkAction = QAction("Open A Workflow", self)
+        self.OpenNWorkAction.triggered.connect(self.open)
+        self.OpenNWorkAction.setShortcut("ctrl+O")
 
         self.ExitAction = QAction("Exit", self)
         self.ExitAction.triggered.connect(self.exit)
@@ -107,8 +113,12 @@ class Main(QMainWindow):
         #TODO save the current window's data into a save file
         pass
 
+    def open(self):
+        #TODO open file dialog
+        self.filename = QFileDialog.getOpenFileName(self, "Open a Workflow File", '.', "(*.wrf)")
+
     def exit(self):
-        #TODO close the program when this function activates
+        #TODO close the current window
         self.close()
 
     def InitUi(self):
