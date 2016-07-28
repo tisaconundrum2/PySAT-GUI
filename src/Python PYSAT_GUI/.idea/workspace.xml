@@ -24,9 +24,11 @@
       <file leaf-file-name="pysat_main_00001.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/recycle.bin/pysat_main_00001.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="565">
-              <caret line="238" column="38" selection-start-line="238" selection-start-column="38" selection-end-line="238" selection-end-column="38" />
-              <folding />
+            <state relative-caret-position="196">
+              <caret line="35" column="69" selection-start-line="35" selection-start-column="69" selection-end-line="35" selection-end-column="69" />
+              <folding>
+                <element signature="e#258#289#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -183,7 +185,7 @@
       <recent name="C:\Users\nicholas\Documents\GitHub\PySAT\src\Python PYSAT_GUI\recycle.bin" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.pysat_main">
+  <component name="RunManager" selected="Python.pysat_main_00001">
     <configuration default="false" name="pysat_main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -248,6 +250,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Python PYSAT_GUI" />
       <option name="SCRIPT_NAME" value="C:\Users\nicholas\Documents\GitHub\PySAT\src\Python PYSAT_GUI\recycle.bin\DynamicAdd.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="pysat_main_00001" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/recycle.bin" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Python PYSAT_GUI" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/recycle.bin/pysat_main_00001.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -386,18 +405,20 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <list size="4">
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.pysat_main" />
       <item index="1" class="java.lang.String" itemvalue="Python.untitled" />
       <item index="2" class="java.lang.String" itemvalue="Python.startUI" />
       <item index="3" class="java.lang.String" itemvalue="Python.DynamicAdd" />
+      <item index="4" class="java.lang.String" itemvalue="Python.pysat_main_00001" />
     </list>
     <recent_temporary>
-      <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="Python.pysat_main" />
-        <item index="1" class="java.lang.String" itemvalue="Python.startUI" />
-        <item index="2" class="java.lang.String" itemvalue="Python.DynamicAdd" />
-        <item index="3" class="java.lang.String" itemvalue="Python.untitled" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Python.pysat_main_00001" />
+        <item index="1" class="java.lang.String" itemvalue="Python.pysat_main" />
+        <item index="2" class="java.lang.String" itemvalue="Python.startUI" />
+        <item index="3" class="java.lang.String" itemvalue="Python.DynamicAdd" />
+        <item index="4" class="java.lang.String" itemvalue="Python.untitled" />
       </list>
     </recent_temporary>
   </component>
@@ -426,7 +447,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32869378" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32869378" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -625,16 +646,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pysat_main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="30" column="44" selection-start-line="30" selection-start-column="44" selection-end-line="30" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../New PYSAT_Gui/mainwindow_setup.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -651,11 +662,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/recycle.bin/startUI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="14" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pysat_main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2104">
+          <caret line="3" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/recycle.bin/pysat_main_00001.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="565">
-          <caret line="238" column="38" selection-start-line="238" selection-start-column="38" selection-end-line="238" selection-end-column="38" />
-          <folding />
+        <state relative-caret-position="196">
+          <caret line="35" column="69" selection-start-line="35" selection-start-column="69" selection-end-line="35" selection-end-column="69" />
+          <folding>
+            <element signature="e#258#289#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

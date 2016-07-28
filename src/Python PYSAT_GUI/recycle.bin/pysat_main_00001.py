@@ -7,6 +7,8 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
+from PyQt4.QtGui import QMainWindow
+import sys
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -237,3 +239,126 @@ class Ui_MainWindow(object):
         self.menuBar.addAction(self.menuHelp.menuAction())
 
         self.retranslateUi(MainWindow)
+
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def retranslateUi(self, MainWindow):
+        MainWindow.setWindowTitle(_translate("MainWindow", "PYSAT", None))
+
+        self.menuFile.setTitle(_translate("MainWindow", "File", None))
+        self.menuPreprocessing.setTitle(_translate("MainWindow", "Preprocessing", None))
+        self.menuBaseline_Removal.setTitle(_translate("MainWindow", "Baseline Removal", None))
+        self.menuCalibration_Transfer.setTitle(_translate("MainWindow", "Calibration Transfer", None))
+        self.menuVisualization.setTitle(_translate("MainWindow", "Visualization", None))
+        self.menuClustering.setTitle(_translate("MainWindow", "Clustering", None))
+        self.menuRegression.setTitle(_translate("MainWindow", "Regression", None))
+        self.menuHelp.setTitle(_translate("MainWindow", "Help", None))
+        self.actionLoad_Refence_Data.setText(_translate("MainWindow", "Load Refence Data", None))
+        self.actionLoad_Unknown_Data.setText(_translate("MainWindow", "Load Unknown Data", None))
+        self.actionSave_Current_Workflow.setText(_translate("MainWindow", "Save Current Workflow", None))
+        self.actionSave_Current_Plots.setText(_translate("MainWindow", "Save Current Plots", None))
+        self.actionSave_Current_Data.setText(_translate("MainWindow", "Save Current Data", None))
+        self.actionCreate_New_Workflow.setText(_translate("MainWindow", "Create New Workflow", None))
+        self.actionNoise_Reduction.setText(_translate("MainWindow", "Noise Reduction", None))
+        self.actionApply_Mask.setText(_translate("MainWindow", "Apply Mask", None))
+        self.actionInterpolate.setText(_translate("MainWindow", "Interpolate", None))
+        self.actionInstrument_Response.setText(_translate("MainWindow", "Instrument Response", None))
+        self.actionALS.setText(_translate("MainWindow", "ALS", None))
+        self.actionDietrich.setText(_translate("MainWindow", "Dietrich", None))
+        self.actionPolyFit.setText(_translate("MainWindow", "PolyFit", None))
+        self.actionAirPLS.setText(_translate("MainWindow", "AirPLS", None))
+        self.actionFABC.setText(_translate("MainWindow", "FABC", None))
+        self.actionKK.setText(_translate("MainWindow", "KK", None))
+        self.actionMario.setText(_translate("MainWindow", "Mario", None))
+        self.actionMedian.setText(_translate("MainWindow", "Median", None))
+        self.actionRubberband.setText(_translate("MainWindow", "Rubberband", None))
+        self.actionUndecimated_Wavelet.setText(_translate("MainWindow", "Undecimated Wavelet", None))
+        self.actionRatio.setText(_translate("MainWindow", "Ratio", None))
+        self.actionTommy_s_Methgod.setText(_translate("MainWindow", "Tommy\'s Method", None))
+        self.actionPiecewise_Direct_Standardization.setText(_translate("MainWindow", "Piecewise Direct Standardization", None))
+        self.actionPCA.setText(_translate("MainWindow", "PCA", None))
+        self.actionICA.setText(_translate("MainWindow", "ICA", None))
+        self.actionK_Means.setText(_translate("MainWindow", "K-Means", None))
+        self.actionHierarchical.setText(_translate("MainWindow", "Hierarchical", None))
+        self.actionOthers.setText(_translate("MainWindow", "Others...", None))
+        self.actionOthers_2.setText(_translate("MainWindow", "Others...", None))
+        self.actionOthers_3.setText(_translate("MainWindow", "Others...", None))
+        self.actionPLS.setText(_translate("MainWindow", "PLS", None))
+        self.actionSM_PLS.setText(_translate("MainWindow", "SM-PLS", None))
+        self.actionICA_Regression.setText(_translate("MainWindow", "ICA Regression", None))
+        self.actionGaussian_Process.setText(_translate("MainWindow", "Gaussian Process", None))
+        self.actionMLP.setText(_translate("MainWindow", "MLP", None))
+        self.actionSVM.setText(_translate("MainWindow", "SVM", None))
+        self.actionOthers_4.setText(_translate("MainWindow", "Others...", None))
+        self.actionOthers_5.setText(_translate("MainWindow", "Others...", None))
+        self.actionIndex.setText(_translate("MainWindow", "Index", None))
+        self.actionContent_2.setText(_translate("MainWindow", "Content", None))
+        self.actionAbout.setText(_translate("MainWindow", "About...", None))
+        self.actionAbout_QtCreator.setText(_translate("MainWindow", "About QtCreator...", None))
+        self.actionExit.setText(_translate("MainWindow", "Exit", None))
+        self.actionNormalization.setText(_translate("MainWindow", "Normalization", None))
+
+
+
+    def CrossValidation(self,MainWindow):
+        font = QtGui.QFont()
+        self.CrossValidation = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
+        self.CrossValidation.setFont(font)
+        self.CrossValidation.setObjectName(_fromUtf8("CrossValidation"))
+        self.CrossValid = QtGui.QVBoxLayout(self.CrossValidation)
+        self.CrossValid.setMargin(11)
+        self.CrossValid.setSpacing(6)
+
+        self.CrossValid.setObjectName(_fromUtf8("CrossValid"))
+
+        self.horizontalLayout_4 = QtGui.QHBoxLayout()
+        self.horizontalLayout_4.setMargin(11)
+        self.horizontalLayout_4.setSpacing(6)
+        self.horizontalLayout_4.setObjectName(_fromUtf8("horizontalLayout_4"))
+
+        self.verticalLayout_11 = QtGui.QVBoxLayout()
+        self.verticalLayout_11.setMargin(11)
+        self.verticalLayout_11.setSpacing(6)
+        self.verticalLayout_11.setObjectName(_fromUtf8("verticalLayout_11"))
+        self.label_14 = QtGui.QLabel(self.CrossValidation)
+        self.label_14.setObjectName(_fromUtf8("label_14"))
+        self.verticalLayout_11.addWidget(self.label_14)
+
+        self.label_15 = QtGui.QLabel(self.CrossValidation)
+        self.label_15.setObjectName(_fromUtf8("label_15"))
+        self.verticalLayout_11.addWidget(self.label_15)
+
+        self.horizontalLayout_4.addLayout(self.verticalLayout_11)
+        self.verticalLayout_12 = QtGui.QVBoxLayout()
+        self.verticalLayout_12.setMargin(11)
+        self.verticalLayout_12.setSpacing(6)
+        self.verticalLayout_12.setObjectName(_fromUtf8("verticalLayout_12"))
+        self.elementNameLine = QtGui.QLineEdit(self.CrossValidation)
+
+        self.elementNameLine.setObjectName(_fromUtf8("elementNameLine"))
+        self.verticalLayout_12.addWidget(self.elementNameLine)
+        self.nfolds_test = QtGui.QSpinBox(self.CrossValidation)
+
+        self.nfolds_test.setObjectName(_fromUtf8("nfolds_test"))
+
+        self.verticalLayout_12.addWidget(self.nfolds_test)
+        self.horizontalLayout_4.addLayout(self.verticalLayout_12)
+        self.CrossValid.addLayout(self.horizontalLayout_4)
+
+        self.verticalLayout_8.addWidget(self.CrossValidation)
+        self.CrossValidation.setTitle(_translate("MainWindow", "Setup", None))
+
+        self.label_14.setText(_translate("MainWindow", "Element Name", None))
+        self.label_15.setText(_translate("MainWindow", "nfolds_test", None))
+
+
+class main(QtGui.QMainWindow, Ui_MainWindow):
+    def __init__(self):
+        QMainWindow.__init__(self)
+        self.setupUi(self)
+        self.CrossValidation(self)
+
+app = QtGui.QApplication(sys.argv)
+window = main()
+window.show()
+app.exec_()
