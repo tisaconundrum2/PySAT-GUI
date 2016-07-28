@@ -24,8 +24,8 @@
       <file leaf-file-name="pysat_main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pysat_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-918">
-              <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
+            <state relative-caret-position="34">
+              <caret line="4" column="85" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="85" />
               <folding />
             </state>
           </provider>
@@ -48,11 +48,11 @@
         <option value="$PROJECT_DIR$/DynamicAdd.py" />
         <option value="$PROJECT_DIR$/mainwindow.py" />
         <option value="$PROJECT_DIR$/startUI.py" />
-        <option value="$PROJECT_DIR$/pysat_main.py" />
         <option value="$USER_HOME$/PycharmProjects/Udemy/src/mainwindow.py" />
         <option value="$PROJECT_DIR$/../New PYSAT_Gui/mainwindow.py" />
         <option value="$PROJECT_DIR$/recycle.bin/pysat_main_00001.py" />
         <option value="$PROJECT_DIR$/../New PYSAT_Gui/mainwindow_compranges.py" />
+        <option value="$PROJECT_DIR$/pysat_main.py" />
       </list>
     </option>
   </component>
@@ -635,8 +635,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pysat_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-918">
-          <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
+        <state relative-caret-position="34">
+          <caret line="4" column="85" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="85" />
           <folding />
         </state>
       </provider>

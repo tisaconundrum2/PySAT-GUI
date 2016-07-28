@@ -2,6 +2,7 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 import sys, time
 
+#Before Hell Breaks loose! This is where we'll revert to in case of complete disaster.
 
 class Main(QMainWindow):
     def __init__(self, parent=None):
