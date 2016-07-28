@@ -268,10 +268,6 @@ class SetUp(object):
         self.menuBar.addAction(self.menuRegression.menuAction())
         self.menuBar.addAction(self.menuHelp.menuAction())
 
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
-    def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "PYSAT", None))
         self.CrossValidation.setTitle(_translate("MainWindow", "Setup", None))
         self.label_14.setText(_translate("MainWindow", "Element Name", None))
@@ -328,4 +324,6 @@ class SetUp(object):
         self.actionAbout_QtCreator.setText(_translate("MainWindow", "About QtCreator...", None))
         self.actionExit.setText(_translate("MainWindow", "Exit", None))
         self.actionNormalization.setText(_translate("MainWindow", "Normalization", None))
+
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 

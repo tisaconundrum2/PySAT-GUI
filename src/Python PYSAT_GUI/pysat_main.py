@@ -11,5 +11,6 @@ class main(QMainWindow, CompRanges):
 
 app = QApplication(sys.argv)
 window = main()
+CompRanges.setupUi(QMainWindow, Comp)
 window.show()
 app.exec_()

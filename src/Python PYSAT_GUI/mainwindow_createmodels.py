@@ -330,14 +330,6 @@ class CreateModels(object):
         self.menuBar.addAction(self.menuRegression.menuAction())
         self.menuBar.addAction(self.menuHelp.menuAction())
 
-        self.retranslateUi(MainWindow)
-        QtCore.QObject.connect(self.create_model_spin_2, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_79.setNum)
-        QtCore.QObject.connect(self.create_model_spin, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_77.setNum)
-        QtCore.QObject.connect(self.create_model_spin_3, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_84.setNum)
-        QtCore.QObject.connect(self.create_model_spin_4, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_89.setNum)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
-    def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "PYSAT", None))
         self.CreateModels.setTitle(_translate("MainWindow", "Create Models", None))
         self.label_70.setText(_translate("MainWindow", "Value 1", None))
@@ -408,4 +400,11 @@ class CreateModels(object):
         self.actionAbout_QtCreator.setText(_translate("MainWindow", "About QtCreator...", None))
         self.actionExit.setText(_translate("MainWindow", "Exit", None))
         self.actionNormalization.setText(_translate("MainWindow", "Normalization", None))
+
+
+        QtCore.QObject.connect(self.create_model_spin_2, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_79.setNum)
+        QtCore.QObject.connect(self.create_model_spin, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_77.setNum)
+        QtCore.QObject.connect(self.create_model_spin_3, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_84.setNum)
+        QtCore.QObject.connect(self.create_model_spin_4, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_89.setNum)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 

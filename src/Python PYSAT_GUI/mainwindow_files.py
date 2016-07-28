@@ -316,10 +316,6 @@ class Files(object):
         self.menuBar.addAction(self.menuRegression.menuAction())
         self.menuBar.addAction(self.menuHelp.menuAction())
 
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
-    def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "PYSAT", None))
         self.Files.setTitle(_translate("MainWindow", "Files", None))
         self.label_3.setText(_translate("MainWindow", "Maskfile", None))
@@ -389,4 +385,7 @@ class Files(object):
         self.actionAbout_QtCreator.setText(_translate("MainWindow", "About QtCreator...", None))
         self.actionExit.setText(_translate("MainWindow", "Exit", None))
         self.actionNormalization.setText(_translate("MainWindow", "Normalization", None))
+
+
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 

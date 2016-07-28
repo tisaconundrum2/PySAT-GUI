@@ -448,18 +448,6 @@ class CompRanges(object):
         self.menuBar.addAction(self.menuRegression.menuAction())
         self.menuBar.addAction(self.menuHelp.menuAction())
 
-        self.retranslateUi(MainWindow)
-        QtCore.QObject.connect(self.comp_range, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_21.setNum)
-        QtCore.QObject.connect(self.comp_range_2, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_23.setNum)
-        QtCore.QObject.connect(self.comp_range_3, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_29.setNum)
-        QtCore.QObject.connect(self.comp_range_4, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_26.setNum)
-        QtCore.QObject.connect(self.comp_range_5, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_30.setNum)
-        QtCore.QObject.connect(self.comp_range_6, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_34.setNum)
-        QtCore.QObject.connect(self.comp_range_7, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_36.setNum)
-        QtCore.QObject.connect(self.comp_range_8, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_35.setNum)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
-    def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "PYSAT", None))
         self.CompRanges.setTitle(_translate("MainWindow", "Composition Ranges", None))
         self.label_80.setText(_translate("MainWindow", "Value 1", None))
@@ -539,3 +527,13 @@ class CompRanges(object):
         self.actionAbout_QtCreator.setText(_translate("MainWindow", "About QtCreator...", None))
         self.actionExit.setText(_translate("MainWindow", "Exit", None))
         self.actionNormalization.setText(_translate("MainWindow", "Normalization", None))
+
+        QtCore.QObject.connect(self.comp_range, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_21.setNum)
+        QtCore.QObject.connect(self.comp_range_2, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_23.setNum)
+        QtCore.QObject.connect(self.comp_range_3, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_29.setNum)
+        QtCore.QObject.connect(self.comp_range_4, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_26.setNum)
+        QtCore.QObject.connect(self.comp_range_5, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_30.setNum)
+        QtCore.QObject.connect(self.comp_range_6, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_34.setNum)
+        QtCore.QObject.connect(self.comp_range_7, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_36.setNum)
+        QtCore.QObject.connect(self.comp_range_8, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_35.setNum)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
