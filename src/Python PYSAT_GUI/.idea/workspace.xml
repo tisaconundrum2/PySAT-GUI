@@ -21,63 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="pysat_main_00001.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/recycle.bin/pysat_main_00001.py">
+      <file leaf-file-name="pysat_main.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pysat_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="35" column="69" selection-start-line="35" selection-start-column="69" selection-end-line="35" selection-end-column="69" />
-              <folding>
-                <element signature="e#258#289#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mainwindow_setup.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../New PYSAT_Gui/mainwindow_setup.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="1" selection-start-line="0" selection-start-column="0" selection-end-line="331" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mainwindow_compranges.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../New PYSAT_Gui/mainwindow_compranges.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="25" selection-start-line="0" selection-start-column="0" selection-end-line="541" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mainwindow_createmodels.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../New PYSAT_Gui/mainwindow_createmodels.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="367" column="56" selection-start-line="0" selection-start-column="0" selection-end-line="411" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mainwindow_normalization.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../New PYSAT_Gui/mainwindow_normalization.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-289">
-              <caret line="25" column="34" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mainwindow_files.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../New PYSAT_Gui/mainwindow_files.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-612">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="-918">
+              <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -104,6 +52,7 @@
         <option value="$USER_HOME$/PycharmProjects/Udemy/src/mainwindow.py" />
         <option value="$PROJECT_DIR$/../New PYSAT_Gui/mainwindow.py" />
         <option value="$PROJECT_DIR$/recycle.bin/pysat_main_00001.py" />
+        <option value="$PROJECT_DIR$/../New PYSAT_Gui/mainwindow_compranges.py" />
       </list>
     </option>
   </component>
@@ -185,7 +134,7 @@
       <recent name="C:\Users\nicholas\Documents\GitHub\PySAT\src\Python PYSAT_GUI\recycle.bin" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.pysat_main_00001">
+  <component name="RunManager" selected="Python.mainwindow_compranges">
     <configuration default="false" name="pysat_main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -199,23 +148,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Python PYSAT_GUI" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pysat_main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="untitled" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$USER_HOME$/PycharmProjects/Udemy/src" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Python PYSAT_GUI" />
-      <option name="SCRIPT_NAME" value="$USER_HOME$/PycharmProjects/Udemy/src/untitled.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -267,6 +199,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Python PYSAT_GUI" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/recycle.bin/pysat_main_00001.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="mainwindow_compranges" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../New PYSAT_Gui" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Python PYSAT_GUI" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../New PYSAT_Gui/mainwindow_compranges.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -407,18 +356,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.pysat_main" />
-      <item index="1" class="java.lang.String" itemvalue="Python.untitled" />
-      <item index="2" class="java.lang.String" itemvalue="Python.startUI" />
-      <item index="3" class="java.lang.String" itemvalue="Python.DynamicAdd" />
-      <item index="4" class="java.lang.String" itemvalue="Python.pysat_main_00001" />
+      <item index="1" class="java.lang.String" itemvalue="Python.startUI" />
+      <item index="2" class="java.lang.String" itemvalue="Python.DynamicAdd" />
+      <item index="3" class="java.lang.String" itemvalue="Python.pysat_main_00001" />
+      <item index="4" class="java.lang.String" itemvalue="Python.mainwindow_compranges" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.pysat_main_00001" />
-        <item index="1" class="java.lang.String" itemvalue="Python.pysat_main" />
-        <item index="2" class="java.lang.String" itemvalue="Python.startUI" />
-        <item index="3" class="java.lang.String" itemvalue="Python.DynamicAdd" />
-        <item index="4" class="java.lang.String" itemvalue="Python.untitled" />
+        <item index="0" class="java.lang.String" itemvalue="Python.mainwindow_compranges" />
+        <item index="1" class="java.lang.String" itemvalue="Python.pysat_main_00001" />
+        <item index="2" class="java.lang.String" itemvalue="Python.pysat_main" />
+        <item index="3" class="java.lang.String" itemvalue="Python.startUI" />
+        <item index="4" class="java.lang.String" itemvalue="Python.DynamicAdd" />
       </list>
     </recent_temporary>
   </component>
@@ -447,7 +396,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32869378" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32869378" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -519,7 +468,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
+            <element signature="e#0#25#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -646,22 +595,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../New PYSAT_Gui/mainwindow_setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="1" selection-start-line="0" selection-start-column="0" selection-end-line="331" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../New PYSAT_Gui/mainwindow_compranges.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="25" selection-start-line="0" selection-start-column="0" selection-end-line="541" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/recycle.bin/startUI.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -672,23 +605,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pysat_main.py">
+    <entry file="file://$PROJECT_DIR$/recycle.bin/pysat_main_00001.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2104">
-          <caret line="3" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        <state relative-caret-position="145">
+          <caret line="342" column="21" selection-start-line="342" selection-start-column="21" selection-end-line="342" selection-end-column="21" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
+            <element signature="e#258#289#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/recycle.bin/pysat_main_00001.py">
+    <entry file="file://$PROJECT_DIR$/../New PYSAT_Gui/mainwindow_compranges.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="35" column="69" selection-start-line="35" selection-start-column="69" selection-end-line="35" selection-end-column="69" />
+        <state relative-caret-position="8993">
+          <caret line="529" column="66" selection-start-line="529" selection-start-column="66" selection-end-line="529" selection-end-column="66" />
           <folding>
             <element signature="e#258#289#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../New PYSAT_Gui/mainwindow_setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="310" column="69" selection-start-line="310" selection-start-column="69" selection-end-line="310" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pysat_main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-918">
+          <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
+          <folding />
         </state>
       </provider>
     </entry>

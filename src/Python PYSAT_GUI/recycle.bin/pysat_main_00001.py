@@ -238,11 +238,7 @@ class Ui_MainWindow(object):
         self.menuBar.addAction(self.menuRegression.menuAction())
         self.menuBar.addAction(self.menuHelp.menuAction())
 
-        self.retranslateUi(MainWindow)
 
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
-    def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "PYSAT", None))
 
         self.menuFile.setTitle(_translate("MainWindow", "File", None))
@@ -298,10 +294,11 @@ class Ui_MainWindow(object):
         self.actionExit.setText(_translate("MainWindow", "Exit", None))
         self.actionNormalization.setText(_translate("MainWindow", "Normalization", None))
 
+        self.CrossValidation(MainWindow)
 
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def CrossValidation(self,MainWindow):
-        font = QtGui.QFont()
         self.CrossValidation = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
         self.CrossValidation.setFont(font)
         self.CrossValidation.setObjectName(_fromUtf8("CrossValidation"))
@@ -352,11 +349,12 @@ class Ui_MainWindow(object):
         self.label_15.setText(_translate("MainWindow", "nfolds_test", None))
 
 
+
+
 class main(QtGui.QMainWindow, Ui_MainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
         self.setupUi(self)
-        self.CrossValidation(self)
 
 app = QtGui.QApplication(sys.argv)
 window = main()
