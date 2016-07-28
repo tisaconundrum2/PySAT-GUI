@@ -7,19 +7,13 @@ from mainwindow_files import Files
 from mainwindow_normalization import Normalization
 from mainwindow_setup import  SetUp
 
-class createModel(QMainWindow, CompRanges):
+class initUI(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
         self.setupUi(self)
 
-class files(QMainWindow, Files):
-    def __init__(self):
-        QMainWindow.__init__(self)
-        self.setupUi(self)
 
 app = QApplication(sys.argv)
-c = createModel()
-f = files()
-f.show()
+c = initUI()
 c.show()
 app.exec_()
