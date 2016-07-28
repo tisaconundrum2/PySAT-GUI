@@ -23,7 +23,7 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-class Ui_MainWindow(object):
+class CompRanges(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(581, 841)
@@ -539,13 +539,3 @@ class Ui_MainWindow(object):
         self.actionAbout_QtCreator.setText(_translate("MainWindow", "About QtCreator...", None))
         self.actionExit.setText(_translate("MainWindow", "Exit", None))
         self.actionNormalization.setText(_translate("MainWindow", "Normalization", None))
-
-class main(QtGui.QMainWindow, Ui_MainWindow):
-    def __init__(self):
-        QtGui.QMainWindow.__init__(self)
-        self.setupUi(self)
-
-app = QtGui.QApplication(sys.argv)
-window = main()
-window.show()
-app.exec_()
