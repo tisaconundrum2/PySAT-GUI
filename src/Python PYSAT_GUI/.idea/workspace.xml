@@ -21,11 +21,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="mainwindow_setup.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="pysat_main_00001.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/recycle.bin/pysat_main_00001.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="565">
+              <caret line="238" column="38" selection-start-line="238" selection-start-column="38" selection-end-line="238" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mainwindow_setup.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../New PYSAT_Gui/mainwindow_setup.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="331" selection-end-column="0" />
+            <state relative-caret-position="51">
+              <caret line="3" column="1" selection-start-line="0" selection-start-column="0" selection-end-line="331" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -35,7 +45,7 @@
         <entry file="file://$PROJECT_DIR$/../New PYSAT_Gui/mainwindow_compranges.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
-              <caret line="6" column="31" selection-start-line="0" selection-start-column="0" selection-end-line="541" selection-end-column="0" />
+              <caret line="6" column="25" selection-start-line="0" selection-start-column="0" selection-end-line="541" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -91,6 +101,7 @@
         <option value="$PROJECT_DIR$/pysat_main.py" />
         <option value="$USER_HOME$/PycharmProjects/Udemy/src/mainwindow.py" />
         <option value="$PROJECT_DIR$/../New PYSAT_Gui/mainwindow.py" />
+        <option value="$PROJECT_DIR$/recycle.bin/pysat_main_00001.py" />
       </list>
     </option>
   </component>
@@ -582,27 +593,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pysat_main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../New PYSAT_Gui/mainwindow.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../New PYSAT_Gui/mainwindow_files.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-612">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -616,10 +609,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../New PYSAT_Gui/mainwindow_compranges.py">
+    <entry file="file://$PROJECT_DIR$/../New PYSAT_Gui/mainwindow_files.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="31" selection-start-line="0" selection-start-column="0" selection-end-line="541" selection-end-column="0" />
+        <state relative-caret-position="-612">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -632,10 +625,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/pysat_main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="30" column="44" selection-start-line="30" selection-start-column="44" selection-end-line="30" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../New PYSAT_Gui/mainwindow_setup.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="331" selection-end-column="0" />
+        <state relative-caret-position="51">
+          <caret line="3" column="1" selection-start-line="0" selection-start-column="0" selection-end-line="331" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../New PYSAT_Gui/mainwindow_compranges.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="25" selection-start-line="0" selection-start-column="0" selection-end-line="541" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recycle.bin/pysat_main_00001.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="565">
+          <caret line="238" column="38" selection-start-line="238" selection-start-column="38" selection-end-line="238" selection-end-column="38" />
           <folding />
         </state>
       </provider>
