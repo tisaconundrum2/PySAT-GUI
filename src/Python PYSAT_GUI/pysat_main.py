@@ -1,19 +1,61 @@
+from PyQt4 import QtGui
+
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 import sys, time
-from mainwindow_compranges import CompRanges
-from mainwindow_createmodels import CreateModels
-from mainwindow_files import Files
-from mainwindow_normalization import Normalization
-from mainwindow_setup import SetUp
+from mainwindow_compranges import compranges
+from mainwindow_createmodels import createmodels
+from mainwindow_files import files
+from mainwindow_normalization import normalization
+from mainwindow_setup import setup
+from mainwindow_ import Ui_MainWindow
+from mainwindow_ok import ok
 
-class initUI(QMainWindow):
-    def __init__(self):
-        QMainWindow.__init__(self)
-        self.setupUi(self)
+from qtpy import QtCore
 
 
-app = QApplication(sys.argv)
-c = initUI()
-c.show()
-app.exec_()
+try:
+    _encoding = QtGui.QApplication.UnicodeUTF8
+
+
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+except AttributeError:
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig)
+
+
+
+class Main(QMainWindow, Ui_MainWindow):
+    def __init__(self, parent=None):
+        QMainWindow.__init__(self, parent)
+        self.runningFunctions(self)
+
+    def runningFunctions(self, MainWindow):
+        Ui_MainWindow.setupUi(self, MainWindow)
+        files.setupUi(self, MainWindow)
+        normalization.setupUi(self, MainWindow)
+        setup.setupUi(self, MainWindow)
+        compranges.setupUi(self, MainWindow)
+        createmodels.setupUi(self, MainWindow)
+        ok.setupUi(self, MainWindow)
+
+
+
+def main():
+    app = QApplication(sys.argv)
+
+    splash_pix = QPixmap('splash.png')
+    splash = QSplashScreen(splash_pix, Qt.WindowStaysOnTopHint)
+    splash.setMask(splash_pix.mask())
+    splash.show()
+    app.processEvents()
+    time.sleep(1.3)
+
+    main_window = Main()
+    main_window.show()
+    splash.finish(main_window)
+    app.exec_()
+
+if __name__ == "__main__":
+    main()
