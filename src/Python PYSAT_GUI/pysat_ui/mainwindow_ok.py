@@ -22,8 +22,8 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-class ok(object):
-    def setupUi(self, MainWindow):
+class pysat_ui(object):
+    def ok(self, MainWindow):
         self.OK = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
         self.OK.setObjectName(_fromUtf8("OK"))
         self.ok = QtGui.QHBoxLayout(self.OK)

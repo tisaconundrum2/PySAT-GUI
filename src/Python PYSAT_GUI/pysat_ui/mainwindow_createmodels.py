@@ -22,8 +22,8 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-class createmodels(object):
-    def setupUi(self, MainWindow):
+class pysat_ui(object):
+    def createmodels(self, MainWindow):
         self.CreateModels = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
         font = QtGui.QFont()
         font.setPointSize(10)

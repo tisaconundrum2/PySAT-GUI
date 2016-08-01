@@ -1,24 +1,18 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 import sys, time
-from mainwindow_compranges import compranges
-from mainwindow_createmodels import createmodels
-from mainwindow_files import files
-from mainwindow_normalization import normalization
-from mainwindow_setup import setup
-from mainwindow_ import Ui_MainWindow
-from mainwindow_ok import ok
+from pysat_ui import mainwindow_normalization
 
 
 
 
-
-class Main(QMainWindow, Ui_MainWindow):
+class Main(QMainWindow, pysat_ui.compranges):
     def __init__(self, parent=None):
         QMainWindow.__init__(self, parent)
         self.runningFunctions(self)
 
     def runningFunctions(self, MainWindow):
+        mainwindow_normalization.pysat_ui.normalization(self, MainWindow)
         Ui_MainWindow.setupUi(self, MainWindow)
         files.setupUi(self, MainWindow)
         normalization.setupUi(self, MainWindow)

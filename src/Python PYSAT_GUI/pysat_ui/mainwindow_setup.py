@@ -23,7 +23,7 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 class pysat_ui(object):
-    def setupUi(self, MainWindow):
+    def setup(self, MainWindow):
         self.CrossValidation = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
         font = QtGui.QFont()
         font.setPointSize(10)
