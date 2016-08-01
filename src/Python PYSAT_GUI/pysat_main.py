@@ -5,12 +5,12 @@ from pysat_ui import mainwindow_normalization
 
 
 
-
 class Main(QMainWindow, pysat_ui.compranges):
     def __init__(self, parent=None):
         QMainWindow.__init__(self, parent)
         self.runningFunctions(self)
 
+    numpy.`
     def runningFunctions(self, MainWindow):
         mainwindow_normalization.pysat_ui.normalization(self, MainWindow)
         Ui_MainWindow.setupUi(self, MainWindow)
