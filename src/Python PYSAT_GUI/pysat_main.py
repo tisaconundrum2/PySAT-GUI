@@ -1,30 +1,22 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 import sys, time
-from pysat_ui import compranges
-from pysat_ui import mainframe
-from pysat_ui import files
-from pysat_ui import normalization
-from pysat_ui import setup
-from pysat_ui import createmodels
-from pysat_ui import ok
-import antigravity
-
 
 class Main(QMainWindow):
     def __init__(self, parent=None):
         QMainWindow.__init__(self, parent)
         self.runningFunctions(self)
 
+    # def runningFunctions(self, MainWindow):
+    #     mainframe(self, MainWindow)
+    #     files(self, MainWindow)
+    #     normalization(self, MainWindow)
+    #     setup(self, MainWindow)
+    #     compranges(self, MainWindow)
+    #     createmodels(self, MainWindow)
+    #     ok(self, MainWindow)
     def runningFunctions(self, MainWindow):
-        mainframe(self, MainWindow)
-        files(self, MainWindow)
-        normalization(self, MainWindow)
-        setup(self, MainWindow)
-        compranges(self, MainWindow)
-        createmodels(self, MainWindow)
-        ok(self, MainWindow)
-
+        mainframe.pysat_ui()
 
 
 def main():
