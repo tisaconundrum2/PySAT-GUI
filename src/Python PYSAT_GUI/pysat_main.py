@@ -1,8 +1,14 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 import sys, time
-import pysat_ui
-
+from pysat_ui import compranges
+from pysat_ui import mainframe
+from pysat_ui import files
+from pysat_ui import normalization
+from pysat_ui import setup
+from pysat_ui import createmodels
+from pysat_ui import ok
+import antigravity
 
 
 class Main(QMainWindow):
@@ -11,13 +17,13 @@ class Main(QMainWindow):
         self.runningFunctions(self)
 
     def runningFunctions(self, MainWindow):
-        pysat_ui.mainframe(self, MainWindow)
-        pysat_ui.files(self, MainWindow)
-        pysat_ui.normalization(self, MainWindow)
-        pysat_ui.setup(self, MainWindow)
-        pysat_ui.compranges(self, MainWindow)
-        pysat_ui.createmodels(self, MainWindow)
-        pysat_ui.ok(self, MainWindow)
+        mainframe(self, MainWindow)
+        files(self, MainWindow)
+        normalization(self, MainWindow)
+        setup(self, MainWindow)
+        compranges(self, MainWindow)
+        createmodels(self, MainWindow)
+        ok(self, MainWindow)
 
 
 
