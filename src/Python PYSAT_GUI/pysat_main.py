@@ -1,5 +1,3 @@
-from PyQt4 import QtGui
-
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 import sys, time
@@ -11,18 +9,7 @@ from mainwindow_setup import setup
 from mainwindow_ import Ui_MainWindow
 from mainwindow_ok import ok
 
-from qtpy import QtCore
 
-
-try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
-
-
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
-except AttributeError:
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
 
 
 
