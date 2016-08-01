@@ -1,24 +1,22 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 import sys, time
-from pysat_ui import compranges
-from pysat_ui import setup
+from pysat_ui import *
+
 
 class Main(QMainWindow):
     def __init__(self, parent=None):
         QMainWindow.__init__(self, parent)
         self.runningFunctions(self)
 
-    # def runningFunctions(self, MainWindow):
-    #     mainframe(self, MainWindow)
-    #     files(self, MainWindow)
-    #     normalization(self, MainWindow)
-    #     setup(self, MainWindow)
-    #     compranges(self, MainWindow)
-    #     createmodels(self, MainWindow)
-    #     ok(self, MainWindow)
     def runningFunctions(self, MainWindow):
-        setup(self, MainWindow)
+        pysat_ui.mainframe(self, MainWindow)
+        pysat_ui.files(self, MainWindow)
+        pysat_ui.normalization(self, MainWindow)
+        pysat_ui.setup(self, MainWindow)
+        pysat_ui.compranges(self, MainWindow)
+        pysat_ui.createmodels(self, MainWindow)
+        pysat_ui.ok(self, MainWindow)
 
 def main():
     app = QApplication(sys.argv)
