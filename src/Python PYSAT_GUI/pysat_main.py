@@ -1,6 +1,8 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 import sys, time
+from pysat_ui import compranges
+from pysat_ui import setup
 
 class Main(QMainWindow):
     def __init__(self, parent=None):
@@ -16,8 +18,7 @@ class Main(QMainWindow):
     #     createmodels(self, MainWindow)
     #     ok(self, MainWindow)
     def runningFunctions(self, MainWindow):
-        mainframe.pysat_ui()
-
+        setup(self, MainWindow)
 
 def main():
     app = QApplication(sys.argv)
