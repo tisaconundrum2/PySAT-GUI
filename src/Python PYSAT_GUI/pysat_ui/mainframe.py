@@ -23,7 +23,7 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 class pysat_ui(object):
-    def mainwindow(self, MainWindow):
+    def mainframe(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(600, 900)
         self.centralWidget = QtGui.QWidget(MainWindow)
