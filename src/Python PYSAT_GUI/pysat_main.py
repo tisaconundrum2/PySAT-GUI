@@ -17,6 +17,8 @@ class Main(QMainWindow):
         pysat_ui.compranges(self, MainWindow)
         pysat_ui.createmodels(self, MainWindow)
         pysat_ui.ok(self, MainWindow)
+        pysat_ui.buttonFunctions(self)
+
 
 def main():
     app = QApplication(sys.argv)

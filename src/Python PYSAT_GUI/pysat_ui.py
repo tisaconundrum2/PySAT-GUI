@@ -1,6 +1,13 @@
-__author__ = "Nicholas Finch"
-__license__ = "Share a like"
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'C:\Users\nicholas\Documents\GitHub\PYSAT\src\New PYSAT_Gui\mainwindow.ui'
+#
+# Created by: PyQt4 UI code generator 4.11.4
+#
+# WARNING! All changes made in this file will be lost!
+
 from PyQt4 import QtCore, QtGui
+import button_functionality as bfun
 import sys
 
 try:
@@ -16,6 +23,7 @@ try:
 except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
+
 
 class pysat_ui(object):
     def compranges(self, MainWindow):
@@ -1033,5 +1041,7 @@ class pysat_ui(object):
         self.label_14.setText(_translate("MainWindow", "Element Name", None))
         self.label_15.setText(_translate("MainWindow", "nfolds_test", None))
 
-    def PCA(self, MainWindow):
-        pass
+    def buttonFunctions(self):
+        self.maskFileButton.clicked.connect(lambda: bfun.printObjects(1))
+        self.unknownDataButton.clicked.connect(lambda: bfun.printObjects(2))
+        self.fullDataBaseButton.clicked.connect(lambda: bfun.printObjects(3))
