@@ -510,13 +510,7 @@ class pysat_ui(object):
         self.outPutLocationButton.setText(_translate("MainWindow", "...", None))
         self.pythonButton.setText(_translate("MainWindow", "...", None))
 
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)# -*- coding: utf-8 -*-
 
-        self.maskFileButton.clicked.connect(lambda:       self.on_maskeFile_clicked(self))
-        self.unknownDataButton.clicked.connect(lambda:    self.on_uknownDataButton_clicked(self))
-        self.fullDataBaseButton.clicked.connect(lambda:   self.on_fullDataBaseButton_clicked(self))
-        self.outPutLocationButton.clicked.connect(lambda: self.on_outPutLocationButton_clicked(self))
-        self.pythonButton.clicked.connect(lambda:         self.on_pythonButton_clicked(self))
 
 
     def mainframe(self, MainWindow):
@@ -780,7 +774,6 @@ class pysat_ui(object):
         self.actionAbout_QtCreator.setText(_translate("MainWindow", "About QtCreator...", None))
         self.actionExit.setText(_translate("MainWindow", "Exit", None))
         self.actionNormalization.setText(_translate("MainWindow", "Normalization", None))
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def normalization(self, MainWindow):
         self.Normalization = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -986,7 +979,6 @@ class pysat_ui(object):
         self.norm_label_7.setText(_translate("MainWindow", "Value 7", None))
         self.norm_label_8.setText(_translate("MainWindow", "Value 8", None))
         self.NormValuebutton.setText(_translate("MainWindow", "Add Value", None))
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def ok(self, MainWindow):
         self.OK = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -1006,7 +998,6 @@ class pysat_ui(object):
         self.ok.addWidget(self.okButton)
         self.verticalLayout_8.addWidget(self.OK)
         self.okButton.setText(_translate("MainWindow", "OK", None))
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def setup(self, MainWindow):
         self.CrossValidation = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -1051,9 +1042,17 @@ class pysat_ui(object):
         self.label_15.setText(_translate("MainWindow", "nfolds_test", None))
 
 ####These functions below are private
+
+    def button_functions(self):
+        self.maskFileButton.clicked.connect(lambda: self.on_maskFile_clicked())
+        self.unknownDataButton.clicked.connect(lambda: self.on_uknownDataButton_clicked())
+        self.fullDataBaseButton.clicked.connect(lambda: self.on_fullDataBaseButton_clicked())
+        self.outPutLocationButton.clicked.connect(lambda: self.on_outPutLocationButton_clicked())
+        self.pythonButton.clicked.connect(lambda: self.on_pythonButton_clicked())
+
 ####These are the functions that dictate the interactions in the UI
 
-    def on_maskeFile_clicked(self):
+    def on_maskFile_clicked(self):
         filename = QFileDialog.getOpenFileName(self, "Open Mask File", '.', "(*.csv)")
         self.lineEdit.setText(self, filename)
 
