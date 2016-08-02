@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
-import button_functionality as bfun
+from button_functions import *
 import sys
 
 try:
@@ -26,6 +26,8 @@ except AttributeError:
 
 
 class pysat_ui(object):
+
+####These are the functions that dictate how the UI looks
     def compranges(self, MainWindow):
         self.CompRanges = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
         font = QtGui.QFont()
@@ -509,6 +511,13 @@ class pysat_ui(object):
         self.pythonButton.setText(_translate("MainWindow", "...", None))
 
         QtCore.QMetaObject.connectSlotsByName(MainWindow)# -*- coding: utf-8 -*-
+
+        self.maskFileButton.clicked.connect(lambda:       self.on_maskeFile_clicked(self))
+        self.unknownDataButton.clicked.connect(lambda:    self.on_uknownDataButton_clicked(self))
+        self.fullDataBaseButton.clicked.connect(lambda:   self.on_fullDataBaseButton_clicked(self))
+        self.outPutLocationButton.clicked.connect(lambda: self.on_outPutLocationButton_clicked(self))
+        self.pythonButton.clicked.connect(lambda:         self.on_pythonButton_clicked(self))
+
 
     def mainframe(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
@@ -1041,7 +1050,24 @@ class pysat_ui(object):
         self.label_14.setText(_translate("MainWindow", "Element Name", None))
         self.label_15.setText(_translate("MainWindow", "nfolds_test", None))
 
-    def buttonFunctions(self):
-        self.maskFileButton.clicked.connect(lambda: bfun.printObjects(1))
-        self.unknownDataButton.clicked.connect(lambda: bfun.printObjects(2))
-        self.fullDataBaseButton.clicked.connect(lambda: bfun.printObjects(3))
+####These functions below are private
+####These are the functions that dictate the interactions in the UI
+
+    def on_maskeFile_clicked(self):
+        filename = QFileDialog.getOpenFileName(self, "Open Mask File", '.', "(*.csv)")
+        self.lineEdit.setText(self, filename)
+
+    def on_uknownDataButton_clicked(self):
+        filename = QFileDialog.getOpenFileName(self, "Open Uknown Data File", '.' "(*.csv)")
+        self.lineEdit_2.setText(self, filename)
+
+    def on_fullDataBaseButton_clicked(self):
+        filename = QFileDialog.getOpenFileName(self, "Open Uknown Data File", '.' "(*.csv)")
+        self.lineEdit_2.setText(self, filename)
+
+    def on_outPutLocationButton_clicked(self):
+        filename = QFileDialog.getExistingDirectory(self, "Select Output Directory", '.')
+        self.lineEdit_4.setText(self, filename)
+
+    def on_pythonButton_clicked(self):
+        print("This needs to be removed... ")
