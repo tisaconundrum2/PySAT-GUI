@@ -884,6 +884,10 @@ class Ui_MainWindow(object):
         self.menuBar.addAction(self.menuHelp.menuAction())
 
         self.retranslateUi(MainWindow)
+        QtCore.QObject.connect(self.create_model_spin_2, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_79.setNum)
+        QtCore.QObject.connect(self.create_model_spin, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_77.setNum)
+        QtCore.QObject.connect(self.create_model_spin_3, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_84.setNum)
+        QtCore.QObject.connect(self.create_model_spin_4, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_89.setNum)
         QtCore.QObject.connect(self.comp_range, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_21.setNum)
         QtCore.QObject.connect(self.comp_range_2, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_23.setNum)
         QtCore.QObject.connect(self.comp_range_3, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_29.setNum)
@@ -892,10 +896,6 @@ class Ui_MainWindow(object):
         QtCore.QObject.connect(self.comp_range_6, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_34.setNum)
         QtCore.QObject.connect(self.comp_range_7, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_36.setNum)
         QtCore.QObject.connect(self.comp_range_8, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_35.setNum)
-        QtCore.QObject.connect(self.create_model_spin_2, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_79.setNum)
-        QtCore.QObject.connect(self.create_model_spin, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_77.setNum)
-        QtCore.QObject.connect(self.create_model_spin_3, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_84.setNum)
-        QtCore.QObject.connect(self.create_model_spin_4, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_89.setNum)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
