@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\nicholas\Documents\GitHub\PYSAT\src\New PYSAT_Gui\mainwindow.ui'
+# Form implementation generated from reading ui file 'C:\Users\nicholas\Documents\GitHub\PYSAT\src\New PYSAT_Gui\mainwindow_files.ui'
 #
 # Created by: PyQt4 UI code generator 4.11.4
 #
@@ -91,9 +91,6 @@ class Ui_MainWindow(object):
         self.label_4 = QtGui.QLabel(self.layoutWidget)
         self.label_4.setObjectName(_fromUtf8("label_4"))
         self.verticalLayout_6.addWidget(self.label_4)
-        self.label_5 = QtGui.QLabel(self.layoutWidget)
-        self.label_5.setObjectName(_fromUtf8("label_5"))
-        self.verticalLayout_6.addWidget(self.label_5)
         self.horizontalLayout.addLayout(self.verticalLayout_6)
         self.verticalLayout_5 = QtGui.QVBoxLayout()
         self.verticalLayout_5.setMargin(11)
@@ -115,10 +112,6 @@ class Ui_MainWindow(object):
         self.lineEdit_4.setReadOnly(True)
         self.lineEdit_4.setObjectName(_fromUtf8("lineEdit_4"))
         self.verticalLayout_5.addWidget(self.lineEdit_4)
-        self.lineEdit_6 = QtGui.QLineEdit(self.layoutWidget)
-        self.lineEdit_6.setReadOnly(True)
-        self.lineEdit_6.setObjectName(_fromUtf8("lineEdit_6"))
-        self.verticalLayout_5.addWidget(self.lineEdit_6)
         self.horizontalLayout.addLayout(self.verticalLayout_5)
         self.verticalLayout = QtGui.QVBoxLayout()
         self.verticalLayout.setMargin(11)
@@ -136,9 +129,6 @@ class Ui_MainWindow(object):
         self.outPutLocationButton = QtGui.QToolButton(self.layoutWidget)
         self.outPutLocationButton.setObjectName(_fromUtf8("outPutLocationButton"))
         self.verticalLayout.addWidget(self.outPutLocationButton)
-        self.pythonButton = QtGui.QToolButton(self.layoutWidget)
-        self.pythonButton.setObjectName(_fromUtf8("pythonButton"))
-        self.verticalLayout.addWidget(self.pythonButton)
         self.horizontalLayout.addLayout(self.verticalLayout)
         self.files.addWidget(self.splitter_2)
         self.verticalLayout_8.addWidget(self.Files)
@@ -326,17 +316,14 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "Unknown Data", None))
         self.label_2.setText(_translate("MainWindow", "Full Database", None))
         self.label_4.setText(_translate("MainWindow", "Output Location", None))
-        self.label_5.setText(_translate("MainWindow", "Python exe Location", None))
         self.lineEdit.setText(_translate("MainWindow", "*.csv", None))
         self.lineEdit_2.setText(_translate("MainWindow", "*.csv", None))
         self.lineEdit_3.setText(_translate("MainWindow", "*.csv", None))
         self.lineEdit_4.setText(_translate("MainWindow", "*/*", None))
-        self.lineEdit_6.setText(_translate("MainWindow", "*python.exe", None))
         self.maskFileButton.setText(_translate("MainWindow", "...", None))
         self.unknownDataButton.setText(_translate("MainWindow", "...", None))
         self.fullDataBaseButton.setText(_translate("MainWindow", "...", None))
         self.outPutLocationButton.setText(_translate("MainWindow", "...", None))
-        self.pythonButton.setText(_translate("MainWindow", "...", None))
         self.menuFile.setTitle(_translate("MainWindow", "File", None))
         self.menuPreprocessing.setTitle(_translate("MainWindow", "Preprocessing", None))
         self.menuBaseline_Removal.setTitle(_translate("MainWindow", "Baseline Removal", None))

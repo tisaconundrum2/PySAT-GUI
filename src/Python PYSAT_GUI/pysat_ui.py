@@ -7,8 +7,10 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
-from button_functions import *
+from PyQt4.QtGui import QFileDialog
+import button_functions as bfun
 import sys
+
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -27,7 +29,6 @@ except AttributeError:
 
 class pysat_ui(object):
 
-####These are the functions that dictate how the UI looks
     def compranges(self, MainWindow):
         self.CompRanges = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
         font = QtGui.QFont()
@@ -441,9 +442,6 @@ class pysat_ui(object):
         self.label_4 = QtGui.QLabel(self.layoutWidget)
         self.label_4.setObjectName(_fromUtf8("label_4"))
         self.verticalLayout_6.addWidget(self.label_4)
-        self.label_5 = QtGui.QLabel(self.layoutWidget)
-        self.label_5.setObjectName(_fromUtf8("label_5"))
-        self.verticalLayout_6.addWidget(self.label_5)
         self.horizontalLayout.addLayout(self.verticalLayout_6)
         self.verticalLayout_5 = QtGui.QVBoxLayout()
         self.verticalLayout_5.setMargin(11)
@@ -465,10 +463,6 @@ class pysat_ui(object):
         self.lineEdit_4.setReadOnly(True)
         self.lineEdit_4.setObjectName(_fromUtf8("lineEdit_4"))
         self.verticalLayout_5.addWidget(self.lineEdit_4)
-        self.lineEdit_6 = QtGui.QLineEdit(self.layoutWidget)
-        self.lineEdit_6.setReadOnly(True)
-        self.lineEdit_6.setObjectName(_fromUtf8("lineEdit_6"))
-        self.verticalLayout_5.addWidget(self.lineEdit_6)
         self.horizontalLayout.addLayout(self.verticalLayout_5)
         self.verticalLayout = QtGui.QVBoxLayout()
         self.verticalLayout.setMargin(11)
@@ -486,32 +480,24 @@ class pysat_ui(object):
         self.outPutLocationButton = QtGui.QToolButton(self.layoutWidget)
         self.outPutLocationButton.setObjectName(_fromUtf8("outPutLocationButton"))
         self.verticalLayout.addWidget(self.outPutLocationButton)
-        self.pythonButton = QtGui.QToolButton(self.layoutWidget)
-        self.pythonButton.setObjectName(_fromUtf8("pythonButton"))
-        self.verticalLayout.addWidget(self.pythonButton)
         self.horizontalLayout.addLayout(self.verticalLayout)
         self.files.addWidget(self.splitter_2)
         self.verticalLayout_8.addWidget(self.Files)
-
         self.Files.setTitle(_translate("MainWindow", "Files", None))
         self.label_3.setText(_translate("MainWindow", "Maskfile", None))
         self.label.setText(_translate("MainWindow", "Unknown Data", None))
         self.label_2.setText(_translate("MainWindow", "Full Database", None))
         self.label_4.setText(_translate("MainWindow", "Output Location", None))
-        self.label_5.setText(_translate("MainWindow", "Python exe Location", None))
         self.lineEdit.setText(_translate("MainWindow", "*.csv", None))
         self.lineEdit_2.setText(_translate("MainWindow", "*.csv", None))
         self.lineEdit_3.setText(_translate("MainWindow", "*.csv", None))
         self.lineEdit_4.setText(_translate("MainWindow", "*/*", None))
-        self.lineEdit_6.setText(_translate("MainWindow", "*python.exe", None))
         self.maskFileButton.setText(_translate("MainWindow", "...", None))
         self.unknownDataButton.setText(_translate("MainWindow", "...", None))
         self.fullDataBaseButton.setText(_translate("MainWindow", "...", None))
         self.outPutLocationButton.setText(_translate("MainWindow", "...", None))
-        self.pythonButton.setText(_translate("MainWindow", "...", None))
 
-
-
+        pysat_ui.file_button_functions(self)
 
     def mainframe(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
@@ -774,6 +760,7 @@ class pysat_ui(object):
         self.actionAbout_QtCreator.setText(_translate("MainWindow", "About QtCreator...", None))
         self.actionExit.setText(_translate("MainWindow", "Exit", None))
         self.actionNormalization.setText(_translate("MainWindow", "Normalization", None))
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def normalization(self, MainWindow):
         self.Normalization = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -979,6 +966,7 @@ class pysat_ui(object):
         self.norm_label_7.setText(_translate("MainWindow", "Value 7", None))
         self.norm_label_8.setText(_translate("MainWindow", "Value 8", None))
         self.NormValuebutton.setText(_translate("MainWindow", "Add Value", None))
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def ok(self, MainWindow):
         self.OK = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -998,6 +986,7 @@ class pysat_ui(object):
         self.ok.addWidget(self.okButton)
         self.verticalLayout_8.addWidget(self.OK)
         self.okButton.setText(_translate("MainWindow", "OK", None))
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def setup(self, MainWindow):
         self.CrossValidation = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -1041,32 +1030,43 @@ class pysat_ui(object):
         self.label_14.setText(_translate("MainWindow", "Element Name", None))
         self.label_15.setText(_translate("MainWindow", "nfolds_test", None))
 
+    def buttonFunctions(self):
+        self.maskFileButton.clicked.connect(lambda: bfun.printObjects(1))
+        self.unknownDataButton.clicked.connect(lambda: bfun.printObjects(2))
+        self.fullDataBaseButton.clicked.connect(lambda: bfun.printObjects(3))
+
+
 ####These functions below are private
-
-    def button_functions(self):
-        self.maskFileButton.clicked.connect(lambda: self.on_maskFile_clicked())
-        self.unknownDataButton.clicked.connect(lambda: self.on_uknownDataButton_clicked())
-        self.fullDataBaseButton.clicked.connect(lambda: self.on_fullDataBaseButton_clicked())
-        self.outPutLocationButton.clicked.connect(lambda: self.on_outPutLocationButton_clicked())
-        self.pythonButton.clicked.connect(lambda: self.on_pythonButton_clicked())
-
-####These are the functions that dictate the interactions in the UI
 
     def on_maskFile_clicked(self):
         filename = QFileDialog.getOpenFileName(self, "Open Mask File", '.', "(*.csv)")
-        self.lineEdit.setText(self, filename)
+        self.lineEdit.setText(filename)
 
     def on_uknownDataButton_clicked(self):
-        filename = QFileDialog.getOpenFileName(self, "Open Uknown Data File", '.' "(*.csv)")
-        self.lineEdit_2.setText(self, filename)
+        filename = QFileDialog.getOpenFileName(self, "Open Uknown Data File", '.', "(*.csv)")
+        self.lineEdit_2.setText(filename)
 
     def on_fullDataBaseButton_clicked(self):
-        filename = QFileDialog.getOpenFileName(self, "Open Uknown Data File", '.' "(*.csv)")
-        self.lineEdit_2.setText(self, filename)
+        filename = QFileDialog.getOpenFileName(self, "Open Uknown Data File", '.', "(*.csv)")
+        self.lineEdit_3.setText(filename)
 
     def on_outPutLocationButton_clicked(self):
         filename = QFileDialog.getExistingDirectory(self, "Select Output Directory", '.')
-        self.lineEdit_4.setText(self, filename)
+        self.lineEdit_4.setText(filename)
 
     def on_pythonButton_clicked(self):
         print("This needs to be removed... ")
+
+
+    def file_button_functions(self):
+        try:
+            self.unknownDataButton.clicked.connect(lambda: pysat_ui.on_uknownDataButton_clicked(self))
+            self.maskFileButton.clicked.connect(lambda: pysat_ui.on_maskFile_clicked(self))
+            self.fullDataBaseButton.clicked.connect(lambda: pysat_ui.on_fullDataBaseButton_clicked(self))
+            self.outPutLocationButton.clicked.connect(lambda: pysat_ui.on_outPutLocationButton_clicked(self))
+        except:
+            pass
+
+
+    def printObjects(self, n):
+        print('Button {0} clicked'.format(n))
