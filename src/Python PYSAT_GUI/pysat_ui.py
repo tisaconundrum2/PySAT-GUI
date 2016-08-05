@@ -25,7 +25,6 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-
 class pysat_ui(object):
 
     def compranges(self, MainWindow):
@@ -488,7 +487,6 @@ class pysat_ui(object):
         self.unknownDataButton.setText(_translate("MainWindow", "...", None))
         self.fullDataBaseButton.setText(_translate("MainWindow", "...", None))
         self.outPutLocationButton.setText(_translate("MainWindow", "...", None))
-        def file_button_functions(self):
 
     def mainframe(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
@@ -1040,19 +1038,24 @@ class pysat_ui(object):
         filename = QFileDialog.getExistingDirectory(self, "Select Output Directory", '.')
         self.lineEdit_4.setText(filename)
 
-    def on_pythonButton_clicked(self):
-        print("This needs to be removed... ")
+    def on_okButton_clicked(self):
+        print(self.lineEdit.text())
+        print(self.lineEdit_2.text())
+        print(self.lineEdit_3.text())
+        print(self.lineEdit_4.text())
 
 
-    def file_button_functions(self):
-        try:
-            self.unknownDataButton.clicked.connect(lambda: pysat_ui.on_uknownDataButton_clicked(self))
-            self.maskFileButton.clicked.connect(lambda: pysat_ui.on_maskFile_clicked(self))
-            self.fullDataBaseButton.clicked.connect(lambda: pysat_ui.on_fullDataBaseButton_clicked(self))
-            self.outPutLocationButton.clicked.connect(lambda: pysat_ui.on_outPutLocationButton_clicked(self))
-        except:
-            pass
-
+    def button_functions(self):
+        try_function(self.unknownDataButton.clicked.connect(lambda: pysat_ui.on_uknownDataButton_clicked(self)))
+        try_function(self.maskFileButton.clicked.connect(lambda: pysat_ui.on_maskFile_clicked(self)))
+        try_function(self.outPutLocationButton.clicked.connect(lambda: pysat_ui.on_outPutLocationButton_clicked(self)))
+        try_function(self.okButton.clicked.connect(lambda: pysat_ui.on_okButton_clicked(self)))
 
     def printObjects(self, n):
         print('Button {0} clicked'.format(n))
+
+
+def try_function(e):
+    try:
+    except:
+        pass
