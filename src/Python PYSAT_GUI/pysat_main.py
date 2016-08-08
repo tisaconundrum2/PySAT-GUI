@@ -11,13 +11,12 @@ class Main(QMainWindow):
 
     def runningFunctions(self, MainWindow):
         pysat_ui.mainframe(self, MainWindow)
-        pysat_ui.files(self, MainWindow)
+        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.files(self, MainWindow))
         pysat_ui.normalization(self, MainWindow)
         pysat_ui.setup(self, MainWindow)
         pysat_ui.compranges(self, MainWindow)
         pysat_ui.createmodels(self, MainWindow)
         pysat_ui.ok(self, MainWindow)
-        pysat_ui.button_functions(self)
 
 
 def main():

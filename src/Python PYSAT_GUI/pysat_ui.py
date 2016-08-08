@@ -487,6 +487,15 @@ class pysat_ui(object):
         self.unknownDataButton.setText(_translate("MainWindow", "...", None))
         self.fullDataBaseButton.setText(_translate("MainWindow", "...", None))
         self.outPutLocationButton.setText(_translate("MainWindow", "...", None))
+        try: #try the files button
+            self.maskFileButton.clicked.connect(lambda: pysat_ui.on_maskFile_clicked(self))
+            self.unknownDataButton.clicked.connect(lambda: pysat_ui.on_uknownDataButton_clicked(self))
+            self.fullDataBaseButton.clicked.connect(lambda: pysat_ui.on_fullDataBaseButton_clicked(self))
+            self.outPutLocationButton.clicked.connect(lambda: pysat_ui.on_outPutLocationButton_clicked(self))
+            self.okButton.clicked.connect(lambda: pysat_ui.on_okButton_clicked(self))
+        except:
+            pass
+
 
     def mainframe(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
@@ -958,7 +967,7 @@ class pysat_ui(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def ok(self, MainWindow):
-        self.OK = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
+        self.OK = QtGui.QGroupBox(self.centralWidget)
         self.OK.setObjectName(_fromUtf8("OK"))
         self.ok = QtGui.QHBoxLayout(self.OK)
         self.ok.setMargin(11)
@@ -973,9 +982,8 @@ class pysat_ui(object):
         self.okButton.setMouseTracking(False)
         self.okButton.setObjectName(_fromUtf8("okButton"))
         self.ok.addWidget(self.okButton)
-        self.verticalLayout_8.addWidget(self.OK)
+        self.verticalLayout_9.addWidget(self.OK)
         self.okButton.setText(_translate("MainWindow", "OK", None))
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def setup(self, MainWindow):
         self.CrossValidation = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -1053,15 +1061,8 @@ class pysat_ui(object):
         print(self.lineEdit_4.text())
 
 
-    def button_functions(self):
-        try: #try the files button
-            self.maskFileButton.clicked.connect(lambda: pysat_ui.on_maskFile_clicked(self))
-            self.unknownDataButton.clicked.connect(lambda: pysat_ui.on_uknownDataButton_clicked(self))
-            self.fullDataBaseButton.clicked.connect(lambda: pysat_ui.on_fullDataBaseButton_clicked(self))
-            self.outPutLocationButton.clicked.connect(lambda: pysat_ui.on_outPutLocationButton_clicked(self))
-            self.okButton.clicked.connect(lambda: pysat_ui.on_okButton_clicked(self))
-        except:
-            pass
 
     def printObjects(self, n):
         print('Button {0} clicked'.format(n))
+
+
