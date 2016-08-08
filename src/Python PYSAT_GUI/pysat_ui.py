@@ -1025,18 +1025,26 @@ class pysat_ui(object):
     def on_maskFile_clicked(self):
         filename = QFileDialog.getOpenFileName(self, "Open Mask File", '.', "(*.csv)")
         self.lineEdit.setText(filename)
+        if self.lineEdit.text() == "":
+            self.lineEdit.setText("*.csv")
 
     def on_uknownDataButton_clicked(self):
         filename = QFileDialog.getOpenFileName(self, "Open Uknown Data File", '.', "(*.csv)")
         self.lineEdit_2.setText(filename)
+        if self.lineEdit_2.text() == "":
+            self.lineEdit_2.setText("*.csv")
 
     def on_fullDataBaseButton_clicked(self):
         filename = QFileDialog.getOpenFileName(self, "Open Uknown Data File", '.', "(*.csv)")
         self.lineEdit_3.setText(filename)
+        if self.lineEdit_3.text() == "":
+            self.lineEdit_3.setText("*.csv")
 
     def on_outPutLocationButton_clicked(self):
         filename = QFileDialog.getExistingDirectory(self, "Select Output Directory", '.')
         self.lineEdit_4.setText(filename)
+        if self.lineEdit_4.text() == "":
+            self.lineEdit_4.setText("*/*")
 
     def on_okButton_clicked(self):
         print(self.lineEdit.text())
@@ -1046,17 +1054,14 @@ class pysat_ui(object):
 
 
     def button_functions(self):
-        try_function(self.unknownDataButton.clicked.connect(lambda: pysat_ui.on_uknownDataButton_clicked(self)))
-        try_function(self.maskFileButton.clicked.connect(lambda: pysat_ui.on_maskFile_clicked(self)))
-        try_function(self.outPutLocationButton.clicked.connect(lambda: pysat_ui.on_outPutLocationButton_clicked(self)))
-        try_function(self.okButton.clicked.connect(lambda: pysat_ui.on_okButton_clicked(self)))
+        try: #try the files button
+            self.maskFileButton.clicked.connect(lambda: pysat_ui.on_maskFile_clicked(self))
+            self.unknownDataButton.clicked.connect(lambda: pysat_ui.on_uknownDataButton_clicked(self))
+            self.fullDataBaseButton.clicked.connect(lambda: pysat_ui.on_fullDataBaseButton_clicked(self))
+            self.outPutLocationButton.clicked.connect(lambda: pysat_ui.on_outPutLocationButton_clicked(self))
+            self.okButton.clicked.connect(lambda: pysat_ui.on_okButton_clicked(self))
+        except:
+            pass
 
     def printObjects(self, n):
         print('Button {0} clicked'.format(n))
-
-
-def try_function(e):
-    try:
-        return e
-    except:
-        pass
