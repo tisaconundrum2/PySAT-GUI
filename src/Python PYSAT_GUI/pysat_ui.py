@@ -1057,5 +1057,6 @@ class pysat_ui(object):
 
 def try_function(e):
     try:
+        return e
     except:
         pass
