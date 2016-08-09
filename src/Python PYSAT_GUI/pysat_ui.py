@@ -1066,3 +1066,7 @@ class pysat_ui(object):
         self.actionCreate_New_Workflow.setShortcut("ctrl+N")
         self.actionLoad_Unknown_Data.setShortcut("ctrl+O")
         self.actionExit.setShortcut("ctrl+Q")
+
+    def exit(self):
+        # TODO close the current window
+        self.close()
