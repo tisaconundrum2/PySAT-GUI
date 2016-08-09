@@ -1064,4 +1064,5 @@ class pysat_ui(object):
 
     def menu_item_shortcuts(self):
         self.actionCreate_New_Workflow.setShortcut("ctrl+N")
-        self.action
+        self.actionLoad_Unknown_Data.setShortcut("ctrl+O")
+        self.actionExit.setShortcut("ctrl+Q")
