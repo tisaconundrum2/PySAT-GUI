@@ -997,7 +997,7 @@ class pysat_ui(object):
         self.verticalLayout_9.addWidget(self.OK)
         self.okButton.setText(_translate("MainWindow", "OK", None))
 
-    def setup(self, MainWindow):
+    def element_name_setup(self, MainWindow):
         self.CrossValidation = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -1085,11 +1085,9 @@ class pysat_ui(object):
         self.actionNormalization.triggered.connect(lambda: pysat_ui.normalization(self, MainWindow))
         self.actionCreate_New_Workflow.triggered.connect(lambda: self.new())
         self.actionExit.triggered.connect(lambda: self.exit())
-
-        ##TODO we need to make functions for these pysat modules
-        # pysat_ui.setup(self, MainWindow)
-        # pysat_ui.compranges(self, MainWindow)
-        # pysat_ui.createmodels(self, MainWindow)
+        self.actionElement_Name_Setup.triggered.connect(lambda: self.element_name_setup(self))
+        self.actionComposition_Ranges.triggered.connect(lambda: pysat_ui.compranges(self, MainWindow))
+        self.actionCreate_Models.triggered.connect(lambda: pysat_ui.createmodels(self, MainWindow))
 
 
 
