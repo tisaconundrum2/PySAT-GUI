@@ -496,7 +496,6 @@ class pysat_ui(object):
         except:
             pass
 
-
     def mainframe(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(600, 900)
@@ -1060,9 +1059,9 @@ class pysat_ui(object):
         print(self.lineEdit_3.text())
         print(self.lineEdit_4.text())
 
-
-
-    def printObjects(self, n):
+    def printObjects(self, n): #can be deleted, for debugging purposes
         print('Button {0} clicked'.format(n))
 
-
+    def menu_item_shortcuts(self):
+        self.actionCreate_New_Workflow.setShortcut("ctrl+N")
+        self.action
