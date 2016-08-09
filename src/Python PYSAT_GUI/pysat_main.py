@@ -11,14 +11,20 @@ class Main(QMainWindow):
 
     def runningFunctions(self, MainWindow):
         pysat_ui.mainframe(self, MainWindow)
-        pysat_ui.files(self, MainWindow)
-        pysat_ui.normalization(self, MainWindow)
-        pysat_ui.element_name_setup(self, MainWindow)
-        pysat_ui.compranges(self, MainWindow)
-        pysat_ui.createmodels(self, MainWindow)
+        pysat_ui.menu_item_shortcuts(self)
+        pysat_ui.menu_item_functions(self, MainWindow)
         pysat_ui.ok(self, MainWindow)
-        pysat_ui.buttonFunctions(self)
 
+
+    def new(self):
+        # TODO create a new window to work in. The old window does not disappear
+        window = Main(self)
+        window.show()
+
+
+    def exit(self):
+        # TODO close the current window
+        self.close()
 
 def main():
     app = QApplication(sys.argv)

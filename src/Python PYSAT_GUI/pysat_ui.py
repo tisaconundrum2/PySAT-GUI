@@ -1085,7 +1085,7 @@ class pysat_ui(object):
         self.actionNormalization.triggered.connect(lambda: pysat_ui.normalization(self, MainWindow))
         self.actionCreate_New_Workflow.triggered.connect(lambda: self.new())
         self.actionExit.triggered.connect(lambda: self.exit())
-        self.actionElement_Name_Setup.triggered.connect(lambda: self.element_name_setup(self))
+        self.actionElement_Name_Setup.triggered.connect(lambda: pysat_ui.element_name_setup(self, MainWindow))
         self.actionComposition_Ranges.triggered.connect(lambda: pysat_ui.compranges(self, MainWindow))
         self.actionCreate_Models.triggered.connect(lambda: pysat_ui.createmodels(self, MainWindow))
 
