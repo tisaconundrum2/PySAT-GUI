@@ -498,7 +498,7 @@ class pysat_ui(object):
 
     def mainframe(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(600, 900)
+        MainWindow.resize(581, 843)
         self.centralWidget = QtGui.QWidget(MainWindow)
         self.centralWidget.setObjectName(_fromUtf8("centralWidget"))
         self.verticalLayout_9 = QtGui.QVBoxLayout(self.centralWidget)
@@ -514,17 +514,17 @@ class pysat_ui(object):
         font.setPointSize(8)
         self.scrollAreaWidgetContents_2.setFont(font)
         self.scrollAreaWidgetContents_2.setStyleSheet(_fromUtf8("QGroupBox {\n"
-"  border: 2px solid gray;\n"
-"  border-radius: 6px;\n"
-"  margin-top: 0.5em;\n"
-"}\n"
-"\n"
-"QGroupBox::title {\n"
-"\n"
-"  padding-top: -14px;\n"
-"  padding-left: 8px;\n"
-"}\n"
-""))
+                                                                "  border: 2px solid gray;\n"
+                                                                "  border-radius: 6px;\n"
+                                                                "  margin-top: 0.5em;\n"
+                                                                "}\n"
+                                                                "\n"
+                                                                "QGroupBox::title {\n"
+                                                                "\n"
+                                                                "  padding-top: -14px;\n"
+                                                                "  padding-left: 8px;\n"
+                                                                "}\n"
+                                                                ""))
         self.scrollAreaWidgetContents_2.setObjectName(_fromUtf8("scrollAreaWidgetContents_2"))
         self.verticalLayout_8 = QtGui.QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_8.setMargin(11)
@@ -647,7 +647,12 @@ class pysat_ui(object):
         self.actionExit.setObjectName(_fromUtf8("actionExit"))
         self.actionNormalization = QtGui.QAction(MainWindow)
         self.actionNormalization.setObjectName(_fromUtf8("actionNormalization"))
-        self.menuFile.addAction(self.actionLoad_Refence_Data)
+        self.actionElement_Name_Setup = QtGui.QAction(MainWindow)
+        self.actionElement_Name_Setup.setObjectName(_fromUtf8("actionElement_Name_Setup"))
+        self.actionComposition_Ranges = QtGui.QAction(MainWindow)
+        self.actionComposition_Ranges.setObjectName(_fromUtf8("actionComposition_Ranges"))
+        self.actionCreate_Models = QtGui.QAction(MainWindow)
+        self.actionCreate_Models.setObjectName(_fromUtf8("actionCreate_Models"))
         self.menuFile.addAction(self.actionLoad_Unknown_Data)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionSave_Current_Plots)
@@ -678,6 +683,10 @@ class pysat_ui(object):
         self.menuPreprocessing.addAction(self.actionInstrument_Response)
         self.menuPreprocessing.addAction(self.menuCalibration_Transfer.menuAction())
         self.menuPreprocessing.addAction(self.menuBaseline_Removal.menuAction())
+        self.menuPreprocessing.addSeparator()
+        self.menuPreprocessing.addAction(self.actionElement_Name_Setup)
+        self.menuPreprocessing.addAction(self.actionComposition_Ranges)
+        self.menuPreprocessing.addAction(self.actionCreate_Models)
         self.menuClustering.addAction(self.actionK_Means)
         self.menuClustering.addAction(self.actionHierarchical)
         self.menuClustering.addAction(self.actionOthers)
@@ -714,7 +723,7 @@ class pysat_ui(object):
         self.menuRegression.setTitle(_translate("MainWindow", "Regression", None))
         self.menuHelp.setTitle(_translate("MainWindow", "Help", None))
         self.actionLoad_Refence_Data.setText(_translate("MainWindow", "Load Refence Data", None))
-        self.actionLoad_Unknown_Data.setText(_translate("MainWindow", "Load Unknown Data", None))
+        self.actionLoad_Unknown_Data.setText(_translate("MainWindow", "Load Data Files", None))
         self.actionSave_Current_Workflow.setText(_translate("MainWindow", "Save Current Workflow", None))
         self.actionSave_Current_Plots.setText(_translate("MainWindow", "Save Current Plots", None))
         self.actionSave_Current_Data.setText(_translate("MainWindow", "Save Current Data", None))
@@ -757,6 +766,10 @@ class pysat_ui(object):
         self.actionAbout_QtCreator.setText(_translate("MainWindow", "About QtCreator...", None))
         self.actionExit.setText(_translate("MainWindow", "Exit", None))
         self.actionNormalization.setText(_translate("MainWindow", "Normalization", None))
+        self.actionElement_Name_Setup.setText(_translate("MainWindow", "Element Name Setup", None))
+        self.actionComposition_Ranges.setText(_translate("MainWindow", "Composition Ranges", None))
+        self.actionCreate_Models.setText(_translate("MainWindow", "Create Models", None))
+
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def normalization(self, MainWindow):
@@ -1074,7 +1087,7 @@ class pysat_ui(object):
         self.actionExit.triggered.connect(lambda: self.exit())
 
         ##TODO we need to make functions for these pysat modules
-        ##TODO create menu items that are require to make these modules appear
+        ##TODO 
         # pysat_ui.setup(self, MainWindow)
         # pysat_ui.compranges(self, MainWindow)
         # pysat_ui.createmodels(self, MainWindow)

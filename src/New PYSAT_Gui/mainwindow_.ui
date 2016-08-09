@@ -67,7 +67,6 @@ QGroupBox::title {
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionLoad_Refence_Data"/>
     <addaction name="actionLoad_Unknown_Data"/>
     <addaction name="separator"/>
     <addaction name="actionSave_Current_Plots"/>
@@ -113,6 +112,10 @@ QGroupBox::title {
     <addaction name="actionInstrument_Response"/>
     <addaction name="menuCalibration_Transfer"/>
     <addaction name="menuBaseline_Removal"/>
+    <addaction name="separator"/>
+    <addaction name="actionElement_Name_Setup"/>
+    <addaction name="actionComposition_Ranges"/>
+    <addaction name="actionCreate_Models"/>
    </widget>
    <widget class="QMenu" name="menuVisualization">
     <property name="title">
@@ -176,7 +179,7 @@ QGroupBox::title {
   </action>
   <action name="actionLoad_Unknown_Data">
    <property name="text">
-    <string>Load Unknown Data</string>
+    <string>Load Data Files</string>
    </property>
   </action>
   <action name="actionSave_Current_Workflow">
@@ -387,6 +390,21 @@ QGroupBox::title {
   <action name="actionNormalization">
    <property name="text">
     <string>Normalization</string>
+   </property>
+  </action>
+  <action name="actionElement_Name_Setup">
+   <property name="text">
+    <string>Element Name Setup</string>
+   </property>
+  </action>
+  <action name="actionComposition_Ranges">
+   <property name="text">
+    <string>Composition Ranges</string>
+   </property>
+  </action>
+  <action name="actionCreate_Models">
+   <property name="text">
+    <string>Create Models</string>
    </property>
   </action>
  </widget>
