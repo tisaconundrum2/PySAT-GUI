@@ -1087,7 +1087,6 @@ class pysat_ui(object):
         self.actionExit.triggered.connect(lambda: self.exit())
 
         ##TODO we need to make functions for these pysat modules
-        ##TODO 
         # pysat_ui.setup(self, MainWindow)
         # pysat_ui.compranges(self, MainWindow)
         # pysat_ui.createmodels(self, MainWindow)

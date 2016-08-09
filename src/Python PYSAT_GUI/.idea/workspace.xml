@@ -90,8 +90,8 @@
           <file leaf-file-name="pysat_ui.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/pysat_ui.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="254">
-                  <caret line="1089" column="15" selection-start-line="1089" selection-start-column="15" selection-end-line="1089" selection-end-column="15" />
+                <state relative-caret-position="356">
+                  <caret line="1091" column="34" selection-start-line="1091" selection-start-column="34" selection-end-line="1091" selection-end-column="34" />
                   <folding>
                     <element signature="e#258#289#0" expanded="true" />
                     <element signature="e#833#14255#0" expanded="false" />
@@ -106,8 +106,8 @@
                     <element signature="e#62662#62869#0" expanded="false" />
                     <element signature="e#62914#63055#0" expanded="false" />
                     <element signature="e#63136#63173#0" expanded="false" />
-                    <element signature="e#64017#64084#0" expanded="false" />
-                    <element signature="e#64114#64235#0" expanded="false" />
+                    <element signature="e#64001#64068#0" expanded="false" />
+                    <element signature="e#64098#64219#0" expanded="false" />
                   </folding>
                 </state>
               </provider>
@@ -814,8 +814,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pysat_ui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="1089" column="15" selection-start-line="1089" selection-start-column="15" selection-end-line="1089" selection-end-column="15" />
+        <state relative-caret-position="356">
+          <caret line="1091" column="34" selection-start-line="1091" selection-start-column="34" selection-end-line="1091" selection-end-column="34" />
           <folding>
             <element signature="e#258#289#0" expanded="true" />
             <element signature="e#833#14255#0" expanded="false" />
@@ -830,8 +830,8 @@
             <element signature="e#62662#62869#0" expanded="false" />
             <element signature="e#62914#63055#0" expanded="false" />
             <element signature="e#63136#63173#0" expanded="false" />
-            <element signature="e#64017#64084#0" expanded="false" />
-            <element signature="e#64114#64235#0" expanded="false" />
+            <element signature="e#64001#64068#0" expanded="false" />
+            <element signature="e#64098#64219#0" expanded="false" />
           </folding>
         </state>
       </provider>
