@@ -1073,6 +1073,14 @@ class pysat_ui(object):
         self.actionCreate_New_Workflow.triggered.connect(lambda: self.new())
         self.actionExit.triggered.connect(lambda: self.exit())
 
+        ##TODO we need to make functions for these pysat modules
+        ##TODO create menu items that are require to make these modules appear
+        # pysat_ui.setup(self, MainWindow)
+        # pysat_ui.compranges(self, MainWindow)
+        # pysat_ui.createmodels(self, MainWindow)
+
+
+
 
     def save(self):
         # TODO save the current window's data into a save file
@@ -1082,6 +1090,3 @@ class pysat_ui(object):
         # TODO open file dialog
         self.filename = QFileDialog.getOpenFileName(self, "Open a Workflow File", '.', "(*.wrf)")
 
-    def exit(self):
-        # TODO close the current window
-        self.close()
