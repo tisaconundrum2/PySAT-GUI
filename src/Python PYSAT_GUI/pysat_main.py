@@ -11,34 +11,17 @@ class Main(QMainWindow):
 
     def runningFunctions(self, MainWindow):
         pysat_ui.mainframe(self, MainWindow)
-        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.files(self, MainWindow))
-        self.actionNormalization.triggered.connect(lambda: pysat_ui.normalization(self, MainWindow))
-        self.actionCreate_New_Workflow.triggered.connect(lambda: self.new())
         # pysat_ui.setup(self, MainWindow)
         # pysat_ui.compranges(self, MainWindow)
         # pysat_ui.createmodels(self, MainWindow)
         pysat_ui.menu_item_shortcuts(self)
+        pysat_ui.menu_item_functions(self, MainWindow)
         pysat_ui.ok(self, MainWindow)
 
     def new(self):
         # TODO create a new window to work in. The old window does not disappear
         window = Main(self)
         window.show()
-
-
-    def save(self):
-        # TODO save the current window's data into a save file
-        pass
-
-
-    def open(self):
-        # TODO open file dialog
-        self.filename = QFileDialog.getOpenFileName(self, "Open a Workflow File", '.', "(*.wrf)")
-
-
-    def exit(self):
-        # TODO close the current window
-        self.close()
 
 
 def main():

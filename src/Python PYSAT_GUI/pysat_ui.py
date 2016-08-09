@@ -1067,6 +1067,21 @@ class pysat_ui(object):
         self.actionLoad_Unknown_Data.setShortcut("ctrl+O")
         self.actionExit.setShortcut("ctrl+Q")
 
+    def menu_item_functions(self, MainWindow):
+        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.files(self, MainWindow))
+        self.actionNormalization.triggered.connect(lambda: pysat_ui.normalization(self, MainWindow))
+        self.actionCreate_New_Workflow.triggered.connect(lambda: self.new())
+        self.actionExit.triggered.connect(lambda: self.exit())
+
+
+    def save(self):
+        # TODO save the current window's data into a save file
+        pass
+
+    def open(self):
+        # TODO open file dialog
+        self.filename = QFileDialog.getOpenFileName(self, "Open a Workflow File", '.', "(*.wrf)")
+
     def exit(self):
         # TODO close the current window
         self.close()
