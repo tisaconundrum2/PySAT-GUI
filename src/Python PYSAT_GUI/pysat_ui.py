@@ -772,7 +772,6 @@ class pysat_ui(object):
 
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-
     ##TODO allow dynamic adding of values to normalization
 
     def std_norm(self, MainWindow):
@@ -884,7 +883,6 @@ class pysat_ui(object):
         self.label_14.setText(_translate("MainWindow", "Element Name", None))
         self.label_15.setText(_translate("MainWindow", "nfolds_test", None))
 
-
 ####These functions below are private
 
     def on_maskFile_clicked(self):
@@ -919,6 +917,8 @@ class pysat_ui(object):
 
     def printObjects(self, n): #can be deleted, for debugging purposes
         print('Button {0} clicked'.format(n))
+
+####These functions allow for interactions of buttons
 
     def menu_item_shortcuts(self):
         self.actionCreate_New_Workflow.setShortcut("ctrl+N")
