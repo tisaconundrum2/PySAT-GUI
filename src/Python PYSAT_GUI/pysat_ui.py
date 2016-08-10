@@ -933,7 +933,7 @@ class pysat_ui(object):
         self.actionElement_Name_Setup.triggered.connect(lambda: pysat_ui.element_name_setup(self, MainWindow))
         self.actionComposition_Ranges.triggered.connect(lambda: pysat_ui.compranges(self, MainWindow))
         self.actionCreate_Models.triggered.connect(lambda: pysat_ui.createmodels(self, MainWindow))
-        self.NormValuebutton.clicked.connect(lambda: pysat_ui.val_norm(self, MainWindow))
+        # self.NormValuebutton.clicked.connect(lambda: pysat_ui.val_norm(self, MainWindow))
 
     def save(self):
         # TODO save the current window's data into a save file
