@@ -487,7 +487,7 @@ class pysat_ui(object):
         self.unknownDataButton.setText(_translate("MainWindow", "...", None))
         self.fullDataBaseButton.setText(_translate("MainWindow", "...", None))
         self.outPutLocationButton.setText(_translate("MainWindow", "...", None))
-        try: #try the files button
+        try: #this try allows for
             self.maskFileButton.clicked.connect(lambda: pysat_ui.on_maskFile_clicked(self))
             self.unknownDataButton.clicked.connect(lambda: pysat_ui.on_uknownDataButton_clicked(self))
             self.fullDataBaseButton.clicked.connect(lambda: pysat_ui.on_fullDataBaseButton_clicked(self))
@@ -797,6 +797,11 @@ class pysat_ui(object):
         self.verticalLayout_8.addWidget(self.Normalization)
         self.Normalization.setTitle(_translate("MainWindow", "Normalization", None))
         self.NormValuebutton.setText(_translate("MainWindow", "Add Value", None))
+        try:
+            self.NormValuebutton.clicked.connect(lambda: pysat_ui.val_norm(self, MainWindow))
+        except:
+            pass
+
 
     def val_norm(self, MainWindow):
         self.verticalLayout_2 = QtGui.QVBoxLayout()
@@ -933,7 +938,6 @@ class pysat_ui(object):
         self.actionElement_Name_Setup.triggered.connect(lambda: pysat_ui.element_name_setup(self, MainWindow))
         self.actionComposition_Ranges.triggered.connect(lambda: pysat_ui.compranges(self, MainWindow))
         self.actionCreate_Models.triggered.connect(lambda: pysat_ui.createmodels(self, MainWindow))
-        # self.NormValuebutton.clicked.connect(lambda: pysat_ui.val_norm(self, MainWindow))
 
     def save(self):
         # TODO save the current window's data into a save file
