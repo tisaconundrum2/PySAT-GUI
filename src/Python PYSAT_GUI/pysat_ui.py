@@ -27,6 +27,7 @@ except AttributeError:
 
 class pysat_ui(object):
 
+    global count
     count = 0
 
     def compranges(self, MainWindow):
@@ -802,13 +803,12 @@ class pysat_ui(object):
         self.NormValuebutton.setText(_translate("MainWindow", "Add Value", None))
         try:
             self.NormValuebutton.clicked.connect(lambda: pysat_ui.val_norm(self, MainWindow))
-            count += 1
         except:
             pass
 
     def val_norm(self, MainWindow):
-        self.norm_spinBox_ = [None] * 1024
         global count
+        self.norm_spinBox_ = []
         self.verticalLayout_2 = QtGui.QVBoxLayout()
         self.verticalLayout_2.setMargin(11)
         self.verticalLayout_2.setSpacing(6)
@@ -820,9 +820,9 @@ class pysat_ui(object):
         self.norm_label = QtGui.QLabel(self.Normalization)
         self.norm_label.setObjectName(_fromUtf8("norm_label"))
         self.horizontalLayout_2.addWidget(self.norm_label)
-        self.norm_spinBox_[count] = QtGui.QSpinBox(self.Normalization)
+        self.norm_spinBox_.append(QtGui.QSpinBox(self.Normalization))
         self.norm_spinBox_[count].setMaximum(1000)
-        self.norm_spinBox_[count].setObjectName(_fromUtf8("norm_spinBox_"+count))
+        self.norm_spinBox_[count].setObjectName(_fromUtf8("norm_spinBox_{}".format(count)))
         self.horizontalLayout_2.addWidget(self.norm_spinBox_[count])
         self.norm_spinBox = QtGui.QSpinBox(self.Normalization)
         self.norm_spinBox.setMaximum(1000)
@@ -830,7 +830,8 @@ class pysat_ui(object):
         self.horizontalLayout_2.addWidget(self.norm_spinBox)
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
         self.verticalLayout.addLayout(self.verticalLayout_2)
-        self.norm_label.setText(_translate("MainWindow", "Value 1", None))
+        self.norm_label.setText(_translate("MainWindow", "Value {}".format(count), None))
+        count += 1
 
     def ok(self, MainWindow):
         self.OK = QtGui.QGroupBox(self.centralWidget)
