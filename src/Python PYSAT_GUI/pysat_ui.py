@@ -802,8 +802,7 @@ class pysat_ui(object):
         except:
             pass
 
-
-    def val_norm(self, MainWindow):
+    def val_norm(self, MainWindow, count):
         self.verticalLayout_2 = QtGui.QVBoxLayout()
         self.verticalLayout_2.setMargin(11)
         self.verticalLayout_2.setSpacing(6)
