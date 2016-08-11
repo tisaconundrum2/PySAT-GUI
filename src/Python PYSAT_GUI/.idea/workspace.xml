@@ -26,8 +26,8 @@
           <file leaf-file-name="pysat_ui.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/pysat_ui.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="282">
-                  <caret line="810" column="45" selection-start-line="810" selection-start-column="45" selection-end-line="810" selection-end-column="45" />
+                <state relative-caret-position="180">
+                  <caret line="804" column="35" selection-start-line="804" selection-start-column="35" selection-end-line="804" selection-end-column="35" />
                   <folding>
                     <element signature="e#552#623#0" expanded="false" />
                     <element signature="e#651#760#0" expanded="false" />
@@ -769,8 +769,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pysat_ui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="810" column="45" selection-start-line="810" selection-start-column="45" selection-end-line="810" selection-end-column="45" />
+        <state relative-caret-position="180">
+          <caret line="804" column="35" selection-start-line="804" selection-start-column="35" selection-end-line="804" selection-end-column="35" />
           <folding>
             <element signature="e#552#623#0" expanded="false" />
             <element signature="e#651#760#0" expanded="false" />
