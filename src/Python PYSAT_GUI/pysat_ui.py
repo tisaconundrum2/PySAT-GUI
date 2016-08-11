@@ -27,9 +27,6 @@ except AttributeError:
 
 class pysat_ui(object):
 
-    global count
-    count = 0
-
     def compranges(self, MainWindow):
         self.CompRanges = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
         font = QtGui.QFont()
@@ -778,7 +775,6 @@ class pysat_ui(object):
     ##TODO allow dynamic adding of values to normalization
 
     def std_norm(self, MainWindow):
-        global count
         self.Normalization = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -802,13 +798,14 @@ class pysat_ui(object):
         self.Normalization.setTitle(_translate("MainWindow", "Normalization", None))
         self.NormValuebutton.setText(_translate("MainWindow", "Add Value", None))
         try:
-            self.NormValuebutton.clicked.connect(lambda: pysat_ui.val_norm(self, MainWindow))
+            self.SpinBoxes = []
+            self.SpinBoxes.append(pysat_ui.val_norm(self, MainWindow))
+            # self.NormValuebutton.clicked.connect(lambda: SpinBoxes[])
+            print("stop here")
         except:
             pass
 
     def val_norm(self, MainWindow):
-        global count
-        self.norm_spinBox_ = []
         self.verticalLayout_2 = QtGui.QVBoxLayout()
         self.verticalLayout_2.setMargin(11)
         self.verticalLayout_2.setSpacing(6)
@@ -820,18 +817,17 @@ class pysat_ui(object):
         self.norm_label = QtGui.QLabel(self.Normalization)
         self.norm_label.setObjectName(_fromUtf8("norm_label"))
         self.horizontalLayout_2.addWidget(self.norm_label)
-        self.norm_spinBox_.append(QtGui.QSpinBox(self.Normalization))
-        self.norm_spinBox_[count].setMaximum(1000)
-        self.norm_spinBox_[count].setObjectName(_fromUtf8("norm_spinBox_{}".format(count)))
-        self.horizontalLayout_2.addWidget(self.norm_spinBox_[count])
+        self.norm_spinBox_9 = QtGui.QSpinBox(self.Normalization)
+        self.norm_spinBox_9.setMaximum(1000)
+        self.norm_spinBox_9.setObjectName(_fromUtf8("norm_spinBox_9"))
+        self.horizontalLayout_2.addWidget(self.norm_spinBox_9)
         self.norm_spinBox = QtGui.QSpinBox(self.Normalization)
         self.norm_spinBox.setMaximum(1000)
         self.norm_spinBox.setObjectName(_fromUtf8("norm_spinBox"))
         self.horizontalLayout_2.addWidget(self.norm_spinBox)
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
         self.verticalLayout.addLayout(self.verticalLayout_2)
-        self.norm_label.setText(_translate("MainWindow", "Value {}".format(count), None))
-        count += 1
+        self.norm_label.setText(_translate("MainWindow", "Value 1", None))
 
     def ok(self, MainWindow):
         self.OK = QtGui.QGroupBox(self.centralWidget)
