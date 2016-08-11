@@ -798,10 +798,7 @@ class pysat_ui(object):
         self.Normalization.setTitle(_translate("MainWindow", "Normalization", None))
         self.NormValuebutton.setText(_translate("MainWindow", "Add Value", None))
         try:
-            self.SpinBoxes = [None] * 10
-            self.SpinBoxes[0] = pysat_ui.val_norm(self, MainWindow)
-            # self.NormValuebutton.clicked.connect(lambda: SpinBoxes[])
-            print("stop here")
+            self.NormValuebutton.clicked.connect(lambda: pysat_ui.val_norm(self, MainWindow))
         except:
             pass
 
