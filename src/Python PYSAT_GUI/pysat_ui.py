@@ -944,6 +944,10 @@ class pysat_ui(object):
         self.actionComposition_Ranges.triggered.connect(lambda: pysat_ui.compranges(self, MainWindow))
         self.actionCreate_Models.triggered.connect(lambda: pysat_ui.createmodels(self, MainWindow))
 
+    def windowed_functions(self, MainWindow):
+        emp1 = pysat_ui()
+        emp1.val_norm(self, MainWindow)
+        pass
 
     def getCount(self):
         return pysat_ui.count
