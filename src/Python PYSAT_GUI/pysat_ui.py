@@ -946,7 +946,6 @@ class pysat_ui(object):
     def windowed_functions(self, MainWindow):
         # pysat_ui.norm_spinBox_[0] = pysat_ui()
         # pysat_ui.norm_spinBox_[0].val_norm(MainWindow)
-        
         pass
 
     def getCount(self):
