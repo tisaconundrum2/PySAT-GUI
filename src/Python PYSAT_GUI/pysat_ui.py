@@ -63,6 +63,8 @@ class Norm:
 
 
 class pysat_ui(object):
+    norm_spinBox_ = []
+
     def __init__(self):
         self.norm_spinBox_ = [None]*1024
         self.count = 0
@@ -952,7 +954,11 @@ class pysat_ui(object):
         self.actionCreate_Models.triggered.connect(lambda: pysat_ui.createmodels(self, MainWindow))
 
     def windowed_functions(self, MainWindow):
-        Norm.
+        for i in range(0,10):
+            self.norm_spinBox_[i] = Norm(MainWindow)
+        self.norm_spinBox_[0].
+
+
 
     def save(self):
         # TODO save the current window's data into a save file

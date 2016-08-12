@@ -26,30 +26,27 @@
           <file leaf-file-name="pysat_ui.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/pysat_ui.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="339">
-                  <caret line="953" column="45" selection-start-line="953" selection-start-column="45" selection-end-line="953" selection-end-column="45" />
+                <state relative-caret-position="-698">
+                  <caret line="57" column="14" selection-start-line="57" selection-start-column="14" selection-end-line="57" selection-end-column="14" />
                   <folding>
                     <element signature="e#552#623#0" expanded="false" />
                     <element signature="e#651#760#0" expanded="false" />
-                    <element signature="e#834#931#0" expanded="false" />
-                    <element signature="e#977#2278#0" expanded="false" />
-                    <element signature="e#2388#2443#0" expanded="false" />
-                    <element signature="e#2491#15913#0" expanded="false" />
-                    <element signature="e#15963#23454#0" expanded="false" />
-                    <element signature="e#23497#28914#0" expanded="false" />
-                    <element signature="e#28961#47757#0" expanded="false" />
-                    <element signature="e#47857#48648#0" expanded="false" />
-                    <element signature="e#48704#51048#0" expanded="false" />
-                    <element signature="e#51094#52460#0" expanded="false" />
-                    <element signature="e#52544#52744#0" expanded="false" />
-                    <element signature="e#52797#53010#0" expanded="false" />
-                    <element signature="e#53065#53278#0" expanded="false" />
-                    <element signature="e#53335#53542#0" expanded="false" />
-                    <element signature="e#53587#53728#0" expanded="false" />
-                    <element signature="e#53809#53846#0" expanded="false" />
-                    <element signature="e#53946#54103#0" expanded="false" />
-                    <element signature="e#54889#54956#0" expanded="false" />
-                    <element signature="e#54986#55107#0" expanded="false" />
+                    <element signature="e#2515#15937#0" expanded="false" />
+                    <element signature="e#15987#23478#0" expanded="false" />
+                    <element signature="e#23521#28938#0" expanded="false" />
+                    <element signature="e#28985#47781#0" expanded="false" />
+                    <element signature="e#47881#48672#0" expanded="false" />
+                    <element signature="e#48728#51072#0" expanded="false" />
+                    <element signature="e#51118#52484#0" expanded="false" />
+                    <element signature="e#52568#52768#0" expanded="false" />
+                    <element signature="e#52821#53034#0" expanded="false" />
+                    <element signature="e#53089#53302#0" expanded="false" />
+                    <element signature="e#53359#53566#0" expanded="false" />
+                    <element signature="e#53611#53752#0" expanded="false" />
+                    <element signature="e#53833#53870#0" expanded="false" />
+                    <element signature="e#53970#54127#0" expanded="false" />
+                    <element signature="e#55015#55082#0" expanded="false" />
+                    <element signature="e#55112#55233#0" expanded="false" />
                   </folding>
                 </state>
               </provider>
@@ -755,42 +752,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pysat_ui.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="953" column="45" selection-start-line="953" selection-start-column="45" selection-end-line="953" selection-end-column="45" />
-          <folding>
-            <element signature="e#552#623#0" expanded="false" />
-            <element signature="e#651#760#0" expanded="false" />
-            <element signature="e#834#931#0" expanded="false" />
-            <element signature="e#977#2278#0" expanded="false" />
-            <element signature="e#2388#2443#0" expanded="false" />
-            <element signature="e#2491#15913#0" expanded="false" />
-            <element signature="e#15963#23454#0" expanded="false" />
-            <element signature="e#23497#28914#0" expanded="false" />
-            <element signature="e#28961#47757#0" expanded="false" />
-            <element signature="e#47857#48648#0" expanded="false" />
-            <element signature="e#48704#51048#0" expanded="false" />
-            <element signature="e#51094#52460#0" expanded="false" />
-            <element signature="e#52544#52744#0" expanded="false" />
-            <element signature="e#52797#53010#0" expanded="false" />
-            <element signature="e#53065#53278#0" expanded="false" />
-            <element signature="e#53335#53542#0" expanded="false" />
-            <element signature="e#53587#53728#0" expanded="false" />
-            <element signature="e#53809#53846#0" expanded="false" />
-            <element signature="e#53946#54103#0" expanded="false" />
-            <element signature="e#54889#54956#0" expanded="false" />
-            <element signature="e#54986#55107#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pysat_main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="421">
           <caret line="42" column="15" selection-start-line="42" selection-start-column="15" selection-end-line="42" selection-end-column="15" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pysat_ui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-698">
+          <caret line="57" column="14" selection-start-line="57" selection-start-column="14" selection-end-line="57" selection-end-column="14" />
+          <folding>
+            <element signature="e#552#623#0" expanded="false" />
+            <element signature="e#651#760#0" expanded="false" />
+            <element signature="e#2515#15937#0" expanded="false" />
+            <element signature="e#15987#23478#0" expanded="false" />
+            <element signature="e#23521#28938#0" expanded="false" />
+            <element signature="e#28985#47781#0" expanded="false" />
+            <element signature="e#47881#48672#0" expanded="false" />
+            <element signature="e#48728#51072#0" expanded="false" />
+            <element signature="e#51118#52484#0" expanded="false" />
+            <element signature="e#52568#52768#0" expanded="false" />
+            <element signature="e#52821#53034#0" expanded="false" />
+            <element signature="e#53089#53302#0" expanded="false" />
+            <element signature="e#53359#53566#0" expanded="false" />
+            <element signature="e#53611#53752#0" expanded="false" />
+            <element signature="e#53833#53870#0" expanded="false" />
+            <element signature="e#53970#54127#0" expanded="false" />
+            <element signature="e#55015#55082#0" expanded="false" />
+            <element signature="e#55112#55233#0" expanded="false" />
           </folding>
         </state>
       </provider>
