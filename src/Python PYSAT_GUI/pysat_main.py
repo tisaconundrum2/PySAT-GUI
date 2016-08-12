@@ -11,10 +11,10 @@ class Main(QMainWindow):
 
     def runningFunctions(self, MainWindow):
         emp1 = pysat_ui()
-        emp1.mainframe( MainWindow)
+        emp1.mainframe(MainWindow)
         emp1.menu_item_shortcuts()
-        emp1.menu_item_functions( MainWindow)
-        emp1.ok( MainWindow)
+        emp1.menu_item_functions(MainWindow)
+        emp1.ok(MainWindow)
 
 
     def new(self):

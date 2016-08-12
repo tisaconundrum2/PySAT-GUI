@@ -781,8 +781,6 @@ class pysat_ui(object):
 
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    ##TODO allow dynamic adding of values to normalization
-
     def ok(self, MainWindow):
         self.OK = QtGui.QGroupBox(self.centralWidget)
         self.OK.setObjectName(_fromUtf8("OK"))
