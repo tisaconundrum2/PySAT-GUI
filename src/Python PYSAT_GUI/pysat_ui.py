@@ -943,6 +943,7 @@ class pysat_ui(object):
         self.actionCreate_Models.triggered.connect(lambda: pysat_ui.createmodels(self, MainWindow))
 
     def windowed_functions(self, MainWindow):
+        emp = pysat_ui
         pysat_ui.val_norm(self, MainWindow)
         pass
 
