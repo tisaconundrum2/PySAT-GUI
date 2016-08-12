@@ -26,49 +26,15 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 
-class Norm:
-    count = 0
-
-    def __init__(self, MainWindow):
-        self.MainWindow = MainWindow
-        Norm.count += 1
-        pysat_ui.mainframe(self, MainWindow)
-        pysat_ui.std_norm(self, MainWindow)
-
-    def val_norm(self, MainWindow):
-        self.verticalLayout_2 = QtGui.QVBoxLayout()
-        self.verticalLayout_2.setMargin(11)
-        self.verticalLayout_2.setSpacing(6)
-        self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
-        self.horizontalLayout_2 = QtGui.QHBoxLayout()
-        self.horizontalLayout_2.setMargin(11)
-        self.horizontalLayout_2.setSpacing(6)
-        self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
-        self.norm_label = QtGui.QLabel(self.Normalization)
-        self.norm_label.setObjectName(_fromUtf8("norm_label"))
-        self.horizontalLayout_2.addWidget(self.norm_label)
-        self.norm_spinBox_0 = QtGui.QSpinBox(self.Normalization)
-        self.norm_spinBox_0.setMaximum(1000)
-        self.norm_spinBox_0.setObjectName(_fromUtf8("norm_spinBox_0"))
-        self.horizontalLayout_2.addWidget(self.norm_spinBox_0)
-        self.norm_spinBox_1 = QtGui.QSpinBox(self.Normalization)
-        self.norm_spinBox_1.setMaximum(1000)
-        self.norm_spinBox_1.setObjectName(_fromUtf8("norm_spinBox_1"))
-        self.horizontalLayout_2.addWidget(self.norm_spinBox_1)
-        self.verticalLayout_2.addLayout(self.horizontalLayout_2)
-        self.verticalLayout.addLayout(self.verticalLayout_2)
-        self.norm_label.setText(_translate("MainWindow", "Value {}".format(self.getCount()), None))
-
-    def getCount(self):
-        return Norm.count
 
 
 class pysat_ui(object):
     norm_spinBox_ = [None]*1024
+    count = 0
 
     def __init__(self):
         self.norm_spinBox_ = [None]*1024
-        self.count = 0
+        pysat_ui.count = 0
 
     def compranges(self, MainWindow):
         self.CompRanges = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -878,6 +844,30 @@ class pysat_ui(object):
         self.label_14.setText(_translate("MainWindow", "Element Name", None))
         self.label_15.setText(_translate("MainWindow", "nfolds_test", None))
 
+    def val_norm(self, MainWindow):
+        self.verticalLayout_2 = QtGui.QVBoxLayout()
+        self.verticalLayout_2.setMargin(11)
+        self.verticalLayout_2.setSpacing(6)
+        self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
+        self.horizontalLayout_2 = QtGui.QHBoxLayout()
+        self.horizontalLayout_2.setMargin(11)
+        self.horizontalLayout_2.setSpacing(6)
+        self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
+        self.norm_label = QtGui.QLabel(self.Normalization)
+        self.norm_label.setObjectName(_fromUtf8("norm_label"))
+        self.horizontalLayout_2.addWidget(self.norm_label)
+        self.norm_spinBox_0 = QtGui.QSpinBox(self.Normalization)
+        self.norm_spinBox_0.setMaximum(1000)
+        self.norm_spinBox_0.setObjectName(_fromUtf8("norm_spinBox_0"))
+        self.horizontalLayout_2.addWidget(self.norm_spinBox_0)
+        self.norm_spinBox_1 = QtGui.QSpinBox(self.Normalization)
+        self.norm_spinBox_1.setMaximum(1000)
+        self.norm_spinBox_1.setObjectName(_fromUtf8("norm_spinBox_1"))
+        self.horizontalLayout_2.addWidget(self.norm_spinBox_1)
+        self.verticalLayout_2.addLayout(self.horizontalLayout_2)
+        self.verticalLayout.addLayout(self.verticalLayout_2)
+        self.norm_label.setText(_translate("MainWindow", "Value {}".format(self.getCount()), None))
+
     def std_norm(self, MainWindow):
         self.Normalization = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
         font = QtGui.QFont()
@@ -954,16 +944,12 @@ class pysat_ui(object):
         self.actionCreate_Models.triggered.connect(lambda: pysat_ui.createmodels(self, MainWindow))
 
     def windowed_functions(self, MainWindow):
-        pysat_ui.norm_spinBox_[0] = Norm(MainWindow)
-        pysat_ui.norm_spinBox_[1] = Norm(MainWindow)
-        pysat_ui.norm_spinBox_[2] = Norm(MainWindow)
-        pysat_ui.norm_spinBox_[0].val_norm(MainWindow)
-        pysat_ui.norm_spinBox_[1].val_norm(MainWindow)
-        pysat_ui.norm_spinBox_[2].val_norm(MainWindow)
+        # pysat_ui.norm_spinBox_[0] = pysat_ui()
+        # pysat_ui.norm_spinBox_[0].val_norm(MainWindow)
+        pass
 
-
-
-
+    def getCount(self):
+        return pysat_ui.count
 
     def save(self):
         # TODO save the current window's data into a save file
