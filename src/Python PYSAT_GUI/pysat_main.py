@@ -15,9 +15,14 @@ class Main(QMainWindow):
         emp1.mainframe(MainWindow)
         emp1.menu_item_shortcuts()
         emp1.menu_item_functions(MainWindow)
-        arr.append(emp1.val_norm(MainWindow))
-        arr.append(emp1.val_norm(MainWindow))
-        arr.append(emp1.val_norm(MainWindow))
+        #TODO Figure out what is happening below!
+        emp1.std_norm(MainWindow)
+        emp1.val_norm(MainWindow)
+        emp1.val_norm(MainWindow)
+        emp1.val_norm(MainWindow)
+        emp1.val_norm(MainWindow)
+        emp1.val_norm(MainWindow)
+        emp1.val_norm(MainWindow)
         emp1.ok(MainWindow)
 
 
