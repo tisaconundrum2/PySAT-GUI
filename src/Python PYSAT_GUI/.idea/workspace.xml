@@ -26,8 +26,8 @@
           <file leaf-file-name="pysat_ui.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/pysat_ui.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="288">
-                  <caret line="949" column="0" selection-start-line="949" selection-start-column="0" selection-end-line="949" selection-end-column="0" />
+                <state relative-caret-position="184">
+                  <caret line="947" column="32" selection-start-line="947" selection-start-column="32" selection-end-line="947" selection-end-column="32" />
                   <folding>
                     <element signature="e#552#623#0" expanded="false" />
                     <element signature="e#651#760#0" expanded="false" />
@@ -37,13 +37,12 @@
                     <element signature="e#27445#46241#0" expanded="false" />
                     <element signature="e#46341#47132#0" expanded="false" />
                     <element signature="e#47188#49532#0" expanded="false" />
-                    <element signature="e#52379#52579#0" expanded="false" />
-                    <element signature="e#52632#52845#0" expanded="false" />
-                    <element signature="e#52900#53113#0" expanded="false" />
-                    <element signature="e#53170#53377#0" expanded="false" />
-                    <element signature="e#53422#53563#0" expanded="false" />
-                    <element signature="e#53644#53681#0" expanded="false" />
-                    <element signature="e#54981#55102#0" expanded="false" />
+                    <element signature="e#52744#52957#0" expanded="false" />
+                    <element signature="e#53012#53225#0" expanded="false" />
+                    <element signature="e#53282#53489#0" expanded="false" />
+                    <element signature="e#53534#53675#0" expanded="false" />
+                    <element signature="e#53756#53793#0" expanded="false" />
+                    <element signature="e#55091#55212#0" expanded="false" />
                   </folding>
                 </state>
               </provider>
@@ -56,8 +55,8 @@
           <file leaf-file-name="pysat_main.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/pysat_main.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="234">
-                  <caret line="16" column="89" selection-start-line="16" selection-start-column="89" selection-end-line="16" selection-end-column="89" />
+                <state relative-caret-position="191">
+                  <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
                   <folding>
                     <element signature="e#0#25#0" expanded="true" />
                   </folding>
@@ -123,8 +122,8 @@
         <option value="$PROJECT_DIR$/../New PYSAT_Gui/mainwindow_norm.py" />
         <option value="$PROJECT_DIR$/../New PYSAT_Gui/mainwindow_norm_2.py" />
         <option value="$PROJECT_DIR$/../New PYSAT_Gui/mainwindow_.py" />
-        <option value="$PROJECT_DIR$/pysat_ui.py" />
         <option value="$PROJECT_DIR$/pysat_main.py" />
+        <option value="$PROJECT_DIR$/pysat_ui.py" />
       </list>
     </option>
   </component>
@@ -463,7 +462,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35546038" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36295503" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -751,8 +750,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pysat_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="16" column="89" selection-start-line="16" selection-start-column="89" selection-end-line="16" selection-end-column="89" />
+        <state relative-caret-position="191">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
@@ -761,8 +760,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pysat_ui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="949" column="0" selection-start-line="949" selection-start-column="0" selection-end-line="949" selection-end-column="0" />
+        <state relative-caret-position="184">
+          <caret line="947" column="32" selection-start-line="947" selection-start-column="32" selection-end-line="947" selection-end-column="32" />
           <folding>
             <element signature="e#552#623#0" expanded="false" />
             <element signature="e#651#760#0" expanded="false" />
@@ -772,13 +771,12 @@
             <element signature="e#27445#46241#0" expanded="false" />
             <element signature="e#46341#47132#0" expanded="false" />
             <element signature="e#47188#49532#0" expanded="false" />
-            <element signature="e#52379#52579#0" expanded="false" />
-            <element signature="e#52632#52845#0" expanded="false" />
-            <element signature="e#52900#53113#0" expanded="false" />
-            <element signature="e#53170#53377#0" expanded="false" />
-            <element signature="e#53422#53563#0" expanded="false" />
-            <element signature="e#53644#53681#0" expanded="false" />
-            <element signature="e#54981#55102#0" expanded="false" />
+            <element signature="e#52744#52957#0" expanded="false" />
+            <element signature="e#53012#53225#0" expanded="false" />
+            <element signature="e#53282#53489#0" expanded="false" />
+            <element signature="e#53534#53675#0" expanded="false" />
+            <element signature="e#53756#53793#0" expanded="false" />
+            <element signature="e#55091#55212#0" expanded="false" />
           </folding>
         </state>
       </provider>

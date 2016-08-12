@@ -866,7 +866,7 @@ class pysat_ui(object):
         self.horizontalLayout_2.addWidget(self.norm_spinBox_1)
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
         self.verticalLayout.addLayout(self.verticalLayout_2)
-        self.norm_label.setText(_translate("MainWindow", "Value {}".format(self.getCount()), None))
+        self.norm_label.setText(_translate("MainWindow", "Value {}".format(pysat_ui.getCount(self)), None))
 
     def std_norm(self, MainWindow):
         self.Normalization = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -891,8 +891,9 @@ class pysat_ui(object):
         self.verticalLayout_8.addWidget(self.Normalization)
         self.Normalization.setTitle(_translate("MainWindow", "Normalization", None))
         self.NormValuebutton.setText(_translate("MainWindow", "Add Value", None))
+        self.NormValuebutton.clicked.connect(lambda: pysat_ui.windowed_functions(self, MainWindow))
 
-####These functions below are private
+    ####These functions below are private
 
     def on_maskFile_clicked(self):
         filename = QFileDialog.getOpenFileName(self, "Open Mask File", '.', "(*.csv)")
@@ -944,8 +945,9 @@ class pysat_ui(object):
         self.actionCreate_Models.triggered.connect(lambda: pysat_ui.createmodels(self, MainWindow))
 
     def windowed_functions(self, MainWindow):
-        # pysat_ui.norm_spinBox_[0] = pysat_ui()
-        # pysat_ui.norm_spinBox_[0].val_norm(MainWindow)
+        pysat_ui.std_norm(self, MainWindow)
+        emp1 = pysat_ui()
+        emp1.val_norm(MainWindow)
         pass
 
     def getCount(self):
