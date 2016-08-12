@@ -25,7 +25,47 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
+
+class Norm:
+    count = 0
+
+    def __init__(self, MainWindow):
+        self.MainWindow = MainWindow
+        Norm.count += 1
+        pysat_ui.mainframe(self, MainWindow)
+
+    def val_norm(self, MainWindow):
+        self.verticalLayout_2 = QtGui.QVBoxLayout()
+        self.verticalLayout_2.setMargin(11)
+        self.verticalLayout_2.setSpacing(6)
+        self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
+        self.horizontalLayout_2 = QtGui.QHBoxLayout()
+        self.horizontalLayout_2.setMargin(11)
+        self.horizontalLayout_2.setSpacing(6)
+        self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
+        self.norm_label = QtGui.QLabel(self.Normalization)
+        self.norm_label.setObjectName(_fromUtf8("norm_label"))
+        self.horizontalLayout_2.addWidget(self.norm_label)
+        self.norm_spinBox_0 = QtGui.QSpinBox(self.Normalization)
+        self.norm_spinBox_0.setMaximum(1000)
+        self.norm_spinBox_0.setObjectName(_fromUtf8("norm_spinBox_0"))
+        self.horizontalLayout_2.addWidget(self.norm_spinBox_0)
+        self.norm_spinBox_1 = QtGui.QSpinBox(self.Normalization)
+        self.norm_spinBox_1.setMaximum(1000)
+        self.norm_spinBox_1.setObjectName(_fromUtf8("norm_spinBox_1"))
+        self.horizontalLayout_2.addWidget(self.norm_spinBox_1)
+        self.verticalLayout_2.addLayout(self.horizontalLayout_2)
+        self.verticalLayout.addLayout(self.verticalLayout_2)
+        self.norm_label.setText(_translate("MainWindow", "Value 1", None))
+
+    def getCount(self):
+        return Norm.count
+
+
 class pysat_ui(object):
+    def __init__(self):
+        self.norm_spinBox_ = [None]*1024
+        self.count = 0
 
     def compranges(self, MainWindow):
         self.CompRanges = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -774,58 +814,6 @@ class pysat_ui(object):
 
     ##TODO allow dynamic adding of values to normalization
 
-    def std_norm(self, MainWindow):
-        self.Normalization = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.Normalization.setFont(font)
-        self.Normalization.setObjectName(_fromUtf8("Normalization"))
-        self.verticalLayout = QtGui.QVBoxLayout(self.Normalization)
-        self.verticalLayout.setMargin(11)
-        self.verticalLayout.setSpacing(6)
-        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
-        self.horizontalLayout_25 = QtGui.QHBoxLayout()
-        self.horizontalLayout_25.setMargin(11)
-        self.horizontalLayout_25.setSpacing(6)
-        self.horizontalLayout_25.setObjectName(_fromUtf8("horizontalLayout_25"))
-        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_25.addItem(spacerItem)
-        self.NormValuebutton = QtGui.QPushButton(self.Normalization)
-        self.NormValuebutton.setObjectName(_fromUtf8("NormValuebutton"))
-        self.horizontalLayout_25.addWidget(self.NormValuebutton)
-        self.verticalLayout.addLayout(self.horizontalLayout_25)
-        self.verticalLayout_8.addWidget(self.Normalization)
-        self.Normalization.setTitle(_translate("MainWindow", "Normalization", None))
-        self.NormValuebutton.setText(_translate("MainWindow", "Add Value", None))
-        try:
-            self.NormValuebutton.clicked.connect(lambda: pysat_ui.val_norm(self, MainWindow))
-        except:
-            pass
-
-    def val_norm(self, MainWindow):
-        self.verticalLayout_2 = QtGui.QVBoxLayout()
-        self.verticalLayout_2.setMargin(11)
-        self.verticalLayout_2.setSpacing(6)
-        self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
-        self.horizontalLayout_2 = QtGui.QHBoxLayout()
-        self.horizontalLayout_2.setMargin(11)
-        self.horizontalLayout_2.setSpacing(6)
-        self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
-        self.norm_label = QtGui.QLabel(self.Normalization)
-        self.norm_label.setObjectName(_fromUtf8("norm_label"))
-        self.horizontalLayout_2.addWidget(self.norm_label)
-        self.norm_spinBox_9 = QtGui.QSpinBox(self.Normalization)
-        self.norm_spinBox_9.setMaximum(1000)
-        self.norm_spinBox_9.setObjectName(_fromUtf8("norm_spinBox_9"))
-        self.horizontalLayout_2.addWidget(self.norm_spinBox_9)
-        self.norm_spinBox = QtGui.QSpinBox(self.Normalization)
-        self.norm_spinBox.setMaximum(1000)
-        self.norm_spinBox.setObjectName(_fromUtf8("norm_spinBox"))
-        self.horizontalLayout_2.addWidget(self.norm_spinBox)
-        self.verticalLayout_2.addLayout(self.horizontalLayout_2)
-        self.verticalLayout.addLayout(self.verticalLayout_2)
-        self.norm_label.setText(_translate("MainWindow", "Value 1", None))
-
     def ok(self, MainWindow):
         self.OK = QtGui.QGroupBox(self.centralWidget)
         self.OK.setObjectName(_fromUtf8("OK"))
@@ -886,6 +874,31 @@ class pysat_ui(object):
         self.CrossValidation.setTitle(_translate("MainWindow", "Setup", None))
         self.label_14.setText(_translate("MainWindow", "Element Name", None))
         self.label_15.setText(_translate("MainWindow", "nfolds_test", None))
+
+    def std_norm(self, MainWindow):
+        global count
+        self.Normalization = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.Normalization.setFont(font)
+        self.Normalization.setObjectName(_fromUtf8("Normalization"))
+        self.verticalLayout = QtGui.QVBoxLayout(self.Normalization)
+        self.verticalLayout.setMargin(11)
+        self.verticalLayout.setSpacing(6)
+        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
+        self.horizontalLayout_25 = QtGui.QHBoxLayout()
+        self.horizontalLayout_25.setMargin(11)
+        self.horizontalLayout_25.setSpacing(6)
+        self.horizontalLayout_25.setObjectName(_fromUtf8("horizontalLayout_25"))
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout_25.addItem(spacerItem)
+        self.NormValuebutton = QtGui.QPushButton(self.Normalization)
+        self.NormValuebutton.setObjectName(_fromUtf8("NormValuebutton"))
+        self.horizontalLayout_25.addWidget(self.NormValuebutton)
+        self.verticalLayout.addLayout(self.horizontalLayout_25)
+        self.verticalLayout_8.addWidget(self.Normalization)
+        self.Normalization.setTitle(_translate("MainWindow", "Normalization", None))
+        self.NormValuebutton.setText(_translate("MainWindow", "Add Value", None))
 
 ####These functions below are private
 
