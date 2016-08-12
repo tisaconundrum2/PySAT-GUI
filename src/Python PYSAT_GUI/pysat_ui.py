@@ -956,7 +956,7 @@ class pysat_ui(object):
     def windowed_functions(self, MainWindow):
         for i in range(0,10):
             self.norm_spinBox_[i] = Norm(MainWindow)
-        self.norm_spinBox_[0].
+        self.norm_spinBox_
 
 
 
