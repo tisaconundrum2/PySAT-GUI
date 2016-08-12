@@ -57,7 +57,7 @@ class Norm:
         self.horizontalLayout_2.addWidget(self.norm_spinBox_1)
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
         self.verticalLayout.addLayout(self.verticalLayout_2)
-        self.norm_label.setText(_translate("MainWindow", "Value 1", None))
+        self.norm_label.setText(_translate("MainWindow", "Value {}".format(self.getCount()), None))
 
     def getCount(self):
         return Norm.count
@@ -879,7 +879,6 @@ class pysat_ui(object):
         self.label_15.setText(_translate("MainWindow", "nfolds_test", None))
 
     def std_norm(self, MainWindow):
-        global count
         self.Normalization = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -956,7 +955,11 @@ class pysat_ui(object):
 
     def windowed_functions(self, MainWindow):
         pysat_ui.norm_spinBox_[0] = Norm(MainWindow)
+        pysat_ui.norm_spinBox_[1] = Norm(MainWindow)
+        pysat_ui.norm_spinBox_[2] = Norm(MainWindow)
         pysat_ui.norm_spinBox_[0].val_norm(MainWindow)
+        pysat_ui.norm_spinBox_[1].val_norm(MainWindow)
+        pysat_ui.norm_spinBox_[2].val_norm(MainWindow)
 
 
 
