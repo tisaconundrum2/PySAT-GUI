@@ -33,6 +33,7 @@ class Norm:
         self.MainWindow = MainWindow
         Norm.count += 1
         pysat_ui.mainframe(self, MainWindow)
+        pysat_ui.std_norm(self, MainWindow)
 
     def val_norm(self, MainWindow):
         self.verticalLayout_2 = QtGui.QVBoxLayout()
@@ -63,7 +64,7 @@ class Norm:
 
 
 class pysat_ui(object):
-    norm_spinBox_ = []
+    norm_spinBox_ = [None]*1024
 
     def __init__(self):
         self.norm_spinBox_ = [None]*1024
@@ -954,9 +955,10 @@ class pysat_ui(object):
         self.actionCreate_Models.triggered.connect(lambda: pysat_ui.createmodels(self, MainWindow))
 
     def windowed_functions(self, MainWindow):
-        for i in range(0,10):
-            self.norm_spinBox_[i] = Norm(MainWindow)
-        self.norm_spinBox_
+        pysat_ui.norm_spinBox_[0] = Norm(MainWindow)
+        pysat_ui.norm_spinBox_[0].val_norm(MainWindow)
+
+
 
 
 
