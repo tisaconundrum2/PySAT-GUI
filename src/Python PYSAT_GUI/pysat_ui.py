@@ -945,8 +945,7 @@ class pysat_ui(object):
         self.actionCreate_Models.triggered.connect(lambda: pysat_ui.createmodels(self, MainWindow))
 
     def windowed_functions(self, MainWindow):
-        emp1 = pysat_ui()
-        emp1.val_norm(self, MainWindow)
+        pysat_ui.val_norm(self, MainWindow)
         pass
 
     def getCount(self):
