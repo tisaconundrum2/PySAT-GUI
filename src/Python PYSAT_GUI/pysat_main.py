@@ -13,7 +13,12 @@ class Main(QMainWindow):
         pysat_ui.mainframe(self, MainWindow)
         pysat_ui.menu_item_shortcuts(self)
         pysat_ui.menu_item_functions(self, MainWindow)
-        # pysat_ui.windowed_functions(self, MainWindow)
+        pysat_ui.std_norm(self, MainWindow)
+        pysat_ui.val_norm(self, MainWindow)
+        pysat_ui.val_norm(self, MainWindow)
+        pysat_ui.val_norm(self, MainWindow)
+        pysat_ui.val_norm(self, MainWindow)
+        pysat_ui.val_norm(self, MainWindow)
         pysat_ui.ok(self, MainWindow)
 
 
