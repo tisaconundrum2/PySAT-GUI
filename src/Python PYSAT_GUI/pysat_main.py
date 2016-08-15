@@ -16,8 +16,6 @@ class Main(QMainWindow):
         pysat.menu_item_shortcuts()
         pysat.menu_item_functions(MainWindow)
         #TODO Figure out what is happening below!
-        pysat.std_norm(MainWindow)
-        pysat.val_norm(MainWindow, 1)
         pysat.ok(MainWindow)
 
 

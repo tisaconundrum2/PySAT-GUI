@@ -864,7 +864,7 @@ class pysat_ui(object):
         self.verticalLayout_8.addWidget(self.Normalization)
         self.Normalization.setTitle(_translate("MainWindow", "Normalization", None))
         self.NormValuebutton.setText(_translate("MainWindow", "Add Value", None))
-        pysat_ui.count = pysat_ui.count + 1
+        self.NormValuebutton.clicked.connect(lambda: pysat_ui.val_norm(self, MainWindow, self.count))
 
     def val_norm(self, MainWindow, count):
         self.verticalLayout_2 = QtGui.QVBoxLayout()
@@ -893,15 +893,13 @@ class pysat_ui(object):
 
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
         self.verticalLayout.addLayout(self.verticalLayout_2)
-        self.NormValuebutton.clicked.connect(lambda: pysat_ui.val_norm(self, MainWindow, self.count))
-        self.count+=1
 
         #for debugging purposes
         self.norm_spinBox_[(count*2)-1].valueChanged.connect(lambda: print(self.norm_spinBox_[(count*2)-1].text()))
         self.norm_spinBox_[(count*2)].valueChanged.connect(lambda: print(self.norm_spinBox_[(count*2)].text()))
 
-        self.norm_label.setText(_translate("MainWindow", "Value {}".format(pysat_ui.getCount(self)), None))
-
+        self.norm_label.setText(_translate("MainWindow", "Value {}".format(self.count), None))
+        self.count += 1
 
     ####These functions below are private
 
