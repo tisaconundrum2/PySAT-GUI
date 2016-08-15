@@ -23,7 +23,7 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="pysat_ui.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="pysat_ui.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/pysat_ui.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="380">
@@ -37,24 +37,24 @@
                     <element signature="e#27445#46241#0" expanded="false" />
                     <element signature="e#46281#47072#0" expanded="false" />
                     <element signature="e#47128#49472#0" expanded="false" />
-                    <element signature="e#52437#52637#0" expanded="false" />
-                    <element signature="e#52690#52903#0" expanded="false" />
-                    <element signature="e#52958#53171#0" expanded="false" />
-                    <element signature="e#53228#53435#0" expanded="false" />
-                    <element signature="e#53480#53621#0" expanded="false" />
-                    <element signature="e#53702#53739#0" expanded="false" />
-                    <element signature="e#53839#53996#0" expanded="false" />
-                    <element signature="e#55000#55121#0" expanded="false" />
+                    <element signature="e#52672#52872#0" expanded="false" />
+                    <element signature="e#52925#53138#0" expanded="false" />
+                    <element signature="e#53193#53406#0" expanded="false" />
+                    <element signature="e#53463#53670#0" expanded="false" />
+                    <element signature="e#53715#53856#0" expanded="false" />
+                    <element signature="e#53937#53974#0" expanded="false" />
+                    <element signature="e#54074#54231#0" expanded="false" />
+                    <element signature="e#55235#55356#0" expanded="false" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="pysat_main.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="pysat_main.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/pysat_main.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="442">
-                  <caret line="39" column="32" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="32" />
+                <state relative-caret-position="719">
+                  <caret line="49" column="22" selection-start-line="49" selection-start-column="22" selection-end-line="49" selection-end-column="22" />
                   <folding>
                     <element signature="e#0#25#0" expanded="true" />
                   </folding>
@@ -69,25 +69,24 @@
           <file leaf-file-name="pysat_ui.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/pysat_ui.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="516">
-                  <caret line="896" column="8" selection-start-line="896" selection-start-column="8" selection-end-line="896" selection-end-column="8" />
+                <state relative-caret-position="425">
+                  <caret line="897" column="91" selection-start-line="897" selection-start-column="91" selection-end-line="897" selection-end-column="91" />
                   <folding>
                     <element signature="e#552#623#0" expanded="false" />
                     <element signature="e#651#760#0" expanded="false" />
-                    <element signature="e#975#14397#0" expanded="false" />
                     <element signature="e#14447#21938#0" expanded="false" />
                     <element signature="e#21981#27398#0" expanded="false" />
                     <element signature="e#27445#46241#0" expanded="false" />
                     <element signature="e#46281#47072#0" expanded="false" />
                     <element signature="e#47128#49472#0" expanded="false" />
-                    <element signature="e#52437#52637#0" expanded="false" />
-                    <element signature="e#52690#52903#0" expanded="false" />
-                    <element signature="e#52958#53171#0" expanded="false" />
-                    <element signature="e#53228#53435#0" expanded="false" />
-                    <element signature="e#53480#53621#0" expanded="false" />
-                    <element signature="e#53702#53739#0" expanded="false" />
-                    <element signature="e#53839#53996#0" expanded="false" />
-                    <element signature="e#55000#55121#0" expanded="false" />
+                    <element signature="e#52672#52872#0" expanded="false" />
+                    <element signature="e#52925#53138#0" expanded="false" />
+                    <element signature="e#53193#53406#0" expanded="false" />
+                    <element signature="e#53463#53670#0" expanded="false" />
+                    <element signature="e#53715#53856#0" expanded="false" />
+                    <element signature="e#53937#53974#0" expanded="false" />
+                    <element signature="e#54074#54231#0" expanded="false" />
+                    <element signature="e#55235#55356#0" expanded="false" />
                   </folding>
                 </state>
               </provider>
@@ -495,7 +494,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39828694" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35653105" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -552,8 +551,18 @@
           <line>36</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/pysat_main.py</url>
+          <line>12</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/pysat_ui.py</url>
+          <line>845</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="31" />
+      <option name="time" value="33" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -779,8 +788,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pysat_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="39" column="32" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="32" />
+        <state relative-caret-position="719">
+          <caret line="49" column="22" selection-start-line="49" selection-start-column="22" selection-end-line="49" selection-end-column="22" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
@@ -789,25 +798,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pysat_ui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="869" column="0" selection-start-line="869" selection-start-column="0" selection-end-line="869" selection-end-column="0" />
+        <state relative-caret-position="425">
+          <caret line="897" column="91" selection-start-line="897" selection-start-column="91" selection-end-line="897" selection-end-column="91" />
           <folding>
             <element signature="e#552#623#0" expanded="false" />
             <element signature="e#651#760#0" expanded="false" />
-            <element signature="e#975#14397#0" expanded="false" />
             <element signature="e#14447#21938#0" expanded="false" />
             <element signature="e#21981#27398#0" expanded="false" />
             <element signature="e#27445#46241#0" expanded="false" />
             <element signature="e#46281#47072#0" expanded="false" />
             <element signature="e#47128#49472#0" expanded="false" />
-            <element signature="e#52437#52637#0" expanded="false" />
-            <element signature="e#52690#52903#0" expanded="false" />
-            <element signature="e#52958#53171#0" expanded="false" />
-            <element signature="e#53228#53435#0" expanded="false" />
-            <element signature="e#53480#53621#0" expanded="false" />
-            <element signature="e#53702#53739#0" expanded="false" />
-            <element signature="e#53839#53996#0" expanded="false" />
-            <element signature="e#55000#55121#0" expanded="false" />
+            <element signature="e#52672#52872#0" expanded="false" />
+            <element signature="e#52925#53138#0" expanded="false" />
+            <element signature="e#53193#53406#0" expanded="false" />
+            <element signature="e#53463#53670#0" expanded="false" />
+            <element signature="e#53715#53856#0" expanded="false" />
+            <element signature="e#53937#53974#0" expanded="false" />
+            <element signature="e#54074#54231#0" expanded="false" />
+            <element signature="e#55235#55356#0" expanded="false" />
           </folding>
         </state>
       </provider>

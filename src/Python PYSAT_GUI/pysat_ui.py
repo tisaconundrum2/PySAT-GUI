@@ -894,6 +894,10 @@ class pysat_ui(object):
 
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
         self.verticalLayout.addLayout(self.verticalLayout_2)
+        self.NormValuebutton.clicked.connect(lambda: pysat_ui.windowed_functions(self, MainWindow))
+        self.norm_spinBox_0.valueChanged.connect(lambda: print(self.norm_spinBox_0.text()))
+
+        print(self.norm_spinBox_0.text())
         self.norm_label.setText(_translate("MainWindow", "Value {}".format(pysat_ui.getCount(self)), None))
 
 
