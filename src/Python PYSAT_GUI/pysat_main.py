@@ -11,15 +11,14 @@ class Main(QMainWindow):
 
     def runningFunctions(self, MainWindow):
         arr = [None]*10
-        pysat_ui.mainframe(self, MainWindow)
-        pysat_ui.menu_item_shortcuts(self)
-        pysat_ui.menu_item_functions(self, MainWindow)
+        pysat = pysat_ui()
+        pysat.mainframe(MainWindow)
+        pysat.menu_item_shortcuts()
+        pysat.menu_item_functions(MainWindow)
         #TODO Figure out what is happening below!
-        pysat_ui.std_norm(self, MainWindow)
-        pysat_ui.val_norm(self, MainWindow, 5)
-        pysat_ui.val_norm(self, MainWindow, 6)
-        pysat_ui.val_norm(self, MainWindow, 7)
-        pysat_ui.ok(self, MainWindow)
+        pysat.std_norm(MainWindow)
+        pysat.NormValuebutton.clicked.connect(lambda: pysat.val_norm(MainWindow, pysat.count))
+        pysat.ok(MainWindow)
 
 
     def new(self):
