@@ -29,7 +29,7 @@ except AttributeError:
 
 
 class pysat_ui(object):
-    count = 0
+    count = 1
 
     def __init__(self):
         self.norm_spinBox_ = [None]*1024
@@ -893,8 +893,12 @@ class pysat_ui(object):
 
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
         self.verticalLayout.addLayout(self.verticalLayout_2)
-        self.NormValuebutton.clicked.connect(lambda: pysat_ui.windowed_functions(self, MainWindow))
+        self.NormValuebutton.clicked.connect(lambda: pysat_ui.val_norm(self, MainWindow, self.count))
+        self.count+=1
+
+        #for debugging purposes
         self.norm_spinBox_[(count*2)-1].valueChanged.connect(lambda: print(self.norm_spinBox_[(count*2)-1].text()))
+        self.norm_spinBox_[(count*2)].valueChanged.connect(lambda: print(self.norm_spinBox_[(count*2)].text()))
 
         self.norm_label.setText(_translate("MainWindow", "Value {}".format(pysat_ui.getCount(self)), None))
 
