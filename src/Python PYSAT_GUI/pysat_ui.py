@@ -842,30 +842,6 @@ class pysat_ui(object):
         self.label_14.setText(_translate("MainWindow", "Element Name", None))
         self.label_15.setText(_translate("MainWindow", "nfolds_test", None))
 
-    def val_norm(self, MainWindow):
-        self.verticalLayout_2 = QtGui.QVBoxLayout()
-        self.verticalLayout_2.setMargin(11)
-        self.verticalLayout_2.setSpacing(6)
-        self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
-        self.horizontalLayout_2 = QtGui.QHBoxLayout()
-        self.horizontalLayout_2.setMargin(11)
-        self.horizontalLayout_2.setSpacing(6)
-        self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
-        self.norm_label = QtGui.QLabel(self.Normalization)
-        self.norm_label.setObjectName(_fromUtf8("norm_label"))
-        self.horizontalLayout_2.addWidget(self.norm_label)
-        self.norm_spinBox_0 = QtGui.QSpinBox(self.Normalization)
-        self.norm_spinBox_0.setMaximum(1000)
-        self.norm_spinBox_0.setObjectName(_fromUtf8("norm_spinBox_0"))
-        self.horizontalLayout_2.addWidget(self.norm_spinBox_0)
-        self.norm_spinBox_1 = QtGui.QSpinBox(self.Normalization)
-        self.norm_spinBox_1.setMaximum(1000)
-        self.norm_spinBox_1.setObjectName(_fromUtf8("norm_spinBox_1"))
-        self.horizontalLayout_2.addWidget(self.norm_spinBox_1)
-        self.verticalLayout_2.addLayout(self.horizontalLayout_2)
-        self.verticalLayout.addLayout(self.verticalLayout_2)
-        self.norm_label.setText(_translate("MainWindow", "Value {}".format(pysat_ui.getCount(self)), None))
-
     def std_norm(self, MainWindow):
         self.Normalization = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
         font = QtGui.QFont()
@@ -890,6 +866,36 @@ class pysat_ui(object):
         self.Normalization.setTitle(_translate("MainWindow", "Normalization", None))
         self.NormValuebutton.setText(_translate("MainWindow", "Add Value", None))
         self.NormValuebutton.clicked.connect(lambda: pysat_ui.windowed_functions(self, MainWindow))
+
+    def val_norm(self, MainWindow):
+        self.verticalLayout_2 = QtGui.QVBoxLayout()
+        self.verticalLayout_2.setMargin(11)
+        self.verticalLayout_2.setSpacing(6)
+        self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
+        self.horizontalLayout_2 = QtGui.QHBoxLayout()
+        self.horizontalLayout_2.setMargin(11)
+        self.horizontalLayout_2.setSpacing(6)
+        self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
+        self.norm_label = QtGui.QLabel(self.Normalization)
+        self.norm_label.setObjectName(_fromUtf8("norm_label"))
+        self.horizontalLayout_2.addWidget(self.norm_label)
+
+        self.norm_spinBox_0 = QtGui.QSpinBox(self.Normalization)
+        self.norm_spinBox_1 = QtGui.QSpinBox(self.Normalization)
+
+        self.norm_spinBox_0.setMaximum(1000)
+        self.norm_spinBox_1.setMaximum(1000)
+
+        self.norm_spinBox_0.setObjectName(_fromUtf8("norm_spinBox_0"))
+        self.norm_spinBox_1.setObjectName(_fromUtf8("norm_spinBox_1"))
+
+        self.horizontalLayout_2.addWidget(self.norm_spinBox_0)
+        self.horizontalLayout_2.addWidget(self.norm_spinBox_1)
+
+        self.verticalLayout_2.addLayout(self.horizontalLayout_2)
+        self.verticalLayout.addLayout(self.verticalLayout_2)
+        self.norm_label.setText(_translate("MainWindow", "Value {}".format(pysat_ui.getCount(self)), None))
+
 
     ####These functions below are private
 
