@@ -17,12 +17,12 @@ class Main(QMainWindow):
         emp1.menu_item_functions(MainWindow)
         #TODO Figure out what is happening below!
         emp1.std_norm(MainWindow)
-        emp1.val_norm(MainWindow)
-        emp1.val_norm(MainWindow)
-        emp1.val_norm(MainWindow)
-        emp1.val_norm(MainWindow)
-        emp1.val_norm(MainWindow)
-        emp1.val_norm(MainWindow)
+        emp1.val_norm(MainWindow, 2)
+        emp1.val_norm(MainWindow, 3)
+        emp1.val_norm(MainWindow, 4)
+        emp1.val_norm(MainWindow, 5)
+        emp1.val_norm(MainWindow, 6)
+        emp1.val_norm(MainWindow, 7)
         emp1.ok(MainWindow)
 
 

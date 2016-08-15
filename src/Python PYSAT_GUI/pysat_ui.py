@@ -867,7 +867,7 @@ class pysat_ui(object):
         self.NormValuebutton.setText(_translate("MainWindow", "Add Value", None))
         self.NormValuebutton.clicked.connect(lambda: pysat_ui.windowed_functions(self, MainWindow))
 
-    def val_norm(self, MainWindow):
+    def val_norm(self, MainWindow, count):
         self.verticalLayout_2 = QtGui.QVBoxLayout()
         self.verticalLayout_2.setMargin(11)
         self.verticalLayout_2.setSpacing(6)
@@ -880,24 +880,23 @@ class pysat_ui(object):
         self.norm_label.setObjectName(_fromUtf8("norm_label"))
         self.horizontalLayout_2.addWidget(self.norm_label)
 
-        self.norm_spinBox_0 = QtGui.QSpinBox(self.Normalization)
-        self.norm_spinBox_1 = QtGui.QSpinBox(self.Normalization)
+        self.norm_spinBox_[(count*2)-1] = QtGui.QSpinBox(self.Normalization)
+        self.norm_spinBox_[count*2] = QtGui.QSpinBox(self.Normalization)
 
-        self.norm_spinBox_0.setMaximum(1000)
-        self.norm_spinBox_1.setMaximum(1000)
+        self.norm_spinBox_[(count*2)-1].setMaximum(1000)
+        self.norm_spinBox_[count*2].setMaximum(1000)
 
-        self.norm_spinBox_0.setObjectName(_fromUtf8("norm_spinBox_0"))
-        self.norm_spinBox_1.setObjectName(_fromUtf8("norm_spinBox_1"))
+        self.norm_spinBox_[(count*2)-1].setObjectName(_fromUtf8("norm_spinBox_0"))
+        self.norm_spinBox_[count*2].setObjectName(_fromUtf8("norm_spinBox_1"))
 
-        self.horizontalLayout_2.addWidget(self.norm_spinBox_0)
-        self.horizontalLayout_2.addWidget(self.norm_spinBox_1)
+        self.horizontalLayout_2.addWidget(self.norm_spinBox_[(count*2)-1])
+        self.horizontalLayout_2.addWidget(self.norm_spinBox_[count*2])
 
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
         self.verticalLayout.addLayout(self.verticalLayout_2)
         self.NormValuebutton.clicked.connect(lambda: pysat_ui.windowed_functions(self, MainWindow))
-        self.norm_spinBox_0.valueChanged.connect(lambda: print(self.norm_spinBox_0.text()))
+        self.norm_spinBox_[(count*2)-1].valueChanged.connect(lambda: print(self.norm_spinBox_[(count*2)-1].text()))
 
-        print(self.norm_spinBox_0.text())
         self.norm_label.setText(_translate("MainWindow", "Value {}".format(pysat_ui.getCount(self)), None))
 
 
