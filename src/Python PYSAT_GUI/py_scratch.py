@@ -40,7 +40,6 @@ class Main(QtGui.QMainWindow):
 
     def Add(self):
         global count
-
         b = QtGui.QPushButton(str(count), self)
         b.clicked.connect(self.Button)
 
