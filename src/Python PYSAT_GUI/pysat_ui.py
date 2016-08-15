@@ -865,7 +865,8 @@ class pysat_ui(object):
         self.verticalLayout_8.addWidget(self.Normalization)
         self.Normalization.setTitle(_translate("MainWindow", "Normalization", None))
         self.NormValuebutton.setText(_translate("MainWindow", "Add Value", None))
-        self.NormValuebutton.clicked.connect(lambda: pysat_ui.windowed_functions(self, MainWindow))
+        self.NormValuebutton.clicked.connect(lambda: pysat_ui.val_norm(self, MainWindow, pysat_ui.count))
+        pysat_ui.count = pysat_ui.count + 1
 
     def val_norm(self, MainWindow, count):
         self.verticalLayout_2 = QtGui.QVBoxLayout()
@@ -950,11 +951,6 @@ class pysat_ui(object):
         self.actionElement_Name_Setup.triggered.connect(lambda: pysat_ui.element_name_setup(self, MainWindow))
         self.actionComposition_Ranges.triggered.connect(lambda: pysat_ui.compranges(self, MainWindow))
         self.actionCreate_Models.triggered.connect(lambda: pysat_ui.createmodels(self, MainWindow))
-
-    def windowed_functions(self, MainWindow):
-        emp = pysat_ui
-        pysat_ui.val_norm(self, MainWindow)
-        pass
 
     def getCount(self):
         return pysat_ui.count
