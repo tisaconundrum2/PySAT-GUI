@@ -10,12 +10,12 @@ class Main(QMainWindow):
         self.runningFunctions(self)
 
     def runningFunctions(self, MainWindow):
-        arr = [None]*10
         pysat = pysat_ui()
         pysat.mainframe(MainWindow)
         pysat.menu_item_shortcuts()
         pysat.menu_item_functions(MainWindow)
-        #TODO Figure out what is happening below!
+        pysat.actionExit.triggered.connect(lambda: self.exit())
+        pysat.actionCreate_New_Workflow.triggered.connect(lambda: self.new())
         pysat.ok(MainWindow)
 
 
@@ -23,6 +23,12 @@ class Main(QMainWindow):
         # TODO create a new window to work in. The old window does not disappear
         window = Main(self)
         window.show()
+
+
+    def exit(self):
+        # TODO close the current window
+        self.close()
+
 
 def main():
     app = QApplication(sys.argv)

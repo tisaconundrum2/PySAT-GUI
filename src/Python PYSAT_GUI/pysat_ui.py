@@ -946,8 +946,6 @@ class pysat_ui(object):
     def menu_item_functions(self, MainWindow):
         self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.files(self, MainWindow))
         self.actionNormalization.triggered.connect(lambda: pysat_ui.std_norm(self, MainWindow))
-        self.actionCreate_New_Workflow.triggered.connect(lambda: self.new())
-        self.actionExit.triggered.connect(lambda: self.exit())
         self.actionElement_Name_Setup.triggered.connect(lambda: pysat_ui.element_name_setup(self, MainWindow))
         self.actionComposition_Ranges.triggered.connect(lambda: pysat_ui.compranges(self, MainWindow))
         self.actionCreate_Models.triggered.connect(lambda: pysat_ui.createmodels(self, MainWindow))
@@ -964,9 +962,3 @@ class pysat_ui(object):
         self.filename = QFileDialog.getOpenFileName(self, "Open a Workflow File", '.', "(*.wrf)")
 
 
-    def exit(self):
-        # TODO close the current window
-        self.close()
-
-    def close(self):
-        pass
