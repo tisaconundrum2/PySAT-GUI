@@ -24,11 +24,6 @@ class Main(QMainWindow):
         window = Main(self)
         window.show()
 
-
-    def exit(self):
-        # TODO close the current window
-        self.close()
-
 def main():
     app = QApplication(sys.argv)
 

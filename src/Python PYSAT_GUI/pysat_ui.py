@@ -963,3 +963,10 @@ class pysat_ui(object):
         # TODO open file dialog
         self.filename = QFileDialog.getOpenFileName(self, "Open a Workflow File", '.', "(*.wrf)")
 
+
+    def exit(self):
+        # TODO close the current window
+        self.close()
+
+    def close(self):
+        pass
