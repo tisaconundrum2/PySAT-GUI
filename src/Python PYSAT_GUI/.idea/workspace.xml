@@ -36,8 +36,10 @@
       <file leaf-file-name="pysat_ui.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pysat_ui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1257">
-              <caret line="949" column="97" selection-start-line="949" selection-start-column="97" selection-end-line="949" selection-end-column="97" />
+            <state relative-caret-position="1207">
+              <caret line="904" column="51" selection-start-line="904" selection-start-column="51" selection-end-line="904" selection-end-column="51" />
+              <caret line="910" column="51" selection-start-line="910" selection-start-column="51" selection-end-line="910" selection-end-column="51" />
+              <caret line="916" column="56" selection-start-line="916" selection-start-column="56" selection-end-line="916" selection-end-column="56" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
                 <element signature="e#684#19480#0" expanded="false" />
@@ -46,11 +48,6 @@
                 <element signature="e#40534#45951#0" expanded="false" />
                 <element signature="e#45991#46782#0" expanded="false" />
                 <element signature="e#46838#49182#0" expanded="false" />
-                <element signature="e#49228#50675#0" expanded="false" />
-                <element signature="e#52540#52740#0" expanded="false" />
-                <element signature="e#52793#53006#0" expanded="false" />
-                <element signature="e#53061#53274#0" expanded="false" />
-                <element signature="e#53331#53538#0" expanded="false" />
                 <element signature="e#53583#53724#0" expanded="false" />
                 <element signature="e#53828#53985#0" expanded="false" />
                 <element signature="e#54042#54680#0" expanded="false" />
@@ -767,8 +764,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pysat_ui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1257">
-          <caret line="949" column="97" selection-start-line="949" selection-start-column="97" selection-end-line="949" selection-end-column="97" />
+        <state relative-caret-position="1207">
+          <caret line="904" column="51" selection-start-line="904" selection-start-column="51" selection-end-line="904" selection-end-column="51" />
+          <caret line="910" column="51" selection-start-line="910" selection-start-column="51" selection-end-line="910" selection-end-column="51" />
+          <caret line="916" column="56" selection-start-line="916" selection-start-column="56" selection-end-line="916" selection-end-column="56" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
             <element signature="e#684#19480#0" expanded="false" />
@@ -777,11 +776,6 @@
             <element signature="e#40534#45951#0" expanded="false" />
             <element signature="e#45991#46782#0" expanded="false" />
             <element signature="e#46838#49182#0" expanded="false" />
-            <element signature="e#49228#50675#0" expanded="false" />
-            <element signature="e#52540#52740#0" expanded="false" />
-            <element signature="e#52793#53006#0" expanded="false" />
-            <element signature="e#53061#53274#0" expanded="false" />
-            <element signature="e#53331#53538#0" expanded="false" />
             <element signature="e#53583#53724#0" expanded="false" />
             <element signature="e#53828#53985#0" expanded="false" />
             <element signature="e#54042#54680#0" expanded="false" />
