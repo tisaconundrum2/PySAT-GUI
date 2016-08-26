@@ -36,10 +36,8 @@
       <file leaf-file-name="pysat_ui.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pysat_ui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1207">
-              <caret line="904" column="51" selection-start-line="904" selection-start-column="51" selection-end-line="904" selection-end-column="51" />
-              <caret line="910" column="51" selection-start-line="910" selection-start-column="51" selection-end-line="910" selection-end-column="51" />
-              <caret line="916" column="56" selection-start-line="916" selection-start-column="56" selection-end-line="916" selection-end-column="56" />
+            <state relative-caret-position="901">
+              <caret line="898" column="86" selection-start-line="898" selection-start-column="31" selection-end-line="898" selection-end-column="86" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
                 <element signature="e#684#19480#0" expanded="false" />
@@ -764,10 +762,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pysat_ui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1207">
-          <caret line="904" column="51" selection-start-line="904" selection-start-column="51" selection-end-line="904" selection-end-column="51" />
-          <caret line="910" column="51" selection-start-line="910" selection-start-column="51" selection-end-line="910" selection-end-column="51" />
-          <caret line="916" column="56" selection-start-line="916" selection-start-column="56" selection-end-line="916" selection-end-column="56" />
+        <state relative-caret-position="901">
+          <caret line="898" column="86" selection-start-line="898" selection-start-column="31" selection-end-line="898" selection-end-column="86" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
             <element signature="e#684#19480#0" expanded="false" />
