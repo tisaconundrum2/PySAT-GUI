@@ -29,11 +29,11 @@ except AttributeError:
 
 
 class pysat_ui(object):
-    count = 1
+    count = 0
+    norm_spinBox_ = [None] * 1024
 
     def __init__(self):
-        self.norm_spinBox_ = [None]*1024
-        pysat_ui.count = 0
+        pass
 
     def compranges(self, MainWindow):
         self.CompRanges = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -864,7 +864,7 @@ class pysat_ui(object):
         self.verticalLayout_8.addWidget(self.Normalization)
         self.Normalization.setTitle(_translate("MainWindow", "Normalization", None))
         self.NormValuebutton.setText(_translate("MainWindow", "Add Value", None))
-        self.NormValuebutton.clicked.connect(lambda: pysat_ui.val_norm(self, MainWindow, self.count))
+        self.NormValuebutton.clicked.connect(lambda: pysat_ui.val_norm(self, MainWindow, pysat_ui.count))
 
     def val_norm(self, MainWindow, count):
         self.verticalLayout_2 = QtGui.QVBoxLayout()
@@ -878,28 +878,23 @@ class pysat_ui(object):
         self.norm_label = QtGui.QLabel(self.Normalization)
         self.norm_label.setObjectName(_fromUtf8("norm_label"))
         self.horizontalLayout_2.addWidget(self.norm_label)
-
-        self.norm_spinBox_[(count*2)-1] = QtGui.QSpinBox(self.Normalization)
-        self.norm_spinBox_[count*2] = QtGui.QSpinBox(self.Normalization)
-
-        self.norm_spinBox_[(count*2)-1].setMaximum(1000)
-        self.norm_spinBox_[count*2].setMaximum(1000)
-
-        self.norm_spinBox_[(count*2)-1].setObjectName(_fromUtf8("norm_spinBox_0"))
-        self.norm_spinBox_[count*2].setObjectName(_fromUtf8("norm_spinBox_1"))
-
-        self.horizontalLayout_2.addWidget(self.norm_spinBox_[(count*2)-1])
-        self.horizontalLayout_2.addWidget(self.norm_spinBox_[count*2])
-
+        pysat_ui.norm_spinBox_[(pysat_ui.count*2)-1] = QtGui.QSpinBox(self.Normalization)
+        pysat_ui.norm_spinBox_[pysat_ui.count*2] = QtGui.QSpinBox(self.Normalization)
+        pysat_ui.norm_spinBox_[(pysat_ui.count*2)-1].setMaximum(1000)
+        pysat_ui.norm_spinBox_[pysat_ui.count*2].setMaximum(1000)
+        pysat_ui.norm_spinBox_[(pysat_ui.count*2)-1].setObjectName(_fromUtf8("norm_spinBox_0"))
+        pysat_ui.norm_spinBox_[pysat_ui.count*2].setObjectName(_fromUtf8("norm_spinBox_1"))
+        self.horizontalLayout_2.addWidget(pysat_ui.norm_spinBox_[(pysat_ui.count*2)-1])
+        self.horizontalLayout_2.addWidget(pysat_ui.norm_spinBox_[pysat_ui.count*2])
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
         self.verticalLayout.addLayout(self.verticalLayout_2)
 
         #for debugging purposes
-        self.norm_spinBox_[(count*2)-1].valueChanged.connect(lambda: print(self.norm_spinBox_[(count*2)-1].text()))
-        self.norm_spinBox_[(count*2)].valueChanged.connect(lambda: print(self.norm_spinBox_[(count*2)].text()))
+        pysat_ui.norm_spinBox_[(pysat_ui.count*2)-1].valueChanged.connect(lambda: print(pysat_ui.norm_spinBox_[(pysat_ui.count*2)-1].text()))
+        pysat_ui.norm_spinBox_[(pysat_ui.count*2)].valueChanged.connect(lambda: print(pysat_ui.norm_spinBox_[(pysat_ui.count*2)-1].text()))
 
-        self.norm_label.setText(_translate("MainWindow", "Value {}".format(self.count), None))
-        self.count += 1
+        self.norm_label.setText(_translate("MainWindow", "Value {}".format(pysat_ui.count), None))
+        pysat_ui.count += 1
 
     ####These functions below are private
 
@@ -950,6 +945,7 @@ class pysat_ui(object):
         self.actionComposition_Ranges.triggered.connect(lambda: pysat_ui.compranges(self, MainWindow))
         self.actionCreate_Models.triggered.connect(lambda: pysat_ui.createmodels(self, MainWindow))
 
+
     def getCount(self):
         return pysat_ui.count
 
@@ -960,5 +956,3 @@ class pysat_ui(object):
     def open(self):
         # TODO open file dialog
         self.filename = QFileDialog.getOpenFileName(self, "Open a Workflow File", '.', "(*.wrf)")
-
-
