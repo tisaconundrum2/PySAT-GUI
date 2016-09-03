@@ -871,26 +871,50 @@ class pysat_ui(object):
         self.norm_label = QtGui.QLabel(self.Normalization)
         self.norm_label.setObjectName(_fromUtf8("norm_label"))
         self.horizontalLayout_2.addWidget(self.norm_label)
-        self.norm_spinBox_[(count*2)-1] = QtGui.QSpinBox(self.Normalization)    #All the left side boxes
-        self.norm_spinBox_[(count*2)] = QtGui.QSpinBox(self.Normalization)      #All the right side boxes
-        self.norm_spinBox_[(count*2)-1].setMaximum(1000)                        #set the maximums for the left side
-        self.norm_spinBox_[(count*2)].setMaximum(1000)                          #set the maximums for the right side
-        self.horizontalLayout_2.addWidget(self.norm_spinBox_[(count*2)-1])      #adding the actual object to UI (left)
-        self.horizontalLayout_2.addWidget(self.norm_spinBox_[(count*2)])        #adding the actual object to UI (right)
-        self.verticalLayout_2.addLayout(self.horizontalLayout_2)
-        self.verticalLayout.addLayout(self.verticalLayout_2)
+        
+        self.norm_spinBox_[(count*2)-1] = QtGui.QSpinBox(self.Normalization)    # All the left side boxes
+        self.norm_spinBox_[(count*2)] = QtGui.QSpinBox(self.Normalization)      # All the right side boxes
 
-        #for debugging purposes
-        self.norm_spinBox_[(count*2)-1].editingFinished.connect(lambda: print(self.norm_spinBox_[(count*2)-1].text()))
-        self.norm_spinBox_[(count*2)].editingFinished.connect(lambda: print(self.norm_spinBox_[(count*2)].text()))
+        self.norm_spinBox_[(count*2)-1].setMaximum(1000)                        # set the maximums for the left side
+        self.norm_spinBox_[(count*2)].setMaximum(1000)                          # set the maximums for the right side
+        self.horizontalLayout_2.addWidget(self.norm_spinBox_[(count*2)-1])      # adding the actual object to UI (left)
+        self.horizontalLayout_2.addWidget(self.norm_spinBox_[(count*2)])        # adding the actual object to UI (right)
+        self.verticalLayout_2.addLayout(self.horizontalLayout_2)                # setting up layout
+        self.verticalLayout.addLayout(self.verticalLayout_2)                    # setting up layout
+
+        # for debugging purposes
+        left_value = self.norm_spinBox_[(count*2)-1].text()
+        right_value = self.norm_spinBox_[count*2].text()
+        self.norm_spinBox_[(count*2)-1].editingFinished.connect(lambda: self.isWithinRange(left_value, right_value))
+        self.norm_spinBox_[(count*2)].editingFinished.connect(lambda: self.isWithinRange())
+
         self.norm_label.setText(_translate("MainWindow", "Value {}".format(self.count), None))
         self.count += 1
 
     ####These functions below are private and add functionality to the UI
 
-    def check_values_of_QSpinBox(self, qspin_val1, qspin_val2):
-        if (qspin_val1 > qspin_val2):
-            return True
+    def isWithinRange(self, low, high):
+        """
+        isWithinRange(int, int)
+        all values in spinboxes must go least to greatest
+        value 0: [] []
+        value 1: [1st] [2nd]
+
+        or
+
+        value 0: [] [1st]
+        value 1: [2nd] []
+
+
+        """
+
+        # if (low > high):
+
+
+        # if int(self.spinbox.text()) >= low and int(self.spinbox.text()) <= high:
+        #     return
+        # else:
+        #     self.spinbox.setText("")
 
     def on_maskFile_clicked(self):
         filename = QFileDialog.getOpenFileName(None, "Open Mask File", '.', "(*.csv)")
