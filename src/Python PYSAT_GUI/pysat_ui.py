@@ -24,7 +24,7 @@ class pysat_ui(object):
     count = 1
 
     def __init__(self):
-        self.norm_spinBox_ = [None]*1024
+        self.norm_spinBox_ = None
         pysat_ui.count = 0
 
     def mainframe(self, MainWindow):
@@ -871,22 +871,27 @@ class pysat_ui(object):
         self.norm_label = QtGui.QLabel(self.Normalization)
         self.norm_label.setObjectName(_fromUtf8("norm_label"))
         self.horizontalLayout_2.addWidget(self.norm_label)
-        
-        self.norm_spinBox_[(count*2)-1] = QtGui.QSpinBox(self.Normalization)    # All the left side boxes
-        self.norm_spinBox_[(count*2)] = QtGui.QSpinBox(self.Normalization)      # All the right side boxes
 
-        self.norm_spinBox_[(count*2)-1].setMaximum(1000)                        # set the maximums for the left side
-        self.norm_spinBox_[(count*2)].setMaximum(1000)                          # set the maximums for the right side
-        self.horizontalLayout_2.addWidget(self.norm_spinBox_[(count*2)-1])      # adding the actual object to UI (left)
-        self.horizontalLayout_2.addWidget(self.norm_spinBox_[(count*2)])        # adding the actual object to UI (right)
+        self.norm_spinBox_left = QtGui.QSpinBox(self.Normalization)
+        self.norm_spinBox_right = QtGui.QSpinBox(self.Normalization)
+
+        self.norm_spinBox_left.setMaximum(self.Normalization)
+        self.norm_spinBox_right.setMaximum(self.Normalization)
+
+        self.horizontalLayout_2.addWidget(self.norm_spinBox_left)
+        self.horizontalLayout_2.addWidget(self.norm_spinBox_right)
+
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)                # setting up layout
         self.verticalLayout.addLayout(self.verticalLayout_2)                    # setting up layout
 
         # for debugging purposes
-        left_value = self.norm_spinBox_[(count*2)-1].text()
-        right_value = self.norm_spinBox_[count*2].text()
-        self.norm_spinBox_[(count*2)-1].editingFinished.connect(lambda: self.isWithinRange(left_value, right_value))
-        self.norm_spinBox_[(count*2)].editingFinished.connect(lambda: self.isWithinRange())
+        self.norm_spinBox_.append(self.norm_spinBox_left.text())
+        self.norm_spinBox_.append(self.norm_spinBox_right.text())
+
+        # self.norm_spinBox_left.editingFinished.connect(lambda: self.isWithinRange())
+
+        # self.norm_spinBox_[(count*2)-1].editingFinished.connect(lambda: self.isWithinRange(left_value, right_value))
+        # self.norm_spinBox_[(count*2)].editingFinished.connect(lambda: self.isWithinRange(left_))
 
         self.norm_label.setText(_translate("MainWindow", "Value {}".format(self.count), None))
         self.count += 1
