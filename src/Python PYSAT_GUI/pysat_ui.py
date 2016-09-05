@@ -888,10 +888,6 @@ class pysat_ui(object):
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
         self.verticalLayout.addLayout(self.verticalLayout_2)  # setting up layout
 
-        for i in range(self.count):
-            # TODO iterate through each object and add it's data into an array
-            print(self.norm_spinBox_[count])
-
         self.norm_label.setText(_translate("MainWindow", "Value {}".format(self.count), None))
         self.count += 1
 
