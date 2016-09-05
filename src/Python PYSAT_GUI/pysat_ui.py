@@ -2,7 +2,6 @@ from PyQt4 import QtCore, QtGui
 from PyQt4.QtGui import QFileDialog
 import sys
 
-
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
@@ -11,6 +10,8 @@ except AttributeError:
 
 try:
     _encoding = QtGui.QApplication.UnicodeUTF8
+
+
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig, _encoding)
 except AttributeError:
@@ -18,13 +19,10 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 
-
-
 class pysat_ui(object):
     count = 1
 
     def __init__(self):
-        self.norm_spinBox_ = None
         pysat_ui.count = 0
 
     def mainframe(self, MainWindow):
@@ -275,7 +273,8 @@ class pysat_ui(object):
         self.actionUndecimated_Wavelet.setText(_translate("MainWindow", "Undecimated Wavelet", None))
         self.actionRatio.setText(_translate("MainWindow", "Ratio", None))
         self.actionTommy_s_Methgod.setText(_translate("MainWindow", "Tommy\'s Method", None))
-        self.actionPiecewise_Direct_Standardization.setText(_translate("MainWindow", "Piecewise Direct Standardization", None))
+        self.actionPiecewise_Direct_Standardization.setText(
+            _translate("MainWindow", "Piecewise Direct Standardization", None))
         self.actionPCA.setText(_translate("MainWindow", "PCA", None))
         self.actionICA.setText(_translate("MainWindow", "ICA", None))
         self.actionK_Means.setText(_translate("MainWindow", "K-Means", None))
@@ -674,10 +673,14 @@ class pysat_ui(object):
         self.label_89.setText(_translate("MainWindow", "0", None))
         self.label_90.setText(_translate("MainWindow", ")", None))
         self.label_91.setText(_translate("MainWindow", "]", None))
-        QtCore.QObject.connect(self.create_model_spin_2, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_79.setNum)
-        QtCore.QObject.connect(self.create_model_spin, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_77.setNum)
-        QtCore.QObject.connect(self.create_model_spin_3, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_84.setNum)
-        QtCore.QObject.connect(self.create_model_spin_4, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_89.setNum)
+        QtCore.QObject.connect(self.create_model_spin_2, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")),
+                               self.label_79.setNum)
+        QtCore.QObject.connect(self.create_model_spin, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")),
+                               self.label_77.setNum)
+        QtCore.QObject.connect(self.create_model_spin_3, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")),
+                               self.label_84.setNum)
+        QtCore.QObject.connect(self.create_model_spin_4, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")),
+                               self.label_89.setNum)
 
     def files(self, MainWindow):
         self.Files = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -763,7 +766,7 @@ class pysat_ui(object):
         self.unknownDataButton.setText(_translate("MainWindow", "...", None))
         self.fullDataBaseButton.setText(_translate("MainWindow", "...", None))
         self.outPutLocationButton.setText(_translate("MainWindow", "...", None))
-        try: #this try allows for
+        try:  # this try allows for
             self.maskFileButton.clicked.connect(lambda: pysat_ui.on_maskFile_clicked(self))
             self.unknownDataButton.clicked.connect(lambda: pysat_ui.on_uknownDataButton_clicked(self))
             self.fullDataBaseButton.clicked.connect(lambda: pysat_ui.on_fullDataBaseButton_clicked(self))
@@ -856,10 +859,10 @@ class pysat_ui(object):
         self.verticalLayout_8.addWidget(self.Normalization)
         self.Normalization.setTitle(_translate("MainWindow", "Normalization", None))
         self.NormValuebutton.setText(_translate("MainWindow", "Add Value", None))
-        self.NormValuebutton.clicked.connect(lambda: pysat_ui.val_norm(self, MainWindow, self.count))
+        self.NormValuebutton.clicked.connect(lambda: pysat_ui.val_norm(self, MainWindow))
 
 
-    def val_norm(self, MainWindow, count):
+    def val_norm(self, MainWindow):
         self.verticalLayout_2 = QtGui.QVBoxLayout()
         self.verticalLayout_2.setMargin(11)
         self.verticalLayout_2.setSpacing(6)
@@ -875,23 +878,19 @@ class pysat_ui(object):
         self.norm_spinBox_left = QtGui.QSpinBox(self.Normalization)
         self.norm_spinBox_right = QtGui.QSpinBox(self.Normalization)
 
-        self.norm_spinBox_left.setMaximum(self.Normalization)
-        self.norm_spinBox_right.setMaximum(self.Normalization)
+        self.norm_spinBox_left.setMaximum(1000)
+        self.norm_spinBox_right.setMaximum(1000)
+
 
         self.horizontalLayout_2.addWidget(self.norm_spinBox_left)
         self.horizontalLayout_2.addWidget(self.norm_spinBox_right)
 
-        self.verticalLayout_2.addLayout(self.horizontalLayout_2)                # setting up layout
-        self.verticalLayout.addLayout(self.verticalLayout_2)                    # setting up layout
+        self.verticalLayout_2.addLayout(self.horizontalLayout_2)
+        self.verticalLayout.addLayout(self.verticalLayout_2)  # setting up layout
 
-        # for debugging purposes
-        self.norm_spinBox_.append(self.norm_spinBox_left.text())
-        self.norm_spinBox_.append(self.norm_spinBox_right.text())
-
-        # self.norm_spinBox_left.editingFinished.connect(lambda: self.isWithinRange())
-
-        # self.norm_spinBox_[(count*2)-1].editingFinished.connect(lambda: self.isWithinRange(left_value, right_value))
-        # self.norm_spinBox_[(count*2)].editingFinished.connect(lambda: self.isWithinRange(left_))
+        for i in range(self.count):
+            # TODO iterate through each object and add it's data into an array
+            print(self.norm_spinBox_[count])
 
         self.norm_label.setText(_translate("MainWindow", "Value {}".format(self.count), None))
         self.count += 1
@@ -904,13 +903,9 @@ class pysat_ui(object):
         all values in spinboxes must go least to greatest
         value 0: [] []
         value 1: [1st] [2nd]
-
         or
-
         value 0: [] [1st]
         value 1: [2nd] []
-
-
         """
 
         # if (low > high):
