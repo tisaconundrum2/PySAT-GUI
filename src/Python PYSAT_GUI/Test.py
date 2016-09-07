@@ -1,29 +1,21 @@
 import sys
-from PyQt4.QtCore import *
+from PyQt4.QtCore import  *
 from PyQt4.QtGui import *
 
-class SpinboxWidget(QWidget):
+class SpinboxWidget(QWidget): ## this needs to be for mainwindow not widgets
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)
-        self.layout = QVBoxLayout()
-        # self.signalMapper = QSignalMapper(self)
-        # self.signalMapper.mapped[str].connect(self.setspbMin)
-
-        self.addSpinboxes(10)                                   # add an arbitrary number of spinboxes
-        self.setLayout(self.layout)
+        self.addSpinboxes(10)
 
     def addSpinboxes(self, n):
-        spb = []
-        self.layout.addWidget(QPushButton)
+        self.layout = QVBoxLayout()
+        self.setLayout(self.layout)
 
+        spb = []
         for i in range(n):
-            # objectname = 'spinbox_{}'.format(i)
-            spinbox = QSpinBox()
-            # spinbox.setObjectName(objectname)                 # to identify the spinbox later
-            spinbox.setMaximum(1000)
-            # spinbox.valueChanged.connect(self.signalMapper.map)
-            # self.signalMapper.setMapping(spinbox, objectname) # sends the objectname with his mapped() signal
-            spb.append(spinbox)                                 # added in edit
+            spinbox = QSpinBox() #
+            spinbox.setMaximum(1000) #
+            spb.append(spinbox)#
             self.layout.addWidget(spinbox)
 
         for i in range(n-1):
