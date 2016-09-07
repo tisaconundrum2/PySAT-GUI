@@ -861,6 +861,20 @@ class pysat_ui(object):
         self.NormValuebutton.setText(_translate("MainWindow", "Add Value", None))
         self.NormValuebutton.clicked.connect(lambda: pysat_ui.val_norm(self, MainWindow))
 
+    def addSpinboxes(self, n):
+        spb = []
+        for i in range(n):
+            # objectname = 'spinbox_{}'.format(i)
+            spinbox = QSpinBox()
+            # spinbox.setObjectName(objectname)                 # to identify the spinbox later
+            spinbox.setMaximum(1000)
+            # spinbox.valueChanged.connect(self.signalMapper.map)
+            # self.signalMapper.setMapping(spinbox, objectname) # sends the objectname with his mapped() signal
+            spb.append(spinbox)                                 # added in edit
+            self.layout.addWidget(spinbox)
+
+        for i in range(n-1):
+            spb[i].valueChanged.connect(spb[i + 1].setMinimum)
 
     def val_norm(self, MainWindow):
         self.verticalLayout_2 = QtGui.QVBoxLayout()
@@ -881,7 +895,6 @@ class pysat_ui(object):
         self.norm_spinBox_left.setMaximum(1000)
         self.norm_spinBox_right.setMaximum(1000)
 
-
         self.horizontalLayout_2.addWidget(self.norm_spinBox_left)
         self.horizontalLayout_2.addWidget(self.norm_spinBox_right)
 
@@ -892,25 +905,6 @@ class pysat_ui(object):
         self.count += 1
 
     ####These functions below are private and add functionality to the UI
-
-    def isWithinRange(self, low, high):
-        """
-        isWithinRange(int, int)
-        all values in spinboxes must go least to greatest
-        value 0: [] []
-        value 1: [1st] [2nd]
-        or
-        value 0: [] [1st]
-        value 1: [2nd] []
-        """
-
-        # if (low > high):
-
-
-        # if int(self.spinbox.text()) >= low and int(self.spinbox.text()) <= high:
-        #     return
-        # else:
-        #     self.spinbox.setText("")
 
     def on_maskFile_clicked(self):
         filename = QFileDialog.getOpenFileName(None, "Open Mask File", '.', "(*.csv)")
