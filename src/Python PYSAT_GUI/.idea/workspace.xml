@@ -24,8 +24,8 @@
       <file leaf-file-name="pysat_ui.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pysat_ui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="984">
-              <caret line="894" column="22" selection-start-line="894" selection-start-column="22" selection-end-line="894" selection-end-column="22" />
+            <state relative-caret-position="746">
+              <caret line="890" column="80" selection-start-line="890" selection-start-column="80" selection-end-line="890" selection-end-column="80" />
               <folding>
                 <element signature="e#684#19480#0" expanded="false" />
                 <element signature="e#19528#32950#0" expanded="false" />
@@ -33,16 +33,16 @@
                 <element signature="e#40534#45951#0" expanded="false" />
                 <element signature="e#45991#46782#0" expanded="false" />
                 <element signature="e#46838#49182#0" expanded="false" />
-                <element signature="e#52664#52864#0" expanded="false" />
-                <element signature="e#52917#53130#0" expanded="false" />
-                <element signature="e#53185#53398#0" expanded="false" />
-                <element signature="e#53455#53662#0" expanded="false" />
-                <element signature="e#53707#53848#0" expanded="false" />
-                <element signature="e#53952#54109#0" expanded="false" />
-                <element signature="e#54166#54664#0" expanded="false" />
-                <element signature="e#54694#54761#0" expanded="false" />
-                <element signature="e#54791#54912#0" expanded="false" />
-                <marker date="1473446191952" expanded="true" signature="49563:49572" ph="..." />
+                <element signature="e#52681#52881#0" expanded="false" />
+                <element signature="e#52934#53147#0" expanded="false" />
+                <element signature="e#53202#53415#0" expanded="false" />
+                <element signature="e#53472#53679#0" expanded="false" />
+                <element signature="e#53724#53865#0" expanded="false" />
+                <element signature="e#53969#54126#0" expanded="false" />
+                <element signature="e#54183#54681#0" expanded="false" />
+                <element signature="e#54711#54778#0" expanded="false" />
+                <element signature="e#54808#54929#0" expanded="false" />
+                <marker date="1473446829326" expanded="true" signature="49563:49572" ph="..." />
               </folding>
             </state>
           </provider>
@@ -661,7 +661,7 @@
         <state relative-caret-position="357">
           <caret line="21" column="62" selection-start-line="21" selection-start-column="62" selection-end-line="21" selection-end-column="62" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -676,8 +676,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pysat_ui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="984">
-          <caret line="894" column="22" selection-start-line="894" selection-start-column="22" selection-end-line="894" selection-end-column="22" />
+        <state relative-caret-position="746">
+          <caret line="890" column="80" selection-start-line="890" selection-start-column="80" selection-end-line="890" selection-end-column="80" />
           <folding>
             <element signature="e#684#19480#0" expanded="false" />
             <element signature="e#19528#32950#0" expanded="false" />
@@ -685,16 +685,16 @@
             <element signature="e#40534#45951#0" expanded="false" />
             <element signature="e#45991#46782#0" expanded="false" />
             <element signature="e#46838#49182#0" expanded="false" />
-            <element signature="e#52664#52864#0" expanded="false" />
-            <element signature="e#52917#53130#0" expanded="false" />
-            <element signature="e#53185#53398#0" expanded="false" />
-            <element signature="e#53455#53662#0" expanded="false" />
-            <element signature="e#53707#53848#0" expanded="false" />
-            <element signature="e#53952#54109#0" expanded="false" />
-            <element signature="e#54166#54664#0" expanded="false" />
-            <element signature="e#54694#54761#0" expanded="false" />
-            <element signature="e#54791#54912#0" expanded="false" />
-            <marker date="1473446191952" expanded="true" signature="49563:49572" ph="..." />
+            <element signature="e#52681#52881#0" expanded="false" />
+            <element signature="e#52934#53147#0" expanded="false" />
+            <element signature="e#53202#53415#0" expanded="false" />
+            <element signature="e#53472#53679#0" expanded="false" />
+            <element signature="e#53724#53865#0" expanded="false" />
+            <element signature="e#53969#54126#0" expanded="false" />
+            <element signature="e#54183#54681#0" expanded="false" />
+            <element signature="e#54711#54778#0" expanded="false" />
+            <element signature="e#54808#54929#0" expanded="false" />
+            <marker date="1473446829326" expanded="true" signature="49563:49572" ph="..." />
           </folding>
         </state>
       </provider>
