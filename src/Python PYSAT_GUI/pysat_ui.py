@@ -892,6 +892,7 @@ class pysat_ui(object):
 
         self.norm_label.setText(_translate("MainWindow", "Value {}".format(self.count), None))
         self.count += 1
+        for i in range
 
     ####These functions below are private and add functionality to the UI
 
