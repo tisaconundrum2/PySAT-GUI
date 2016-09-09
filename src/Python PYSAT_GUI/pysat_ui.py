@@ -887,15 +887,15 @@ class pysat_ui(object):
         self.verticalLayout.addLayout(self.verticalLayout_2)
 
         # for debugging purposes
-        self.norm_spinBox_[(count * 2) - 1].editingFinished.connect(lambda: print())
-        self.norm_spinBox_[(count * 2)].editingFinished.connect(lambda: print())
+        self.norm_spinBox_[(count * 2) - 1].editingFinished.connect(lambda: print(self.spinCount((count * 2) - 1)))
+        self.norm_spinBox_[(count * 2)].editingFinished.connect(lambda: print(self.spinCount(count * 2)))
 
         self.norm_label.setText(_translate("MainWindow", "Value {}".format(self.count), None))
 
 
     ####These functions below are private and add functionality to the UI
 
-    def whichSpinBox(self, value):
+    def spinCount(self, value):
         for i in range(self.count * 2):
             if value == "norm_spinBox_{}".format(i):
                 return i
