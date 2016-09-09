@@ -656,14 +656,6 @@
     <entry file="file://C:/Anaconda3/Lib/pysat/regression/pls_sm.py" />
     <entry file="file://$USER_HOME$/Anaconda3/Lib/codecs.py" />
     <entry file="file://$USER_HOME$/.PyCharm2016.2/system/python_stubs/1729424695/PyQt4/QtGui/QWidget.py" />
-    <entry file="file://$PROJECT_DIR$/pysat_main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="42" column="19" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -671,6 +663,14 @@
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pysat_main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="42" column="19" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
