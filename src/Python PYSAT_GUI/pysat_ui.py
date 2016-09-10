@@ -25,6 +25,7 @@ class pysat_ui(object):
 
     def __init__(self):
         self.norm_spinBox_ = [None]*1024
+        self.spin_array = [None]*1024
         pysat_ui.count = 1
 
     def mainframe(self, MainWindow):
@@ -859,6 +860,8 @@ class pysat_ui(object):
         self.NormValuebutton.clicked.connect(lambda: pysat_ui.val_norm(self, MainWindow, self.count))
 
     def val_norm(self, MainWindow, count):
+        l_spin = (count * 2) - 1
+        r_spin = (count * 2)
         self.verticalLayout_2 = QtGui.QVBoxLayout()
         self.verticalLayout_2.setMargin(11)
         self.verticalLayout_2.setSpacing(6)
@@ -871,29 +874,38 @@ class pysat_ui(object):
         self.norm_label.setObjectName(_fromUtf8("norm_label"))
         self.horizontalLayout_2.addWidget(self.norm_label)
 
-        self.norm_spinBox_[(count * 2) - 1] = QtGui.QSpinBox(self.Normalization)
-        self.norm_spinBox_[count * 2] = QtGui.QSpinBox(self.Normalization)
+        self.norm_spinBox_[l_spin] = QtGui.QSpinBox(self.Normalization)
+        self.norm_spinBox_[r_spin] = QtGui.QSpinBox(self.Normalization)
 
-        self.norm_spinBox_[(count * 2) - 1].setMaximum(1000)
-        self.norm_spinBox_[count * 2].setMaximum(1000)
+        self.norm_spinBox_[l_spin].setMaximum(1000)
+        self.norm_spinBox_[r_spin].setMaximum(1000)
 
-        self.norm_spinBox_[(count * 2) - 1].setObjectName(_fromUtf8("norm_spinBox_{}".format((count * 2) - 1)))
-        self.norm_spinBox_[count * 2].setObjectName(_fromUtf8("norm_spinBox_{}".format((count * 2))))
-
-        self.horizontalLayout_2.addWidget(self.norm_spinBox_[(count * 2) - 1])
-        self.horizontalLayout_2.addWidget(self.norm_spinBox_[count * 2])
+        self.norm_spinBox_[l_spin].setObjectName(_fromUtf8("norm_spinBox_{}".format(l_spin)))
+        self.norm_spinBox_[r_spin].setObjectName(_fromUtf8("norm_spinBox_{}".format(r_spin)))
+        
+        self.horizontalLayout_2.addWidget(self.norm_spinBox_[l_spin])
+        self.horizontalLayout_2.addWidget(self.norm_spinBox_[r_spin])
 
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
         self.verticalLayout.addLayout(self.verticalLayout_2)
 
         # for debugging purposes
-        self.norm_spinBox_[(count * 2) - 1].editingFinished.connect(lambda: )
-        self.norm_spinBox_[(count * 2)].editingFinished.connect(lambda: )
-
+        self.norm_spinBox_[l_spin].editingFinished.connect(lambda: self.set_norm_array(self.norm_spinBox_[l_spin].text(), l_spin))
+        self.norm_spinBox_[r_spin].editingFinished.connect(lambda: self.set_norm_array(self.norm_spinBox_[r_spin].text(), r_spin))
         self.norm_label.setText(_translate("MainWindow", "Value {}".format(self.count), None))
-
+        self.count += 1
 
     ####These functions below are private and add functionality to the UI
+
+	#   object           function
+	# |--------|       |----------|
+	# |spinBox | ----> |text      |
+	# |--------|       |----------|     array
+    #                         |------> | data |
+    def set_norm_array(self, spin_box_text, index):
+        self.spin_array[index] = spin_box_text
+        for i in range(0, index+1):
+            print(self.spin_array[i])
 
     def on_maskFile_clicked(self):
         filename = QFileDialog.getOpenFileName(None, "Open Mask File", '.', "(*.csv)")
