@@ -773,25 +773,6 @@ class pysat_ui(object):
         except:
             pass
 
-    def ok(self, MainWindow):
-        self.OK = QtGui.QGroupBox(self.centralWidget)
-        self.OK.setObjectName(_fromUtf8("OK"))
-        self.ok = QtGui.QHBoxLayout(self.OK)
-        self.ok.setMargin(11)
-        self.ok.setSpacing(6)
-        self.ok.setObjectName(_fromUtf8("ok"))
-        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.ok.addItem(spacerItem)
-        self.okButton = QtGui.QPushButton(self.OK)
-        font = QtGui.QFont()
-        font.setPointSize(8)
-        self.okButton.setFont(font)
-        self.okButton.setMouseTracking(False)
-        self.okButton.setObjectName(_fromUtf8("okButton"))
-        self.ok.addWidget(self.okButton)
-        self.verticalLayout_9.addWidget(self.OK)
-        self.okButton.setText(_translate("MainWindow", "OK", None))
-
     def element_name_setup(self, MainWindow):
         self.CrossValidation = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
         font = QtGui.QFont()
@@ -860,6 +841,11 @@ class pysat_ui(object):
         self.NormValuebutton.clicked.connect(lambda: pysat_ui.val_norm(self, MainWindow, self.count))
 
     def val_norm(self, MainWindow, count):
+		#   object           function
+	    # |--------|       |----------|
+		# |spinBox | ----> |text      |
+		# |--------|       |----------|     array
+		#                         |------> | data |
         l_spin = (count * 2) - 1
         r_spin = (count * 2)
         self.verticalLayout_2 = QtGui.QVBoxLayout()
@@ -895,13 +881,29 @@ class pysat_ui(object):
         self.norm_label.setText(_translate("MainWindow", "Value {}".format(self.count), None))
         self.count += 1
 
-    ####These functions below are private and add functionality to the UI
+    def ok(self, MainWindow):
+        self.OK = QtGui.QGroupBox(self.centralWidget)
+        self.OK.setObjectName(_fromUtf8("OK"))
+        self.ok = QtGui.QHBoxLayout(self.OK)
+        self.ok.setMargin(11)
+        self.ok.setSpacing(6)
+        self.ok.setObjectName(_fromUtf8("ok"))
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.ok.addItem(spacerItem)
+        self.okButton = QtGui.QPushButton(self.OK)
+        font = QtGui.QFont()
+        font.setPointSize(8)
+        self.okButton.setFont(font)
+        self.okButton.setMouseTracking(False)
+        self.okButton.setObjectName(_fromUtf8("okButton"))
+        self.ok.addWidget(self.okButton)
+        self.verticalLayout_9.addWidget(self.OK)
+        self.okButton.setText(_translate("MainWindow", "OK", None))
 
-	#   object           function
-	# |--------|       |----------|
-	# |spinBox | ----> |text      |
-	# |--------|       |----------|     array
-    #                         |------> | data |
+
+	####These functions below are private and add functionality to the UI
+
+	
     def set_norm_array(self, spin_box_text, index):
         self.spin_array[index] = spin_box_text
         for i in range(0, index+1):
@@ -932,6 +934,7 @@ class pysat_ui(object):
             self.lineEdit_4.setText("*/*")
 
     def on_okButton_clicked(self):
+		#TODO Create functionality for all modules
         print(self.lineEdit.text())
         print(self.lineEdit_2.text())
         print(self.lineEdit_3.text())
