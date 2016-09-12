@@ -3,8 +3,10 @@ from pysat.regression.pls_sm import pls_sm
 import pandas as pd
 
 class pysat_func(object):
-    def __init__(self, outpath, db, unknowndatacsv, maskfile):
+    def __init__(self):
+        pass
 
+    def set_files(self, outpath, db, unknowndatacsv, maskfile):
         self.outpath = outpath
         self.db = db
         self.unknowndatacsv = unknowndatacsv

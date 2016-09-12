@@ -24,7 +24,7 @@ class pysat_ui(object):
     count = 0
 
     def __init__(self):
-        self.pysat = pysat_func()
+        self.pysat_func = pysat_func()
         self.norm_spinBox_ = [None]*1024
         self.spin_array = [None]*1024
         pysat_ui.count = 1
@@ -773,7 +773,7 @@ class pysat_ui(object):
             self.okButton.clicked.connect(lambda: pysat_ui.on_okButton_clicked(self))
         except:
             pass
-        
+        self.pysat_func.set_files()
         print(self.lineEdit.text())
         print(self.lineEdit_2.text())
         print(self.lineEdit_3.text())
