@@ -841,11 +841,15 @@ class pysat_ui(object):
         self.NormValuebutton.clicked.connect(lambda: pysat_ui.val_norm(self, MainWindow, self.count))
 
     def val_norm(self, MainWindow, count):
-		#   object           function
-	    # |--------|       |----------|
-		# |spinBox | ----> |text      |
-		# |--------|       |----------|     array
-		#                         |------> | data |
+        # an array holds a set of spinbox objects
+        # each array has a function text() that outputs an int
+        # that will be added to the array called spin_array[]
+        # this array will then add this data as parameters for normalization
+        #   object           function
+        # |--------|       |----------|
+        # |spinBox | ----> |text      |
+        # |--------|       |----------|     array
+        #                          |------> | data |
         l_spin = (count * 2) - 1
         r_spin = (count * 2)
         self.verticalLayout_2 = QtGui.QVBoxLayout()
@@ -880,7 +884,6 @@ class pysat_ui(object):
         self.norm_spinBox_[r_spin].editingFinished.connect(lambda: self.set_norm_array(self.norm_spinBox_[r_spin].text(), r_spin))
         self.norm_label.setText(_translate("MainWindow", "Value {}".format(self.count), None))
         self.count += 1
-        pysat_function.get_ranges(self.set_norm_array())
 
     def ok(self, MainWindow):
         self.OK = QtGui.QGroupBox(self.centralWidget)
@@ -902,8 +905,8 @@ class pysat_ui(object):
         self.okButton.setText(_translate("MainWindow", "OK", None))
 
 
-	####These functions below are private and add functionality to the UI
-	
+    ####These functions below are private and add functionality to the UI
+
     def set_norm_array(self, spin_box_text, index):
         self.spin_array[index] = spin_box_text
         for i in range(0, index+1):
@@ -934,7 +937,7 @@ class pysat_ui(object):
             self.lineEdit_4.setText("*/*")
 
     def on_okButton_clicked(self):
-		#TODO Create functionality for all modules
+        #TODO Create functionality for all modules
         print(self.lineEdit.text())
         print(self.lineEdit_2.text())
         print(self.lineEdit_3.text())
