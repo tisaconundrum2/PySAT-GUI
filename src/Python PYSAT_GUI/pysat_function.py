@@ -5,7 +5,7 @@ import pandas as pd
 class pysat_func(object):
     def __init__(self):
         pass
-    
+
     def set_files(self, outpath, db, unknowndatacsv, maskfile):
         self.outpath = outpath
         self.db = db

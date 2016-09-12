@@ -771,13 +771,13 @@ class pysat_ui(object):
             self.fullDataBaseButton.clicked.connect(lambda: pysat_ui.on_fullDataBaseButton_clicked(self))
             self.outPutLocationButton.clicked.connect(lambda: pysat_ui.on_outPutLocationButton_clicked(self))
             self.okButton.clicked.connect(lambda: pysat_ui.on_okButton_clicked(self))
+            maskfile = self.lineEdit.text()
+            unknowndatacsv = self.lineEdit_2.text()
+            db = self.lineEdit_3.text()
+            outpath = self.lineEdit_4.text()
+            self.pysat_func.set_files(outpath, db, unknowndatacsv, maskfile)
         except:
             pass
-        maskfile = self.lineEdit.text()
-        unknowndatacsv = self.lineEdit_2.text()
-        db = self.lineEdit_3.text()
-        outpath = self.lineEdit_4.text()
-        self.pysat_func.set_files(outpath, db, unknowndatacsv, maskfile)
 
     def element_name_setup(self, MainWindow):
         self.CrossValidation = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -915,7 +915,7 @@ class pysat_ui(object):
 
     def set_norm_array(self, spin_box_text, index):
         self.spin_array[index] = spin_box_text
-        for i in range(0, index+1):
+        for i in range(0, self.count*2):
             print(self.spin_array[i])
 
     def on_maskFile_clicked(self):
