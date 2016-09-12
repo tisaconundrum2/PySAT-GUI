@@ -1,7 +1,7 @@
 from PyQt4 import QtCore, QtGui
 from PyQt4.QtGui import QFileDialog
 import sys
-import pysat_function import pysat_func
+from pysat_function import pysat_func
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -773,11 +773,11 @@ class pysat_ui(object):
             self.okButton.clicked.connect(lambda: pysat_ui.on_okButton_clicked(self))
         except:
             pass
-        self.pysat_func.set_files()
-        print(self.lineEdit.text())
-        print(self.lineEdit_2.text())
-        print(self.lineEdit_3.text())
-        print(self.lineEdit_4.text())
+        maskfile = self.lineEdit.text()
+        unknowndatacsv = self.lineEdit_2.text()
+        db = self.lineEdit_3.text()
+        outpath = self.lineEdit_4.text()
+        self.pysat_func.set_files(outpath, db, unknowndatacsv, maskfile)
 
     def element_name_setup(self, MainWindow):
         self.CrossValidation = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
