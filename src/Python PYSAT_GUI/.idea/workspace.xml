@@ -20,14 +20,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="pysat_ui.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="pysat_ui.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pysat_ui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="894" column="8" selection-start-line="894" selection-start-column="8" selection-end-line="894" selection-end-column="8" />
+            <state relative-caret-position="479">
+              <caret line="882" column="54" selection-start-line="882" selection-start-column="54" selection-end-line="882" selection-end-column="54" />
               <folding>
-                <marker date="1473497844877" expanded="false" signature="0:78" ph="import ..." />
+                <element signature="e#0#31#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="spectral_data.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../../pysat/spectral/spectral_data.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2400">
+              <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -35,9 +45,35 @@
       <file leaf-file-name="pysat_main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pysat_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="4" />
-              <folding />
+            <state relative-caret-position="512">
+              <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pysat_function.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pysat_function.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="462">
+              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#54#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pls_sm_test[0.13].py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../python_test_code/pls_sm_test[0.13].py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="462">
+              <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+              <folding>
+                <element signature="e#196#250#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -101,6 +137,7 @@
         <option value="$PROJECT_DIR$/../python_test_code/pls_sm_test[0.13].py" />
         <option value="$PROJECT_DIR$/Test.py" />
         <option value="$PROJECT_DIR$/pysat_main.py" />
+        <option value="$PROJECT_DIR$/pysat_function.py" />
         <option value="$PROJECT_DIR$/pysat_ui.py" />
       </list>
     </option>
@@ -136,7 +173,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -158,10 +194,11 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../python_test_code/pls_sm_test[0.13].py" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
@@ -430,7 +467,7 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-11" y="-11" width="1942" height="1042" extended-state="6" />
+    <frame x="-11" y="-11" width="1942" height="1042" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18333334" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -522,8 +559,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://C:/Anaconda3/Lib/site-packages/numpy/__config__.py" />
-    <entry file="file://C:/Anaconda3/Lib/site-packages/numpy/__init__.py" />
     <entry file="file://$PROJECT_DIR$/pysat_ui/main.py" />
     <entry file="file://$PROJECT_DIR$/pysat_ui/all.py" />
     <entry file="file://$PROJECT_DIR$/pysat_ui/pysat_ui.py" />
@@ -550,11 +585,6 @@
     <entry file="file://$PROJECT_DIR$/button_functionality.py" />
     <entry file="file://$USER_HOME$/.PyCharm2016.1/system/python_stubs/1013586911/PyQt4/QtCore/QMetaObject.py" />
     <entry file="file://$PROJECT_DIR$/button_functions.py" />
-    <entry file="file://$PROJECT_DIR$/splash.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../New PYSAT_Gui/mainwindow_normalization.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
@@ -630,13 +660,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../python_test_code/pls_sm_test[0.13].py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="893">
-          <caret line="59" column="20" selection-start-line="59" selection-start-column="20" selection-end-line="59" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Anaconda3/Lib/pysat/regression/pls_sm.py" />
     <entry file="file://$USER_HOME$/Anaconda3/Lib/codecs.py" />
     <entry file="file://$USER_HOME$/.PyCharm2016.2/system/python_stubs/1729424695/PyQt4/QtGui/QWidget.py" />
@@ -647,20 +670,55 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/splash.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pysat_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="4" />
-          <folding />
+        <state relative-caret-position="512">
+          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pysat_ui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="894" column="8" selection-start-line="894" selection-start-column="8" selection-end-line="894" selection-end-column="8" />
+        <state relative-caret-position="479">
+          <caret line="882" column="54" selection-start-line="882" selection-start-column="54" selection-end-line="882" selection-end-column="54" />
           <folding>
-            <marker date="1473497844877" expanded="false" signature="0:78" ph="import ..." />
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../python_test_code/pls_sm_test[0.13].py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+          <folding>
+            <element signature="e#196#250#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../pysat/spectral/spectral_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2400">
+          <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pysat_function.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#54#0" expanded="true" />
           </folding>
         </state>
       </provider>

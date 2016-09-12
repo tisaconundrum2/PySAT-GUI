@@ -880,6 +880,7 @@ class pysat_ui(object):
         self.norm_spinBox_[r_spin].editingFinished.connect(lambda: self.set_norm_array(self.norm_spinBox_[r_spin].text(), r_spin))
         self.norm_label.setText(_translate("MainWindow", "Value {}".format(self.count), None))
         self.count += 1
+        pysat_function.get_ranges(self.set_norm_array())
 
     def ok(self, MainWindow):
         self.OK = QtGui.QGroupBox(self.centralWidget)
@@ -902,7 +903,6 @@ class pysat_ui(object):
 
 
 	####These functions below are private and add functionality to the UI
-
 	
     def set_norm_array(self, spin_box_text, index):
         self.spin_array[index] = spin_box_text
@@ -939,6 +939,7 @@ class pysat_ui(object):
         print(self.lineEdit_2.text())
         print(self.lineEdit_3.text())
         print(self.lineEdit_4.text())
+
 
     ####These functions allow for interactions of buttons
 
