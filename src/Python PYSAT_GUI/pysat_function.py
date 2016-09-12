@@ -12,7 +12,7 @@ class pysat_func(object):
         self.data
 
 
-    def interp(self, data):
+    def set1_interp(self, data):
         pass
 
     def get_range(self, data, ranges):
@@ -20,7 +20,7 @@ class pysat_func(object):
 
 
 
-    def getspectra(self):
+    def get_spectra(self):
         self.data = pd.read_csv(self.db, header=[0, 1])
         self.data = spectral_data(self.data)
         unknown_data = pd.read_csv(self.unknowndatacsv, header=[0, 1])
@@ -28,25 +28,14 @@ class pysat_func(object):
         unknown_data.interp(self.data.df['wvl'].columns)
         self.data.mask(self.maskfile)
         unknown_data.mask(self.maskfile)
+        return unknown_data
 
-###################################################
-# Normalizing Data and getting Ranges
-# range3: equivalent to norm3
-# range1: equivalent to norm1
-###################################################
     def get_ranges(self, data, ranges):
         data.norm(ranges)
         unknown_data = self.unknown_data
         unknown_data.norm(ranges)
         return unknown_data
 
-###################################################
-# nfolds: the number of folds to divide data into to extract an overall test set
-# testfold: which fold to use as the overall test set
-# nfolds_cv: Number of folds for CV
-# testfold_cv: Which fold to use as the test set for cross validation
-# Cross Validation
-###################################################
     def set_element_name(self, el):
         self.el = el
 
@@ -65,11 +54,6 @@ class pysat_func(object):
     def get_testfold_test(self):
         return self.testfold_test
 
-###################################################
-# Composition Ranges
-# These are the composition ranges for the submodels
-# nc: max number of components
-###################################################
     def set_compranges(self, data):
         """ Usage:         [[-20, 50], [30, 70], [60, 100], [0, 120]]
         :param data:
