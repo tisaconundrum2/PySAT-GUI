@@ -3,7 +3,6 @@ from pysat.regression.pls_sm import pls_sm
 import pandas as pd
 
 class pysat_func(object):
-    #TODO Get rid of maskfile, you will want to stick that into another module
     #TODO there may be instances where unknown_data never exists, you will want to account for that.
     # Thus make sure that you have if's for all instances in functions where unknown_data doesn't exist.
     def __init__(self):
@@ -42,7 +41,8 @@ class pysat_func(object):
         
         
         
-        #TODO make mask it's own function
+    #TODO make mask it's own function
+    #TODO Get rid of maskfile, you will want to stick that into another module
     def set_mask(self)
         self.data.mask(self.maskfile)
         self.unknown_data.mask(self.maskfile)
