@@ -59,50 +59,15 @@ QGroupBox::title {
           <property name="title">
            <string>Files</string>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_4">
+          <layout class="QVBoxLayout" name="verticalLayout_2">
            <item>
-            <layout class="QHBoxLayout" name="horizontalLayout">
+            <layout class="QVBoxLayout" name="verticalLayout">
              <item>
-              <layout class="QVBoxLayout" name="verticalLayout">
-               <item>
-                <widget class="QLabel" name="label_3">
-                 <property name="text">
-                  <string>Maskfile</string>
-                 </property>
-                </widget>
-               </item>
+              <layout class="QHBoxLayout" name="horizontalLayout">
                <item>
                 <widget class="QLabel" name="label">
                  <property name="text">
                   <string>Unknown Data</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_2">
-                 <property name="text">
-                  <string>Full Database</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_4">
-                 <property name="text">
-                  <string>Output Location</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QVBoxLayout" name="verticalLayout_2">
-               <item>
-                <widget class="QLineEdit" name="lineEdit">
-                 <property name="text">
-                  <string extracomment="Make this change whenever a new file is selected">*.csv</string>
-                 </property>
-                 <property name="readOnly">
-                  <bool>true</bool>
                  </property>
                 </widget>
                </item>
@@ -117,6 +82,24 @@ QGroupBox::title {
                 </widget>
                </item>
                <item>
+                <widget class="QToolButton" name="unknownDataButton">
+                 <property name="text">
+                  <string>...</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_2">
+               <item>
+                <widget class="QLabel" name="label_2">
+                 <property name="text">
+                  <string>Full Database</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
                 <widget class="QLineEdit" name="lineEdit_3">
                  <property name="text">
                   <string extracomment="Make this change whenever a new file is selected">*.csv</string>
@@ -127,37 +110,30 @@ QGroupBox::title {
                 </widget>
                </item>
                <item>
-                <widget class="QLineEdit" name="lineEdit_4">
+                <widget class="QToolButton" name="fullDataBaseButton">
                  <property name="text">
-                  <string extracomment="Make this change whenever a new folder is selected">*/*</string>
-                 </property>
-                 <property name="readOnly">
-                  <bool>true</bool>
+                  <string>...</string>
                  </property>
                 </widget>
                </item>
               </layout>
              </item>
              <item>
-              <layout class="QVBoxLayout" name="verticalLayout_3">
+              <layout class="QHBoxLayout" name="horizontalLayout_3">
                <item>
-                <widget class="QToolButton" name="maskFileButton">
+                <widget class="QLabel" name="label_4">
                  <property name="text">
-                  <string>...</string>
+                  <string>Output Location</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QToolButton" name="unknownDataButton">
+                <widget class="QLineEdit" name="lineEdit_4">
                  <property name="text">
-                  <string>...</string>
+                  <string extracomment="Make this change whenever a new folder is selected">*/*</string>
                  </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QToolButton" name="fullDataBaseButton">
-                 <property name="text">
-                  <string>...</string>
+                 <property name="readOnly">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </item>
