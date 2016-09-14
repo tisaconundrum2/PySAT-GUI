@@ -765,17 +765,12 @@ class pysat_ui(object):
         self.unknownDataButton.setText(_translate("MainWindow", "...", None))
         self.fullDataBaseButton.setText(_translate("MainWindow", "...", None))
         self.outPutLocationButton.setText(_translate("MainWindow", "...", None))
-        try: #this try allows for
+        try:
             self.maskFileButton.clicked.connect(lambda: pysat_ui.on_maskFile_clicked(self))
             self.unknownDataButton.clicked.connect(lambda: pysat_ui.on_uknownDataButton_clicked(self))
             self.fullDataBaseButton.clicked.connect(lambda: pysat_ui.on_fullDataBaseButton_clicked(self))
             self.outPutLocationButton.clicked.connect(lambda: pysat_ui.on_outPutLocationButton_clicked(self))
             self.okButton.clicked.connect(lambda: pysat_ui.on_okButton_clicked(self))
-            m = self.lineEdit.text()
-            u = self.lineEdit_2.text()
-            d = self.lineEdit_3.text()
-            o = self.lineEdit_4.text()
-            self.pysat_fun(outpath=o, db=d, unknowndatacsv=u, maskfile=m)
         except:
             pass
 
