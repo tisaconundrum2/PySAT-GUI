@@ -3,10 +3,8 @@ from pysat.regression.pls_sm import pls_sm
 import pandas as pd
 
 class pysat_func(object):
-    #TODO there may be instances where unknown_data never exists, you will want to account for that.
     # Thus make sure that you have if's for all instances in functions where unknown_data doesn't exist.
     def __init__(self):
-        #TODO Globalize all of the files and data and unknowndata
         self.data = None
         self.unknown_data = None
         self.outpath = None
