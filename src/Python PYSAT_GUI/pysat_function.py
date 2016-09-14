@@ -3,29 +3,45 @@ from pysat.regression.pls_sm import pls_sm
 import pandas as pd
 
 class pysat_func(object):
+    #TODO Get rid of maskfile, you will want to stick that into another module
     def __init__(self):
-        pass
+        #TODO Globalize all of the files and data and unknowndata
+        data = None
+        unknown_data = None
+        outpath = None
+        unknowndatacsv = None
+        maskfile = None
     
-    def set_files(self, outpath, db, unknowndatacsv, maskfile):
-        self.outpath = outpath
-        self.db = db
-        self.unknowndatacsv = unknowndatacsv
-        self.maskfile = maskfile
 
-    def set1_interp(self, data):
+    def get_files(self, **kwargs):
+        for key, value in kwargs.items():
+            if key == "outpath":
+                self.outpath = value
+            elif key == "db":
+                self.db = value
+            elif key == "unknowndatacsv":
+                self.unknowndatacsv = value
+            elif key == "maskfile":
+                self.maskfile = value
+
+    def set_interp(self, data):
         pass
 
     def get_range(self, data, ranges):
         pass
-
-
 
     def get_spectra(self):
         self.data = pd.read_csv(self.db, header=[0, 1])
         self.data = spectral_data(self.data)
         unknown_data = pd.read_csv(self.unknowndatacsv, header=[0, 1])
         unknown_data = spectral_data(unknown_data)
+        
+        
+        #TODO interp should be it's ownn function
         unknown_data.interp(self.data.df['wvl'].columns)
+        
+        
+        #TODO make mask it's own function
         self.data.mask(self.maskfile)
         unknown_data.mask(self.maskfile)
         return unknown_data

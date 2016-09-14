@@ -28,6 +28,8 @@ data = pd.read_csv(db, header=[0, 1])
 data = spectral_data(data)
 unknown_data = pd.read_csv(unknowndatacsv, header=[0, 1])
 unknown_data = spectral_data(unknown_data)
+
+
 unknown_data.interp(data.df['wvl'].columns)
 
 data.mask(maskfile)
@@ -80,7 +82,6 @@ data1_test = data1.rows_match(('meta', 'Folds'), [testfold_test])
 ncs = [7, 7, 5, 9]
 traindata = [data1_train.df, data1_train.df, data1_train.df, data1_train.df]
 testdata = [data1_test.df, data1_test.df, data1_test.df, data1_test.df]
-unkdata = [unknown_data1.df, unknown_data1.df, unknown_data1.df, unknown_data1.df]
 
 sm = pls_sm()
 
