@@ -4,13 +4,15 @@ import pandas as pd
 
 class pysat_func(object):
     #TODO Get rid of maskfile, you will want to stick that into another module
+    #TODO there may be instances where unknown_data never exists, you will want to account for that.
+    # Thus make sure that you have if's for all instances in functions where unknown_data doesn't exist.
     def __init__(self):
         #TODO Globalize all of the files and data and unknowndata
-        data = None
-        unknown_data = None
-        outpath = None
-        unknowndatacsv = None
-        maskfile = None
+        self.data = None
+        self.unknown_data = None
+        self.outpath = None
+        self.unknowndatacsv = None
+        self.maskfile = None
     
 
     def get_files(self, **kwargs):
@@ -25,7 +27,8 @@ class pysat_func(object):
                 self.maskfile = value
 
     def set_interp(self, data):
-        pass
+        #TODO interp should be it's ownn function
+        self.unknown_data.interp(self.data.df['wvl'].columns)
 
     def get_range(self, data, ranges):
         pass
@@ -33,19 +36,17 @@ class pysat_func(object):
     def get_spectra(self):
         self.data = pd.read_csv(self.db, header=[0, 1])
         self.data = spectral_data(self.data)
-        unknown_data = pd.read_csv(self.unknowndatacsv, header=[0, 1])
-        unknown_data = spectral_data(unknown_data)
+        self.unknown_data = pd.read_csv(self.unknowndatacsv, header=[0, 1])
+        self.unknown_data = spectral_data(self.unknown_data)
         
         
-        #TODO interp should be it's ownn function
-        unknown_data.interp(self.data.df['wvl'].columns)
         
         
         #TODO make mask it's own function
+    def set_mask(self)
         self.data.mask(self.maskfile)
-        unknown_data.mask(self.maskfile)
-        return unknown_data
-
+        self.unknown_data.mask(self.maskfile)
+        
     def get_ranges(self, data, ranges):
         data.norm(ranges)
         unknown_data = self.unknown_data
