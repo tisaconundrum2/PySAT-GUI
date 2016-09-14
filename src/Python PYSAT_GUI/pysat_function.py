@@ -36,12 +36,9 @@ class pysat_func(object):
         self.unknown_data = pd.read_csv(self.unknowndatacsv, header=[0, 1])
         self.unknown_data = spectral_data(self.unknown_data)
         
-        
-        
-        
     #TODO make mask it's own function
     #TODO Get rid of maskfile, you will want to stick that into another module
-    def set_mask(self)
+    def set_mask(self):
         self.data.mask(self.maskfile)
         self.unknown_data.mask(self.maskfile)
         

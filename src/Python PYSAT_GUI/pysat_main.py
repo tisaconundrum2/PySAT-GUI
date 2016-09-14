@@ -18,14 +18,11 @@ class Main(QMainWindow):
         pysat.actionCreate_New_Workflow.triggered.connect(lambda: self.new())  # Create a new window. It will be blank
         pysat.ok(MainWindow)                                                   # The Ok button at the bottom of the UI
 
-
-
     def new(self):
         # TODO create a new window to work in. The old window does not disappear
         window = Main(self)
         window.show()
         window.exec_()
-
 
     def exit(self):
         # TODO close the current window
