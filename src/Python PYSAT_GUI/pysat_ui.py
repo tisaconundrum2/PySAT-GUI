@@ -916,28 +916,28 @@ class pysat_ui(object):
     def on_maskFile_clicked(self):
         filename = QFileDialog.getOpenFileName(None, "Open Mask File", '.', "(*.csv)")
         self.lineEdit.setText(filename)
-        self.pysat_fun.get_files(maskfile=filename)
+        self.pysat_fun.set_files(maskfile=filename)
         if self.lineEdit.text() == "":
             self.lineEdit.setText("*.csv")
 
     def on_uknownDataButton_clicked(self):
         filename = QFileDialog.getOpenFileName(None, "Open Uknown Data File", '.', "(*.csv)")
         self.lineEdit_2.setText(filename)
-        self.pysat_fun.get_files(unknowndatacsv=filename)
+        self.pysat_fun.set_files(unknowndatacsv=filename)
         if self.lineEdit_2.text() == "":
             self.lineEdit_2.setText("*.csv")
 
     def on_fullDataBaseButton_clicked(self):
         filename = QFileDialog.getOpenFileName(None, "Open Uknown Data File", '.', "(*.csv)")
         self.lineEdit_3.setText(filename)
-        self.pysat_fun.get_files(db=filename)
+        self.pysat_fun.set_files(db=filename)
         if self.lineEdit_3.text() == "":
             self.lineEdit_3.setText("*.csv")
 
     def on_outPutLocationButton_clicked(self):
         filename = QFileDialog.getExistingDirectory(None, "Select Output Directory", '.')
         self.lineEdit_4.setText(filename)
-        self.pysat_fun(outpath=filename)
+        self.pysat_fun.set_files(outpath=filename)
         if self.lineEdit_4.text() == "":
             self.lineEdit_4.setText("*/*")
 

@@ -13,7 +13,7 @@ class pysat_func(object):
         self.maskfile = None
     
 
-    def get_files(self, **kwargs):
+    def set_files(self, **kwargs):
         for key, value in kwargs.items():
             if key == "outpath":
                 self.outpath = value
