@@ -10,13 +10,24 @@ class Main(QMainWindow):
         self.runningFunctions(self)
 
     def runningFunctions(self, MainWindow):
-        pysat_ui.mainframe(self, MainWindow)
-        pysat_ui.files(self, MainWindow)
-        pysat_ui.normalization(self, MainWindow)
-        pysat_ui.setup(self, MainWindow)
-        pysat_ui.compranges(self, MainWindow)
-        pysat_ui.createmodels(self, MainWindow)
-        pysat_ui.ok(self, MainWindow)
+        pysat = pysat_ui()
+        pysat.mainframe(MainWindow)                                            # Set up the mainwindow. This is the backbone of the UI it IS REQUIRED
+        pysat.menu_item_shortcuts()                                            # The shortcuts for making things happen in the UI
+        pysat.menu_item_functions(MainWindow)                                  # These are the various functions that make the UI work
+        pysat.actionExit.triggered.connect(lambda: self.exit())                # Exit out of the current workflow
+        pysat.actionCreate_New_Workflow.triggered.connect(lambda: self.new())  # Create a new window. It will be blank
+        pysat.ok(MainWindow)                                                   # The Ok button at the bottom of the UI
+
+    def new(self):
+        # TODO create a new window to work in. The old window does not disappear
+        window = Main(self)
+        window.show()
+        window.exec_()
+
+    def exit(self):
+        # TODO close the current window
+        self.close()
+
 
 def main():
     app = QApplication(sys.argv)
@@ -25,8 +36,8 @@ def main():
     splash = QSplashScreen(splash_pix, Qt.WindowStaysOnTopHint)
     splash.setMask(splash_pix.mask())
     splash.show()
-    app.processEvents()
     time.sleep(1.3)
+    app.processEvents()
 
     main_window = Main()
     main_window.show()

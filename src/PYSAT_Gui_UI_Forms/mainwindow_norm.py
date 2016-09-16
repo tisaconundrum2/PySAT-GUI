@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\nicholas\Documents\GitHub\PYSAT\src\New PYSAT_Gui\mainwindow.ui'
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Documents\GitHub\PySAT\src\PYSAT_Gui_UI_Forms\.recycle.bin\mainwindow_norm.ui'
 #
 # Created by: PyQt4 UI code generator 4.11.4
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
-from PyQt4.QtGui import QMainWindow
-import sys
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -18,19 +16,16 @@ except AttributeError:
 
 try:
     _encoding = QtGui.QApplication.UnicodeUTF8
-
-
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig, _encoding)
 except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(581, 841)
+        MainWindow.resize(581, 843)
         self.centralWidget = QtGui.QWidget(MainWindow)
         self.centralWidget.setObjectName(_fromUtf8("centralWidget"))
         self.verticalLayout_9 = QtGui.QVBoxLayout(self.centralWidget)
@@ -41,29 +36,47 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName(_fromUtf8("scrollArea"))
         self.scrollAreaWidgetContents_2 = QtGui.QWidget()
-        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 561, 768))
+        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 561, 770))
         font = QtGui.QFont()
         font.setPointSize(8)
         self.scrollAreaWidgetContents_2.setFont(font)
         self.scrollAreaWidgetContents_2.setStyleSheet(_fromUtf8("QGroupBox {\n"
-                                                                "  border: 2px solid gray;\n"
-                                                                "  border-radius: 6px;\n"
-                                                                "  margin-top: 0.5em;\n"
-                                                                "}\n"
-                                                                "\n"
-                                                                "QGroupBox::title {\n"
-                                                                "\n"
-                                                                "  padding-top: -14px;\n"
-                                                                "  padding-left: 8px;\n"
-                                                                "}\n"
-                                                                ""))
+"  border: 2px solid gray;\n"
+"  border-radius: 6px;\n"
+"  margin-top: 0.5em;\n"
+"}\n"
+"\n"
+"QGroupBox::title {\n"
+"\n"
+"  padding-top: -14px;\n"
+"  padding-left: 8px;\n"
+"}\n"
+""))
         self.scrollAreaWidgetContents_2.setObjectName(_fromUtf8("scrollAreaWidgetContents_2"))
         self.verticalLayout_8 = QtGui.QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_8.setMargin(11)
         self.verticalLayout_8.setSpacing(6)
         self.verticalLayout_8.setObjectName(_fromUtf8("verticalLayout_8"))
+        self.Normalization = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
         font = QtGui.QFont()
         font.setPointSize(10)
+        self.Normalization.setFont(font)
+        self.Normalization.setObjectName(_fromUtf8("Normalization"))
+        self.verticalLayout = QtGui.QVBoxLayout(self.Normalization)
+        self.verticalLayout.setMargin(11)
+        self.verticalLayout.setSpacing(6)
+        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
+        self.horizontalLayout_25 = QtGui.QHBoxLayout()
+        self.horizontalLayout_25.setMargin(11)
+        self.horizontalLayout_25.setSpacing(6)
+        self.horizontalLayout_25.setObjectName(_fromUtf8("horizontalLayout_25"))
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout_25.addItem(spacerItem)
+        self.NormValuebutton = QtGui.QPushButton(self.Normalization)
+        self.NormValuebutton.setObjectName(_fromUtf8("NormValuebutton"))
+        self.horizontalLayout_25.addWidget(self.NormValuebutton)
+        self.verticalLayout.addLayout(self.horizontalLayout_25)
+        self.verticalLayout_8.addWidget(self.Normalization)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents_2)
         self.verticalLayout_9.addWidget(self.scrollArea)
         MainWindow.setCentralWidget(self.centralWidget)
@@ -238,9 +251,13 @@ class Ui_MainWindow(object):
         self.menuBar.addAction(self.menuRegression.menuAction())
         self.menuBar.addAction(self.menuHelp.menuAction())
 
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+    def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "PYSAT", None))
-
+        self.Normalization.setTitle(_translate("MainWindow", "Normalization", None))
+        self.NormValuebutton.setText(_translate("MainWindow", "Add Value", None))
         self.menuFile.setTitle(_translate("MainWindow", "File", None))
         self.menuPreprocessing.setTitle(_translate("MainWindow", "Preprocessing", None))
         self.menuBaseline_Removal.setTitle(_translate("MainWindow", "Baseline Removal", None))
@@ -294,69 +311,3 @@ class Ui_MainWindow(object):
         self.actionExit.setText(_translate("MainWindow", "Exit", None))
         self.actionNormalization.setText(_translate("MainWindow", "Normalization", None))
 
-        self.CrossValidation(MainWindow)
-
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
-    def CrossValidation(self,MainWindow):
-        self.CrossValidation = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
-        self.CrossValidation.setFont(font)
-        self.CrossValidation.setObjectName(_fromUtf8("CrossValidation"))
-        self.CrossValid = QtGui.QVBoxLayout(self.CrossValidation)
-        self.CrossValid.setMargin(11)
-        self.CrossValid.setSpacing(6)
-
-        self.CrossValid.setObjectName(_fromUtf8("CrossValid"))
-
-        self.horizontalLayout_4 = QtGui.QHBoxLayout()
-        self.horizontalLayout_4.setMargin(11)
-        self.horizontalLayout_4.setSpacing(6)
-        self.horizontalLayout_4.setObjectName(_fromUtf8("horizontalLayout_4"))
-
-        self.verticalLayout_11 = QtGui.QVBoxLayout()
-        self.verticalLayout_11.setMargin(11)
-        self.verticalLayout_11.setSpacing(6)
-        self.verticalLayout_11.setObjectName(_fromUtf8("verticalLayout_11"))
-        self.label_14 = QtGui.QLabel(self.CrossValidation)
-        self.label_14.setObjectName(_fromUtf8("label_14"))
-        self.verticalLayout_11.addWidget(self.label_14)
-
-        self.label_15 = QtGui.QLabel(self.CrossValidation)
-        self.label_15.setObjectName(_fromUtf8("label_15"))
-        self.verticalLayout_11.addWidget(self.label_15)
-
-        self.horizontalLayout_4.addLayout(self.verticalLayout_11)
-        self.verticalLayout_12 = QtGui.QVBoxLayout()
-        self.verticalLayout_12.setMargin(11)
-        self.verticalLayout_12.setSpacing(6)
-        self.verticalLayout_12.setObjectName(_fromUtf8("verticalLayout_12"))
-        self.elementNameLine = QtGui.QLineEdit(self.CrossValidation)
-
-        self.elementNameLine.setObjectName(_fromUtf8("elementNameLine"))
-        self.verticalLayout_12.addWidget(self.elementNameLine)
-        self.nfolds_test = QtGui.QSpinBox(self.CrossValidation)
-
-        self.nfolds_test.setObjectName(_fromUtf8("nfolds_test"))
-
-        self.verticalLayout_12.addWidget(self.nfolds_test)
-        self.horizontalLayout_4.addLayout(self.verticalLayout_12)
-        self.CrossValid.addLayout(self.horizontalLayout_4)
-
-        self.verticalLayout_8.addWidget(self.CrossValidation)
-        self.CrossValidation.setTitle(_translate("MainWindow", "Setup", None))
-
-        self.label_14.setText(_translate("MainWindow", "Element Name", None))
-        self.label_15.setText(_translate("MainWindow", "nfolds_test", None))
-
-
-
-
-class main(QtGui.QMainWindow, Ui_MainWindow):
-    def __init__(self):
-        QMainWindow.__init__(self)
-        self.setupUi(self)
-
-app = QtGui.QApplication(sys.argv)
-window = main()
-window.show()
-app.exec_()

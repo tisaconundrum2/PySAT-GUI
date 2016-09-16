@@ -50,37 +50,43 @@ QGroupBox::title {
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_8">
         <item>
-         <widget class="QGroupBox" name="OK">
-          <layout class="QHBoxLayout" name="ok">
+         <widget class="QGroupBox" name="Normalization">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="title">
+           <string>Normalization</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout">
            <item>
-            <spacer name="horizontalSpacer_5">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <widget class="QPushButton" name="okButton">
-             <property name="font">
-              <font>
-               <pointsize>8</pointsize>
-              </font>
-             </property>
-             <property name="mouseTracking">
-              <bool>false</bool>
-             </property>
-             <property name="text">
-              <string>OK</string>
-             </property>
-            </widget>
+            <layout class="QHBoxLayout" name="horizontalLayout_25">
+             <item>
+              <spacer name="horizontalSpacer_6">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="NormValuebutton">
+               <property name="text">
+                <string>Add Value</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
           </layout>
+          <zorder></zorder>
+          <zorder>layoutWidget</zorder>
          </widget>
         </item>
        </layout>

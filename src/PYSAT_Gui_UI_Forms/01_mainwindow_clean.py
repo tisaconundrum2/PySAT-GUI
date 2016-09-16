@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\nicholas\Documents\GitHub\PYSAT\src\New PYSAT_Gui\mainwindow_ok.ui'
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Documents\GitHub\PySAT\src\PYSAT_Gui_UI_Forms\01_mainwindow_clean.ui'
 #
 # Created by: PyQt4 UI code generator 4.11.4
 #
@@ -57,22 +57,6 @@ class Ui_MainWindow(object):
         self.verticalLayout_8.setMargin(11)
         self.verticalLayout_8.setSpacing(6)
         self.verticalLayout_8.setObjectName(_fromUtf8("verticalLayout_8"))
-        self.OK = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
-        self.OK.setObjectName(_fromUtf8("OK"))
-        self.ok = QtGui.QHBoxLayout(self.OK)
-        self.ok.setMargin(11)
-        self.ok.setSpacing(6)
-        self.ok.setObjectName(_fromUtf8("ok"))
-        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.ok.addItem(spacerItem)
-        self.okButton = QtGui.QPushButton(self.OK)
-        font = QtGui.QFont()
-        font.setPointSize(8)
-        self.okButton.setFont(font)
-        self.okButton.setMouseTracking(False)
-        self.okButton.setObjectName(_fromUtf8("okButton"))
-        self.ok.addWidget(self.okButton)
-        self.verticalLayout_8.addWidget(self.OK)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents_2)
         self.verticalLayout_9.addWidget(self.scrollArea)
         MainWindow.setCentralWidget(self.centralWidget)
@@ -190,7 +174,12 @@ class Ui_MainWindow(object):
         self.actionExit.setObjectName(_fromUtf8("actionExit"))
         self.actionNormalization = QtGui.QAction(MainWindow)
         self.actionNormalization.setObjectName(_fromUtf8("actionNormalization"))
-        self.menuFile.addAction(self.actionLoad_Refence_Data)
+        self.actionElement_Name_Setup = QtGui.QAction(MainWindow)
+        self.actionElement_Name_Setup.setObjectName(_fromUtf8("actionElement_Name_Setup"))
+        self.actionComposition_Ranges = QtGui.QAction(MainWindow)
+        self.actionComposition_Ranges.setObjectName(_fromUtf8("actionComposition_Ranges"))
+        self.actionCreate_Models = QtGui.QAction(MainWindow)
+        self.actionCreate_Models.setObjectName(_fromUtf8("actionCreate_Models"))
         self.menuFile.addAction(self.actionLoad_Unknown_Data)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionSave_Current_Plots)
@@ -221,6 +210,10 @@ class Ui_MainWindow(object):
         self.menuPreprocessing.addAction(self.actionInstrument_Response)
         self.menuPreprocessing.addAction(self.menuCalibration_Transfer.menuAction())
         self.menuPreprocessing.addAction(self.menuBaseline_Removal.menuAction())
+        self.menuPreprocessing.addSeparator()
+        self.menuPreprocessing.addAction(self.actionElement_Name_Setup)
+        self.menuPreprocessing.addAction(self.actionComposition_Ranges)
+        self.menuPreprocessing.addAction(self.actionCreate_Models)
         self.menuClustering.addAction(self.actionK_Means)
         self.menuClustering.addAction(self.actionHierarchical)
         self.menuClustering.addAction(self.actionOthers)
@@ -252,7 +245,6 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "PYSAT", None))
-        self.okButton.setText(_translate("MainWindow", "OK", None))
         self.menuFile.setTitle(_translate("MainWindow", "File", None))
         self.menuPreprocessing.setTitle(_translate("MainWindow", "Preprocessing", None))
         self.menuBaseline_Removal.setTitle(_translate("MainWindow", "Baseline Removal", None))
@@ -262,7 +254,7 @@ class Ui_MainWindow(object):
         self.menuRegression.setTitle(_translate("MainWindow", "Regression", None))
         self.menuHelp.setTitle(_translate("MainWindow", "Help", None))
         self.actionLoad_Refence_Data.setText(_translate("MainWindow", "Load Refence Data", None))
-        self.actionLoad_Unknown_Data.setText(_translate("MainWindow", "Load Unknown Data", None))
+        self.actionLoad_Unknown_Data.setText(_translate("MainWindow", "Load Data Files", None))
         self.actionSave_Current_Workflow.setText(_translate("MainWindow", "Save Current Workflow", None))
         self.actionSave_Current_Plots.setText(_translate("MainWindow", "Save Current Plots", None))
         self.actionSave_Current_Data.setText(_translate("MainWindow", "Save Current Data", None))
@@ -305,4 +297,7 @@ class Ui_MainWindow(object):
         self.actionAbout_QtCreator.setText(_translate("MainWindow", "About QtCreator...", None))
         self.actionExit.setText(_translate("MainWindow", "Exit", None))
         self.actionNormalization.setText(_translate("MainWindow", "Normalization", None))
+        self.actionElement_Name_Setup.setText(_translate("MainWindow", "Element Name Setup", None))
+        self.actionComposition_Ranges.setText(_translate("MainWindow", "Composition Ranges", None))
+        self.actionCreate_Models.setText(_translate("MainWindow", "Create Models", None))
 
