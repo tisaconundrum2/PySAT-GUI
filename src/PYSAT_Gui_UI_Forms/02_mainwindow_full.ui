@@ -24,7 +24,7 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>-17</y>
+         <y>0</y>
          <width>544</width>
          <height>923</height>
         </rect>
@@ -489,7 +489,7 @@ QGroupBox::title {
            </font>
           </property>
           <property name="title">
-           <string>Setup</string>
+           <string>Y Variable</string>
           </property>
           <layout class="QVBoxLayout" name="CrossValid">
            <item>
@@ -525,7 +525,7 @@ QGroupBox::title {
            </font>
           </property>
           <property name="title">
-           <string>Composition Ranges</string>
+           <string>Submodel Ranges</string>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_7">
            <item>
