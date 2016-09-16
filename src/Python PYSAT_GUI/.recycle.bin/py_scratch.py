@@ -1,7 +1,15 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Jul 22 10:42:41 2016
+
+@author: rbanderson
+"""
+
 import sys
 from PyQt4 import QtGui, QtCore
 
 count = 1
+
 
 class Main(QtGui.QMainWindow):
     def __init__(self):
@@ -10,11 +18,16 @@ class Main(QtGui.QMainWindow):
 
     def initUI(self):
         centralwidget = QtGui.QWidget()
+
         self.add = QtGui.QPushButton("Add")
         self.add.clicked.connect(self.Add)
+
         self.grid = QtGui.QGridLayout()
+
         self.grid.addWidget(self.add, 0, 0)
+
         centralwidget.setLayout(self.grid)
+
         self.setCentralWidget(centralwidget)
 
         # ---------Window settings --------------------------------
@@ -29,11 +42,14 @@ class Main(QtGui.QMainWindow):
         global count
         b = QtGui.QPushButton(str(count), self)
         b.clicked.connect(self.Button)
+
         self.grid.addWidget(b, count, 0)
+
         count += 1
 
     def Button(self):
         sender = self.sender()
+
         print(sender.text())
 
 
@@ -41,6 +57,7 @@ def main():
     app = QtGui.QApplication(sys.argv)
     main = Main()
     main.show()
+
     sys.exit(app.exec_())
 
 
