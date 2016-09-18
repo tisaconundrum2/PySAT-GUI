@@ -11,8 +11,8 @@ class pysat_func(object):
         self.outpath = None
         self.unknowndatacsv = None
         self.maskfile = None
+        self.ncs = None
     
-
     def set_files(self, **kwargs):
         for key, value in kwargs.items():
             if key == "outpath":
@@ -36,13 +36,9 @@ class pysat_func(object):
         self.data = spectral_data(self.data)
         self.unknown_data = pd.read_csv(self.unknowndatacsv, header=[0, 1])
         self.unknown_data = spectral_data(self.unknown_data)
-        
-    #TODO make mask it's own function
-    #TODO Get rid of maskfile, you will want to stick that into another module
+    
     def set_mask(self):
-        self.data.mask(self.maskfile)
-        self.unknown_data.mask(self.maskfile)
-        
+
     def get_ranges(self, data, ranges):
         data.norm(ranges)
         unknown_data = self.unknown_data
@@ -72,42 +68,46 @@ class pysat_func(object):
         :param data:
         :return:
         """
-# ###################################################
-# # remove a test set to be completely excluded from CV
-# # and used to assess the final blended model
-# ###################################################
-# data1.stratified_folds(nfolds=nfolds_test, sortby=('meta', el))
-# data1_train = data1.rows_match(('meta', 'Folds'), [testfold_test], invert=True)
-# data1_test = data1.rows_match(('meta', 'Folds'), [testfold_test])
-#
-# ###################################################
-# # Create the models here in order: Low, Mid, High, Full
-# # The full model will be used as a references to determine which submodel is appropriate
-# # The Full model will be computed last
-# ###################################################
-# ncs = [7, 7, 5, 9]
-# traindata = [data1_train.df, data1_train.df, data1_train.df, data1_train.df]
-# testdata = [data1_test.df, data1_test.df, data1_test.df, data1_test.df]
-# unkdata = [unknown_data1.df, unknown_data1.df, unknown_data1.df, unknown_data1.df]
-#
-# sm = pls_sm()
-#
-# sm.fit(traindata, compranges, ncs, el, figpath=outpath)
-#
-# predictions_train = sm.predict(traindata)
-#
-# predictions_test = sm.predict(testdata)
-#
-# blended_train = sm.do_blend(predictions_train, traindata[0]['meta'][el])
-#
-# blended_test = sm.do_blend(predictions_test)
-#
-# ###################################################
-# # Create all the Plots in Outpath
-# ###################################################
-# sm.final(testdata[0]['meta'][el],
-#          blended_test,
-#          el=el,
-#          xcol='Ref Comp Wt. %',
-#          ycol='Predicted Comp Wt. %',
-#          figpath=outpath)
+
+    def set_stratified(self, data1):
+        data1.stratified_folds(nfolds=nfolds_test, sortby=('meta', el))
+        data1_train = data1.rows_match(('meta', 'Folds'), [testfold_test], invert=True)
+        data1_test = data1.rows_match(('meta', 'Folds'), [testfold_test])
+
+    def get_number_components(self, ncs):
+        # ncs = [7, 7, 5, 9]
+        self.ncs = ncs
+        
+    def get_train_data(self, traindata):
+        #traindata = [data1_train.df, data1_train.df, data1_train.df, data1_train.df]
+        self.traindata = traindata
+    
+    def get_testdata(self, testdata):
+        #testdata = [data1_test.df, data1_test.df, data1_test.df, data1_test.df]
+        self.testdata = testdata
+        
+    def get_unkdata(self, unkdata):
+        #unkdata = [unknown_data1.df, unknown_data1.df, unknown_data1.df, unknown_data1.df]
+        self.unkdata = unkdata
+        
+    def set_sm(self, sm):
+        self.sm = pls_sm()
+
+    def get_sm_fit(self):
+        self.sm.fit(traindata, compranges, ncs, el, figpath=outpath)
+        self.sm.fit(self.traindata, self.compranges, self.ncs, self.el, self.outpath)
+        self.predictions_train = sm.predict(self.traindata)
+        self.predictions_test = sm.predict(self.testdata)
+        self.blended_train = sm.do_blend(self.predictions_train, self.traindata[0]['meta'][self.el])
+        self.blended_test = sm.do_blend(self.predictions_test)
+
+    def get_plots(self):
+        # ###################################################
+        # # Create all the Plots in Outpath
+        # ###################################################
+        sm.final(testdata[0]['meta'][el],
+            blended_test,
+            el=self.el,
+            xcol='Ref Comp Wt. %',
+            ycol='Predicted Comp Wt. %',
+            figpath=self.outpath)
