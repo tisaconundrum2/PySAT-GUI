@@ -5,14 +5,7 @@ import pandas as pd
 
 class pysat_func(object):
     # Thus make sure that you have if's for all instances in functions where unknown_data doesn't exist.
-    def __init__(self):
-        self.data = None
-        self.unknown_data = None
-        self.outpath = None
-        self.unknowndatacsv = None
-        self.maskfile = None
-        self.ncs = None
-    
+
     def set_files(self, **kwargs):
         for key, value in kwargs.items():
             if key == "outpath":
@@ -25,7 +18,7 @@ class pysat_func(object):
                 self.maskfile = value
 
     def set_interp(self, data):
-        #TODO interp should be it's ownn function
+        # TODO interp should be it's ownn function
         self.unknown_data.interp(self.data.df['wvl'].columns)
 
     def get_range(self, data, ranges):
@@ -38,6 +31,7 @@ class pysat_func(object):
         self.unknown_data = spectral_data(self.unknown_data)
     
     def set_mask(self):
+        pass
 
     def get_ranges(self, data, ranges):
         data.norm(ranges)
@@ -71,8 +65,8 @@ class pysat_func(object):
 
     def set_stratified(self, data1):
         data1.stratified_folds(nfolds=nfolds_test, sortby=('meta', el))
-        data1_train = data1.rows_match(('meta', 'Folds'), [testfold_test], invert=True)
-        data1_test = data1.rows_match(('meta', 'Folds'), [testfold_test])
+        self.data1_train = data1.rows_match(('meta', 'Folds'), [testfold_test], invert=True)
+        self.data1_test = data1.rows_match(('meta', 'Folds'), [testfold_test])
 
     def get_number_components(self, ncs):
         # ncs = [7, 7, 5, 9]
@@ -94,18 +88,18 @@ class pysat_func(object):
         self.sm = pls_sm()
 
     def get_sm_fit(self):
-        self.sm.fit(traindata, compranges, ncs, el, figpath=outpath)
+        self.sm.fit(self.traindata, self.compranges, self.ncs, self.el, figpath=self.outpath)
         self.sm.fit(self.traindata, self.compranges, self.ncs, self.el, self.outpath)
-        self.predictions_train = sm.predict(self.traindata)
-        self.predictions_test = sm.predict(self.testdata)
-        self.blended_train = sm.do_blend(self.predictions_train, self.traindata[0]['meta'][self.el])
-        self.blended_test = sm.do_blend(self.predictions_test)
+        self.predictions_train = self.sm.predict(self.traindata)
+        self.predictions_test = self.sm.predict(self.testdata)
+        self.blended_train = self.sm.do_blend(self.predictions_train, self.traindata[0]['meta'][self.el])
+        self.blended_test = self.sm.do_blend(self.predictions_test)
 
     def get_plots(self):
         # ###################################################
         # # Create all the Plots in Outpath
         # ###################################################
-        sm.final(testdata[0]['meta'][el],
+        self.sm.final(testdata[0]['meta'][self.el],
             blended_test,
             el=self.el,
             xcol='Ref Comp Wt. %',
