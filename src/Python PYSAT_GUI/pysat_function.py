@@ -7,28 +7,17 @@ class pysat_func(object):
     # Thus make sure that you have if's for all instances in functions where unknown_data doesn't exist.
 
 
-    def set_file_outpath(self):
-        pass
+    def set_file_outpath(self, outpath):
+        self.outpath = outpath
 
-    def set_file_db(self):
-        pass
+    def set_file_db(self, db):
+        self.db = db
 
-    def set_file_unknowndatacsv(self):
-        pass
+    def set_file_unknowndatacsv(self, unknowndatacsv):
+        self.unknowndatacsv = unknowndatacsv
 
-    def set_file_maskfile(self):
-        pass
-
-    def set_files(self, **kwargs):
-        for key, value in kwargs.items():
-            if key == "outpath":
-                self.outpath = value
-            elif key == "db":
-                self.db = value
-            elif key == "unknowndatacsv":
-                self.unknowndatacsv = value
-            elif key == "maskfile":
-                self.maskfile = value
+    def set_file_maskfile(self, maskfile):
+        self.maskfile = maskfile
 
     def set_interp(self, data):
         # TODO interp should be it's ownn function
