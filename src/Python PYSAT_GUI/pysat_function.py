@@ -6,6 +6,19 @@ import pandas as pd
 class pysat_func(object):
     # Thus make sure that you have if's for all instances in functions where unknown_data doesn't exist.
 
+
+    def set_file_outpath(self):
+        pass
+
+    def set_file_db(self):
+        pass
+
+    def set_file_unknowndatacsv(self):
+        pass
+
+    def set_file_maskfile(self):
+        pass
+
     def set_files(self, **kwargs):
         for key, value in kwargs.items():
             if key == "outpath":
