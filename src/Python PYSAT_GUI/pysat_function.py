@@ -32,14 +32,9 @@ class pysat_func(object):
         self.unknown_data = pd.read_csv(self.unknowndatacsv, header=[0, 1])
         self.unknown_data = spectral_data(self.unknown_data)
     
-    def set_mask(self):
-        pass
-
-    def get_ranges(self, data, ranges):
-        data.norm(ranges)
-        unknown_data = self.unknown_data
-        unknown_data.norm(ranges)
-        return unknown_data
+    def get_ranges(self, ranges):
+        self.data.norm(ranges)
+        self.unknown_data.norm(ranges)
 
     def set_element_name(self, el):
         self.el = el
@@ -59,11 +54,8 @@ class pysat_func(object):
     def get_testfold_test(self):
         return self.testfold_test
 
-    def set_compranges(self, data):
-        """ Usage:         [[-20, 50], [30, 70], [60, 100], [0, 120]]
-        :param data:
-        :return:
-        """
+    def set_compranges(self,compranges):
+        self.compranges = compranges
 
     def set_stratified(self, data1):
         data1.stratified_folds(nfolds=nfolds_test, sortby=('meta', el))
@@ -91,7 +83,6 @@ class pysat_func(object):
 
     def get_sm_fit(self):
         self.sm.fit(self.traindata, self.compranges, self.ncs, self.el, figpath=self.outpath)
-        self.sm.fit(self.traindata, self.compranges, self.ncs, self.el, self.outpath)
         self.predictions_train = self.sm.predict(self.traindata)
         self.predictions_test = self.sm.predict(self.testdata)
         self.blended_train = self.sm.do_blend(self.predictions_train, self.traindata[0]['meta'][self.el])
@@ -102,7 +93,7 @@ class pysat_func(object):
         # # Create all the Plots in Outpath
         # ###################################################
         self.sm.final(testdata[0]['meta'][self.el],
-            blended_test,
+            self.blended_test,
             el=self.el,
             xcol='Ref Comp Wt. %',
             ycol='Predicted Comp Wt. %',
