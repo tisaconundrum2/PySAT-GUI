@@ -95,7 +95,7 @@ class pysat_func(object):
         # ###################################################
         # # Create all the Plots in Outpath
         # ###################################################
-        self.sm.final(testdata[0]['meta'][self.el],
+        self.sm.final(self.testdata[0]['meta'][self.el],
             self.blended_test,
             el=self.el,
             xcol='Ref Comp Wt. %',
