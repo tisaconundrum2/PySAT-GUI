@@ -77,4 +77,12 @@ class pysat_func(object):
         pass
 
     def get_range(self, data, ranges):
-        pass
+        """
+        Usage:
+        pysat.get_ranges(k_data, [(0, 1000)])
+        pysat.get_ranges(u_data, [(0, 1000)])
+        :param data:
+        :param ranges:
+        :return:
+        """
+        data.norm(ranges)
