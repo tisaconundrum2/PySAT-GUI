@@ -62,8 +62,8 @@ class pysat_func(object):
 
     def set_stratified(self, data1):
         data1.stratified_folds(nfolds=nfolds_test, sortby=('meta', el))
-        self.data1_train = data1.rows_match(('meta', 'Folds'), [testfold_test], invert=True)
-        self.data1_test = data1.rows_match(('meta', 'Folds'), [testfold_test])
+        self.data1_train = data1.rows_match(('meta', 'Folds'), [self.testfold_test], invert=True)
+        self.data1_test = data1.rows_match(('meta', 'Folds'), [self.testfold_test])
 
     def get_number_components(self, ncs):
         # ncs = [7, 7, 5, 9]
