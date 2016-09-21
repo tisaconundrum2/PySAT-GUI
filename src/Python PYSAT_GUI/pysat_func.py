@@ -4,7 +4,7 @@ import pandas as pd
 
 class pysat_func(object):
 
-    # Below are all your file setters.
+    # Below are all your file setters. ======================================================
 
     def set_file_outpath(self, outpath):
         self.outpath = outpath
@@ -18,7 +18,7 @@ class pysat_func(object):
     def set_maskfile(self, maskfile):
         self.maskfile = maskfile
 
-    # Below are all your file getters
+    # Below are all your file getters =======================================================
 
     def get_outpath(self):
         return self.outpath
@@ -32,6 +32,11 @@ class pysat_func(object):
     def get_maskfile(self):
         return self.maskfile
 
+
+    # Actual functions that do work =========================================================
+    # Note functions double up for known and unknown because, I realized we want to keep
+    # things as private as possible.
+    # in the future
     def set_interp(self, data_value_1, data_value_2):
         """
         Usage: set_interp(unknown_data, known_data
@@ -40,10 +45,11 @@ class pysat_func(object):
         """
         data_value_1.interp(data_value_2.df['wv1'].columns)
 
-    def set_spectral(self):
-        self.get_known_data()
+
+    def set_spectral_unknown(self):
+
+    def set_spectral_known(self):
 
     def set_mask_known(self):
-
 
     def set_mask_unknown(self):
