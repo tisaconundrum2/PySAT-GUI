@@ -23,6 +23,9 @@ class pysat_func(object):
         # TODO interp should be it's ownn function
         self.unknown_data.interp(self.data.df['wvl'].columns)
 
+    def set_mask(self):
+        self.data.mask(self.maskfile)
+
     def get_range(self, data, ranges):
         pass
 
@@ -89,6 +92,9 @@ class pysat_func(object):
         self.blended_test = self.sm.do_blend(self.predictions_test)
 
     def get_plots(self):
+        # ###################################################
+        # # Create all the Plots in Outpath
+        # ###################################################
         self.sm.final(testdata[0]['meta'][self.el],
             self.blended_test,
             el=self.el,

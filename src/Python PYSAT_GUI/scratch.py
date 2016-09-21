@@ -9,20 +9,14 @@ pysat = pysat_func()
 # unknowndatacsv = r"C:\Users\nfinch\Desktop\lab_data_averages_pandas_format.csv"
 # maskfile = r"C:\Users\nfinch\Desktop\mask_minors_noise.csv"
 
-pysat.set_file_outpath(r'')
+pysat.set_file_outpath(r'C:\Users\nfinch\Desktop\Output')
 pysat.set_file_db(r'C:\Users\nfinch\Documents\GitHub\PySAT\src\Python PYSAT_GUI\full_db_mars_corrected_dopedTiO2_pandas_format.csv')
 pysat.set_file_unknowndatacsv(r'C:\Users\nfinch\Documents\GitHub\PySAT\src\Python PYSAT_GUI\lab_data_averages_pandas_format.csv')
 pysat.set_file_maskfile(r'C:\Users\nfinch\Documents\GitHub\PySAT\src\Python PYSAT_GUI\mask_minors_noise.csv')
 
-
-###################################################
-# Spectral setup
-# spectral analysis data
-###################################################
 pysat.get_spectra()
 pysat.set_interp()
-
-unknown_data.interp(data.df['wvl'].columns)
+pysat.set_file_maskfile()
 
 data.mask(maskfile)
 unknown_data.mask(maskfile)
