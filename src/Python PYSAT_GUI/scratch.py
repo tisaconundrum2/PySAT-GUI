@@ -12,4 +12,5 @@ pysat.set_file_maskfile(r'C:\Users\nfinch\Documents\GitHub\PySAT\src\Python PYSA
 
 pysat.get_spectra()
 pysat.set_interp()
-pysat.set_file_maskfile()
+pysat.set_mask()
+pysat.get_ranges()

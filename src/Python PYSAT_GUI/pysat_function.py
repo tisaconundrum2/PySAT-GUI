@@ -19,9 +19,6 @@ class pysat_func(object):
     def set_file_maskfile(self, maskfile):
         self.maskfile = maskfile
 
-    def get_range(self, data, ranges):
-        pass
-
     def get_spectra(self):
         self.data = pd.read_csv(self.db, header=[0, 1])
         self.data = spectral_data(self.data)
