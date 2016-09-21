@@ -19,11 +19,8 @@ pysat.set_file_maskfile(r'C:\Users\nfinch\Documents\GitHub\PySAT\src\Python PYSA
 # Spectral setup
 # spectral analysis data
 ###################################################
-data = pd.read_csv(db, header=[0, 1])
-data = spectral_data(data)
-unknown_data = pd.read_csv(unknowndatacsv, header=[0, 1])
-unknown_data = spectral_data(unknown_data)
-
+pysat.get_spectra()
+pysat.set_interp()
 
 unknown_data.interp(data.df['wvl'].columns)
 

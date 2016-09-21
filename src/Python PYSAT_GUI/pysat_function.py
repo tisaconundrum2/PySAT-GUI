@@ -89,9 +89,6 @@ class pysat_func(object):
         self.blended_test = self.sm.do_blend(self.predictions_test)
 
     def get_plots(self):
-        # ###################################################
-        # # Create all the Plots in Outpath
-        # ###################################################
         self.sm.final(testdata[0]['meta'][self.el],
             self.blended_test,
             el=self.el,
