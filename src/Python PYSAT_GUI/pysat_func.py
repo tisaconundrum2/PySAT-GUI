@@ -64,9 +64,17 @@ class pysat_func(object):
         """
         data_value_1.interp(data_value_2.df['wv1'].columns)
 
-    def set_mask(self):
+    def set_mask(self, data, maskfile):
+        """
+        Usage:
+        set_mask(pysat.get_known_data(), pysat.get_maskfile())
+        set_mask(pysat.get_unknown_data(), pysat.get_maskfile())
+
+        :param data:
+        :param maskfile:
+        :return:
+        """
         pass
 
     def get_range(self, data, ranges):
-
         pass
