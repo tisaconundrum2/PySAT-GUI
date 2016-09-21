@@ -55,10 +55,10 @@ class pysat_func(object):
     def set_compranges(self, compranges):
         self.compranges = compranges
 
-    def set_stratified(self, data1):
-        data1.stratified_folds(nfolds=self.nfolds_test, sortby=('meta', self.el))
-        self.data1_train = data1.rows_match(('meta', 'Folds'), [self.testfold_test], invert=True)
-        self.data1_test = data1.rows_match(('meta', 'Folds'), [self.testfold_test])
+    def set_stratified(self):
+        self.data.stratified_folds(nfolds=self.nfolds_test, sortby=('meta', self.el))
+        self.data_train = self.data.rows_match(('meta', 'Folds'), [self.testfold_test], invert=True)
+        self.data_test = self.data.rows_match(('meta', 'Folds'), [self.testfold_test])
 
     def get_number_components(self, ncs):
         # ncs = [7, 7, 5, 9]
@@ -67,7 +67,7 @@ class pysat_func(object):
     def get_train_data(self):
         self.traindata = [self.data1_train.df, self.data1_train.df, self.data1_train.df, self.data1_train.df]
 
-    def get_testdata(self):
+    def get_test_data(self):
         self.testdata = [self.data1_test.df, self.data1_test.df, self.data1_test.df, self.data1_test.df]
 
     def set_sm(self):
