@@ -1,7 +1,7 @@
-
 from pysat.spectral.spectral_data import spectral_data
 from pysat.regression.pls_sm import pls_sm
 import pandas as pd
+
 
 class pysat_func(object):
     # Thus make sure that you have if's for all instances in functions where unknown_data doesn't exist.
@@ -19,9 +19,6 @@ class pysat_func(object):
     def set_file_maskfile(self, maskfile):
         self.maskfile = maskfile
 
-    def set_mask(self):
-        self.data.mask(self.maskfile)
-
     def get_range(self, data, ranges):
         pass
 
@@ -34,6 +31,10 @@ class pysat_func(object):
     def set_interp(self, data):
         # TODO interp should be it's ownn function
         self.unknown_data.interp(self.data.df['wvl'].columns)
+
+    def set_mask(self):
+        self.data.mask(self.maskfile)
+        self.unknown_data.mask(self.maskfile)
 
     def get_ranges(self, ranges):
         self.data.norm(ranges)
@@ -48,40 +49,31 @@ class pysat_func(object):
     def set_testfold_test(self, testfold_test):
         self.testfold_test = testfold_test
 
-    def get_element_name(self):
-        return self.el
-
     def get_nfolds(self):
         return self.nfolds_test
 
     def get_testfold_test(self):
         return self.testfold_test
 
-    def set_compranges(self,compranges):
+    def set_compranges(self, compranges):
         self.compranges = compranges
 
     def set_stratified(self, data1):
-        data1.stratified_folds(nfolds=nfolds_test, sortby=('meta', el))
+        data1.stratified_folds(nfolds=self.nfolds_test, sortby=('meta', self.el))
         self.data1_train = data1.rows_match(('meta', 'Folds'), [self.testfold_test], invert=True)
         self.data1_test = data1.rows_match(('meta', 'Folds'), [self.testfold_test])
 
     def get_number_components(self, ncs):
         # ncs = [7, 7, 5, 9]
         self.ncs = ncs
-        
-    def get_train_data(self, traindata):
-        #traindata = [data1_train.df, data1_train.df, data1_train.df, data1_train.df]
-        self.traindata = traindata
-    
-    def get_testdata(self, testdata):
-        #testdata = [data1_test.df, data1_test.df, data1_test.df, data1_test.df]
-        self.testdata = testdata
-        
-    def get_unkdata(self, unkdata):
-        #unkdata = [unknown_data1.df, unknown_data1.df, unknown_data1.df, unknown_data1.df]
-        self.unkdata = unkdata
-        
-    def set_sm(self, sm):
+
+    def get_train_data(self):
+        self.traindata = [self.data1_train.df, self.data1_train.df, self.data1_train.df, self.data1_train.df]
+
+    def get_testdata(self):
+        self.testdata = [self.data1_test.df, self.data1_test.df, self.data1_test.df, self.data1_test.df]
+
+    def set_sm(self):
         self.sm = pls_sm()
 
     def get_sm_fit(self):
@@ -96,8 +88,8 @@ class pysat_func(object):
         # # Create all the Plots in Outpath
         # ###################################################
         self.sm.final(self.testdata[0]['meta'][self.el],
-            self.blended_test,
-            el=self.el,
-            xcol='Ref Comp Wt. %',
-            ycol='Predicted Comp Wt. %',
-            figpath=self.outpath)
+                      self.blended_test,
+                      el=self.el,
+                      xcol='Ref Comp Wt. %',
+                      ycol='Predicted Comp Wt. %',
+                      figpath=self.outpath)
