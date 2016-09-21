@@ -10,7 +10,7 @@ class pysat_func(object):
     def set_file_outpath(self, outpath):
         self.outpath = outpath
 
-    def set_file_db(self, db):
+    def set_file_knowndatacsv(self, db):
         self.db = db
 
     def set_file_unknowndatacsv(self, unknowndatacsv):
@@ -25,7 +25,7 @@ class pysat_func(object):
         self.unknown_data = pd.read_csv(self.unknowndatacsv, header=[0, 1])
         self.unknown_data = spectral_data(self.unknown_data)
 
-    def set_interp(self, data):
+    def set_interp(self):
         # TODO interp should be it's ownn function
         self.unknown_data.interp(self.data.df['wvl'].columns)
 
@@ -57,8 +57,8 @@ class pysat_func(object):
 
     def set_stratified(self):
         self.data.stratified_folds(nfolds=self.nfolds_test, sortby=('meta', self.el))
-        self.data_train = self.data.rows_match(('meta', 'Folds'), [self.testfold_test], invert=True)
-        self.data_test = self.data.rows_match(('meta', 'Folds'), [self.testfold_test])
+        self.data1_train = self.data.rows_match(('meta', 'Folds'), [self.testfold_test], invert=True)
+        self.data1_test = self.data.rows_match(('meta', 'Folds'), [self.testfold_test])
 
     def get_number_components(self, ncs):
         # ncs = [7, 7, 5, 9]
