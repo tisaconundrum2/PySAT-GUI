@@ -4,7 +4,11 @@ import pandas as pd
 
 # This class should be worked on and saved for the future.
 # Currently we are only going to work on setting up the program
-# such that the user can only
+# such that the user can only do each function once, but the
+# inner process is done twice.
+
+# The below class will one day be an attempt at moving away from
+# this restriction
 
 class pysat_func(object):
 

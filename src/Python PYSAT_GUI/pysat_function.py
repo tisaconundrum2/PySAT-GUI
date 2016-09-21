@@ -19,10 +19,6 @@ class pysat_func(object):
     def set_file_maskfile(self, maskfile):
         self.maskfile = maskfile
 
-    def set_interp(self, data):
-        # TODO interp should be it's ownn function
-        self.unknown_data.interp(self.data.df['wvl'].columns)
-
     def set_mask(self):
         self.data.mask(self.maskfile)
 
@@ -34,7 +30,11 @@ class pysat_func(object):
         self.data = spectral_data(self.data)
         self.unknown_data = pd.read_csv(self.unknowndatacsv, header=[0, 1])
         self.unknown_data = spectral_data(self.unknown_data)
-    
+
+    def set_interp(self, data):
+        # TODO interp should be it's ownn function
+        self.unknown_data.interp(self.data.df['wvl'].columns)
+
     def get_ranges(self, ranges):
         self.data.norm(ranges)
         self.unknown_data.norm(ranges)
