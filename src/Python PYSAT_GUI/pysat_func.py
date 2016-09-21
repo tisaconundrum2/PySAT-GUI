@@ -34,9 +34,13 @@ class pysat_func(object):
 
 
     # Actual functions that do work =========================================================
-    # Note functions double up for known and unknown because, I realized we want to keep
-    # things as private as possible.
-    # in the future
+    # Note functions double up because of known and unknown data, it is done this way because
+    # I realized we want to keep things as private as possible between the two classes:
+    # PYSAT_UI and PYSAT_FUNC
+    # After working through everything, I realized doubling up on functions, is not the best
+    # way forward. Instead we'll have to allow UI to have a little access to pysat_func.data
+    # and pysat_func.unknowndata
+
     def set_interp(self, data_value_1, data_value_2):
         """
         Usage: set_interp(unknown_data, known_data
