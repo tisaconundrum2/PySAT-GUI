@@ -18,7 +18,7 @@ class pysat_func(object):
     def set_maskfile(self, maskfile):
         self.maskfile = maskfile
 
-    # Below are all your file getters =======================================================
+    # Below are all your file getters. ======================================================
 
     def get_outpath(self):
         return self.outpath
@@ -43,7 +43,7 @@ class pysat_func(object):
 
     def set_interp(self, data_value_1, data_value_2):
         """
-        Usage: set_interp(unknown_data, known_data
+        Usage: set_interp(unknown_data, known_data)
         Technically speaking, the values can be set up any way you want.
         The only concern in the typing. Make sure both values are of type spectral_data
         """
