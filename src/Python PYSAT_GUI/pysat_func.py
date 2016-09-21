@@ -15,21 +15,21 @@ class pysat_func(object):
     def set_file_unknown_data(self, unknowndatacsv):
         self.unknown_data = unknowndatacsv
 
-    def set_maskfile(self, maskfile):
+    def set_file_maskfile(self, maskfile):
         self.maskfile = maskfile
 
     # Below are all your file getters. ======================================================
 
-    def get_outpath(self):
+    def get_file_outpath(self):
         return self.outpath
 
-    def get_known_data(self):
+    def get_file_known_data(self):
         return self.known_data
 
-    def get_unknown_data(self):
+    def get_file_unknown_data(self):
         return self.unknown_data
 
-    def get_maskfile(self):
+    def get_file_maskfile(self):
         return self.maskfile
 
 
@@ -45,8 +45,8 @@ class pysat_func(object):
         """
         The user will choose from either database of unknowndatacsv or db
         this means usage will be either:
-        k_data = set_spectral(pysat.get_known_data())
-        u_data = set_spectral(pysat.get_unknown_data())
+        k_data = set_spectral(pysat.get_file_known_data())
+        u_data = set_spectral(pysat.get_file_unknown_data())
         :param data_base:
         :return:
         """
@@ -55,7 +55,8 @@ class pysat_func(object):
 
     def set_interp(self, data_value_1, data_value_2):
         """
-        Usage: set_interp(unknown_data, known_data)
+        Usage:
+        set_interp(u_data, k_data)
         Technically speaking, the values can be set up any way you want.
         The only concern in the typing. Make sure both values are of type spectral_data
         :param data_value_1
@@ -69,7 +70,6 @@ class pysat_func(object):
         Usage:
         set_mask(pysat.get_known_data(), pysat.get_maskfile())
         set_mask(pysat.get_unknown_data(), pysat.get_maskfile())
-
         :param data:
         :param maskfile:
         :return:
