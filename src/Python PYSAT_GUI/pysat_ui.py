@@ -933,6 +933,7 @@ class pysat_ui(object):
 
     def on_okButton_clicked(self):
         #TODO Create functionality for all modules
+        #TODO Create a list of functions that call each function that is loaded into the list.
         print(self.lineEdit_2.text())
         print(self.lineEdit_3.text())
         print(self.lineEdit_4.text())
