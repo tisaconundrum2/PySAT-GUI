@@ -41,19 +41,32 @@ class pysat_func(object):
     # way forward. Instead we'll have to allow UI to have a little access to pysat_func.data
     # and pysat_func.unknowndata
 
+    def set_spectral(self, data_base):
+        """
+        The user will choose from either database of unknowndatacsv or db
+        this means usage will be either:
+        k_data = set_spectral(pysat.get_known_data())
+        u_data = set_spectral(pysat.get_unknown_data())
+        :param data_base:
+        :return:
+        """
+        data = pd.read_csv(data_base, header=[0, 1])
+        return spectral_data(data)
+
     def set_interp(self, data_value_1, data_value_2):
         """
         Usage: set_interp(unknown_data, known_data)
         Technically speaking, the values can be set up any way you want.
         The only concern in the typing. Make sure both values are of type spectral_data
+        :param data_value_1
+        :param data_value_2
+        :return:
         """
         data_value_1.interp(data_value_2.df['wv1'].columns)
 
+    def set_mask(self):
+        pass
 
-    def set_spectral_unknown(self):
+    def get_range(self, data, ranges):
 
-    def set_spectral_known(self):
-
-    def set_mask_known(self):
-
-    def set_mask_unknown(self):
+        pass
