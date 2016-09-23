@@ -559,6 +559,7 @@ class pysat_ui(object):
         QtCore.QObject.connect(self.comp_range_6, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_34.setNum)
         QtCore.QObject.connect(self.comp_range_7, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_36.setNum)
         QtCore.QObject.connect(self.comp_range_8, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_35.setNum)
+        self.add_run_module_button(self.CompRanges, "runCompranges")
 
     def createmodels(self, MainWindow):
         self.CreateModels = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -754,7 +755,7 @@ class pysat_ui(object):
         self.unknownDataButton.setText(_translate("MainWindow", "...", None))
         self.fullDataBaseButton.setText(_translate("MainWindow", "...", None))
         self.outPutLocationButton.setText(_translate("MainWindow", "...", None))
-        self.add_run_module_button(self.verticalLayout_4, self.Files, "runFiles")
+        self.add_run_module_button(self.Files, "runFiles")
         try:
             #TODO you will need to move this maskfilebutton function to the maskfile module
             #self.maskFileButton.clicked.connect(lambda: pysat_ui.on_maskFile_clicked(self))
@@ -806,7 +807,7 @@ class pysat_ui(object):
         self.CrossValidation.setTitle(_translate("MainWindow", "Setup", None))
         self.label_14.setText(_translate("MainWindow", "Element Name", None))
         self.label_15.setText(_translate("MainWindow", "nfolds_test", None))
-        self.add_run_module_button(self.verticalLayout_11, self.CrossValidation, "runElementName")
+        self.add_run_module_button(self.CrossValidation, "runElementName")
 
     def std_norm(self, MainWindow):
         self.Normalization = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -831,7 +832,7 @@ class pysat_ui(object):
         self.verticalLayout_8.addWidget(self.Normalization)
         self.Normalization.setTitle(_translate("MainWindow", "Normalization", None))
         self.NormValuebutton.setText(_translate("MainWindow", "Add Value", None))
-        self.add_run_module_button(self.verticalLayout, self.Normalization, "runNormalization")
+        self.add_run_module_button(self.Normalization, "runNormalization")
         self.NormValuebutton.clicked.connect(lambda: pysat_ui.val_norm(self, MainWindow, self.count))
 
     def val_norm(self, MainWindow, count):
@@ -901,15 +902,21 @@ class pysat_ui(object):
 
     ####These functions below are private and add functionality to the UI
 
-    def add_run_module_button(self,verticalLayout, QGroupBox, set_object_name):
+    def add_run_module_button(self, verticalLayout, set_object_name):
+        self.verticalLayout = QtGui.QVBoxLayout(verticalLayout)
+        self.verticalLayout.setMargin(11)
+        self.verticalLayout.setSpacing(6)
+        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.horizontalLayout = QtGui.QHBoxLayout()
         self.horizontalLayout.setMargin(11)
         self.horizontalLayout.setSpacing(6)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
-        self.run_module_files = QtGui.QPushButton(QGroupBox)
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem)
+        self.run_module_files = QtGui.QPushButton(verticalLayout)
         self.run_module_files.setObjectName(_fromUtf8(set_object_name))
         self.horizontalLayout.addWidget(self.run_module_files)
-        verticalLayout.addLayout(self.horizontalLayout)
+        self.verticalLayout.addLayout(self.horizontalLayout)
         self.run_module_files.setText(_translate("MainWindow", "Run Module", None))
 
     def set_norm_array(self, spin_box_text, index):
