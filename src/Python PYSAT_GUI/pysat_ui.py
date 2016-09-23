@@ -757,17 +757,7 @@ class pysat_ui(object):
         self.fullDataBaseButton.setText(_translate("MainWindow", "...", None))
         self.outPutLocationButton.setText(_translate("MainWindow", "...", None))
         # start button
-        self.horizontalLayout_8 = QtGui.QHBoxLayout()
-        self.horizontalLayout_8.setMargin(11)
-        self.horizontalLayout_8.setSpacing(6)
-        self.horizontalLayout_8.setObjectName(_fromUtf8("horizontalLayout_8"))
-        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_8.addItem(spacerItem)
-        self.pushButton = QtGui.QPushButton(self.Files)
-        self.pushButton.setObjectName(_fromUtf8("pushButton"))
-        self.horizontalLayout_8.addWidget(self.pushButton)
-        self.verticalLayout_4.addLayout(self.horizontalLayout_8)
-        self.pushButton.setText(_translate("MainWindow", "PushButton", None))
+        self.add_run_module_button2(self.verticalLayout_4, "files")
         # end button
 
 
@@ -917,7 +907,32 @@ class pysat_ui(object):
 
     ####These functions below are private and add functionality to the UI
 
-    def add_run_module_button(self, verticalLayout, set_object_name):
+    def add_run_module_button(self, verticalLayout, QGroupBox, set_object_name):
+        self.horizontalLayout = QtGui.QHBoxLayout()
+        self.horizontalLayout.setMargin(11)
+        self.horizontalLayout.setSpacing(6)
+        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.run_module_files = QtGui.QPushButton(QGroupBox)
+        self.run_module_files.setObjectName(_fromUtf8(set_object_name))
+        self.horizontalLayout.addWidget(self.run_module_files)
+        verticalLayout.addLayout(self.horizontalLayout)
+        self.run_module_files.setText(_translate("MainWindow", "Run Module", None))
+
+    def add_run_module_button2(self, verticalLayout, set_object_name):
+        self.horizontalLayout = QtGui.QHBoxLayout()
+        self.horizontalLayout.setMargin(11)
+        self.horizontalLayout.setSpacing(6)
+        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem)
+        self.pushButton = QtGui.QPushButton(verticalLayout)
+        self.pushButton.setObjectName(_fromUtf8(set_object_name))
+        self.horizontalLayout.addWidget(self.pushButton)
+        self.verticalLayout.addLayout(self.horizontalLayout)
+        self.pushButton.setText(_translate("MainWindow", "Run Module", None))
+
+    def add_run_module_button1(self, verticalLayout, set_object_name):
         self.horizontalLayout = QtGui.QHBoxLayout()
         self.horizontalLayout.setMargin(11)
         self.horizontalLayout.setSpacing(6)
