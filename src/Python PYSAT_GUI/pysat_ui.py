@@ -830,8 +830,8 @@ class pysat_ui(object):
         self.verticalLayout_8.addWidget(self.Normalization)
         self.Normalization.setTitle(_translate("MainWindow", "Normalization", None))
         self.NormValuebutton.setText(_translate("MainWindow", "Add Value", None))
+        self.add_run_module_button(self.verticalLayout, self.Normalization, "runNormalization")
         self.NormValuebutton.clicked.connect(lambda: pysat_ui.val_norm(self, MainWindow, self.count))
-        self.add_run_module_button(self.Normalization, "runNormalization")
 
     def val_norm(self, MainWindow, count):
         # an array holds a set of spinbox objects
