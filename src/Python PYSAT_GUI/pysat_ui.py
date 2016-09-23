@@ -678,6 +678,7 @@ class pysat_ui(object):
         self.label_89.setText(_translate("MainWindow", "0", None))
         self.label_90.setText(_translate("MainWindow", ")", None))
         self.label_91.setText(_translate("MainWindow", "]", None))
+        self.add_run_module_button(self.CreateModels, "runCreateModels")
         QtCore.QObject.connect(self.create_model_spin_2, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_79.setNum)
         QtCore.QObject.connect(self.create_model_spin, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_77.setNum)
         QtCore.QObject.connect(self.create_model_spin_3, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_84.setNum)
