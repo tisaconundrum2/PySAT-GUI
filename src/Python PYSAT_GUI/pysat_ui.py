@@ -560,6 +560,8 @@ class pysat_ui(object):
         QtCore.QObject.connect(self.comp_range_7, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_36.setNum)
         QtCore.QObject.connect(self.comp_range_8, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_35.setNum)
 
+        self.set_module_button(self.CompRanges, self.verticalLayout_7)
+
     def createmodels(self, MainWindow):
         self.CreateModels = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
         font = QtGui.QFont()
@@ -681,6 +683,7 @@ class pysat_ui(object):
         QtCore.QObject.connect(self.create_model_spin, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_77.setNum)
         QtCore.QObject.connect(self.create_model_spin_3, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_84.setNum)
         QtCore.QObject.connect(self.create_model_spin_4, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_89.setNum)
+        self.set_module_button(self.CreateModels, self.verticalLayout_17)
 
     def files(self, MainWindow):
         self.Files = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -806,6 +809,7 @@ class pysat_ui(object):
         self.CrossValidation.setTitle(_translate("MainWindow", "Setup", None))
         self.label_14.setText(_translate("MainWindow", "Element Name", None))
         self.label_15.setText(_translate("MainWindow", "nfolds_test", None))
+        self.set_module_button(self.CrossValidation, self.CrossValid)
 
     def std_norm(self, MainWindow):
         self.Normalization = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
