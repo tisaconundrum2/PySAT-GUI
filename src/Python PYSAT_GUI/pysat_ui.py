@@ -766,8 +766,9 @@ class pysat_ui(object):
         self.pushButton = QtGui.QPushButton(self.Files)
         self.pushButton.setObjectName(_fromUtf8("pushButton"))
         self.horizontalLayout_8.addWidget(self.pushButton)
-        self.verticalLayout_3.addLayout(self.horizontalLayout_8)
-    # end button
+        self.verticalLayout_4.addLayout(self.horizontalLayout_8)
+        self.pushButton.setText(_translate("MainWindow", "PushButton", None))
+        # end button
 
 
         try:
