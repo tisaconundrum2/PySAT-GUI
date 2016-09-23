@@ -812,6 +812,7 @@ class pysat_ui(object):
         self.label_14.setText(_translate("MainWindow", "Element Name", None))
         self.label_15.setText(_translate("MainWindow", "nfolds_test", None))
         self.pushButtonCrossValid = QtGui.QPushButton(self.CrossValidation)
+        self.set_module_button(self.CrossValid, self.pushButtonCrossValid)
 
     def std_norm(self, MainWindow):
         self.Normalization = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -838,6 +839,7 @@ class pysat_ui(object):
         self.NormValuebutton.setText(_translate("MainWindow", "Add Value", None))
         self.NormValuebutton.clicked.connect(lambda: pysat_ui.val_norm(self, MainWindow, self.count))
         self.pushButtonNormalization = QtGui.QPushButton(self.Normalization)
+        self.set_module_button(self.verticalLayout, self.pushButtonNormalization)
 
     def val_norm(self, MainWindow, count):
         # an array holds a set of spinbox objects
