@@ -59,7 +59,7 @@ QGroupBox::title {
           <property name="title">
            <string>Normalization</string>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_27">
+          <layout class="QVBoxLayout" name="verticalLayout">
            <item>
             <layout class="QVBoxLayout" name="verticalLayout_26">
              <item>
@@ -92,8 +92,20 @@ QGroupBox::title {
              </item>
             </layout>
            </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout">
+             <item>
+              <widget class="QPushButton" name="run_module_files">
+               <property name="text">
+                <string>Run Module</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
           </layout>
           <zorder></zorder>
+          <zorder>layoutWidget</zorder>
          </widget>
         </item>
        </layout>
