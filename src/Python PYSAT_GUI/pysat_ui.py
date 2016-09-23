@@ -559,8 +559,8 @@ class pysat_ui(object):
         QtCore.QObject.connect(self.comp_range_6, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_34.setNum)
         QtCore.QObject.connect(self.comp_range_7, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_36.setNum)
         QtCore.QObject.connect(self.comp_range_8, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_35.setNum)
-
-        self.set_module_button(self.CompRanges, self.verticalLayout_7)
+        self.pushButtonCompRanges = QtGui.QPushButton(self.CompRanges)
+        self.set_module_button(self.verticalLayout_7, self.pushButtonCompRanges)
 
     def createmodels(self, MainWindow):
         self.CreateModels = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -683,7 +683,8 @@ class pysat_ui(object):
         QtCore.QObject.connect(self.create_model_spin, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_77.setNum)
         QtCore.QObject.connect(self.create_model_spin_3, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_84.setNum)
         QtCore.QObject.connect(self.create_model_spin_4, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_89.setNum)
-        self.set_module_button(self.CreateModels, self.verticalLayout_17)
+        self.pushButtonCreateModels = QtGui.QPushButton(self.CreateModels)
+        self.set_module_button(self.verticalLayout_17, self.pushButtonCreateModels)
 
     def files(self, MainWindow):
         self.Files = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -757,7 +758,8 @@ class pysat_ui(object):
         self.unknownDataButton.setText(_translate("MainWindow", "...", None))
         self.fullDataBaseButton.setText(_translate("MainWindow", "...", None))
         self.outPutLocationButton.setText(_translate("MainWindow", "...", None))
-        self.set_module_button(self.Files, self.verticalLayout_4)
+        self.pushButtonFiles = QtGui.QPushButton(self.Files)
+        self.set_module_button(self.verticalLayout_4, self.pushButtonFiles)
 
         try:
             #TODO you will need to move this maskfilebutton function to the maskfile module
@@ -809,7 +811,7 @@ class pysat_ui(object):
         self.CrossValidation.setTitle(_translate("MainWindow", "Setup", None))
         self.label_14.setText(_translate("MainWindow", "Element Name", None))
         self.label_15.setText(_translate("MainWindow", "nfolds_test", None))
-        self.set_module_button(self.CrossValidation, self.CrossValid)
+        self.pushButtonCrossValid = QtGui.QPushButton(self.CrossValidation)
 
     def std_norm(self, MainWindow):
         self.Normalization = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -835,7 +837,7 @@ class pysat_ui(object):
         self.Normalization.setTitle(_translate("MainWindow", "Normalization", None))
         self.NormValuebutton.setText(_translate("MainWindow", "Add Value", None))
         self.NormValuebutton.clicked.connect(lambda: pysat_ui.val_norm(self, MainWindow, self.count))
-        self.set_module_button(self.Normalization, self.verticalLayout)
+        self.pushButtonNormalization = QtGui.QPushButton(self.Normalization)
 
     def val_norm(self, MainWindow, count):
         # an array holds a set of spinbox objects
@@ -904,17 +906,16 @@ class pysat_ui(object):
 
     ####These functions below are private and add functionality to the UI
 
-    def set_module_button(self, QGroupBox, QVBoxLayout):
+    def set_module_button(self, QVBoxLayout, PushButtonName):
         self.horizontalLayout = QtGui.QHBoxLayout()
         self.horizontalLayout.setMargin(11)
         self.horizontalLayout.setSpacing(6)
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
-        self.run_module_files = QtGui.QPushButton(QGroupBox)
-        self.run_module_files.setObjectName(_fromUtf8("run_module_files"))
-        self.horizontalLayout.addWidget(self.run_module_files)
+        PushButtonName.setObjectName(_fromUtf8("run_module_files"))
+        self.horizontalLayout.addWidget(PushButtonName)
         QVBoxLayout.addLayout(self.horizontalLayout)
-        self.run_module_files.setText(_translate("MainWindow", "Run Module", None))
+        PushButtonName.setText(_translate("MainWindow", "Run Module", None))
 
     def set_norm_array(self, spin_box_text, index):
         self.spin_array[index] = spin_box_text
