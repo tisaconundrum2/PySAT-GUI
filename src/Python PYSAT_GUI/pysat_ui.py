@@ -754,7 +754,7 @@ class pysat_ui(object):
         self.unknownDataButton.setText(_translate("MainWindow", "...", None))
         self.fullDataBaseButton.setText(_translate("MainWindow", "...", None))
         self.outPutLocationButton.setText(_translate("MainWindow", "...", None))
-        self.add_run_module_button(self.Files, "runFiles")
+        self.add_run_module_button(self.verticalLayout_4, self.Files, "runFiles")
         try:
             #TODO you will need to move this maskfilebutton function to the maskfile module
             #self.maskFileButton.clicked.connect(lambda: pysat_ui.on_maskFile_clicked(self))
@@ -900,7 +900,7 @@ class pysat_ui(object):
 
     ####These functions below are private and add functionality to the UI
 
-    def add_run_module_button(self, button_attrib, set_object_name):
+    def add_run_module_button(self,verticalLayout, button_attrib, set_object_name):
         self.horizontalLayout = QtGui.QHBoxLayout()
         self.horizontalLayout.setMargin(11)
         self.horizontalLayout.setSpacing(6)
@@ -908,19 +908,7 @@ class pysat_ui(object):
         self.run_module_files = QtGui.QPushButton(button_attrib)
         self.run_module_files.setObjectName(_fromUtf8(set_object_name))
         self.horizontalLayout.addWidget(self.run_module_files)
-        self.verticalLayout_4.addLayout(self.horizontalLayout)
-        self.run_module_files.setText(_translate("MainWindow", "Run Module", None))
-
-    def add_run_module_button(self):
-        self.verticalLayout.addLayout(self.verticalLayout_26)
-        self.horizontalLayout = QtGui.QHBoxLayout()
-        self.horizontalLayout.setMargin(11)
-        self.horizontalLayout.setSpacing(6)
-        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
-        self.run_module_files = QtGui.QPushButton(self.Normalization)
-        self.run_module_files.setObjectName(_fromUtf8("run_module_files"))
-        self.horizontalLayout.addWidget(self.run_module_files)
-        self.verticalLayout.addLayout(self.horizontalLayout)
+        verticalLayout.addLayout(self.horizontalLayout)
         self.run_module_files.setText(_translate("MainWindow", "Run Module", None))
 
     def set_norm_array(self, spin_box_text, index):
