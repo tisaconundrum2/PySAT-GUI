@@ -904,10 +904,6 @@ class pysat_ui(object):
     ####These functions below are private and add functionality to the UI
 
     def add_run_module_button(self, verticalLayout, set_object_name):
-        self.verticalLayout = QtGui.QVBoxLayout(verticalLayout)
-        self.verticalLayout.setMargin(11)
-        self.verticalLayout.setSpacing(6)
-        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.horizontalLayout = QtGui.QHBoxLayout()
         self.horizontalLayout.setMargin(11)
         self.horizontalLayout.setSpacing(6)

@@ -26,7 +26,7 @@
          <x>0</x>
          <y>0</y>
          <width>544</width>
-         <height>923</height>
+         <height>954</height>
         </rect>
        </property>
        <property name="font">
@@ -59,7 +59,7 @@ QGroupBox::title {
           <property name="title">
            <string>Files</string>
           </property>
-          <layout class="QVBoxLayout" name="files">
+          <layout class="QVBoxLayout" name="verticalLayout_3">
            <item>
             <widget class="QSplitter" name="splitter_2">
              <property name="orientation">
@@ -202,6 +202,30 @@ QGroupBox::title {
               </layout>
              </widget>
             </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_8">
+             <item>
+              <spacer name="horizontalSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton">
+               <property name="text">
+                <string>PushButton</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
           </layout>
          </widget>
