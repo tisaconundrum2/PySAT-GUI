@@ -756,7 +756,20 @@ class pysat_ui(object):
         self.unknownDataButton.setText(_translate("MainWindow", "...", None))
         self.fullDataBaseButton.setText(_translate("MainWindow", "...", None))
         self.outPutLocationButton.setText(_translate("MainWindow", "...", None))
-        self.add_run_module_button(self.Files, "runFiles")
+        # start button
+        self.horizontalLayout_8 = QtGui.QHBoxLayout()
+        self.horizontalLayout_8.setMargin(11)
+        self.horizontalLayout_8.setSpacing(6)
+        self.horizontalLayout_8.setObjectName(_fromUtf8("horizontalLayout_8"))
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout_8.addItem(spacerItem)
+        self.pushButton = QtGui.QPushButton(self.Files)
+        self.pushButton.setObjectName(_fromUtf8("pushButton"))
+        self.horizontalLayout_8.addWidget(self.pushButton)
+        self.verticalLayout_3.addLayout(self.horizontalLayout_8)
+    # end button
+
+
         try:
             #TODO you will need to move this maskfilebutton function to the maskfile module
             #self.maskFileButton.clicked.connect(lambda: pysat_ui.on_maskFile_clicked(self))
