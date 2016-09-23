@@ -806,6 +806,7 @@ class pysat_ui(object):
         self.CrossValidation.setTitle(_translate("MainWindow", "Setup", None))
         self.label_14.setText(_translate("MainWindow", "Element Name", None))
         self.label_15.setText(_translate("MainWindow", "nfolds_test", None))
+        self.add_run_module_button(self.verticalLayout_11, self.CrossValidation, "runElementName")
 
     def std_norm(self, MainWindow):
         self.Normalization = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -900,12 +901,12 @@ class pysat_ui(object):
 
     ####These functions below are private and add functionality to the UI
 
-    def add_run_module_button(self,verticalLayout, button_attrib, set_object_name):
+    def add_run_module_button(self,verticalLayout, QGroupBox, set_object_name):
         self.horizontalLayout = QtGui.QHBoxLayout()
         self.horizontalLayout.setMargin(11)
         self.horizontalLayout.setSpacing(6)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
-        self.run_module_files = QtGui.QPushButton(button_attrib)
+        self.run_module_files = QtGui.QPushButton(QGroupBox)
         self.run_module_files.setObjectName(_fromUtf8(set_object_name))
         self.horizontalLayout.addWidget(self.run_module_files)
         verticalLayout.addLayout(self.horizontalLayout)
