@@ -1023,7 +1023,34 @@ class pysat_ui(object):
         self.N_Folds.setTitle(_translate("MainWindow", "Folds", None))
         self.label_15.setText(_translate("MainWindow", "n folds", None))
 
-####These functions below are private and add functionality to the UI
+    def interpolated(self, MainWindow):
+        self.Interpolated = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.Interpolated.setFont(font)
+        self.Interpolated.setObjectName(_fromUtf8("Interpolated"))
+        self.CrossValid_3 = QtGui.QVBoxLayout(self.Interpolated)
+        self.CrossValid_3.setMargin(11)
+        self.CrossValid_3.setSpacing(6)
+        self.CrossValid_3.setObjectName(_fromUtf8("CrossValid_3"))
+        self.horizontalLayout_12 = QtGui.QHBoxLayout()
+        self.horizontalLayout_12.setMargin(11)
+        self.horizontalLayout_12.setSpacing(6)
+        self.horizontalLayout_12.setObjectName(_fromUtf8("horizontalLayout_12"))
+        self.verticalLayout_23 = QtGui.QVBoxLayout()
+        self.verticalLayout_23.setMargin(11)
+        self.verticalLayout_23.setSpacing(6)
+        self.verticalLayout_23.setObjectName(_fromUtf8("verticalLayout_23"))
+        self.label_16 = QtGui.QLabel(self.Interpolated)
+        self.label_16.setObjectName(_fromUtf8("label_16"))
+        self.verticalLayout_23.addWidget(self.label_16)
+        self.horizontalLayout_12.addLayout(self.verticalLayout_23)
+        self.CrossValid_3.addLayout(self.horizontalLayout_12)
+        self.verticalLayout_8.addWidget(self.Interpolated)
+        self.Interpolated.setTitle(_translate("MainWindow", "Interpolated", None))
+        self.label_16.setText(_translate("MainWindow", "Interpolated unknown data to known data", None))
+
+    ####These functions below are private and add functionality to the UI
 
     def set_module_button(self, QVBoxLayout, PushButtonName):
         self.horizontalLayout = QtGui.QHBoxLayout()
