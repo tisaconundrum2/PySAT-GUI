@@ -15,9 +15,13 @@ class Main(QMainWindow):
         pysat.menubar(MainWindow)
         pysat.menu_item_shortcuts()                                            # The shortcuts for making things happen in the UI
         pysat.menu_item_functions(MainWindow)                                  # These are the various functions that make the UI work
+        pysat.unknown_data(MainWindow)
+        pysat.reference_data(MainWindow)
+        pysat.normalization(MainWindow)
+
+#### These are the triggers for exit and new
         pysat.actionExit.triggered.connect(lambda: self.exit())                # Exit out of the current workflow
         pysat.actionCreate_New_Workflow.triggered.connect(lambda: self.new())  # Create a new window. It will be blank
-        pysat.ok(MainWindow)                                                   # The Ok button at the bottom of the UI
 
     def new(self):
         # TODO create a new window to work in. The old window does not disappear

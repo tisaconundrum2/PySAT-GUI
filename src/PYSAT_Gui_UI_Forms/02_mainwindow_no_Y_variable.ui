@@ -260,42 +260,6 @@ QGroupBox::title {
          </widget>
         </item>
         <item>
-         <widget class="QGroupBox" name="Y_variable">
-          <property name="font">
-           <font>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-          <property name="title">
-           <string>Y Variable</string>
-          </property>
-          <layout class="QVBoxLayout" name="CrossValid">
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_4">
-             <item>
-              <layout class="QVBoxLayout" name="verticalLayout_11">
-               <item>
-                <widget class="QLabel" name="label_14">
-                 <property name="text">
-                  <string>Element Name</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QVBoxLayout" name="verticalLayout_12">
-               <item>
-                <widget class="QLineEdit" name="elementNameLine"/>
-               </item>
-              </layout>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
          <widget class="QGroupBox" name="CompRanges">
           <property name="font">
            <font>
@@ -677,7 +641,7 @@ QGroupBox::title {
          </widget>
         </item>
         <item>
-         <widget class="QGroupBox" name="NumberOfComponents">
+         <widget class="QGroupBox" name="CreateModels">
           <property name="font">
            <font>
             <pointsize>10</pointsize>
@@ -851,8 +815,7 @@ QGroupBox::title {
          </widget>
         </item>
        </layout>
-       <zorder>Y_variable</zorder>
-       <zorder>NumberOfComponents</zorder>
+       <zorder>CreateModels</zorder>
        <zorder>Normalization</zorder>
        <zorder>CompRanges</zorder>
        <zorder>unknownData</zorder>
@@ -1312,6 +1275,70 @@ QGroupBox::title {
  <resources/>
  <connections>
   <connection>
+   <sender>create_model_spin_2</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>label_79</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>399</x>
+     <y>307</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>383</x>
+     <y>383</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>create_model_spin</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>label_77</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>336</x>
+     <y>268</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>338</x>
+     <y>385</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>create_model_spin_3</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>label_84</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>443</x>
+     <y>329</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>430</x>
+     <y>386</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>create_model_spin_4</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>label_89</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>485</x>
+     <y>356</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>473</x>
+     <y>378</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
    <sender>comp_range</sender>
    <signal>valueChanged(int)</signal>
    <receiver>label_21</receiver>
@@ -1436,70 +1463,6 @@ QGroupBox::title {
     <hint type="destinationlabel">
      <x>518</x>
      <y>210</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>create_model_spin_2</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>label_79</receiver>
-   <slot>setNum(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>399</x>
-     <y>307</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>383</x>
-     <y>383</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>create_model_spin</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>label_77</receiver>
-   <slot>setNum(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>336</x>
-     <y>268</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>338</x>
-     <y>385</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>create_model_spin_3</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>label_84</receiver>
-   <slot>setNum(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>443</x>
-     <y>329</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>430</x>
-     <y>386</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>create_model_spin_4</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>label_89</receiver>
-   <slot>setNum(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>485</x>
-     <y>356</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>473</x>
-     <y>378</y>
     </hint>
    </hints>
   </connection>
