@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Documents\GitHub\PySAT\src\PYSAT_Gui_UI_Forms\05_mainwindow_norm_test.ui'
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Documents\GitHub\PySAT\src\PYSAT_Gui_UI_Forms\.recycle.bin\05_mainwindow_norm_test.ui'
 #
 # Created by: PyQt4 UI code generator 4.11.4
 #

@@ -1,12 +1,7 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Documents\GitHub\PySAT\src\PYSAT_Gui_UI_Forms\.recycle.bin\01_mainwindow_clean.ui'
-#
-# Created by: PyQt4 UI code generator 4.11.4
-#
-# WARNING! All changes made in this file will be lost!
-
 from PyQt4 import QtCore, QtGui
+from PyQt4.QtGui import QFileDialog
+import sys
+from pysat_function import pysat_func
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -22,8 +17,21 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
+
+
+
+class pysat_ui(object):
+    count = 0
+
+    def __init__(self):
+        self.pysat_fun = pysat_func()
+        self.norm_spinBox_ = [None]*1024
+        self.spin_array = [None]*1024
+        pysat_ui.count = 1
+        self.pysat = pysat_func()
+
+
+    def mainframe(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(581, 843)
         self.centralWidget = QtGui.QWidget(MainWindow)
@@ -41,17 +49,17 @@ class Ui_MainWindow(object):
         font.setPointSize(8)
         self.scrollAreaWidgetContents_2.setFont(font)
         self.scrollAreaWidgetContents_2.setStyleSheet(_fromUtf8("QGroupBox {\n"
-"  border: 2px solid gray;\n"
-"  border-radius: 6px;\n"
-"  margin-top: 0.5em;\n"
-"}\n"
-"\n"
-"QGroupBox::title {\n"
-"\n"
-"  padding-top: -14px;\n"
-"  padding-left: 8px;\n"
-"}\n"
-""))
+                                                                "  border: 2px solid gray;\n"
+                                                                "  border-radius: 6px;\n"
+                                                                "  margin-top: 0.5em;\n"
+                                                                "}\n"
+                                                                "\n"
+                                                                "QGroupBox::title {\n"
+                                                                "\n"
+                                                                "  padding-top: -14px;\n"
+                                                                "  padding-left: 8px;\n"
+                                                                "}\n"
+                                                                ""))
         self.scrollAreaWidgetContents_2.setObjectName(_fromUtf8("scrollAreaWidgetContents_2"))
         self.verticalLayout_8 = QtGui.QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_8.setMargin(11)
@@ -63,22 +71,6 @@ class Ui_MainWindow(object):
         self.menuBar = QtGui.QMenuBar(MainWindow)
         self.menuBar.setGeometry(QtCore.QRect(0, 0, 581, 21))
         self.menuBar.setObjectName(_fromUtf8("menuBar"))
-        self.menuFile = QtGui.QMenu(self.menuBar)
-        self.menuFile.setObjectName(_fromUtf8("menuFile"))
-        self.menuPreprocessing = QtGui.QMenu(self.menuBar)
-        self.menuPreprocessing.setObjectName(_fromUtf8("menuPreprocessing"))
-        self.menuBaseline_Removal = QtGui.QMenu(self.menuPreprocessing)
-        self.menuBaseline_Removal.setObjectName(_fromUtf8("menuBaseline_Removal"))
-        self.menuCalibration_Transfer = QtGui.QMenu(self.menuPreprocessing)
-        self.menuCalibration_Transfer.setObjectName(_fromUtf8("menuCalibration_Transfer"))
-        self.menuVisualization = QtGui.QMenu(self.menuBar)
-        self.menuVisualization.setObjectName(_fromUtf8("menuVisualization"))
-        self.menuClustering = QtGui.QMenu(self.menuVisualization)
-        self.menuClustering.setObjectName(_fromUtf8("menuClustering"))
-        self.menuRegression = QtGui.QMenu(self.menuBar)
-        self.menuRegression.setObjectName(_fromUtf8("menuRegression"))
-        self.menuHelp = QtGui.QMenu(self.menuBar)
-        self.menuHelp.setObjectName(_fromUtf8("menuHelp"))
         MainWindow.setMenuBar(self.menuBar)
         self.mainToolBar = QtGui.QToolBar(MainWindow)
         self.mainToolBar.setObjectName(_fromUtf8("mainToolBar"))
@@ -180,6 +172,83 @@ class Ui_MainWindow(object):
         self.actionComposition_Ranges.setObjectName(_fromUtf8("actionComposition_Ranges"))
         self.actionCreate_Models = QtGui.QAction(MainWindow)
         self.actionCreate_Models.setObjectName(_fromUtf8("actionCreate_Models"))
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        MainWindow.setWindowTitle(_translate("MainWindow", "PYSAT", None))
+        self.actionLoad_Refence_Data.setText(_translate("MainWindow", "Load Refence Data", None))
+        self.actionLoad_Unknown_Data.setText(_translate("MainWindow", "Load Data Files", None))
+        self.actionSave_Current_Workflow.setText(_translate("MainWindow", "Save Current Workflow", None))
+        self.actionSave_Current_Plots.setText(_translate("MainWindow", "Save Current Plots", None))
+        self.actionSave_Current_Data.setText(_translate("MainWindow", "Save Current Data", None))
+        self.actionCreate_New_Workflow.setText(_translate("MainWindow", "Create New Workflow", None))
+        self.actionNoise_Reduction.setText(_translate("MainWindow", "Noise Reduction", None))
+        self.actionApply_Mask.setText(_translate("MainWindow", "Apply Mask", None))
+        self.actionInterpolate.setText(_translate("MainWindow", "Interpolate", None))
+        self.actionInstrument_Response.setText(_translate("MainWindow", "Instrument Response", None))
+        self.actionALS.setText(_translate("MainWindow", "ALS", None))
+        self.actionDietrich.setText(_translate("MainWindow", "Dietrich", None))
+        self.actionPolyFit.setText(_translate("MainWindow", "PolyFit", None))
+        self.actionAirPLS.setText(_translate("MainWindow", "AirPLS", None))
+        self.actionFABC.setText(_translate("MainWindow", "FABC", None))
+        self.actionKK.setText(_translate("MainWindow", "KK", None))
+        self.actionMario.setText(_translate("MainWindow", "Mario", None))
+        self.actionMedian.setText(_translate("MainWindow", "Median", None))
+        self.actionRubberband.setText(_translate("MainWindow", "Rubberband", None))
+        self.actionUndecimated_Wavelet.setText(_translate("MainWindow", "Undecimated Wavelet", None))
+        self.actionRatio.setText(_translate("MainWindow", "Ratio", None))
+        self.actionTommy_s_Methgod.setText(_translate("MainWindow", "Tommy\'s Method", None))
+        self.actionPiecewise_Direct_Standardization.setText(
+            _translate("MainWindow", "Piecewise Direct Standardization", None))
+        self.actionPCA.setText(_translate("MainWindow", "PCA", None))
+        self.actionICA.setText(_translate("MainWindow", "ICA", None))
+        self.actionK_Means.setText(_translate("MainWindow", "K-Means", None))
+        self.actionHierarchical.setText(_translate("MainWindow", "Hierarchical", None))
+        self.actionOthers.setText(_translate("MainWindow", "Others...", None))
+        self.actionOthers_2.setText(_translate("MainWindow", "Others...", None))
+        self.actionOthers_3.setText(_translate("MainWindow", "Others...", None))
+        self.actionPLS.setText(_translate("MainWindow", "PLS", None))
+        self.actionSM_PLS.setText(_translate("MainWindow", "SM-PLS", None))
+        self.actionICA_Regression.setText(_translate("MainWindow", "ICA Regression", None))
+        self.actionGaussian_Process.setText(_translate("MainWindow", "Gaussian Process", None))
+        self.actionMLP.setText(_translate("MainWindow", "MLP", None))
+        self.actionSVM.setText(_translate("MainWindow", "SVM", None))
+        self.actionOthers_4.setText(_translate("MainWindow", "Others...", None))
+        self.actionOthers_5.setText(_translate("MainWindow", "Others...", None))
+        self.actionIndex.setText(_translate("MainWindow", "Index", None))
+        self.actionContent_2.setText(_translate("MainWindow", "Content", None))
+        self.actionAbout.setText(_translate("MainWindow", "About...", None))
+        self.actionAbout_QtCreator.setText(_translate("MainWindow", "About QtCreator...", None))
+        self.actionExit.setText(_translate("MainWindow", "Exit", None))
+        self.actionNormalization.setText(_translate("MainWindow", "Normalization", None))
+        self.actionElement_Name_Setup.setText(_translate("MainWindow", "Element Name Setup", None))
+        self.actionComposition_Ranges.setText(_translate("MainWindow", "Composition Ranges", None))
+        self.actionCreate_Models.setText(_translate("MainWindow", "Create Models", None))
+
+    def menubar(self, MainWindow):
+        self.menuBar = QtGui.QMenuBar(MainWindow)
+        self.menuBar.setGeometry(QtCore.QRect(0, 0, 581, 21))
+        self.menuBar.setObjectName(_fromUtf8("menuBar"))
+        self.menuFile = QtGui.QMenu(self.menuBar)
+        self.menuFile.setObjectName(_fromUtf8("menuFile"))
+        self.menuPreprocessing = QtGui.QMenu(self.menuBar)
+        self.menuPreprocessing.setObjectName(_fromUtf8("menuPreprocessing"))
+        self.menuBaseline_Removal = QtGui.QMenu(self.menuPreprocessing)
+        self.menuBaseline_Removal.setObjectName(_fromUtf8("menuBaseline_Removal"))
+        self.menuCalibration_Transfer = QtGui.QMenu(self.menuPreprocessing)
+        self.menuCalibration_Transfer.setObjectName(_fromUtf8("menuCalibration_Transfer"))
+        self.menuRegression = QtGui.QMenu(self.menuBar)
+        self.menuRegression.setObjectName(_fromUtf8("menuRegression"))
+        self.menuHelp = QtGui.QMenu(self.menuBar)
+        self.menuHelp.setObjectName(_fromUtf8("menuHelp"))
+        self.menuClassification = QtGui.QMenu(self.menuBar)
+        self.menuClassification.setObjectName(_fromUtf8("menuClassification"))
+        self.menuSupervised = QtGui.QMenu(self.menuClassification)
+        self.menuSupervised.setObjectName(_fromUtf8("menuSupervised"))
+        self.menuClustering = QtGui.QMenu(self.menuClassification)
+        self.menuClustering.setObjectName(_fromUtf8("menuClustering"))
+        self.menuVisualization = QtGui.QMenu(self.menuBar)
+        self.menuVisualization.setObjectName(_fromUtf8("menuVisualization"))
+        MainWindow.setMenuBar(self.menuBar)
+        self.menuFile.addAction(self.actionLoad_Refence_Data)
         self.menuFile.addAction(self.actionLoad_Unknown_Data)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionSave_Current_Plots)
@@ -208,96 +277,117 @@ class Ui_MainWindow(object):
         self.menuPreprocessing.addAction(self.actionApply_Mask)
         self.menuPreprocessing.addAction(self.actionInterpolate)
         self.menuPreprocessing.addAction(self.actionInstrument_Response)
-        self.menuPreprocessing.addAction(self.menuCalibration_Transfer.menuAction())
         self.menuPreprocessing.addAction(self.menuBaseline_Removal.menuAction())
-        self.menuPreprocessing.addSeparator()
-        self.menuPreprocessing.addAction(self.actionElement_Name_Setup)
-        self.menuPreprocessing.addAction(self.actionComposition_Ranges)
-        self.menuPreprocessing.addAction(self.actionCreate_Models)
-        self.menuClustering.addAction(self.actionK_Means)
-        self.menuClustering.addAction(self.actionHierarchical)
-        self.menuClustering.addAction(self.actionOthers)
-        self.menuClustering.addAction(self.actionOthers_2)
-        self.menuVisualization.addAction(self.actionPCA)
-        self.menuVisualization.addAction(self.actionICA)
-        self.menuVisualization.addAction(self.menuClustering.menuAction())
-        self.menuRegression.addAction(self.actionPLS)
-        self.menuRegression.addAction(self.actionSM_PLS)
-        self.menuRegression.addAction(self.actionICA_Regression)
-        self.menuRegression.addAction(self.actionGaussian_Process)
-        self.menuRegression.addAction(self.actionMLP)
-        self.menuRegression.addAction(self.actionSVM)
-        self.menuRegression.addAction(self.actionOthers_4)
-        self.menuRegression.addAction(self.actionOthers_5)
+        self.menuPreprocessing.addAction(self.menuCalibration_Transfer.menuAction())
+        self.menuPreprocessing.addAction(self.actionICA_2)
+        self.menuPreprocessing.addAction(self.actionPCA_2)
+        self.menuRegression.addAction(self.actionCross_Validation)
+        self.menuRegression.addAction(self.actionTrain)
+        self.menuRegression.addAction(self.actionPredict)
         self.menuHelp.addAction(self.actionIndex)
         self.menuHelp.addAction(self.actionContent_2)
         self.menuHelp.addSeparator()
         self.menuHelp.addAction(self.actionAbout)
         self.menuHelp.addAction(self.actionAbout_QtCreator)
+        self.menuSupervised.addAction(self.actionPLS_DA)
+        self.menuSupervised.addAction(self.actionSIMCA)
+        self.menuClustering.addAction(self.actionK_means)
+        self.menuClustering.addAction(self.actionHierarchical_2)
+        self.menuClassification.addAction(self.menuSupervised.menuAction())
+        self.menuClassification.addAction(self.menuClustering.menuAction())
+        self.menuVisualization.addAction(self.actionLine_Plot)
+        self.menuVisualization.addAction(self.action1_to_1_Plot)
+        self.menuVisualization.addAction(self.actionScatter_Plot)
         self.menuBar.addAction(self.menuFile.menuAction())
         self.menuBar.addAction(self.menuPreprocessing.menuAction())
-        self.menuBar.addAction(self.menuVisualization.menuAction())
+        self.menuBar.addAction(self.menuClassification.menuAction())
         self.menuBar.addAction(self.menuRegression.menuAction())
+        self.menuBar.addAction(self.menuVisualization.menuAction())
         self.menuBar.addAction(self.menuHelp.menuAction())
-
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
-    def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(_translate("MainWindow", "PYSAT", None))
         self.menuFile.setTitle(_translate("MainWindow", "File", None))
         self.menuPreprocessing.setTitle(_translate("MainWindow", "Preprocessing", None))
         self.menuBaseline_Removal.setTitle(_translate("MainWindow", "Baseline Removal", None))
         self.menuCalibration_Transfer.setTitle(_translate("MainWindow", "Calibration Transfer", None))
-        self.menuVisualization.setTitle(_translate("MainWindow", "Visualization", None))
-        self.menuClustering.setTitle(_translate("MainWindow", "Clustering", None))
         self.menuRegression.setTitle(_translate("MainWindow", "Regression", None))
         self.menuHelp.setTitle(_translate("MainWindow", "Help", None))
-        self.actionLoad_Refence_Data.setText(_translate("MainWindow", "Load Refence Data", None))
-        self.actionLoad_Unknown_Data.setText(_translate("MainWindow", "Load Data Files", None))
-        self.actionSave_Current_Workflow.setText(_translate("MainWindow", "Save Current Workflow", None))
-        self.actionSave_Current_Plots.setText(_translate("MainWindow", "Save Current Plots", None))
-        self.actionSave_Current_Data.setText(_translate("MainWindow", "Save Current Data", None))
-        self.actionCreate_New_Workflow.setText(_translate("MainWindow", "Create New Workflow", None))
-        self.actionNoise_Reduction.setText(_translate("MainWindow", "Noise Reduction", None))
-        self.actionApply_Mask.setText(_translate("MainWindow", "Apply Mask", None))
-        self.actionInterpolate.setText(_translate("MainWindow", "Interpolate", None))
-        self.actionInstrument_Response.setText(_translate("MainWindow", "Instrument Response", None))
-        self.actionALS.setText(_translate("MainWindow", "ALS", None))
-        self.actionDietrich.setText(_translate("MainWindow", "Dietrich", None))
-        self.actionPolyFit.setText(_translate("MainWindow", "PolyFit", None))
-        self.actionAirPLS.setText(_translate("MainWindow", "AirPLS", None))
-        self.actionFABC.setText(_translate("MainWindow", "FABC", None))
-        self.actionKK.setText(_translate("MainWindow", "KK", None))
-        self.actionMario.setText(_translate("MainWindow", "Mario", None))
-        self.actionMedian.setText(_translate("MainWindow", "Median", None))
-        self.actionRubberband.setText(_translate("MainWindow", "Rubberband", None))
-        self.actionUndecimated_Wavelet.setText(_translate("MainWindow", "Undecimated Wavelet", None))
-        self.actionRatio.setText(_translate("MainWindow", "Ratio", None))
-        self.actionTommy_s_Methgod.setText(_translate("MainWindow", "Tommy\'s Method", None))
-        self.actionPiecewise_Direct_Standardization.setText(_translate("MainWindow", "Piecewise Direct Standardization", None))
-        self.actionPCA.setText(_translate("MainWindow", "PCA", None))
-        self.actionICA.setText(_translate("MainWindow", "ICA", None))
-        self.actionK_Means.setText(_translate("MainWindow", "K-Means", None))
-        self.actionHierarchical.setText(_translate("MainWindow", "Hierarchical", None))
-        self.actionOthers.setText(_translate("MainWindow", "Others...", None))
-        self.actionOthers_2.setText(_translate("MainWindow", "Others...", None))
-        self.actionOthers_3.setText(_translate("MainWindow", "Others...", None))
-        self.actionPLS.setText(_translate("MainWindow", "PLS", None))
-        self.actionSM_PLS.setText(_translate("MainWindow", "SM-PLS", None))
-        self.actionICA_Regression.setText(_translate("MainWindow", "ICA Regression", None))
-        self.actionGaussian_Process.setText(_translate("MainWindow", "Gaussian Process", None))
-        self.actionMLP.setText(_translate("MainWindow", "MLP", None))
-        self.actionSVM.setText(_translate("MainWindow", "SVM", None))
-        self.actionOthers_4.setText(_translate("MainWindow", "Others...", None))
-        self.actionOthers_5.setText(_translate("MainWindow", "Others...", None))
-        self.actionIndex.setText(_translate("MainWindow", "Index", None))
-        self.actionContent_2.setText(_translate("MainWindow", "Content", None))
-        self.actionAbout.setText(_translate("MainWindow", "About...", None))
-        self.actionAbout_QtCreator.setText(_translate("MainWindow", "About QtCreator...", None))
-        self.actionExit.setText(_translate("MainWindow", "Exit", None))
-        self.actionNormalization.setText(_translate("MainWindow", "Normalization", None))
-        self.actionElement_Name_Setup.setText(_translate("MainWindow", "Element Name Setup", None))
-        self.actionComposition_Ranges.setText(_translate("MainWindow", "Composition Ranges", None))
-        self.actionCreate_Models.setText(_translate("MainWindow", "Create Models", None))
+        self.menuClassification.setTitle(_translate("MainWindow", "Classification", None))
+        self.menuSupervised.setTitle(_translate("MainWindow", "Supervised", None))
+        self.menuClustering.setTitle(_translate("MainWindow", "Clustering", None))
+        self.menuVisualization.setTitle(_translate("MainWindow", "Visualization", None))
 
+
+    ####These functions below are private and add functionality to the UI
+
+    def set_module_button(self, QVBoxLayout, PushButtonName):
+        self.horizontalLayout = QtGui.QHBoxLayout()
+        self.horizontalLayout.setMargin(11)
+        self.horizontalLayout.setSpacing(6)
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem)
+        PushButtonName.setObjectName(_fromUtf8("run_module_files"))
+        self.horizontalLayout.addWidget(PushButtonName)
+        QVBoxLayout.addLayout(self.horizontalLayout)
+        PushButtonName.setText(_translate("MainWindow", "Run Module", None))
+
+    def set_norm_array(self, spin_box_text, index):
+        self.spin_array[index] = spin_box_text
+        for i in range(0, self.count*2):
+            print(self.spin_array[i])
+
+    def on_maskFile_clicked(self):
+        filename = QFileDialog.getOpenFileName(None, "Open Mask File", '.', "(*.csv)")
+        self.lineEdit.setText(filename)
+        self.pysat_fun.set_files(maskfile=filename)
+        if self.lineEdit.text() == "":
+            self.lineEdit.setText("*.csv")
+
+    def on_uknownDataButton_clicked(self):
+        filename = QFileDialog.getOpenFileName(None, "Open Uknown Data File", '.', "(*.csv)")
+        self.lineEdit_2.setText(filename)
+        self.pysat_fun.set_files(unknowndatacsv=filename)
+        if self.lineEdit_2.text() == "":
+            self.lineEdit_2.setText("*.csv")
+
+    def on_fullDataBaseButton_clicked(self):
+        filename = QFileDialog.getOpenFileName(None, "Open Uknown Data File", '.', "(*.csv)")
+        self.lineEdit_3.setText(filename)
+        self.pysat_fun.set_files(db=filename)
+        if self.lineEdit_3.text() == "":
+            self.lineEdit_3.setText("*.csv")
+
+    def on_outPutLocationButton_clicked(self):
+        filename = QFileDialog.getExistingDirectory(None, "Select Output Directory", '.')
+        self.lineEdit_4.setText(filename)
+        self.pysat_fun.set_files(outpath=filename)
+        if self.lineEdit_4.text() == "":
+            self.lineEdit_4.setText("*/*")
+
+    def on_okButton_clicked(self):
+        #TODO Create functionality for all modules
+        #TODO Create a list of functions that call each function that is loaded into the list.
+        print(self.lineEdit_2.text())
+        print(self.lineEdit_3.text())
+        print(self.lineEdit_4.text())
+
+
+    ####These functions allow for interactions of buttons
+
+    def menu_item_shortcuts(self):
+        self.actionCreate_New_Workflow.setShortcut("ctrl+N")
+        self.actionLoad_Unknown_Data.setShortcut("ctrl+O")
+        self.actionExit.setShortcut("ctrl+Q")
+
+    def menu_item_functions(self, MainWindow):
+        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.files(self, MainWindow))
+        self.actionNormalization.triggered.connect(lambda: pysat_ui.std_norm(self, MainWindow))
+        self.actionElement_Name_Setup.triggered.connect(lambda: pysat_ui.element_name_setup(self, MainWindow))
+        self.actionComposition_Ranges.triggered.connect(lambda: pysat_ui.compranges(self, MainWindow))
+        self.actionCreate_Models.triggered.connect(lambda: pysat_ui.createmodels(self, MainWindow))
+
+    def save(self):
+        # TODO save the current window's data into a save file
+        pass
+
+    def open(self):
+        # TODO open file dialog
+        self.filename = QFileDialog.getOpenFileName(self, "Open a Workflow File", '.', "(*.wrf)")
