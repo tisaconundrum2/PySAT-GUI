@@ -1009,7 +1009,7 @@ class pysat_ui(object):
 
     def menu_item_functions(self, MainWindow):
         pass
-        pysat.unknown_data(MainWindow)
+        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.unknown_data(self, MainWindow))
         pysat.reference_data(MainWindow)
         pysat.normalization(MainWindow)
         pysat.comp_ranges(MainWindow)
