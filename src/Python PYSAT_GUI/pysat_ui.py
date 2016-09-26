@@ -28,6 +28,8 @@ class pysat_ui(object):
         self.norm_spinBox_ = [None]*1024
         self.spin_array = [None]*1024
         pysat_ui.count = 1
+        self.pysat = pysat_func()
+
 
     def mainframe(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
@@ -561,6 +563,11 @@ class pysat_ui(object):
         QtCore.QObject.connect(self.comp_range_8, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_35.setNum)
         self.pushButtonCompRanges = QtGui.QPushButton(self.CompRanges)
         self.set_module_button(self.verticalLayout_7, self.pushButtonCompRanges)
+        # pysat.set_compranges([[-20, 50], [30, 70], [60, 100], [0, 120]])
+        self.pushButtonCompRanges.clicked.connect(lambda: self.pysat.compranges([self.comp_range, self.comp_range_2],
+                                                                                [self.comp_range_3, self.comp_range_4],
+                                                                                [self.comp_range_5, self.comp_range_6],
+                                                                                [self.comp_range_7, self.comp_range_8]))
 
     def createmodels(self, MainWindow):
         self.CreateModels = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
