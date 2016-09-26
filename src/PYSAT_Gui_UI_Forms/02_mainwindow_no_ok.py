@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Documents\GitHub\PySAT\src\PYSAT_Gui_UI_Forms\02_mainwindow_full.ui'
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Documents\GitHub\PySAT\src\PYSAT_Gui_UI_Forms\02_mainwindow_no_ok.ui'
 #
 # Created by: PyQt4 UI code generator 4.11.4
 #
@@ -36,7 +36,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName(_fromUtf8("scrollArea"))
         self.scrollAreaWidgetContents_2 = QtGui.QWidget()
-        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 561, 721))
+        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 561, 770))
         font = QtGui.QFont()
         font.setPointSize(8)
         self.scrollAreaWidgetContents_2.setFont(font)
@@ -558,22 +558,6 @@ class Ui_MainWindow(object):
         self.referenceData.raise_()
         self.scrollArea.setWidget(self.scrollAreaWidgetContents_2)
         self.verticalLayout_23.addWidget(self.scrollArea)
-        self.OK = QtGui.QGroupBox(self.centralWidget)
-        self.OK.setObjectName(_fromUtf8("OK"))
-        self.ok = QtGui.QHBoxLayout(self.OK)
-        self.ok.setMargin(11)
-        self.ok.setSpacing(6)
-        self.ok.setObjectName(_fromUtf8("ok"))
-        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.ok.addItem(spacerItem1)
-        self.okButton = QtGui.QPushButton(self.OK)
-        font = QtGui.QFont()
-        font.setPointSize(8)
-        self.okButton.setFont(font)
-        self.okButton.setMouseTracking(False)
-        self.okButton.setObjectName(_fromUtf8("okButton"))
-        self.ok.addWidget(self.okButton)
-        self.verticalLayout_23.addWidget(self.OK)
         MainWindow.setCentralWidget(self.centralWidget)
         self.mainToolBar = QtGui.QToolBar(MainWindow)
         self.mainToolBar.setObjectName(_fromUtf8("mainToolBar"))
@@ -851,7 +835,6 @@ class Ui_MainWindow(object):
         self.label_89.setText(_translate("MainWindow", "0", None))
         self.label_90.setText(_translate("MainWindow", ")", None))
         self.label_91.setText(_translate("MainWindow", "]", None))
-        self.okButton.setText(_translate("MainWindow", "OK", None))
         self.menuFile.setTitle(_translate("MainWindow", "File", None))
         self.menuPreprocessing.setTitle(_translate("MainWindow", "Preprocessing", None))
         self.menuBaseline_Removal.setTitle(_translate("MainWindow", "Baseline Removal", None))

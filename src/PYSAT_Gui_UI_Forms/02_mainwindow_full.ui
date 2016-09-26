@@ -260,7 +260,7 @@ QGroupBox::title {
          </widget>
         </item>
         <item>
-         <widget class="QGroupBox" name="Y_variable">
+         <widget class="QGroupBox" name="CrossValidation">
           <property name="font">
            <font>
             <pointsize>10</pointsize>
@@ -677,7 +677,7 @@ QGroupBox::title {
          </widget>
         </item>
         <item>
-         <widget class="QGroupBox" name="NumberOfComponents">
+         <widget class="QGroupBox" name="CreateModels">
           <property name="font">
            <font>
             <pointsize>10</pointsize>
@@ -851,8 +851,8 @@ QGroupBox::title {
          </widget>
         </item>
        </layout>
-       <zorder>Y_variable</zorder>
-       <zorder>NumberOfComponents</zorder>
+       <zorder>CrossValidation</zorder>
+       <zorder>CreateModels</zorder>
        <zorder>Normalization</zorder>
        <zorder>CompRanges</zorder>
        <zorder>unknownData</zorder>
