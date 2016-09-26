@@ -25,8 +25,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>544</width>
-         <height>762</height>
+         <width>561</width>
+         <height>721</height>
         </rect>
        </property>
        <property name="font">
@@ -886,42 +886,6 @@ QGroupBox::title {
           </layout>
          </widget>
         </item>
-        <item>
-         <widget class="QGroupBox" name="Test_Folds">
-          <property name="font">
-           <font>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-          <property name="title">
-           <string>Folds</string>
-          </property>
-          <layout class="QVBoxLayout" name="CrossValid_3">
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_12">
-             <item>
-              <layout class="QVBoxLayout" name="verticalLayout_23">
-               <item>
-                <widget class="QLabel" name="label_16">
-                 <property name="text">
-                  <string>test folds</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QVBoxLayout" name="verticalLayout_24">
-               <item>
-                <widget class="QSpinBox" name="test_fold_spinBox"/>
-               </item>
-              </layout>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </widget>
-        </item>
        </layout>
        <zorder>CrossValidation</zorder>
        <zorder>CreateModels</zorder>
@@ -930,7 +894,6 @@ QGroupBox::title {
        <zorder>unknownData</zorder>
        <zorder>referenceData</zorder>
        <zorder>N_Folds</zorder>
-       <zorder>Test_Folds</zorder>
       </widget>
      </widget>
     </item>

@@ -26,7 +26,7 @@
          <x>0</x>
          <y>0</y>
          <width>561</width>
-         <height>770</height>
+         <height>721</height>
         </rect>
        </property>
        <property name="font">
@@ -52,17 +52,41 @@ QGroupBox::title {
       </widget>
      </widget>
     </item>
+    <item>
+     <widget class="QGroupBox" name="OK">
+      <layout class="QHBoxLayout" name="ok">
+       <item>
+        <spacer name="horizontalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="okButton">
+         <property name="font">
+          <font>
+           <pointsize>8</pointsize>
+          </font>
+         </property>
+         <property name="mouseTracking">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>OK</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
    </layout>
-  </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>581</width>
-     <height>21</height>
-    </rect>
-   </property>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -73,6 +97,125 @@ QGroupBox::title {
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>581</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionLoad_Refence_Data"/>
+    <addaction name="actionLoad_Unknown_Data"/>
+    <addaction name="actionSet_output_location"/>
+    <addaction name="separator"/>
+    <addaction name="actionSave_Current_Plots"/>
+    <addaction name="actionSave_Current_Data"/>
+    <addaction name="separator"/>
+    <addaction name="actionCreate_New_Workflow"/>
+    <addaction name="actionSave_Current_Workflow"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuPreprocessing">
+    <property name="title">
+     <string>Preprocessing</string>
+    </property>
+    <widget class="QMenu" name="menuBaseline_Removal">
+     <property name="title">
+      <string>Baseline Removal</string>
+     </property>
+     <addaction name="actionALS"/>
+     <addaction name="actionDietrich"/>
+     <addaction name="actionPolyFit"/>
+     <addaction name="actionAirPLS"/>
+     <addaction name="actionFABC"/>
+     <addaction name="actionKK"/>
+     <addaction name="actionMario"/>
+     <addaction name="actionMedian"/>
+     <addaction name="actionRubberband"/>
+     <addaction name="actionUndecimated_Wavelet"/>
+    </widget>
+    <widget class="QMenu" name="menuCalibration_Transfer">
+     <property name="title">
+      <string>Calibration Transfer</string>
+     </property>
+     <addaction name="actionRatio"/>
+     <addaction name="actionTommy_s_Methgod"/>
+     <addaction name="actionPiecewise_Direct_Standardization"/>
+     <addaction name="actionOthers_3"/>
+    </widget>
+    <addaction name="actionNormalization"/>
+    <addaction name="actionNoise_Reduction"/>
+    <addaction name="actionApply_Mask"/>
+    <addaction name="actionInterpolate"/>
+    <addaction name="actionInstrument_Response"/>
+    <addaction name="menuBaseline_Removal"/>
+    <addaction name="menuCalibration_Transfer"/>
+    <addaction name="actionICA_2"/>
+    <addaction name="actionPCA_2"/>
+   </widget>
+   <widget class="QMenu" name="menuRegression">
+    <property name="title">
+     <string>Regression</string>
+    </property>
+    <addaction name="actionCross_Validation"/>
+    <addaction name="actionTrain"/>
+    <addaction name="actionPredict"/>
+    <addaction name="actionCreate_N_Folds"/>
+    <addaction name="actionCreate_Test_Folds"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionIndex"/>
+    <addaction name="actionContent_2"/>
+    <addaction name="separator"/>
+    <addaction name="actionAbout"/>
+    <addaction name="actionAbout_QtCreator"/>
+   </widget>
+   <widget class="QMenu" name="menuClassification">
+    <property name="title">
+     <string>Classification</string>
+    </property>
+    <widget class="QMenu" name="menuSupervised">
+     <property name="title">
+      <string>Supervised</string>
+     </property>
+     <addaction name="actionPLS_DA"/>
+     <addaction name="actionSIMCA"/>
+    </widget>
+    <widget class="QMenu" name="menuClustering">
+     <property name="title">
+      <string>Clustering</string>
+     </property>
+     <addaction name="actionK_means"/>
+     <addaction name="actionHierarchical_2"/>
+    </widget>
+    <addaction name="menuSupervised"/>
+    <addaction name="menuClustering"/>
+   </widget>
+   <widget class="QMenu" name="menuVisualization">
+    <property name="title">
+     <string>Visualization</string>
+    </property>
+    <addaction name="actionLine_Plot"/>
+    <addaction name="action1_to_1_Plot"/>
+    <addaction name="actionScatter_Plot"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuPreprocessing"/>
+   <addaction name="menuClassification"/>
+   <addaction name="menuRegression"/>
+   <addaction name="menuVisualization"/>
+   <addaction name="menuHelp"/>
+  </widget>
   <action name="actionLoad_Refence_Data">
    <property name="text">
     <string>Load Refence Data</string>
@@ -80,7 +223,7 @@ QGroupBox::title {
   </action>
   <action name="actionLoad_Unknown_Data">
    <property name="text">
-    <string>Load Data Files</string>
+    <string>Load Unknown Data</string>
    </property>
   </action>
   <action name="actionSave_Current_Workflow">
@@ -115,7 +258,7 @@ QGroupBox::title {
   </action>
   <action name="actionInterpolate">
    <property name="text">
-    <string>Interpolate</string>
+    <string>Interpolate (unknown to known)</string>
    </property>
   </action>
   <action name="actionInstrument_Response">
@@ -280,7 +423,7 @@ QGroupBox::title {
   </action>
   <action name="actionAbout_QtCreator">
    <property name="text">
-    <string>About QtCreator...</string>
+    <string>About Qt...</string>
    </property>
   </action>
   <action name="actionExit">
@@ -293,19 +436,79 @@ QGroupBox::title {
     <string>Normalization</string>
    </property>
   </action>
-  <action name="actionElement_Name_Setup">
+  <action name="actionICA_2">
    <property name="text">
-    <string>Element Name Setup</string>
+    <string>ICA</string>
    </property>
   </action>
-  <action name="actionComposition_Ranges">
+  <action name="actionPCA_2">
    <property name="text">
-    <string>Composition Ranges</string>
+    <string>PCA</string>
    </property>
   </action>
-  <action name="actionCreate_Models">
+  <action name="actionPLS_DA">
    <property name="text">
-    <string>Create Models</string>
+    <string>PLS-DA</string>
+   </property>
+  </action>
+  <action name="actionSIMCA">
+   <property name="text">
+    <string>SIMCA</string>
+   </property>
+  </action>
+  <action name="actionK_means">
+   <property name="text">
+    <string>K-means</string>
+   </property>
+  </action>
+  <action name="actionHierarchical_2">
+   <property name="text">
+    <string>Hierarchical</string>
+   </property>
+  </action>
+  <action name="actionCross_Validation">
+   <property name="text">
+    <string>Cross Validation</string>
+   </property>
+  </action>
+  <action name="actionTrain">
+   <property name="text">
+    <string>Train</string>
+   </property>
+  </action>
+  <action name="actionPredict">
+   <property name="text">
+    <string>Predict</string>
+   </property>
+  </action>
+  <action name="actionLine_Plot">
+   <property name="text">
+    <string>Line Plot</string>
+   </property>
+  </action>
+  <action name="action1_to_1_Plot">
+   <property name="text">
+    <string>1 to 1 Plot</string>
+   </property>
+  </action>
+  <action name="actionScatter_Plot">
+   <property name="text">
+    <string>Scatter Plot</string>
+   </property>
+  </action>
+  <action name="actionSet_output_location">
+   <property name="text">
+    <string>Output Location</string>
+   </property>
+  </action>
+  <action name="actionCreate_N_Folds">
+   <property name="text">
+    <string>Create N Folds</string>
+   </property>
+  </action>
+  <action name="actionCreate_Test_Folds">
+   <property name="text">
+    <string>Create Test Folds</string>
    </property>
   </action>
  </widget>

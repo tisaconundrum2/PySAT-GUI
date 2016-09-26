@@ -344,24 +344,7 @@ class pysat_ui(object):
         self.menuClustering.setTitle(_translate("MainWindow", "Clustering", None))
         self.menuVisualization.setTitle(_translate("MainWindow", "Visualization", None))
 
-    def ok_button(self, MainWindow):
-        self.OK = QtGui.QGroupBox(self.centralWidget)
-        self.OK.setObjectName(_fromUtf8("OK"))
-        self.ok = QtGui.QHBoxLayout(self.OK)
-        self.ok.setMargin(11)
-        self.ok.setSpacing(6)
-        self.ok.setObjectName(_fromUtf8("ok"))
-        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.ok.addItem(spacerItem1)
-        self.okButton = QtGui.QPushButton(self.OK)
-        font = QtGui.QFont()
-        font.setPointSize(8)
-        self.okButton.setFont(font)
-        self.okButton.setMouseTracking(False)
-        self.okButton.setObjectName(_fromUtf8("okButton"))
-        self.ok.addWidget(self.okButton)
-        self.verticalLayout_23.addWidget(self.OK)
-        self.okButton.setText(_translate("MainWindow", "OK", None))
+#### UI modules
 
     def unknown_data(self, MainWindow):
         self.unknownData = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -530,6 +513,8 @@ class pysat_ui(object):
         self.norm_label.setText(_translate("MainWindow", "Value 1", None))
         self.norm_label_8.setText(_translate("MainWindow", "Value 8", None))
         self.NormValuebutton.setText(_translate("MainWindow", "Add Value", None))
+        self.pushButtonNormalization = QtGui.QPushButton(self.Normalization)
+        self.set_module_button(self.verticalLayout, self.pushButtonNormalization)
 
     def comp_ranges(self, MainWindow):
         self.CompRanges = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -947,6 +932,97 @@ class pysat_ui(object):
         self.y_variable.setTitle(_translate("MainWindow", "Y Variable", None))
         self.label_14.setText(_translate("MainWindow", "Element Name", None))
 
+    def ok_button(self, MainWindow):
+        self.OK = QtGui.QGroupBox(self.centralWidget)
+        self.OK.setObjectName(_fromUtf8("OK"))
+        self.ok = QtGui.QHBoxLayout(self.OK)
+        self.ok.setMargin(11)
+        self.ok.setSpacing(6)
+        self.ok.setObjectName(_fromUtf8("ok"))
+        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.ok.addItem(spacerItem1)
+        self.okButton = QtGui.QPushButton(self.OK)
+        font = QtGui.QFont()
+        font.setPointSize(8)
+        self.okButton.setFont(font)
+        self.okButton.setMouseTracking(False)
+        self.okButton.setObjectName(_fromUtf8("okButton"))
+        self.ok.addWidget(self.okButton)
+        self.verticalLayout_23.addWidget(self.OK)
+        self.okButton.setText(_translate("MainWindow", "OK", None))
+
+    def test_folds(self, MainWindow):
+        self.Test_Folds = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.Test_Folds.setFont(font)
+        self.Test_Folds.setObjectName(_fromUtf8("Test_Folds"))
+        self.CrossValid_3 = QtGui.QVBoxLayout(self.Test_Folds)
+        self.CrossValid_3.setMargin(11)
+        self.CrossValid_3.setSpacing(6)
+        self.CrossValid_3.setObjectName(_fromUtf8("CrossValid_3"))
+        self.horizontalLayout_12 = QtGui.QHBoxLayout()
+        self.horizontalLayout_12.setMargin(11)
+        self.horizontalLayout_12.setSpacing(6)
+        self.horizontalLayout_12.setObjectName(_fromUtf8("horizontalLayout_12"))
+        self.verticalLayout_23 = QtGui.QVBoxLayout()
+        self.verticalLayout_23.setMargin(11)
+        self.verticalLayout_23.setSpacing(6)
+        self.verticalLayout_23.setObjectName(_fromUtf8("verticalLayout_23"))
+        self.label_16 = QtGui.QLabel(self.Test_Folds)
+        self.label_16.setObjectName(_fromUtf8("label_16"))
+        self.verticalLayout_23.addWidget(self.label_16)
+        self.horizontalLayout_12.addLayout(self.verticalLayout_23)
+        self.verticalLayout_24 = QtGui.QVBoxLayout()
+        self.verticalLayout_24.setMargin(11)
+        self.verticalLayout_24.setSpacing(6)
+        self.verticalLayout_24.setObjectName(_fromUtf8("verticalLayout_24"))
+        self.test_fold_spinBox = QtGui.QSpinBox(self.Test_Folds)
+        self.test_fold_spinBox.setObjectName(_fromUtf8("test_fold_spinBox"))
+        self.verticalLayout_24.addWidget(self.test_fold_spinBox)
+        self.horizontalLayout_12.addLayout(self.verticalLayout_24)
+        self.CrossValid_3.addLayout(self.horizontalLayout_12)
+        self.verticalLayout_8.addWidget(self.Test_Folds)
+        self.Test_Folds.raise_()
+        self.Test_Folds.setTitle(_translate("MainWindow", "Folds", None))
+        self.label_16.setText(_translate("MainWindow", "test folds", None))
+
+    def n_folds(self, MainWindow):
+        self.N_Folds = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.N_Folds.setFont(font)
+        self.N_Folds.setObjectName(_fromUtf8("N_Folds"))
+        self.CrossValid_2 = QtGui.QVBoxLayout(self.N_Folds)
+        self.CrossValid_2.setMargin(11)
+        self.CrossValid_2.setSpacing(6)
+        self.CrossValid_2.setObjectName(_fromUtf8("CrossValid_2"))
+        self.horizontalLayout_8 = QtGui.QHBoxLayout()
+        self.horizontalLayout_8.setMargin(11)
+        self.horizontalLayout_8.setSpacing(6)
+        self.horizontalLayout_8.setObjectName(_fromUtf8("horizontalLayout_8"))
+        self.verticalLayout_13 = QtGui.QVBoxLayout()
+        self.verticalLayout_13.setMargin(11)
+        self.verticalLayout_13.setSpacing(6)
+        self.verticalLayout_13.setObjectName(_fromUtf8("verticalLayout_13"))
+        self.label_15 = QtGui.QLabel(self.N_Folds)
+        self.label_15.setObjectName(_fromUtf8("label_15"))
+        self.verticalLayout_13.addWidget(self.label_15)
+        self.horizontalLayout_8.addLayout(self.verticalLayout_13)
+        self.verticalLayout_14 = QtGui.QVBoxLayout()
+        self.verticalLayout_14.setMargin(11)
+        self.verticalLayout_14.setSpacing(6)
+        self.verticalLayout_14.setObjectName(_fromUtf8("verticalLayout_14"))
+        self.n_folds_spinBox = QtGui.QSpinBox(self.N_Folds)
+        self.n_folds_spinBox.setObjectName(_fromUtf8("n_folds_spinBox"))
+        self.verticalLayout_14.addWidget(self.n_folds_spinBox)
+        self.horizontalLayout_8.addLayout(self.verticalLayout_14)
+        self.CrossValid_2.addLayout(self.horizontalLayout_8)
+        self.verticalLayout_8.addWidget(self.N_Folds)
+        self.N_Folds.raise_()
+        self.N_Folds.setTitle(_translate("MainWindow", "Folds", None))
+        self.label_15.setText(_translate("MainWindow", "n folds", None))
+
 ####These functions below are private and add functionality to the UI
 
     def set_module_button(self, QVBoxLayout, PushButtonName):
@@ -960,10 +1036,34 @@ class pysat_ui(object):
         QVBoxLayout.addLayout(self.horizontalLayout)
         PushButtonName.setText(_translate("MainWindow", "Run Module", None))
 
-    def set_norm_array(self, spin_box_text, index):
-        self.spin_array[index] = spin_box_text
-        for i in range(0, self.count*2):
-            print(self.spin_array[i])
+    def menu_item_shortcuts(self):
+        self.actionLoad_Unknown_Data.setShortcut("ctrl+O")
+        self.actionExit.setShortcut("ctrl+Q")
+
+    def menu_item_functions(self, MainWindow):
+        pass
+        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.unknown_data(self, MainWindow))
+        # pysat.reference_data(MainWindow)
+        # pysat.normalization(MainWindow)
+        # pysat.comp_ranges(MainWindow)
+        # pysat.num_of_compoents(MainWindow)
+        # pysat.y_variable(MainWindow)
+
+        # self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.files(self, MainWindow))
+        # self.actionNormalization.triggered.connect(lambda: pysat_ui.std_norm(self, MainWindow))
+        # self.actionElement_Name_Setup.triggered.connect(lambda: pysat_ui.element_name_setup(self, MainWindow))
+        # self.actionComposition_Ranges.triggered.connect(lambda: pysat_ui.compranges(self, MainWindow))
+        # self.actionCreate_Models.triggered.connect(lambda: pysat_ui.createmodels(self, MainWindow))
+
+    def save(self):
+        # TODO save the current window's data into a save file
+        pass
+
+    def open(self):
+        # TODO open file dialog
+        self.filename = QFileDialog.getOpenFileName(self, "Open a Workflow File", '.', "(*.wrf)")
+
+#### Opening Files
 
     def on_maskFile_clicked(self):
         filename = QFileDialog.getOpenFileName(None, "Open Mask File", '.', "(*.csv)")
@@ -993,6 +1093,8 @@ class pysat_ui(object):
         if self.lineEdit_4.text() == "":
             self.lineEdit_4.setText("*/*")
 
+#### Ok Button Clicked
+
     def on_okButton_clicked(self):
         #TODO Create functionality for all modules
         #TODO Create a list of functions that call each function that is loaded into the list.
@@ -1002,30 +1104,3 @@ class pysat_ui(object):
 
 
 ####These functions allow for interactions of buttons
-
-    def menu_item_shortcuts(self):
-        self.actionLoad_Unknown_Data.setShortcut("ctrl+O")
-        self.actionExit.setShortcut("ctrl+Q")
-
-    def menu_item_functions(self, MainWindow):
-        pass
-        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.unknown_data(self, MainWindow))
-        pysat.reference_data(MainWindow)
-        pysat.normalization(MainWindow)
-        pysat.comp_ranges(MainWindow)
-        pysat.num_of_compoents(MainWindow)
-        pysat.y_variable(MainWindow)
-
-        # self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.files(self, MainWindow))
-        # self.actionNormalization.triggered.connect(lambda: pysat_ui.std_norm(self, MainWindow))
-        # self.actionElement_Name_Setup.triggered.connect(lambda: pysat_ui.element_name_setup(self, MainWindow))
-        # self.actionComposition_Ranges.triggered.connect(lambda: pysat_ui.compranges(self, MainWindow))
-        # self.actionCreate_Models.triggered.connect(lambda: pysat_ui.createmodels(self, MainWindow))
-
-    def save(self):
-        # TODO save the current window's data into a save file
-        pass
-
-    def open(self):
-        # TODO open file dialog
-        self.filename = QFileDialog.getOpenFileName(self, "Open a Workflow File", '.', "(*.wrf)")
