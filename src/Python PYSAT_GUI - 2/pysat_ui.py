@@ -434,6 +434,8 @@ class pysat_ui(object):
         self.unknownDataButton.setText(_translate("MainWindow", "...", None))
         self.unknown_data_button = QtGui.QPushButton(self.unknownData)
         self.set_module_button(self.verticalLayout_6, self.unknown_data_button)
+        self.unknown_data_button.clicked.connect(lambda: pysat_ui.on_uknownDataButton_clicked(self))
+
 
     def reference_data(self, MainWindow):
         self.referenceData = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
