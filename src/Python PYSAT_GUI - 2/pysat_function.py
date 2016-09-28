@@ -3,7 +3,7 @@ from pysat.regression.pls_sm import pls_sm
 import pandas as pd
 
 
-class pysat_func(object):
+class pysat_func():
     # Thus make sure that you have if's for all instances in functions where unknown_data doesn't exist.
 
 
@@ -34,8 +34,12 @@ class pysat_func(object):
         self.unknown_data.mask(self.maskfile)
 
     def get_ranges(self, ranges):
-        self.data.norm(ranges)
-        self.unknown_data.norm(ranges)
+        try:
+            self.data.norm(ranges)
+            self.unknown_data.norm(ranges)
+        except Exception as e:
+            print(e)
+
 
     def set_element_name(self, el):
         self.el = el

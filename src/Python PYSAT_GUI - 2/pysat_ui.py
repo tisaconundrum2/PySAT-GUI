@@ -523,27 +523,6 @@ class pysat_ui(object):
         self.horizontalLayout_2.addWidget(self.norm_spinBox)
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
         self.verticalLayout_26.addLayout(self.verticalLayout_2)
-        self.verticalLayout_22 = QtGui.QVBoxLayout()
-        self.verticalLayout_22.setMargin(11)
-        self.verticalLayout_22.setSpacing(6)
-        self.verticalLayout_22.setObjectName(_fromUtf8("verticalLayout_22"))
-        self.horizontalLayout_24 = QtGui.QHBoxLayout()
-        self.horizontalLayout_24.setMargin(11)
-        self.horizontalLayout_24.setSpacing(6)
-        self.horizontalLayout_24.setObjectName(_fromUtf8("horizontalLayout_24"))
-        self.norm_label_8 = QtGui.QLabel(self.Normalization)
-        self.norm_label_8.setObjectName(_fromUtf8("norm_label_8"))
-        self.horizontalLayout_24.addWidget(self.norm_label_8)
-        self.norm_spinBox_16 = QtGui.QSpinBox(self.Normalization)
-        self.norm_spinBox_16.setMaximum(1000)
-        self.norm_spinBox_16.setObjectName(_fromUtf8("norm_spinBox_16"))
-        self.horizontalLayout_24.addWidget(self.norm_spinBox_16)
-        self.norm_spinBox_8 = QtGui.QSpinBox(self.Normalization)
-        self.norm_spinBox_8.setMaximum(1000)
-        self.norm_spinBox_8.setObjectName(_fromUtf8("norm_spinBox_8"))
-        self.horizontalLayout_24.addWidget(self.norm_spinBox_8)
-        self.verticalLayout_22.addLayout(self.horizontalLayout_24)
-        self.verticalLayout_26.addLayout(self.verticalLayout_22)
         self.verticalLayout_27.addLayout(self.verticalLayout_26)
         self.horizontalLayout_25 = QtGui.QHBoxLayout()
         self.horizontalLayout_25.setMargin(11)
@@ -557,12 +536,18 @@ class pysat_ui(object):
         self.verticalLayout_27.addLayout(self.horizontalLayout_25)
         self.verticalLayout_8.addWidget(self.Normalization)
         self.Normalization.raise_()
-        self.Normalization.setTitle(_translate("MainWindow", "Normalization Range", None))
+        self.Normalization.setTitle(_translate("MainWindow", "Normalization", None))
         self.norm_label.setText(_translate("MainWindow", "Value 1", None))
-        self.norm_label_8.setText(_translate("MainWindow", "Value 8", None))
         self.NormValuebutton.setText(_translate("MainWindow", "Add Value", None))
         self.normalization_button = QtGui.QPushButton(self.Normalization)
         self.set_module_button(self.verticalLayout_27, self.normalization_button)
+        try:
+            # ranges = [(int(self.norm_spinBox_9), int(self.norm_spinBox))]
+            ranges = [(0, 1000)]
+            self.normalization_button.clicked.connect(lambda: pysat_func.get_ranges(self, ranges))
+        except:
+            pass
+
 
     def comp_ranges(self, MainWindow):
         self.CompRanges = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)

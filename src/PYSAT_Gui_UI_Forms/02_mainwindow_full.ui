@@ -26,7 +26,7 @@
          <x>0</x>
          <y>0</y>
          <width>544</width>
-         <height>758</height>
+         <height>728</height>
         </rect>
        </property>
        <property name="font">
@@ -190,35 +190,6 @@ QGroupBox::title {
                  </item>
                  <item>
                   <widget class="QSpinBox" name="norm_spinBox">
-                   <property name="maximum">
-                    <number>1000</number>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QVBoxLayout" name="verticalLayout_22">
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_24">
-                 <item>
-                  <widget class="QLabel" name="norm_label_8">
-                   <property name="text">
-                    <string>Value 8</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QSpinBox" name="norm_spinBox_16">
-                   <property name="maximum">
-                    <number>1000</number>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QSpinBox" name="norm_spinBox_8">
                    <property name="maximum">
                     <number>1000</number>
                    </property>
