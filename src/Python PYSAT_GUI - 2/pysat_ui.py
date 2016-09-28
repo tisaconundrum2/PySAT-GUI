@@ -1067,6 +1067,10 @@ class pysat_ui(object):
         self.label_15.setText(_translate("MainWindow", "n folds", None))
         self.test_folds_button = QtGui.QPushButton(self.N_Folds)
         self.set_module_button(self.CrossValid_2, self.test_folds_button)
+        try:
+            self.test_folds_button.clicked.connect(lambda: self.pysat_fun.set_nfolds(int(self.n_folds_spinBox.text())))
+        except:
+            pass
 
     def interpolated(self, MainWindow):
         self.Interpolated = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -1094,6 +1098,7 @@ class pysat_ui(object):
         self.verticalLayout_8.addWidget(self.Interpolated)
         self.Interpolated.setTitle(_translate("MainWindow", "Interpolated", None))
         self.label_16.setText(_translate("MainWindow", "Interpolated unknown data to known data", None))
+        self.pysat_fun.set_interp()
 
     def masked(self, MainWindow):
         self.masked = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -1149,6 +1154,10 @@ class pysat_ui(object):
         self.lineEdit_10.setText(_translate("MainWindow", "*.csv", None))
         self.fullDataBaseButton_4.setText(_translate("MainWindow", "...", None))
         self.label_16.setText(_translate("MainWindow", "Mask was applied to unknown and known data", None))
+        try:
+            self.fullDataBaseButton_4.clicked.connect(lambda: pysat_ui.on_maskFile_clicked(self.lineEdit_10))
+        except:
+            pass
 
     def startified(self, MainWindow):
         self.stratified = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -1277,6 +1286,7 @@ class pysat_ui(object):
         self.pysat_fun.set_file_maskfile(filename)
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")
+        self.pysat_fun.set_mask()
 
     def on_uknownDataButton_clicked(self, lineEdit):
         filename = QFileDialog.getOpenFileName(None, "Open Uknown Data File", '.', "(*.csv)")
