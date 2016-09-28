@@ -434,6 +434,7 @@ class pysat_ui(object):
         self.unknownDataButton.setText(_translate("MainWindow", "...", None))
         try:
             self.unknownDataButton.clicked.connect(lambda: pysat_ui.on_uknownDataButton_clicked(self, self.lineEdit_2))
+            self.unknownDataButton.clicked.connect(lambda: self.pysat_fun.get_spectra())
         except:
             pass
 
@@ -542,9 +543,8 @@ class pysat_ui(object):
         self.normalization_button = QtGui.QPushButton(self.Normalization)
         self.set_module_button(self.verticalLayout_27, self.normalization_button)
         try:
-            # ranges = [(int(self.norm_spinBox_9), int(self.norm_spinBox))]
-            ranges = [(0, 1000)]
-            self.normalization_button.clicked.connect(lambda: pysat_func.get_ranges(self, ranges))
+            ranges = [(int(self.norm_spinBox_9), int(self.norm_spinBox))]
+            self.normalization_button.clicked.connect(lambda: self.pysat_fun.get_ranges(ranges))
         except:
             pass
 
@@ -1272,7 +1272,7 @@ class pysat_ui(object):
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")
 
-    def on_outPutLocationButton_clicked(self):
+    def on_outPutLocationButton_clicked(self, lineEdit):
         filename = QFileDialog.getExistingDirectory(None, "Select Output Directory", '.')
         lineEdit.setText(filename)
         self.pysat_fun.set_files(outpath=filename)
