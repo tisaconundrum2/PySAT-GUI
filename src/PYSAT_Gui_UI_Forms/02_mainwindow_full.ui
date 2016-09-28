@@ -135,6 +135,7 @@ QGroupBox::title {
     <addaction name="actionPredict"/>
     <addaction name="actionCreate_N_Folds"/>
     <addaction name="actionCreate_Test_Folds"/>
+    <addaction name="actionSubmodel_Ranges"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -475,6 +476,11 @@ QGroupBox::title {
   <action name="actionCreate_Test_Folds">
    <property name="text">
     <string>Create Test Folds</string>
+   </property>
+  </action>
+  <action name="actionSubmodel_Ranges">
+   <property name="text">
+    <string>Submodel Ranges</string>
    </property>
   </action>
  </widget>

@@ -215,6 +215,8 @@ class pysat_ui(object):
         self.actionCreate_N_Folds.setObjectName(_fromUtf8("actionCreate_N_Folds"))
         self.actionCreate_Test_Folds = QtGui.QAction(MainWindow)
         self.actionCreate_Test_Folds.setObjectName(_fromUtf8("actionCreate_Test_Folds"))
+        self.actionSubmodel_Ranges = QtGui.QAction(MainWindow)
+        self.actionSubmodel_Ranges.setObjectName(_fromUtf8("actionSubmodel_Ranges"))
         self.menuFile.addAction(self.actionLoad_Refence_Data)
         self.menuFile.addAction(self.actionLoad_Unknown_Data)
         self.menuFile.addAction(self.actionSet_output_location)
@@ -254,6 +256,7 @@ class pysat_ui(object):
         self.menuRegression.addAction(self.actionPredict)
         self.menuRegression.addAction(self.actionCreate_N_Folds)
         self.menuRegression.addAction(self.actionCreate_Test_Folds)
+        self.menuRegression.addAction(self.actionSubmodel_Ranges)
         self.menuHelp.addAction(self.actionIndex)
         self.menuHelp.addAction(self.actionContent_2)
         self.menuHelp.addSeparator()
@@ -348,6 +351,7 @@ class pysat_ui(object):
         self.actionSet_output_location.setText(_translate("MainWindow", "Output Location", None))
         self.actionCreate_N_Folds.setText(_translate("MainWindow", "Create N Folds", None))
         self.actionCreate_Test_Folds.setText(_translate("MainWindow", "Create Test Folds", None))
+        self.actionSubmodel_Ranges.setText(_translate("MainWindow", "Submodel Ranges", None))
 
     #### UI modules
 
