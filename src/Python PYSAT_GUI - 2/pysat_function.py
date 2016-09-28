@@ -31,7 +31,7 @@ class pysat_func():
     def set_file_maskfile(self, maskfile):
         try:
             self.maskfile = maskfile
-            print("Maskfile has been applied")
+            print("Masking file has been added")
         except Exception as e:
             print(e)
 

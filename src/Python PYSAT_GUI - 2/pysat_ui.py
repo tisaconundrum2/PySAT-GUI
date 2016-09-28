@@ -385,6 +385,10 @@ class pysat_ui(object):
         self.ok.addWidget(self.okButton)
         self.verticalLayout_9.addWidget(self.OK)
         self.okButton.setText(_translate("MainWindow", "OK", None))
+        try:
+            self.okButton.clicked.connect(lambda: pysat_ui.on_okButton_clicked(self))
+        except:
+            pass
 
     def unknown_data(self, MainWindow):
         self.unknownData = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -1155,7 +1159,7 @@ class pysat_ui(object):
         self.fullDataBaseButton_4.setText(_translate("MainWindow", "...", None))
         self.label_16.setText(_translate("MainWindow", "Mask was applied to unknown and known data", None))
         try:
-            self.fullDataBaseButton_4.clicked.connect(lambda: pysat_ui.on_maskFile_clicked(self.lineEdit_10))
+            self.fullDataBaseButton_4.clicked.connect(lambda: pysat_ui.on_maskFile_clicked(self, self.lineEdit_10))
         except:
             pass
 
@@ -1185,6 +1189,7 @@ class pysat_ui(object):
         self.verticalLayout_8.addWidget(self.stratified)
         self.stratified.setTitle(_translate("MainWindow", "Stratified", None))
         self.label_16.setText(_translate("MainWindow", "Known Data was stratified", None))
+        self.pysat_fun.set_stratified()
 
     def train_data(self, MainWindow):
         self.train_unknown = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -1238,6 +1243,8 @@ class pysat_ui(object):
         self.verticalLayout_8.addWidget(self.train_known)
         self.train_known.setTitle(_translate("MainWindow", "Train Known Data", None))
         self.label_16.setText(_translate("MainWindow", "Training known data", None))
+        self.pysat_fun.get_train_data()
+        self.pysat_fun.get_test_data()
 
     ####These functions below are private and add functionality to the UI
 
@@ -1314,11 +1321,8 @@ class pysat_ui(object):
 #### Ok Button Clicked
 
     def on_okButton_clicked(self):
-        #TODO Create functionality for all modules
-        #TODO Create a list of functions that call each function that is loaded into the list.
-        print(self.lineEdit_2.text())
-        print(self.lineEdit_3.text())
-        print(self.lineEdit_4.text())
-
+        self.pysat_fun.set_sm()
+        self.pysat_fun.get_sm_fit()
+        self.pysat_fun.get_plots()
 
 ####These functions allow for interactions of buttons
