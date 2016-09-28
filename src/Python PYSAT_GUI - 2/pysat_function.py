@@ -171,15 +171,12 @@ class pysat_func():
             print(e)
 
     def get_plots(self):
-        try:
-            print("Now outputting plots to output folder")
-            self.sm.final(self.testdata[0]['meta'][self.el],
-                      self.blended_test,
-                      el=self.el,
-                      xcol='Ref Comp Wt. %',
-                      ycol='Predicted Comp Wt. %',
-                      figpath=self.outpath)
-            print("All finished")
-        except Exception as e:
-            print(e)
+        print("Now outputting plots to output folder")
+        self.sm.final(self.testdata[0]['meta'][self.el],
+                  self.blended_test,
+                  el=self.el,
+                  xcol='Ref Comp Wt. %',
+                  ycol='Predicted Comp Wt. %',
+                  figpath=self.outpath)
+        print("All finished")
 

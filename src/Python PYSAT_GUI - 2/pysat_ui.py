@@ -863,7 +863,6 @@ class pysat_ui(object):
         except:
             pass
 
-
     def num_of_compoents(self, MainWindow):
         self.NumberComponents = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
         font = QtGui.QFont()
@@ -1041,7 +1040,6 @@ class pysat_ui(object):
             self.y_variable_button.clicked.connect(lambda: self.pysat_fun.set_element_name(self.elementNameLine.text()))
         except:
             pass
-
 
     def test_folds(self, MainWindow):
         self.Test_Folds = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -1311,7 +1309,6 @@ class pysat_ui(object):
         PushButtonName.setText(_translate("MainWindow", "Run Module", None))
 
     def menu_item_shortcuts(self):
-        self.actionLoad_Unknown_Data.setShortcut("ctrl+O")
         self.actionExit.setShortcut("ctrl+Q")
 
     def menu_item_functions(self, MainWindow):

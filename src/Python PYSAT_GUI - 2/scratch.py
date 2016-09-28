@@ -21,7 +21,7 @@ pysat.set_element_name('SiO2')
 
 pysat.set_nfolds(6)
 
-pysat.set_testfold_test(4)
+pysat.set_testfold(4)
 
 pysat.set_compranges([[-20, 50], [30, 70], [60, 100], [0, 120]])
 
