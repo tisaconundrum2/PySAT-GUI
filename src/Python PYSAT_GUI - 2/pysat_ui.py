@@ -538,6 +538,10 @@ class pysat_ui(object):
         self.label_9.setText(_translate("MainWindow", "Output Folder", None))
         self.lineEdit_10.setText(_translate("MainWindow", "*.*", None))
         self.fullDataBaseButton_4.setText(_translate("MainWindow", "...", None))
+        try:
+            self.fullDataBaseButton_4.clicked.connect(lambda: pysat_ui.on_outPutLocationButton_clicked(self, self.lineEdit_10))
+        except:
+            pass
 
     def normalization(self, MainWindow):
         self.Normalization = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
