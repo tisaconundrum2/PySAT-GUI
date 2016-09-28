@@ -26,7 +26,7 @@
          <x>0</x>
          <y>0</y>
          <width>544</width>
-         <height>728</height>
+         <height>787</height>
         </rect>
        </property>
        <property name="font">
@@ -145,6 +145,60 @@ QGroupBox::title {
               <layout class="QVBoxLayout" name="verticalLayout_21">
                <item>
                 <widget class="QToolButton" name="fullDataBaseButton_3">
+                 <property name="text">
+                  <string>...</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="outputFolder">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="title">
+           <string>Output</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_22">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_13">
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_25">
+               <item>
+                <widget class="QLabel" name="label_9">
+                 <property name="text">
+                  <string>Output Folder</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_28">
+               <item>
+                <widget class="QLineEdit" name="lineEdit_10">
+                 <property name="text">
+                  <string extracomment="Make this change whenever a new file is selected">*.*</string>
+                 </property>
+                 <property name="readOnly">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_29">
+               <item>
+                <widget class="QToolButton" name="fullDataBaseButton_4">
                  <property name="text">
                   <string>...</string>
                  </property>
@@ -902,6 +956,7 @@ QGroupBox::title {
        <zorder>referenceData</zorder>
        <zorder>N_Folds</zorder>
        <zorder>Test_Folds</zorder>
+       <zorder>outputFolder</zorder>
       </widget>
      </widget>
     </item>
