@@ -982,6 +982,11 @@ class pysat_ui(object):
         self.label_14.setText(_translate("MainWindow", "Element Name", None))
         self.y_variable_button = QtGui.QPushButton(self.y_variable)
         self.set_module_button(self.verticalLayout_25, self.y_variable_button)
+        try:
+            self.y_variable_button.clicked.connect(lambda: self.pysat_fun.set_element_name(self.elementNameLine.text()))
+        except:
+            pass
+
 
     def test_folds(self, MainWindow):
         self.Test_Folds = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -1018,8 +1023,12 @@ class pysat_ui(object):
         self.Test_Folds.raise_()
         self.Test_Folds.setTitle(_translate("MainWindow", "Folds", None))
         self.label_16.setText(_translate("MainWindow", "test folds", None))
-        self.n_folds_button = QtGui.QPushButton(self.Test_Folds)
-        self.set_module_button(self.verticalLayout_28, self.n_folds_button)
+        self.test_folds_button = QtGui.QPushButton(self.Test_Folds)
+        self.set_module_button(self.verticalLayout_28, self.test_folds_button)
+        try:
+            self.test_folds_button.clicked.connect(lambda: self.pysat_fun.set_testfold(int(self.test_fold_spinBox.text())))
+        except:
+            pass
 
     def n_folds(self, MainWindow):
         self.N_Folds = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -1056,8 +1065,8 @@ class pysat_ui(object):
         self.N_Folds.raise_()
         self.N_Folds.setTitle(_translate("MainWindow", "Folds", None))
         self.label_15.setText(_translate("MainWindow", "n folds", None))
-        self.n_folds_button = QtGui.QPushButton(self.N_Folds)
-        self.set_module_button(self.CrossValid_2, self.n_folds_button)
+        self.test_folds_button = QtGui.QPushButton(self.N_Folds)
+        self.set_module_button(self.CrossValid_2, self.test_folds_button)
 
     def interpolated(self, MainWindow):
         self.Interpolated = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)

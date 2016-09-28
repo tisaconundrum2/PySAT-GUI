@@ -76,6 +76,7 @@ class pysat_func():
     def set_element_name(self, el):
         try:
             self.el = el
+            print("{}".format(el))
             print("Element name for y variable has been set")
         except Exception as e:
             print(e)
@@ -83,13 +84,15 @@ class pysat_func():
     def set_nfolds(self, nfolds_test):
         try:
             self.nfolds_test = nfolds_test
+            print("{}".format(nfolds_test))
             print("N folds has been applied")
         except Exception as e:
             print(e)
 
-    def set_testfold_test(self, testfold_test):
+    def set_testfold(self, testfold_test):
         try:
             self.testfold_test = testfold_test
+            print("{}".format(testfold_test))
             print("Test folds has been applied")
         except Exception as e:
             print(e)
@@ -100,7 +103,7 @@ class pysat_func():
         except Exception as e:
             print(e)
 
-    def get_testfold_test(self):
+    def get_testfold(self):
         try:
             return self.testfold_test
         except Exception as e:
