@@ -433,7 +433,7 @@ class pysat_ui(object):
         self.lineEdit_2.setText(_translate("MainWindow", "*.csv", None))
         self.unknownDataButton.setText(_translate("MainWindow", "...", None))
         try:
-            self.unknownDataButton.clicked.connect(lambda: pysat_ui.on_uknownDataButton_clicked(self))
+            self.unknownDataButton.clicked.connect(lambda: pysat_ui.on_uknownDataButton_clicked(self, self.lineEdit_2))
         except:
             pass
 
@@ -484,7 +484,7 @@ class pysat_ui(object):
         self.lineEdit_9.setText(_translate("MainWindow", "*.csv", None))
         self.fullDataBaseButton_3.setText(_translate("MainWindow", "...", None))
         try:
-            self.fullDataBaseButton_3.clicked.connect(lambda: pysat_ui.on_fullDataBaseButton_clicked(self))
+            self.fullDataBaseButton_3.clicked.connect(lambda: pysat_ui.on_fullDataBaseButton_clicked(self, self.lineEdit_9))
         except:
             pass
 
