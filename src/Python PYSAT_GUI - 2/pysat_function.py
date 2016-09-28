@@ -44,7 +44,7 @@ class pysat_func():
             self.unknown_data = spectral_data(self.unknown_data)
             print("Spectral analysis has completed")
         except Exception as e:
-            print(e)
+            print("I am missing some files please fix: {}".format(e))
 
     def set_interp(self):
         # TODO interp should be it's ownn function

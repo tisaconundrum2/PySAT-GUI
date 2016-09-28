@@ -800,6 +800,14 @@ class pysat_ui(object):
         self.label_38.setText(_translate("MainWindow", "]", None))
         self.compRanges_button = QtGui.QPushButton(self.CompRanges)
         self.set_module_button(self.verticalLayout_7, self.compRanges_button)
+        try:
+            self.compRanges_button.clicked.connect(lambda: self.pysat_fun.set_compranges([[int(self.comp_range.text()), int(self.comp_range_2.text())],
+                                                                                          [int(self.comp_range_3.text()), int(self.comp_range_4.text())],
+                                                                                          [int(self.comp_range_5.text()), int(self.comp_range_6.text())],
+                                                                                          [int(self.comp_range_7.text()), int(self.comp_range_8.text())]]))
+        except:
+            pass
+
 
     def num_of_compoents(self, MainWindow):
         self.NumberComponents = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
