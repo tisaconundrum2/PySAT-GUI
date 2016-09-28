@@ -8,30 +8,51 @@ class pysat_func():
 
 
     def set_file_outpath(self, outpath):
-        self.outpath = outpath
+        try:
+            self.outpath = outpath
+        except Exception as e:
+            print(e)
 
     def set_file_knowndatacsv(self, db):
-        self.db = db
+        try:
+            self.db = db
+        except Exception as e:
+            print(e)
 
     def set_file_unknowndatacsv(self, unknowndatacsv):
-        self.unknowndatacsv = unknowndatacsv
+        try:
+            self.unknowndatacsv = unknowndatacsv
+        except Exception as e:
+            print(e)
 
     def set_file_maskfile(self, maskfile):
-        self.maskfile = maskfile
+        try:
+            self.maskfile = maskfile
+        except Exception as e:
+            print(e)
 
     def get_spectra(self):
-        self.data = pd.read_csv(self.db, header=[0, 1])
-        self.data = spectral_data(self.data)
-        self.unknown_data = pd.read_csv(self.unknowndatacsv, header=[0, 1])
-        self.unknown_data = spectral_data(self.unknown_data)
+        try:
+            self.data = pd.read_csv(self.db, header=[0, 1])
+            self.data = spectral_data(self.data)
+            self.unknown_data = pd.read_csv(self.unknowndatacsv, header=[0, 1])
+            self.unknown_data = spectral_data(self.unknown_data)
+        except Exception as e:
+            print(e)
 
     def set_interp(self):
         # TODO interp should be it's ownn function
-        self.unknown_data.interp(self.data.df['wvl'].columns)
+        try:
+            self.unknown_data.interp(self.data.df['wvl'].columns)
+        except Exception as e:
+            print(e)
 
     def set_mask(self):
-        self.data.mask(self.maskfile)
-        self.unknown_data.mask(self.maskfile)
+        try:
+            self.data.mask(self.maskfile)
+            self.unknown_data.mask(self.maskfile)
+        except Exception as e:
+            print(e)
 
     def get_ranges(self, ranges):
         try:
@@ -42,55 +63,92 @@ class pysat_func():
 
 
     def set_element_name(self, el):
-        self.el = el
+        try:
+            self.el = el
+        except Exception as e:
+            print(e)
 
     def set_nfolds(self, nfolds_test):
-        self.nfolds_test = nfolds_test
+        try:
+            self.nfolds_test = nfolds_test
+        except Exception as e:
+            print(e)
 
     def set_testfold_test(self, testfold_test):
-        self.testfold_test = testfold_test
+        try:
+            self.testfold_test = testfold_test
+        except Exception as e:
+            print(e)
 
     def get_nfolds(self):
-        return self.nfolds_test
+        try:
+            return self.nfolds_test
+        except Exception as e:
+            print(e)
 
     def get_testfold_test(self):
-        return self.testfold_test
+        try:
+            return self.testfold_test
+        except Exception as e:
+            print(e)
 
     def set_compranges(self, compranges):
-        self.compranges = compranges
+        try:
+            self.compranges = compranges
+        except Exception as e:
+            print(e)
 
     def set_stratified(self):
-        self.data.stratified_folds(nfolds=self.nfolds_test, sortby=('meta', self.el))
-        self.data1_train = self.data.rows_match(('meta', 'Folds'), [self.testfold_test], invert=True)
-        self.data1_test = self.data.rows_match(('meta', 'Folds'), [self.testfold_test])
+        try:
+            self.data.stratified_folds(nfolds=self.nfolds_test, sortby=('meta', self.el))
+            self.data1_train = self.data.rows_match(('meta', 'Folds'), [self.testfold_test], invert=True)
+            self.data1_test = self.data.rows_match(('meta', 'Folds'), [self.testfold_test])
+        except Exception as e:
+            print(e)
 
     def get_number_components(self, ncs):
         # ncs = [7, 7, 5, 9]
-        self.ncs = ncs
+        try:
+            self.ncs = ncs
+        except Exception as e:
+            print(e)
 
     def get_train_data(self):
-        self.traindata = [self.data1_train.df, self.data1_train.df, self.data1_train.df, self.data1_train.df]
+        try:
+            self.traindata = [self.data1_train.df, self.data1_train.df, self.data1_train.df, self.data1_train.df]
+        except Exception as e:
+            print(e)
 
     def get_test_data(self):
-        self.testdata = [self.data1_test.df, self.data1_test.df, self.data1_test.df, self.data1_test.df]
+        try:
+            self.testdata = [self.data1_test.df, self.data1_test.df, self.data1_test.df, self.data1_test.df]
+        except Exception as e:
+            print(e)
 
     def set_sm(self):
-        self.sm = pls_sm()
+        try:
+            self.sm = pls_sm()
+        except Exception as e:
+            print(e)
 
     def get_sm_fit(self):
-        self.sm.fit(self.traindata, self.compranges, self.ncs, self.el, figpath=self.outpath)
-        self.predictions_train = self.sm.predict(self.traindata)
-        self.predictions_test = self.sm.predict(self.testdata)
-        self.blended_train = self.sm.do_blend(self.predictions_train, self.traindata[0]['meta'][self.el])
-        self.blended_test = self.sm.do_blend(self.predictions_test)
+        try:
+            self.sm.fit(self.traindata, self.compranges, self.ncs, self.el, figpath=self.outpath)
+            self.predictions_train = self.sm.predict(self.traindata)
+            self.predictions_test = self.sm.predict(self.testdata)
+            self.blended_train = self.sm.do_blend(self.predictions_train, self.traindata[0]['meta'][self.el])
+            self.blended_test = self.sm.do_blend(self.predictions_test)
+        except Exception as e:
+            print(e)
 
     def get_plots(self):
-        # ###################################################
-        # # Create all the Plots in Outpath
-        # ###################################################
-        self.sm.final(self.testdata[0]['meta'][self.el],
+        try:
+            self.sm.final(self.testdata[0]['meta'][self.el],
                       self.blended_test,
                       el=self.el,
                       xcol='Ref Comp Wt. %',
                       ycol='Predicted Comp Wt. %',
                       figpath=self.outpath)
+        except Exception as e:
+            print(e)
+
