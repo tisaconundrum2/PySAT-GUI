@@ -153,22 +153,16 @@ class pysat_func():
             print(e)
 
     def set_sm(self):
-        try:
-            self.sm = pls_sm()
-        except Exception as e:
-            print(e)
+        self.sm = pls_sm()
 
     def get_sm_fit(self):
-        try:
-            print("Beginning SM fit")
-            self.sm.fit(self.traindata, self.compranges, self.ncs, self.el, figpath=self.outpath)
-            self.predictions_train = self.sm.predict(self.traindata)
-            self.predictions_test = self.sm.predict(self.testdata)
-            self.blended_train = self.sm.do_blend(self.predictions_train, self.traindata[0]['meta'][self.el])
-            self.blended_test = self.sm.do_blend(self.predictions_test)
-            print("Finishing up...")
-        except Exception as e:
-            print(e)
+        print("Beginning SM fit")
+        self.sm.fit(self.traindata, self.compranges, self.ncs, self.el, figpath=self.outpath)
+        self.predictions_train = self.sm.predict(self.traindata)
+        self.predictions_test = self.sm.predict(self.testdata)
+        self.blended_train = self.sm.do_blend(self.predictions_train, self.traindata[0]['meta'][self.el])
+        self.blended_test = self.sm.do_blend(self.predictions_test)
+        print("Finishing up...")
 
     def get_plots(self):
         print("Now outputting plots to output folder")
