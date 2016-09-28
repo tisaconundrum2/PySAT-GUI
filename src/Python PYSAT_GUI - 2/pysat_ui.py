@@ -437,7 +437,6 @@ class pysat_ui(object):
         except:
             pass
 
-
     def reference_data(self, MainWindow):
         self.referenceData = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
         font = QtGui.QFont()
