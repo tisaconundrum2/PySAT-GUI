@@ -12,22 +12,9 @@ class Main(QMainWindow):
     def runningFunctions(self, MainWindow):
         pysat = pysat_ui()
         pysat.mainframe(MainWindow)           # Set up the mainwindow. This is the backbone of the UI it IS REQUIRED
-        pysat.menubar(MainWindow)
         pysat.ok_button(MainWindow)
         pysat.menu_item_shortcuts()           # The shortcuts for making things happen in the UI
         pysat.menu_item_functions(MainWindow) # These are the various functions that make the UI work
-        pysat.unknown_data(MainWindow)
-        pysat.reference_data(MainWindow)
-        pysat.normalization(MainWindow)
-        pysat.comp_ranges(MainWindow)
-        pysat.num_of_compoents(MainWindow)
-        pysat.y_variable(MainWindow)
-        pysat.test_folds(MainWindow)
-        pysat.n_folds(MainWindow)
-        pysat.interpolated(MainWindow)
-        pysat.masked(MainWindow)
-        pysat.startified(MainWindow)
-        pysat.train_data(MainWindow)
 
 
 #### These are the triggers for exit and new
