@@ -10,33 +10,39 @@ class pysat_func():
     def set_file_outpath(self, outpath):
         try:
             self.outpath = outpath
+            print("Output path folder has been set")
         except Exception as e:
             print(e)
 
     def set_file_knowndatacsv(self, db):
         try:
             self.db = db
+            print("Known data file has been added")
         except Exception as e:
             print(e)
 
     def set_file_unknowndatacsv(self, unknowndatacsv):
         try:
             self.unknowndatacsv = unknowndatacsv
+            print("Unknown data file has been added")
         except Exception as e:
             print(e)
 
     def set_file_maskfile(self, maskfile):
         try:
             self.maskfile = maskfile
+            print("Maskfile has been applied")
         except Exception as e:
             print(e)
 
     def get_spectra(self):
         try:
+            print("Running Spectral on data set")
             self.data = pd.read_csv(self.db, header=[0, 1])
             self.data = spectral_data(self.data)
             self.unknown_data = pd.read_csv(self.unknowndatacsv, header=[0, 1])
             self.unknown_data = spectral_data(self.unknown_data)
+            print("Spectral analysis has completed")
         except Exception as e:
             print(e)
 
@@ -44,6 +50,7 @@ class pysat_func():
         # TODO interp should be it's ownn function
         try:
             self.unknown_data.interp(self.data.df['wvl'].columns)
+            print("Interpolation has been applied")
         except Exception as e:
             print(e)
 
@@ -51,6 +58,7 @@ class pysat_func():
         try:
             self.data.mask(self.maskfile)
             self.unknown_data.mask(self.maskfile)
+            print("Masking has been applied")
         except Exception as e:
             print(e)
 
@@ -59,6 +67,7 @@ class pysat_func():
         try:
             self.data.norm(ranges)
             self.unknown_data.norm(ranges)
+            print("Ranges have been applied")
         except Exception as e:
             print(e)
 
