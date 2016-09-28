@@ -214,6 +214,8 @@ class Ui_MainWindow(object):
         self.actionNumber_of_Components.setObjectName(_fromUtf8("actionNumber_of_Components"))
         self.actionAdd_Y_Variable = QtGui.QAction(MainWindow)
         self.actionAdd_Y_Variable.setObjectName(_fromUtf8("actionAdd_Y_Variable"))
+        self.actionStratify = QtGui.QAction(MainWindow)
+        self.actionStratify.setObjectName(_fromUtf8("actionStratify"))
         self.menuFile.addAction(self.actionLoad_Refence_Data)
         self.menuFile.addAction(self.actionLoad_Unknown_Data)
         self.menuFile.addAction(self.actionSet_output_location)
@@ -248,6 +250,7 @@ class Ui_MainWindow(object):
         self.menuPreprocessing.addAction(self.menuCalibration_Transfer.menuAction())
         self.menuPreprocessing.addAction(self.actionICA_2)
         self.menuPreprocessing.addAction(self.actionPCA_2)
+        self.menuPreprocessing.addAction(self.actionStratify)
         self.menuRegression.addAction(self.actionCross_Validation)
         self.menuRegression.addAction(self.actionTrain)
         self.menuRegression.addAction(self.actionPredict)
@@ -354,4 +357,5 @@ class Ui_MainWindow(object):
         self.actionSubmodel_Ranges.setText(_translate("MainWindow", "Submodel Ranges", None))
         self.actionNumber_of_Components.setText(_translate("MainWindow", "Number of Components", None))
         self.actionAdd_Y_Variable.setText(_translate("MainWindow", "Add Y Variable", None))
+        self.actionStratify.setText(_translate("MainWindow", "Stratify", None))
 

@@ -125,6 +125,7 @@ QGroupBox::title {
     <addaction name="menuCalibration_Transfer"/>
     <addaction name="actionICA_2"/>
     <addaction name="actionPCA_2"/>
+    <addaction name="actionStratify"/>
    </widget>
    <widget class="QMenu" name="menuRegression">
     <property name="title">
@@ -493,6 +494,11 @@ QGroupBox::title {
   <action name="actionAdd_Y_Variable">
    <property name="text">
     <string>Add Y Variable</string>
+   </property>
+  </action>
+  <action name="actionStratify">
+   <property name="text">
+    <string>Stratify</string>
    </property>
   </action>
  </widget>

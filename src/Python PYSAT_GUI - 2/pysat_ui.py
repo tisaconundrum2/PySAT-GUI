@@ -221,6 +221,8 @@ class pysat_ui(object):
         self.actionNumber_of_Components.setObjectName(_fromUtf8("actionNumber_of_Components"))
         self.actionAdd_Y_Variable = QtGui.QAction(MainWindow)
         self.actionAdd_Y_Variable.setObjectName(_fromUtf8("actionAdd_Y_Variable"))
+        self.actionStratify = QtGui.QAction(MainWindow)
+        self.actionStratify.setObjectName(_fromUtf8("actionStratify"))
         self.menuFile.addAction(self.actionLoad_Refence_Data)
         self.menuFile.addAction(self.actionLoad_Unknown_Data)
         self.menuFile.addAction(self.actionSet_output_location)
@@ -255,6 +257,7 @@ class pysat_ui(object):
         self.menuPreprocessing.addAction(self.menuCalibration_Transfer.menuAction())
         self.menuPreprocessing.addAction(self.actionICA_2)
         self.menuPreprocessing.addAction(self.actionPCA_2)
+        self.menuPreprocessing.addAction(self.actionStratify)
         self.menuRegression.addAction(self.actionCross_Validation)
         self.menuRegression.addAction(self.actionTrain)
         self.menuRegression.addAction(self.actionPredict)
@@ -360,6 +363,7 @@ class pysat_ui(object):
         self.actionSubmodel_Ranges.setText(_translate("MainWindow", "Submodel Ranges", None))
         self.actionNumber_of_Components.setText(_translate("MainWindow", "Number of Components", None))
         self.actionAdd_Y_Variable.setText(_translate("MainWindow", "Add Y Variable", None))
+        self.actionStratify.setText(_translate("MainWindow", "Stratify", None))
 
     #### UI modules
 
@@ -1211,26 +1215,14 @@ class pysat_ui(object):
         self.actionLoad_Refence_Data.triggered.connect(lambda: pysat_ui.reference_data(self, MainWindow))
         self.actionNormalization.triggered.connect(lambda: pysat_ui.normalization(self, MainWindow))
         self.actionSubmodel_Ranges.triggered.connect(lambda: pysat_ui.comp_ranges(self, MainWindow))
-        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.num_of_compoents(self, MainWindow))
-        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.y_variable(self, MainWindow))
-        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.test_folds(self, MainWindow))
-        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.n_folds(self, MainWindow))
-        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.interpolated(self, MainWindow))
-        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.masked(self, MainWindow))
-        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.startified(self, MainWindow))
-        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.train_data(self, MainWindow))
-
-        # pysat.reference_data(MainWindow)
-        # pysat.normalization(MainWindow)
-        # pysat.comp_ranges(MainWindow)
-        # pysat.num_of_compoents(MainWindow)
-        # pysat.y_variable(MainWindow)
-
-        # self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.files(self, MainWindow))
-        # self.actionNormalization.triggered.connect(lambda: pysat_ui.std_norm(self, MainWindow))
-        # self.actionElement_Name_Setup.triggered.connect(lambda: pysat_ui.element_name_setup(self, MainWindow))
-        # self.actionComposition_Ranges.triggered.connect(lambda: pysat_ui.compranges(self, MainWindow))
-        # self.actionCreate_Models.triggered.connect(lambda: pysat_ui.createmodels(self, MainWindow))
+        self.actionNumber_of_Components.triggered.connect(lambda: pysat_ui.num_of_compoents(self, MainWindow))
+        self.actionAdd_Y_Variable.triggered.connect(lambda: pysat_ui.y_variable(self, MainWindow))
+        self.actionCreate_Test_Folds.triggered.connect(lambda: pysat_ui.test_folds(self, MainWindow))
+        self.actionCreate_N_Folds.triggered.connect(lambda: pysat_ui.n_folds(self, MainWindow))
+        self.actionInterpolate.triggered.connect(lambda: pysat_ui.interpolated(self, MainWindow))
+        self.actionApply_Mask.triggered.connect(lambda: pysat_ui.masked(self, MainWindow))
+        self.actionStratify.triggered.connect(lambda: pysat_ui.startified(self, MainWindow))
+        self.actionTrain.triggered.connect(lambda: pysat_ui.train_data(self, MainWindow))
 
     def save(self):
         # TODO save the current window's data into a save file
