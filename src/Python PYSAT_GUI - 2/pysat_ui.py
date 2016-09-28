@@ -1366,7 +1366,7 @@ class pysat_ui(object):
     def on_outPutLocationButton_clicked(self, lineEdit):
         filename = QFileDialog.getExistingDirectory(None, "Select Output Directory", '.')
         lineEdit.setText(filename)
-        self.pysat_fun.set_files(outpath=filename)
+        self.pysat_fun.set_file_outpath(filename)
         if lineEdit.text() == "":
             lineEdit.setText("*/*")
 
