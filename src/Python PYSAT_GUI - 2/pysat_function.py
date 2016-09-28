@@ -67,6 +67,7 @@ class pysat_func():
         try:
             self.data.norm(ranges)
             self.unknown_data.norm(ranges)
+            print("{}".format(ranges))
             print("Ranges have been applied")
         except Exception as e:
             print(e)
@@ -108,6 +109,7 @@ class pysat_func():
     def set_compranges(self, compranges):
         try:
             self.compranges = compranges
+            print("{}".format(compranges))
             print("Submodel ranges has been applied")
         except Exception as e:
             print(e)
@@ -126,6 +128,7 @@ class pysat_func():
         # ncs = [7, 7, 5, 9]
         try:
             self.ncs = ncs
+            print("{}".format(ncs))
             print("Applying components")
         except Exception as e:
             print(e)

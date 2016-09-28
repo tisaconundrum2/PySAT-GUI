@@ -935,8 +935,15 @@ class pysat_ui(object):
         self.label_89.setText(_translate("MainWindow", "0", None))
         self.label_90.setText(_translate("MainWindow", ")", None))
         self.label_91.setText(_translate("MainWindow", "]", None))
-        self.num_of_compoents_button = QtGui.QPushButton(self.NumberComponents)
-        self.set_module_button(self.verticalLayout_17, self.num_of_compoents_button)
+        self.num_of_components_button = QtGui.QPushButton(self.NumberComponents)
+        self.set_module_button(self.verticalLayout_17, self.num_of_components_button)
+        try:
+            self.num_of_components_button.clicked.connect(lambda: self.pysat_fun.get_number_components([(int(self.create_model_spin.text()),
+                                                                                                         int(self.create_model_spin_2.text()),
+                                                                                                         int(self.create_model_spin_3.text()),
+                                                                                                         int(self.create_model_spin_4.text()))]))
+        except:
+            pass
 
     def y_variable(self, MainWindow):
         self.y_variable = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
