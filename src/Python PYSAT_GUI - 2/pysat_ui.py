@@ -217,6 +217,10 @@ class pysat_ui(object):
         self.actionCreate_Test_Folds.setObjectName(_fromUtf8("actionCreate_Test_Folds"))
         self.actionSubmodel_Ranges = QtGui.QAction(MainWindow)
         self.actionSubmodel_Ranges.setObjectName(_fromUtf8("actionSubmodel_Ranges"))
+        self.actionNumber_of_Components = QtGui.QAction(MainWindow)
+        self.actionNumber_of_Components.setObjectName(_fromUtf8("actionNumber_of_Components"))
+        self.actionAdd_Y_Variable = QtGui.QAction(MainWindow)
+        self.actionAdd_Y_Variable.setObjectName(_fromUtf8("actionAdd_Y_Variable"))
         self.menuFile.addAction(self.actionLoad_Refence_Data)
         self.menuFile.addAction(self.actionLoad_Unknown_Data)
         self.menuFile.addAction(self.actionSet_output_location)
@@ -257,6 +261,8 @@ class pysat_ui(object):
         self.menuRegression.addAction(self.actionCreate_N_Folds)
         self.menuRegression.addAction(self.actionCreate_Test_Folds)
         self.menuRegression.addAction(self.actionSubmodel_Ranges)
+        self.menuRegression.addAction(self.actionNumber_of_Components)
+        self.menuRegression.addAction(self.actionAdd_Y_Variable)
         self.menuHelp.addAction(self.actionIndex)
         self.menuHelp.addAction(self.actionContent_2)
         self.menuHelp.addSeparator()
@@ -352,6 +358,8 @@ class pysat_ui(object):
         self.actionCreate_N_Folds.setText(_translate("MainWindow", "Create N Folds", None))
         self.actionCreate_Test_Folds.setText(_translate("MainWindow", "Create Test Folds", None))
         self.actionSubmodel_Ranges.setText(_translate("MainWindow", "Submodel Ranges", None))
+        self.actionNumber_of_Components.setText(_translate("MainWindow", "Number of Components", None))
+        self.actionAdd_Y_Variable.setText(_translate("MainWindow", "Add Y Variable", None))
 
     #### UI modules
 
@@ -1202,7 +1210,7 @@ class pysat_ui(object):
         self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.unknown_data(self, MainWindow))
         self.actionLoad_Refence_Data.triggered.connect(lambda: pysat_ui.reference_data(self, MainWindow))
         self.actionNormalization.triggered.connect(lambda: pysat_ui.normalization(self, MainWindow))
-        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.comp_ranges(self, MainWindow))
+        self.actionSubmodel_Ranges.triggered.connect(lambda: pysat_ui.comp_ranges(self, MainWindow))
         self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.num_of_compoents(self, MainWindow))
         self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.y_variable(self, MainWindow))
         self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.test_folds(self, MainWindow))
