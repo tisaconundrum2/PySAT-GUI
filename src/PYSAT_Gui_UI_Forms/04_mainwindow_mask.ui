@@ -48,37 +48,7 @@ QGroupBox::title {
 }
 </string>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout_8">
-        <item>
-         <widget class="QGroupBox" name="masked">
-          <property name="font">
-           <font>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-          <property name="title">
-           <string>Mask</string>
-          </property>
-          <layout class="QVBoxLayout" name="CrossValid_3">
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_12">
-             <item>
-              <layout class="QVBoxLayout" name="verticalLayout_23">
-               <item>
-                <widget class="QLabel" name="label_16">
-                 <property name="text">
-                  <string>Mask was applied to unknown and known data</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </widget>
-        </item>
-       </layout>
+       <layout class="QVBoxLayout" name="verticalLayout_8"/>
       </widget>
      </widget>
     </item>

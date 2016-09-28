@@ -21,6 +21,7 @@ except AttributeError:
 
 
 class pysat_ui(object):
+
     count = 0
 
     def __init__(self):
@@ -28,7 +29,6 @@ class pysat_ui(object):
         self.norm_spinBox_ = [None]*1024
         self.spin_array = [None]*1024
         pysat_ui.count = 1
-        self.pysat = pysat_func()
 
     def mainframe(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
@@ -434,7 +434,10 @@ class pysat_ui(object):
         self.unknownDataButton.setText(_translate("MainWindow", "...", None))
         self.unknown_data_button = QtGui.QPushButton(self.unknownData)
         self.set_module_button(self.verticalLayout_6, self.unknown_data_button)
-        self.unknown_data_button.clicked.connect(lambda: pysat_ui.on_uknownDataButton_clicked(self))
+        try:
+            self.unknownDataButton.clicked.connect(lambda: pysat_ui.on_uknownDataButton_clicked(self))
+        except:
+            pass
 
 
     def reference_data(self, MainWindow):
@@ -1094,14 +1097,40 @@ class pysat_ui(object):
         font.setPointSize(10)
         self.masked.setFont(font)
         self.masked.setObjectName(_fromUtf8("masked"))
-        self.verticalLayout_30 = QtGui.QVBoxLayout(self.masked)
-        self.verticalLayout_30.setMargin(11)
-        self.verticalLayout_30.setSpacing(6)
-        self.verticalLayout_30.setObjectName(_fromUtf8("verticalLayout_30"))
-        self.horizontalLayout_12 = QtGui.QHBoxLayout()
-        self.horizontalLayout_12.setMargin(11)
-        self.horizontalLayout_12.setSpacing(6)
-        self.horizontalLayout_12.setObjectName(_fromUtf8("horizontalLayout_12"))
+        self.verticalLayout = QtGui.QVBoxLayout(self.masked)
+        self.verticalLayout.setMargin(11)
+        self.verticalLayout.setSpacing(6)
+        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
+        self.horizontalLayout_13 = QtGui.QHBoxLayout()
+        self.horizontalLayout_13.setMargin(11)
+        self.horizontalLayout_13.setSpacing(6)
+        self.horizontalLayout_13.setObjectName(_fromUtf8("horizontalLayout_13"))
+        self.verticalLayout_17 = QtGui.QVBoxLayout()
+        self.verticalLayout_17.setMargin(11)
+        self.verticalLayout_17.setSpacing(6)
+        self.verticalLayout_17.setObjectName(_fromUtf8("verticalLayout_17"))
+        self.label_9 = QtGui.QLabel(self.masked)
+        self.label_9.setObjectName(_fromUtf8("label_9"))
+        self.verticalLayout_17.addWidget(self.label_9)
+        self.horizontalLayout_13.addLayout(self.verticalLayout_17)
+        self.verticalLayout_22 = QtGui.QVBoxLayout()
+        self.verticalLayout_22.setMargin(11)
+        self.verticalLayout_22.setSpacing(6)
+        self.verticalLayout_22.setObjectName(_fromUtf8("verticalLayout_22"))
+        self.lineEdit_10 = QtGui.QLineEdit(self.masked)
+        self.lineEdit_10.setReadOnly(True)
+        self.lineEdit_10.setObjectName(_fromUtf8("lineEdit_10"))
+        self.verticalLayout_22.addWidget(self.lineEdit_10)
+        self.horizontalLayout_13.addLayout(self.verticalLayout_22)
+        self.verticalLayout_24 = QtGui.QVBoxLayout()
+        self.verticalLayout_24.setMargin(11)
+        self.verticalLayout_24.setSpacing(6)
+        self.verticalLayout_24.setObjectName(_fromUtf8("verticalLayout_24"))
+        self.fullDataBaseButton_4 = QtGui.QToolButton(self.masked)
+        self.fullDataBaseButton_4.setObjectName(_fromUtf8("fullDataBaseButton_4"))
+        self.verticalLayout_24.addWidget(self.fullDataBaseButton_4)
+        self.horizontalLayout_13.addLayout(self.verticalLayout_24)
+        self.verticalLayout.addLayout(self.horizontalLayout_13)
         self.verticalLayout_23 = QtGui.QVBoxLayout()
         self.verticalLayout_23.setMargin(11)
         self.verticalLayout_23.setSpacing(6)
@@ -1109,10 +1138,12 @@ class pysat_ui(object):
         self.label_16 = QtGui.QLabel(self.masked)
         self.label_16.setObjectName(_fromUtf8("label_16"))
         self.verticalLayout_23.addWidget(self.label_16)
-        self.horizontalLayout_12.addLayout(self.verticalLayout_23)
-        self.verticalLayout_30.addLayout(self.horizontalLayout_12)
+        self.verticalLayout.addLayout(self.verticalLayout_23)
         self.verticalLayout_8.addWidget(self.masked)
         self.masked.setTitle(_translate("MainWindow", "Mask", None))
+        self.label_9.setText(_translate("MainWindow", "Maskfile", None))
+        self.lineEdit_10.setText(_translate("MainWindow", "*.csv", None))
+        self.fullDataBaseButton_4.setText(_translate("MainWindow", "...", None))
         self.label_16.setText(_translate("MainWindow", "Mask was applied to unknown and known data", None))
 
     def startified(self, MainWindow):
@@ -1239,21 +1270,21 @@ class pysat_ui(object):
     def on_maskFile_clicked(self):
         filename = QFileDialog.getOpenFileName(None, "Open Mask File", '.', "(*.csv)")
         self.lineEdit.setText(filename)
-        self.pysat_fun.set_files(maskfile=filename)
+        self.pysat_fun.set_file_maskfile(filename)
         if self.lineEdit.text() == "":
             self.lineEdit.setText("*.csv")
 
     def on_uknownDataButton_clicked(self):
         filename = QFileDialog.getOpenFileName(None, "Open Uknown Data File", '.', "(*.csv)")
         self.lineEdit_2.setText(filename)
-        self.pysat_fun.set_files(unknowndatacsv=filename)
+        self.pysat_fun.set_file_unknowndatacsv(filename)
         if self.lineEdit_2.text() == "":
             self.lineEdit_2.setText("*.csv")
 
     def on_fullDataBaseButton_clicked(self):
         filename = QFileDialog.getOpenFileName(None, "Open Uknown Data File", '.', "(*.csv)")
         self.lineEdit_3.setText(filename)
-        self.pysat_fun.set_files(db=filename)
+        self.pysat_fun.set_file_knowndatacsv(filename)
         if self.lineEdit_3.text() == "":
             self.lineEdit_3.setText("*.csv")
 
