@@ -55,6 +55,7 @@ class pysat_func():
             print(e)
 
     def get_ranges(self, ranges):
+        print("{}".format(ranges))
         try:
             self.data.norm(ranges)
             self.unknown_data.norm(ranges)

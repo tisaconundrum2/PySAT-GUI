@@ -434,7 +434,6 @@ class pysat_ui(object):
         self.unknownDataButton.setText(_translate("MainWindow", "...", None))
         try:
             self.unknownDataButton.clicked.connect(lambda: pysat_ui.on_uknownDataButton_clicked(self, self.lineEdit_2))
-            self.unknownDataButton.clicked.connect(lambda: self.pysat_fun.get_spectra())
         except:
             pass
 
@@ -543,11 +542,9 @@ class pysat_ui(object):
         self.normalization_button = QtGui.QPushButton(self.Normalization)
         self.set_module_button(self.verticalLayout_27, self.normalization_button)
         try:
-            ranges = [(int(self.norm_spinBox_9), int(self.norm_spinBox))]
-            self.normalization_button.clicked.connect(lambda: self.pysat_fun.get_ranges(ranges))
+            self.normalization_button.clicked.connect(lambda: self.pysat_fun.get_ranges(([(int(self.norm_spinBox_9.text()), int(self.norm_spinBox.text()))])))
         except:
             pass
-
 
     def comp_ranges(self, MainWindow):
         self.CompRanges = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -933,7 +930,6 @@ class pysat_ui(object):
         self.num_of_compoents_button = QtGui.QPushButton(self.NumberComponents)
         self.set_module_button(self.verticalLayout_17, self.num_of_compoents_button)
 
-
     def y_variable(self, MainWindow):
         self.y_variable = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
         font = QtGui.QFont()
@@ -1264,6 +1260,7 @@ class pysat_ui(object):
         self.pysat_fun.set_file_unknowndatacsv(filename)
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")
+        self.pysat_fun.get_spectra()
 
     def on_fullDataBaseButton_clicked(self, lineEdit):
         filename = QFileDialog.getOpenFileName(None, "Open Uknown Data File", '.', "(*.csv)")
@@ -1271,6 +1268,7 @@ class pysat_ui(object):
         self.pysat_fun.set_file_knowndatacsv(filename)
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")
+        self.pysat_fun.get_spectra()
 
     def on_outPutLocationButton_clicked(self, lineEdit):
         filename = QFileDialog.getExistingDirectory(None, "Select Output Directory", '.')
