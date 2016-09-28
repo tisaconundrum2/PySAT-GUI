@@ -432,8 +432,6 @@ class pysat_ui(object):
         self.label.setText(_translate("MainWindow", "Unknown Data", None))
         self.lineEdit_2.setText(_translate("MainWindow", "*.csv", None))
         self.unknownDataButton.setText(_translate("MainWindow", "...", None))
-        self.unknown_data_button = QtGui.QPushButton(self.unknownData)
-        self.set_module_button(self.verticalLayout_6, self.unknown_data_button)
         try:
             self.unknownDataButton.clicked.connect(lambda: pysat_ui.on_uknownDataButton_clicked(self))
         except:
