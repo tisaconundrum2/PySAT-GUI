@@ -992,10 +992,10 @@ class pysat_ui(object):
         self.num_of_components_button = QtGui.QPushButton(self.NumberComponents)
         self.set_module_button(self.verticalLayout_17, self.num_of_components_button)
         try:
-            self.num_of_components_button.clicked.connect(lambda: self.pysat_fun.get_number_components([(int(self.create_model_spin.text()),
+            self.num_of_components_button.clicked.connect(lambda: self.pysat_fun.get_number_components([int(self.create_model_spin.text()),
                                                                                                          int(self.create_model_spin_2.text()),
                                                                                                          int(self.create_model_spin_3.text()),
-                                                                                                         int(self.create_model_spin_4.text()))]))
+                                                                                                         int(self.create_model_spin_4.text())]))
         except:
             pass
 
