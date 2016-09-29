@@ -28,6 +28,8 @@ class pysat_ui(object):
         self.norm_spinBox_ = [None]*1024
         self.spin_array = [None]*1024
         pysat_ui.count = 1
+        self.pysat = pysat_func()
+
 
     def mainframe(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
@@ -69,22 +71,6 @@ class pysat_ui(object):
         self.menuBar = QtGui.QMenuBar(MainWindow)
         self.menuBar.setGeometry(QtCore.QRect(0, 0, 581, 21))
         self.menuBar.setObjectName(_fromUtf8("menuBar"))
-        self.menuFile = QtGui.QMenu(self.menuBar)
-        self.menuFile.setObjectName(_fromUtf8("menuFile"))
-        self.menuPreprocessing = QtGui.QMenu(self.menuBar)
-        self.menuPreprocessing.setObjectName(_fromUtf8("menuPreprocessing"))
-        self.menuBaseline_Removal = QtGui.QMenu(self.menuPreprocessing)
-        self.menuBaseline_Removal.setObjectName(_fromUtf8("menuBaseline_Removal"))
-        self.menuCalibration_Transfer = QtGui.QMenu(self.menuPreprocessing)
-        self.menuCalibration_Transfer.setObjectName(_fromUtf8("menuCalibration_Transfer"))
-        self.menuVisualization = QtGui.QMenu(self.menuBar)
-        self.menuVisualization.setObjectName(_fromUtf8("menuVisualization"))
-        self.menuClustering = QtGui.QMenu(self.menuVisualization)
-        self.menuClustering.setObjectName(_fromUtf8("menuClustering"))
-        self.menuRegression = QtGui.QMenu(self.menuBar)
-        self.menuRegression.setObjectName(_fromUtf8("menuRegression"))
-        self.menuHelp = QtGui.QMenu(self.menuBar)
-        self.menuHelp.setObjectName(_fromUtf8("menuHelp"))
         MainWindow.setMenuBar(self.menuBar)
         self.mainToolBar = QtGui.QToolBar(MainWindow)
         self.mainToolBar.setObjectName(_fromUtf8("mainToolBar"))
@@ -186,6 +172,74 @@ class pysat_ui(object):
         self.actionComposition_Ranges.setObjectName(_fromUtf8("actionComposition_Ranges"))
         self.actionCreate_Models = QtGui.QAction(MainWindow)
         self.actionCreate_Models.setObjectName(_fromUtf8("actionCreate_Models"))
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        MainWindow.setWindowTitle(_translate("MainWindow", "PYSAT", None))
+        self.actionLoad_Refence_Data.setText(_translate("MainWindow", "Load Refence Data", None))
+        self.actionLoad_Unknown_Data.setText(_translate("MainWindow", "Load Data Files", None))
+        self.actionSave_Current_Workflow.setText(_translate("MainWindow", "Save Current Workflow", None))
+        self.actionSave_Current_Plots.setText(_translate("MainWindow", "Save Current Plots", None))
+        self.actionSave_Current_Data.setText(_translate("MainWindow", "Save Current Data", None))
+        self.actionCreate_New_Workflow.setText(_translate("MainWindow", "Create New Workflow", None))
+        self.actionNoise_Reduction.setText(_translate("MainWindow", "Noise Reduction", None))
+        self.actionApply_Mask.setText(_translate("MainWindow", "Apply Mask", None))
+        self.actionInterpolate.setText(_translate("MainWindow", "Interpolate", None))
+        self.actionInstrument_Response.setText(_translate("MainWindow", "Instrument Response", None))
+        self.actionALS.setText(_translate("MainWindow", "ALS", None))
+        self.actionDietrich.setText(_translate("MainWindow", "Dietrich", None))
+        self.actionPolyFit.setText(_translate("MainWindow", "PolyFit", None))
+        self.actionAirPLS.setText(_translate("MainWindow", "AirPLS", None))
+        self.actionFABC.setText(_translate("MainWindow", "FABC", None))
+        self.actionKK.setText(_translate("MainWindow", "KK", None))
+        self.actionMario.setText(_translate("MainWindow", "Mario", None))
+        self.actionMedian.setText(_translate("MainWindow", "Median", None))
+        self.actionRubberband.setText(_translate("MainWindow", "Rubberband", None))
+        self.actionUndecimated_Wavelet.setText(_translate("MainWindow", "Undecimated Wavelet", None))
+        self.actionRatio.setText(_translate("MainWindow", "Ratio", None))
+        self.actionTommy_s_Methgod.setText(_translate("MainWindow", "Tommy\'s Method", None))
+        self.actionPiecewise_Direct_Standardization.setText(
+            _translate("MainWindow", "Piecewise Direct Standardization", None))
+        self.actionPCA.setText(_translate("MainWindow", "PCA", None))
+        self.actionICA.setText(_translate("MainWindow", "ICA", None))
+        self.actionK_Means.setText(_translate("MainWindow", "K-Means", None))
+        self.actionHierarchical.setText(_translate("MainWindow", "Hierarchical", None))
+        self.actionOthers.setText(_translate("MainWindow", "Others...", None))
+        self.actionOthers_2.setText(_translate("MainWindow", "Others...", None))
+        self.actionOthers_3.setText(_translate("MainWindow", "Others...", None))
+        self.actionPLS.setText(_translate("MainWindow", "PLS", None))
+        self.actionSM_PLS.setText(_translate("MainWindow", "SM-PLS", None))
+        self.actionICA_Regression.setText(_translate("MainWindow", "ICA Regression", None))
+        self.actionGaussian_Process.setText(_translate("MainWindow", "Gaussian Process", None))
+        self.actionMLP.setText(_translate("MainWindow", "MLP", None))
+        self.actionSVM.setText(_translate("MainWindow", "SVM", None))
+        self.actionOthers_4.setText(_translate("MainWindow", "Others...", None))
+        self.actionOthers_5.setText(_translate("MainWindow", "Others...", None))
+        self.actionIndex.setText(_translate("MainWindow", "Index", None))
+        self.actionContent_2.setText(_translate("MainWindow", "Content", None))
+        self.actionAbout.setText(_translate("MainWindow", "About...", None))
+        self.actionAbout_QtCreator.setText(_translate("MainWindow", "About QtCreator...", None))
+        self.actionExit.setText(_translate("MainWindow", "Exit", None))
+        self.actionNormalization.setText(_translate("MainWindow", "Normalization", None))
+        self.actionElement_Name_Setup.setText(_translate("MainWindow", "Element Name Setup", None))
+        self.actionComposition_Ranges.setText(_translate("MainWindow", "Composition Ranges", None))
+        self.actionCreate_Models.setText(_translate("MainWindow", "Create Models", None))
+
+    def menubar(self, MainWindow):
+        self.menuFile = QtGui.QMenu(self.menuBar)
+        self.menuFile.setObjectName(_fromUtf8("menuFile"))
+        self.menuPreprocessing = QtGui.QMenu(self.menuBar)
+        self.menuPreprocessing.setObjectName(_fromUtf8("menuPreprocessing"))
+        self.menuBaseline_Removal = QtGui.QMenu(self.menuPreprocessing)
+        self.menuBaseline_Removal.setObjectName(_fromUtf8("menuBaseline_Removal"))
+        self.menuCalibration_Transfer = QtGui.QMenu(self.menuPreprocessing)
+        self.menuCalibration_Transfer.setObjectName(_fromUtf8("menuCalibration_Transfer"))
+        self.menuVisualization = QtGui.QMenu(self.menuBar)
+        self.menuVisualization.setObjectName(_fromUtf8("menuVisualization"))
+        self.menuClustering = QtGui.QMenu(self.menuVisualization)
+        self.menuClustering.setObjectName(_fromUtf8("menuClustering"))
+        self.menuRegression = QtGui.QMenu(self.menuBar)
+        self.menuRegression.setObjectName(_fromUtf8("menuRegression"))
+        self.menuHelp = QtGui.QMenu(self.menuBar)
+        self.menuHelp.setObjectName(_fromUtf8("menuHelp"))
         self.menuFile.addAction(self.actionLoad_Unknown_Data)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionSave_Current_Plots)
@@ -245,8 +299,6 @@ class pysat_ui(object):
         self.menuBar.addAction(self.menuVisualization.menuAction())
         self.menuBar.addAction(self.menuRegression.menuAction())
         self.menuBar.addAction(self.menuHelp.menuAction())
-
-        MainWindow.setWindowTitle(_translate("MainWindow", "PYSAT", None))
         self.menuFile.setTitle(_translate("MainWindow", "File", None))
         self.menuPreprocessing.setTitle(_translate("MainWindow", "Preprocessing", None))
         self.menuBaseline_Removal.setTitle(_translate("MainWindow", "Baseline Removal", None))
@@ -255,55 +307,6 @@ class pysat_ui(object):
         self.menuClustering.setTitle(_translate("MainWindow", "Clustering", None))
         self.menuRegression.setTitle(_translate("MainWindow", "Regression", None))
         self.menuHelp.setTitle(_translate("MainWindow", "Help", None))
-        self.actionLoad_Refence_Data.setText(_translate("MainWindow", "Load Refence Data", None))
-        self.actionLoad_Unknown_Data.setText(_translate("MainWindow", "Load Data Files", None))
-        self.actionSave_Current_Workflow.setText(_translate("MainWindow", "Save Current Workflow", None))
-        self.actionSave_Current_Plots.setText(_translate("MainWindow", "Save Current Plots", None))
-        self.actionSave_Current_Data.setText(_translate("MainWindow", "Save Current Data", None))
-        self.actionCreate_New_Workflow.setText(_translate("MainWindow", "Create New Workflow", None))
-        self.actionNoise_Reduction.setText(_translate("MainWindow", "Noise Reduction", None))
-        self.actionApply_Mask.setText(_translate("MainWindow", "Apply Mask", None))
-        self.actionInterpolate.setText(_translate("MainWindow", "Interpolate", None))
-        self.actionInstrument_Response.setText(_translate("MainWindow", "Instrument Response", None))
-        self.actionALS.setText(_translate("MainWindow", "ALS", None))
-        self.actionDietrich.setText(_translate("MainWindow", "Dietrich", None))
-        self.actionPolyFit.setText(_translate("MainWindow", "PolyFit", None))
-        self.actionAirPLS.setText(_translate("MainWindow", "AirPLS", None))
-        self.actionFABC.setText(_translate("MainWindow", "FABC", None))
-        self.actionKK.setText(_translate("MainWindow", "KK", None))
-        self.actionMario.setText(_translate("MainWindow", "Mario", None))
-        self.actionMedian.setText(_translate("MainWindow", "Median", None))
-        self.actionRubberband.setText(_translate("MainWindow", "Rubberband", None))
-        self.actionUndecimated_Wavelet.setText(_translate("MainWindow", "Undecimated Wavelet", None))
-        self.actionRatio.setText(_translate("MainWindow", "Ratio", None))
-        self.actionTommy_s_Methgod.setText(_translate("MainWindow", "Tommy\'s Method", None))
-        self.actionPiecewise_Direct_Standardization.setText(_translate("MainWindow", "Piecewise Direct Standardization", None))
-        self.actionPCA.setText(_translate("MainWindow", "PCA", None))
-        self.actionICA.setText(_translate("MainWindow", "ICA", None))
-        self.actionK_Means.setText(_translate("MainWindow", "K-Means", None))
-        self.actionHierarchical.setText(_translate("MainWindow", "Hierarchical", None))
-        self.actionOthers.setText(_translate("MainWindow", "Others...", None))
-        self.actionOthers_2.setText(_translate("MainWindow", "Others...", None))
-        self.actionOthers_3.setText(_translate("MainWindow", "Others...", None))
-        self.actionPLS.setText(_translate("MainWindow", "PLS", None))
-        self.actionSM_PLS.setText(_translate("MainWindow", "SM-PLS", None))
-        self.actionICA_Regression.setText(_translate("MainWindow", "ICA Regression", None))
-        self.actionGaussian_Process.setText(_translate("MainWindow", "Gaussian Process", None))
-        self.actionMLP.setText(_translate("MainWindow", "MLP", None))
-        self.actionSVM.setText(_translate("MainWindow", "SVM", None))
-        self.actionOthers_4.setText(_translate("MainWindow", "Others...", None))
-        self.actionOthers_5.setText(_translate("MainWindow", "Others...", None))
-        self.actionIndex.setText(_translate("MainWindow", "Index", None))
-        self.actionContent_2.setText(_translate("MainWindow", "Content", None))
-        self.actionAbout.setText(_translate("MainWindow", "About...", None))
-        self.actionAbout_QtCreator.setText(_translate("MainWindow", "About QtCreator...", None))
-        self.actionExit.setText(_translate("MainWindow", "Exit", None))
-        self.actionNormalization.setText(_translate("MainWindow", "Normalization", None))
-        self.actionElement_Name_Setup.setText(_translate("MainWindow", "Element Name Setup", None))
-        self.actionComposition_Ranges.setText(_translate("MainWindow", "Composition Ranges", None))
-        self.actionCreate_Models.setText(_translate("MainWindow", "Create Models", None))
-
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def compranges(self, MainWindow):
         self.CompRanges = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -558,6 +561,13 @@ class pysat_ui(object):
         QtCore.QObject.connect(self.comp_range_6, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_34.setNum)
         QtCore.QObject.connect(self.comp_range_7, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_36.setNum)
         QtCore.QObject.connect(self.comp_range_8, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_35.setNum)
+        self.pushButtonCompRanges = QtGui.QPushButton(self.CompRanges)
+        self.set_module_button(self.verticalLayout_7, self.pushButtonCompRanges)
+        # pysat.set_compranges([[-20, 50], [30, 70], [60, 100], [0, 120]])
+        self.pushButtonCompRanges.clicked.connect(lambda: self.pysat.compranges([self.comp_range, self.comp_range_2],
+                                                                                [self.comp_range_3, self.comp_range_4],
+                                                                                [self.comp_range_5, self.comp_range_6],
+                                                                                [self.comp_range_7, self.comp_range_8]))
 
     def createmodels(self, MainWindow):
         self.CreateModels = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -680,6 +690,8 @@ class pysat_ui(object):
         QtCore.QObject.connect(self.create_model_spin, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_77.setNum)
         QtCore.QObject.connect(self.create_model_spin_3, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_84.setNum)
         QtCore.QObject.connect(self.create_model_spin_4, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.label_89.setNum)
+        self.pushButtonCreateModels = QtGui.QPushButton(self.CreateModels)
+        self.set_module_button(self.verticalLayout_17, self.pushButtonCreateModels)
 
     def files(self, MainWindow):
         self.Files = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -753,9 +765,11 @@ class pysat_ui(object):
         self.unknownDataButton.setText(_translate("MainWindow", "...", None))
         self.fullDataBaseButton.setText(_translate("MainWindow", "...", None))
         self.outPutLocationButton.setText(_translate("MainWindow", "...", None))
+        self.pushButtonFiles = QtGui.QPushButton(self.Files)
+        self.set_module_button(self.verticalLayout_4, self.pushButtonFiles)
+
         try:
             #TODO you will need to move this maskfilebutton function to the maskfile module
-            #self.maskFileButton.clicked.connect(lambda: pysat_ui.on_maskFile_clicked(self))
             self.unknownDataButton.clicked.connect(lambda: pysat_ui.on_uknownDataButton_clicked(self))
             self.fullDataBaseButton.clicked.connect(lambda: pysat_ui.on_fullDataBaseButton_clicked(self))
             self.outPutLocationButton.clicked.connect(lambda: pysat_ui.on_outPutLocationButton_clicked(self))
@@ -804,6 +818,8 @@ class pysat_ui(object):
         self.CrossValidation.setTitle(_translate("MainWindow", "Setup", None))
         self.label_14.setText(_translate("MainWindow", "Element Name", None))
         self.label_15.setText(_translate("MainWindow", "nfolds_test", None))
+        self.pushButtonCrossValid = QtGui.QPushButton(self.CrossValidation)
+        self.set_module_button(self.CrossValid, self.pushButtonCrossValid)
 
     def std_norm(self, MainWindow):
         self.Normalization = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -829,6 +845,8 @@ class pysat_ui(object):
         self.Normalization.setTitle(_translate("MainWindow", "Normalization", None))
         self.NormValuebutton.setText(_translate("MainWindow", "Add Value", None))
         self.NormValuebutton.clicked.connect(lambda: pysat_ui.val_norm(self, MainWindow, self.count))
+        self.pushButtonNormalization = QtGui.QPushButton(self.Normalization)
+        self.set_module_button(self.verticalLayout, self.pushButtonNormalization)
 
     def val_norm(self, MainWindow, count):
         # an array holds a set of spinbox objects
@@ -897,6 +915,17 @@ class pysat_ui(object):
 
     ####These functions below are private and add functionality to the UI
 
+    def set_module_button(self, QVBoxLayout, PushButtonName):
+        self.horizontalLayout = QtGui.QHBoxLayout()
+        self.horizontalLayout.setMargin(11)
+        self.horizontalLayout.setSpacing(6)
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem)
+        PushButtonName.setObjectName(_fromUtf8("run_module_files"))
+        self.horizontalLayout.addWidget(PushButtonName)
+        QVBoxLayout.addLayout(self.horizontalLayout)
+        PushButtonName.setText(_translate("MainWindow", "Run Module", None))
+
     def set_norm_array(self, spin_box_text, index):
         self.spin_array[index] = spin_box_text
         for i in range(0, self.count*2):
@@ -932,6 +961,7 @@ class pysat_ui(object):
 
     def on_okButton_clicked(self):
         #TODO Create functionality for all modules
+        #TODO Create a list of functions that call each function that is loaded into the list.
         print(self.lineEdit_2.text())
         print(self.lineEdit_3.text())
         print(self.lineEdit_4.text())
