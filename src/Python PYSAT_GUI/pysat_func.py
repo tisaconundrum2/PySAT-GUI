@@ -1,5 +1,5 @@
 from pysat.spectral.spectral_data import spectral_data
-from pysat.regression.pls_sm import pls_sm
+from pysat.regression.sm import sm
 import pandas as pd
 
 # This class should be worked on and saved for the future.
@@ -61,14 +61,14 @@ class pysat_func(object):
         data = pd.read_csv(data_base, header=[0, 1])
         return spectral_data(data)
 
-    def set_interp(self, data_value_1, data_value_2):
+    def set_interp(self, data_1, data_2):
         """
         Usage:
         set_interp(u_data, k_data)
         Technically speaking, the values can be set up any way you want.
         The only concern in the typing. Make sure both values are of type spectral_data
-        :param data_value_1
-        :param data_value_2
+        :param data_1
+        :param data_1
         :return:
         """
         data_value_1.interp(data_value_2.df['wv1'].columns)
