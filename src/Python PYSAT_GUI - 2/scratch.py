@@ -4,10 +4,10 @@ from pysat_function import pysat_func
 pysat = pysat_func()
 
 #get all the files
-pysat.set_file_outpath(r'C:\Users\nfinch\Desktop\Output')
-pysat.set_file_knowndatacsv(r'C:\Users\nfinch\Documents\GitHub\PySAT\src\Python PYSAT_GUI\full_db_mars_corrected_dopedTiO2_pandas_format.csv')
-pysat.set_file_unknowndatacsv(r'C:\Users\nfinch\Documents\GitHub\PySAT\src\Python PYSAT_GUI\lab_data_averages_pandas_format.csv')
-pysat.set_file_maskfile(r'C:\Users\nfinch\Documents\GitHub\PySAT\src\Python PYSAT_GUI\mask_minors_noise.csv')
+pysat.set_file_outpath(r"C:\Users\rbanderson\Documents\Projects\LIBS PDART\Output")
+pysat.set_file_knowndatacsv(r"C:\Users\rbanderson\Documents\Projects\LIBS PDART\Sample_Data\full_db_mars_corrected_dopedTiO2_pandas_format.csv")
+pysat.set_file_unknowndatacsv(r"C:\Users\rbanderson\Documents\Projects\LIBS PDART\Sample_Data\lab_data_averages_pandas_format.csv")
+pysat.set_file_maskfile(r"C:\Users\rbanderson\Documents\Projects\LIBS PDART\Input\mask_minors_noise.csv")
 
 pysat.get_spectra()
 
