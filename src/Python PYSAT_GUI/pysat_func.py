@@ -51,12 +51,12 @@ class pysat_func(object):
 
     def set_spectral(self, data_base):
         """
-        The user will choose from either database of unknowndatacsv or db
+        The user will choose from either database of unknowndata or knowndata
         this means usage will be either:
         k_data = set_spectral(pysat.get_file_known_data())
         u_data = set_spectral(pysat.get_file_unknown_data())
         :param data_base:
-        :return:
+        :return spectra:
         """
         data = pd.read_csv(data_base, header=[0, 1])
         return spectral_data(data)
@@ -71,7 +71,7 @@ class pysat_func(object):
         :param data_1
         :return:
         """
-        data_value_1.interp(data_value_2.df['wv1'].columns)
+        data_1.interp(data_2.df['wv1'].columns)
 
     def set_mask(self, data, maskfile):
         """
@@ -94,3 +94,11 @@ class pysat_func(object):
         :return:
         """
         data.norm(ranges)
+
+    def set_element_name(self, el):
+        """
+
+        :param el:
+        :return:
+        """
+        pass
