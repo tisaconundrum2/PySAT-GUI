@@ -52,12 +52,11 @@ class pysat_func(object):
     def set_spectral(self, data_base):
         """
         Usage:
-        k_data = set_spectral(pysat_func.get_file_known_data())
-        u_data = set_spectral(pysat_func.get_file_unknown_data())
+        k_data = pysat_func.set_spectral(pysat_func.get_file_known_data())
+        u_data = pysat_func.set_spectral(pysat_func.get_file_unknown_data())
 
         The user will choose from either database of unknowndata or knowndata
         this means usage will be either:
-
         :param data_base:
         :return spectra:
         """
@@ -67,12 +66,12 @@ class pysat_func(object):
     def set_interp(self, data_1, data_2):
         """
         Usage:
-        set_interp(u_data, k_data)
+        pysat_func.set_interp(u_data, k_data)
+        pysat_func.set_interp(k_data, u_data)
 
-        Technically speaking, the values can be set up any way you want.
-        The only concern in the typing. Make sure both values are of type spectral_data
+        Interpolate data. Make sure both values are of type spectral_data
         :param data_1
-        :param data_1
+        :param data_2
         :return:
         """
         data_1.interp(data_2.df['wv1'].columns)
@@ -80,8 +79,8 @@ class pysat_func(object):
     def set_mask(self, data, maskfile):
         """
         Usage:
-        set_mask(pysat_func.get_known_data(), pysat_func.get_maskfile())
-        set_mask(pysat_func.get_unknown_data(), pysat_func.get_maskfile())
+        pysat_func.set_mask(pysat_func.get_known_data(), pysat_func.get_maskfile())
+        pysat_func.set_mask(pysat_func.get_unknown_data(), pysat_func.get_maskfile())
 
         :param data:
         :param maskfile:
@@ -103,8 +102,12 @@ class pysat_func(object):
 
     def set_element_name(self, el):
         """
+        Usage:
+        pysat_func.set_element_name("SiO2")
 
         :param el:
         :return:
         """
         pass
+
+    
