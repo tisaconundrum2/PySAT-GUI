@@ -109,4 +109,3 @@ class pysat_func(object):
         :return:
         """
         pass
-    
