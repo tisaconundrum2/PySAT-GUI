@@ -69,7 +69,8 @@ class pysat_func(object):
         pysat_func.set_interp(u_data, k_data)
         pysat_func.set_interp(k_data, u_data)
 
-        Interpolate data. Make sure both values are of type spectral_data
+        Must be of type spectral
+        Interpolate data.
         :param data_1
         :param data_2
         :return:
@@ -86,13 +87,14 @@ class pysat_func(object):
         :param maskfile:
         :return:
         """
-        pass
+        data.mask(self.maskfile)
+        return data
 
     def get_range(self, data, ranges):
         """
         Usage:
-        pysat_func.get_ranges(k_data, [(0, 1000)])
-        pysat_func.get_ranges(u_data, [(0, 1000)])
+        pysat_func.get_ranges(k_data, [0, 1000])
+        pysat_func.get_ranges(u_data, [0, 1000])
 
         :param data:
         :param ranges:
@@ -108,4 +110,7 @@ class pysat_func(object):
         :param el:
         :return:
         """
-        pass
+        self.el = el
+        print("{}".format(el))
+
+    
