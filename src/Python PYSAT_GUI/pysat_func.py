@@ -113,3 +113,5 @@ class pysat_func(object):
         self.el = el
         print("{}".format(el))
 
+    def stratify_folds(self, data):
+            
