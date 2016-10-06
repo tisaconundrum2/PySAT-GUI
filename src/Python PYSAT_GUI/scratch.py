@@ -1,6 +1,8 @@
 from pysat_function import pysat_func
 
 # Initialize pysat for use
+
+
 pysat = pysat_func()
 
 #get all the files
