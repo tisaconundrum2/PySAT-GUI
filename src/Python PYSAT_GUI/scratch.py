@@ -29,3 +29,5 @@ pysat.get_plots()
 
 for func in f:
    func()
+
+#All tests failed
