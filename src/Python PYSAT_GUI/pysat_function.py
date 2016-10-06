@@ -4,17 +4,13 @@ import pandas as pd
 
 class pysat_func():
 # Thus make sure that you have if's for all instances in functions where unknown_data doesn't exist.
-
-
     def set_file_outpath(self, outpath):
         self.outpath = outpath
         print("Output path folder has been set")
-        
 
     def set_file_knowndatacsv(self, db):
         self.db = db
         print("Known data file has been added")
-
 
     def set_file_unknowndatacsv(self, unknowndatacsv):
         self.unknowndatacsv = unknowndatacsv
@@ -25,7 +21,6 @@ class pysat_func():
         print("Masking file has been added")
 
     def get_spectra(self):
-
         print("Running Spectral on data set")
         self.data = pd.read_csv(self.db, header=[0, 1])
         self.data = spectral_data(self.data)
@@ -35,7 +30,6 @@ class pysat_func():
 
     def set_interp(self):
         # TODO interp should be it's ownn function
-
         self.unknown_data.interp(self.data.df['wvl'].columns)
         print("Interpolation has been applied")
 
@@ -46,47 +40,38 @@ class pysat_func():
 
     def get_ranges(self, ranges):
         print("{}".format(ranges))
-
         self.data.norm(ranges)
         self.unknown_data.norm(ranges)
         print("{}".format(ranges))
         print("Ranges have been applied")
 
-
     def set_element_name(self, el):
-
         self.el = el
         print("{}".format(el))
         print("Element name for y variable has been set")
 
     def set_nfolds(self, nfolds_test):
-
         self.nfolds_test = nfolds_test
         print("{}".format(nfolds_test))
         print("N folds has been applied")
 
     def set_testfold(self, testfold_test):
-
         self.testfold_test = testfold_test
         print("{}".format(testfold_test))
         print("Test folds has been applied")
 
     def get_nfolds(self):
-
         return self.nfolds_test
 
     def get_testfold(self):
-
         return self.testfold_test
 
     def set_compranges(self, compranges):
-
         self.compranges = compranges
         print("{}".format(compranges))
         print("Submodel ranges has been applied")
 
     def set_stratified(self):
-
         print("Beginning stratification of data")
         self.data.stratified_folds(nfolds=self.nfolds_test, sortby=('meta', self.el))
         self.data1_train = self.data.rows_match(('meta', 'Folds'), [self.testfold_test], invert=True)
