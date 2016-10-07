@@ -29,6 +29,7 @@ class pysat_ui(object):
         self.norm_spinBox_ = [None]*1024
         self.spin_array = [None]*1024
         pysat_ui.count = 1
+        self.list_of_functions = []
 
     def mainframe(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
@@ -437,7 +438,7 @@ class pysat_ui(object):
         self.lineEdit_2.setText(_translate("MainWindow", "*.csv", None))
         self.unknownDataButton.setText(_translate("MainWindow", "...", None))
         try:
-            self.unknownDataButton.clicked.connect(lambda: pysat_ui.on_uknownDataButton_clicked(self, self.lineEdit_2))
+            self.unknownDataButton.clicked.connect(lambda: self.list_of_functions.append(pysat_ui.on_uknownDataButton_clicked(self, self.lineEdit_2)))
         except:
             pass
 
