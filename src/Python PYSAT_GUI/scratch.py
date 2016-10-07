@@ -29,7 +29,3 @@ pysat.get_plots()
 
 for f in fobj:
     f
-#
-#   File "C:/Users/nfinch/Documents/GitHub/PySAT/src/Python PYSAT_GUI/scratch.py", line 31, in <module>
-#     f(fobj)
-# TypeError: 'NoneType' object is not callable
