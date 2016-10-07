@@ -1370,6 +1370,7 @@ class pysat_ui(object):
 #### Ok Button Clicked
 
     def on_okButton_clicked(self):
+        # TODO this will be a list of functions that will be called when the OK button is triggered
         self.pysat_fun.set_sm()
         self.pysat_fun.get_sm_fit()
         self.pysat_fun.get_plots()
