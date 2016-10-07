@@ -6,7 +6,7 @@ from pysat_function import pysat_func
 pysat = pysat_func()
 
 #get all the files
-fobj = [pysat.set_file_outpath(r'C:\Users\nfinch\Desktop\Output'),
+fun_list = [pysat.set_file_outpath(r'C:\Users\nfinch\Desktop\Output'),
 pysat.set_file_knowndatacsv(r'C:\Users\nfinch\Desktop\full_db_mars_corrected_dopedTiO2_pandas_format.csv'),
 pysat.set_file_unknowndatacsv(r'C:\Users\nfinch\Desktop\lab_data_averages_pandas_format.csv'),
 pysat.set_file_maskfile(r'C:\Users\nfinch\Desktop\mask_minors_noise.csv'),
@@ -27,5 +27,5 @@ pysat.get_sm_fit(),
 pysat.get_plots()
 ]
 
-for f in fobj:
+for f in fun_list:
     f
