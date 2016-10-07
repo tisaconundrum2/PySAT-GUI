@@ -1340,7 +1340,7 @@ class pysat_ui(object):
     def on_maskFile_clicked(self, lineEdit):
         filename = QFileDialog.getOpenFileName(None, "Open Mask File", '.', "(*.csv)")
         lineEdit.setText(filename)
-        self.pysat_fun.set_file_maskfile(filename)
+        self.list_of_functions.append(self.pysat_fun.set_file_maskfile(filename))
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")
         self.pysat_fun.set_mask()
@@ -1348,7 +1348,7 @@ class pysat_ui(object):
     def on_uknownDataButton_clicked(self, lineEdit):
         filename = QFileDialog.getOpenFileName(None, "Open Uknown Data File", '.', "(*.csv)")
         lineEdit.setText(filename)
-        self.pysat_fun.set_file_unknowndatacsv(filename)
+        self.list_of_functions.append(self.pysat_fun.set_file_unknowndatacsv(filename))
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")
         self.pysat_fun.get_spectra()
@@ -1356,7 +1356,7 @@ class pysat_ui(object):
     def on_fullDataBaseButton_clicked(self, lineEdit):
         filename = QFileDialog.getOpenFileName(None, "Open Uknown Data File", '.', "(*.csv)")
         lineEdit.setText(filename)
-        self.pysat_fun.set_file_knowndatacsv(filename)
+        self.list_of_functions.append(self.pysat_fun.set_file_knowndatacsv(filename))
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")
         self.pysat_fun.get_spectra()
@@ -1364,7 +1364,7 @@ class pysat_ui(object):
     def on_outPutLocationButton_clicked(self, lineEdit):
         filename = QFileDialog.getExistingDirectory(None, "Select Output Directory", '.')
         lineEdit.setText(filename)
-        self.pysat_fun.set_file_outpath(filename)
+        self.list_of_functions.append(self.pysat_fun.set_file_outpath(filename))
         if lineEdit.text() == "":
             lineEdit.setText("*/*")
 
