@@ -5,7 +5,8 @@ from pysat_function import pysat_func
 
 pysat = pysat_func()
 
-#get all the files
+# Build was successful
+
 fun_list = []
 fun_list.append(pysat.set_file_outpath(r'C:\Users\nfinch\Desktop\Output'))
 fun_list.append(pysat.set_file_knowndatacsv(r'C:\Users\nfinch\Desktop\full_db_mars_corrected_dopedTiO2_pandas_format.csv'))
