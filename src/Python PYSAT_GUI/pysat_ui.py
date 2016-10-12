@@ -1335,7 +1335,7 @@ class pysat_ui(object):
         # TODO open file dialog
         self.filename = QFileDialog.getOpenFileName(self, "Open a Workflow File", '.', "(*.wrf)")
 
-#### Opening Files
+    #### Opening Files
 
     def on_maskFile_clicked(self, lineEdit):
         filename = QFileDialog.getOpenFileName(None, "Open Mask File", '.', "(*.csv)")
