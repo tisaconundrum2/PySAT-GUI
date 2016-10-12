@@ -29,6 +29,7 @@ class pysat_ui(object):
         self.norm_spinBox_ = [None]*1024
         self.spin_array = [None]*1024
         pysat_ui.count = 1
+        self.list_of_functions = []
 
     def mainframe(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
@@ -597,7 +598,7 @@ class pysat_ui(object):
         self.normalization_button = QtGui.QPushButton(self.Normalization)
         self.set_module_button(self.verticalLayout_27, self.normalization_button)
         try:
-            self.normalization_button.clicked.connect(lambda: self.pysat_fun.get_ranges(([(int(self.norm_spinBox_9.text()), int(self.norm_spinBox.text()))])))
+            self.normalization_button.clicked.connect(lambda: self.list_of_functions.append(lambda: self.pysat_fun.get_ranges(([(int(self.norm_spinBox_9.text()), int(self.norm_spinBox.text()))]))))
         except:
             pass
 
@@ -856,10 +857,10 @@ class pysat_ui(object):
         self.compRanges_button = QtGui.QPushButton(self.CompRanges)
         self.set_module_button(self.verticalLayout_7, self.compRanges_button)
         try:
-            self.compRanges_button.clicked.connect(lambda: self.pysat_fun.set_compranges([[int(self.comp_range.text()), int(self.comp_range_2.text())],
+            self.compRanges_button.clicked.connect(lambda: self.list_of_functions.append(lambda: self.pysat_fun.set_compranges([[int(self.comp_range.text()), int(self.comp_range_2.text())],
                                                                                           [int(self.comp_range_3.text()), int(self.comp_range_4.text())],
                                                                                           [int(self.comp_range_5.text()), int(self.comp_range_6.text())],
-                                                                                          [int(self.comp_range_7.text()), int(self.comp_range_8.text())]]))
+                                                                                          [int(self.comp_range_7.text()), int(self.comp_range_8.text())]])))
         except:
             pass
 
@@ -992,10 +993,10 @@ class pysat_ui(object):
         self.num_of_components_button = QtGui.QPushButton(self.NumberComponents)
         self.set_module_button(self.verticalLayout_17, self.num_of_components_button)
         try:
-            self.num_of_components_button.clicked.connect(lambda: self.pysat_fun.get_number_components([int(self.create_model_spin.text()),
+            self.num_of_components_button.clicked.connect(lambda: self.list_of_functions.append(lambda: self.pysat_fun.get_number_components([int(self.create_model_spin.text()),
                                                                                                          int(self.create_model_spin_2.text()),
                                                                                                          int(self.create_model_spin_3.text()),
-                                                                                                         int(self.create_model_spin_4.text())]))
+                                                                                                         int(self.create_model_spin_4.text())])))
         except:
             pass
 
@@ -1037,7 +1038,7 @@ class pysat_ui(object):
         self.y_variable_button = QtGui.QPushButton(self.y_variable)
         self.set_module_button(self.verticalLayout_25, self.y_variable_button)
         try:
-            self.y_variable_button.clicked.connect(lambda: self.pysat_fun.set_element_name(self.elementNameLine.text()))
+            self.y_variable_button.clicked.connect(lambda: self.list_of_functions.append(lambda: self.pysat_fun.set_element_name(self.elementNameLine.text())))
         except:
             pass
 
@@ -1079,7 +1080,7 @@ class pysat_ui(object):
         self.test_folds_button = QtGui.QPushButton(self.Test_Folds)
         self.set_module_button(self.verticalLayout_28, self.test_folds_button)
         try:
-            self.test_folds_button.clicked.connect(lambda: self.pysat_fun.set_testfold(int(self.test_fold_spinBox.text())))
+            self.test_folds_button.clicked.connect(lambda: self.list_of_functions.append(lambda: self.pysat_fun.set_testfold(int(self.test_fold_spinBox.text()))))
         except:
             pass
 
@@ -1121,7 +1122,7 @@ class pysat_ui(object):
         self.test_folds_button = QtGui.QPushButton(self.N_Folds)
         self.set_module_button(self.CrossValid_2, self.test_folds_button)
         try:
-            self.test_folds_button.clicked.connect(lambda: self.pysat_fun.set_nfolds(int(self.n_folds_spinBox.text())))
+            self.test_folds_button.clicked.connect(lambda: self.list_of_functions.append(lambda: self.pysat_fun.set_nfolds(int(self.n_folds_spinBox.text()))))
         except:
             pass
 
@@ -1151,7 +1152,7 @@ class pysat_ui(object):
         self.verticalLayout_8.addWidget(self.Interpolated)
         self.Interpolated.setTitle(_translate("MainWindow", "Interpolated", None))
         self.label_16.setText(_translate("MainWindow", "Interpolated unknown data to known data", None))
-        self.pysat_fun.set_interp()
+        self.list_of_functions.append(lambda: self.pysat_fun.set_interp())
 
     def masked(self, MainWindow):
         self.masked = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -1238,7 +1239,7 @@ class pysat_ui(object):
         self.verticalLayout_8.addWidget(self.stratified)
         self.stratified.setTitle(_translate("MainWindow", "Stratified", None))
         self.label_16.setText(_translate("MainWindow", "Known Data was stratified", None))
-        self.pysat_fun.set_stratified()
+        self.list_of_functions.append(lambda: self.pysat_fun.set_stratified())
 
     def train_data(self, MainWindow):
         self.train_unknown = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -1292,8 +1293,8 @@ class pysat_ui(object):
         self.verticalLayout_8.addWidget(self.train_known)
         self.train_known.setTitle(_translate("MainWindow", "Train Known Data", None))
         self.label_16.setText(_translate("MainWindow", "Training known data", None))
-        self.pysat_fun.get_train_data()
-        self.pysat_fun.get_test_data()
+        self.list_of_functions.append(lambda: self.pysat_fun.get_train_data())
+        self.list_of_functions.append(lambda: self.pysat_fun.get_test_data())
 
     ####These functions below are private and add functionality to the UI
 
@@ -1339,39 +1340,48 @@ class pysat_ui(object):
     def on_maskFile_clicked(self, lineEdit):
         filename = QFileDialog.getOpenFileName(None, "Open Mask File", '.', "(*.csv)")
         lineEdit.setText(filename)
-        self.pysat_fun.set_file_maskfile(filename)
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")
-        self.pysat_fun.set_mask()
+        else:
+            self.list_of_functions.append(lambda: self.pysat_fun.set_file_maskfile(filename))
+            self.list_of_functions.append(lambda: self.pysat_fun.set_mask())
 
     def on_uknownDataButton_clicked(self, lineEdit):
         filename = QFileDialog.getOpenFileName(None, "Open Uknown Data File", '.', "(*.csv)")
         lineEdit.setText(filename)
-        self.pysat_fun.set_file_unknowndatacsv(filename)
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")
-        self.pysat_fun.get_spectra()
+        else:
+            self.list_of_functions.append(lambda: self.pysat_fun.set_file_unknowndatacsv(filename))
+            self.list_of_functions.append(lambda: self.pysat_fun.get_spectra())
 
     def on_fullDataBaseButton_clicked(self, lineEdit):
         filename = QFileDialog.getOpenFileName(None, "Open Uknown Data File", '.', "(*.csv)")
         lineEdit.setText(filename)
-        self.pysat_fun.set_file_knowndatacsv(filename)
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")
-        self.pysat_fun.get_spectra()
+        else:
+            self.list_of_functions.append(lambda: self.pysat_fun.set_file_knowndatacsv(filename))
+            self.list_of_functions.append(lambda: self.pysat_fun.get_spectra())
 
     def on_outPutLocationButton_clicked(self, lineEdit):
         filename = QFileDialog.getExistingDirectory(None, "Select Output Directory", '.')
         lineEdit.setText(filename)
-        self.pysat_fun.set_file_outpath(filename)
         if lineEdit.text() == "":
             lineEdit.setText("*/*")
+        else:
+            self.list_of_functions.append(lambda: self.pysat_fun.set_file_outpath(filename))
 
 #### Ok Button Clicked
 
     def on_okButton_clicked(self):
-        self.pysat_fun.set_sm()
-        self.pysat_fun.get_sm_fit()
-        self.pysat_fun.get_plots()
+        # TODO this will be a list of functions that will be called when the OK button is triggered
+        self.list_of_functions.append(lambda: self.pysat_fun.set_sm())
+        self.list_of_functions.append(lambda: self.pysat_fun.get_sm_fit())
+        self.list_of_functions.append(lambda: self.pysat_fun.get_plots())
+        # Run all the functions that have been added
+        for functions in self.list_of_functions:
+            functions()
 
-####These functions allow for interactions of buttons
+
+            ####These functions allow for interactions of buttons
