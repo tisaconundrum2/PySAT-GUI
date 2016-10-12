@@ -1351,7 +1351,7 @@ class pysat_ui(object):
         self.list_of_functions.append(lambda: self.pysat_fun.set_file_unknowndatacsv(filename))
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")
-        self.pysat_fun.get_spectra()
+        self.list_of_functions.append(lambda: self.pysat_fun.get_spectra())
 
     def on_fullDataBaseButton_clicked(self, lineEdit):
         filename = QFileDialog.getOpenFileName(None, "Open Uknown Data File", '.', "(*.csv)")
@@ -1359,7 +1359,7 @@ class pysat_ui(object):
         self.list_of_functions.append(lambda: self.pysat_fun.set_file_knowndatacsv(filename))
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")
-        self.pysat_fun.get_spectra()
+        self.list_of_functions.append(lambda: self.pysat_fun.get_spectra())
 
     def on_outPutLocationButton_clicked(self, lineEdit):
         filename = QFileDialog.getExistingDirectory(None, "Select Output Directory", '.')
