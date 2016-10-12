@@ -1209,7 +1209,7 @@ class pysat_ui(object):
         self.fullDataBaseButton_4.setText(_translate("MainWindow", "...", None))
         self.label_16.setText(_translate("MainWindow", "Mask was applied to unknown and known data", None))
         try:
-            self.fullDataBaseButton_4.clicked.connect(lambda: self.list_of_functions.append(lambda: pysat_ui.on_maskFile_clicked(self, self.lineEdit_10)))
+            self.fullDataBaseButton_4.clicked.connect(lambda: pysat_ui.on_maskFile_clicked(self, self.lineEdit_10))
         except:
             pass
 
