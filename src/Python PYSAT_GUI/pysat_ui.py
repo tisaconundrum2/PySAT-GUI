@@ -1239,7 +1239,7 @@ class pysat_ui(object):
         self.verticalLayout_8.addWidget(self.stratified)
         self.stratified.setTitle(_translate("MainWindow", "Stratified", None))
         self.label_16.setText(_translate("MainWindow", "Known Data was stratified", None))
-        self.pysat_fun.set_stratified()
+        self.list_of_functions.append(lambda: self.pysat_fun.set_stratified())
 
     def train_data(self, MainWindow):
         self.train_unknown = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -1293,8 +1293,8 @@ class pysat_ui(object):
         self.verticalLayout_8.addWidget(self.train_known)
         self.train_known.setTitle(_translate("MainWindow", "Train Known Data", None))
         self.label_16.setText(_translate("MainWindow", "Training known data", None))
-        self.pysat_fun.get_train_data()
-        self.pysat_fun.get_test_data()
+        self.list_of_functions.append(lambda: self.pysat_fun.get_train_data())
+        self.list_of_functions.append(lambda: self.pysat_fun.get_test_data())
 
     ####These functions below are private and add functionality to the UI
 
