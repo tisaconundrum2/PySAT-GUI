@@ -1152,7 +1152,7 @@ class pysat_ui(object):
         self.verticalLayout_8.addWidget(self.Interpolated)
         self.Interpolated.setTitle(_translate("MainWindow", "Interpolated", None))
         self.label_16.setText(_translate("MainWindow", "Interpolated unknown data to known data", None))
-        self.pysat_fun.set_interp()
+        self.list_of_functions.append(lambda: self.pysat_fun.set_interp())
 
     def masked(self, MainWindow):
         self.masked = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
