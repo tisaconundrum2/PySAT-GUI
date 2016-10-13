@@ -5,7 +5,9 @@ import pandas as pd
 
 class pysat_func():
     # Thus make sure that you have if's for all instances in functions where unknown_data doesn't exist.
-
+    def __init__(self):
+        self.data={} #initialize with an empty dict to hold data frames
+        self.datakeys=[]
 
     def set_file_outpath(self, outpath):
         try:
@@ -35,6 +37,16 @@ class pysat_func():
         except Exception as e:
             print(e)
 
+    def get_data(self,filename,keyname):
+        try:
+            print('Loading data file: '+str(filename))
+            self.data[keyname]=spectral_data(pd.read_csv(filename,header=[0,1]))
+            self.datakeys.append(keyname)
+
+        except Exception as e:
+            print('Problem reading data: {}'.format(e))
+            
+            
     def get_spectra(self):
         try:
             print("Running Spectral on data set")
@@ -97,13 +109,22 @@ class pysat_func():
         except Exception as e:
             print(e)
 
-    def get_nfolds(self):
+    def set_nfolds(self):
         try:
             return self.nfolds_test
         except Exception as e:
             print(e)
 
-    def get_testfold(self):
+    def do_strat_folds(self,datakey=None,nfolds=None,testfold=None,colname=None):
+        self.data[datakey].stratified_folds(nfolds=nfolds,sortby=colname)
+        self.data[datakey+'-Train']=self.data[datakey].rows_match(('meta', 'Folds'), [testfold], invert=True)
+        self.data[datakey+'-Test']=self.data[datakey].rows_match(('meta', 'Folds'), [testfold])
+        print(self.data.keys())
+        print(self.data[datakey+'-Test'].df.index.shape)
+        print(self.data[datakey+'-Train'].df.index.shape)
+        
+    
+    def set_testfold(self):
         try:
             return self.testfold_test
         except Exception as e:
@@ -136,21 +157,6 @@ class pysat_func():
         except Exception as e:
             print(e)
 
-    def get_train_data(self):
-        try:
-            print("Training has begun on data")
-            self.traindata = [self.data1_train.df, self.data1_train.df, self.data1_train.df, self.data1_train.df]
-            print("Finishing up on training")
-        except Exception as e:
-            print(e)
-
-    def get_test_data(self):
-        try:
-            print("Training has begun on test set")
-            self.testdata = [self.data1_test.df, self.data1_test.df, self.data1_test.df, self.data1_test.df]
-            print("Finishing up on training")
-        except Exception as e:
-            print(e)
 
     def set_sm(self):
         self.sm = pls_sm()
