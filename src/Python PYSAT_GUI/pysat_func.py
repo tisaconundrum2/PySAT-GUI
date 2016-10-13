@@ -1,5 +1,5 @@
 from pysat.spectral.spectral_data import spectral_data
-from pysat.regression.pls_sm import pls_sm
+from pysat.regression.sm import sm
 import pandas as pd
 
 # This class should be worked on and saved for the future.
@@ -41,8 +41,8 @@ class pysat_func(object):
         return self.maskfile
 
 
-    # Actual functions that do work =========================================================
-    # Note functions double up because of known and unknown data, it is done this way because
+    # These are the functions that do the necessary work ====================================
+    # Note: functions double up because of known and unknown data, it is done this way because
     # I realized we want to keep things as private as possible between the two classes:
     # PYSAT_UI and PYSAT_FUNC
     # After working through everything, I realized doubling up on functions, is not the best
@@ -51,46 +51,68 @@ class pysat_func(object):
 
     def set_spectral(self, data_base):
         """
-        The user will choose from either database of unknowndatacsv or db
+        Usage:
+        k_data = pysat_func.set_spectral(pysat_func.get_file_known_data())
+        u_data = pysat_func.set_spectral(pysat_func.get_file_unknown_data())
+
+        The user will choose from either database of unknowndata or knowndata
         this means usage will be either:
-        k_data = set_spectral(pysat.get_file_known_data())
-        u_data = set_spectral(pysat.get_file_unknown_data())
         :param data_base:
-        :return:
+        :return spectra:
         """
         data = pd.read_csv(data_base, header=[0, 1])
         return spectral_data(data)
 
-    def set_interp(self, data_value_1, data_value_2):
+    def set_interp(self, data_1, data_2):
         """
         Usage:
-        set_interp(u_data, k_data)
-        Technically speaking, the values can be set up any way you want.
-        The only concern in the typing. Make sure both values are of type spectral_data
-        :param data_value_1
-        :param data_value_2
+        pysat_func.set_interp(u_data, k_data)
+        pysat_func.set_interp(k_data, u_data)
+
+        Must be of type spectral
+        Interpolate data.
+        :param data_1
+        :param data_2
         :return:
         """
-        data_value_1.interp(data_value_2.df['wv1'].columns)
+        data_1.interp(data_2.df['wv1'].columns)
 
     def set_mask(self, data, maskfile):
         """
         Usage:
-        set_mask(pysat.get_known_data(), pysat.get_maskfile())
-        set_mask(pysat.get_unknown_data(), pysat.get_maskfile())
+        pysat_func.set_mask(pysat_func.get_known_data(), pysat_func.get_maskfile())
+        pysat_func.set_mask(pysat_func.get_unknown_data(), pysat_func.get_maskfile())
+
         :param data:
         :param maskfile:
         :return:
         """
-        pass
+        data.mask(self.maskfile)
+        return data
 
     def get_range(self, data, ranges):
         """
         Usage:
-        pysat.get_ranges(k_data, [(0, 1000)])
-        pysat.get_ranges(u_data, [(0, 1000)])
+        pysat_func.get_ranges(k_data, [0, 1000])
+        pysat_func.get_ranges(u_data, [0, 1000])
+
         :param data:
         :param ranges:
         :return:
         """
         data.norm(ranges)
+
+    def set_element_name(self, el):
+        """
+        Usage:
+        pysat_func.set_element_name("SiO2")
+
+        :param el:
+        :return:
+        """
+        self.el = el
+        print("{}".format(el))
+
+    def stratify_folds(self, data):
+        pass
+
