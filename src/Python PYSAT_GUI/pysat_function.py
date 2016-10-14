@@ -19,14 +19,13 @@ class pysat_func():
             self.outpath = outpath
             print("Output path folder has been set")
         except Exception as e:
-            print(e)
-
+            error_print(e)
     def set_file_maskfile(self, maskfile):
         try:
             self.maskfile = maskfile
             print("Masking file has been added")
         except Exception as e:
-            print(e)
+            error_print(e)
 
     def get_data(self,filename,keyname):
         try:
@@ -35,7 +34,7 @@ class pysat_func():
             self.datakeys.append(keyname)
 
         except Exception as e:
-            print('Problem reading data: {}'.format(e))
+            error_print('Problem reading data: {}'.format(e))
             
     """
     Getter and Setter functions
@@ -49,7 +48,7 @@ class pysat_func():
             self.unknown_data = spectral_data(self.unknown_data)
             print("Spectral analysis has completed")
         except Exception as e:
-            print("I am missing some files please fix: {}".format(e))
+            error_print("I am missing some files please fix: {}".format(e))
 
     def set_interp(self):
         # TODO interp should be it's ownn function
@@ -57,7 +56,7 @@ class pysat_func():
             self.unknown_data.interp(self.data.df['wvl'].columns)
             print("Interpolation has been applied")
         except Exception as e:
-            print(e)
+            error_print(e)
 
     def set_mask(self):
         try:
@@ -65,7 +64,7 @@ class pysat_func():
             self.unknown_data.mask(self.maskfile)
             print("Masking has been applied")
         except Exception as e:
-            print(e)
+            error_print(e)
 
     def get_ranges(self, ranges):
         print("{}".format(ranges))
@@ -75,7 +74,7 @@ class pysat_func():
             print("{}".format(ranges))
             print("Ranges have been applied")
         except Exception as e:
-            print(e)
+            error_print(e)
 
     def set_element_name(self, el):
         try:
@@ -83,7 +82,7 @@ class pysat_func():
             print("{}".format(el))
             print("Element name for y variable has been set")
         except Exception as e:
-            print(e)
+            error_print(e)
 
     def set_nfolds(self, nfolds_test):
         try:
@@ -91,7 +90,7 @@ class pysat_func():
             print("{}".format(nfolds_test))
             print("N folds has been applied")
         except Exception as e:
-            print(e)
+            error_print(e)
 
     def set_testfold(self, testfold_test):
         try:
@@ -99,13 +98,13 @@ class pysat_func():
             print("{}".format(testfold_test))
             print("Test folds has been applied")
         except Exception as e:
-            print(e)
+            error_print(e)
 
     def set_nfolds(self):
         try:
             return self.nfolds_test
         except Exception as e:
-            print(e)
+            error_print(e)
 
     def do_strat_folds(self,datakey=None,nfolds=None,testfold=None,colname=None):
         self.data[datakey].stratified_folds(nfolds=nfolds,sortby=colname)
@@ -120,7 +119,7 @@ class pysat_func():
         try:
             return self.testfold_test
         except Exception as e:
-            print(e)
+            error_print(e)
 
     def set_compranges(self, compranges):
         try:
@@ -128,7 +127,7 @@ class pysat_func():
             print("{}".format(compranges))
             print("Submodel ranges has been applied")
         except Exception as e:
-            print(e)
+            error_print(e)
 
     def set_stratified(self):
         try:
@@ -138,7 +137,7 @@ class pysat_func():
             self.data1_test = self.data.rows_match(('meta', 'Folds'), [self.testfold_test])
             print("Finishing up on stratification")
         except Exception as e:
-            print(e)
+            error_print(e)
 
     def get_number_components(self, ncs):
         # ncs = [7, 7, 5, 9]
@@ -147,7 +146,7 @@ class pysat_func():
             print("{}".format(ncs))
             print("Applying components")
         except Exception as e:
-            print(e)
+            error_print(e)
 
 
     def set_sm(self):
@@ -173,7 +172,7 @@ class pysat_func():
         print("All finished")
 
 
-def print(self, message):
+def error_print(message):
     """
     Warning Message Box
     """
@@ -181,3 +180,5 @@ def print(self, message):
     msg.setIcon(QMessageBox.Warning)
     msg.setText(message)
     msg.setStandardButtons(QMessageBox.Ok)
+    msg.exec_()
+
