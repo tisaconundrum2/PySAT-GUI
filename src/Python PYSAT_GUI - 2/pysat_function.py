@@ -47,16 +47,16 @@ class pysat_func():
             print('Problem reading data: {}'.format(e))
             
             
-    def get_spectra(self):
-        try:
-            print("Running Spectral on data set")
-            self.data = pd.read_csv(self.db, header=[0, 1])
-            self.data = spectral_data(self.data)
-            self.unknown_data = pd.read_csv(self.unknowndatacsv, header=[0, 1])
-            self.unknown_data = spectral_data(self.unknown_data)
-            print("Spectral analysis has completed")
-        except Exception as e:
-            print("I am missing some files please fix: {}".format(e))
+#    def get_spectra(self):
+#        try:
+#            print("Running Spectral on data set")
+#            self.data = pd.read_csv(self.db, header=[0, 1])
+#            self.data = spectral_data(self.data)
+#            self.unknown_data = pd.read_csv(self.unknowndatacsv, header=[0, 1])
+#            self.unknown_data = spectral_data(self.unknown_data)
+#            print("Spectral analysis has completed")
+#        except Exception as e:
+#            print("I am missing some files please fix: {}".format(e))
 
     def set_interp(self):
         # TODO interp should be it's ownn function
@@ -109,11 +109,11 @@ class pysat_func():
         except Exception as e:
             print(e)
 
-    def set_nfolds(self):
-        try:
-            return self.nfolds_test
-        except Exception as e:
-            print(e)
+#    def set_nfolds(self):
+#        try:
+#            return self.nfolds_test
+#        except Exception as e:
+#            print(e)
 
     def do_strat_folds(self,datakey=None,nfolds=None,testfold=None,colname=None):
         self.data[datakey].stratified_folds(nfolds=nfolds,sortby=colname)
