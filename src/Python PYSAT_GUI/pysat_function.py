@@ -1,6 +1,7 @@
 from pysat.spectral.spectral_data import spectral_data
 from pysat.regression.pls_sm import pls_sm
 import pandas as pd
+from PyQt4.QtGui import QMessageBox
 
 
 class pysat_func():
@@ -9,24 +10,14 @@ class pysat_func():
         self.data={} #initialize with an empty dict to hold data frames
         self.datakeys=[]
 
+
+    """
+    Get all files
+    """
     def set_file_outpath(self, outpath):
         try:
             self.outpath = outpath
             print("Output path folder has been set")
-        except Exception as e:
-            print(e)
-
-    def set_file_knowndatacsv(self, db):
-        try:
-            self.db = db
-            print("Known data file has been added")
-        except Exception as e:
-            print(e)
-
-    def set_file_unknowndatacsv(self, unknowndatacsv):
-        try:
-            self.unknowndatacsv = unknowndatacsv
-            print("Unknown data file has been added")
         except Exception as e:
             print(e)
 
@@ -46,7 +37,9 @@ class pysat_func():
         except Exception as e:
             print('Problem reading data: {}'.format(e))
             
-            
+    """
+    Getter and Setter functions
+    """
     def get_spectra(self):
         try:
             print("Running Spectral on data set")
@@ -83,7 +76,6 @@ class pysat_func():
             print("Ranges have been applied")
         except Exception as e:
             print(e)
-
 
     def set_element_name(self, el):
         try:
@@ -180,3 +172,12 @@ class pysat_func():
                   figpath=self.outpath)
         print("All finished")
 
+
+def print(self, message):
+    """
+    Warning Message Box
+    """
+    msg = QMessageBox()
+    msg.setIcon(QMessageBox.Warning)
+    msg.setText(message)
+    msg.setStandardButtons(QMessageBox.Ok)

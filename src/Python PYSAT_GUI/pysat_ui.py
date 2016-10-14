@@ -1312,8 +1312,6 @@ class pysat_ui(object):
         self.strat_folds_choose_data_label.setObjectName(_fromUtf8("strat_folds_choose_data_label"))
         self.strat_folds_vlayout.addWidget(self.strat_folds_choose_data_label)
         datachoices=self.pysat_fun.datakeys
-        if datachoices==[]:
-            datachoices=['No data has been loaded!']
         self.strat_folds_choose_data=make_combobox(datachoices)
         self.strat_folds_vlayout.addWidget(self.strat_folds_choose_data)
         self.strat_folds_choose_var_label = QtGui.QLabel(self.strat_folds)
@@ -1447,7 +1445,10 @@ class pysat_ui(object):
 
 def make_combobox(choices):
     combo=QtGui.QComboBox()
-   
+    if choices == []:
+        print('No data has been loaded!')
+        return
+
     for i,choice in enumerate(choices):
         combo.addItem(_fromUtf8(""))
         combo.setItemText(i,_translate('',choice,None))
