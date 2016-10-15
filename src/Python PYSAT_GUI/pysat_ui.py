@@ -1467,6 +1467,8 @@ class pysat_ui(object):
         self.msg.setIcon(QMessageBox.Information)
         self.msg.setText("Please Wait")
         self.msg.setWindowTitle("UI is Loading...")
+        self.msg.setMinimumSize(630, 50)
+        self.msg.resize(630, 50)
         self.msg.show()
 
     def close_wait_box(self):
