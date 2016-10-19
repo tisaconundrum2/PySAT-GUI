@@ -21,13 +21,9 @@ except AttributeError:
 
 
 class pysat_ui(object):
-    count = 0
 
     def __init__(self):
         self.pysat_fun = pysat_func()
-        self.norm_spinBox_ = [None] * 1024
-        self.spin_array = [None] * 1024
-        pysat_ui.count = 1
 
     def mainframe(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
