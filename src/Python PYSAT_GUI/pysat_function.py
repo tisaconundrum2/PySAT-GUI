@@ -2,9 +2,10 @@ from pysat.spectral.spectral_data import spectral_data
 from pysat.regression.pls_sm import pls_sm
 import pandas as pd
 from PyQt4.QtGui import QMessageBox
+from PyQt4.QtCore import QThread
 
 
-class pysat_func():
+class pysat_func(QThread):
     # Thus make sure that you have if's for all instances in functions where unknown_data doesn't exist.
     def __init__(self):
         self.data={} #initialize with an empty dict to hold data frames
@@ -107,12 +108,16 @@ class pysat_func():
             error_print(e)
 
     def do_strat_folds(self,datakey=None,nfolds=None,testfold=None,colname=None):
-        self.data[datakey].stratified_folds(nfolds=nfolds,sortby=colname)
-        self.data[datakey+'-Train']=self.data[datakey].rows_match(('meta', 'Folds'), [testfold], invert=True)
-        self.data[datakey+'-Test']=self.data[datakey].rows_match(('meta', 'Folds'), [testfold])
-        print(self.data.keys())
-        print(self.data[datakey+'-Test'].df.index.shape)
-        print(self.data[datakey+'-Train'].df.index.shape)
+        try:
+            self.data[datakey].stratified_folds(nfolds=nfolds,sortby=colname)
+            self.data[datakey+'-Train']=self.data[datakey].rows_match(('meta', 'Folds'), [testfold], invert=True)
+            self.data[datakey+'-Test']=self.data[datakey].rows_match(('meta', 'Folds'), [testfold])
+            print(self.data.keys())
+            print(self.data[datakey+'-Test'].df.index.shape)
+            print(self.data[datakey+'-Train'].df.index.shape)
+        except Exception as e:
+            error_print(e)
+
         
     
     def set_testfold(self):

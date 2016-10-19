@@ -1,7 +1,6 @@
 import sys
 from PyQt4 import QtCore, QtGui
-from PyQt4.QtGui import QFileDialog
-from PyQt4.QtGui import QMessageBox
+from PyQt4.QtGui import *
 from pysat_function import pysat_func
 
 try:
@@ -1317,6 +1316,9 @@ class pysat_ui(object):
         self.strat_folds_choose_data_label.setObjectName(_fromUtf8("strat_folds_choose_data_label"))
         self.strat_folds_vlayout.addWidget(self.strat_folds_choose_data_label)
         datachoices = self.pysat_fun.datakeys
+        if datachoices == []:
+            print('No data has been loaded!')
+
         self.strat_folds_choose_data = make_combobox(datachoices)
         self.strat_folds_vlayout.addWidget(self.strat_folds_choose_data)
         self.strat_folds_choose_var_label = QtGui.QLabel(self.strat_folds)
@@ -1463,24 +1465,16 @@ class pysat_ui(object):
     """
 
     def open_wait_box(self):
-        self.msg = QMessageBox()
-        self.msg.setIcon(QMessageBox.Information)
-        self.msg.setText("Please Wait")
-        self.msg.setWindowTitle("UI is Loading...")
-        self.msg.setMinimumSize(630, 50)
-        self.msg.resize(630, 50)
-        self.msg.show()
+        self.splash_pix = QPixmap('27-512.png')
+        self.splash = QSplashScreen(self.splash_pix, QtCore.Qt.WindowStaysOnTopHint)
+        self.splash.show()
 
     def close_wait_box(self):
-        self.msg.hide()
+        self.splash.close()
 
 
 def make_combobox(choices):
     combo = QtGui.QComboBox()
-    if choices == []:
-        print('No data has been loaded!')
-        return
-
     for i, choice in enumerate(choices):
         combo.addItem(_fromUtf8(""))
         combo.setItemText(i, _translate('', choice, None))
