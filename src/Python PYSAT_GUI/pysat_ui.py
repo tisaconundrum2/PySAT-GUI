@@ -27,6 +27,8 @@ class pysat_ui(object):
         self.pysat_fun = pysat_func()
         self.norm_spinBox_ = [None] * 1024
         self.spin_array = [None] * 1024
+        self.addFunc = []
+
         pysat_ui.count = 1
 
     def mainframe(self, MainWindow):
@@ -374,10 +376,12 @@ class pysat_ui(object):
         self.okButton.setText(_translate("MainWindow", "OK", None))
         try:
             self.okButton.clicked.connect(lambda: pysat_ui.on_okButton_clicked(self))
+
         except:
             pass
 
     def unknown_data(self, MainWindow):
+        self.addFunc.append(lambda: pysat_ui.on_getDataButton_clicked())
         self.unknownData = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -424,8 +428,7 @@ class pysat_ui(object):
         self.lineEdit_2.setText(_translate("MainWindow", "*.csv", None))
         self.unknownDataButton.setText(_translate("MainWindow", "...", None))
         try:
-            self.unknownDataButton.clicked.connect(
-                lambda: pysat_ui.on_getDataButton_clicked(self, self.lineEdit_2, 'Unknown Data'))
+            self.unknownDataButton.clicked.connect(lambda: self.addPara.append(self.lineEdit_2, 'Unknown Data')))
         except:
             pass
 
@@ -1443,6 +1446,9 @@ class pysat_ui(object):
     """
 
     def on_okButton_clicked(self):
+        for i in range(10):
+            self.addFunc[i]
+            self.addParam[i]]
         self.pysat_fun.set_sm()
         self.pysat_fun.get_sm_fit()
         self.pysat_fun.get_plots()
