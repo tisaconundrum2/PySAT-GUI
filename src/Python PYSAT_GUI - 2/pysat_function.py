@@ -1,5 +1,6 @@
 from pysat.spectral.spectral_data import spectral_data
-from pysat.regression.pls_sm import pls_sm
+from pysat.regression import regression
+from pysat.plotting.plots import scatterplot
 import pandas as pd
 
 
@@ -8,6 +9,9 @@ class pysat_func():
     def __init__(self):
         self.data={} #initialize with an empty dict to hold data frames
         self.datakeys=[]
+        self.models={}
+        self.modelkeys=[]
+        
 
     def set_file_outpath(self, outpath):
         try:
@@ -66,21 +70,35 @@ class pysat_func():
         except Exception as e:
             print(e)
 
-    def set_mask(self):
+    def do_mask(self,datakey,maskfile):
+        self.maskfile=maskfile        
         try:
-            self.data.mask(self.maskfile)
-            self.unknown_data.mask(self.maskfile)
-            print("Masking has been applied")
+            self.data[datakey].mask(maskfile)
+            print("Mask applied")
         except Exception as e:
             print(e)
-
-    def get_ranges(self, ranges):
+            
+    def do_norm(self,datakey, ranges):
         print("{}".format(ranges))
         try:
-            self.data.norm(ranges)
-            self.unknown_data.norm(ranges)
-            print("{}".format(ranges))
-            print("Ranges have been applied")
+            self.data[datakey].norm(ranges)
+            print("Normalization has been applied to the ranges: "+str(ranges))
+        except Exception as e:
+            print(e)
+            
+    def do_regression_train(self,datakey,xvars,yvars,method,params,ransacparams):
+        try:
+            self.models[method]=regression.regression([method],[params],i=0,ransacparams=[ransacparams])
+            self.modelkeys.append(method)
+            self.models[method].fit(self.data[datakey].df[xvars],self.data[datakey].df[yvars])
+            self.predictname=('meta',method+'_prediction')
+        except Exception as e:
+            print(e)
+            
+    def do_regression_predict(self,datakey,modelkey,xvars):
+        try:
+            prediction=self.models[modelkey].predict(self.data[datakey].df[xvars])
+            self.data[datakey].df[self.predictname]=prediction
         except Exception as e:
             print(e)
 
@@ -115,7 +133,7 @@ class pysat_func():
 #        except Exception as e:
 #            print(e)
 
-    def do_strat_folds(self,datakey=None,nfolds=None,testfold=None,colname=None):
+    def do_strat_folds(self,datakey,nfolds,testfold,colname):
         self.data[datakey].stratified_folds(nfolds=nfolds,sortby=colname)
         self.data[datakey+'-Train']=self.data[datakey].rows_match(('meta', 'Folds'), [testfold], invert=True)
         self.data[datakey+'-Test']=self.data[datakey].rows_match(('meta', 'Folds'), [testfold])
@@ -170,6 +188,13 @@ class pysat_func():
         self.blended_test = self.sm.do_blend(self.predictions_test)
         print("Finishing up...")
 
+    def do_scatterplot(self,datakey,xvar,yvar,figname,xrange=None,yrange=None,xtitle='Reference (wt.%)',ytitle='Prediction (wt.%)',title=None,
+                lbls=None,one_to_one=False,dpi=1000,colors=None,annot_mask=None,alpha=0.4,cmap=None,colortitle=''):
+        x=[self.data[datakey].df[xvar]]
+        y=[self.data[datakey].df[yvar]]          
+        scatterplot(x,y,self.outpath,figname,xrange=xrange,yrange=yrange,xtitle=xtitle,ytitle=ytitle,title=title,
+                lbls=lbls,one_to_one=one_to_one,dpi=dpi,colors=colors,annot_mask=annot_mask,alpha=alpha,cmap=cmap,colortitle=colortitle)
+        
     def get_plots(self):
         print("Now outputting plots to output folder")
         self.sm.final(self.testdata[0]['meta'][self.el],
