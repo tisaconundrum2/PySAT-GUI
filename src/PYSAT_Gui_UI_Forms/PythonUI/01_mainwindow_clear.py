@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Documents\GitHub\PySAT\src\PYSAT_Gui_UI_Forms\01_mainwindow_clear.ui'
+# Form implementation generated from reading ui file '01_mainwindow_clear.ui'
 #
 # Created by: PyQt4 UI code generator 4.11.4
 #
@@ -36,7 +36,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName(_fromUtf8("scrollArea"))
         self.scrollAreaWidgetContents_2 = QtGui.QWidget()
-        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 561, 721))
+        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 557, 695))
         font = QtGui.QFont()
         font.setPointSize(8)
         self.scrollAreaWidgetContents_2.setFont(font)
@@ -83,7 +83,7 @@ class Ui_MainWindow(object):
         self.statusBar.setObjectName(_fromUtf8("statusBar"))
         MainWindow.setStatusBar(self.statusBar)
         self.menuBar = QtGui.QMenuBar(MainWindow)
-        self.menuBar.setGeometry(QtCore.QRect(0, 0, 581, 21))
+        self.menuBar.setGeometry(QtCore.QRect(0, 0, 581, 26))
         self.menuBar.setObjectName(_fromUtf8("menuBar"))
         self.menuFile = QtGui.QMenu(self.menuBar)
         self.menuFile.setObjectName(_fromUtf8("menuFile"))
@@ -224,6 +224,10 @@ class Ui_MainWindow(object):
         self.actionCreate_N_Folds.setObjectName(_fromUtf8("actionCreate_N_Folds"))
         self.actionCreate_Test_Folds = QtGui.QAction(MainWindow)
         self.actionCreate_Test_Folds.setObjectName(_fromUtf8("actionCreate_Test_Folds"))
+        self.actionStratified_Folds = QtGui.QAction(MainWindow)
+        self.actionStratified_Folds.setObjectName(_fromUtf8("actionStratified_Folds"))
+        self.actionTrain_Submodels = QtGui.QAction(MainWindow)
+        self.actionTrain_Submodels.setObjectName(_fromUtf8("actionTrain_Submodels"))
         self.menuFile.addAction(self.actionLoad_Refence_Data)
         self.menuFile.addAction(self.actionLoad_Unknown_Data)
         self.menuFile.addAction(self.actionSet_output_location)
@@ -258,11 +262,11 @@ class Ui_MainWindow(object):
         self.menuPreprocessing.addAction(self.menuCalibration_Transfer.menuAction())
         self.menuPreprocessing.addAction(self.actionICA_2)
         self.menuPreprocessing.addAction(self.actionPCA_2)
+        self.menuPreprocessing.addAction(self.actionStratified_Folds)
         self.menuRegression.addAction(self.actionCross_Validation)
         self.menuRegression.addAction(self.actionTrain)
+        self.menuRegression.addAction(self.actionTrain_Submodels)
         self.menuRegression.addAction(self.actionPredict)
-        self.menuRegression.addAction(self.actionCreate_N_Folds)
-        self.menuRegression.addAction(self.actionCreate_Test_Folds)
         self.menuHelp.addAction(self.actionIndex)
         self.menuHelp.addAction(self.actionContent_2)
         self.menuHelp.addSeparator()
@@ -359,4 +363,16 @@ class Ui_MainWindow(object):
         self.actionSet_output_location.setText(_translate("MainWindow", "Output Location", None))
         self.actionCreate_N_Folds.setText(_translate("MainWindow", "Create N Folds", None))
         self.actionCreate_Test_Folds.setText(_translate("MainWindow", "Create Test Folds", None))
+        self.actionStratified_Folds.setText(_translate("MainWindow", "Stratified Folds", None))
+        self.actionTrain_Submodels.setText(_translate("MainWindow", "Train Submodels", None))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtGui.QApplication(sys.argv)
+    MainWindow = QtGui.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())
 
