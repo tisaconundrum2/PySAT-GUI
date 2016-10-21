@@ -52,6 +52,7 @@ class pysat_func(object):
             print(self.data.keys())
             print(self.data[datakey+'-Test'].df.index.shape)
             print(self.data[datakey+'-Train'].df.index.shape)
+
         except Exception as e:
             error_print(e)
 
@@ -84,16 +85,6 @@ class pysat_func(object):
 
     def set_sm(self):
         self.sm = pls_sm()
-
-
-    def get_sm_fit(self):
-        print("Beginning SM fit")
-        self.sm.fit(self.traindata, self.compranges, self.ncs, self.el, figpath=self.outpath)
-        self.predictions_train = self.sm.predict(self.traindata)
-        self.predictions_test = self.sm.predict(self.testdata)
-        self.blended_train = self.sm.do_blend(self.predictions_train, self.traindata[0]['meta'][self.el])
-        self.blended_test = self.sm.do_blend(self.predictions_test)
-        print("Finishing up...")
 
 
     def get_plots(self):
