@@ -31,16 +31,18 @@ def error_print(message):
 
 
 class pysat_ui(object):
-    count = 0
 
     def __init__(self):
         self.pysat_fun = pysat_func()
+<<<<<<< HEAD
+=======
         self.norm_spinBox_ = [None] * 1024
         self.spin_array = [None] * 1024
         self.addFunc = []
         self.addParam = []
 
         pysat_ui.count = 1
+>>>>>>> 3073526ac1100d3d0a5ddb16f329ed630910f548
 
     def mainframe(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
