@@ -3,11 +3,7 @@ from PyQt4.QtGui import QFileDialog
 import sys
 from pysat_function import pysat_func
 from functools import partial
-<<<<<<< HEAD
 from PyQt4.QtGui import QMessageBox
-
-=======
->>>>>>> bd16a834a2ef44ae9ce4acba1ddb345fe44c6d32
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
