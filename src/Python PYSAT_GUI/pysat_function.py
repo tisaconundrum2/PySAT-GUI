@@ -88,11 +88,15 @@ class pysat_func(object):
                     colortitle=colortitle)
 
 def error_print(message):
-    """
-    Warning Message Box
-    """
-    msg = QMessageBox()
-    msg.setIcon(QMessageBox.Warning)
-    msg.setText(message)
-    msg.setStandardButtons(QMessageBox.Ok)
-    msg.exec_()
+    print(message)
+    try:
+        """
+        Warning Message Box
+        """
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Warning)
+        msg.setText(message)
+        msg.setStandardButtons(QMessageBox.Ok)
+        msg.exec_()
+    except:
+        pass
