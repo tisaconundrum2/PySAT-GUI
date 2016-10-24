@@ -1,7 +1,8 @@
-import sys
 from PyQt4 import QtCore, QtGui
-from PyQt4.QtGui import *
+from PyQt4.QtGui import QFileDialog
+import sys
 from pysat_function import pysat_func
+from functools import partial
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -11,8 +12,6 @@ except AttributeError:
 
 try:
     _encoding = QtGui.QApplication.UnicodeUTF8
-
-
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig, _encoding)
 except AttributeError:
@@ -20,16 +19,16 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 
+
+
 class pysat_ui(object):
+
     count = 0
 
     def __init__(self):
         self.pysat_fun = pysat_func()
-        self.norm_spinBox_ = [None] * 1024
-        self.spin_array = [None] * 1024
-        self.addFunc = []
-        self.addParam = []
-
+        self.norm_spinBox_ = [None]*1024
+        self.spin_array = [None]*1024
         pysat_ui.count = 1
 
     def mainframe(self, MainWindow):
@@ -50,17 +49,17 @@ class pysat_ui(object):
         font.setPointSize(8)
         self.scrollAreaWidgetContents_2.setFont(font)
         self.scrollAreaWidgetContents_2.setStyleSheet(_fromUtf8("QGroupBox {\n"
-                                                                "  border: 2px solid gray;\n"
-                                                                "  border-radius: 6px;\n"
-                                                                "  margin-top: 0.5em;\n"
-                                                                "}\n"
-                                                                "\n"
-                                                                "QGroupBox::title {\n"
-                                                                "\n"
-                                                                "  padding-top: -14px;\n"
-                                                                "  padding-left: 8px;\n"
-                                                                "}\n"
-                                                                ""))
+"  border: 2px solid gray;\n"
+"  border-radius: 6px;\n"
+"  margin-top: 0.5em;\n"
+"}\n"
+"\n"
+"QGroupBox::title {\n"
+"\n"
+"  padding-top: -14px;\n"
+"  padding-left: 8px;\n"
+"}\n"
+""))
         self.scrollAreaWidgetContents_2.setObjectName(_fromUtf8("scrollAreaWidgetContents_2"))
         self.verticalLayout_8 = QtGui.QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_8.setMargin(11)
@@ -68,6 +67,22 @@ class pysat_ui(object):
         self.verticalLayout_8.setObjectName(_fromUtf8("verticalLayout_8"))
         self.scrollArea.setWidget(self.scrollAreaWidgetContents_2)
         self.verticalLayout_9.addWidget(self.scrollArea)
+        self.OK = QtGui.QGroupBox(self.centralWidget)
+        self.OK.setObjectName(_fromUtf8("OK"))
+        self.ok = QtGui.QHBoxLayout(self.OK)
+        self.ok.setMargin(11)
+        self.ok.setSpacing(6)
+        self.ok.setObjectName(_fromUtf8("ok"))
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.ok.addItem(spacerItem)
+        self.okButton = QtGui.QPushButton(self.OK)
+        font = QtGui.QFont()
+        font.setPointSize(8)
+        self.okButton.setFont(font)
+        self.okButton.setMouseTracking(False)
+        self.okButton.setObjectName(_fromUtf8("okButton"))
+        self.ok.addWidget(self.okButton)
+        self.verticalLayout_9.addWidget(self.OK)
         MainWindow.setCentralWidget(self.centralWidget)
         self.mainToolBar = QtGui.QToolBar(MainWindow)
         self.mainToolBar.setObjectName(_fromUtf8("mainToolBar"))
@@ -280,7 +295,10 @@ class pysat_ui(object):
         self.menuBar.addAction(self.menuRegression.menuAction())
         self.menuBar.addAction(self.menuVisualization.menuAction())
         self.menuBar.addAction(self.menuHelp.menuAction())
+
+
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
         MainWindow.setWindowTitle(_translate("MainWindow", "PYSAT", None))
         self.menuFile.setTitle(_translate("MainWindow", "File", None))
         self.menuPreprocessing.setTitle(_translate("MainWindow", "Preprocessing", None))
@@ -353,9 +371,7 @@ class pysat_ui(object):
         self.actionCreate_N_Folds.setText(_translate("MainWindow", "Create N Folds", None))
         self.actionStratified_Folds.setText(_translate("MainWindow", "Stratified Folds", None))
 
-    """
-    UI modules
-    """
+    #### UI modules
 
     def ok_button(self, MainWindow):
         self.OK = QtGui.QGroupBox(self.centralWidget)
@@ -377,12 +393,10 @@ class pysat_ui(object):
         self.okButton.setText(_translate("MainWindow", "OK", None))
         try:
             self.okButton.clicked.connect(lambda: pysat_ui.on_okButton_clicked(self))
-
         except:
             pass
 
     def unknown_data(self, MainWindow):
-        self.addFunc.append(lambda: pysat_ui.on_getDataButton_clicked())
         self.unknownData = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -429,7 +443,7 @@ class pysat_ui(object):
         self.lineEdit_2.setText(_translate("MainWindow", "*.csv", None))
         self.unknownDataButton.setText(_translate("MainWindow", "...", None))
         try:
-            self.unknownDataButton.clicked.connect(lambda: self.addParam.append(self.lineEdit_2, 'Unknown Data'))
+            self.unknownDataButton.clicked.connect(lambda: pysat_ui.on_getDataButton_clicked(self, self.lineEdit_2,'Unknown Data'))
         except:
             pass
 
@@ -480,8 +494,7 @@ class pysat_ui(object):
         self.lineEdit_9.setText(_translate("MainWindow", "*.csv", None))
         self.fullDataBaseButton_3.setText(_translate("MainWindow", "...", None))
         try:
-            self.fullDataBaseButton_3.clicked.connect(
-                lambda: pysat_ui.on_getDataButton_clicked(self, self.lineEdit_9, 'Known Data'))
+            self.fullDataBaseButton_3.clicked.connect(lambda: pysat_ui.on_getDataButton_clicked(self, self.lineEdit_9,'Known Data'))
         except:
             pass
 
@@ -532,8 +545,7 @@ class pysat_ui(object):
         self.lineEdit_10.setText(_translate("MainWindow", "*.*", None))
         self.fullDataBaseButton_4.setText(_translate("MainWindow", "...", None))
         try:
-            self.fullDataBaseButton_4.clicked.connect(
-                lambda: pysat_ui.on_outPutLocationButton_clicked(self, self.lineEdit_10))
+            self.fullDataBaseButton_4.clicked.connect(lambda: pysat_ui.on_outPutLocationButton_clicked(self, self.lineEdit_10))
         except:
             pass
 
@@ -591,9 +603,7 @@ class pysat_ui(object):
         self.normalization_button = QtGui.QPushButton(self.Normalization)
         self.set_module_button(self.verticalLayout_27, self.normalization_button)
         try:
-            self.normalization_button.clicked.connect(
-                lambda: self.pysat_fun.get_ranges(([(int(self.norm_spinBox_9.text()),
-                                                     int(self.norm_spinBox.text()))])))
+            self.normalization_button.clicked.connect(lambda: self.pysat_fun.get_ranges(([(int(self.norm_spinBox_9.text()), int(self.norm_spinBox.text()))])))
         except:
             pass
 
@@ -852,11 +862,10 @@ class pysat_ui(object):
         self.compRanges_button = QtGui.QPushButton(self.CompRanges)
         self.set_module_button(self.verticalLayout_7, self.compRanges_button)
         try:
-            self.compRanges_button.clicked.connect(
-                lambda: self.pysat_fun.set_compranges([[int(self.comp_range.text()), int(self.comp_range_2.text())],
-                                                       [int(self.comp_range_3.text()), int(self.comp_range_4.text())],
-                                                       [int(self.comp_range_5.text()), int(self.comp_range_6.text())],
-                                                       [int(self.comp_range_7.text()), int(self.comp_range_8.text())]]))
+            self.compRanges_button.clicked.connect(lambda: self.pysat_fun.set_compranges([[int(self.comp_range.text()), int(self.comp_range_2.text())],
+                                                                                          [int(self.comp_range_3.text()), int(self.comp_range_4.text())],
+                                                                                          [int(self.comp_range_5.text()), int(self.comp_range_6.text())],
+                                                                                          [int(self.comp_range_7.text()), int(self.comp_range_8.text())]]))
         except:
             pass
 
@@ -989,11 +998,10 @@ class pysat_ui(object):
         self.num_of_components_button = QtGui.QPushButton(self.NumberComponents)
         self.set_module_button(self.verticalLayout_17, self.num_of_components_button)
         try:
-            self.num_of_components_button.clicked.connect(
-                lambda: self.pysat_fun.get_number_components([int(self.create_model_spin.text()),
-                                                              int(self.create_model_spin_2.text()),
-                                                              int(self.create_model_spin_3.text()),
-                                                              int(self.create_model_spin_4.text())]))
+            self.num_of_components_button.clicked.connect(lambda: self.pysat_fun.get_number_components([int(self.create_model_spin.text()),
+                                                                                                         int(self.create_model_spin_2.text()),
+                                                                                                         int(self.create_model_spin_3.text()),
+                                                                                                         int(self.create_model_spin_4.text())]))
         except:
             pass
 
@@ -1038,6 +1046,7 @@ class pysat_ui(object):
             self.y_variable_button.clicked.connect(lambda: self.pysat_fun.set_element_name(self.elementNameLine.text()))
         except:
             pass
+
 
     def interpolated(self, MainWindow):
         self.Interpolated = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -1127,186 +1136,180 @@ class pysat_ui(object):
             pass
 
     def regression_train(self, MainWindow):
-        self.regression_train = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
+        self.regression_train=QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
         font = QtGui.QFont()
         font.setPointSize(10)
         self.regression_train.setFont(font)
         self.regression_train.setObjectName(_fromUtf8("regression_train"))
         self.regression_vlayout = QtGui.QVBoxLayout(self.regression_train)
         self.regression_vlayout.setObjectName(_fromUtf8("regression_vlayout"))
-        # choose data
+        #choose data
         self.regression_choosedata_hlayout = QtGui.QHBoxLayout()
         self.regression_choosedata_hlayout.setObjectName(_fromUtf8("regression_choosedata_hlayout"))
         self.regression_train_choosedata_label = QtGui.QLabel(self.regression_train)
         self.regression_train_choosedata_label.setObjectName(_fromUtf8("regression_train_choosedata_label"))
         self.regression_choosedata_hlayout.addWidget(self.regression_train_choosedata_label)
-        self.regression_choosedata = QtGui.QComboBox(self.regression_train)
+        datachoices=self.pysat_fun.datakeys
+        if datachoices==[]:
+            datachoices=['No data has been loaded!']
+        self.regression_choosedata=make_combobox(datachoices)
         self.regression_choosedata.setIconSize(QtCore.QSize(50, 20))
         self.regression_choosedata.setObjectName(_fromUtf8("regression_choosedata"))
-        self.regression_choosedata.addItem(_fromUtf8(""))
-        self.regression_choosedata.addItem(_fromUtf8(""))
         self.regression_choosedata_hlayout.addWidget(self.regression_choosedata)
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.regression_choosedata_hlayout.addItem(spacerItem)
         self.regression_vlayout.addLayout(self.regression_choosedata_hlayout)
-        # choose variables
+        #choose variables        
         self.regression_choosevars_hlayout = QtGui.QHBoxLayout()
         self.regression_choosevars_hlayout.setObjectName(_fromUtf8("regression_choosevars_hlayout"))
         self.regression_train_choosex_label = QtGui.QLabel(self.regression_train)
         self.regression_train_choosex_label.setObjectName(_fromUtf8("regression_train_choosex_label"))
         self.regression_choosevars_hlayout.addWidget(self.regression_train_choosex_label)
-        self.regression_train_choosex = QtGui.QListWidget(self.regression_train)
+        xvarchoices=self.pysat_fun.data[self.regression_choosedata.currentText()].df.columns.levels[0].values        
+        self.regression_train_choosex = make_listwidget(xvarchoices)
         self.regression_train_choosex.setObjectName(_fromUtf8("regression_train_choosex"))
-        item = QtGui.QListWidgetItem()
-        self.regression_train_choosex.addItem(item)
         self.regression_choosevars_hlayout.addWidget(self.regression_train_choosex)
+
         self.regression_train_choosey_label = QtGui.QLabel(self.regression_train)
         self.regression_train_choosey_label.setObjectName(_fromUtf8("regression_train_choosey_label"))
         self.regression_choosevars_hlayout.addWidget(self.regression_train_choosey_label)
-        self.regression_train_choosey = QtGui.QListWidget(self.regression_train)
-        self.regression_train_choosey.setObjectName(_fromUtf8("regression_train_choosey"))
-        item = QtGui.QListWidgetItem()
-        self.regression_train_choosey.addItem(item)
+        yvarchoices=self.pysat_fun.data[self.regression_choosedata.currentText()].df['comp'].columns.values        
+        self.regression_train_choosey=make_listwidget(yvarchoices)
         self.regression_choosevars_hlayout.addWidget(self.regression_train_choosey)
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.regression_choosevars_hlayout.addItem(spacerItem1)
         self.regression_vlayout.addLayout(self.regression_choosevars_hlayout)
-        # choose regression algorithm
+        #choose regression algorithm        
         self.regression_choosealg_hlayout = QtGui.QHBoxLayout()
         self.regression_choosealg_hlayout.setObjectName(_fromUtf8("regression_choosealg_hlayout"))
         self.regression_choosealg_label = QtGui.QLabel(self.regression_train)
         self.regression_choosealg_label.setObjectName(_fromUtf8("regression_choosealg_label"))
         self.regression_choosealg_hlayout.addWidget(self.regression_choosealg_label)
-        self.regression_choosealg = QtGui.QComboBox(self.regression_train)
+        regression_alg_choices=['PLS','GP','More to come...']
+        self.regression_choosealg=make_combobox(regression_alg_choices)
         self.regression_choosealg.setIconSize(QtCore.QSize(50, 20))
         self.regression_choosealg.setObjectName(_fromUtf8("regression_choosealg"))
-        self.regression_choosealg.addItem(_fromUtf8(""))
-        self.regression_choosealg.addItem(_fromUtf8(""))
-        self.regression_choosealg.addItem(_fromUtf8(""))
         self.regression_choosealg_hlayout.addWidget(self.regression_choosealg)
         regression_choosealg_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.regression_choosealg_hlayout.addItem(regression_choosealg_spacer)
         self.regression_vlayout.addLayout(self.regression_choosealg_hlayout)
-        # pls options
-        #        self.pls_hlayout = QtGui.QHBoxLayout()
-        #        self.pls_hlayout.setObjectName(_fromUtf8("pls_hlayout"))
-        #        self.pls_nc_label = QtGui.QLabel(self.regression_train)
-        #        self.pls_nc_label.setObjectName(_fromUtf8("pls_nc_label"))
-        #        self.pls_hlayout.addWidget(self.pls_nc_label)
-        #        self.pls_nc_spin = QtGui.QSpinBox(self.regression_train)
-        #        self.pls_nc_spin.setObjectName(_fromUtf8("pls_nc_spin"))
-        #        self.pls_hlayout.addWidget(self.pls_nc_spin)
-        #        pls_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        #        self.pls_hlayout.addItem(pls_spacer)
-        #        self.regression_vlayout.addLayout(self.pls_hlayout)
-        # gp options
-        #        self.gp_vlayout = QtGui.QVBoxLayout()
-        #        self.gp_vlayout.setObjectName(_fromUtf8("gp_vlayout"))
-        #        self.gp_dim_red_hlayout = QtGui.QHBoxLayout()
-        #        self.gp_dim_red_hlayout.setObjectName(_fromUtf8("gp_dim_red_hlayout"))
-        #        self.gp_dim_red_label = QtGui.QLabel(self.regression_train)
-        #        self.gp_dim_red_label.setObjectName(_fromUtf8("gp_dim_red_label"))
-        #        self.gp_dim_red_hlayout.addWidget(self.gp_dim_red_label)
-        #        self.gp_dim_red_combobox = QtGui.QComboBox(self.regression_train)
-        #        self.gp_dim_red_combobox.setObjectName(_fromUtf8("gp_dim_red_combobox"))
-        #        self.gp_dim_red_combobox.addItem(_fromUtf8(""))
-        #        self.gp_dim_red_combobox.addItem(_fromUtf8(""))
-        #        self.gp_dim_red_combobox.addItem(_fromUtf8(""))
-        #        self.gp_dim_red_combobox.addItem(_fromUtf8(""))
-        #        self.gp_dim_red_hlayout.addWidget(self.gp_dim_red_combobox)
-        #        self.gp_vlayout.addLayout(self.gp_dim_red_hlayout)
-        #        self.gp_rand_starts_hlayout = QtGui.QHBoxLayout()
-        #        self.gp_rand_starts_hlayout.setObjectName(_fromUtf8("gp_rand_starts_hlayout"))
-        #        self.gp_rand_starts_label = QtGui.QLabel(self.regression_train)
-        #        self.gp_rand_starts_label.setObjectName(_fromUtf8("gp_rand_starts_label"))
-        #        self.gp_rand_starts_hlayout.addWidget(self.gp_rand_starts_label)
-        #        self.gp_rand_starts_spin = QtGui.QSpinBox(self.regression_train)
-        #        self.gp_rand_starts_spin.setObjectName(_fromUtf8("gp_rand_starts_spin"))
-        #        self.gp_rand_starts_hlayout.addWidget(self.gp_rand_starts_spin)
-        #        spacerItem4 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        #        self.gp_rand_starts_hlayout.addItem(spacerItem4)
-        #        self.gp_vlayout.addLayout(self.gp_rand_starts_hlayout)
-        #        self.gp_theta_hlayout = QtGui.QHBoxLayout()
-        #        self.gp_theta_hlayout.setObjectName(_fromUtf8("gp_theta_hlayout"))
-        #        self.gp_theta0_label = QtGui.QLabel(self.regression_train)
-        #        self.gp_theta0_label.setObjectName(_fromUtf8("gp_theta0_label"))
-        #        self.gp_theta_hlayout.addWidget(self.gp_theta0_label)
-        #        self.gp_theta0_spin = QtGui.QDoubleSpinBox(self.regression_train)
-        #        self.gp_theta0_spin.setObjectName(_fromUtf8("gp_theta0_spin"))
-        #        self.gp_theta_hlayout.addWidget(self.gp_theta0_spin)
-        #        self.gp_thetaL_label = QtGui.QLabel(self.regression_train)
-        #        self.gp_thetaL_label.setObjectName(_fromUtf8("gp_thetaL_label"))
-        #        self.gp_theta_hlayout.addWidget(self.gp_thetaL_label)
-        #        self.gp_thetaL_spin = QtGui.QDoubleSpinBox(self.regression_train)
-        #        self.gp_thetaL_spin.setObjectName(_fromUtf8("gp_thetaL_spin"))
-        #        self.gp_theta_hlayout.addWidget(self.gp_thetaL_spin)
-        #        self.gp_thetaU_label = QtGui.QLabel(self.regression_train)
-        #        self.gp_thetaU_label.setObjectName(_fromUtf8("gp_thetaU_label"))
-        #        self.gp_theta_hlayout.addWidget(self.gp_thetaU_label)
-        #        self.gp_thetaU_spin = QtGui.QDoubleSpinBox(self.regression_train)
-        #        self.gp_thetaU_spin.setObjectName(_fromUtf8("gp_thetaU_spin"))
-        #        self.gp_theta_hlayout.addWidget(self.gp_thetaU_spin)
-        #        spacerItem5 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        #        self.gp_theta_hlayout.addItem(spacerItem5)
-        #        self.gp_vlayout.addLayout(self.gp_theta_hlayout)
-        #        self.regression_vlayout.addLayout(self.gp_vlayout)
-        # ransac options
-        #        self.regression_ransac_checkbox = QtGui.QCheckBox(self.regression_train)
-        #        self.regression_ransac_checkbox.setObjectName(_fromUtf8("regression_ransac_checkbox"))
-        #        self.regression_vlayout.addWidget(self.regression_ransac_checkbox)
-        #        self.ransac_vlayout = QtGui.QVBoxLayout()
-        #        self.ransac_vlayout.setObjectName(_fromUtf8("ransac_vlayout"))
-        #        self.ransac_lossfunc_hlayout = QtGui.QHBoxLayout()
-        #        self.ransac_lossfunc_hlayout.setObjectName(_fromUtf8("ransac_lossfunc_hlayout"))
-        #        self.ransac_lossfunc_label = QtGui.QLabel(self.regression_train)
-        #        self.ransac_lossfunc_label.setObjectName(_fromUtf8("ransac_lossfunc_label"))
-        #        self.ransac_lossfunc_hlayout.addWidget(self.ransac_lossfunc_label)
-        #        self.ransac_lossfunc_combobox = QtGui.QComboBox(self.regression_train)
-        #        self.ransac_lossfunc_combobox.setObjectName(_fromUtf8("ransac_lossfunc_combobox"))
-        #        self.ransac_lossfunc_combobox.addItem(_fromUtf8(""))
-        #        self.ransac_lossfunc_combobox.addItem(_fromUtf8(""))
-        #        self.ransac_lossfunc_hlayout.addWidget(self.ransac_lossfunc_combobox)
-        #        ransac_lossfunc_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        #        self.ransac_lossfunc_hlayout.addItem(ransac_lossfunc_spacer)
-        #        self.ransac_vlayout.addLayout(self.ransac_lossfunc_hlayout)
-        #        self.ransac_thresh_hlayout = QtGui.QHBoxLayout()
-        #        self.ransac_thresh_hlayout.setObjectName(_fromUtf8("ransac_thresh_hlayout"))
-        #        self.ransac_thresh_label = QtGui.QLabel(self.regression_train)
-        #        self.ransac_thresh_label.setObjectName(_fromUtf8("ransac_thresh_label"))
-        #        self.ransac_thresh_hlayout.addWidget(self.ransac_thresh_label)
-        #        self.ransac_thresh_spin = QtGui.QDoubleSpinBox(self.regression_train)
-        #        self.ransac_thresh_spin.setObjectName(_fromUtf8("ransac_thresh_spin"))
-        #        self.ransac_thresh_hlayout.addWidget(self.ransac_thresh_spin)
-        #        ransac_thresh_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        #        self.ransac_thresh_hlayout.addItem(ransac_thresh_spacer)
-        #        self.ransac_vlayout.addLayout(self.ransac_thresh_hlayout)
-        #        self.regression_vlayout.addLayout(self.ransac_vlayout)
+        #pls options
+#        self.pls_hlayout = QtGui.QHBoxLayout()
+#        self.pls_hlayout.setObjectName(_fromUtf8("pls_hlayout"))
+#        self.pls_nc_label = QtGui.QLabel(self.regression_train)
+#        self.pls_nc_label.setObjectName(_fromUtf8("pls_nc_label"))
+#        self.pls_hlayout.addWidget(self.pls_nc_label)
+#        self.pls_nc_spin = QtGui.QSpinBox(self.regression_train)
+#        self.pls_nc_spin.setObjectName(_fromUtf8("pls_nc_spin"))
+#        self.pls_hlayout.addWidget(self.pls_nc_spin)
+#        pls_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+#        self.pls_hlayout.addItem(pls_spacer)
+#        self.regression_vlayout.addLayout(self.pls_hlayout)
+        #gp options
+#        self.gp_vlayout = QtGui.QVBoxLayout()
+#        self.gp_vlayout.setObjectName(_fromUtf8("gp_vlayout"))
+#        self.gp_dim_red_hlayout = QtGui.QHBoxLayout()
+#        self.gp_dim_red_hlayout.setObjectName(_fromUtf8("gp_dim_red_hlayout"))
+#        self.gp_dim_red_label = QtGui.QLabel(self.regression_train)
+#        self.gp_dim_red_label.setObjectName(_fromUtf8("gp_dim_red_label"))
+#        self.gp_dim_red_hlayout.addWidget(self.gp_dim_red_label)
+#        self.gp_dim_red_combobox = QtGui.QComboBox(self.regression_train)
+#        self.gp_dim_red_combobox.setObjectName(_fromUtf8("gp_dim_red_combobox"))
+#        self.gp_dim_red_combobox.addItem(_fromUtf8(""))
+#        self.gp_dim_red_combobox.addItem(_fromUtf8(""))
+#        self.gp_dim_red_combobox.addItem(_fromUtf8(""))
+#        self.gp_dim_red_combobox.addItem(_fromUtf8(""))
+#        self.gp_dim_red_hlayout.addWidget(self.gp_dim_red_combobox)
+#        self.gp_vlayout.addLayout(self.gp_dim_red_hlayout)
+#        self.gp_rand_starts_hlayout = QtGui.QHBoxLayout()
+#        self.gp_rand_starts_hlayout.setObjectName(_fromUtf8("gp_rand_starts_hlayout"))
+#        self.gp_rand_starts_label = QtGui.QLabel(self.regression_train)
+#        self.gp_rand_starts_label.setObjectName(_fromUtf8("gp_rand_starts_label"))
+#        self.gp_rand_starts_hlayout.addWidget(self.gp_rand_starts_label)
+#        self.gp_rand_starts_spin = QtGui.QSpinBox(self.regression_train)
+#        self.gp_rand_starts_spin.setObjectName(_fromUtf8("gp_rand_starts_spin"))
+#        self.gp_rand_starts_hlayout.addWidget(self.gp_rand_starts_spin)
+#        spacerItem4 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+#        self.gp_rand_starts_hlayout.addItem(spacerItem4)
+#        self.gp_vlayout.addLayout(self.gp_rand_starts_hlayout)
+#        self.gp_theta_hlayout = QtGui.QHBoxLayout()
+#        self.gp_theta_hlayout.setObjectName(_fromUtf8("gp_theta_hlayout"))
+#        self.gp_theta0_label = QtGui.QLabel(self.regression_train)
+#        self.gp_theta0_label.setObjectName(_fromUtf8("gp_theta0_label"))
+#        self.gp_theta_hlayout.addWidget(self.gp_theta0_label)
+#        self.gp_theta0_spin = QtGui.QDoubleSpinBox(self.regression_train)
+#        self.gp_theta0_spin.setObjectName(_fromUtf8("gp_theta0_spin"))
+#        self.gp_theta_hlayout.addWidget(self.gp_theta0_spin)
+#        self.gp_thetaL_label = QtGui.QLabel(self.regression_train)
+#        self.gp_thetaL_label.setObjectName(_fromUtf8("gp_thetaL_label"))
+#        self.gp_theta_hlayout.addWidget(self.gp_thetaL_label)
+#        self.gp_thetaL_spin = QtGui.QDoubleSpinBox(self.regression_train)
+#        self.gp_thetaL_spin.setObjectName(_fromUtf8("gp_thetaL_spin"))
+#        self.gp_theta_hlayout.addWidget(self.gp_thetaL_spin)
+#        self.gp_thetaU_label = QtGui.QLabel(self.regression_train)
+#        self.gp_thetaU_label.setObjectName(_fromUtf8("gp_thetaU_label"))
+#        self.gp_theta_hlayout.addWidget(self.gp_thetaU_label)
+#        self.gp_thetaU_spin = QtGui.QDoubleSpinBox(self.regression_train)
+#        self.gp_thetaU_spin.setObjectName(_fromUtf8("gp_thetaU_spin"))
+#        self.gp_theta_hlayout.addWidget(self.gp_thetaU_spin)
+#        spacerItem5 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+#        self.gp_theta_hlayout.addItem(spacerItem5)
+#        self.gp_vlayout.addLayout(self.gp_theta_hlayout)
+#        self.regression_vlayout.addLayout(self.gp_vlayout)
+        #ransac options        
+#        self.regression_ransac_checkbox = QtGui.QCheckBox(self.regression_train)
+#        self.regression_ransac_checkbox.setObjectName(_fromUtf8("regression_ransac_checkbox"))
+#        self.regression_vlayout.addWidget(self.regression_ransac_checkbox)
+#        self.ransac_vlayout = QtGui.QVBoxLayout()
+#        self.ransac_vlayout.setObjectName(_fromUtf8("ransac_vlayout"))
+#        self.ransac_lossfunc_hlayout = QtGui.QHBoxLayout()
+#        self.ransac_lossfunc_hlayout.setObjectName(_fromUtf8("ransac_lossfunc_hlayout"))
+#        self.ransac_lossfunc_label = QtGui.QLabel(self.regression_train)
+#        self.ransac_lossfunc_label.setObjectName(_fromUtf8("ransac_lossfunc_label"))
+#        self.ransac_lossfunc_hlayout.addWidget(self.ransac_lossfunc_label)
+#        self.ransac_lossfunc_combobox = QtGui.QComboBox(self.regression_train)
+#        self.ransac_lossfunc_combobox.setObjectName(_fromUtf8("ransac_lossfunc_combobox"))
+#        self.ransac_lossfunc_combobox.addItem(_fromUtf8(""))
+#        self.ransac_lossfunc_combobox.addItem(_fromUtf8(""))
+#        self.ransac_lossfunc_hlayout.addWidget(self.ransac_lossfunc_combobox)
+#        ransac_lossfunc_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+#        self.ransac_lossfunc_hlayout.addItem(ransac_lossfunc_spacer)
+#        self.ransac_vlayout.addLayout(self.ransac_lossfunc_hlayout)
+#        self.ransac_thresh_hlayout = QtGui.QHBoxLayout()
+#        self.ransac_thresh_hlayout.setObjectName(_fromUtf8("ransac_thresh_hlayout"))
+#        self.ransac_thresh_label = QtGui.QLabel(self.regression_train)
+#        self.ransac_thresh_label.setObjectName(_fromUtf8("ransac_thresh_label"))
+#        self.ransac_thresh_hlayout.addWidget(self.ransac_thresh_label)
+#        self.ransac_thresh_spin = QtGui.QDoubleSpinBox(self.regression_train)
+#        self.ransac_thresh_spin.setObjectName(_fromUtf8("ransac_thresh_spin"))
+#        self.ransac_thresh_hlayout.addWidget(self.ransac_thresh_spin)
+#        ransac_thresh_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+#        self.ransac_thresh_hlayout.addItem(ransac_thresh_spacer)
+#        self.ransac_vlayout.addLayout(self.ransac_thresh_hlayout)
+#        self.regression_vlayout.addLayout(self.ransac_vlayout)
 
-        # train button
+        #train button
         self.regression_trainbutton_hlayout = QtGui.QHBoxLayout()
         self.regression_trainbutton_hlayout.setObjectName(_fromUtf8("regression_trainbutton_hlayout"))
-        regression_trainbutton_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding,
-                                                          QtGui.QSizePolicy.Minimum)
+        regression_trainbutton_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.regression_trainbutton_hlayout.addItem(regression_trainbutton_spacer)
         self.regression_trainbutton = QtGui.QPushButton(self.regression_train)
         self.regression_trainbutton.setObjectName(_fromUtf8("regression_trainbutton"))
         self.regression_trainbutton_hlayout.addWidget(self.regression_trainbutton)
         self.regression_vlayout.addLayout(self.regression_trainbutton_hlayout)
-
-        self.verticalLayout_8.addWidget(self.regression_train)
+        
+        self.verticalLayout_8.addWidget(self.regression_train)        
         self.regression_train.raise_()
 
         self.regression_train.setTitle(_translate("regression_train", "Regression - Train", None))
         self.regression_train_choosedata_label.setText(_translate("regression_train", "Choose data:", None))
-
+        
         self.regression_train_choosex.setItemText(0, _translate("regression_train", "Choose X Variables", None))
         self.regression_train_choosey.setItemText(0, _translate("regression_train", "Choose Y Variables", None))
-        self.regression_train_choosealg.setItemText(0, _translate("regression_train", "Choose Algorithm", None))
-        self.regression_train_choosealg.setItemText(1, _translate("regression_train", "PLS", None))
-        self.regression_train_choosealg.setItemText(2, _translate("regression_train", "GP", None))
-        self.regression_train_choosealg.setItemText(3, _translate("regression_train", "Others coming soon...", None))
         self.regression_train_ransac_checkbox.setText(_translate("regression_train", "RANSAC", None))
         self.regression_train_trainbutton.setText(_translate("regression_train", "Train Regression", None))
+
+
 
     def stratified_folds(self, MainWindow):
         self.strat_folds = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
@@ -1319,17 +1322,16 @@ class pysat_ui(object):
         self.strat_folds_choose_data_label = QtGui.QLabel(self.strat_folds)
         self.strat_folds_choose_data_label.setObjectName(_fromUtf8("strat_folds_choose_data_label"))
         self.strat_folds_vlayout.addWidget(self.strat_folds_choose_data_label)
-        datachoices = self.pysat_fun.datakeys
-        if datachoices == []:
-            print('No data has been loaded!')
-
-        self.strat_folds_choose_data = make_combobox(datachoices)
+        datachoices=self.pysat_fun.datakeys
+        if datachoices==[]:
+            datachoices=['No data has been loaded!']
+        self.strat_folds_choose_data=make_combobox(datachoices)
         self.strat_folds_vlayout.addWidget(self.strat_folds_choose_data)
         self.strat_folds_choose_var_label = QtGui.QLabel(self.strat_folds)
         self.strat_folds_choose_var_label.setObjectName(_fromUtf8("strat_folds_choose_var_label"))
         self.strat_folds_vlayout.addWidget(self.strat_folds_choose_var_label)
-        varchoices = self.pysat_fun.data[self.strat_folds_choose_data.currentText()].df['meta'].columns.values
-        self.strat_folds_choose_var = make_combobox(varchoices)
+        varchoices=self.pysat_fun.data[self.strat_folds_choose_data.currentText()].df['comp'].columns.values
+        self.strat_folds_choose_var=make_combobox(varchoices)
         self.strat_folds_vlayout.addWidget(self.strat_folds_choose_var)
         self.strat_folds_choose_data.activated[int].connect(self.strat_fold_change_vars)
         self.strat_folds_hlayout = QtGui.QHBoxLayout()
@@ -1344,7 +1346,7 @@ class pysat_ui(object):
         self.test_fold_label = QtGui.QLabel(self.strat_folds)
         self.test_fold_label.setObjectName(_fromUtf8("test_fold_label"))
         self.strat_folds_hlayout.addWidget(self.test_fold_label)
-        foldchoices = ['1']
+        foldchoices=['1'] 
         self.choose_test_fold = make_combobox(foldchoices)
         self.choose_test_fold.setObjectName(_fromUtf8("choose_test_fold"))
         self.nfolds_spin.valueChanged.connect(self.strat_fold_change_testfolds)
@@ -1356,7 +1358,7 @@ class pysat_ui(object):
         self.create_folds.setText(_translate("strat_folds", "Create Folds", None))
         self.strat_folds_hlayout.addWidget(self.create_folds)
         self.strat_folds_vlayout.addLayout(self.strat_folds_hlayout)
-        self.verticalLayout_8.addWidget(self.strat_folds)
+        self.verticalLayout_8.addWidget(self.strat_folds)        
         self.strat_folds.raise_()
         self.strat_folds.setTitle(_translate("MainWindow", "Stratified Folds", None))
         self.nfolds_label.setText(_translate("strat_folds", "N folds", None))
@@ -1365,16 +1367,14 @@ class pysat_ui(object):
         self.strat_folds_choose_data_label.setText(_translate("strat_folds", "Choose data to stratify:", None))
         self.strat_folds_choose_var_label.setText(_translate("strat_folds", "Choose variable on which to sort:", None))
         try:
-            self.create_folds.clicked.connect(
-                lambda: self.pysat_fun.do_strat_folds(datakey=str(self.strat_folds_choose_data.currentText()),
-                                                      nfolds=int(self.nfolds_spin.text()),
-                                                      testfold=int(self.choose_test_fold.currentText()),
-                                                      colname=('meta', self.strat_folds_choose_var.currentText())))
+            self.create_folds.clicked.connect(lambda: self.pysat_fun.do_strat_folds(datakey=str(self.strat_folds_choose_data.currentText()),nfolds=int(self.nfolds_spin.text()),testfold=int(self.choose_test_fold.currentText()),colname=('comp',self.strat_folds_choose_var.currentText())))
         except:
-            print('There was a problem with creating stratified folds...')
+            print('There was a problem with creating stratified folds...')            
+            
+
+    ####These functions below are private and add functionality to the UI
 
 
-            ####These functions below are private and add functionality to the UI
 
     def set_module_button(self, QVBoxLayout, PushButtonName):
         self.horizontalLayout = QtGui.QHBoxLayout()
@@ -1387,6 +1387,7 @@ class pysat_ui(object):
         QVBoxLayout.addLayout(self.horizontalLayout)
         PushButtonName.setText(_translate("MainWindow", "Run Module", None))
 
+    
     def menu_item_shortcuts(self):
         self.actionExit.setShortcut("ctrl+Q")
 
@@ -1399,92 +1400,75 @@ class pysat_ui(object):
         self.actionApply_Mask.triggered.connect(lambda: pysat_ui.masked(self, MainWindow))
         self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.stratified_folds(self, MainWindow))
         self.actionTrain.triggered.connect(lambda: pysat_ui.regression_train(self, MainWindow))
-        self.actionSave_Current_Workflow.triggered.connect(lambda: pysat_ui.saveworkflow(MainWindow))
 
     def saveworkflow(self):
         # TODO save the current window's data into a save file
-        pysat_ui.open_wait_box(self)
+        pass
 
     def openworkflow(self):
         # TODO open file dialog
         self.filename = QFileDialog.getOpenFileName(self, "Open a Workflow File", '.', "(*.wrf)")
 
-    """
-    Opening Files
-    """
+#### Opening Files
 
     def on_maskFile_clicked(self, lineEdit):
         filename = QFileDialog.getOpenFileName(None, "Open Mask File", '.', "(*.csv)")
         lineEdit.setText(filename)
+        self.pysat_fun.set_file_maskfile(filename)
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")
-        else:
-            self.open_wait_box()
-            self.list_of_functions.append(lambda: self.pysat_fun.set_file_maskfile(filename))
-            self.list_of_functions.append(lambda: self.pysat_fun.set_mask())
-            self.close_wait_box()
+        self.pysat_fun.set_mask()
 
     def on_getDataButton_clicked(self, lineEdit, key):
         filename = QFileDialog.getOpenFileName(None, "Open Uknown Data File", '.', "(*.csv)")
         lineEdit.setText(filename)
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")
-        self.open_wait_box()
-        self.pysat_fun.get_data(filename, key)
-        self.close_wait_box()
-
+        self.pysat_fun.get_data(filename,key)
+        
+        
     def on_outPutLocationButton_clicked(self, lineEdit):
         filename = QFileDialog.getExistingDirectory(None, "Select Output Directory", '.')
         lineEdit.setText(filename)
+        self.pysat_fun.set_file_outpath(filename)
         if lineEdit.text() == "":
             lineEdit.setText("*/*")
-        self.open_wait_box()
-        self.pysat_fun.set_file_outpath(filename)
-        self.close_wait_box()
 
-    """
-    Ok Button Clicked
-    """
+#### Ok Button Clicked
 
     def on_okButton_clicked(self):
-        for i in range(10):
-            self.addFunc[i]
-            self.addParam[i]
         self.pysat_fun.set_sm()
         self.pysat_fun.get_sm_fit()
         self.pysat_fun.get_plots()
-
+        
     def strat_fold_change_vars(self):
         self.strat_folds_choose_var.clear()
-        choices = self.pysat_fun.data[self.strat_folds_choose_data.currentText()].df['meta'].columns.values
+        choices=self.pysat_fun.data[self.strat_folds_choose_data.currentText()].df['comp'].columns.values
         print(choices)
         self.strat_folds_choose_var.addItems(choices)
 
     def strat_fold_change_testfolds(self):
         self.choose_test_fold.clear()
-        choices = list(map(str, list(range(1, self.nfolds_spin.value() + 1))))
+        choices=list(map(str,list(range(1,self.nfolds_spin.value()+1))))
         print(choices)
         self.choose_test_fold.addItems(choices)
-
-    """
-    Message Box that will appear, to let the user know that some work is being done, and that
-    the UI will be non-responsive for a sec.
-    """
-
-    def open_wait_box(self):
-        self.splash_pix = QPixmap('27-512.png')
-        self.splash = QSplashScreen(self.splash_pix, QtCore.Qt.WindowStaysOnTopHint)
-        self.splash.show()
-
-    def close_wait_box(self):
-        self.splash.close()
-
+        
 
 def make_combobox(choices):
-    combo = QtGui.QComboBox()
-    for i, choice in enumerate(choices):
+    combo=QtGui.QComboBox()
+   
+    for i,choice in enumerate(choices):
         combo.addItem(_fromUtf8(""))
-        combo.setItemText(i, _translate('', choice, None))
-
+        combo.setItemText(i,_translate('',choice,None))
+        
     return combo
 
+    
+def make_listwidget(choices):
+    listwidget=QtGui.QListWidget()
+    listwidget.setItemDelegate
+    for item in choices:
+        item = QtGui.QListWidgetItem(item)
+        listwidget.addItem(item)
+    return listwidget
+        

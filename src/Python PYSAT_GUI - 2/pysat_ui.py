@@ -1149,11 +1149,12 @@ class pysat_ui(object):
         self.regression_train_choosedata_label = QtGui.QLabel(self.regression_train)
         self.regression_train_choosedata_label.setObjectName(_fromUtf8("regression_train_choosedata_label"))
         self.regression_choosedata_hlayout.addWidget(self.regression_train_choosedata_label)
-        self.regression_choosedata = QtGui.QComboBox(self.regression_train)
+        datachoices=self.pysat_fun.datakeys
+        if datachoices==[]:
+            datachoices=['No data has been loaded!']
+        self.regression_choosedata=make_combobox(datachoices)
         self.regression_choosedata.setIconSize(QtCore.QSize(50, 20))
         self.regression_choosedata.setObjectName(_fromUtf8("regression_choosedata"))
-        self.regression_choosedata.addItem(_fromUtf8(""))
-        self.regression_choosedata.addItem(_fromUtf8(""))
         self.regression_choosedata_hlayout.addWidget(self.regression_choosedata)
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.regression_choosedata_hlayout.addItem(spacerItem)
@@ -1164,18 +1165,16 @@ class pysat_ui(object):
         self.regression_train_choosex_label = QtGui.QLabel(self.regression_train)
         self.regression_train_choosex_label.setObjectName(_fromUtf8("regression_train_choosex_label"))
         self.regression_choosevars_hlayout.addWidget(self.regression_train_choosex_label)
-        self.regression_train_choosex = QtGui.QListWidget(self.regression_train)
+        xvarchoices=self.pysat_fun.data[self.regression_choosedata.currentText()].df.columns.levels[0].values        
+        self.regression_train_choosex = make_listwidget(xvarchoices)
         self.regression_train_choosex.setObjectName(_fromUtf8("regression_train_choosex"))
-        item = QtGui.QListWidgetItem()
-        self.regression_train_choosex.addItem(item)
         self.regression_choosevars_hlayout.addWidget(self.regression_train_choosex)
+
         self.regression_train_choosey_label = QtGui.QLabel(self.regression_train)
         self.regression_train_choosey_label.setObjectName(_fromUtf8("regression_train_choosey_label"))
         self.regression_choosevars_hlayout.addWidget(self.regression_train_choosey_label)
-        self.regression_train_choosey = QtGui.QListWidget(self.regression_train)
-        self.regression_train_choosey.setObjectName(_fromUtf8("regression_train_choosey"))
-        item = QtGui.QListWidgetItem()
-        self.regression_train_choosey.addItem(item)
+        yvarchoices=self.pysat_fun.data[self.regression_choosedata.currentText()].df['comp'].columns.values        
+        self.regression_train_choosey=make_listwidget(yvarchoices)
         self.regression_choosevars_hlayout.addWidget(self.regression_train_choosey)
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.regression_choosevars_hlayout.addItem(spacerItem1)
@@ -1186,12 +1185,10 @@ class pysat_ui(object):
         self.regression_choosealg_label = QtGui.QLabel(self.regression_train)
         self.regression_choosealg_label.setObjectName(_fromUtf8("regression_choosealg_label"))
         self.regression_choosealg_hlayout.addWidget(self.regression_choosealg_label)
-        self.regression_choosealg = QtGui.QComboBox(self.regression_train)
+        regression_alg_choices=['PLS','GP','More to come...']
+        self.regression_choosealg=make_combobox(regression_alg_choices)
         self.regression_choosealg.setIconSize(QtCore.QSize(50, 20))
         self.regression_choosealg.setObjectName(_fromUtf8("regression_choosealg"))
-        self.regression_choosealg.addItem(_fromUtf8(""))
-        self.regression_choosealg.addItem(_fromUtf8(""))
-        self.regression_choosealg.addItem(_fromUtf8(""))
         self.regression_choosealg_hlayout.addWidget(self.regression_choosealg)
         regression_choosealg_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.regression_choosealg_hlayout.addItem(regression_choosealg_spacer)
@@ -1309,10 +1306,6 @@ class pysat_ui(object):
         
         self.regression_train_choosex.setItemText(0, _translate("regression_train", "Choose X Variables", None))
         self.regression_train_choosey.setItemText(0, _translate("regression_train", "Choose Y Variables", None))
-        self.regression_train_choosealg.setItemText(0, _translate("regression_train", "Choose Algorithm", None))
-        self.regression_train_choosealg.setItemText(1, _translate("regression_train", "PLS", None))
-        self.regression_train_choosealg.setItemText(2, _translate("regression_train", "GP", None))
-        self.regression_train_choosealg.setItemText(3, _translate("regression_train", "Others coming soon...", None))
         self.regression_train_ransac_checkbox.setText(_translate("regression_train", "RANSAC", None))
         self.regression_train_trainbutton.setText(_translate("regression_train", "Train Regression", None))
 
@@ -1337,7 +1330,7 @@ class pysat_ui(object):
         self.strat_folds_choose_var_label = QtGui.QLabel(self.strat_folds)
         self.strat_folds_choose_var_label.setObjectName(_fromUtf8("strat_folds_choose_var_label"))
         self.strat_folds_vlayout.addWidget(self.strat_folds_choose_var_label)
-        varchoices=self.pysat_fun.data[self.strat_folds_choose_data.currentText()].df['meta'].columns.values
+        varchoices=self.pysat_fun.data[self.strat_folds_choose_data.currentText()].df['comp'].columns.values
         self.strat_folds_choose_var=make_combobox(varchoices)
         self.strat_folds_vlayout.addWidget(self.strat_folds_choose_var)
         self.strat_folds_choose_data.activated[int].connect(self.strat_fold_change_vars)
@@ -1374,7 +1367,7 @@ class pysat_ui(object):
         self.strat_folds_choose_data_label.setText(_translate("strat_folds", "Choose data to stratify:", None))
         self.strat_folds_choose_var_label.setText(_translate("strat_folds", "Choose variable on which to sort:", None))
         try:
-            self.create_folds.clicked.connect(lambda: self.pysat_fun.do_strat_folds(datakey=str(self.strat_folds_choose_data.currentText()),nfolds=int(self.nfolds_spin.text()),testfold=int(self.choose_test_fold.currentText()),colname=('meta',self.strat_folds_choose_var.currentText())))
+            self.create_folds.clicked.connect(lambda: self.pysat_fun.do_strat_folds(datakey=str(self.strat_folds_choose_data.currentText()),nfolds=int(self.nfolds_spin.text()),testfold=int(self.choose_test_fold.currentText()),colname=('comp',self.strat_folds_choose_var.currentText())))
         except:
             print('There was a problem with creating stratified folds...')            
             
@@ -1450,7 +1443,7 @@ class pysat_ui(object):
         
     def strat_fold_change_vars(self):
         self.strat_folds_choose_var.clear()
-        choices=self.pysat_fun.data[self.strat_folds_choose_data.currentText()].df['meta'].columns.values
+        choices=self.pysat_fun.data[self.strat_folds_choose_data.currentText()].df['comp'].columns.values
         print(choices)
         self.strat_folds_choose_var.addItems(choices)
 
@@ -1471,3 +1464,11 @@ def make_combobox(choices):
     return combo
 
     
+def make_listwidget(choices):
+    listwidget=QtGui.QListWidget()
+    listwidget.setItemDelegate
+    for item in choices:
+        item = QtGui.QListWidgetItem(item)
+        listwidget.addItem(item)
+    return listwidget
+        
