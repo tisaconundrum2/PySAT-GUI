@@ -363,7 +363,6 @@ class pysat_ui(object):
         self.actionCreate_N_Folds.setText(_translate("MainWindow", "Create N Folds", None))
         self.actionStratified_Folds.setText(_translate("MainWindow", "Stratified Folds", None))
 
-
     def unknown_data(self, MainWindow):
         self.unknownData = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
         font = QtGui.QFont()
@@ -518,3 +517,60 @@ class pysat_ui(object):
                 lambda: pysat_ui.on_outPutLocationButton_clicked(self, self.lineEdit_10))
         except:
             pass
+
+
+            #### Opening Files
+
+    def on_maskFile_clicked(self, lineEdit):
+        filename = QFileDialog.getOpenFileName(None, "Open Mask File", '.', "(*.csv)")
+        lineEdit.setText(filename)
+        self.pysat_fun.set_file_maskfile(filename)
+        if lineEdit.text() == "":
+            lineEdit.setText("*.csv")
+        self.pysat_fun.set_mask()
+
+    def on_getDataButton_clicked(self, lineEdit, key):
+        filename = QFileDialog.getOpenFileName(None, "Open Uknown Data File", '.', "(*.csv)")
+        lineEdit.setText(filename)
+        if lineEdit.text() == "":
+            lineEdit.setText("*.csv")
+        self.pysat_fun.get_data(filename, key)
+
+    def on_outPutLocationButton_clicked(self, lineEdit):
+        filename = QFileDialog.getExistingDirectory(None, "Select Output Directory", '.')
+        lineEdit.setText(filename)
+        self.pysat_fun.set_file_outpath(filename)
+        if lineEdit.text() == "":
+            lineEdit.setText("*/*")
+
+    #### Shortcuts
+    def menu_item_shortcuts(self):
+        self.actionExit.setShortcut("ctrl+Q")
+
+    def menu_item_functions(self, MainWindow):
+        self.actionSet_output_location.triggered.connect(lambda: pysat_ui.output_folder(self, MainWindow))
+        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.unknown_data(self, MainWindow))
+        self.actionLoad_reference_Data.triggered.connect(lambda: pysat_ui.reference_data(self, MainWindow))
+        self.actionNormalization.triggered.connect(lambda: pysat_ui.normalization(self, MainWindow))
+        self.actionInterpolate.triggered.connect(lambda: pysat_ui.interpolated(self, MainWindow))
+        self.actionApply_Mask.triggered.connect(lambda: pysat_ui.masked(self, MainWindow))
+        self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.stratified_folds(self, MainWindow))
+        self.actionTrain.triggered.connect(lambda: pysat_ui.regression_train(self, MainWindow))
+
+    #### Ok Button Clicked
+    def on_okButton_clicked(self):
+        self.pysat_fun.set_sm()
+        self.pysat_fun.get_sm_fit()
+        self.pysat_fun.get_plots()
+
+    def strat_fold_change_vars(self):
+        self.strat_folds_choose_var.clear()
+        choices = self.pysat_fun.data[self.strat_folds_choose_data.currentText()].df['meta'].columns.values
+        print(choices)
+        self.strat_folds_choose_var.addItems(choices)
+
+    def strat_fold_change_testfolds(self):
+        self.choose_test_fold.clear()
+        choices = list(map(str, list(range(1, self.nfolds_spin.value() + 1))))
+        print(choices)
+        self.choose_test_fold.addItems(choices)
