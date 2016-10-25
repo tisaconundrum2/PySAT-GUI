@@ -3,7 +3,7 @@ from pysat.regression.sm import sm
 import pandas as pd
 
 # This class should be worked on and saved for the future.
-# Currently we are only going to work on setting up the program
+# In previous versions we were only going to work on setting up the program
 # such that the user can only do each function once, but the
 # inner process is done twice.
 
