@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>644</width>
-    <height>433</height>
+    <height>525</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -174,147 +174,154 @@
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="pls_hlayout">
-       <item>
-        <widget class="QLabel" name="pls_nc_label">
-         <property name="text">
-          <string># of components: </string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QSpinBox" name="pls_nc_spin"/>
-       </item>
-       <item>
-        <spacer name="pls_spacer">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
+      <widget class="QWidget" name="pls_widget" native="true">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QLabel" name="pls_nc_label">
+          <property name="text">
+           <string># of Components: </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="pls_nc_spinbox"/>
+        </item>
+        <item>
+         <spacer name="pls_spacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="regression_options_vlayout"/>
-     </item>
-     <item>
-      <layout class="QVBoxLayout" name="gp_vlayout">
-       <item>
-        <layout class="QHBoxLayout" name="gp_dim_red_hlayout">
-         <item>
-          <widget class="QLabel" name="gp_dim_red_label">
-           <property name="text">
-            <string>Dimensionality reduction method:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="gp_dim_red_combobox">
-           <item>
+      <widget class="QWidget" name="gp_widget" native="true">
+       <layout class="QVBoxLayout" name="gp_vlayout">
+        <item>
+         <layout class="QHBoxLayout" name="gp_dim_red_hlayout">
+          <item>
+           <widget class="QLabel" name="gp_dim_red_label">
             <property name="text">
-             <string>PCA</string>
+             <string>Dimensionality reduction method:</string>
             </property>
-           </item>
-           <item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="gp_dim_red_combobox">
+            <item>
+             <property name="text">
+              <string>PCA</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>FastICA</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>ICA - JADE</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>None</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="gp_rand_starts_hlayout">
+          <item>
+           <widget class="QLabel" name="gp_rand_starts_label">
             <property name="text">
-             <string>FastICA</string>
+             <string># of random starts:</string>
             </property>
-           </item>
-           <item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="gp_rand_starts_spin"/>
+          </item>
+          <item>
+           <spacer name="gp_rand_starts_spacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="gp_theta_hlayout">
+          <item>
+           <widget class="QLabel" name="gp_theta0_label">
             <property name="text">
-             <string>ICA - JADE</string>
+             <string>theta_0</string>
             </property>
-           </item>
-           <item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDoubleSpinBox" name="gp_theta0_spin"/>
+          </item>
+          <item>
+           <widget class="QLabel" name="gp_thetaL_label">
             <property name="text">
-             <string>None</string>
+             <string>theta_L</string>
             </property>
-           </item>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="gp_rand_starts_hlayout">
-         <item>
-          <widget class="QLabel" name="gp_rand_starts_label">
-           <property name="text">
-            <string># of random starts:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QSpinBox" name="gp_rand_starts_spin"/>
-         </item>
-         <item>
-          <spacer name="gp_rand_starts_spacer">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="gp_theta_hlayout">
-         <item>
-          <widget class="QLabel" name="gp_theta0_label">
-           <property name="text">
-            <string>theta_0</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDoubleSpinBox" name="gp_theta0_spin"/>
-         </item>
-         <item>
-          <widget class="QLabel" name="gp_thetaL_label">
-           <property name="text">
-            <string>theta_L</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDoubleSpinBox" name="gp_thetaL_spin"/>
-         </item>
-         <item>
-          <widget class="QLabel" name="gp_thetaU_label">
-           <property name="text">
-            <string>theta_U</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDoubleSpinBox" name="gp_thetaU_spin"/>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-        </layout>
-       </item>
-      </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDoubleSpinBox" name="gp_thetaL_spin"/>
+          </item>
+          <item>
+           <widget class="QLabel" name="gp_thetaU_label">
+            <property name="text">
+             <string>theta_U</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDoubleSpinBox" name="gp_thetaU_spin"/>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
      </item>
      <item>
       <widget class="QCheckBox" name="regression_ransac_checkbox">

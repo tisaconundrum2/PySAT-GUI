@@ -135,8 +135,12 @@ class pysat_func():
 
     def do_strat_folds(self,datakey,nfolds,testfold,colname):
         self.data[datakey].stratified_folds(nfolds=nfolds,sortby=colname)
+        
         self.data[datakey+'-Train']=self.data[datakey].rows_match(('meta', 'Folds'), [testfold], invert=True)
         self.data[datakey+'-Test']=self.data[datakey].rows_match(('meta', 'Folds'), [testfold])
+        self.datakeys=self.data.keys()
+        
+        
         print(self.data.keys())
         print(self.data[datakey+'-Test'].df.index.shape)
         print(self.data[datakey+'-Train'].df.index.shape)
