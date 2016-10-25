@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ransac.ui'
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT\src\PYSAT_Gui_UI_Forms\ransac.ui'
 #
 # Created by: PyQt4 UI code generator 4.11.4
 #
@@ -68,14 +68,4 @@ class Ui_ransac(object):
         self.ransac_loss_func.setItemText(2, _translate("ransac", "Squared Error", None))
         self.ransac_threshold_label.setText(_translate("ransac", "Threshold", None))
         self.ransac_min_label.setText(_translate("ransac", "Minimum samples ", None))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    ransac = QtGui.QGroupBox()
-    ui = Ui_ransac()
-    ui.setupUi(ransac)
-    ransac.show()
-    sys.exit(app.exec_())
 

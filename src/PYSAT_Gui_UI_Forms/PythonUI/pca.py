@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'pca.ui'
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT\src\PYSAT_Gui_UI_Forms\pca.ui'
 #
 # Created by: PyQt4 UI code generator 4.11.4
 #
@@ -63,14 +63,4 @@ class Ui_pca(object):
         self.pca_choose_data.setItemText(1, _translate("pca", "Known Data", None))
         self.pca_nc_label.setText(_translate("pca", "# of components", None))
         self.pca_button.setText(_translate("pca", "Do PCA", None))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    pca = QtGui.QGroupBox()
-    ui = Ui_pca()
-    ui.setupUi(pca)
-    pca.show()
-    sys.exit(app.exec_())
 
