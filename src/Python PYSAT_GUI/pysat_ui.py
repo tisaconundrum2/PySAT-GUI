@@ -27,7 +27,6 @@ class pysat_ui(object):
         self.addPara = []
 
     def mainframe(self, MainWindow):
-        def setupUi(self, MainWindow):
             MainWindow.setObjectName(_fromUtf8("MainWindow"))
             MainWindow.resize(581, 843)
             self.centralWidget = QtGui.QWidget(MainWindow)
@@ -277,113 +276,6 @@ class pysat_ui(object):
             self.actionStratified_Folds.setText(_translate("MainWindow", "Stratified Folds", None))
             self.actionTrain_Submodels.setText(_translate("MainWindow", "Train Submodels", None))
 
-    def menu_items(self, MainWindow):
-        self.menuBar = QtGui.QMenuBar(MainWindow)
-        self.actionLoad_Refence_Data = QtGui.QAction(MainWindow)
-        self.actionLoad_Refence_Data.setObjectName(_fromUtf8("actionLoad_Refence_Data"))
-        self.menuBar.setGeometry(QtCore.QRect(0, 0, 581, 26))
-        self.menuBar.setObjectName(_fromUtf8("menuBar"))
-        self.menuFile = QtGui.QMenu(self.menuBar)
-        self.menuFile.setObjectName(_fromUtf8("menuFile"))
-        self.menuPreprocessing = QtGui.QMenu(self.menuBar)
-        self.menuPreprocessing.setObjectName(_fromUtf8("menuPreprocessing"))
-        self.menuBaseline_Removal = QtGui.QMenu(self.menuPreprocessing)
-        self.menuBaseline_Removal.setObjectName(_fromUtf8("menuBaseline_Removal"))
-        self.menuCalibration_Transfer = QtGui.QMenu(self.menuPreprocessing)
-        self.menuCalibration_Transfer.setObjectName(_fromUtf8("menuCalibration_Transfer"))
-        self.menuRegression = QtGui.QMenu(self.menuBar)
-        self.menuRegression.setObjectName(_fromUtf8("menuRegression"))
-        self.menuHelp = QtGui.QMenu(self.menuBar)
-        self.menuHelp.setObjectName(_fromUtf8("menuHelp"))
-        self.menuClassification = QtGui.QMenu(self.menuBar)
-        self.menuClassification.setObjectName(_fromUtf8("menuClassification"))
-        self.menuSupervised = QtGui.QMenu(self.menuClassification)
-        self.menuSupervised.setObjectName(_fromUtf8("menuSupervised"))
-        self.menuClustering = QtGui.QMenu(self.menuClassification)
-        self.menuClustering.setObjectName(_fromUtf8("menuClustering"))
-        self.menuVisualization = QtGui.QMenu(self.menuBar)
-        self.menuVisualization.setObjectName(_fromUtf8("menuVisualization"))
-        MainWindow.setMenuBar(self.menuBar)
-        self.actionLoad_reference_Data = QtGui.QAction(MainWindow)
-        self.actionLoad_reference_Data.setObjectName(_fromUtf8("actionLoad_reference_Data"))
-        self.menuFile.addAction(self.actionLoad_reference_Data)
-        self.menuFile.addAction(self.actionLoad_Unknown_Data)
-        self.menuFile.addAction(self.actionSet_output_location)
-        self.menuFile.addSeparator()
-        self.menuFile.addAction(self.actionSave_Current_Plots)
-        self.menuFile.addAction(self.actionSave_Current_Data)
-        self.menuFile.addSeparator()
-        self.menuFile.addAction(self.actionCreate_New_Workflow)
-        self.menuFile.addAction(self.actionSave_Current_Workflow)
-        self.menuFile.addSeparator()
-        self.menuFile.addAction(self.actionExit)
-        self.menuBaseline_Removal.addAction(self.actionALS)
-        self.menuBaseline_Removal.addAction(self.actionDietrich)
-        self.menuBaseline_Removal.addAction(self.actionPolyFit)
-        self.menuBaseline_Removal.addAction(self.actionAirPLS)
-        self.menuBaseline_Removal.addAction(self.actionFABC)
-        self.menuBaseline_Removal.addAction(self.actionKK)
-        self.menuBaseline_Removal.addAction(self.actionMario)
-        self.menuBaseline_Removal.addAction(self.actionMedian)
-        self.menuBaseline_Removal.addAction(self.actionRubberband)
-        self.menuBaseline_Removal.addAction(self.actionUndecimated_Wavelet)
-        self.menuCalibration_Transfer.addAction(self.actionRatio)
-        self.menuCalibration_Transfer.addAction(self.actionTommy_s_Methgod)
-        self.menuCalibration_Transfer.addAction(self.actionPiecewise_Direct_Standardization)
-        self.menuCalibration_Transfer.addAction(self.actionOthers_3)
-        self.menuPreprocessing.addAction(self.actionNormalization)
-        self.menuPreprocessing.addAction(self.actionNoise_Reduction)
-        self.menuPreprocessing.addAction(self.actionApply_Mask)
-        self.menuPreprocessing.addAction(self.actionInterpolate)
-        self.menuPreprocessing.addAction(self.actionInstrument_Response)
-        self.menuPreprocessing.addAction(self.menuBaseline_Removal.menuAction())
-        self.menuPreprocessing.addAction(self.menuCalibration_Transfer.menuAction())
-        self.menuPreprocessing.addAction(self.actionICA_2)
-        self.menuPreprocessing.addAction(self.actionPCA_2)
-        self.menuPreprocessing.addAction(self.actionStratified_Folds)
-        self.menuRegression.addAction(self.actionCross_Validation)
-        self.menuRegression.addAction(self.actionTrain)
-        self.menuRegression.addAction(self.actionTrain_Submodels)
-        self.menuRegression.addAction(self.actionPredict)
-        self.menuHelp.addAction(self.actionIndex)
-        self.menuHelp.addAction(self.actionContent_2)
-        self.menuHelp.addSeparator()
-        self.menuHelp.addAction(self.actionAbout)
-        self.menuHelp.addAction(self.actionAbout_QtCreator)
-        self.menuSupervised.addAction(self.actionPLS_DA)
-        self.menuSupervised.addAction(self.actionSIMCA)
-        self.menuClustering.addAction(self.actionK_means)
-        self.menuClustering.addAction(self.actionHierarchical_2)
-        self.menuClassification.addAction(self.menuSupervised.menuAction())
-        self.menuClassification.addAction(self.menuClustering.menuAction())
-        self.menuVisualization.addAction(self.actionLine_Plot)
-        self.menuVisualization.addAction(self.action1_to_1_Plot)
-        self.menuVisualization.addAction(self.actionScatter_Plot)
-        self.menuBar.addAction(self.menuFile.menuAction())
-        self.menuBar.addAction(self.menuPreprocessing.menuAction())
-        self.menuBar.addAction(self.menuClassification.menuAction())
-        self.menuBar.addAction(self.menuRegression.menuAction())
-        self.menuBar.addAction(self.menuVisualization.menuAction())
-        self.menuBar.addAction(self.menuHelp.menuAction())
-        self.okButton.setText(_translate("MainWindow", "OK", None))
-        self.menuFile.setTitle(_translate("MainWindow", "File", None))
-        self.actionLoad_Refence_Data.setText(_translate("MainWindow", "Load Refence Data", None))
-        self.menuPreprocessing.setTitle(_translate("MainWindow", "Preprocessing", None))
-        self.menuBaseline_Removal.setTitle(_translate("MainWindow", "Baseline Removal", None))
-        self.menuCalibration_Transfer.setTitle(_translate("MainWindow", "Calibration Transfer", None))
-        self.menuRegression.setTitle(_translate("MainWindow", "Regression", None))
-        self.menuHelp.setTitle(_translate("MainWindow", "Help", None))
-        self.menuClassification.setTitle(_translate("MainWindow", "Classification", None))
-        self.menuSupervised.setTitle(_translate("MainWindow", "Supervised", None))
-        self.menuClustering.setTitle(_translate("MainWindow", "Clustering", None))
-        self.menuVisualization.setTitle(_translate("MainWindow", "Visualization", None))
-        self.actionLoad_reference_Data.setText(_translate("MainWindow", "Load Reference Data", None))
-        self.actionPiecewise_Direct_Standardization.setText(_translate("MainWindow", "Piecewise Direct Standardization", None))
-        self.actionCreate_Test_Folds.setText(_translate("MainWindow", "Create Test Folds", None))
-        self.actionStratified_Folds.setText(_translate("MainWindow", "Stratified Folds", None))
-        self.actionStratified_Folds.setText(_translate("MainWindow", "Stratified Folds", None))
-        self.actionTrain_Submodels.setText(_translate("MainWindow", "Train Submodels", None))
-
     def unknown_data(self, MainWindow):
         self.unknownData = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
         font = QtGui.QFont()
@@ -540,8 +432,7 @@ class pysat_ui(object):
             pass
 
 
-            #### Opening Files
-
+    #### Opening Files
     def on_maskFile_clicked(self, lineEdit):
         filename = QFileDialog.getOpenFileName(None, "Open Mask File", '.', "(*.csv)")
         lineEdit.setText(filename)
@@ -595,3 +486,125 @@ class pysat_ui(object):
         choices = list(map(str, list(range(1, self.nfolds_spin.value() + 1))))
         print(choices)
         self.choose_test_fold.addItems(choices)
+        
+    def make_ransac_widget(self):
+        try:
+            self.ransac_widget.deleteLater()
+        except:
+            pass
+        self.ransac_widget=QtGui.QWidget()
+        if self.regression_ransac_checkbox.isChecked():
+            
+            ransac_widget_hlayout = QtGui.QHBoxLayout(self.ransac_widget)
+            ransac_lossfunc_hlayout = QtGui.QHBoxLayout()
+            ransac_lossfunc_label = QtGui.QLabel(self.ransac_widget)
+            ransac_lossfunc_label.setText('Loss function:')
+            ransac_lossfunc_hlayout.addWidget(ransac_lossfunc_label)
+            ransac_lossfunc_combobox = QtGui.QComboBox(self.ransac_widget)
+            ransac_lossfunc_combobox.addItem(_fromUtf8("Squared Error"))
+            ransac_lossfunc_combobox.addItem(_fromUtf8("Absolute Error"))
+            ransac_lossfunc_hlayout.addWidget(ransac_lossfunc_combobox)
+            ransac_lossfunc_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+            ransac_lossfunc_hlayout.addItem(ransac_lossfunc_spacer)
+            ransac_widget_hlayout.addLayout(ransac_lossfunc_hlayout)
+            ransac_thresh_hlayout = QtGui.QHBoxLayout()
+            ransac_thresh_label = QtGui.QLabel(self.ransac_widget)
+            ransac_thresh_label.setText('Threshold:')
+            ransac_thresh_hlayout.addWidget(ransac_thresh_label)
+            ransac_thresh_spin = QtGui.QDoubleSpinBox(self.ransac_widget)
+            ransac_thresh_hlayout.addWidget(ransac_thresh_spin)
+            ransac_thresh_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+            ransac_thresh_hlayout.addItem(ransac_thresh_spacer)
+            ransac_widget_hlayout.addLayout(ransac_thresh_hlayout)
+            self.ransac_hlayout.addWidget(self.ransac_widget)
+
+        
+        
+            
+            
+    def make_regression_widget(self):
+        alg=self.regression_choosealg.currentText()
+        print(alg)
+        try:
+            self.reg_widget.deleteLater()
+        except:
+            pass
+        self.reg_widget=QtGui.QWidget()
+        if alg=='Choose an algorithm':
+            pass
+        if alg=='PLS':
+            pls_hlayout = QtGui.QHBoxLayout(self.reg_widget)
+            pls_nc_label = QtGui.QLabel(self.reg_widget)
+            pls_nc_label.setText('# of components:')
+            pls_hlayout.addWidget(pls_nc_label)
+            pls_nc_spinbox = QtGui.QSpinBox(self.reg_widget)
+            pls_hlayout.addWidget(pls_nc_spinbox)
+            pls_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+            pls_hlayout.addItem(pls_spacer)
+            
+        if alg=='GP':
+            gp_vlayout = QtGui.QVBoxLayout(self.reg_widget)
+            gp_dim_red_hlayout = QtGui.QHBoxLayout()
+            gp_dim_red_label = QtGui.QLabel(self.reg_widget)
+            gp_dim_red_label.setText('Choose dimensionality reduction method:')
+            gp_dim_red_hlayout.addWidget(gp_dim_red_label)
+            gp_dim_red_combobox = QtGui.QComboBox(self.reg_widget)
+            gp_dim_red_combobox.addItem(_fromUtf8("PCA"))
+            gp_dim_red_combobox.addItem(_fromUtf8("ICA"))
+            gp_dim_red_hlayout.addWidget(gp_dim_red_combobox)
+            gp_vlayout.addLayout(gp_dim_red_hlayout)
+            gp_rand_starts_hlayout = QtGui.QHBoxLayout()
+            gp_rand_starts_label = QtGui.QLabel(self.reg_widget)
+            gp_rand_starts_label.setText('# of random starts:')
+            gp_rand_starts_hlayout.addWidget(gp_rand_starts_label)
+            gp_rand_starts_spin = QtGui.QSpinBox(self.reg_widget)
+            gp_rand_starts_spin.setValue(1)
+            gp_rand_starts_hlayout.addWidget(gp_rand_starts_spin)
+            spacerItem4 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+            gp_rand_starts_hlayout.addItem(spacerItem4)
+            gp_vlayout.addLayout(gp_rand_starts_hlayout)
+            gp_theta_vlayout = QtGui.QVBoxLayout()
+            gp_theta0_label = QtGui.QLabel(self.reg_widget)
+            gp_theta0_label.setText('Starting Theta:')
+            gp_theta_vlayout.addWidget(gp_theta0_label)
+            gp_theta0_spin = QtGui.QDoubleSpinBox(self.reg_widget)
+            gp_theta0_spin.setValue(1.0)
+            gp_theta_vlayout.addWidget(gp_theta0_spin)
+            gp_thetaL_label = QtGui.QLabel(self.reg_widget)
+            gp_thetaL_label.setText('Lower bound on Theta:')
+            gp_theta_vlayout.addWidget(gp_thetaL_label)
+            gp_thetaL_spin = QtGui.QDoubleSpinBox(self.reg_widget)
+            gp_thetaL_spin.setValue(0.1)            
+            gp_theta_vlayout.addWidget(gp_thetaL_spin)
+            gp_thetaU_label = QtGui.QLabel(self.reg_widget)
+            gp_thetaU_label.setText('Upper bound on Theta:')
+            gp_theta_vlayout.addWidget(gp_thetaU_label)
+            gp_thetaU_spin = QtGui.QDoubleSpinBox(self.reg_widget)
+            gp_thetaU_spin.setMaximum(10000)
+            gp_thetaU_spin.setValue(100.0)
+            
+            gp_theta_vlayout.addWidget(gp_thetaU_spin)
+            spacerItem5 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+            gp_theta_vlayout.addItem(spacerItem5)
+            gp_vlayout.addLayout(gp_theta_vlayout)
+            
+        self.regression_vlayout.addWidget(self.reg_widget)
+        
+
+def make_combobox(choices):
+    combo=QtGui.QComboBox()
+   
+    for i,choice in enumerate(choices):
+        combo.addItem(_fromUtf8(""))
+        combo.setItemText(i,_translate('',choice,None))
+        
+    return combo
+
+    
+def make_listwidget(choices):
+    listwidget = QtGui.QListWidget()
+    listwidget.setItemDelegate
+    for item in choices:
+        item = QtGui.QListWidgetItem(item)
+        listwidget.addItem(item)
+    return listwidget
