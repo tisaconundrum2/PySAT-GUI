@@ -39,7 +39,7 @@ class pysat_func(object):
         except Exception as e:
             error_print(e)
 
-    def do_norm(self, datakey, ranges):
+    def submodel_ranges(self, datakey, ranges):
         print("{}".format(ranges))
         try:
             self.data[datakey].norm(ranges)
