@@ -13,6 +13,7 @@ class Main(QMainWindow):
         pysat = pysat_ui()
         pysat.mainframe(MainWindow)           # Set up the mainwindow. This is the backbone of the UI it IS REQUIRED
         pysat.file_outpath(MainWindow)
+
         # pysat.menu_item_shortcuts()           # The shortcuts for making things happen in the UI
         # pysat.menu_item_functions(MainWindow) # These are the various functions that make the UI work
 
