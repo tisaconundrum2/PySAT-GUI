@@ -47,7 +47,7 @@ class Ui_file_out_path(object):
     def retranslateUi(self, file_out_path):
         file_out_path.setWindowTitle(_translate("file_out_path", "PCA", None))
         file_out_path.setTitle(_translate("file_out_path", "Output Folder", None))
-        self.file_out_path_label.setText(_translate("file_out_path", "File Name", None))
+        self.file_out_path_label.setText(_translate("file_out_path", "Folder Name", None))
         self.file_out_path_line_edit.setText(_translate("file_out_path", "*/", None))
         self.file_out_path_button.setText(_translate("file_out_path", "...", None))
 

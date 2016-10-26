@@ -1,12 +1,5 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT\src\PYSAT_Gui_UI_Forms\00_mainframe_ok.ui'
-#
-# Created by: PyQt4 UI code generator 4.11.4
-#
-# WARNING! All changes made in this file will be lost!
-
 from PyQt4 import QtCore, QtGui
+from pysat_function import pysat_func
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -16,16 +9,22 @@ except AttributeError:
 
 try:
     _encoding = QtGui.QApplication.UnicodeUTF8
+
+
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig, _encoding)
 except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
+
+class mainframe_(object):
+    def __init__(self):
+        pass
+
+    def mainframe(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(581, 843)
+        MainWindow.resize(600, 843)
         self.centralWidget = QtGui.QWidget(MainWindow)
         self.centralWidget.setObjectName(_fromUtf8("centralWidget"))
         self.verticalLayout_9 = QtGui.QVBoxLayout(self.centralWidget)
@@ -35,29 +34,29 @@ class Ui_MainWindow(object):
         self.scrollArea = QtGui.QScrollArea(self.centralWidget)
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName(_fromUtf8("scrollArea"))
-        self.scrollAreaContents = QtGui.QWidget()
-        self.scrollAreaContents.setGeometry(QtCore.QRect(0, 0, 561, 742))
+        self.scrollAreaWidgetContents_2 = QtGui.QWidget()
+        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 557, 695))
         font = QtGui.QFont()
         font.setPointSize(8)
-        self.scrollAreaContents.setFont(font)
-        self.scrollAreaContents.setStyleSheet(_fromUtf8("QGroupBox {\n"
-"  border: 2px solid gray;\n"
-"  border-radius: 6px;\n"
-"  margin-top: 0.5em;\n"
-"}\n"
-"\n"
-"QGroupBox::title {\n"
-"\n"
-"  padding-top: -14px;\n"
-"  padding-left: 8px;\n"
-"}\n"
-""))
-        self.scrollAreaContents.setObjectName(_fromUtf8("scrollAreaContents"))
-        self.verticalLayout_8 = QtGui.QVBoxLayout(self.scrollAreaContents)
+        self.scrollAreaWidgetContents_2.setFont(font)
+        self.scrollAreaWidgetContents_2.setStyleSheet(_fromUtf8("QGroupBox {\n"
+                                                                "  border: 2px solid gray;\n"
+                                                                "  border-radius: 6px;\n"
+                                                                "  margin-top: 0.5em;\n"
+                                                                "}\n"
+                                                                "\n"
+                                                                "QGroupBox::title {\n"
+                                                                "\n"
+                                                                "  padding-top: -14px;\n"
+                                                                "  padding-left: 8px;\n"
+                                                                "}\n"
+                                                                ""))
+        self.scrollAreaWidgetContents_2.setObjectName(_fromUtf8("scrollAreaWidgetContents_2"))
+        self.verticalLayout_8 = QtGui.QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_8.setMargin(11)
         self.verticalLayout_8.setSpacing(6)
         self.verticalLayout_8.setObjectName(_fromUtf8("verticalLayout_8"))
-        self.scrollArea.setWidget(self.scrollAreaContents)
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents_2)
         self.verticalLayout_9.addWidget(self.scrollArea)
         self.OK = QtGui.QGroupBox(self.centralWidget)
         self.OK.setObjectName(_fromUtf8("OK"))
@@ -82,8 +81,32 @@ class Ui_MainWindow(object):
         self.statusBar = QtGui.QStatusBar(MainWindow)
         self.statusBar.setObjectName(_fromUtf8("statusBar"))
         MainWindow.setStatusBar(self.statusBar)
-        self.actionLoad_Refence_Data = QtGui.QAction(MainWindow)
-        self.actionLoad_Refence_Data.setObjectName(_fromUtf8("actionLoad_Refence_Data"))
+        self.menuBar = QtGui.QMenuBar(MainWindow)
+        self.menuBar.setGeometry(QtCore.QRect(0, 0, 581, 26))
+        self.menuBar.setObjectName(_fromUtf8("menuBar"))
+        self.menuFile = QtGui.QMenu(self.menuBar)
+        self.menuFile.setObjectName(_fromUtf8("menuFile"))
+        self.menuPreprocessing = QtGui.QMenu(self.menuBar)
+        self.menuPreprocessing.setObjectName(_fromUtf8("menuPreprocessing"))
+        self.menuBaseline_Removal = QtGui.QMenu(self.menuPreprocessing)
+        self.menuBaseline_Removal.setObjectName(_fromUtf8("menuBaseline_Removal"))
+        self.menuCalibration_Transfer = QtGui.QMenu(self.menuPreprocessing)
+        self.menuCalibration_Transfer.setObjectName(_fromUtf8("menuCalibration_Transfer"))
+        self.menuRegression = QtGui.QMenu(self.menuBar)
+        self.menuRegression.setObjectName(_fromUtf8("menuRegression"))
+        self.menuHelp = QtGui.QMenu(self.menuBar)
+        self.menuHelp.setObjectName(_fromUtf8("menuHelp"))
+        self.menuClassification = QtGui.QMenu(self.menuBar)
+        self.menuClassification.setObjectName(_fromUtf8("menuClassification"))
+        self.menuSupervised = QtGui.QMenu(self.menuClassification)
+        self.menuSupervised.setObjectName(_fromUtf8("menuSupervised"))
+        self.menuClustering = QtGui.QMenu(self.menuClassification)
+        self.menuClustering.setObjectName(_fromUtf8("menuClustering"))
+        self.menuVisualization = QtGui.QMenu(self.menuBar)
+        self.menuVisualization.setObjectName(_fromUtf8("menuVisualization"))
+        MainWindow.setMenuBar(self.menuBar)
+        self.actionLoad_reference_Data = QtGui.QAction(MainWindow)
+        self.actionLoad_reference_Data.setObjectName(_fromUtf8("actionLoad_reference_Data"))
         self.actionLoad_Unknown_Data = QtGui.QAction(MainWindow)
         self.actionLoad_Unknown_Data.setObjectName(_fromUtf8("actionLoad_Unknown_Data"))
         self.actionSave_Current_Workflow = QtGui.QAction(MainWindow)
@@ -127,7 +150,8 @@ class Ui_MainWindow(object):
         self.actionTommy_s_Methgod = QtGui.QAction(MainWindow)
         self.actionTommy_s_Methgod.setObjectName(_fromUtf8("actionTommy_s_Methgod"))
         self.actionPiecewise_Direct_Standardization = QtGui.QAction(MainWindow)
-        self.actionPiecewise_Direct_Standardization.setObjectName(_fromUtf8("actionPiecewise_Direct_Standardization"))
+        self.actionPiecewise_Direct_Standardization.setObjectName(
+            _fromUtf8("actionPiecewise_Direct_Standardization"))
         self.actionPCA = QtGui.QAction(MainWindow)
         self.actionPCA.setObjectName(_fromUtf8("actionPCA"))
         self.actionICA = QtGui.QAction(MainWindow)
@@ -200,16 +224,84 @@ class Ui_MainWindow(object):
         self.actionCreate_N_Folds.setObjectName(_fromUtf8("actionCreate_N_Folds"))
         self.actionCreate_Test_Folds = QtGui.QAction(MainWindow)
         self.actionCreate_Test_Folds.setObjectName(_fromUtf8("actionCreate_Test_Folds"))
-        self.actionSubmodel_Ranges = QtGui.QAction(MainWindow)
-        self.actionSubmodel_Ranges.setObjectName(_fromUtf8("actionSubmodel_Ranges"))
-
-        self.retranslateUi(MainWindow)
+        self.actionStratified_Folds = QtGui.QAction(MainWindow)
+        self.actionStratified_Folds.setObjectName(_fromUtf8("actionStratified_Folds"))
+        self.actionTrain_Submodels = QtGui.QAction(MainWindow)
+        self.actionTrain_Submodels.setObjectName(_fromUtf8("actionTrain_Submodels"))
+        self.menuFile.addAction(self.actionLoad_reference_Data)
+        self.menuFile.addAction(self.actionLoad_Unknown_Data)
+        self.menuFile.addAction(self.actionSet_output_location)
+        self.menuFile.addSeparator()
+        self.menuFile.addAction(self.actionSave_Current_Plots)
+        self.menuFile.addAction(self.actionSave_Current_Data)
+        self.menuFile.addSeparator()
+        self.menuFile.addAction(self.actionCreate_New_Workflow)
+        self.menuFile.addAction(self.actionSave_Current_Workflow)
+        self.menuFile.addSeparator()
+        self.menuFile.addAction(self.actionExit)
+        self.menuBaseline_Removal.addAction(self.actionALS)
+        self.menuBaseline_Removal.addAction(self.actionDietrich)
+        self.menuBaseline_Removal.addAction(self.actionPolyFit)
+        self.menuBaseline_Removal.addAction(self.actionAirPLS)
+        self.menuBaseline_Removal.addAction(self.actionFABC)
+        self.menuBaseline_Removal.addAction(self.actionKK)
+        self.menuBaseline_Removal.addAction(self.actionMario)
+        self.menuBaseline_Removal.addAction(self.actionMedian)
+        self.menuBaseline_Removal.addAction(self.actionRubberband)
+        self.menuBaseline_Removal.addAction(self.actionUndecimated_Wavelet)
+        self.menuCalibration_Transfer.addAction(self.actionRatio)
+        self.menuCalibration_Transfer.addAction(self.actionTommy_s_Methgod)
+        self.menuCalibration_Transfer.addAction(self.actionPiecewise_Direct_Standardization)
+        self.menuCalibration_Transfer.addAction(self.actionOthers_3)
+        self.menuPreprocessing.addAction(self.actionNormalization)
+        self.menuPreprocessing.addAction(self.actionNoise_Reduction)
+        self.menuPreprocessing.addAction(self.actionApply_Mask)
+        self.menuPreprocessing.addAction(self.actionInterpolate)
+        self.menuPreprocessing.addAction(self.actionInstrument_Response)
+        self.menuPreprocessing.addAction(self.menuBaseline_Removal.menuAction())
+        self.menuPreprocessing.addAction(self.menuCalibration_Transfer.menuAction())
+        self.menuPreprocessing.addAction(self.actionICA_2)
+        self.menuPreprocessing.addAction(self.actionPCA_2)
+        self.menuPreprocessing.addAction(self.actionStratified_Folds)
+        self.menuRegression.addAction(self.actionCross_Validation)
+        self.menuRegression.addAction(self.actionTrain)
+        # self.menuRegression.addAction(self.actionTrain_Submodels)
+        self.menuRegression.addAction(self.actionPredict)
+        self.menuHelp.addAction(self.actionIndex)
+        self.menuHelp.addAction(self.actionContent_2)
+        self.menuHelp.addSeparator()
+        self.menuHelp.addAction(self.actionAbout)
+        self.menuHelp.addAction(self.actionAbout_QtCreator)
+        self.menuSupervised.addAction(self.actionPLS_DA)
+        self.menuSupervised.addAction(self.actionSIMCA)
+        self.menuClustering.addAction(self.actionK_means)
+        self.menuClustering.addAction(self.actionHierarchical_2)
+        self.menuClassification.addAction(self.menuSupervised.menuAction())
+        self.menuClassification.addAction(self.menuClustering.menuAction())
+        self.menuVisualization.addAction(self.actionLine_Plot)
+        self.menuVisualization.addAction(self.action1_to_1_Plot)
+        self.menuVisualization.addAction(self.actionScatter_Plot)
+        self.menuBar.addAction(self.menuFile.menuAction())
+        self.menuBar.addAction(self.menuPreprocessing.menuAction())
+        self.menuBar.addAction(self.menuClassification.menuAction())
+        self.menuBar.addAction(self.menuRegression.menuAction())
+        self.menuBar.addAction(self.menuVisualization.menuAction())
+        self.menuBar.addAction(self.menuHelp.menuAction())
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "PYSAT", None))
         self.okButton.setText(_translate("MainWindow", "OK", None))
-        self.actionLoad_Refence_Data.setText(_translate("MainWindow", "Load Refence Data", None))
+        self.menuFile.setTitle(_translate("MainWindow", "File", None))
+        self.menuPreprocessing.setTitle(_translate("MainWindow", "Preprocessing", None))
+        self.menuBaseline_Removal.setTitle(_translate("MainWindow", "Baseline Removal", None))
+        self.menuCalibration_Transfer.setTitle(_translate("MainWindow", "Calibration Transfer", None))
+        self.menuRegression.setTitle(_translate("MainWindow", "Regression", None))
+        self.menuHelp.setTitle(_translate("MainWindow", "Help", None))
+        self.menuClassification.setTitle(_translate("MainWindow", "Classification", None))
+        self.menuSupervised.setTitle(_translate("MainWindow", "Supervised", None))
+        self.menuClustering.setTitle(_translate("MainWindow", "Clustering", None))
+        self.menuVisualization.setTitle(_translate("MainWindow", "Visualization", None))
+        self.actionLoad_reference_Data.setText(_translate("MainWindow", "Load Reference Data", None))
         self.actionLoad_Unknown_Data.setText(_translate("MainWindow", "Load Unknown Data", None))
         self.actionSave_Current_Workflow.setText(_translate("MainWindow", "Save Current Workflow", None))
         self.actionSave_Current_Plots.setText(_translate("MainWindow", "Save Current Plots", None))
@@ -231,7 +323,8 @@ class Ui_MainWindow(object):
         self.actionUndecimated_Wavelet.setText(_translate("MainWindow", "Undecimated Wavelet", None))
         self.actionRatio.setText(_translate("MainWindow", "Ratio", None))
         self.actionTommy_s_Methgod.setText(_translate("MainWindow", "Tommy\'s Method", None))
-        self.actionPiecewise_Direct_Standardization.setText(_translate("MainWindow", "Piecewise Direct Standardization", None))
+        self.actionPiecewise_Direct_Standardization.setText(
+            _translate("MainWindow", "Piecewise Direct Standardization", None))
         self.actionPCA.setText(_translate("MainWindow", "PCA", None))
         self.actionICA.setText(_translate("MainWindow", "ICA", None))
         self.actionK_Means.setText(_translate("MainWindow", "K-Means", None))
@@ -267,6 +360,4 @@ class Ui_MainWindow(object):
         self.actionScatter_Plot.setText(_translate("MainWindow", "Scatter Plot", None))
         self.actionSet_output_location.setText(_translate("MainWindow", "Output Location", None))
         self.actionCreate_N_Folds.setText(_translate("MainWindow", "Create N Folds", None))
-        self.actionCreate_Test_Folds.setText(_translate("MainWindow", "Create Test Folds", None))
-        self.actionSubmodel_Ranges.setText(_translate("MainWindow", "Submodel Ranges", None))
-
+        self.actionStratified_Folds.setText(_translate("MainWindow", "Stratified Folds", None))

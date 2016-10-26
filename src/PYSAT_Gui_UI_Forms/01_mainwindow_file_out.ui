@@ -32,7 +32,7 @@
    <item>
     <widget class="QLabel" name="file_out_path_label">
      <property name="text">
-      <string>File Name</string>
+      <string>Folder Name</string>
      </property>
     </widget>
    </item>
