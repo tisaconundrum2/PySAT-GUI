@@ -431,7 +431,11 @@ class pysat_ui(object):
         except:
             pass
 
-
+    """ =============================================
+    Please do not delete the files below this line!
+    These files are the working files that allow the UI
+    to operate and do things!
+    ============================================== """
     #### Opening Files
     def on_maskFile_clicked(self, lineEdit):
         filename = QFileDialog.getOpenFileName(None, "Open Mask File", '.', "(*.csv)")
@@ -494,7 +498,7 @@ class pysat_ui(object):
             pass
         self.ransac_widget=QtGui.QWidget()
         if self.regression_ransac_checkbox.isChecked():
-            
+
             ransac_widget_hlayout = QtGui.QHBoxLayout(self.ransac_widget)
             ransac_lossfunc_hlayout = QtGui.QHBoxLayout()
             ransac_lossfunc_label = QtGui.QLabel(self.ransac_widget)
