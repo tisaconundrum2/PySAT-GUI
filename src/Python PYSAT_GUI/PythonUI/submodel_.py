@@ -1,12 +1,6 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT\src\PYSAT_Gui_UI_Forms\01_mainwindow_submodel.ui'
-#
-# Created by: PyQt4 UI code generator 4.11.4
-#
-# WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
+from pysat_function import pysat_func
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -16,14 +10,20 @@ except AttributeError:
 
 try:
     _encoding = QtGui.QApplication.UnicodeUTF8
+
+
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig, _encoding)
 except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-class Ui_submodel(object):
-    def setupUi(self, submodel):
+
+class submodel_(object):
+    def __init__(self):
+        self.pysat_fun = pysat_func()
+
+    def submodel(self, submodel):
         submodel.setObjectName(_fromUtf8("submodel"))
         submodel.resize(644, 238)
         submodel.setMinimumSize(QtCore.QSize(600, 150))
@@ -86,10 +86,6 @@ class Ui_submodel(object):
         self.submodel_vlayout.addLayout(self.submodel_trainbutton_hlayout)
         self.verticalLayout_2.addLayout(self.submodel_vlayout)
 
-        self.retranslateUi(submodel)
-        QtCore.QMetaObject.connectSlotsByName(submodel)
-
-    def retranslateUi(self, submodel):
         submodel.setWindowTitle(_translate("submodel", "Regression", None))
         submodel.setTitle(_translate("submodel", "Regression", None))
         self.submodel_choosedata.setItemText(0, _translate("submodel", "Choose Data", None))

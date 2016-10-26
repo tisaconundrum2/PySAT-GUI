@@ -1,12 +1,6 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT\src\PYSAT_Gui_UI_Forms\01_mainwindow_strat_folds.ui'
-#
-# Created by: PyQt4 UI code generator 4.11.4
-#
-# WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
+from pysat_function import pysat_func
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -16,18 +10,21 @@ except AttributeError:
 
 try:
     _encoding = QtGui.QApplication.UnicodeUTF8
+
+
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig, _encoding)
 except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-class Ui_strat_folds(object):
-    def setupUi(self, strat_folds):
+
+class strat_folds_(object):
+    def __init__(self):
+        self.pysat_fun = pysat_func()
+
+    def strat_folds(self, strat_folds):
         strat_folds.setObjectName(_fromUtf8("strat_folds"))
-        strat_folds.resize(602, 150)
-        strat_folds.setMinimumSize(QtCore.QSize(600, 150))
-        strat_folds.setMaximumSize(QtCore.QSize(16777215, 150))
         self.verticalLayout_2 = QtGui.QVBoxLayout(strat_folds)
         self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
         self.strat_folds_vlayout = QtGui.QVBoxLayout()
@@ -72,10 +69,6 @@ class Ui_strat_folds(object):
         self.strat_folds_vlayout.addLayout(self.strat_folds_hlayout)
         self.verticalLayout_2.addLayout(self.strat_folds_vlayout)
 
-        self.retranslateUi(strat_folds)
-        QtCore.QMetaObject.connectSlotsByName(strat_folds)
-
-    def retranslateUi(self, strat_folds):
         strat_folds.setWindowTitle(_translate("strat_folds", "Stratified Folds", None))
         strat_folds.setTitle(_translate("strat_folds", "Stratified Folds", None))
         self.strat_folds_choose_data.setItemText(0, _translate("strat_folds", "Choose Data", None))

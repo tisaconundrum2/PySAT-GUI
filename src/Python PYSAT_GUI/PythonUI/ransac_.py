@@ -1,12 +1,6 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT\src\PYSAT_Gui_UI_Forms\01_mainwindow_ransac.ui'
-#
-# Created by: PyQt4 UI code generator 4.11.4
-#
-# WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
+from pysat_function import pysat_func
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -16,14 +10,20 @@ except AttributeError:
 
 try:
     _encoding = QtGui.QApplication.UnicodeUTF8
+
+
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig, _encoding)
 except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-class Ui_ransac(object):
-    def setupUi(self, ransac):
+
+class regression_(object):
+    def __init__(self):
+        self.pysat_fun = pysat_func()
+
+    def regression(self, ransac):
         ransac.setObjectName(_fromUtf8("ransac"))
         ransac.resize(676, 100)
         ransac.setMinimumSize(QtCore.QSize(600, 100))
@@ -56,11 +56,6 @@ class Ui_ransac(object):
         self.ransac_loss_func_hlayout.addItem(spacerItem)
         self.ransac_vlayout.addLayout(self.ransac_loss_func_hlayout)
         self.verticalLayout_2.addLayout(self.ransac_vlayout)
-
-        self.retranslateUi(ransac)
-        QtCore.QMetaObject.connectSlotsByName(ransac)
-
-    def retranslateUi(self, ransac):
         ransac.setWindowTitle(_translate("ransac", "RANSAC", None))
         ransac.setTitle(_translate("ransac", "RANSAC", None))
         self.ransac_loss_func.setItemText(0, _translate("ransac", "Loss Function", None))

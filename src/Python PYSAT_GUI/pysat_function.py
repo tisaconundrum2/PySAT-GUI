@@ -12,6 +12,8 @@ class pysat_func(object):
         self.datakeys=[]
         self.models={}
         self.modelkeys=[]
+        self.addFunc = []
+        self.addPara = []
 
 
     def set_file_outpath(self, outpath):
@@ -29,7 +31,6 @@ class pysat_func(object):
 
         except Exception as e:
             error_print('Problem reading data: {}'.format(e))
-
 
     def do_mask(self, datakey, maskfile):
         self.maskfile = maskfile
