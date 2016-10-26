@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'strat_folds.ui'
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT\src\PYSAT_Gui_UI_Forms\01_mainwindow_strat_folds.ui'
 #
 # Created by: PyQt4 UI code generator 4.11.4
 #
@@ -93,14 +93,4 @@ class Ui_strat_folds(object):
         self.nfolds_label.setText(_translate("strat_folds", "N folds", None))
         self.test_fold_label.setText(_translate("strat_folds", "Test Fold", None))
         self.create_folds.setText(_translate("strat_folds", "Create Folds", None))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    strat_folds = QtGui.QGroupBox()
-    ui = Ui_strat_folds()
-    ui.setupUi(strat_folds)
-    strat_folds.show()
-    sys.exit(app.exec_())
 

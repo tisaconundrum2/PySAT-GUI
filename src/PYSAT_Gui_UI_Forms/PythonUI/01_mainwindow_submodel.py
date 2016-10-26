@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'submodel.ui'
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT\src\PYSAT_Gui_UI_Forms\01_mainwindow_submodel.ui'
 #
 # Created by: PyQt4 UI code generator 4.11.4
 #
@@ -102,14 +102,4 @@ class Ui_submodel(object):
         self.submodel_choosealg.setItemText(3, _translate("submodel", "Others coming soon...", None))
         self.regression_ransac_checkbox.setText(_translate("submodel", "RANSAC", None))
         self.submodel_trainbutton.setText(_translate("submodel", "Train Submodels", None))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    submodel = QtGui.QGroupBox()
-    ui = Ui_submodel()
-    ui.setupUi(submodel)
-    submodel.show()
-    sys.exit(app.exec_())
 
