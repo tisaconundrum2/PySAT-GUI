@@ -1,8 +1,12 @@
-from PyQt4 import QtCore, QtGui
-from pysat_function import pysat_func
-import PythonUI
+# -*- coding: utf-8 -*-
 
-import pysat
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT\src\PYSAT_Gui_UI_Forms\\UI Files\01_mainwindow_get_mask.ui'
+#
+# Created by: PyQt4 UI code generator 4.11.4
+#
+# WARNING! All changes made in this file will be lost!
+
+from PyQt4 import QtCore, QtGui
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -12,26 +16,16 @@ except AttributeError:
 
 try:
     _encoding = QtGui.QApplication.UnicodeUTF8
-
-
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig, _encoding)
 except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-
-
-
-
-
-class pysat_ui(object):
-    def __init__(self):
-        self.pysat_fun = pysat_func()
-
-    def mainframe(self, MainWindow):
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(600, 843)
+        MainWindow.resize(581, 843)
         self.centralWidget = QtGui.QWidget(MainWindow)
         self.centralWidget.setObjectName(_fromUtf8("centralWidget"))
         self.verticalLayout_9 = QtGui.QVBoxLayout(self.centralWidget)
@@ -42,27 +36,47 @@ class pysat_ui(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName(_fromUtf8("scrollArea"))
         self.scrollAreaWidgetContents_2 = QtGui.QWidget()
-        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 557, 695))
+        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 561, 721))
         font = QtGui.QFont()
         font.setPointSize(8)
         self.scrollAreaWidgetContents_2.setFont(font)
         self.scrollAreaWidgetContents_2.setStyleSheet(_fromUtf8("QGroupBox {\n"
-                                                                "  border: 2px solid gray;\n"
-                                                                "  border-radius: 6px;\n"
-                                                                "  margin-top: 0.5em;\n"
-                                                                "}\n"
-                                                                "\n"
-                                                                "QGroupBox::title {\n"
-                                                                "\n"
-                                                                "  padding-top: -14px;\n"
-                                                                "  padding-left: 8px;\n"
-                                                                "}\n"
-                                                                ""))
+"  border: 2px solid gray;\n"
+"  border-radius: 6px;\n"
+"  margin-top: 0.5em;\n"
+"}\n"
+"\n"
+"QGroupBox::title {\n"
+"\n"
+"  padding-top: -14px;\n"
+"  padding-left: 8px;\n"
+"}\n"
+""))
         self.scrollAreaWidgetContents_2.setObjectName(_fromUtf8("scrollAreaWidgetContents_2"))
         self.verticalLayout_8 = QtGui.QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_8.setMargin(11)
         self.verticalLayout_8.setSpacing(6)
         self.verticalLayout_8.setObjectName(_fromUtf8("verticalLayout_8"))
+        self.get_mask = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.get_mask.setFont(font)
+        self.get_mask.setObjectName(_fromUtf8("get_mask"))
+        self.horizontalLayout = QtGui.QHBoxLayout(self.get_mask)
+        self.horizontalLayout.setMargin(11)
+        self.horizontalLayout.setSpacing(6)
+        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
+        self.get_mask_label = QtGui.QLabel(self.get_mask)
+        self.get_mask_label.setObjectName(_fromUtf8("get_mask_label"))
+        self.horizontalLayout.addWidget(self.get_mask_label)
+        self.get_mask_line_edit = QtGui.QLineEdit(self.get_mask)
+        self.get_mask_line_edit.setReadOnly(True)
+        self.get_mask_line_edit.setObjectName(_fromUtf8("get_mask_line_edit"))
+        self.horizontalLayout.addWidget(self.get_mask_line_edit)
+        self.get_mask_button = QtGui.QToolButton(self.get_mask)
+        self.get_mask_button.setObjectName(_fromUtf8("get_mask_button"))
+        self.horizontalLayout.addWidget(self.get_mask_button)
+        self.verticalLayout_8.addWidget(self.get_mask)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents_2)
         self.verticalLayout_9.addWidget(self.scrollArea)
         self.OK = QtGui.QGroupBox(self.centralWidget)
@@ -89,7 +103,7 @@ class pysat_ui(object):
         self.statusBar.setObjectName(_fromUtf8("statusBar"))
         MainWindow.setStatusBar(self.statusBar)
         self.menuBar = QtGui.QMenuBar(MainWindow)
-        self.menuBar.setGeometry(QtCore.QRect(0, 0, 581, 26))
+        self.menuBar.setGeometry(QtCore.QRect(0, 0, 581, 21))
         self.menuBar.setObjectName(_fromUtf8("menuBar"))
         self.menuFile = QtGui.QMenu(self.menuBar)
         self.menuFile.setObjectName(_fromUtf8("menuFile"))
@@ -112,8 +126,8 @@ class pysat_ui(object):
         self.menuVisualization = QtGui.QMenu(self.menuBar)
         self.menuVisualization.setObjectName(_fromUtf8("menuVisualization"))
         MainWindow.setMenuBar(self.menuBar)
-        self.actionLoad_reference_Data = QtGui.QAction(MainWindow)
-        self.actionLoad_reference_Data.setObjectName(_fromUtf8("actionLoad_reference_Data"))
+        self.actionLoad_Refence_Data = QtGui.QAction(MainWindow)
+        self.actionLoad_Refence_Data.setObjectName(_fromUtf8("actionLoad_Refence_Data"))
         self.actionLoad_Unknown_Data = QtGui.QAction(MainWindow)
         self.actionLoad_Unknown_Data.setObjectName(_fromUtf8("actionLoad_Unknown_Data"))
         self.actionSave_Current_Workflow = QtGui.QAction(MainWindow)
@@ -157,8 +171,7 @@ class pysat_ui(object):
         self.actionTommy_s_Methgod = QtGui.QAction(MainWindow)
         self.actionTommy_s_Methgod.setObjectName(_fromUtf8("actionTommy_s_Methgod"))
         self.actionPiecewise_Direct_Standardization = QtGui.QAction(MainWindow)
-        self.actionPiecewise_Direct_Standardization.setObjectName(
-            _fromUtf8("actionPiecewise_Direct_Standardization"))
+        self.actionPiecewise_Direct_Standardization.setObjectName(_fromUtf8("actionPiecewise_Direct_Standardization"))
         self.actionPCA = QtGui.QAction(MainWindow)
         self.actionPCA.setObjectName(_fromUtf8("actionPCA"))
         self.actionICA = QtGui.QAction(MainWindow)
@@ -231,11 +244,9 @@ class pysat_ui(object):
         self.actionCreate_N_Folds.setObjectName(_fromUtf8("actionCreate_N_Folds"))
         self.actionCreate_Test_Folds = QtGui.QAction(MainWindow)
         self.actionCreate_Test_Folds.setObjectName(_fromUtf8("actionCreate_Test_Folds"))
-        self.actionStratified_Folds = QtGui.QAction(MainWindow)
-        self.actionStratified_Folds.setObjectName(_fromUtf8("actionStratified_Folds"))
-        self.actionTrain_Submodels = QtGui.QAction(MainWindow)
-        self.actionTrain_Submodels.setObjectName(_fromUtf8("actionTrain_Submodels"))
-        self.menuFile.addAction(self.actionLoad_reference_Data)
+        self.actionSubmodel_Ranges = QtGui.QAction(MainWindow)
+        self.actionSubmodel_Ranges.setObjectName(_fromUtf8("actionSubmodel_Ranges"))
+        self.menuFile.addAction(self.actionLoad_Refence_Data)
         self.menuFile.addAction(self.actionLoad_Unknown_Data)
         self.menuFile.addAction(self.actionSet_output_location)
         self.menuFile.addSeparator()
@@ -269,11 +280,12 @@ class pysat_ui(object):
         self.menuPreprocessing.addAction(self.menuCalibration_Transfer.menuAction())
         self.menuPreprocessing.addAction(self.actionICA_2)
         self.menuPreprocessing.addAction(self.actionPCA_2)
-        self.menuPreprocessing.addAction(self.actionStratified_Folds)
         self.menuRegression.addAction(self.actionCross_Validation)
         self.menuRegression.addAction(self.actionTrain)
-        # self.menuRegression.addAction(self.actionTrain_Submodels)
         self.menuRegression.addAction(self.actionPredict)
+        self.menuRegression.addAction(self.actionCreate_N_Folds)
+        self.menuRegression.addAction(self.actionCreate_Test_Folds)
+        self.menuRegression.addAction(self.actionSubmodel_Ranges)
         self.menuHelp.addAction(self.actionIndex)
         self.menuHelp.addAction(self.actionContent_2)
         self.menuHelp.addSeparator()
@@ -294,9 +306,16 @@ class pysat_ui(object):
         self.menuBar.addAction(self.menuRegression.menuAction())
         self.menuBar.addAction(self.menuVisualization.menuAction())
         self.menuBar.addAction(self.menuHelp.menuAction())
+
+        self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+    def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "PYSAT", None))
+        self.get_mask.setTitle(_translate("MainWindow", "Files", None))
+        self.get_mask_label.setText(_translate("MainWindow", "File Name", None))
+        self.get_mask_line_edit.setText(_translate("MainWindow", "*.csv", None))
+        self.get_mask_button.setText(_translate("MainWindow", "...", None))
         self.okButton.setText(_translate("MainWindow", "OK", None))
         self.menuFile.setTitle(_translate("MainWindow", "File", None))
         self.menuPreprocessing.setTitle(_translate("MainWindow", "Preprocessing", None))
@@ -308,7 +327,7 @@ class pysat_ui(object):
         self.menuSupervised.setTitle(_translate("MainWindow", "Supervised", None))
         self.menuClustering.setTitle(_translate("MainWindow", "Clustering", None))
         self.menuVisualization.setTitle(_translate("MainWindow", "Visualization", None))
-        self.actionLoad_reference_Data.setText(_translate("MainWindow", "Load Reference Data", None))
+        self.actionLoad_Refence_Data.setText(_translate("MainWindow", "Load Refence Data", None))
         self.actionLoad_Unknown_Data.setText(_translate("MainWindow", "Load Unknown Data", None))
         self.actionSave_Current_Workflow.setText(_translate("MainWindow", "Save Current Workflow", None))
         self.actionSave_Current_Plots.setText(_translate("MainWindow", "Save Current Plots", None))
@@ -330,8 +349,7 @@ class pysat_ui(object):
         self.actionUndecimated_Wavelet.setText(_translate("MainWindow", "Undecimated Wavelet", None))
         self.actionRatio.setText(_translate("MainWindow", "Ratio", None))
         self.actionTommy_s_Methgod.setText(_translate("MainWindow", "Tommy\'s Method", None))
-        self.actionPiecewise_Direct_Standardization.setText(
-            _translate("MainWindow", "Piecewise Direct Standardization", None))
+        self.actionPiecewise_Direct_Standardization.setText(_translate("MainWindow", "Piecewise Direct Standardization", None))
         self.actionPCA.setText(_translate("MainWindow", "PCA", None))
         self.actionICA.setText(_translate("MainWindow", "ICA", None))
         self.actionK_Means.setText(_translate("MainWindow", "K-Means", None))
@@ -367,41 +385,6 @@ class pysat_ui(object):
         self.actionScatter_Plot.setText(_translate("MainWindow", "Scatter Plot", None))
         self.actionSet_output_location.setText(_translate("MainWindow", "Output Location", None))
         self.actionCreate_N_Folds.setText(_translate("MainWindow", "Create N Folds", None))
-        self.actionStratified_Folds.setText(_translate("MainWindow", "Stratified Folds", None))
+        self.actionCreate_Test_Folds.setText(_translate("MainWindow", "Create Test Folds", None))
+        self.actionSubmodel_Ranges.setText(_translate("MainWindow", "Submodel Ranges", None))
 
-    def file_outpath(self, MainWindow):
-        PythonUI.file_outpath_.file_outpath(self, MainWindow)
-
-    def get_unknown_data(self, MainWindow):
-        PythonUI.get_data_.get_data_u(self, MainWindow)
-
-    def get_known_data(self, MainWindow):
-        PythonUI.get_data_.get_data_k(self, MainWindow)
-
-    def do_mask(self, MainWindow):
-        pass
-
-    def submodel_ranges(self, MainWindow):
-        PythonUI.submodel_.submodel(self, MainWindow)
-
-
-    def do_strat_folds(self, MainWindow):
-        pass
-
-    def do_regression_train(self, MainWindow):
-        PythonUI.regression_.regression_train(self, MainWindow)
-
-    def do_scatter_plot(self, MainWindow):
-        pass
-
-    def menu_item_shortcuts(self):
-        self.actionExit.setShortcut("ctrl+Q")
-
-    def menu_item_functions(self, MainWindow):
-        self.actionSet_output_location.triggered.connect(lambda: pysat_ui.file_outpath(self, MainWindow))               # output location
-        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.get_unknown_data(self, MainWindow))             # unknown data
-        self.actionLoad_reference_Data.triggered.connect(lambda: pysat_ui.get_known_data(self, MainWindow))             # known data
-        self.actionNormalization.triggered.connect(lambda: pysat_ui.submodel_ranges(self, MainWindow))                  # submodel
-        self.actionApply_Mask.triggered.connect(lambda: pysat_ui.do_mask(self, MainWindow))                             # get_mask
-        self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self, MainWindow))                # strat folds
-        self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self, MainWindow))                      # regression train

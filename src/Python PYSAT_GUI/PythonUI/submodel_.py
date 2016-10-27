@@ -25,7 +25,7 @@ class submodel_(object):
 
     def submodel(self, submodel):
         self.submodel = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
-        font = QtGui.QFont()
+        font = QtGui.QFont
         font.setPointSize(10)
         self.submodel.setFont(font)
         self.submodel.setObjectName(_fromUtf8("submodel"))
@@ -45,6 +45,7 @@ class submodel_(object):
         self.submodel_choosedata.setIconSize(QtCore.QSize(50, 20))
         self.submodel_choosedata.setObjectName(_fromUtf8("submodel_choosedata"))
         self.submodel_choosedata_hlayout.addWidget(self.submodel_choosedata)
+        spacerItem = QtGui.QSpacerItem()
         self.submodel_choosedata_hlayout.addItem(spacerItem)
         self.submodel_vlayout.addLayout(self.submodel_choosedata_hlayout)
         self.horizontalLayout = QtGui.QHBoxLayout()
