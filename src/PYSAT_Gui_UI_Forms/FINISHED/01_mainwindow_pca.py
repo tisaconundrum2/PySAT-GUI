@@ -1,31 +1,20 @@
-# -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT\src\PYSAT_Gui_UI_Forms\01_mainwindow_pca.ui'
-#
-# Created by: PyQt4 UI code generator 4.11.4
-#
-# WARNING! All changes made in this file will be lost!
 
-from PyQt4 import QtCore, QtGui
 
-try:
-    _fromUtf8 = QtCore.QString.fromUtf8
-except AttributeError:
-    def _fromUtf8(s):
-        return s
 
-try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
-except AttributeError:
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
 
-class Ui_pca(object):
-    def setupUi(self, pca):
+        self.scrollAreaWidgetContents_2.setStyleSheet(_fromUtf8("QGroupBox {\n"
+"  border: 2px solid gray;\n"
+"  border-radius: 6px;\n"
+"  margin-top: 0.5em;\n"
+"}\n"
+"\n"
+"QGroupBox::title {\n"
+"\n"
+"  padding-top: -14px;\n"
+"  padding-left: 8px;\n"
+"}\n"
         self.pca = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
-        font = QtGui.QFont()
         font.setPointSize(10)
         self.pca.setFont(font)
         self.pca.setObjectName(_fromUtf8("pca"))
@@ -60,7 +49,10 @@ class Ui_pca(object):
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.ok.addItem(spacerItem1)
 
+
         self.pca.setTitle(_translate("MainWindow", "Files", None))
         self.pca_choose_data.setItemText(0, _translate("MainWindow", "Choose Data", None))
         self.pca_choose_data.setItemText(1, _translate("MainWindow", "Known Data", None))
         self.pca_button.setText(_translate("MainWindow", "Do PCA", None))
+        self.actionTommy_s_Methgod.setText(_translate("MainWindow", "Tommy\'s Method", None))
+

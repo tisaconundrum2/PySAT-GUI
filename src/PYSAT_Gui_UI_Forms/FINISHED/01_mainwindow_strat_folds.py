@@ -1,31 +1,20 @@
 
-from PyQt4 import QtCore, QtGui
-from pysat_function import pysat_func
-
-try:
-    _fromUtf8 = QtCore.QString.fromUtf8
-except AttributeError:
-    def _fromUtf8(s):
-        return s
-
-try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
 
 
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
-except AttributeError:
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
 
 
-class strat_folds_(object):
-    def __init__(self):
-        self.pysat_fun = pysat_func()
-
-    def strat_folds(self, strat_folds):
+        self.scrollAreaWidgetContents_2.setStyleSheet(_fromUtf8("QGroupBox {\n"
+"  border: 2px solid gray;\n"
+"  border-radius: 6px;\n"
+"  margin-top: 0.5em;\n"
+"}\n"
+"\n"
+"QGroupBox::title {\n"
+"\n"
+"  padding-top: -14px;\n"
+"  padding-left: 8px;\n"
+"}\n"
         self.strat_folds = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
-        font = QtGui.QFont()
         font.setPointSize(10)
         self.strat_folds.setFont(font)
         self.strat_folds.setObjectName(_fromUtf8("strat_folds"))
@@ -69,6 +58,7 @@ class strat_folds_(object):
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.ok.addItem(spacerItem1)
 
+
         self.strat_folds.setTitle(_translate("MainWindow", "Files", None))
         self.strat_folds_choose_data.setItemText(0, _translate("MainWindow", "Choose Data", None))
         self.strat_folds_choose_data.setItemText(1, _translate("MainWindow", "Unknown Data", None))
@@ -85,4 +75,5 @@ class strat_folds_(object):
         self.nfolds_label.setText(_translate("MainWindow", "N folds", None))
         self.test_fold_label.setText(_translate("MainWindow", "Test Fold", None))
         self.create_folds.setText(_translate("MainWindow", "Create Folds", None))
+        self.actionTommy_s_Methgod.setText(_translate("MainWindow", "Tommy\'s Method", None))
 

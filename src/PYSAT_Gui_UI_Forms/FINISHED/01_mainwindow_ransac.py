@@ -1,31 +1,20 @@
 
-from PyQt4 import QtCore, QtGui
-from pysat_function import pysat_func
-
-try:
-    _fromUtf8 = QtCore.QString.fromUtf8
-except AttributeError:
-    def _fromUtf8(s):
-        return s
-
-try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
 
 
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
-except AttributeError:
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
 
 
-class regression_(object):
-    def __init__(self):
-        self.pysat_fun = pysat_func()
-
-    def regression(self, ransac):
+        self.scrollAreaWidgetContents_2.setStyleSheet(_fromUtf8("QGroupBox {\n"
+"  border: 2px solid gray;\n"
+"  border-radius: 6px;\n"
+"  margin-top: 0.5em;\n"
+"}\n"
+"\n"
+"QGroupBox::title {\n"
+"\n"
+"  padding-top: -14px;\n"
+"  padding-left: 8px;\n"
+"}\n"
         self.ransac = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
-        font = QtGui.QFont()
         font.setPointSize(10)
         self.ransac.setFont(font)
         self.ransac.setObjectName(_fromUtf8("ransac"))
@@ -63,10 +52,12 @@ class regression_(object):
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.ok.addItem(spacerItem1)
 
+
         self.ransac.setTitle(_translate("MainWindow", "Files", None))
         self.ransac_loss_func_2.setItemText(0, _translate("MainWindow", "Loss Function", None))
         self.ransac_loss_func_2.setItemText(1, _translate("MainWindow", "Absolute Error", None))
         self.ransac_loss_func_2.setItemText(2, _translate("MainWindow", "Squared Error", None))
         self.ransac_threshold_label_2.setText(_translate("MainWindow", "Threshold", None))
         self.ransac_min_label_2.setText(_translate("MainWindow", "Minimum samples ", None))
+        self.actionTommy_s_Methgod.setText(_translate("MainWindow", "Tommy\'s Method", None))
 
