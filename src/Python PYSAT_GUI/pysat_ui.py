@@ -398,5 +398,10 @@ class pysat_ui(object):
         self.actionExit.setShortcut("ctrl+Q")
 
     def menu_item_functions(self, MainWindow):
-        self.actionSet_output_location.triggered.connect(lambda: pysat_ui.file_outpath(self, MainWindow))
-        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.unknown_data(self, MainWindow))
+        self.actionSet_output_location.triggered.connect(lambda: pysat_ui.file_outpath(self, MainWindow))               # output location
+        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.get_unknown_data(self, MainWindow))             # unknown data
+        self.actionLoad_reference_Data.triggered.connect(lambda: pysat_ui.get_known_data(self, MainWindow))             # known data
+        self.actionNormalization.triggered.connect(lambda: pysat_ui.submodel_ranges(self, MainWindow))                  # submodel
+        self.actionApply_Mask.triggered.connect(lambda: pysat_ui.do_mask(self, MainWindow))                             # get_mask
+        self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self, MainWindow))                # strat folds
+        self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self, MainWindow))                      # regression train

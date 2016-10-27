@@ -23,8 +23,8 @@ class get_data_(object):
         self.pysat_fun = pysat_func()
 
     def get_data_u(self, get_data):
+        self.get_data = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
         get_data.setObjectName(_fromUtf8("get_data"))
-        get_data.resize(400, 300)
         self.horizontalLayout = QtGui.QHBoxLayout(get_data)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
         self.get_data_label = QtGui.QLabel(get_data)
@@ -51,8 +51,8 @@ class get_data_(object):
 
 
     def get_data_k(self, get_data):
+        self.get_data = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
         get_data.setObjectName(_fromUtf8("get_data"))
-        get_data.resize(400, 300)
         self.horizontalLayout = QtGui.QHBoxLayout(get_data)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
         self.get_data_label = QtGui.QLabel(get_data)

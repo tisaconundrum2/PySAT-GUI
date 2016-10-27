@@ -303,6 +303,18 @@ fa50f900de0cff5a4d52115c9310b4d63de617
         QVBoxLayout.addLayout(self.horizontalLayout)
         PushButtonName.setText(_translate("MainWindow", "Run Module", None))
 
+    def menu_item_shortcuts(self):
+        self.actionExit.setShortcut("ctrl+Q")
+
+    def menu_item_functions(self, MainWindow):
+        self.actionSet_output_location.triggered.connect(lambda: pysat_ui.file_outpath(self, MainWindow))
+        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.unknown_data(self, MainWindow))
+        self.actionLoad_reference_Data.triggered.connect(lambda: pysat_ui.reference_data(self, MainWindow))
+        self.actionNormalization.triggered.connect(lambda: pysat_ui.normalization(self, MainWindow))
+        self.actionInterpolate.triggered.connect(lambda: pysat_ui.interpolated(self, MainWindow))
+        self.actionApply_Mask.triggered.connect(lambda: pysat_ui.masked(self, MainWindow))
+        self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.stratified_folds(self, MainWindow))
+        self.actionTrain.triggered.connect(lambda: pysat_ui.regression_train(self, MainWindow))
 
     def saveworkflow(self):
         # TODO save the current window's data into a save file
