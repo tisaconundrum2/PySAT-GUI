@@ -57,7 +57,7 @@ QGroupBox::title {
            </font>
           </property>
           <property name="title">
-           <string>Files</string>
+           <string>Load in &lt;known&gt; data file</string>
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout">
            <item>

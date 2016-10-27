@@ -405,3 +405,6 @@ class pysat_ui(object):
         self.actionApply_Mask.triggered.connect(lambda: pysat_ui.do_mask(self, MainWindow))                             # get_mask
         self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self, MainWindow))                # strat folds
         self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self, MainWindow))                      # regression train
+
+    def on_okButton_clicked(self):
+        pass

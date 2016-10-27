@@ -312,7 +312,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "PYSAT", None))
-        self.get_data.setTitle(_translate("MainWindow", "Files", None))
+        self.get_data.setTitle(_translate("MainWindow", "Load in <known> data file", None))
         self.get_data_label.setText(_translate("MainWindow", "File Name", None))
         self.get_data_line_edit.setText(_translate("MainWindow", "*.csv", None))
         self.get_data_button.setText(_translate("MainWindow", "...", None))

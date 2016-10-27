@@ -332,7 +332,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "PYSAT", None))
-        self.ransac.setTitle(_translate("MainWindow", "Files", None))
+        self.ransac.setTitle(_translate("MainWindow", "Ransac", None))
         self.ransac_loss_func_2.setItemText(0, _translate("MainWindow", "Loss Function", None))
         self.ransac_loss_func_2.setItemText(1, _translate("MainWindow", "Absolute Error", None))
         self.ransac_loss_func_2.setItemText(2, _translate("MainWindow", "Squared Error", None))

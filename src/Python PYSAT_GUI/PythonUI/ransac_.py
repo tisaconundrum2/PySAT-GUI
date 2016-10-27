@@ -56,6 +56,7 @@ class regression_(object):
         self.ransac_min_2 = QtGui.QDoubleSpinBox(self.ransac)
         self.ransac_min_2.setObjectName(_fromUtf8("ransac_min_2"))
         self.ransac_loss_func_hlayout_2.addWidget(self.ransac_min_2)
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.ransac_loss_func_hlayout_2.addItem(spacerItem)
         self.ransac_vlayout_2.addLayout(self.ransac_loss_func_hlayout_2)
         self.horizontalLayout.addLayout(self.ransac_vlayout_2)
@@ -63,7 +64,7 @@ class regression_(object):
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.ok.addItem(spacerItem1)
 
-        self.ransac.setTitle(_translate("MainWindow", "Files", None))
+        self.ransac.setTitle(_translate("MainWindow", "Ransac", None))
         self.ransac_loss_func_2.setItemText(0, _translate("MainWindow", "Loss Function", None))
         self.ransac_loss_func_2.setItemText(1, _translate("MainWindow", "Absolute Error", None))
         self.ransac_loss_func_2.setItemText(2, _translate("MainWindow", "Squared Error", None))

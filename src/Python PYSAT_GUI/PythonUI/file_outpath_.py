@@ -45,16 +45,13 @@ class file_outpath_(object):
         self.horizontalLayout.addWidget(self.file_out_path_button)
         self.verticalLayout_8.addWidget(self.file_out_path)
 
-
-
-
-        self.file_out_path.setTitle(_translate("MainWindow", "Files", None))
+        self.file_out_path.setTitle(_translate("MainWindow", "Ouput Folder", None))
         self.file_out_path_label.setText(_translate("MainWindow", "Folder Name", None))
         self.file_out_path_line_edit.setText(_translate("MainWindow", "*/", None))
         self.file_out_path_button.setText(_translate("MainWindow", "...", None))
 
         try:
-            self.fullDataBaseButton_4.clicked.connect(lambda: file_outpath_.on_outPutLocationButton_clicked(self, self.lineEdit_10))
+            self.file_out_path_button.clicked.connect(lambda: file_outpath_.on_outPutLocationButton_clicked(self, self.file_out_path_line_edit))
         except:
             pass
 

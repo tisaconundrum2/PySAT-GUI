@@ -328,7 +328,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "PYSAT", None))
-        self.pca.setTitle(_translate("MainWindow", "Files", None))
+        self.pca.setTitle(_translate("MainWindow", "PCA", None))
         self.pca_choose_data.setItemText(0, _translate("MainWindow", "Choose Data", None))
         self.pca_choose_data.setItemText(1, _translate("MainWindow", "Known Data", None))
         self.pca_nc_label.setText(_translate("MainWindow", "# of components", None))

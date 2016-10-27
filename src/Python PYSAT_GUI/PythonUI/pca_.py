@@ -1,12 +1,5 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT\src\PYSAT_Gui_UI_Forms\01_mainwindow_pca.ui'
-#
-# Created by: PyQt4 UI code generator 4.11.4
-#
-# WARNING! All changes made in this file will be lost!
-
 from PyQt4 import QtCore, QtGui
+from pysat_function import pysat_func
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -16,14 +9,20 @@ except AttributeError:
 
 try:
     _encoding = QtGui.QApplication.UnicodeUTF8
+
+
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig, _encoding)
 except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-class Ui_pca(object):
-    def setupUi(self, pca):
+
+class pls_(object):
+    def __init__(self):
+        self.pysat_fun = pysat_func()
+
+    def pls(self, pca):
         self.pca = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -50,6 +49,7 @@ class Ui_pca(object):
         self.pca_nc = QtGui.QSpinBox(self.pca)
         self.pca_nc.setObjectName(_fromUtf8("pca_nc"))
         self.pca_hlayout.addWidget(self.pca_nc)
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.pca_hlayout.addItem(spacerItem)
         self.pca_button = QtGui.QPushButton(self.pca)
         self.pca_button.setObjectName(_fromUtf8("pca_button"))
@@ -60,7 +60,7 @@ class Ui_pca(object):
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.ok.addItem(spacerItem1)
 
-        self.pca.setTitle(_translate("MainWindow", "Files", None))
+        self.pca.setTitle(_translate("MainWindow", "PCA", None))
         self.pca_choose_data.setItemText(0, _translate("MainWindow", "Choose Data", None))
         self.pca_choose_data.setItemText(1, _translate("MainWindow", "Known Data", None))
         self.pca_button.setText(_translate("MainWindow", "Do PCA", None))

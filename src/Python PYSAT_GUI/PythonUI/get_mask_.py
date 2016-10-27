@@ -44,8 +44,19 @@ class get_mask_(object):
         self.horizontalLayout.addWidget(self.get_mask_button)
         self.verticalLayout_8.addWidget(self.get_mask)
 
-        self.get_mask.setTitle(_translate("MainWindow", "Files", None))
+        self.get_mask.setTitle(_translate("MainWindow", "Mask File", None))
         self.get_mask_label.setText(_translate("MainWindow", "File Name", None))
         self.get_mask_line_edit.setText(_translate("MainWindow", "*.csv", None))
         self.get_mask_button.setText(_translate("MainWindow", "...", None))
+        try:
+            self.get_mask_button.clicked.connect(
+                lambda: get_mask.on_getDataButton_clicked(self, self.get_data_k_line_edit, "Known"))
+        except:
+            pass
 
+    def on_getDataButton_clicked(self, lineEdit, key):
+        filename = QtGui.QFileDialog.getOpenFileName(None, "Open " + key + " Data File", '.', "(*.csv)")
+        lineEdit.setText(filename)
+        if lineEdit.text() == "":
+            lineEdit.setText("*.csv")
+        self.pysat_fun.get_data(filename, key)

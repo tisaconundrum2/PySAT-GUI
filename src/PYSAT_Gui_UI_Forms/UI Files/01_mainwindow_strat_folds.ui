@@ -57,7 +57,7 @@ QGroupBox::title {
            </font>
           </property>
           <property name="title">
-           <string>Files</string>
+           <string>Stratified Folds</string>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout">
            <item>

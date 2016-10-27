@@ -367,7 +367,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "PYSAT", None))
-        self.submodel.setTitle(_translate("MainWindow", "Files", None))
+        self.submodel.setTitle(_translate("MainWindow", "Submodel Ranges", None))
         self.submodel_choosedata.setItemText(0, _translate("MainWindow", "Choose Data", None))
         self.submodel_choosedata.setItemText(1, _translate("MainWindow", "Known Data", None))
         self.label.setText(_translate("MainWindow", "Min", None))

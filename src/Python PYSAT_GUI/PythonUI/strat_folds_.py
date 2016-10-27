@@ -59,6 +59,7 @@ class strat_folds_(object):
         self.test_fold_spin = QtGui.QSpinBox(self.strat_folds)
         self.test_fold_spin.setObjectName(_fromUtf8("test_fold_spin"))
         self.strat_folds_hlayout.addWidget(self.test_fold_spin)
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.strat_folds_hlayout.addItem(spacerItem)
         self.create_folds = QtGui.QPushButton(self.strat_folds)
         self.create_folds.setObjectName(_fromUtf8("create_folds"))
@@ -69,7 +70,7 @@ class strat_folds_(object):
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.ok.addItem(spacerItem1)
 
-        self.strat_folds.setTitle(_translate("MainWindow", "Files", None))
+        self.strat_folds.setTitle(_translate("MainWindow", "Stratified Folds", None))
         self.strat_folds_choose_data.setItemText(0, _translate("MainWindow", "Choose Data", None))
         self.strat_folds_choose_data.setItemText(1, _translate("MainWindow", "Unknown Data", None))
         self.strat_folds_choose_data.setItemText(2, _translate("MainWindow", "Known Data", None))
@@ -86,3 +87,17 @@ class strat_folds_(object):
         self.test_fold_label.setText(_translate("MainWindow", "Test Fold", None))
         self.create_folds.setText(_translate("MainWindow", "Create Folds", None))
 
+
+    # TODO Fixed these functions
+    def strat_fold_change_vars(self):
+        self.strat_folds_choose_var.clear()
+        choices = self.pysat_fun.data[self.strat_folds_choose_data.currentText()].df['meta'].columns.values
+        print(choices)
+        self.strat_folds_choose_var.addItems(choices)
+
+
+    def strat_fold_change_testfolds(self):
+        self.choose_test_fold.clear()
+        choices = list(map(str, list(range(1, self.nfolds_spin.value() + 1))))
+        print(choices)
+        self.choose_test_fold.addItems(choices)

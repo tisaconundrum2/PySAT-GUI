@@ -312,7 +312,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "PYSAT", None))
-        self.file_out_path.setTitle(_translate("MainWindow", "Files", None))
+        self.file_out_path.setTitle(_translate("MainWindow", "Ouput Folder", None))
         self.file_out_path_label.setText(_translate("MainWindow", "Folder Name", None))
         self.file_out_path_line_edit.setText(_translate("MainWindow", "*/", None))
         self.file_out_path_button.setText(_translate("MainWindow", "...", None))

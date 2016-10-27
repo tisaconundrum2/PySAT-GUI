@@ -40,5 +40,5 @@ class pls_(object):
         self.horizontalLayout.addWidget(self.pls_spinbox)
         self.verticalLayout_8.addWidget(self.pls)
 
-        self.pls.setTitle(_translate("MainWindow", "Files", None))
+        self.pls.setTitle(_translate("MainWindow", "PLS", None))
 

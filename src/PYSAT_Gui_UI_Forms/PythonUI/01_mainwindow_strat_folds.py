@@ -347,7 +347,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "PYSAT", None))
-        self.strat_folds.setTitle(_translate("MainWindow", "Files", None))
+        self.strat_folds.setTitle(_translate("MainWindow", "Stratified Folds", None))
         self.strat_folds_choose_data.setItemText(0, _translate("MainWindow", "Choose Data", None))
         self.strat_folds_choose_data.setItemText(1, _translate("MainWindow", "Unknown Data", None))
         self.strat_folds_choose_data.setItemText(2, _translate("MainWindow", "Known Data", None))

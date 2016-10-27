@@ -312,7 +312,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "PYSAT", None))
-        self.get_mask.setTitle(_translate("MainWindow", "Files", None))
+        self.get_mask.setTitle(_translate("MainWindow", "Mask File", None))
         self.get_mask_label.setText(_translate("MainWindow", "File Name", None))
         self.get_mask_line_edit.setText(_translate("MainWindow", "*.csv", None))
         self.get_mask_button.setText(_translate("MainWindow", "...", None))

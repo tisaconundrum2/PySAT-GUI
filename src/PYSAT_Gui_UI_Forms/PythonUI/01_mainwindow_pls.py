@@ -308,7 +308,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "PYSAT", None))
-        self.pls.setTitle(_translate("MainWindow", "Files", None))
+        self.pls.setTitle(_translate("MainWindow", "PLS", None))
         self.pls_label.setText(_translate("MainWindow", "# of components", None))
         self.okButton.setText(_translate("MainWindow", "OK", None))
         self.menuFile.setTitle(_translate("MainWindow", "File", None))

@@ -45,7 +45,7 @@ class submodel_(object):
         self.submodel_choosedata.setIconSize(QtCore.QSize(50, 20))
         self.submodel_choosedata.setObjectName(_fromUtf8("submodel_choosedata"))
         self.submodel_choosedata_hlayout.addWidget(self.submodel_choosedata)
-        spacerItem = QtGui.QSpacerItem()
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.submodel_choosedata_hlayout.addItem(spacerItem)
         self.submodel_vlayout.addLayout(self.submodel_choosedata_hlayout)
         self.horizontalLayout = QtGui.QHBoxLayout()
@@ -96,7 +96,7 @@ class submodel_(object):
         spacerItem4 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.ok.addItem(spacerItem4)
 
-        self.submodel.setTitle(_translate("MainWindow", "Files", None))
+        self.submodel.setTitle(_translate("MainWindow", "Submodel Ranges", None))
         self.submodel_choosedata.setItemText(0, _translate("MainWindow", "Choose Data", None))
         self.submodel_choosedata.setItemText(1, _translate("MainWindow", "Known Data", None))
         self.label.setText(_translate("MainWindow", "Min", None))
