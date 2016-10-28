@@ -1,6 +1,6 @@
 
 from PyQt4 import QtCore, QtGui
-from pysat_function import pysat_func
+from pysat_func import pysat_func
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -25,7 +25,7 @@ class submodel_(object):
 
     def submodel(self, submodel):
         self.submodel = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
-        font = QtGui.QFont
+        font = QtGui.QFont()
         font.setPointSize(10)
         self.submodel.setFont(font)
         self.submodel.setObjectName(_fromUtf8("submodel"))
@@ -93,8 +93,6 @@ class submodel_(object):
         self.submodel_vlayout.addLayout(self.submodel_trainbutton_hlayout)
         self.verticalLayout.addLayout(self.submodel_vlayout)
         self.verticalLayout_8.addWidget(self.submodel)
-        spacerItem4 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.ok.addItem(spacerItem4)
 
         self.submodel.setTitle(_translate("MainWindow", "Submodel Ranges", None))
         self.submodel_choosedata.setItemText(0, _translate("MainWindow", "Choose Data", None))

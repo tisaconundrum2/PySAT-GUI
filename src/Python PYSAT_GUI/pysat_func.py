@@ -33,7 +33,6 @@ class pysat_func(object):
             error_print('Problem reading data: {}'.format(e))
 
     def do_mask(self, datakey, maskfile):
-        self.maskfile = maskfile
         try:
             self.data[datakey].mask(maskfile)
             print("Mask applied")

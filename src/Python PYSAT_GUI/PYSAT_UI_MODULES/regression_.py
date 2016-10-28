@@ -1,6 +1,6 @@
 
 from PyQt4 import QtCore, QtGui
-from pysat_function import pysat_func
+from pysat_func import pysat_func
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -78,7 +78,7 @@ class regression_(object):
         self.ransac_hlayout.addWidget(self.regression_ransac_checkbox)
         self.regression_vlayout.addLayout(self.ransac_hlayout)
 
-        self.regression_ransac_checkbox.stateChanged.connect(self.make_ransac_widget)
+        self.regression_ransac_checkbox.stateChanged.connect(regression_.make_ransac_widget)
         # choose regression algorithm
         self.regression_choosealg_hlayout = QtGui.QHBoxLayout()
         self.regression_choosealg_hlayout.setObjectName(_fromUtf8("regression_choosealg_hlayout"))
@@ -96,7 +96,7 @@ class regression_(object):
         self.regression_vlayout.addLayout(self.regression_choosealg_hlayout)
         self.regression_choosealg.activated.connect(self.make_regression_widget)
 
-        self.verticalLayout_8.addWidget(self.regression_train)
+        self.verticalLayout_8.addWidget(regression_.regression_train)
         self.regression_train.raise_()
         self.regression_train.setTitle(_translate("regression_train", "Regression - Train", None))
 

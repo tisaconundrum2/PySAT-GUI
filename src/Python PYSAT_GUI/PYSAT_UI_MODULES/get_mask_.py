@@ -1,5 +1,5 @@
 from PyQt4 import QtCore, QtGui
-from pysat_function import pysat_func
+from pysat_func import pysat_func
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -50,13 +50,13 @@ class get_mask_(object):
         self.get_mask_button.setText(_translate("MainWindow", "...", None))
         try:
             self.get_mask_button.clicked.connect(
-                lambda: get_mask.on_getDataButton_clicked(self, self.get_data_k_line_edit, "Known"))
+                lambda: get_mask_.on_getDataButton_clicked(self, self.get_mask_line_edit, "Known"))
         except:
             pass
 
     def on_getDataButton_clicked(self, lineEdit, key):
-        filename = QtGui.QFileDialog.getOpenFileName(None, "Open " + key + " Data File", '.', "(*.csv)")
+        filename = QtGui.QFileDialog.getOpenFileName(None, "Open Mask Data File", '.', "(*.csv)")
         lineEdit.setText(filename)
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")
-        self.pysat_fun.get_data(filename, key)
+        self.pysat_fun.do_mask(key, filename)
