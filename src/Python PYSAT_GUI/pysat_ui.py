@@ -1,6 +1,6 @@
 from PyQt4 import QtCore, QtGui
-from pysat_function import pysat_func
-import PythonUI
+from pysat_func import pysat_func
+import PYSAT_UI_MODULES
 
 import pysat
 
@@ -370,29 +370,32 @@ class pysat_ui(object):
         self.actionStratified_Folds.setText(_translate("MainWindow", "Stratified Folds", None))
 
     def file_outpath(self, MainWindow):
-        PythonUI.file_outpath_.file_outpath(self, MainWindow)
+        PYSAT_UI_MODULES.file_outpath_.file_outpath(self, MainWindow)
 
     def get_unknown_data(self, MainWindow):
-        PythonUI.get_data_.get_data_u(self, MainWindow)
+        PYSAT_UI_MODULES.get_data_.get_data_u(self, MainWindow)
 
     def get_known_data(self, MainWindow):
-        PythonUI.get_data_.get_data_k(self, MainWindow)
+        PYSAT_UI_MODULES.get_data_.get_data_k(self, MainWindow)
 
     def do_mask(self, MainWindow):
-        pass
+        PYSAT_UI_MODULES.get_mask_.get_mask(self, MainWindow)
 
     def submodel_ranges(self, MainWindow):
-        PythonUI.submodel_.submodel(self, MainWindow)
-
+        PYSAT_UI_MODULES.submodel_.submodel(self, MainWindow)
 
     def do_strat_folds(self, MainWindow):
         pass
 
     def do_regression_train(self, MainWindow):
-        PythonUI.regression_.regression_train(self, MainWindow)
+        PYSAT_UI_MODULES.regression_.regression_train(self, MainWindow)
 
     def do_scatter_plot(self, MainWindow):
         pass
+
+    """
+    Code below adds functionality to the mainframe
+    """
 
     def menu_item_shortcuts(self):
         self.actionExit.setShortcut("ctrl+Q")
@@ -405,6 +408,14 @@ class pysat_ui(object):
         self.actionApply_Mask.triggered.connect(lambda: pysat_ui.do_mask(self, MainWindow))                             # get_mask
         self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self, MainWindow))                # strat folds
         self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self, MainWindow))                      # regression train
+
+    def saveworkflow(self):
+        # TODO save the current window's data into a save file
+        pass
+
+    def openworkflow(self):
+        # TODO open file dialog
+        self.filename = QFileDialog.getOpenFileName(self, "Open a Workflow File", '.', "(*.wrf)")
 
     def on_okButton_clicked(self):
         pass
