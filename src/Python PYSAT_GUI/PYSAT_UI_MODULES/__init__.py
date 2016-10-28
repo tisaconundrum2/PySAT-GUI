@@ -7,3 +7,4 @@ from PYSAT_UI_MODULES.ransac_ import *
 from PYSAT_UI_MODULES.regression_ import *
 from PYSAT_UI_MODULES.strat_folds_ import *
 from PYSAT_UI_MODULES.submodel_ import *
+from PYSAT_UI_MODULES.Error_ import *

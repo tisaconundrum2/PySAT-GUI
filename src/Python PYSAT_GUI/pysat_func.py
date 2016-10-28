@@ -2,7 +2,8 @@ from pysat.spectral.spectral_data import spectral_data
 from pysat.regression import regression
 from pysat.plotting.plots import scatterplot
 import pandas as pd
-from PyQt4.QtGui import QMessageBox
+from PYSAT_UI_MODULES.Error_ import error_print
+
 
 
 
@@ -90,17 +91,3 @@ class pysat_func(object):
         scatterplot(x, y, self.outpath, figname, xrange=xrange, yrange=yrange, xtitle=xtitle, ytitle=ytitle, title=title,
                     lbls=lbls, one_to_one=one_to_one, dpi=dpi, colors=colors, annot_mask=annot_mask, alpha=alpha, cmap=cmap,
                     colortitle=colortitle)
-
-def error_print(message):
-    print(message)
-    try:
-        """
-        Warning Message Box
-        """
-        msg = QMessageBox()
-        msg.setIcon(QMessageBox.Warning)
-        msg.setText(message)
-        msg.setStandardButtons(QMessageBox.Ok)
-        msg.exec_()
-    except:
-        pass

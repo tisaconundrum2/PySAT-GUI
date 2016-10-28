@@ -1,4 +1,4 @@
-
+import PYSAT_UI_MODULES
 from PyQt4 import QtCore, QtGui
 from pysat_func import pysat_func
 
@@ -40,6 +40,7 @@ class regression_(object):
         self.regression_choosedata_hlayout.addWidget(self.regression_train_choosedata_label)
         datachoices = self.pysat_fun.datakeys
         if datachoices == []:
+            PYSAT_UI_MODULES.error_print('No Data has been loaded')
             datachoices = ['No data has been loaded!']
         self.regression_choosedata = make_combobox(datachoices)
         self.regression_choosedata.setIconSize(QtCore.QSize(50, 20))
@@ -102,17 +103,17 @@ class regression_(object):
 
     def make_ransac_widget(self):
         try:
-            self.ransac_widget.deleteLater()
+            regression_.ransac_widget.deleteLater()
         except:
             pass
-        self.ransac_widget = QtGui.QWidget()
+        regression_.ransac_widget = QtGui.QWidget()
         if self.regression_ransac_checkbox.isChecked():
-            ransac_widget_hlayout = QtGui.QHBoxLayout(self.ransac_widget)
+            ransac_widget_hlayout = QtGui.QHBoxLayout(regression_.ransac_widget)
             ransac_lossfunc_hlayout = QtGui.QHBoxLayout()
-            ransac_lossfunc_label = QtGui.QLabel(self.ransac_widget)
+            ransac_lossfunc_label = QtGui.QLabel(regression_.ransac_widget)
             ransac_lossfunc_label.setText('Loss function:')
             ransac_lossfunc_hlayout.addWidget(ransac_lossfunc_label)
-            ransac_lossfunc_combobox = QtGui.QComboBox(self.ransac_widget)
+            ransac_lossfunc_combobox = QtGui.QComboBox(regression_.ransac_widget)
             ransac_lossfunc_combobox.addItem(_fromUtf8("Squared Error"))
             ransac_lossfunc_combobox.addItem(_fromUtf8("Absolute Error"))
             ransac_lossfunc_hlayout.addWidget(ransac_lossfunc_combobox)
@@ -121,15 +122,15 @@ class regression_(object):
             ransac_lossfunc_hlayout.addItem(ransac_lossfunc_spacer)
             ransac_widget_hlayout.addLayout(ransac_lossfunc_hlayout)
             ransac_thresh_hlayout = QtGui.QHBoxLayout()
-            ransac_thresh_label = QtGui.QLabel(self.ransac_widget)
+            ransac_thresh_label = QtGui.QLabel(regression_.ransac_widget)
             ransac_thresh_label.setText('Threshold:')
             ransac_thresh_hlayout.addWidget(ransac_thresh_label)
-            ransac_thresh_spin = QtGui.QDoubleSpinBox(self.ransac_widget)
+            ransac_thresh_spin = QtGui.QDoubleSpinBox(regression_.ransac_widget)
             ransac_thresh_hlayout.addWidget(ransac_thresh_spin)
             ransac_thresh_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
             ransac_thresh_hlayout.addItem(ransac_thresh_spacer)
             ransac_widget_hlayout.addLayout(ransac_thresh_hlayout)
-            self.ransac_hlayout.addWidget(self.ransac_widget)
+            self.ransac_hlayout.addWidget(regression_.ransac_widget)
 
     def make_regression_widget(self):
         alg = self.regression_choosealg.currentText()
