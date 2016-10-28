@@ -1,6 +1,6 @@
-import PYSAT_UI_MODULES
+from PYSAT_UI_MODULES.Error_ import error_print
 from PyQt4 import QtCore, QtGui
-from pysat_func import pysat_func
+import pysat_func
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -40,7 +40,7 @@ class regression_(object):
         self.regression_choosedata_hlayout.addWidget(self.regression_train_choosedata_label)
         datachoices = self.pysat_fun.datakeys
         if datachoices == []:
-            PYSAT_UI_MODULES.error_print('No Data has been loaded')
+            error_print('No Data has been loaded')
             datachoices = ['No data has been loaded!']
         self.regression_choosedata = make_combobox(datachoices)
         self.regression_choosedata.setIconSize(QtCore.QSize(50, 20))

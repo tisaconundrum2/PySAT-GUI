@@ -1,5 +1,5 @@
 from PyQt4 import QtCore, QtGui
-from pysat_func import pysat_func
+import pysat_func
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
