@@ -79,6 +79,8 @@ def strat_folds(pysat_fun, destination):
     strat_folds_choose_var_label.setText(_translate("strat_folds", "Choose variable on which to sort:", None))
     try:
         create_folds.clicked.connect(lambda: pysat_fun.do_strat_folds(datakey=str(strat_folds_choose_data.currentText()),nfolds=int(nfolds_spin.text()),testfold=int(choose_test_fold.currentText()),colname=('comp',strat_folds_choose_var.currentText())))
+        # TODO create a working function like the line below
+        # create_folds.clicked.connect(lambda: pysat_fun.appendNewFunc(do_strat_folds))
     except:
         print('There was a problem with creating stratified folds...')     
 
