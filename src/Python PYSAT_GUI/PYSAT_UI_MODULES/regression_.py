@@ -94,9 +94,9 @@ class regression_(object):
                                                         QtGui.QSizePolicy.Minimum)
         self.regression_choosealg_hlayout.addItem(regression_choosealg_spacer)
         self.regression_vlayout.addLayout(self.regression_choosealg_hlayout)
-        self.regression_choosealg.activated.connect(self.make_regression_widget)
+        self.regression_choosealg.activated.connect(regression_.make_regression_widget)
 
-        self.verticalLayout_8.addWidget(regression_.regression_train)
+        self.verticalLayout_8.addWidget(self.regression_train)
         self.regression_train.raise_()
         self.regression_train.setTitle(_translate("regression_train", "Regression - Train", None))
 
