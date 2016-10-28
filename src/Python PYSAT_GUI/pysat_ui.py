@@ -385,7 +385,7 @@ class pysat_ui(object):
         PYSAT_UI_MODULES.submodel_.submodel(self, MainWindow)
 
     def do_strat_folds(self, MainWindow):
-        pass
+        PYSAT_UI_MODULES.strat_folds_.strat_folds(self.pysat_fun,self.verticalLayout_8)
 
     def do_regression_train(self, MainWindow):
         PYSAT_UI_MODULES.regression_.regression_train(self, MainWindow)
@@ -419,3 +419,4 @@ class pysat_ui(object):
 
     def on_okButton_clicked(self):
         pass
+    

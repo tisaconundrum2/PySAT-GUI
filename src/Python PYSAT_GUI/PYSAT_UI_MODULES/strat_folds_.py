@@ -1,6 +1,7 @@
 
 from PyQt4 import QtCore, QtGui
 from pysat_func import pysat_func
+from pysat.utils.gui_utils import make_combobox
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -19,85 +20,76 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 
-class strat_folds_(object):
-    def __init__(self):
-        self.pysat_fun = pysat_func()
+def strat_folds(pysat_fun, destination):
+    strat_folds_gbox = QtGui.QGroupBox()
+    font = QtGui.QFont()
+    font.setPointSize(10)
+    strat_folds_gbox.setFont(font)
+    strat_folds_gbox.setObjectName(_fromUtf8("Stratified Folds"))
+    strat_folds_vlayout = QtGui.QVBoxLayout(strat_folds_gbox)
+    strat_folds_vlayout.setObjectName(_fromUtf8("strat_folds_vlayout"))
+    strat_folds_choose_data_label = QtGui.QLabel(strat_folds_gbox)
+    strat_folds_choose_data_label.setObjectName(_fromUtf8("strat_folds_choose_data_label"))
+    strat_folds_vlayout.addWidget(strat_folds_choose_data_label)
+    datachoices=pysat_fun.datakeys
+    if datachoices==[]:
+        datachoices=['No data has been loaded!']
+    strat_folds_choose_data=make_combobox(datachoices)
+    strat_folds_vlayout.addWidget(strat_folds_choose_data)
+    strat_folds_choose_var_label = QtGui.QLabel(strat_folds_gbox)
+    strat_folds_choose_var_label.setObjectName(_fromUtf8("strat_folds_choose_var_label"))
+    strat_folds_vlayout.addWidget(strat_folds_choose_var_label)
+    
+    varchoices=pysat_fun.data[strat_folds_choose_data.currentText()].df['comp'].columns.values
+    strat_folds_choose_var=make_combobox(varchoices)
+    strat_folds_vlayout.addWidget(strat_folds_choose_var)
+    choices = pysat_fun.data[strat_folds_choose_data.currentText()].df['meta'].columns.values
+    
+    strat_folds_choose_data.activated[int].connect(lambda: strat_fold_change_vars(strat_folds_choose_var,choices))
+    strat_folds_hlayout = QtGui.QHBoxLayout()
+    strat_folds_hlayout.setObjectName(_fromUtf8("strat_folds_hlayout"))
+    nfolds_label = QtGui.QLabel(strat_folds_gbox)
+    nfolds_label.setObjectName(_fromUtf8("nfolds_label"))
+    strat_folds_hlayout.addWidget(nfolds_label)
+    nfolds_spin = QtGui.QSpinBox(strat_folds_gbox)
+    nfolds_spin.setObjectName(_fromUtf8("nfolds_spin"))
+    nfolds_spin.setMinimum(1)
+    strat_folds_hlayout.addWidget(nfolds_spin)
+    test_fold_label = QtGui.QLabel(strat_folds_gbox)
+    test_fold_label.setObjectName(_fromUtf8("test_fold_label"))
+    strat_folds_hlayout.addWidget(test_fold_label)
+    foldchoices=['1'] 
+    choose_test_fold = make_combobox(foldchoices)
+    choose_test_fold.setObjectName(_fromUtf8("choose_test_fold"))
+    nfolds_spin.valueChanged.connect(lambda: strat_fold_change_testfolds(choose_test_fold,list(map(str, list(range(1, nfolds_spin.value() + 1))))))
+    strat_folds_hlayout.addWidget(choose_test_fold)
+    spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+    strat_folds_hlayout.addItem(spacerItem)
+    create_folds = QtGui.QPushButton(strat_folds_gbox)
+    create_folds.setObjectName(_fromUtf8("create_folds"))
+    create_folds.setText(_translate("strat_folds", "Create Folds", None))
+    strat_folds_hlayout.addWidget(create_folds)
+    strat_folds_vlayout.addLayout(strat_folds_hlayout)
+    destination.addWidget(strat_folds_gbox)        
+    strat_folds_gbox.raise_()
+    strat_folds_gbox.setTitle(_translate("MainWindow", "Stratified Folds", None))
+    nfolds_label.setText(_translate("strat_folds", "N folds", None))
+    test_fold_label.setText(_translate("strat_folds", "Test Fold", None))
+    create_folds.setText(_translate("strat_folds", "Create Folds", None))
+    strat_folds_choose_data_label.setText(_translate("strat_folds", "Choose data to stratify:", None))
+    strat_folds_choose_var_label.setText(_translate("strat_folds", "Choose variable on which to sort:", None))
+    try:
+        create_folds.clicked.connect(lambda: pysat_fun.do_strat_folds(datakey=str(strat_folds_choose_data.currentText()),nfolds=int(nfolds_spin.text()),testfold=int(choose_test_fold.currentText()),colname=('comp',strat_folds_choose_var.currentText())))
+    except:
+        print('There was a problem with creating stratified folds...')     
 
-    def strat_folds(self, strat_folds):
-        self.strat_folds = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.strat_folds.setFont(font)
-        self.strat_folds.setObjectName(_fromUtf8("strat_folds"))
-        self.verticalLayout = QtGui.QVBoxLayout(self.strat_folds)
-        self.verticalLayout.setMargin(11)
-        self.verticalLayout.setSpacing(6)
-        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
-        self.strat_folds_vlayout = QtGui.QVBoxLayout()
-        self.strat_folds_vlayout.setMargin(11)
-        self.strat_folds_vlayout.setSpacing(6)
-        self.strat_folds_vlayout.setObjectName(_fromUtf8("strat_folds_vlayout"))
-        self.strat_folds_choose_data = QtGui.QComboBox(self.strat_folds)
-        self.strat_folds_choose_data.setObjectName(_fromUtf8("strat_folds_choose_data"))
-        self.strat_folds_vlayout.addWidget(self.strat_folds_choose_data)
-        self.strat_folds_choose_element = QtGui.QComboBox(self.strat_folds)
-        self.strat_folds_choose_element.setObjectName(_fromUtf8("strat_folds_choose_element"))
-        self.strat_folds_vlayout.addWidget(self.strat_folds_choose_element)
-        self.strat_folds_hlayout = QtGui.QHBoxLayout()
-        self.strat_folds_hlayout.setMargin(11)
-        self.strat_folds_hlayout.setSpacing(6)
-        self.strat_folds_hlayout.setObjectName(_fromUtf8("strat_folds_hlayout"))
-        self.nfolds_label = QtGui.QLabel(self.strat_folds)
-        self.nfolds_label.setObjectName(_fromUtf8("nfolds_label"))
-        self.strat_folds_hlayout.addWidget(self.nfolds_label)
-        self.nfolds_spin = QtGui.QSpinBox(self.strat_folds)
-        self.nfolds_spin.setObjectName(_fromUtf8("nfolds_spin"))
-        self.strat_folds_hlayout.addWidget(self.nfolds_spin)
-        self.test_fold_label = QtGui.QLabel(self.strat_folds)
-        self.test_fold_label.setObjectName(_fromUtf8("test_fold_label"))
-        self.strat_folds_hlayout.addWidget(self.test_fold_label)
-        self.test_fold_spin = QtGui.QSpinBox(self.strat_folds)
-        self.test_fold_spin.setObjectName(_fromUtf8("test_fold_spin"))
-        self.strat_folds_hlayout.addWidget(self.test_fold_spin)
-        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.strat_folds_hlayout.addItem(spacerItem)
-        self.create_folds = QtGui.QPushButton(self.strat_folds)
-        self.create_folds.setObjectName(_fromUtf8("create_folds"))
-        self.strat_folds_hlayout.addWidget(self.create_folds)
-        self.strat_folds_vlayout.addLayout(self.strat_folds_hlayout)
-        self.verticalLayout.addLayout(self.strat_folds_vlayout)
-        self.verticalLayout_8.addWidget(self.strat_folds)
-        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.ok.addItem(spacerItem1)
-
-        self.strat_folds.setTitle(_translate("MainWindow", "Stratified Folds", None))
-        self.strat_folds_choose_data.setItemText(0, _translate("MainWindow", "Choose Data", None))
-        self.strat_folds_choose_data.setItemText(1, _translate("MainWindow", "Unknown Data", None))
-        self.strat_folds_choose_data.setItemText(2, _translate("MainWindow", "Known Data", None))
-        self.strat_folds_choose_element.setItemText(0, _translate("MainWindow", "Choose Element to Stratify On", None))
-        self.strat_folds_choose_element.setItemText(1, _translate("MainWindow", "SiO2", None))
-        self.strat_folds_choose_element.setItemText(2, _translate("MainWindow", "TiO2", None))
-        self.strat_folds_choose_element.setItemText(3, _translate("MainWindow", "Al2O3", None))
-        self.strat_folds_choose_element.setItemText(4, _translate("MainWindow", "FeOT", None))
-        self.strat_folds_choose_element.setItemText(5, _translate("MainWindow", "MgO", None))
-        self.strat_folds_choose_element.setItemText(6, _translate("MainWindow", "CaO", None))
-        self.strat_folds_choose_element.setItemText(7, _translate("MainWindow", "Na2O", None))
-        self.strat_folds_choose_element.setItemText(8, _translate("MainWindow", "K2O", None))
-        self.nfolds_label.setText(_translate("MainWindow", "N folds", None))
-        self.test_fold_label.setText(_translate("MainWindow", "Test Fold", None))
-        self.create_folds.setText(_translate("MainWindow", "Create Folds", None))
-
-
-    # TODO Fixed these functions
-    def strat_fold_change_vars(self):
-        self.strat_folds_choose_var.clear()
-        choices = self.pysat_fun.data[self.strat_folds_choose_data.currentText()].df['meta'].columns.values
-        print(choices)
-        self.strat_folds_choose_var.addItems(choices)
+def strat_fold_change_vars(choose_var,choices):
+    choose_var.clear()
+    print(choices)
+    choose_var.addItems(choices)
 
 
-    def strat_fold_change_testfolds(self):
-        self.choose_test_fold.clear()
-        choices = list(map(str, list(range(1, self.nfolds_spin.value() + 1))))
-        print(choices)
-        self.choose_test_fold.addItems(choices)
+def strat_fold_change_testfolds(choose_test_fold,choices):
+    choose_test_fold.clear()
+    print(choices)
+    choose_test_fold.addItems(choices)
