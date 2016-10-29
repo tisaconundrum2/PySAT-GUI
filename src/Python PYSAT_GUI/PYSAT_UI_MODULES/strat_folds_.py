@@ -1,5 +1,4 @@
 from PyQt4 import QtCore, QtGui
-import pysat_func
 from pysat.utils.gui_utils import make_combobox
 
 try:

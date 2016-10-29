@@ -1,5 +1,5 @@
 from PyQt4 import QtCore, QtGui
-from pysat_func import pysat_func
+import pysat_func
 import PYSAT_UI_MODULES
 
 import pysat
@@ -382,7 +382,7 @@ class pysat_ui(object):
         PYSAT_UI_MODULES.get_mask_.get_mask(self, MainWindow)
 
     def submodel_ranges(self, MainWindow):
-        PYSAT_UI_MODULES.submodel_.submodel(self, MainWindow)
+        PYSAT_UI_MODULES.submodel_.submodel(self.pysat_fun,self.verticalLayout_8)
 
     def do_strat_folds(self, MainWindow):
         PYSAT_UI_MODULES.strat_folds_.strat_folds(self.pysat_fun,self.verticalLayout_8)
