@@ -1,5 +1,4 @@
 from PyQt4 import QtCore, QtGui
-import pysat_func
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -20,10 +19,10 @@ except AttributeError:
 
 class pls_(object):
     def __init__(self):
-        self.pysat_fun = pysat_func()
+        self.pysat_fun = pysat_function()
 
     def pls(self, Dialog):
-        self.pls = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
+        self.pls = QtGui.QGroupBox()
         font = QtGui.QFont()
         font.setPointSize(10)
         self.pls.setFont(font)
