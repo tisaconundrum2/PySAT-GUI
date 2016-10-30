@@ -15,7 +15,7 @@ try:
 except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
-
+    
 def submodel(pysat_fun, verticalLayout_8):
     submodel = QtGui.QGroupBox()
     font = QtGui.QFont()

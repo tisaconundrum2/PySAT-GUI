@@ -362,28 +362,28 @@ class pysat_ui(object):
         self.actionCreate_N_Folds.setText(_translate("MainWindow", "Create N Folds", None))
         self.actionStratified_Folds.setText(_translate("MainWindow", "Stratified Folds", None))
 
-    def file_outpath(self, MainWindow):
-        PYSAT_UI_MODULES.file_outpath_.file_outpath(self, MainWindow)
+    def file_outpath(self):
+        PYSAT_UI_MODULES.file_outpath_.file_outpath(self.pysat_fun, self.verticalLayout_8)
 
-    def get_unknown_data(self, MainWindow):
-        PYSAT_UI_MODULES.get_data_.get_data_u(self, MainWindow)
+    def get_unknown_data(self):
+        PYSAT_UI_MODULES.get_data_.get_data_u(self.pysat_fun, self.verticalLayout_8)
 
-    def get_known_data(self, MainWindow):
-        PYSAT_UI_MODULES.get_data_.get_data_k(self, MainWindow)
+    def get_known_data(self):
+        PYSAT_UI_MODULES.get_data_.get_data_k(self.pysat_fun, self.verticalLayout_8)
 
-    def do_mask(self, MainWindow):
-        PYSAT_UI_MODULES.get_mask_.get_mask(self, MainWindow)
+    def do_mask(self):
+        PYSAT_UI_MODULES.get_mask_.get_mask(self.pysat_fun, self.verticalLayout_8)
 
-    def submodel_ranges(self, MainWindow):
-        PYSAT_UI_MODULES.submodel_.submodel(self.pysat_fun,self.verticalLayout_8)
+    def submodel_ranges(self):
+        PYSAT_UI_MODULES.submodel_.submodel(self.pysat_fun, self.verticalLayout_8)
 
-    def do_strat_folds(self, MainWindow):
-        PYSAT_UI_MODULES.strat_folds_.strat_folds(self.pysat_fun,self.verticalLayout_8)
+    def do_strat_folds(self):
+        PYSAT_UI_MODULES.strat_folds_.strat_folds(self.pysat_fun, self.verticalLayout_8)
 
-    def do_regression_train(self, MainWindow):
-        PYSAT_UI_MODULES.regression_.regression_train(self, MainWindow)
+    def do_regression_train(self):
+        PYSAT_UI_MODULES.regression_.regression_train(self.pysat_fun, self.verticalLayout_8)
 
-    def do_scatter_plot(self, MainWindow):
+    def do_scatter_plot(self):
         pass
 
     """
@@ -394,13 +394,13 @@ class pysat_ui(object):
         self.actionExit.setShortcut("ctrl+Q")
 
     def menu_item_functions(self, MainWindow):
-        self.actionSet_output_location.triggered.connect(lambda: pysat_ui.file_outpath(self, MainWindow))               # output location
-        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.get_unknown_data(self, MainWindow))             # unknown data
-        self.actionLoad_reference_Data.triggered.connect(lambda: pysat_ui.get_known_data(self, MainWindow))             # known data
-        self.actionNormalization.triggered.connect(lambda: pysat_ui.submodel_ranges(self, MainWindow))                  # submodel
-        self.actionApply_Mask.triggered.connect(lambda: pysat_ui.do_mask(self, MainWindow))                             # get_mask
-        self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self, MainWindow))                # strat folds
-        self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self, MainWindow))                      # regression train
+        self.actionSet_output_location.triggered.connect(lambda: pysat_ui.file_outpath(self))               # output location
+        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.get_unknown_data(self))             # unknown data
+        self.actionLoad_reference_Data.triggered.connect(lambda: pysat_ui.get_known_data(self))             # known data
+        self.actionNormalization.triggered.connect(lambda: pysat_ui.submodel_ranges(self))                  # submodel
+        self.actionApply_Mask.triggered.connect(lambda: pysat_ui.do_mask(self))                             # get_mask
+        self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self))                # strat folds
+        self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))                      # regression train
 
     def saveworkflow(self):
         # TODO save the current window's data into a save file
