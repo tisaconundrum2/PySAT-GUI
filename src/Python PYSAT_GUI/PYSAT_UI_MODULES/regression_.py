@@ -22,6 +22,7 @@ class regression_:
     def __init__(self, pysat_fun, verticalLayout_8):
         self.pysat_fun = pysat_fun
         self.verticalLayout_8 = verticalLayout_8
+        self.regression_train()
 
     def regression_train(self):
         self.regression_train = QtGui.QGroupBox()
@@ -79,7 +80,7 @@ class regression_:
         self.ransac_hlayout.addWidget(self.regression_ransac_checkbox)
         self.regression_vlayout.addLayout(self.ransac_hlayout)
 
-        self.regression_ransac_checkbox.stateChanged.connect(regression_.make_ransac_widget)
+        self.regression_ransac_checkbox.stateChanged.connect(self.make_ransac_widget)
         # choose regression algorithm
         self.regression_choosealg_hlayout = QtGui.QHBoxLayout()
         self.regression_choosealg_hlayout.setObjectName(_fromUtf8("regression_choosealg_hlayout"))
@@ -95,7 +96,7 @@ class regression_:
                                                         QtGui.QSizePolicy.Minimum)
         self.regression_choosealg_hlayout.addItem(regression_choosealg_spacer)
         self.regression_vlayout.addLayout(self.regression_choosealg_hlayout)
-        self.regression_choosealg.activated.connect(regression_.make_regression_widget)
+        self.regression_choosealg.activated.connect(self.make_regression_widget)
 
         self.verticalLayout_8.addWidget(self.regression_train)
         self.regression_train.raise_()
@@ -103,7 +104,7 @@ class regression_:
 
     def make_ransac_widget(self):
         try:
-            regression_.ransac_widget.deleteLater()
+            self.ransac_widget.deleteLater()
         except:
             pass
         regression_.ransac_widget = QtGui.QWidget()

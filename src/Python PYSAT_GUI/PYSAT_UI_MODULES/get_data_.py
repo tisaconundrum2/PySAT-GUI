@@ -17,10 +17,11 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 
-class get_data_:
+class get_data_u_:
     def __init__(self, pysat_fun, verticalLayout_8):
         self.pysat_fun = pysat_fun
         self.verticalLayout_8 = verticalLayout_8
+        self.get_data_u()
 
     def get_data_u(self):
         self.get_data_u = QtGui.QGroupBox()
@@ -50,11 +51,23 @@ class get_data_:
         self.get_data_u_button.setText(_translate("MainWindow", "...", None))
         try:
             self.get_data_u_button.clicked.connect(
-                lambda: get_data_.on_getDataButton_clicked(self, self.get_data_u_line_edit, "Unknown"))
-
+                lambda: get_data_u_.on_getDataButton_clicked(self, self.get_data_u_line_edit, "Unknown"))
         except:
             pass
 
+    def on_getDataButton_clicked(self, lineEdit, key):
+        filename = QtGui.QFileDialog.getOpenFileName(None, "Open " + key + " Data File", '.', "(*.csv)")
+        lineEdit.setText(filename)
+        if lineEdit.text() == "":
+            lineEdit.setText("*.csv")
+        self.pysat_fun.get_data(filename, key)
+
+
+class get_data_k_:
+    def __init__(self, pysat_fun, verticalLayout_8):
+        self.pysat_fun = pysat_fun
+        self.verticalLayout_8 = verticalLayout_8
+        self.get_data_k()
 
     def get_data_k(self):
         self.get_data_k = QtGui.QGroupBox()
@@ -84,7 +97,7 @@ class get_data_:
         self.get_data_k_button.setText(_translate("MainWindow", "...", None))
         try:
             self.get_data_k_button.clicked.connect(
-                lambda: get_data_.on_getDataButton_clicked(self, self.get_data_k_line_edit, "Known"))
+                lambda: get_data_k_.on_getDataButton_clicked(self, self.get_data_k_line_edit, "Known"))
         except:
             pass
 

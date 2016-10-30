@@ -363,25 +363,25 @@ class pysat_ui(object):
         self.actionStratified_Folds.setText(_translate("MainWindow", "Stratified Folds", None))
 
     def file_outpath(self):
-        PYSAT_UI_MODULES.file_outpath_.file_outpath(self.pysat_fun, self.verticalLayout_8)
+        PYSAT_UI_MODULES.file_outpath_(self.pysat_fun, self.verticalLayout_8)
 
     def get_unknown_data(self):
-        PYSAT_UI_MODULES.get_data_.get_data_u(self.pysat_fun, self.verticalLayout_8)
+        PYSAT_UI_MODULES.get_data_u_(self.pysat_fun, self.verticalLayout_8)
 
     def get_known_data(self):
-        PYSAT_UI_MODULES.get_data_.get_data_k(self.pysat_fun, self.verticalLayout_8)
+        PYSAT_UI_MODULES.get_data_k_(self.pysat_fun, self.verticalLayout_8)
 
     def do_mask(self):
-        PYSAT_UI_MODULES.get_mask_.get_mask(self.pysat_fun, self.verticalLayout_8)
+        PYSAT_UI_MODULES.get_mask_(self.pysat_fun, self.verticalLayout_8)
 
     def submodel_ranges(self):
-        PYSAT_UI_MODULES.submodel_.submodel(self.pysat_fun, self.verticalLayout_8)
+        PYSAT_UI_MODULES.submodel_(self.pysat_fun, self.verticalLayout_8)
 
     def do_strat_folds(self):
-        PYSAT_UI_MODULES.strat_folds_.strat_folds(self.pysat_fun, self.verticalLayout_8)
+        PYSAT_UI_MODULES.strat_folds_(self.pysat_fun, self.verticalLayout_8)
 
     def do_regression_train(self):
-        PYSAT_UI_MODULES.regression_.regression_train(self.pysat_fun, self.verticalLayout_8)
+        PYSAT_UI_MODULES.regression_(self.pysat_fun, self.verticalLayout_8)
 
     def do_scatter_plot(self):
         pass

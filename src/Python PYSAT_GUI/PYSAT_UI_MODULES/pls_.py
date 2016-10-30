@@ -1,5 +1,4 @@
 from PyQt4 import QtCore, QtGui
-import pysat_func
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -22,6 +21,7 @@ class pls_:
     def __init__(self, pysat_fun, verticalLayout_8):
         self.pysat_fun = pysat_fun
         self.verticalLayout_8 = verticalLayout_8
+        self.pls()
 
     def pls(self):
         self.pls = QtGui.QGroupBox()
