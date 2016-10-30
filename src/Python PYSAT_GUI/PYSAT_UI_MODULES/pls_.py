@@ -1,4 +1,5 @@
 from PyQt4 import QtCore, QtGui
+import pysat_func
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -17,11 +18,12 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 
-class pls_(object):
-    def __init__(self):
-        self.pysat_fun = pysat_function()
+class pls_:
+    def __init__(self, pysat_fun, verticalLayout_8):
+        self.pysat_fun = pysat_fun
+        self.verticalLayout_8 = verticalLayout_8
 
-    def pls(self, Dialog):
+    def pls(self):
         self.pls = QtGui.QGroupBox()
         font = QtGui.QFont()
         font.setPointSize(10)

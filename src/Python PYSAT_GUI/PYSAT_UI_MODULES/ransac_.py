@@ -1,4 +1,6 @@
+
 from PyQt4 import QtCore, QtGui
+import pysat_func
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -17,8 +19,13 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 
-    def regression(self, ransac):
-        self.ransac = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
+class regression_:
+    def __init__(self, pysat_fun, verticalLayout_8):
+        self.pysat_fun = pysat_fun
+        self.verticalLayout_8 = verticalLayout_8
+
+    def regression(self):
+        self.ransac = QtGui.QGroupBox()
         font = QtGui.QFont()
         font.setPointSize(10)
         self.ransac.setFont(font)
@@ -56,7 +63,6 @@ except AttributeError:
         self.horizontalLayout.addLayout(self.ransac_vlayout_2)
         self.verticalLayout_8.addWidget(self.ransac)
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.ok.addItem(spacerItem1)
 
         self.ransac.setTitle(_translate("MainWindow", "Ransac", None))
         self.ransac_loss_func_2.setItemText(0, _translate("MainWindow", "Loss Function", None))
