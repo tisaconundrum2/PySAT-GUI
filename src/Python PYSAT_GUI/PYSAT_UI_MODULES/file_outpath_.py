@@ -1,5 +1,4 @@
 from PyQt4 import QtCore, QtGui
-import pysat_func
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -20,7 +19,7 @@ except AttributeError:
 
 class file_outpath_(object):
     def __init__(self):
-        self.pysat_fun = pysat_func()
+        self.pysat_fun = pysat_function()
 
 
     def file_outpath(self, MainWindow):

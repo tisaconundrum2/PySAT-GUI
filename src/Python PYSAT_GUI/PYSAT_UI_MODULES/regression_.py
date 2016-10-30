@@ -1,6 +1,5 @@
 from PYSAT_UI_MODULES.Error_ import error_print
 from PyQt4 import QtCore, QtGui
-import pysat_func
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -21,7 +20,7 @@ except AttributeError:
 
 class regression_(object):
     def __init__(self):
-        self.pysat_fun = pysat_func()
+        self.pysat_fun = pysat_function()
 
     def regression_train(self, MainWindow):
         self.regression_train = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)

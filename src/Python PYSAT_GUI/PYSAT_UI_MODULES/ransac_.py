@@ -1,6 +1,4 @@
-
 from PyQt4 import QtCore, QtGui
-import pysat_func
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -18,10 +16,6 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-
-class regression_(object):
-    def __init__(self):
-        self.pysat_fun = pysat_func()
 
     def regression(self, ransac):
         self.ransac = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
