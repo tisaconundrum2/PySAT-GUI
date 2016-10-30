@@ -17,13 +17,13 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 
-class submodel_(object):
+class submodel_:
     def __init__(self, pysat_fun, verticalLayout_8):
         self.pysat_fun = pysat_fun
         self.verticalLayout_8 = verticalLayout_8
 
 
-    def submodel(self, submodel):
+    def submodel(self):
         self.submodel = QtGui.QGroupBox()
         font = QtGui.QFont()
         font.setPointSize(10)
