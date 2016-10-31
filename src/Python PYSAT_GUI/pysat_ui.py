@@ -386,9 +386,11 @@ class pysat_ui(object):
     def do_scatter_plot(self):
         pass
 
-    """
-    Code below adds functionality to the mainframe
-    """
+    """ =============================================
+    Please do not delete the files below this line!
+    These files are the working files that allow the UI
+    to operate and do work!
+    ============================================== """
 
     def menu_item_shortcuts(self):
         self.actionExit.setShortcut("ctrl+Q")
