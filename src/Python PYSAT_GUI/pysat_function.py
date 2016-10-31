@@ -13,8 +13,10 @@ class pysat_func(object):
         self.datakeys=[]
         self.models={}
         self.modelkeys=[]
-        self.addFunc = []
-        self.addPara = []
+
+        self.fun_list = []
+        self.arg_list = []
+        self.kw_list = []
 
     def getDataKeys(self):
         return self.datakeys

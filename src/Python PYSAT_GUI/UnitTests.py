@@ -19,7 +19,6 @@ arg_list.append(['known data', r"C:\Users\nfinch\Desktop\mask_minors_noise.csv"]
 arg_list.append(['known data', [(0, 1000)]])                                                                            # do_norm
 arg_list.append(['known data', 5, 2, ('comp', 'SiO2')])                                                                 # do_strat_folds
 arg_list.append(['known data', 'wvl', ('comp', 'SiO2'), 'PLS', {'n_components': 7, 'scale': False}, {}])                # do_regression_train
-arg_list.append(['known data', 'PLS', 'wvl'])                                                                           # do_regression_predict
 arg_list.append(['known data', ('comp', 'SiO2'), ('comp', 'PLS_prediction'), 'PLS_SiO2_nc7.png'])                       # do_scatterplot
 
 kw_list.append({})                                                                                                      # set_file_outpath
@@ -28,7 +27,6 @@ kw_list.append({})                                                              
 kw_list.append({})                                                                                                      # do_norm
 kw_list.append({})                                                                                                      # do_strat_folds
 kw_list.append({})                                                                                                      # do_regression_train
-kw_list.append({})                                                                                                      # do_regression_predict
 kw_list.append({'one_to_one': True})                                                                                    # do_scatterplot
 
 fun_list.append(pysat.set_file_outpath)
@@ -37,7 +35,6 @@ fun_list.append(pysat.do_mask)
 fun_list.append(pysat.submodel_ranges)
 fun_list.append(pysat.do_strat_folds)
 fun_list.append(pysat.do_regression_train)
-fun_list.append(pysat.do_regression_predict)
 fun_list.append(pysat.do_scatterplot)
 
 for i in range(len(fun_list)):

@@ -52,7 +52,7 @@ class file_outpath_:
         self.file_out_path_button.setText(_translate("MainWindow", "...", None))
 
         try:
-            self.file_out_path_button.clicked.connect(lambda: file_outpath_.on_outPutLocationButton_clicked(self, self.file_out_path_line_edit))
+            self.file_out_path_button.clicked.connect()
         except:
             pass
 
