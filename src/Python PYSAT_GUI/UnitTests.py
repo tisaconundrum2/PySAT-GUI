@@ -17,10 +17,10 @@ arg_list.append([r"C:\Users\nfinch\Desktop\Output"])                            
 arg_list.append([r"C:\Users\nfinch\Desktop\full_db_mars_corrected_dopedTiO2_pandas_format.csv", "known data"])          # get_dat1a
 arg_list.append(['known data', r"C:\Users\nfinch\Desktop\mask_minors_noise.csv"])                                       # do_mask
 arg_list.append(['known data', [(0, 1000)]])                                                                            # do_norm
-arg_list.append(['known data', 5, 2, ('meta', 'SiO2')])                                                                 # do_strat_folds
-arg_list.append(['known data', 'wvl', ('meta', 'SiO2'), 'PLS', {'n_components': 7, 'scale': False}, {}])                # do_regression_train
+arg_list.append(['known data', 5, 2, ('comp', 'SiO2')])                                                                 # do_strat_folds
+arg_list.append(['known data', 'wvl', ('comp', 'SiO2'), 'PLS', {'n_components': 7, 'scale': False}, {}])                # do_regression_train
 arg_list.append(['known data', 'PLS', 'wvl'])                                                                           # do_regression_predict
-arg_list.append(['known data', ('meta', 'SiO2'), ('meta', 'PLS_prediction'), 'PLS_SiO2_nc7.png'])                       # do_scatterplot
+arg_list.append(['known data', ('comp', 'SiO2'), ('comp', 'PLS_prediction'), 'PLS_SiO2_nc7.png'])                       # do_scatterplot
 
 kw_list.append({})                                                                                                      # set_file_outpath
 kw_list.append({})                                                                                                      # get_dat1a
