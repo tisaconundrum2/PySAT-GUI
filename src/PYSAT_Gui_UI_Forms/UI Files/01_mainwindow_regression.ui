@@ -57,7 +57,7 @@ QGroupBox::title {
            </font>
           </property>
           <property name="title">
-           <string>Files</string>
+           <string>Regression</string>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout">
            <item>
