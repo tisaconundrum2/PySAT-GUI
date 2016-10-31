@@ -16,6 +16,17 @@ class pysat_func(object):
         self.addFunc = []
         self.addPara = []
 
+    def getDataKeys(self):
+        return self.datakeys
+
+    def getModelKeys(self):
+        return self.modelkeys
+
+    def getData(self):
+        return self.data
+
+    def getModels(self):
+        return self.models
 
     def set_file_outpath(self, outpath):
         try:
