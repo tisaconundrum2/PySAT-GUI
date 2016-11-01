@@ -1,5 +1,6 @@
 from PyQt4 import QtCore, QtGui
 from pysat.utils.gui_utils import make_combobox
+from PYSAT_UI_MODULES.Error_ import error_print
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -25,6 +26,7 @@ class strat_folds_:
         self.stratified_folds()
 
     def stratified_folds(self):
+        self.pysat_fun.fun_list.append(self.pysat_fun.do_strat_folds)
         self.strat_folds = QtGui.QGroupBox()
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -37,6 +39,7 @@ class strat_folds_:
         self.strat_folds_vlayout.addWidget(self.strat_folds_choose_data_label)
         datachoices=self.pysat_fun.datakeys
         if datachoices==[]:
+            error_print('No data has been loaded!')
             datachoices=['No data has been loaded!']
         self.strat_folds_choose_data=make_combobox(datachoices)
         self.strat_folds_vlayout.addWidget(self.strat_folds_choose_data)
@@ -83,18 +86,20 @@ class strat_folds_:
         self.strat_folds_choose_data_label.setText(_translate("strat_folds", "Choose data to stratify:", None))
         self.strat_folds_choose_var_label.setText(_translate("strat_folds", "Choose variable on which to sort:", None))
         try:
-            self.create_folds.clicked.connect(lambda: self.pysat_fun.do_strat_folds(datakey=str(self.strat_folds_choose_data.currentText()),nfolds=int(self.nfolds_spin.text()),testfold=int(self.choose_test_fold.currentText()),colname=('meta',self.strat_folds_choose_var.currentText())))
-        except:
+            # arg_list.append(['known data', 5, 2, ('meta', 'SiO2')])
+            self.create_folds.clicked.connect(lambda: self.pysat_fun.arg_list.append([known_data, 5, 2, ('meta', 'SiO2')]))
+            except:
             print('There was a problem with creating stratified folds...')
 
     def strat_fold_change_vars(self):
         self.strat_folds_choose_var.clear()
-        choices=self.pysat_fun.data[self.strat_folds_choose_data.currentText()].df['meta'].columns.values
+        choices = self.pysat_fun.data[self.strat_folds_choose_data.currentText()].df['meta'].columns.values
         print(choices)
         self.strat_folds_choose_var.addItems(choices)
 
     def strat_fold_change_testfolds(self):
         self.choose_test_fold.clear()
-        choices=list(map(str,list(range(1,self.nfolds_spin.value()+1))))
+        choices = list(map(str, list(range(1, self.nfolds_spin.value() + 1))))
         print(choices)
         self.choose_test_fold.addItems(choices)
+

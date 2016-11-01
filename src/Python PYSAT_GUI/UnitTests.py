@@ -1,4 +1,4 @@
-from pysat_function import pysat_func
+from pysat_func import pysat_func
 
 # Initialize pysat for use
 

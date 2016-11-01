@@ -1,5 +1,5 @@
 from PyQt4 import QtCore, QtGui
-from pysat_function import pysat_func
+from pysat_func import pysat_func
 import PYSAT_UI_MODULES
 
 try:

@@ -7,7 +7,7 @@ from PYSAT_UI_MODULES.Error_ import error_print
 
 
 
-class pysat_func(object):
+class pysat_func:
     def __init__(self):
         self.data={} #initialize with an empty dict to hold data frames
         self.datakeys=[]
