@@ -25,23 +25,22 @@ class file_outpath_:
 
 
     def main(self):
-        self.pysat_fun.set_fun_list(self.pysat_fun.get_data)  # add this function to the pysat list to be run
+        self.pysat_fun.set_fun_list(self.pysat_fun.set_file_outpath)  # add this function to the pysat list to be run
         self.file_outpath_ui()
         try:
-            self.file_out_path_button.clicked.connect()
+            self.file_out_path_button.clicked.connect(
+                lambda: self.on_outPutLocationButton_clicked(self.file_out_path_line_edit)
+            )
         except:
             pass
-
-            #### Opening Files
 
     def on_outPutLocationButton_clicked(self, lineEdit):
         filename = QtGui.QFileDialog.getExistingDirectory(None, "Select Output Directory", '.')
         lineEdit.setText(filename)
-        self.pysat_fun.set_file_outpath(filename)
         if lineEdit.text() == "":
             lineEdit.setText("*/*")
-
-            #### Ok Button Clicked
+        self.pysat_fun.set_arg_list([filename])
+        self.pysat_fun.set_kw_list({})
 
     def file_outpath_ui(self):
         self.file_out_path = QtGui.QGroupBox()

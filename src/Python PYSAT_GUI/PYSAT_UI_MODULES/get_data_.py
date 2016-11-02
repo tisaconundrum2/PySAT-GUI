@@ -28,7 +28,7 @@ class get_data_u_:
         self.get_data_ui()                                                                     # initiate the UI
         try:
             self.get_data_u_button.clicked.connect(
-                lambda: self.on_getDataButton_clicked(self.get_data_u_line_edit, "known"))     # when a button is clicked call the on_getDataButton_clicked function
+                lambda: self.on_getDataButton_clicked(self.get_data_u_line_edit, "unknown"))     # when a button is clicked call the on_getDataButton_clicked function
         except:
             pass
 
@@ -115,7 +115,7 @@ class get_data_k_:
         self.horizontalLayout.addWidget(self.get_data_k_button)
         self.verticalLayout_8.addWidget(self.get_data_k)
 
-        self.get_data_k.setTitle(_translate("MainWindow", "Load in Unknown data file", None))
+        self.get_data_k.setTitle(_translate("MainWindow", "Load in Known data file", None))
         self.get_data_k_label.setText(_translate("MainWindow", "File Name", None))
         self.get_data_k_line_edit.setText(_translate("MainWindow", "*.csv", None))
         self.get_data_k_button.setText(_translate("MainWindow", "...", None))
