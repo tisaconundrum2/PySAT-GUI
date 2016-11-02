@@ -361,6 +361,7 @@ class pysat_ui(object):
         self.actionSet_output_location.setText(_translate("MainWindow", "Output Location", None))
         self.actionCreate_N_Folds.setText(_translate("MainWindow", "Create N Folds", None))
         self.actionStratified_Folds.setText(_translate("MainWindow", "Stratified Folds", None))
+        self.okButton.clicked.connect(lambda: self.on_okButton_clicked())
 
     def file_outpath(self):
         PYSAT_UI_MODULES.file_outpath_(self.pysat_fun, self.verticalLayout_8)
@@ -413,4 +414,4 @@ class pysat_ui(object):
         self.filename = QtGui.QFileDialog.getOpenFileName(self, "Open a Workflow File", '.', "(*.wrf)")
 
     def on_okButton_clicked(self):
-        pass
+        self.pysat_fun.press_ok()

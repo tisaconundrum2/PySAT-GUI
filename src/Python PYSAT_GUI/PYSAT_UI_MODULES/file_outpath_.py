@@ -21,10 +21,29 @@ class file_outpath_:
     def __init__(self, pysat_fun, verticalLayout_8):
         self.pysat_fun = pysat_fun
         self.verticalLayout_8 = verticalLayout_8
-        self.file_outpath()
+        self.main()
 
 
-    def file_outpath(self):
+    def main(self):
+        self.pysat_fun.set_fun_list(self.pysat_fun.get_data)  # add this function to the pysat list to be run
+        self.file_outpath_ui()
+        try:
+            self.file_out_path_button.clicked.connect()
+        except:
+            pass
+
+            #### Opening Files
+
+    def on_outPutLocationButton_clicked(self, lineEdit):
+        filename = QtGui.QFileDialog.getExistingDirectory(None, "Select Output Directory", '.')
+        lineEdit.setText(filename)
+        self.pysat_fun.set_file_outpath(filename)
+        if lineEdit.text() == "":
+            lineEdit.setText("*/*")
+
+            #### Ok Button Clicked
+
+    def file_outpath_ui(self):
         self.file_out_path = QtGui.QGroupBox()
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -50,19 +69,3 @@ class file_outpath_:
         self.file_out_path_label.setText(_translate("MainWindow", "Folder Name", None))
         self.file_out_path_line_edit.setText(_translate("MainWindow", "*/", None))
         self.file_out_path_button.setText(_translate("MainWindow", "...", None))
-
-        try:
-            self.file_out_path_button.clicked.connect()
-        except:
-            pass
-
-            #### Opening Files
-
-    def on_outPutLocationButton_clicked(self, lineEdit):
-        filename = QtGui.QFileDialog.getExistingDirectory(None, "Select Output Directory", '.')
-        lineEdit.setText(filename)
-        self.pysat_fun.set_file_outpath(filename)
-        if lineEdit.text() == "":
-            lineEdit.setText("*/*")
-
-            #### Ok Button Clicked

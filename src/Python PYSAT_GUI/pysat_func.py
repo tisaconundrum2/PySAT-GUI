@@ -18,6 +18,19 @@ class pysat_func:
         self.arg_list = []
         self.kw_list = []
 
+    """
+    Getter and setter functions below
+    """
+
+    def set_fun_list(self, fun):
+        self.fun_list.append(fun)
+
+    def set_arg_list(self, fun):
+        self.arg_list.append(fun)
+
+    def set_kw_list(self, fun):
+        self.kw_list.append(fun)
+
     def getDataKeys(self):
         return self.datakeys
 
@@ -29,6 +42,10 @@ class pysat_func:
 
     def getModels(self):
         return self.models
+
+    """
+    Work functions below
+    """
 
     def set_file_outpath(self, outpath):
         try:
@@ -104,3 +121,9 @@ class pysat_func:
         scatterplot(x, y, self.outpath, figname, xrange=xrange, yrange=yrange, xtitle=xtitle, ytitle=ytitle, title=title,
                     lbls=lbls, one_to_one=one_to_one, dpi=dpi, colors=colors, annot_mask=annot_mask, alpha=alpha, cmap=cmap,
                     colortitle=colortitle)
+
+    def press_ok(self):
+        # TODO this function will take all the enumerated functions and parameters and run them
+        for i in range(len(self.fun_list)):
+            print(i)
+            self.fun_list[i](*self.arg_list[i], **self.kw_list[i])

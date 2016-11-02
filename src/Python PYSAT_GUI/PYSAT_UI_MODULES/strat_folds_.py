@@ -88,7 +88,7 @@ class strat_folds_:
         try:
             # arg_list.append(['known data', 5, 2, ('meta', 'SiO2')])
             self.create_folds.clicked.connect(lambda: self.pysat_fun.arg_list.append([known_data, 5, 2, ('meta', 'SiO2')]))
-            except:
+        except:
             print('There was a problem with creating stratified folds...')
 
     def strat_fold_change_vars(self):
