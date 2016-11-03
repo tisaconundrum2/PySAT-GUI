@@ -28,7 +28,7 @@ class regression_:
         # TODO add function call here
         self.regression_ui()
         self.regression_ransac_checkbox.toggled.connect(lambda: self.make_ransac_widget(self.regression_ransac_checkbox.isChecked()))
-        self.regression_choosealg.activated.connect(lambda: self.make_regression_widget)
+        self.regression_choosealg.currentIndexChanged.connect(lambda: self.make_regression_widget(self.regression_choosealg.currentText()))
 
         # TODO add try and except here
 
@@ -64,16 +64,76 @@ class regression_:
 
 
     # TODO Fix regression widget, things are not appearing as they should be
-    def make_regression_widget(self):
-        alg = self.regression_choosealg.currentText()
+    def make_regression_widget(self, alg):
         print(alg)
-        self.reg_widget = QtGui.QWidget()
         if alg == 'PLS':
-            pass
+            regression = QtGui.QGroupBox()
+            verticalLayout = QtGui.QVBoxLayout(regression)
+            verticalLayout.setMargin(11)
+            verticalLayout.setSpacing(6)
+            regression_vlayout = QtGui.QVBoxLayout()
+            regression_vlayout.setMargin(11)
+            regression_vlayout.setSpacing(6)
+            pls_widget = QtGui.QWidget(regression)
+            pls_widget.setMinimumSize(QtCore.QSize(0, 0))
+            horizontalLayout_2 = QtGui.QHBoxLayout(pls_widget)
+            horizontalLayout_2.setMargin(11)
+            horizontalLayout_2.setSpacing(6)
+            pls_nc_label = QtGui.QLabel(pls_widget)
+            pls_nc_label.setObjectName(_fromUtf8("pls_nc_label"))
+            pls_nc_label.setText('# of components:')
+            horizontalLayout_2.addWidget(pls_nc_label)
+            pls_nc_spinbox = QtGui.QSpinBox(pls_widget)
+            horizontalLayout_2.addWidget(pls_nc_spinbox)
+            spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+            horizontalLayout_2.addItem(spacerItem)
+            self.regression_vlayout.addWidget(pls_widget)
         elif alg == 'GP':
-            pass
+            gp_vlayout = QtGui.QVBoxLayout(self.reg_widget)
+            gp_dim_red_hlayout = QtGui.QHBoxLayout()
+            gp_dim_red_label = QtGui.QLabel(self.reg_widget)
+            gp_dim_red_label.setText('Choose dimensionality reduction method:')
+            gp_dim_red_hlayout.addWidget(gp_dim_red_label)
+            gp_dim_red_combobox = QtGui.QComboBox(self.reg_widget)
+            gp_dim_red_combobox.addItem(_fromUtf8("PCA"))
+            gp_dim_red_combobox.addItem(_fromUtf8("ICA"))
+            gp_dim_red_hlayout.addWidget(gp_dim_red_combobox)
+            gp_vlayout.addLayout(gp_dim_red_hlayout)
+            gp_rand_starts_hlayout = QtGui.QHBoxLayout()
+            gp_rand_starts_label = QtGui.QLabel(self.reg_widget)
+            gp_rand_starts_label.setText('# of random starts:')
+            gp_rand_starts_hlayout.addWidget(gp_rand_starts_label)
+            gp_rand_starts_spin = QtGui.QSpinBox(self.reg_widget)
+            gp_rand_starts_spin.setValue(1)
+            gp_rand_starts_hlayout.addWidget(gp_rand_starts_spin)
+            spacerItem4 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+            gp_rand_starts_hlayout.addItem(spacerItem4)
+            gp_vlayout.addLayout(gp_rand_starts_hlayout)
+            gp_theta_vlayout = QtGui.QVBoxLayout()
+            gp_theta0_label = QtGui.QLabel(self.reg_widget)
+            gp_theta0_label.setText('Starting Theta:')
+            gp_theta_vlayout.addWidget(gp_theta0_label)
+            gp_theta0_spin = QtGui.QDoubleSpinBox(self.reg_widget)
+            gp_theta0_spin.setValue(1.0)
+            gp_theta_vlayout.addWidget(gp_theta0_spin)
+            gp_thetaL_label = QtGui.QLabel(self.reg_widget)
+            gp_thetaL_label.setText('Lower bound on Theta:')
+            gp_theta_vlayout.addWidget(gp_thetaL_label)
+            gp_thetaL_spin = QtGui.QDoubleSpinBox(self.reg_widget)
+            gp_thetaL_spin.setValue(0.1)
+            gp_theta_vlayout.addWidget(gp_thetaL_spin)
+            gp_thetaU_label = QtGui.QLabel(self.reg_widget)
+            gp_thetaU_label.setText('Upper bound on Theta:')
+            gp_theta_vlayout.addWidget(gp_thetaU_label)
+            gp_thetaU_spin = QtGui.QDoubleSpinBox(self.reg_widget)
+            gp_thetaU_spin.setMaximum(10000)
+            gp_thetaU_spin.setValue(100.0)
 
-
+            gp_theta_vlayout.addWidget(gp_thetaU_spin)
+            spacerItem5 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+            gp_theta_vlayout.addItem(spacerItem5)
+            gp_vlayout.addLayout(gp_theta_vlayout)
+            self.regression_vlayout.addWidget(self.reg_widget)
 
     def regression_ui(self):
         self.regression_train = QtGui.QGroupBox()
