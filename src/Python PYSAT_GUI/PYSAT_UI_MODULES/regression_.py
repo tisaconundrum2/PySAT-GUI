@@ -66,29 +66,22 @@ class regression_:
     # TODO Fix regression widget, things are not appearing as they should be
     def make_regression_widget(self, alg):
         print(alg)
+        try:
+            self.reg_widget.deleteLater()
+        except:
+            pass
+        self.reg_widget = QtGui.QWidget()
         if alg == 'PLS':
-            regression = QtGui.QGroupBox()
-            verticalLayout = QtGui.QVBoxLayout(regression)
-            verticalLayout.setMargin(11)
-            verticalLayout.setSpacing(6)
-            regression_vlayout = QtGui.QVBoxLayout()
-            regression_vlayout.setMargin(11)
-            regression_vlayout.setSpacing(6)
-            pls_widget = QtGui.QWidget(regression)
-            pls_widget.setMinimumSize(QtCore.QSize(0, 0))
-            horizontalLayout_2 = QtGui.QHBoxLayout(pls_widget)
-            horizontalLayout_2.setMargin(11)
-            horizontalLayout_2.setSpacing(6)
-            pls_nc_label = QtGui.QLabel(pls_widget)
-            pls_nc_label.setObjectName(_fromUtf8("pls_nc_label"))
+            pls_hlayout = QtGui.QHBoxLayout(self.reg_widget)
+            pls_nc_label = QtGui.QLabel(self.reg_widget)
             pls_nc_label.setText('# of components:')
-            horizontalLayout_2.addWidget(pls_nc_label)
-            pls_nc_spinbox = QtGui.QSpinBox(pls_widget)
-            horizontalLayout_2.addWidget(pls_nc_spinbox)
-            spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-            horizontalLayout_2.addItem(spacerItem)
-            self.regression_vlayout.addWidget(pls_widget)
+            pls_hlayout.addWidget(pls_nc_label)
+            pls_nc_spinbox = QtGui.QSpinBox(self.reg_widget)
+            pls_hlayout.addWidget(pls_nc_spinbox)
+            pls_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+            pls_hlayout.addItem(pls_spacer)
         elif alg == 'GP':
+            self.reg_widget = QtGui.QWidget()
             gp_vlayout = QtGui.QVBoxLayout(self.reg_widget)
             gp_dim_red_hlayout = QtGui.QHBoxLayout()
             gp_dim_red_label = QtGui.QLabel(self.reg_widget)
@@ -133,7 +126,7 @@ class regression_:
             spacerItem5 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
             gp_theta_vlayout.addItem(spacerItem5)
             gp_vlayout.addLayout(gp_theta_vlayout)
-            self.regression_vlayout.addWidget(self.reg_widget)
+        self.regression_vlayout.addWidget(self.reg_widget)
 
     def regression_ui(self):
         self.regression_train = QtGui.QGroupBox()
@@ -197,7 +190,7 @@ class regression_:
         self.regression_choosealg_label = QtGui.QLabel(self.regression_train)
         self.regression_choosealg_label.setObjectName(_fromUtf8("regression_choosealg_label"))
         self.regression_choosealg_hlayout.addWidget(self.regression_choosealg_label)
-        self.regression_alg_choices = ['Choose an algorithm', 'PLS', 'GP', 'More to come...']
+        self.regression_alg_choices = ['Choose an algorithm', 'PLS', 'GP', 'None', 'More to come...']
         self.regression_choosealg = make_combobox(self.regression_alg_choices)
         self.regression_choosealg.setIconSize(QtCore.QSize(50, 20))
         self.regression_choosealg.setObjectName(_fromUtf8("regression_choosealg"))
