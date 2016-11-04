@@ -12,6 +12,7 @@ Example of how this works, and how this looks
 * make sure to have Word Wrap turned off
 * this way formatting of the below example 
 * is not lost 
+**Note that example.py is the python version of whatever was in ui. (IT IS NOT directly copying the insides of .ui file.)
 
       ~/UI files/example.ui                     ~/PythonUI/example.py                    ~/PythonUI/mainwindow_empty.py
        |------------------|                      |------------------|                     |------------------|
