@@ -32,7 +32,6 @@ class regression_:
 
         # TODO add try and except here
 
-
     def make_ransac_widget(self, isChecked):
         if not isChecked:
             self.ransac_widget.deleteLater()
@@ -62,8 +61,6 @@ class regression_:
             ransac_widget_hlayout.addLayout(ransac_thresh_hlayout)
             self.ransac_hlayout.addWidget(self.ransac_widget)
 
-
-    # TODO Fix regression widget, things are not appearing as they should be
     def make_regression_widget(self, alg):
         print(alg)
         try:
