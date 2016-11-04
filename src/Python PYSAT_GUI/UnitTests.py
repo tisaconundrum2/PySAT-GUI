@@ -54,11 +54,13 @@ kw_list.append({})
 
 # 5
 fun_list.append(pysat.do_regression_train)
+                     #datakey,          xvars, yvars, method,     params,         ransacparams
 arg_list.append(['known data', 'wvl', ('meta', 'SiO2'), 'PLS', {'n_components': 7, 'scale': False}, {}])
 kw_list.append({})
 
 # 6
 fun_list.append(pysat.do_regression_predict)
+                    #datakey, modelkey, xvars
 arg_list.append(['known data', 'PLS', 'wvl'])
 kw_list.append({})
 

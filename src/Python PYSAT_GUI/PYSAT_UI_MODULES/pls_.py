@@ -21,9 +21,14 @@ class pls_:
     def __init__(self, pysat_fun, verticalLayout_8):
         self.pysat_fun = pysat_fun
         self.verticalLayout_8 = verticalLayout_8
-        self.pls()
+        self.main()
 
-    def pls(self):
+    def main(self):
+        # TODO add function param call here
+        # TODO add try and except here
+        self.pls_ui()
+
+    def pls_ui(self):
         self.pls = QtGui.QGroupBox()
         font = QtGui.QFont()
         font.setPointSize(10)

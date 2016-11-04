@@ -33,14 +33,6 @@ class get_mask_:
         except:
             pass
 
-    def on_getDataButton_clicked(self, lineEdit, key):
-        filename = QtGui.QFileDialog.getOpenFileName(None, "Open Mask Data File", '.', "(*.csv)")
-        lineEdit.setText(filename)
-        if lineEdit.text() == "":
-            lineEdit.setText("*.csv")
-        self.pysat_fun.set_arg_list([key, filename])
-        self.pysat_fun.set_kw_list({})
-
     def get_mask_ui(self):
         self.get_mask = QtGui.QGroupBox()
         font = QtGui.QFont()
@@ -67,3 +59,11 @@ class get_mask_:
         self.get_mask_label.setText(_translate("MainWindow", "File Name", None))
         self.get_mask_line_edit.setText(_translate("MainWindow", "*.csv", None))
         self.get_mask_button.setText(_translate("MainWindow", "...", None))
+
+    def on_getDataButton_clicked(self, lineEdit, key):
+        filename = QtGui.QFileDialog.getOpenFileName(None, "Open Mask Data File", '.', "(*.csv)")
+        lineEdit.setText(filename)
+        if lineEdit.text() == "":
+            lineEdit.setText("*.csv")
+        self.pysat_fun.set_arg_list([key, filename])
+        self.pysat_fun.set_kw_list({})

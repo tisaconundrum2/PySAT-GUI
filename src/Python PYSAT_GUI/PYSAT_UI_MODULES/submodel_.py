@@ -22,11 +22,19 @@ class submodel_:
     def __init__(self, pysat_fun, verticalLayout_8):
         self.pysat_fun = pysat_fun
         self.verticalLayout_8 = verticalLayout_8
-        self.submodel()
+        self.main()
 
-    def submodel(self):
-        #append function to pysat
-        self.pysat_fun.fun_list.append(self.pysat_fun.set_file_outpath)
+    def main(self):
+        # append function to pysat
+        # self.pysat_fun.fun_list.append(self.pysat_fun.set_file_outpath)
+        self.submodel_ui()
+        try:
+            pass
+            # parameters here
+        except Exception as e:
+            error_print(e)
+
+    def submodel_ui(self):
         self.submodel = QtGui.QGroupBox()
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -108,9 +116,3 @@ class submodel_:
         self.submodel_choosealg.setItemText(3, _translate("MainWindow", "Others coming soon...", None))
         self.regression_ransac_checkbox.setText(_translate("MainWindow", "RANSAC", None))
         self.submodel_trainbutton.setText(_translate("MainWindow", "Train Submodels", None))
-
-        try:
-            pass
-            # parameters here
-        except Exception as e:
-            error_print(e)

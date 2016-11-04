@@ -32,15 +32,6 @@ class get_data_u_:
         except:
             pass
 
-    def on_getDataButton_clicked(self, lineEdit, key):
-        filename = QtGui.QFileDialog.getOpenFileName(None, "Open " + key + " Data File", '.', "(*.csv)")
-        lineEdit.setText(filename)
-        if lineEdit.text() == "":
-            lineEdit.setText("*.csv")
-        self.pysat_fun.set_arg_list([filename, key])
-        self.pysat_fun.set_kw_list({})
-
-
     def get_data_ui(self):
         self.get_data_u = QtGui.QGroupBox()
         font = QtGui.QFont()
@@ -68,6 +59,14 @@ class get_data_u_:
         self.get_data_u_line_edit.setText(_translate("MainWindow", "*.csv", None))
         self.get_data_u_button.setText(_translate("MainWindow", "...", None))
 
+    def on_getDataButton_clicked(self, lineEdit, key):
+        filename = QtGui.QFileDialog.getOpenFileName(None, "Open " + key + " Data File", '.', "(*.csv)")
+        lineEdit.setText(filename)
+        if lineEdit.text() == "":
+            lineEdit.setText("*.csv")
+        self.pysat_fun.set_arg_list([filename, key])
+        self.pysat_fun.set_kw_list({})
+
 
 class get_data_k_:
     def __init__(self, pysat_fun, verticalLayout_8):
@@ -84,14 +83,6 @@ class get_data_k_:
 
         except:
             pass
-
-    def on_getDataButton_clicked(self, lineEdit, key):
-        filename = QtGui.QFileDialog.getOpenFileName(None, "Open " + key + " Data File", '.', "(*.csv)")
-        lineEdit.setText(filename)
-        if lineEdit.text() == "":
-            lineEdit.setText("*.csv")
-        self.pysat_fun.set_arg_list([filename, key])
-        self.pysat_fun.set_kw_list({})
 
     def get_data_ui(self):
         self.get_data_k = QtGui.QGroupBox()
@@ -119,3 +110,11 @@ class get_data_k_:
         self.get_data_k_label.setText(_translate("MainWindow", "File Name", None))
         self.get_data_k_line_edit.setText(_translate("MainWindow", "*.csv", None))
         self.get_data_k_button.setText(_translate("MainWindow", "...", None))
+
+    def on_getDataButton_clicked(self, lineEdit, key):
+        filename = QtGui.QFileDialog.getOpenFileName(None, "Open " + key + " Data File", '.', "(*.csv)")
+        lineEdit.setText(filename)
+        if lineEdit.text() == "":
+            lineEdit.setText("*.csv")
+        self.pysat_fun.set_arg_list([filename, key])
+        self.pysat_fun.set_kw_list({})

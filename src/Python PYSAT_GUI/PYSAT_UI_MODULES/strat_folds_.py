@@ -23,9 +23,15 @@ class strat_folds_:
     def __init__(self, pysat_fun, verticalLayout_8):
         self.pysat_fun = pysat_fun
         self.verticalLayout_8 = verticalLayout_8
-        self.stratified_folds()
+        self.main()
 
-    def stratified_folds(self):
+
+    def main(self):
+        # TODO add function param call here
+        # TODO add try and except here
+        self.stratified_folds_ui()
+
+    def stratified_folds_ui(self):
         self.pysat_fun.fun_list.append(self.pysat_fun.do_strat_folds)
         self.strat_folds = QtGui.QGroupBox()
         font = QtGui.QFont()
