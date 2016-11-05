@@ -80,12 +80,12 @@ kw_list.append({})                                                              
 fun_message.append('Plot training data predictions')
 fun_list.append(pysat.do_scatterplot)
 arg_list.append(['known data-Train', ('comp', 'SiO2'), ('meta', 'PLS_predict_trainfolds')])                       # do_scatterplot
-kw_list.append({'one_to_one': True,'title':'SiO2','figname':'testfig','colors':[(1,0,0)]})                                                                                    # do_scatterplot
+kw_list.append({'one_to_one': True,'title':'SiO2','figname':'testfig','colors':'r','lbls':'Train'})                                                                                    # do_scatterplot
 
 fun_message.append('Plot test fold predictions')
 fun_list.append(pysat.do_scatterplot)
 arg_list.append(['known data-Test', ('comp', 'SiO2'), ('meta', 'PLS_predict_testfold')])                       # do_scatterplot
-kw_list.append({'one_to_one': True,'title':'SiO2','figfile':'PLS_SiO2_nc7.png','figname':'testfig','colors':[(0,1,0)]})                                                                                    # do_scatterplot
+kw_list.append({'one_to_one': True,'title':'SiO2','figfile':'PLS_SiO2_nc7.png','figname':'testfig','colors':'g','lbls':'Test'})                                                                                    # do_scatterplot
                                                                                                     # do_regression_predict
 
 

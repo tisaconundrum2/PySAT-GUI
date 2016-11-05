@@ -124,6 +124,7 @@ class pysat_func(object):
                     colortitle=colortitle,loadfig=loadfig)
                     
                     
+                    
     def do_pca_ica_plot(self,datakey,x_component,y_component,figfile,colorvar=None,cmap='viridis',method='PCA'):
         pca_ica_plot(self.data[datakey],x_component,y_component,colorvar=colorvar,cmap=cmap,method=method,figpath=self.outpath,figfile=figfile)
         
