@@ -1,11 +1,7 @@
 from pysat_func import pysat_func
 
 # Initialize pysat for use
-
-
 pysat = pysat_func()
-
-# Build was successful
 fun_message = []
 fun_list = []
 arg_list = []
@@ -23,8 +19,8 @@ kw_list.append({})
 
 fun_message.append('Read unknown data')
 fun_list.append(pysat.get_data)
-arg_list.append([r"C:\Users\nfinch\Desktop\lab_data_averages_pandas_format.csv", "unknown data"])  # get_data
-kw_list.append({})  # get_data
+arg_list.append([r"C:\Users\nfinch\Desktop\lab_data_averages_pandas_format.csv", "unknown data"])
+kw_list.append({})
 
 fun_message.append('Interpolate unknown data to known data')
 fun_list.append(pysat.do_interp)
@@ -38,7 +34,7 @@ kw_list.append({})
 
 fun_message.append('Apply normalization')
 fun_list.append(pysat.do_norm)
-arg_list.append(['known data', [(0, 350), (350, 470), (470, 1000)]])  # do_norm
+arg_list.append(['known data', [(0, 350), (350, 470), (470, 1000)]])
 kw_list.append({})
 
 fun_message.append('Do PCA with 5 componenets')
@@ -53,38 +49,37 @@ kw_list.append({'colorvar': ('comp', 'SiO2'), 'cmap': 'viridis', 'method': 'PCA'
 
 fun_message.append('Stratify the data into folds')
 fun_list.append(pysat.do_strat_folds)
-arg_list.append(['known data', 5, 2, ('comp', 'SiO2')])  # do_strat_folds
+arg_list.append(['known data', 5, 2, ('comp', 'SiO2')])
 kw_list.append({})
 
 fun_message.append('Train PLS model')
 fun_list.append(pysat.do_regression_train)
 # datakey,          xvars, yvars, method,     params,         ransacparams
-arg_list.append(['known data-Train', 'wvl', ('comp', 'SiO2'), 'PLS', {'n_components': 7, 'scale': False},
-                 {}])  # do_regression_train
-kw_list.append({})  # do_regression_train
+arg_list.append(['known data-Train', 'wvl', ('comp', 'SiO2'), 'PLS', {'n_components': 7, 'scale': False}, {}])
+kw_list.append({})
 
 fun_message.append('Predict training folds')
 fun_list.append(pysat.do_regression_predict)
 # datakey, modelkey, xvars
-arg_list.append(['known data-Train', 'PLS', 'wvl', ('meta', 'PLS_predict_trainfolds')])  # do_regression_predict
-kw_list.append({})  # do_regression_predict
+arg_list.append(['known data-Train', 'PLS', 'wvl', ('meta', 'PLS_predict_trainfolds')])
+kw_list.append({})
 
 fun_message.append('Predict test fold')
 fun_list.append(pysat.do_regression_predict)
-arg_list.append(['known data-Test', 'PLS', 'wvl', ('meta', 'PLS_predict_testfold')])  # do_regression_predict
-kw_list.append({})  # do_regression_predict
+arg_list.append(['known data-Test', 'PLS', 'wvl', ('meta', 'PLS_predict_testfold')])
+kw_list.append({})
 
 fun_message.append('Plot training data predictions')
 fun_list.append(pysat.do_scatterplot)
-arg_list.append(['known data-Train', ('comp', 'SiO2'), ('meta', 'PLS_predict_trainfolds')])  # do_scatterplot
+arg_list.append(['known data-Train', ('comp', 'SiO2'), ('meta', 'PLS_predict_trainfolds')])
 kw_list.append(
-    {'one_to_one': True, 'title': 'SiO2', 'figname': 'testfig', 'colors': 'r', 'lbls': 'Train'})  # do_scatterplot
+    {'one_to_one': True, 'title': 'SiO2', 'figname': 'testfig', 'colors': 'r', 'lbls': 'Train'})
 
 fun_message.append('Plot test fold predictions')
 fun_list.append(pysat.do_scatterplot)
-arg_list.append(['known data-Test', ('comp', 'SiO2'), ('meta', 'PLS_predict_testfold')])  # do_scatterplot
+arg_list.append(['known data-Test', ('comp', 'SiO2'), ('meta', 'PLS_predict_testfold')])
 kw_list.append({'one_to_one': True, 'title': 'SiO2', 'figfile': 'PLS_SiO2_nc7.png', 'figname': 'testfig', 'colors': 'g',
-                'lbls': 'Test'})  # do_scatterplot
+                'lbls': 'Test'})
 # do_regression_predict
 
 
