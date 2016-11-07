@@ -33,6 +33,12 @@ fun_message.append('Interpolate unknown data to known data')
 fun_list.append(pysat.do_interp)
 arg_list.append(['unknown data','known data'])
 kw_list.append({})                                                                                                      
+                                                                                  # do_regression_predict
+#fun_message.append('Plot a spectrum')
+#fun_list.append(pysat.do_lineplot)
+#arg_list.append(['known data-Test', ('comp', 'SiO2'), ('meta', 'PLS_predict_testfold')])                       # do_scatterplot
+#kw_list.append({'one_to_one': True,'title':'SiO2','figfile':'PLS_SiO2_nc7.png','figname':'testfig','colors':'g','lbls':'Test'})                                                                                    # do_scatterplot
+
 
 fun_message.append('Apply mask')
 fun_list.append(pysat.do_mask)
@@ -62,32 +68,32 @@ kw_list.append({})                                                              
 fun_message.append('Train PLS model')
 fun_list.append(pysat.do_regression_train)
 arg_list.append(['known data-Train', 'wvl', ('comp', 'SiO2'), 'PLS', {'n_components': 7, 'scale': False}, {}])                # do_regression_train
-kw_list.append({})                                                                                                      # do_regression_train
+kw_list.append({'modelkey':'PLS (nc=7)'})                                                                                                      # do_regression_train
 
 fun_message.append('Predict training folds')
 fun_list.append(pysat.do_regression_predict)
-arg_list.append(['known data-Train', 'PLS', 'wvl',('meta','PLS_predict_trainfolds')])                                                                           # do_regression_predict
+                  #choose data        Choose model     #make this variable from the other two
+arg_list.append(['known data-Train', 'PLS (nc=7)',('meta','PLS (nc=7) - known data-Train - Predict')])                                                                           # do_regression_predict
 kw_list.append({})                                                                                                      # do_regression_predict
 
 
 fun_message.append('Predict test fold')
 fun_list.append(pysat.do_regression_predict)
-arg_list.append(['known data-Test', 'PLS', 'wvl',('meta','PLS_predict_testfold')])                                                                           # do_regression_predict
+                  #choose data        Choose model     #make this variable from the other two
+arg_list.append(['known data-Test', 'PLS', ('meta','PLS (nc=7) - known data-Test - Predict')])                                                                           # do_regression_predict
 kw_list.append({})                                                                                                      # do_regression_predict
-
 
 
 fun_message.append('Plot training data predictions')
 fun_list.append(pysat.do_scatterplot)
-arg_list.append(['known data-Train', ('comp', 'SiO2'), ('meta', 'PLS_predict_trainfolds')])                       # do_scatterplot
+arg_list.append(['known data-Train', ('comp', 'SiO2'), ('meta', 'PLS (nc=7) - known data-Train - Predict')])                       # do_scatterplot
 kw_list.append({'one_to_one': True,'title':'SiO2','figname':'testfig','colors':'r','lbls':'Train'})                                                                                    # do_scatterplot
 
 fun_message.append('Plot test fold predictions')
 fun_list.append(pysat.do_scatterplot)
-arg_list.append(['known data-Test', ('comp', 'SiO2'), ('meta', 'PLS_predict_testfold')])                       # do_scatterplot
+arg_list.append(['known data-Test', ('comp', 'SiO2'), ('meta','PLS (nc=7) - known data-Test - Predict')])                       # do_scatterplot
 kw_list.append({'one_to_one': True,'title':'SiO2','figfile':'PLS_SiO2_nc7.png','figname':'testfig','colors':'g','lbls':'Test'})                                                                                    # do_scatterplot
-                                                                                                    # do_regression_predict
-
+                  
 
 for i in range(len(fun_list)):
     print(fun_message[i])
