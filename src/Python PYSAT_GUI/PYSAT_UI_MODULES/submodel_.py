@@ -1,6 +1,5 @@
-
 from PyQt4 import QtCore, QtGui
-from pysat_func import pysat_func
+from PYSAT_UI_MODULES.Error_ import error_print
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -19,12 +18,24 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 
-class submodel_(object):
-    def __init__(self):
-        self.pysat_fun = pysat_func()
+class submodel_:
+    def __init__(self, pysat_fun, verticalLayout_8):
+        self.pysat_fun = pysat_fun
+        self.verticalLayout_8 = verticalLayout_8
+        self.main()
 
-    def submodel(self, submodel):
-        self.submodel = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
+    def main(self):
+        # append function to pysat
+        # self.pysat_fun.fun_list.append(self.pysat_fun.set_file_outpath)
+        self.submodel_ui()
+        try:
+            pass
+            # parameters here
+        except Exception as e:
+            error_print(e)
+
+    def submodel_ui(self):
+        self.submodel = QtGui.QGroupBox()
         font = QtGui.QFont()
         font.setPointSize(10)
         self.submodel.setFont(font)

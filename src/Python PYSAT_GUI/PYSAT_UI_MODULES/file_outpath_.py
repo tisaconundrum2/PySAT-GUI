@@ -1,5 +1,4 @@
 from PyQt4 import QtCore, QtGui
-from pysat_func import pysat_func
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -18,13 +17,24 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 
-class file_outpath_(object):
-    def __init__(self):
-        self.pysat_fun = pysat_func()
+class file_outpath_:
+    def __init__(self, pysat_fun, verticalLayout_8):
+        self.pysat_fun = pysat_fun
+        self.verticalLayout_8 = verticalLayout_8
+        self.main()
 
+    def main(self):
+        self.pysat_fun.set_fun_list(self.pysat_fun.set_file_outpath)  # add this function to the pysat list to be run
+        self.file_outpath_ui()
+        try:
+            self.file_out_path_button.clicked.connect(
+                lambda: self.on_outPutLocationButton_clicked(self.file_out_path_line_edit)
+            )
+        except:
+            pass
 
-    def file_outpath(self, MainWindow):
-        self.file_out_path = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
+    def file_outpath_ui(self):
+        self.file_out_path = QtGui.QGroupBox()
         font = QtGui.QFont()
         font.setPointSize(10)
         self.file_out_path.setFont(font)
@@ -50,18 +60,10 @@ class file_outpath_(object):
         self.file_out_path_line_edit.setText(_translate("MainWindow", "*/", None))
         self.file_out_path_button.setText(_translate("MainWindow", "...", None))
 
-        try:
-            self.file_out_path_button.clicked.connect(lambda: file_outpath_.on_outPutLocationButton_clicked(self, self.file_out_path_line_edit))
-        except:
-            pass
-
-            #### Opening Files
-
     def on_outPutLocationButton_clicked(self, lineEdit):
         filename = QtGui.QFileDialog.getExistingDirectory(None, "Select Output Directory", '.')
         lineEdit.setText(filename)
-        self.pysat_fun.set_file_outpath(filename)
         if lineEdit.text() == "":
             lineEdit.setText("*/*")
-
-            #### Ok Button Clicked
+        self.pysat_fun.set_arg_list([filename])
+        self.pysat_fun.set_kw_list({})

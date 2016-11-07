@@ -1,5 +1,4 @@
 from PyQt4 import QtCore, QtGui
-from pysat_func import pysat_func
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -18,12 +17,24 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 
-class get_mask_(object):
-    def __init__(self):
-        self.pysat_fun = pysat_func()
+class get_mask_:
+    def __init__(self, pysat_fun, verticalLayout_8):
+        self.pysat_fun = pysat_fun
+        self.verticalLayout_8 = verticalLayout_8
+        self.main()
 
-    def get_mask(self, get_mask):
-        self.get_mask = QtGui.QGroupBox(self.scrollAreaWidgetContents_2)
+    def main(self):
+        self.pysat_fun.set_fun_list(self.pysat_fun.do_mask)
+        self.get_mask_ui()
+        try:
+            self.get_mask_button.clicked.connect(
+                lambda: self.on_getDataButton_clicked(self.get_mask_line_edit, "known")
+            )
+        except:
+            pass
+
+    def get_mask_ui(self):
+        self.get_mask = QtGui.QGroupBox()
         font = QtGui.QFont()
         font.setPointSize(10)
         self.get_mask.setFont(font)
@@ -48,15 +59,11 @@ class get_mask_(object):
         self.get_mask_label.setText(_translate("MainWindow", "File Name", None))
         self.get_mask_line_edit.setText(_translate("MainWindow", "*.csv", None))
         self.get_mask_button.setText(_translate("MainWindow", "...", None))
-        try:
-            self.get_mask_button.clicked.connect(
-                lambda: get_mask_.on_getDataButton_clicked(self, self.get_mask_line_edit, "Known"))
-        except:
-            pass
 
     def on_getDataButton_clicked(self, lineEdit, key):
         filename = QtGui.QFileDialog.getOpenFileName(None, "Open Mask Data File", '.', "(*.csv)")
         lineEdit.setText(filename)
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")
-        self.pysat_fun.do_mask(key, filename)
+        self.pysat_fun.set_arg_list([key, filename])
+        self.pysat_fun.set_kw_list({})

@@ -1,8 +1,8 @@
 from PyQt4 import QtCore, QtGui
+from PyQt4.QtGui import QMenu
+
 from pysat_func import pysat_func
 import PYSAT_UI_MODULES
-
-import pysat
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -19,11 +19,6 @@ try:
 except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
-
-
-
-
-
 
 class pysat_ui(object):
     def __init__(self):
@@ -368,46 +363,51 @@ class pysat_ui(object):
         self.actionSet_output_location.setText(_translate("MainWindow", "Output Location", None))
         self.actionCreate_N_Folds.setText(_translate("MainWindow", "Create N Folds", None))
         self.actionStratified_Folds.setText(_translate("MainWindow", "Stratified Folds", None))
+        self.okButton.clicked.connect(lambda: self.on_okButton_clicked())
 
-    def file_outpath(self, MainWindow):
-        PYSAT_UI_MODULES.file_outpath_.file_outpath(self, MainWindow)
+    def file_outpath(self):
+        PYSAT_UI_MODULES.file_outpath_(self.pysat_fun, self.verticalLayout_8)
 
-    def get_unknown_data(self, MainWindow):
-        PYSAT_UI_MODULES.get_data_.get_data_u(self, MainWindow)
+    def get_unknown_data(self):
+        PYSAT_UI_MODULES.get_data_u_(self.pysat_fun, self.verticalLayout_8)
 
-    def get_known_data(self, MainWindow):
-        PYSAT_UI_MODULES.get_data_.get_data_k(self, MainWindow)
+    def get_known_data(self):
+        PYSAT_UI_MODULES.get_data_k_(self.pysat_fun, self.verticalLayout_8)
 
-    def do_mask(self, MainWindow):
-        PYSAT_UI_MODULES.get_mask_.get_mask(self, MainWindow)
+    def do_mask(self):
+        PYSAT_UI_MODULES.get_mask_(self.pysat_fun, self.verticalLayout_8)
 
-    def submodel_ranges(self, MainWindow):
-        PYSAT_UI_MODULES.submodel_.submodel(self, MainWindow)
+    def submodel_ranges(self):
+        PYSAT_UI_MODULES.submodel_(self.pysat_fun, self.verticalLayout_8)
 
-    def do_strat_folds(self, MainWindow):
-        PYSAT_UI_MODULES.strat_folds_.strat_folds(self.pysat_fun,self.verticalLayout_8)
+    def do_strat_folds(self):
+        PYSAT_UI_MODULES.strat_folds_(self.pysat_fun, self.verticalLayout_8)
 
-    def do_regression_train(self, MainWindow):
-        PYSAT_UI_MODULES.regression_.regression_train(self, MainWindow)
+    def do_regression_train(self):
+        PYSAT_UI_MODULES.regression_(self.pysat_fun, self.verticalLayout_8)
 
-    def do_scatter_plot(self, MainWindow):
+    def do_scatter_plot(self):
         pass
 
-    """
-    Code below adds functionality to the mainframe
-    """
+    """ =============================================
+    Please do not delete the files below this line!
+    These files are the working files that allow the UI
+    to operate and do work!
+    ============================================== """
 
     def menu_item_shortcuts(self):
         self.actionExit.setShortcut("ctrl+Q")
 
     def menu_item_functions(self, MainWindow):
-        self.actionSet_output_location.triggered.connect(lambda: pysat_ui.file_outpath(self, MainWindow))               # output location
-        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.get_unknown_data(self, MainWindow))             # unknown data
-        self.actionLoad_reference_Data.triggered.connect(lambda: pysat_ui.get_known_data(self, MainWindow))             # known data
-        self.actionNormalization.triggered.connect(lambda: pysat_ui.submodel_ranges(self, MainWindow))                  # submodel
-        self.actionApply_Mask.triggered.connect(lambda: pysat_ui.do_mask(self, MainWindow))                             # get_mask
-        self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self, MainWindow))                # strat folds
-        self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self, MainWindow))                      # regression train
+        self.actionSet_output_location.setDisabled(False)
+        self.actionSet_output_location.setVisible(False)
+        self.actionSet_output_location.triggered.connect(lambda: pysat_ui.file_outpath(self))               # output location
+        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.get_unknown_data(self))             # unknown data
+        self.actionLoad_reference_Data.triggered.connect(lambda: pysat_ui.get_known_data(self))             # known data
+        self.actionNormalization.triggered.connect(lambda: pysat_ui.submodel_ranges(self))                  # submodel
+        self.actionApply_Mask.triggered.connect(lambda: pysat_ui.do_mask(self))                             # get_mask
+        self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self))                # strat folds
+        self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))                      # regression train
 
     def saveworkflow(self):
         # TODO save the current window's data into a save file
@@ -415,8 +415,7 @@ class pysat_ui(object):
 
     def openworkflow(self):
         # TODO open file dialog
-        self.filename = QFileDialog.getOpenFileName(self, "Open a Workflow File", '.', "(*.wrf)")
+        self.filename = QtGui.QFileDialog.getOpenFileName(self, "Open a Workflow File", '.', "(*.wrf)")
 
     def on_okButton_clicked(self):
-        pass
-    
+        self.pysat_fun.press_ok()
