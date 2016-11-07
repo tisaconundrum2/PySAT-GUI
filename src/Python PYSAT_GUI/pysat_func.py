@@ -2,20 +2,54 @@ from pysat.spectral.spectral_data import spectral_data
 from pysat.regression import regression
 from pysat.plotting.plots import scatterplot,pca_ica_plot
 import pandas as pd
-from PyQt4.QtGui import QMessageBox
+from PYSAT_UI_MODULES.Error_ import error_print
 
 
 
-class pysat_func(object):
+
+class pysat_func:
     def __init__(self):
         self.data={} #initialize with an empty dict to hold data frames
         self.datakeys=[]
         self.models={}
         self.modelkeys=[]
+
         self.addFunc = []
         self.addPara = []
-        self.figs={}
-        self.fignames=[]
+        self.figs = {}
+        self.fignames = []
+        self.fun_list = []
+        self.arg_list = []
+        self.kw_list = []
+
+    """
+    Getter and setter functions below
+    """
+
+    def set_fun_list(self, fun):
+        self.fun_list.append(fun)
+
+    def set_arg_list(self, fun):
+        self.arg_list.append(fun)
+
+    def set_kw_list(self, fun):
+        self.kw_list.append(fun)
+
+    def getDataKeys(self):
+        return self.datakeys
+
+    def getModelKeys(self):
+        return self.modelkeys
+
+    def getData(self):
+        return self.data
+
+    def getModels(self):
+        return self.models
+
+    """
+    Work functions below
+    """
 
     def set_file_outpath(self, outpath):
         try:
@@ -53,11 +87,13 @@ class pysat_func(object):
             self.data[datakey].pca(col,nc=nc,load_fit=load_fit)
         except Exception as e:
             error_print(e)
+
     def do_ica(self,datakey,nc,col,load_fit=None):
         try:
             self.data[datakey].ica(col,nc=nc,load_fit=load_fit)
         except Exception as e:
             error_print(e)
+
     def do_ica_jade(self,datakey,nc,col,load_fit=None,corrcols=None):
         try:
             self.data[datakey].ica_jade(col,nc=nc,load_fit=load_fit,corrcols=corrcols)
@@ -102,15 +138,16 @@ class pysat_func(object):
         except Exception as e:
             error_print(e)
 
-    def do_scatterplot(self, datakey,                                 # This
-                       xvar, yvar,                                    # is
-                       figfile=None, xrange=None,                          # really
-                       yrange=None, xtitle='Reference (wt.%)',        # really
-                       ytitle='Prediction (wt.%)', title=None,        # really
-                       lbls=None, one_to_one=False,                   # really
-                       dpi=1000, colors=None,                         # really
-                       annot_mask=None, alpha=0.4,                    # really
-                       cmap=None, colortitle='',figname=None):                     # long
+    def do_scatterplot(self, datakey,
+                       xvar, yvar,
+                       figfile=None, xrange=None,
+                       yrange=None, xtitle='Reference (wt.%)',
+                       ytitle='Prediction (wt.%)', title=None,
+                       lbls=None, one_to_one=False,
+                       dpi=1000, colors=None,
+                       annot_mask=None, alpha=0.4,
+                       cmap=None, colortitle='',figname=None
+                       ):
 
         x = [self.data[datakey].df[xvar]]
         y = [self.data[datakey].df[yvar]]
@@ -125,20 +162,19 @@ class pysat_func(object):
                     
                     
                     
-    def do_pca_ica_plot(self,datakey,x_component,y_component,figfile,colorvar=None,cmap='viridis',method='PCA'):
+    def do_pca_ica_plot(self,datakey,
+                        x_component,
+                        y_component,
+                        figfile,
+                        colorvar=None,
+                        cmap='viridis',
+                        method='PCA'
+                        ):
         pca_ica_plot(self.data[datakey],x_component,y_component,colorvar=colorvar,cmap=cmap,method=method,figpath=self.outpath,figfile=figfile)
         
 
-def error_print(message):
-    print(message)
-    try:
-        """
-        Warning Message Box
-        """
-        msg = QMessageBox()
-        msg.setIcon(QMessageBox.Warning)
-        msg.setText(message)
-        msg.setStandardButtons(QMessageBox.Ok)
-        msg.exec_()
-    except:
-        pass
+    def press_ok(self):
+        # TODO this function will take all the enumerated functions and parameters and run them
+        for i in range(len(self.fun_list)):
+            print(i)
+            self.fun_list[i](*self.arg_list[i], **self.kw_list[i])
