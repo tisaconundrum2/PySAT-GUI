@@ -14,6 +14,10 @@ class pysat_func:
         self.models={}
         self.modelkeys=[]
 
+        self.addFunc = []
+        self.addPara = []
+        self.figs = {}
+        self.fignames = []
         self.fun_list = []
         self.arg_list = []
         self.kw_list = []
@@ -123,35 +127,50 @@ class pysat_func:
             self.models[method] = regression.regression([method], [params], i=0, ransacparams=[ransacparams])
             self.modelkeys.append(method)
             self.models[method].fit(self.data[datakey].df[xvars], self.data[datakey].df[yvars])
-            self.predictname = ('meta', method + '_prediction')
+            
         except Exception as e:
             error_print(e)
 
-    def do_regression_predict(self, datakey, modelkey, xvars):
+    def do_regression_predict(self, datakey, modelkey, xvars,predictname):
         try:
             prediction = self.models[modelkey].predict(self.data[datakey].df[xvars])
-            self.data[datakey].df[self.predictname] = prediction
+            self.data[datakey].df[predictname] = prediction
         except Exception as e:
             error_print(e)
 
-    def do_scatterplot(self, datakey,                                 # This
-                       xvar, yvar,                                    # is
-                       figname, xrange=None,                          # really
-                       yrange=None, xtitle='Reference (wt.%)',        # really
-                       ytitle='Prediction (wt.%)', title=None,        # really
-                       lbls=None, one_to_one=False,                   # really
-                       dpi=1000, colors=None,                         # really
-                       annot_mask=None, alpha=0.4,                    # really
-                       cmap=None, colortitle=''):                     # long
+    def do_scatterplot(self, datakey,
+                       xvar, yvar,
+                       figfile=None, xrange=None,
+                       yrange=None, xtitle='Reference (wt.%)',
+                       ytitle='Prediction (wt.%)', title=None,
+                       lbls=None, one_to_one=False,
+                       dpi=1000, colors=None,
+                       annot_mask=None, alpha=0.4,
+                       cmap=None, colortitle='',figname=None
+                       ):
 
         x = [self.data[datakey].df[xvar]]
         y = [self.data[datakey].df[yvar]]
-        scatterplot(x, y, self.outpath, figname, xrange=xrange, yrange=yrange, xtitle=xtitle, ytitle=ytitle, title=title,
+        try:
+            loadfig=self.figs[figname]
+        except:
+            loadfig=None
+
+        self.figs[figname]=scatterplot(x, y, self.outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle, ytitle=ytitle, title=title,
                     lbls=lbls, one_to_one=one_to_one, dpi=dpi, colors=colors, annot_mask=annot_mask, alpha=alpha, cmap=cmap,
-                    colortitle=colortitle)
+                    colortitle=colortitle,loadfig=loadfig)
                     
-    def do_pca_ica_plot(self,datakey,x_component,y_component,figname,colorvar=None,cmap='viridis',method='PCA'):
-        pca_ica_plot(self.data[datakey],x_component,y_component,colorvar=colorvar,cmap=cmap,method=method,figpath=self.outpath,figname=figname)
+                    
+                    
+    def do_pca_ica_plot(self,datakey,
+                        x_component,
+                        y_component,
+                        figfile,
+                        colorvar=None,
+                        cmap='viridis',
+                        method='PCA'
+                        ):
+        pca_ica_plot(self.data[datakey],x_component,y_component,colorvar=colorvar,cmap=cmap,method=method,figpath=self.outpath,figfile=figfile)
         
 
     def press_ok(self):
