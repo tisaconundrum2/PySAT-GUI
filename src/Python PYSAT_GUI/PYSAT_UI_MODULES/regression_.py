@@ -30,6 +30,7 @@ class regression_:
         self.regression_ransac_checkbox.toggled.connect(lambda: self.make_ransac_widget(self.regression_ransac_checkbox.isChecked()))
         self.regression_choosealg.currentIndexChanged.connect(lambda: self.make_regression_widget(self.regression_choosealg.currentText()))
 
+
         # TODO add try and except here
 
     def make_ransac_widget(self, isChecked):
@@ -166,12 +167,13 @@ class regression_:
         self.regression_train_choosey_label.setObjectName(_fromUtf8("regression_train_choosey_label"))
         self.regression_choosevars_hlayout.addWidget(self.regression_train_choosey_label)
 
-        # TODO fix: yvarchoices = self.pysat_fun.data[self.regression_choosedata.currentText()].df['comp'].columns.values
-        # self.regression_train_choosey = make_listwidget(yvarchoices)
-        # self.regression_choosevars_hlayout.addWidget(self.regression_train_choosey)
-        # spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        # self.regression_choosevars_hlayout.addItem(spacerItem1)
-        # self.regression_vlayout.addLayout(self.regression_choosevars_hlayout)
+        # TODO fix:
+        yvarchoices = self.pysat_fun.data[self.regression_choosedata.currentText()].df['comp'].columns.values
+        self.regression_train_choosey = make_listwidget(yvarchoices)
+        self.regression_choosevars_hlayout.addWidget(self.regression_train_choosey)
+        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.regression_choosevars_hlayout.addItem(spacerItem1)
+        self.regression_vlayout.addLayout(self.regression_choosevars_hlayout)
 
         # ransac options
         self.ransac_hlayout = QtGui.QHBoxLayout()

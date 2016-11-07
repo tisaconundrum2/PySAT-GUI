@@ -93,7 +93,7 @@ class strat_folds_:
         self.strat_folds_choose_var_label.setText(_translate("strat_folds", "Choose variable on which to sort:", None))
         try:
             # arg_list.append(['known data', 5, 2, ('meta', 'SiO2')])
-            self.create_folds.clicked.connect(lambda: self.pysat_fun.arg_list.append([known_data, 5, 2, ('meta', 'SiO2')]))
+            self.create_folds.clicked.connect(lambda: self.pysat_fun.arg_list.append(['known_data', 5, 2, ('meta', 'SiO2')]))
         except:
             print('There was a problem with creating stratified folds...')
 
