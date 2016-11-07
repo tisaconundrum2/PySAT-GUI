@@ -80,7 +80,6 @@ fun_list.append(pysat.do_scatterplot)
 arg_list.append(['known data-Test', ('comp', 'SiO2'), ('meta', 'PLS_predict_testfold')])
 kw_list.append({'one_to_one': True, 'title': 'SiO2', 'figfile': 'PLS_SiO2_nc7.png', 'figname': 'testfig', 'colors': 'g',
                 'lbls': 'Test'})
-# do_regression_predict
 
 
 for i in range(len(fun_list)):

@@ -1,4 +1,6 @@
 from PyQt4 import QtCore, QtGui
+from PyQt4.QtGui import QMenu
+
 from pysat_func import pysat_func
 import PYSAT_UI_MODULES
 
@@ -397,6 +399,8 @@ class pysat_ui(object):
         self.actionExit.setShortcut("ctrl+Q")
 
     def menu_item_functions(self, MainWindow):
+        self.actionSet_output_location.setDisabled(False)
+        self.actionSet_output_location.setVisible(False)
         self.actionSet_output_location.triggered.connect(lambda: pysat_ui.file_outpath(self))               # output location
         self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.get_unknown_data(self))             # unknown data
         self.actionLoad_reference_Data.triggered.connect(lambda: pysat_ui.get_known_data(self))             # known data
