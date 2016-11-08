@@ -13,7 +13,7 @@ class pysat_func:
         self.datakeys=[]
         self.models={}
         self.modelkeys=[]
-
+        self.model_xvars={}
         self.addFunc = []
         self.addPara = []
         self.figs = {}
@@ -122,18 +122,20 @@ class pysat_func:
         print(self.data[datakey+'-Test'].df.index.shape)
         print(self.data[datakey+'-Train'].df.index.shape)
 
-    def do_regression_train(self, datakey, xvars, yvars, method, params, ransacparams):
+    def do_regression_train(self, datakey, xvars, yvars, method, params, ransacparams,modelkey=None):
         try:
-            self.models[method] = regression.regression([method], [params], i=0, ransacparams=[ransacparams])
-            self.modelkeys.append(method)
-            self.models[method].fit(self.data[datakey].df[xvars], self.data[datakey].df[yvars])
-            
+            if modelkey is None:
+                modelkey=method
+            self.models[modelkey] = regression.regression([method], [params], i=0, ransacparams=[ransacparams])
+            self.modelkeys.append(modelkey)
+            self.models[modelkey].fit(self.data[datakey].df[xvars], self.data[datakey].df[yvars])
+            self.model_xvars[modelkey]=xvars
         except Exception as e:
             error_print(e)
 
-    def do_regression_predict(self, datakey, modelkey, xvars,predictname):
+    def do_regression_predict(self, datakey, modelkey,predictname):
         try:
-            prediction = self.models[modelkey].predict(self.data[datakey].df[xvars])
+            prediction = self.models[modelkey].predict(self.data[datakey].df[self.model_xvars[modelkey]])
             self.data[datakey].df[predictname] = prediction
         except Exception as e:
             error_print(e)
@@ -161,7 +163,10 @@ class pysat_func:
                     colortitle=colortitle,loadfig=loadfig)
                     
                     
-                    
+    def do_lineplot(self,datakey,x,y,xrange=None,yrange=None,xtitle='',ytitle='',title=None,
+                lbls=None,figpath=None,figfile=None,dpi=1000,colors=None,alphas=None,loadfig=None):
+        pass
+            
     def do_pca_ica_plot(self,datakey,
                         x_component,
                         y_component,
