@@ -50,15 +50,122 @@ QGroupBox::title {
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_8">
         <item>
-         <widget class="QGroupBox" name="file_out_path">
+         <widget class="QGroupBox" name="normalization">
           <property name="font">
            <font>
             <pointsize>10</pointsize>
            </font>
           </property>
           <property name="title">
-           <string>Files</string>
+           <string>Normalization</string>
           </property>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <layout class="QHBoxLayout" name="normalization_choosedata_hlayout">
+             <item>
+              <widget class="QLabel" name="regression_choosedata_label">
+               <property name="text">
+                <string>Choose data: </string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="regression_choosedata">
+               <property name="iconSize">
+                <size>
+                 <width>50</width>
+                 <height>20</height>
+                </size>
+               </property>
+               <item>
+                <property name="text">
+                 <string>Choose Data</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Known Data</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item>
+              <spacer name="regression_choosedata_spacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="min_max_horizontalLayout">
+             <item>
+              <widget class="QLabel" name="min_label">
+               <property name="text">
+                <string>Min</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="min_lineEdit"/>
+             </item>
+             <item>
+              <widget class="QLabel" name="max_label">
+               <property name="text">
+                <string>Max</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="max_lineEdit"/>
+             </item>
+             <item>
+              <spacer name="min_max_horizontalSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="add_ranges_button_hlayout">
+             <item>
+              <spacer name="add_ranges_button_spacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="add_ranges_button">
+               <property name="text">
+                <string>Add Ranges</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
          </widget>
         </item>
        </layout>

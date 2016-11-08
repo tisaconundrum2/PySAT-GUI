@@ -381,7 +381,7 @@ class pysat_ui(object):
         PYSAT_UI_MODULES.get_mask_(self.pysat_fun, self.verticalLayout_8)
 
     def submodel_ranges(self):
-        PYSAT_UI_MODULES.submodel_(self.pysat_fun, self.verticalLayout_8)
+        PYSAT_UI_MODULES.normalization_(self.pysat_fun, self.verticalLayout_8)
 
     def do_strat_folds(self):
         PYSAT_UI_MODULES.strat_folds_(self.pysat_fun, self.verticalLayout_8)
@@ -409,11 +409,15 @@ class pysat_ui(object):
         self.actionApply_Mask.triggered.connect(lambda: pysat_ui.do_mask(self))  # get_mask
         self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self))  # strat folds
         self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))  # regression train
-        self.setGreyedOutItems()
+        self.setGreyedOutItems(True)
 
-    def setGreyedOutItems(self):
-        self.actionTrain.setDisabled(True)
-        self.actionTrain.setToolTip("Press OK button to ungrey this item")
+    def setGreyedOutItems(self, bool):
+        self.actionTrain.setDisabled(bool)
+        self.actionPredict.setDisabled(bool)
+        self.actionPredict.hovered.connect(lambda: self.handleMenuHovered("Please, press OK button"))
+
+    def handleMenuHovered(self, action):
+        QtGui.QToolTip.showText(self, None, action, None)
 
     def saveworkflow(self):
         # TODO save the current window's data into a save file
@@ -424,5 +428,5 @@ class pysat_ui(object):
         self.filename = QtGui.QFileDialog.getOpenFileName(self, "Open a Workflow File", '.', "(*.wrf)")
 
     def on_okButton_clicked(self):
-        self.actionTrain.setDisabled(False)
+        self.setGreyedOutItems(False)
         self.pysat_fun.press_ok()

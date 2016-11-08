@@ -9,6 +9,7 @@ from PYSAT_UI_MODULES.Error_ import error_print
 
 class pysat_func:
     def __init__(self):
+        self.leftOff = 0
         self.data={} #initialize with an empty dict to hold data frames
         self.datakeys=[]
         self.models={}
@@ -180,6 +181,7 @@ class pysat_func:
 
     def press_ok(self):
         # TODO this function will take all the enumerated functions and parameters and run them
-        for i in range(len(self.fun_list)):
+        for i in range(self.leftOff, len(self.fun_list)):
             print(i)
             self.fun_list[i](*self.arg_list[i], **self.kw_list[i])
+            self.leftOff = i
