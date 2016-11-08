@@ -20,10 +20,13 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
+
 class pysat_ui(object):
     def __init__(self):
         self.pysat_fun = pysat_func()
 
+    # This is the backbone of the UI, without this portion we have nothing to work with
+    # Keep this here
     def mainframe(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(600, 843)
@@ -390,28 +393,27 @@ class pysat_ui(object):
         pass
 
     """ =============================================
-    Please do not delete the files below this line!
-    These files are the working files that allow the UI
-    to operate and do work!
+    Please do not delete the functions below this line!
+    These functions are the working functions
+    that allow the UI to operate and do work!
     ============================================== """
 
     def menu_item_shortcuts(self):
         self.actionExit.setShortcut("ctrl+Q")
 
     def menu_item_functions(self, MainWindow):
-        self.actionSet_output_location.triggered.connect(lambda: pysat_ui.file_outpath(self))               # output location
-        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.get_unknown_data(self))             # unknown data
-        self.actionLoad_reference_Data.triggered.connect(lambda: pysat_ui.get_known_data(self))             # known data
-        self.actionNormalization.triggered.connect(lambda: pysat_ui.submodel_ranges(self))                  # submodel
-        self.actionApply_Mask.triggered.connect(lambda: pysat_ui.do_mask(self))                             # get_mask
-        self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self))                # strat folds
-        self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))                      # regression train
+        self.actionSet_output_location.triggered.connect(lambda: pysat_ui.file_outpath(self))  # output location
+        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.get_unknown_data(self))  # unknown data
+        self.actionLoad_reference_Data.triggered.connect(lambda: pysat_ui.get_known_data(self))  # known data
+        self.actionNormalization.triggered.connect(lambda: pysat_ui.submodel_ranges(self))  # submodel
+        self.actionApply_Mask.triggered.connect(lambda: pysat_ui.do_mask(self))  # get_mask
+        self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self))  # strat folds
+        self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))  # regression train
         self.setGreyedOutItems()
 
     def setGreyedOutItems(self):
         self.actionTrain.setDisabled(True)
         self.actionTrain.setToolTip("Press OK button to ungrey this item")
-
 
     def saveworkflow(self):
         # TODO save the current window's data into a save file
@@ -422,4 +424,5 @@ class pysat_ui(object):
         self.filename = QtGui.QFileDialog.getOpenFileName(self, "Open a Workflow File", '.', "(*.wrf)")
 
     def on_okButton_clicked(self):
+        self.actionTrain.setDisabled(False)
         self.pysat_fun.press_ok()
