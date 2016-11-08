@@ -399,8 +399,6 @@ class pysat_ui(object):
         self.actionExit.setShortcut("ctrl+Q")
 
     def menu_item_functions(self, MainWindow):
-        self.actionSet_output_location.setDisabled(False)
-        self.actionSet_output_location.setVisible(False)
         self.actionSet_output_location.triggered.connect(lambda: pysat_ui.file_outpath(self))               # output location
         self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.get_unknown_data(self))             # unknown data
         self.actionLoad_reference_Data.triggered.connect(lambda: pysat_ui.get_known_data(self))             # known data
@@ -408,6 +406,12 @@ class pysat_ui(object):
         self.actionApply_Mask.triggered.connect(lambda: pysat_ui.do_mask(self))                             # get_mask
         self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self))                # strat folds
         self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))                      # regression train
+        self.setGreyedOutItems()
+
+    def setGreyedOutItems(self):
+        self.actionTrain.setDisabled(True)
+        self.actionTrain.setToolTip("Press OK button to ungrey this item")
+
 
     def saveworkflow(self):
         # TODO save the current window's data into a save file
