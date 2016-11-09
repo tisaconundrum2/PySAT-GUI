@@ -73,7 +73,7 @@ kw_list.append({})                                                              
 fun_message.append('Predict test fold')
 fun_list.append(pysat.do_regression_predict)
                   #choose data        Choose model     #make this variable from the other two
-arg_list.append(['known data-Test', 'PLS', ('meta','PLS (nc=7) - known data-Test - Predict')])                                                                           # do_regression_predict
+arg_list.append(['known data-Test', 'PLS (nc=7)', ('meta','PLS (nc=7) - known data-Test - Predict')])                                                                           # do_regression_predict
 kw_list.append({})                                                                                                      # do_regression_predict
 
 

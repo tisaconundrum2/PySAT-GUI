@@ -389,6 +389,9 @@ class pysat_ui(object):
     def do_regression_train(self):
         PYSAT_UI_MODULES.regression_(self.pysat_fun, self.verticalLayout_8)
 
+    def do_regression_predict(self):
+        PYSAT_UI_MODULES.regression_predict_(self.pysat_fun, self.verticalLayout_8)
+
     def do_scatter_plot(self):
         pass
 
@@ -402,6 +405,8 @@ class pysat_ui(object):
         self.actionExit.setShortcut("ctrl+Q")
 
     def menu_item_functions(self, MainWindow):
+        self.actionSet_output_location.setDisabled(False)
+        self.actionSet_output_location.setVisible(False)
         self.actionSet_output_location.triggered.connect(lambda: pysat_ui.file_outpath(self))  # output location
         self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.get_unknown_data(self))  # unknown data
         self.actionLoad_reference_Data.triggered.connect(lambda: pysat_ui.get_known_data(self))  # known data
@@ -409,23 +414,29 @@ class pysat_ui(object):
         self.actionApply_Mask.triggered.connect(lambda: pysat_ui.do_mask(self))  # get_mask
         self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self))  # strat folds
         self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))  # regression train
+        self.actionPredict.triggered.connect(lambda: pysat_ui.do_regression_predict(self))  # regression predict
         self.setGreyedOutItems(True)
+
 
     def setGreyedOutItems(self, bool):
         self.actionTrain.setDisabled(bool)
         self.actionPredict.setDisabled(bool)
         self.actionPredict.hovered.connect(lambda: self.handleMenuHovered("Please, press OK button"))
 
+
     def handleMenuHovered(self, action):
         QtGui.QToolTip.showText(self, None, action, None)
+
 
     def saveworkflow(self):
         # TODO save the current window's data into a save file
         pass
 
+
     def openworkflow(self):
         # TODO open file dialog
         self.filename = QtGui.QFileDialog.getOpenFileName(self, "Open a Workflow File", '.', "(*.wrf)")
+
 
     def on_okButton_clicked(self):
         self.setGreyedOutItems(False)
