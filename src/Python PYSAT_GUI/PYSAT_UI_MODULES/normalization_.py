@@ -79,6 +79,8 @@ class normalization_:
         data = [None] * 24
         data[0] = min_max(self.normalization, self.verticalLayout)
         data[1] = min_max(self.normalization, self.verticalLayout)
+        data[2] = min_max(self.normalization, self.verticalLayout)
+
         data[0].min_max()
         data[1].min_max()
 
