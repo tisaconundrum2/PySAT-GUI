@@ -24,6 +24,7 @@ except AttributeError:
 class pysat_ui(object):
     def __init__(self):
         self.pysat_fun = pysat_func()
+        self.flag = False
 
     # This is the backbone of the UI, without this portion we have nothing to work with
     # Keep this here
@@ -372,10 +373,10 @@ class pysat_ui(object):
         PYSAT_UI_MODULES.file_outpath_(self.pysat_fun, self.verticalLayout_8)
 
     def get_unknown_data(self):
-        PYSAT_UI_MODULES.get_data_u_(self.pysat_fun, self.verticalLayout_8)
+        self.flag = PYSAT_UI_MODULES.get_data_u_(self.pysat_fun, self.verticalLayout_8)
 
     def get_known_data(self):
-        PYSAT_UI_MODULES.get_data_k_(self.pysat_fun, self.verticalLayout_8)
+        self.flag = PYSAT_UI_MODULES.get_data_k_(self.pysat_fun, self.verticalLayout_8)
 
     def do_mask(self):
         PYSAT_UI_MODULES.get_mask_(self.pysat_fun, self.verticalLayout_8)
@@ -415,14 +416,19 @@ class pysat_ui(object):
         self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self))                # strat folds
         self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))                      # regression train
         self.actionPredict.triggered.connect(lambda: pysat_ui.do_regression_predict(self))                  #regression predict
-        self.actionScatter_Plot.connect(lambda: pysat_ui.do_scatter_plot(self))
+        self.actionScatter_Plot.triggered.connect(lambda: pysat_ui.do_scatter_plot(self))
         self.setGreyedOutItems(True)
 
 
     def setGreyedOutItems(self, bool):
         self.actionTrain.setDisabled(bool)
         self.actionPredict.setDisabled(bool)
-
+        self.actionNormalization.setDisabled(bool)
+        self.actionApply_Mask.setDisabled(bool)
+        self.actionStratified_Folds.setDisabled(bool)
+        self.actionTrain.setDisabled(bool)
+        self.actionPredict.setDisabled(bool)
+        self.actionScatter_Plot.setDisabled(bool)
 
     def handleMenuHovered(self, action):
         QtGui.QToolTip.showText(self, None, action, None)
@@ -438,5 +444,6 @@ class pysat_ui(object):
 
 
     def on_okButton_clicked(self):
-        self.setGreyedOutItems(False)
-        self.pysat_fun.press_ok()
+        if self.flag:
+            self.setGreyedOutItems(False)
+            self.pysat_fun.press_ok()

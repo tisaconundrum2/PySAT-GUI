@@ -29,7 +29,7 @@ class scatterplot_:
         self.pysat_fun.set_fun_list(self.pysat_fun.do_scatterplot)
         self.pysat_fun.set_arg_list([])
         self.pysat_fun.set_kw_list({})
-        self.regression_ui()
+        self.scatterplot_ui()
 
     def get_scatterplot_parameters(self):
         datakey = self.scatter_choosedata.currentText()

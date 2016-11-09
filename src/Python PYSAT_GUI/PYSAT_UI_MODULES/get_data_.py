@@ -24,11 +24,12 @@ class get_data_u_:
         self.main()
 
     def main(self):
-        self.pysat_fun.set_fun_list(self.pysat_fun.get_data)                                   # add this function to the pysat list to be run
-        self.get_data_ui()                                                                     # initiate the UI
+        self.pysat_fun.set_fun_list(self.pysat_fun.get_data)  # add this function to the pysat list to be run
+        self.get_data_ui()  # initiate the UI
         try:
             self.get_data_u_button.clicked.connect(
-                lambda: self.on_getDataButton_clicked(self.get_data_u_line_edit, "unknown"))     # when a button is clicked call the on_getDataButton_clicked function
+                lambda: self.on_getDataButton_clicked(self.get_data_u_line_edit,
+                                                      "unknown"))  # when a button is clicked call the on_getDataButton_clicked function
         except:
             pass
 
@@ -66,6 +67,7 @@ class get_data_u_:
             lineEdit.setText("*.csv")
         self.pysat_fun.set_arg_list([filename, key])
         self.pysat_fun.set_kw_list({})
+        return True
 
 
 class get_data_k_:
@@ -75,12 +77,12 @@ class get_data_k_:
         self.main()
 
     def main(self):
-        self.pysat_fun.set_fun_list(self.pysat_fun.get_data)                                   # add this function to the pysat list to be run
-        self.get_data_ui()                                                                     # initiate the UI
+        self.pysat_fun.set_fun_list(self.pysat_fun.get_data)  # add this function to the pysat list to be run
+        self.get_data_ui()  # initiate the UI
         try:
             self.get_data_k_button.clicked.connect(
-                lambda: self.on_getDataButton_clicked(self.get_data_k_line_edit, "known"))     # when a button is clicked call the on_getDataButton_clicked function
-
+                lambda: self.on_getDataButton_clicked(self.get_data_k_line_edit,
+                                                      "known"))  # when a button is clicked call the on_getDataButton_clicked function
         except:
             pass
 
@@ -118,3 +120,4 @@ class get_data_k_:
             lineEdit.setText("*.csv")
         self.pysat_fun.set_arg_list([filename, key])
         self.pysat_fun.set_kw_list({})
+        return True

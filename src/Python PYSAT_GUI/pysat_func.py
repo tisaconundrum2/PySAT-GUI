@@ -197,4 +197,4 @@ class pysat_func:
         for i in range(self.leftOff, len(self.fun_list)):
             print(i)
             self.fun_list[i](*self.arg_list[i], **self.kw_list[i])
-            self.leftOff = i
+            self.leftOff = i + 1
