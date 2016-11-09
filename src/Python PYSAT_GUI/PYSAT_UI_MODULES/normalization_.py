@@ -22,6 +22,8 @@ class normalization_:
     def __init__(self, pysat_fun, verticalLayout_8):
         self.pysat_fun = pysat_fun
         self.verticalLayout_8 = verticalLayout_8
+        self.data = [None] * 24
+        self.num = 0
         self.main()
 
     def main(self):
@@ -75,23 +77,21 @@ class normalization_:
         self.regression_choosedata.setItemText(0, _translate("MainWindow", "Choose Data", None))
         self.regression_choosedata.setItemText(1, _translate("MainWindow", "Known Data", None))
         self.add_ranges_button.setText(_translate("MainWindow", "Add Ranges", None))
+        self.add_ranges_button.clicked.connect(lambda: self.add_range_clicked(self.num))
+        self.num = self.num + 1
 
-        data = [None] * 24
-        data[0] = min_max(self.normalization, self.verticalLayout)
-        data[1] = min_max(self.normalization, self.verticalLayout)
-        data[2] = min_max(self.normalization, self.verticalLayout)
-
-        data[0].min_max()
-        data[1].min_max()
-
-
-
+    def add_range_clicked(self, num):
+        self.data[num] = min_max(self.pysat_fun, self.normalization, self.verticalLayout, 0)
 
 
 class min_max:
-    def __init__(self, normalization, verticalLayout):
+    def __init__(self, pysat_fun, normalization, verticalLayout, row_number):
+        self.pysat_fun = pysat_fun
         self.normalization = normalization
         self.verticalLayout = verticalLayout
+        self.row_number = row_number
+        self.small_tuple = (None, None)
+        self.min_max()
 
     def min_max(self):
         self.min_max_horizontalLayout = QtGui.QHBoxLayout()
@@ -115,13 +115,21 @@ class min_max:
         self.verticalLayout.addLayout(self.min_max_horizontalLayout)
         self.min_label.setText(_translate("MainWindow", "Min", None))
         self.max_label.setText(_translate("MainWindow", "Max", None))
-        self.min_lineEdit.editingFinished.connect(lambda: self.get_min())
-        self.max_lineEdit.editingFinished.connect(lambda: self.get_max())
+        self.min_lineEdit.editingFinished.connect(lambda: self.set_list(self.min_lineEdit, self.max_lineEdit))
+        self.max_lineEdit.editingFinished.connect(lambda: self.set_list(self.min_lineEdit, self.max_lineEdit))
 
-    def get_min(self):
-        return self.min_lineEdit
+    def set_list(self, min, max):
+        if min.text() == '' and max.text() == '':
+            error_print("Please fill in all boxes")
+        else:
+            try:
+                min = int(min.text())
+                max = int(max.text())
+                self.small_tuple = (min, max)
+                print(self.small_tuple)
 
-    def get_max(self):
-        return self.max_lineEdit
+            except:
+                pass
 
-
+    def add_to_pysat(self):
+        self.pysat_fun.set_arg_list()

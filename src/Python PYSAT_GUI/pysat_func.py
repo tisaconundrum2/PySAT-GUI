@@ -27,6 +27,9 @@ class pysat_func:
     Getter and setter functions below
     """
 #TODO: combine these three functions into one, they're all doing the same thing!
+#TODO>> Re: we don't want to do that, because we're only updating a single value
+#TODO>> And good programming practices say that we should keep them separate,
+#TODO>> this the geneal rule for getters and setters
     def set_fun_list(self, fun,replacelast=False):
         if replacelast:
             self.fun_list[-1]=fun

@@ -421,7 +421,6 @@ class pysat_ui(object):
     def setGreyedOutItems(self, bool):
         self.actionTrain.setDisabled(bool)
         self.actionPredict.setDisabled(bool)
-        self.actionPredict.hovered.connect(lambda: self.handleMenuHovered("Please, press OK button"))
 
 
     def handleMenuHovered(self, action):
