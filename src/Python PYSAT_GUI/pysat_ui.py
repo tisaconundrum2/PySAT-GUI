@@ -393,7 +393,7 @@ class pysat_ui(object):
         PYSAT_UI_MODULES.regression_predict_(self.pysat_fun, self.verticalLayout_8)
 
     def do_scatter_plot(self):
-        pass
+        PYSAT_UI_MODULES.scatterplot_(self.pysat_fun,self.verticalLayout_8)
 
     """ =============================================
     Please do not delete the functions below this line!
@@ -407,14 +407,15 @@ class pysat_ui(object):
     def menu_item_functions(self, MainWindow):
         self.actionSet_output_location.setDisabled(False)
         self.actionSet_output_location.setVisible(False)
-        self.actionSet_output_location.triggered.connect(lambda: pysat_ui.file_outpath(self))  # output location
-        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.get_unknown_data(self))  # unknown data
-        self.actionLoad_reference_Data.triggered.connect(lambda: pysat_ui.get_known_data(self))  # known data
-        self.actionNormalization.triggered.connect(lambda: pysat_ui.submodel_ranges(self))  # submodel
-        self.actionApply_Mask.triggered.connect(lambda: pysat_ui.do_mask(self))  # get_mask
-        self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self))  # strat folds
-        self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))  # regression train
-        self.actionPredict.triggered.connect(lambda: pysat_ui.do_regression_predict(self))  # regression predict
+        self.actionSet_output_location.triggered.connect(lambda: pysat_ui.file_outpath(self))               # output location
+        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.get_unknown_data(self))             # unknown data
+        self.actionLoad_reference_Data.triggered.connect(lambda: pysat_ui.get_known_data(self))             # known data
+        self.actionNormalization.triggered.connect(lambda: pysat_ui.submodel_ranges(self))                  # submodel
+        self.actionApply_Mask.triggered.connect(lambda: pysat_ui.do_mask(self))                             # get_mask
+        self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self))                # strat folds
+        self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))                      # regression train
+        self.actionPredict.triggered.connect(lambda: pysat_ui.do_regression_predict(self))                  #regression predict
+        self.actionScatter_Plot.connect(lambda: pysat_ui.do_scatter_plot(self))
         self.setGreyedOutItems(True)
 
 
@@ -425,7 +426,6 @@ class pysat_ui(object):
 
     def handleMenuHovered(self, action):
         QtGui.QToolTip.showText(self, None, action, None)
-
 
     def saveworkflow(self):
         # TODO save the current window's data into a save file
