@@ -35,27 +35,31 @@ class regression_:
          
               
     def get_regression_parameters(self):
+        
         method=self.regression_choosealg.currentText()
         datakey=self.regression_choosedata.currentText()
         xvars=[str(x.text()) for x in self.regression_train_choosex.selectedItems()]
         yvars=[('comp',str(y.text())) for y in self.regression_train_choosey.selectedItems()]
         params={}
         ransacparams={}
-        kws={}                
-        if method=='PLS':
-            params={'n_components':self.reg_widget.pls_nc_spinbox.value(),
-                    'scale':False}
-            modelkey=method+' (nc='+str(self.reg_widget.pls_nc_spinbox.value())+')'
-            kws={'modelkey':modelkey}
-        if method=='GP':
-            params={'reduce_dim':self.reg_widget.gp_dim_red_combobox.currentText(),
-                    'n_components':self.reg_widget.gp_dim_red_nc_spinbox.value(),
-                    'random_start':self.reg_widget.gp_rand_starts_spin.value(),
-                    'theta0':self.reg_widget.gp_theta0_spin.value(),
-                    'thetaL':self.reg_widget.gp_thetaL_spin.value(),
-                    'thetaU':self.reg_widget.gp_thetaU_spin.value()}
-            modelkey=method  #TODO: make this somehow concisely summarize the GP parameters in a string label for the model
-            kws={'modelkey':modelkey}
+        kws={}        
+        try:
+            if method=='PLS':
+                params={'n_components':self.reg_widget.pls_nc_spinbox.value(),
+                        'scale':False}
+                modelkey=method+' (nc='+str(self.reg_widget.pls_nc_spinbox.value())+')'
+                kws={'modelkey':modelkey}
+            if method=='GP':
+                params={'reduce_dim':self.reg_widget.gp_dim_red_combobox.currentText(),
+                        'n_components':self.reg_widget.gp_dim_red_nc_spinbox.value(),
+                        'random_start':self.reg_widget.gp_rand_starts_spin.value(),
+                        'theta0':self.reg_widget.gp_theta0_spin.value(),
+                        'thetaL':self.reg_widget.gp_thetaL_spin.value(),
+                        'thetaU':self.reg_widget.gp_thetaU_spin.value()}
+                modelkey=method  #TODO: make this somehow concisely summarize the GP parameters in a string label for the model
+                kws={'modelkey':modelkey}
+        except:
+            pass
         if self.regression_ransac_checkbox.isChecked():
             lossval=self.ransac_widget.ransac_lossfunc_combobox.currentText()
             if lossval=='Squared Error':
@@ -70,38 +74,37 @@ class regression_:
         self.pysat_fun.set_kw_list(kws,replacelast=True)
         
         
-        
     def make_ransac_widget(self, isChecked):
         if not isChecked:
             self.ransac_widget.deleteLater()
         else:
             self.ransac_widget = QtGui.QWidget()
-            ransac_widget_hlayout = QtGui.QHBoxLayout(self.ransac_widget)
-            ransac_lossfunc_hlayout = QtGui.QHBoxLayout()
-            ransac_lossfunc_label = QtGui.QLabel(self.ransac_widget)
-            ransac_lossfunc_label.setText('Loss function:')
-            ransac_lossfunc_hlayout.addWidget(ransac_lossfunc_label)
-            ransac_lossfunc_combobox = QtGui.QComboBox(self.ransac_widget)
-            ransac_lossfunc_combobox.addItem(_fromUtf8("Squared Error"))
-            ransac_lossfunc_combobox.addItem(_fromUtf8("Absolute Error"))
-            ransac_lossfunc_hlayout.addWidget(ransac_lossfunc_combobox)
-            ransac_lossfunc_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding,
+            self.ransac_widget.ransac_widget_hlayout = QtGui.QHBoxLayout(self.ransac_widget)
+            self.ransac_widget.ransac_lossfunc_hlayout = QtGui.QHBoxLayout()
+            self.ransac_widget.ransac_lossfunc_label = QtGui.QLabel(self.ransac_widget)
+            self.ransac_widget.ransac_lossfunc_label.setText('Loss function:')
+            self.ransac_widget.ransac_lossfunc_hlayout.addWidget(self.ransac_widget.ransac_lossfunc_label)
+            self.ransac_widget.ransac_lossfunc_combobox = QtGui.QComboBox(self.ransac_widget)
+            self.ransac_widget.ransac_lossfunc_combobox.addItem(_fromUtf8("Squared Error"))
+            self.ransac_widget.ransac_lossfunc_combobox.addItem(_fromUtf8("Absolute Error"))
+            self.ransac_widget.ransac_lossfunc_hlayout.addWidget(self.ransac_widget.ransac_lossfunc_combobox)
+            self.ransac_widget.ransac_lossfunc_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding,
                                                        QtGui.QSizePolicy.Minimum)
-            ransac_lossfunc_hlayout.addItem(ransac_lossfunc_spacer)
-            ransac_widget_hlayout.addLayout(ransac_lossfunc_hlayout)
-            ransac_thresh_hlayout = QtGui.QHBoxLayout()
-            ransac_thresh_label = QtGui.QLabel(self.ransac_widget)
-            ransac_thresh_label.setText('Threshold:')
-            ransac_thresh_hlayout.addWidget(ransac_thresh_label)
-            ransac_thresh_spin = QtGui.QDoubleSpinBox(self.ransac_widget)
-            ransac_thresh_hlayout.addWidget(ransac_thresh_spin)
-            ransac_thresh_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-            ransac_thresh_hlayout.addItem(ransac_thresh_spacer)
-            ransac_widget_hlayout.addLayout(ransac_thresh_hlayout)
+            self.ransac_widget.ransac_lossfunc_hlayout.addItem(self.ransac_widget.ransac_lossfunc_spacer)
+            self.ransac_widget.ransac_widget_hlayout.addLayout(self.ransac_widget.ransac_lossfunc_hlayout)
+            self.ransac_widget.ransac_thresh_hlayout = QtGui.QHBoxLayout()
+            self.ransac_widget.ransac_thresh_label = QtGui.QLabel(self.ransac_widget)
+            self.ransac_widget.ransac_thresh_label.setText('Threshold:')
+            self.ransac_widget.ransac_thresh_hlayout.addWidget(self.ransac_widget.ransac_thresh_label)
+            self.ransac_widget.ransac_thresh_spin = QtGui.QDoubleSpinBox(self.ransac_widget)
+            self.ransac_widget.ransac_thresh_hlayout.addWidget(self.ransac_widget.ransac_thresh_spin)
+            self.ransac_widget.ransac_thresh_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+            self.ransac_widget.ransac_thresh_hlayout.addItem(self.ransac_widget.ransac_thresh_spacer)
+            self.ransac_widget.ransac_widget_hlayout.addLayout(self.ransac_widget.ransac_thresh_hlayout)
             self.ransac_hlayout.addWidget(self.ransac_widget)
             
-            ransac_lossfunc_combobox.currentIndexChanged.connect(lambda: self.get_regression_parameters())
-            ransac_thresh_spin.valueChanged.connect(lambda: self.get_regression_parameters())
+            self.ransac_widget.ransac_lossfunc_combobox.currentIndexChanged.connect(lambda: self.get_regression_parameters())
+            self.ransac_widget.ransac_thresh_spin.valueChanged.connect(lambda: self.get_regression_parameters())
 
     def make_regression_widget(self, alg):
         print(alg)
