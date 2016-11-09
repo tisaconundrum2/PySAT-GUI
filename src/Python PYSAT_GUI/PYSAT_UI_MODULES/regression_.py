@@ -1,5 +1,6 @@
 from PYSAT_UI_MODULES.Error_ import error_print
 from PyQt4 import QtCore, QtGui
+import inspect
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -25,14 +26,51 @@ class regression_:
         self.main()
 
     def main(self):
-        # TODO add function call here
+        self.pysat_fun.set_fun_list(self.pysat_fun.do_regression_train)
+        self.pysat_fun.set_arg_list([])
+        self.pysat_fun.set_kw_list({})
         self.regression_ui()
         self.regression_ransac_checkbox.toggled.connect(lambda: self.make_ransac_widget(self.regression_ransac_checkbox.isChecked()))
         self.regression_choosealg.currentIndexChanged.connect(lambda: self.make_regression_widget(self.regression_choosealg.currentText()))
-
-
-        # TODO add try and except here
-
+         
+              
+    def get_regression_parameters(self):
+        method=self.regression_choosealg.currentText()
+        datakey=self.regression_choosedata.currentText()
+        xvars=[str(x.text()) for x in self.regression_train_choosex.selectedItems()]
+        yvars=[('comp',str(y.text())) for y in self.regression_train_choosey.selectedItems()]
+        params={}
+        ransacparams={}
+        kws={}                
+        if method=='PLS':
+            params={'n_components':self.reg_widget.pls_nc_spinbox.value(),
+                    'scale':False}
+            modelkey=method+' (nc='+str(self.reg_widget.pls_nc_spinbox.value())+')'
+            kws={'modelkey':modelkey}
+        if method=='GP':
+            params={'reduce_dim':self.reg_widget.gp_dim_red_combobox.currentText(),
+                    'n_components':self.reg_widget.gp_dim_red_nc_spinbox.value(),
+                    'random_start':self.reg_widget.gp_rand_starts_spin.value(),
+                    'theta0':self.reg_widget.gp_theta0_spin.value(),
+                    'thetaL':self.reg_widget.gp_thetaL_spin.value(),
+                    'thetaU':self.reg_widget.gp_thetaU_spin.value()}
+            modelkey=method  #TODO: make this somehow concisely summarize the GP parameters in a string label for the model
+            kws={'modelkey':modelkey}
+        if self.regression_ransac_checkbox.isChecked():
+            lossval=self.ransac_widget.ransac_lossfunc_combobox.currentText()
+            if lossval=='Squared Error':
+                loss='squared_loss'
+            if lossval=='Absolute Error':
+                loss='absolute_loss'
+            ransacparams={'residual_threshold':self.ransac_widget.ransac_thresh_spin.value(),
+                          'loss':loss}
+        
+        args=[datakey,xvars,yvars,method,params,ransacparams]
+        self.pysat_fun.set_arg_list(args,replacelast=True)
+        self.pysat_fun.set_kw_list(kws,replacelast=True)
+        
+        
+        
     def make_ransac_widget(self, isChecked):
         if not isChecked:
             self.ransac_widget.deleteLater()
@@ -61,6 +99,9 @@ class regression_:
             ransac_thresh_hlayout.addItem(ransac_thresh_spacer)
             ransac_widget_hlayout.addLayout(ransac_thresh_hlayout)
             self.ransac_hlayout.addWidget(self.ransac_widget)
+            
+            ransac_lossfunc_combobox.currentIndexChanged.connect(lambda: self.get_regression_parameters())
+            ransac_thresh_spin.valueChanged.connect(lambda: self.get_regression_parameters())
 
     def make_regression_widget(self, alg):
         print(alg)
@@ -70,60 +111,76 @@ class regression_:
             pass
         self.reg_widget = QtGui.QWidget()
         if alg == 'PLS':
-            pls_hlayout = QtGui.QHBoxLayout(self.reg_widget)
-            pls_nc_label = QtGui.QLabel(self.reg_widget)
-            pls_nc_label.setText('# of components:')
-            pls_hlayout.addWidget(pls_nc_label)
-            pls_nc_spinbox = QtGui.QSpinBox(self.reg_widget)
-            pls_hlayout.addWidget(pls_nc_spinbox)
-            pls_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-            pls_hlayout.addItem(pls_spacer)
+            self.reg_widget.pls_hlayout = QtGui.QHBoxLayout(self.reg_widget)
+            self.reg_widget.pls_nc_label = QtGui.QLabel(self.reg_widget)
+            self.reg_widget.pls_nc_label.setText('# of components:')
+            self.reg_widget.pls_hlayout.addWidget(self.reg_widget.pls_nc_label)
+            self.reg_widget.pls_nc_spinbox = QtGui.QSpinBox(self.reg_widget)
+            self.reg_widget.pls_hlayout.addWidget(self.reg_widget.pls_nc_spinbox)
+            self.reg_widget.pls_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+            self.reg_widget.pls_hlayout.addItem(self.reg_widget.pls_spacer)
+            self.reg_widget.pls_nc_spinbox.valueChanged.connect(lambda: self.get_regression_parameters())
+            
         elif alg == 'GP':
             self.reg_widget = QtGui.QWidget()
-            gp_vlayout = QtGui.QVBoxLayout(self.reg_widget)
-            gp_dim_red_hlayout = QtGui.QHBoxLayout()
-            gp_dim_red_label = QtGui.QLabel(self.reg_widget)
-            gp_dim_red_label.setText('Choose dimensionality reduction method:')
-            gp_dim_red_hlayout.addWidget(gp_dim_red_label)
-            gp_dim_red_combobox = QtGui.QComboBox(self.reg_widget)
-            gp_dim_red_combobox.addItem(_fromUtf8("PCA"))
-            gp_dim_red_combobox.addItem(_fromUtf8("ICA"))
-            gp_dim_red_hlayout.addWidget(gp_dim_red_combobox)
-            gp_vlayout.addLayout(gp_dim_red_hlayout)
-            gp_rand_starts_hlayout = QtGui.QHBoxLayout()
-            gp_rand_starts_label = QtGui.QLabel(self.reg_widget)
-            gp_rand_starts_label.setText('# of random starts:')
-            gp_rand_starts_hlayout.addWidget(gp_rand_starts_label)
-            gp_rand_starts_spin = QtGui.QSpinBox(self.reg_widget)
-            gp_rand_starts_spin.setValue(1)
-            gp_rand_starts_hlayout.addWidget(gp_rand_starts_spin)
-            spacerItem4 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-            gp_rand_starts_hlayout.addItem(spacerItem4)
-            gp_vlayout.addLayout(gp_rand_starts_hlayout)
-            gp_theta_vlayout = QtGui.QVBoxLayout()
-            gp_theta0_label = QtGui.QLabel(self.reg_widget)
-            gp_theta0_label.setText('Starting Theta:')
-            gp_theta_vlayout.addWidget(gp_theta0_label)
-            gp_theta0_spin = QtGui.QDoubleSpinBox(self.reg_widget)
-            gp_theta0_spin.setValue(1.0)
-            gp_theta_vlayout.addWidget(gp_theta0_spin)
-            gp_thetaL_label = QtGui.QLabel(self.reg_widget)
-            gp_thetaL_label.setText('Lower bound on Theta:')
-            gp_theta_vlayout.addWidget(gp_thetaL_label)
-            gp_thetaL_spin = QtGui.QDoubleSpinBox(self.reg_widget)
-            gp_thetaL_spin.setValue(0.1)
-            gp_theta_vlayout.addWidget(gp_thetaL_spin)
-            gp_thetaU_label = QtGui.QLabel(self.reg_widget)
-            gp_thetaU_label.setText('Upper bound on Theta:')
-            gp_theta_vlayout.addWidget(gp_thetaU_label)
-            gp_thetaU_spin = QtGui.QDoubleSpinBox(self.reg_widget)
-            gp_thetaU_spin.setMaximum(10000)
-            gp_thetaU_spin.setValue(100.0)
+            self.reg_widget.gp_vlayout = QtGui.QVBoxLayout(self.reg_widget)
+            self.reg_widget.gp_dim_red_hlayout = QtGui.QHBoxLayout()
+            self.reg_widget.gp_dim_red_label = QtGui.QLabel(self.reg_widget)
+            self.reg_widget.gp_dim_red_label.setText('Choose dimensionality reduction method:')
+            self.reg_widget.gp_dim_red_hlayout.addWidget(self.reg_widget.gp_dim_red_label)
+            self.reg_widget.gp_dim_red_combobox = QtGui.QComboBox(self.reg_widget)
+            self.reg_widget.gp_dim_red_combobox.addItem(_fromUtf8("PCA"))
+            self.reg_widget.gp_dim_red_combobox.addItem(_fromUtf8("ICA"))
+            self.reg_widget.gp_dim_red_hlayout.addWidget(self.reg_widget.gp_dim_red_combobox)
+            self.reg_widget.gp_dim_red_nc_label = QtGui.QLabel()
+            self.reg_widget.gp_dim_red_nc_label.setText('# of components:')
+            self.reg_widget.gp_dim_red_hlayout.addWidget(self.reg_widget.gp_dim_red_nc_label)
+            self.reg_widget.gp_dim_red_nc_spinbox = QtGui.QSpinBox(self.reg_widget)
+            self.reg_widget.gp_dim_red_hlayout.addWidget(self.reg_widget.gp_dim_red_nc_spinbox)
+            
+            self.reg_widget.gp_vlayout.addLayout(self.reg_widget.gp_dim_red_hlayout)
+            self.reg_widget.gp_rand_starts_hlayout = QtGui.QHBoxLayout()
+            self.reg_widget.gp_rand_starts_label = QtGui.QLabel(self.reg_widget)
+            self.reg_widget.gp_rand_starts_label.setText('# of random starts:')
+            self.reg_widget.gp_rand_starts_hlayout.addWidget(self.reg_widget.gp_rand_starts_label)
+            self.reg_widget.gp_rand_starts_spin = QtGui.QSpinBox(self.reg_widget)
+            self.reg_widget.gp_rand_starts_spin.setValue(1)
+            self.reg_widget.gp_rand_starts_hlayout.addWidget(self.reg_widget.gp_rand_starts_spin)
+            self.reg_widget.spacerItem4 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+            self.reg_widget.gp_rand_starts_hlayout.addItem(self.reg_widget.spacerItem4)
+            self.reg_widget.gp_vlayout.addLayout(self.reg_widget.gp_rand_starts_hlayout)
+            self.reg_widget.gp_theta_vlayout = QtGui.QVBoxLayout()
+            self.reg_widget.gp_theta0_label = QtGui.QLabel(self.reg_widget)
+            self.reg_widget.gp_theta0_label.setText('Starting Theta:')
+            self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_theta0_label)
+            self.reg_widget.gp_theta0_spin = QtGui.QDoubleSpinBox(self.reg_widget)
+            self.reg_widget.gp_theta0_spin.setValue(1.0)
+            self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_theta0_spin)
+            self.reg_widget.gp_thetaL_label = QtGui.QLabel(self.reg_widget)
+            self.reg_widget.gp_thetaL_label.setText('Lower bound on Theta:')
+            self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_thetaL_label)
+            self.reg_widget.gp_thetaL_spin = QtGui.QDoubleSpinBox(self.reg_widget)
+            self.reg_widget.gp_thetaL_spin.setValue(0.1)
+            self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_thetaL_spin)
+            self.reg_widget.gp_thetaU_label = QtGui.QLabel(self.reg_widget)
+            self.reg_widget.gp_thetaU_label.setText('Upper bound on Theta:')
+            self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_thetaU_label)
+            self.reg_widget.gp_thetaU_spin = QtGui.QDoubleSpinBox(self.reg_widget)
+            self.reg_widget.gp_thetaU_spin.setMaximum(10000)
+            self.reg_widget.gp_thetaU_spin.setValue(100.0)
 
-            gp_theta_vlayout.addWidget(gp_thetaU_spin)
-            spacerItem5 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-            gp_theta_vlayout.addItem(spacerItem5)
-            gp_vlayout.addLayout(gp_theta_vlayout)
+            self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_thetaU_spin)
+            self.reg_widget.spacerItem5 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+            self.reg_widget.gp_theta_vlayout.addItem(self.reg_widget.spacerItem5)
+            self.reg_widget.gp_vlayout.addLayout(self.reg_widget.gp_theta_vlayout)
+            
+            self.reg_widget.gp_dim_red_combobox.currentIndexChanged.connect(lambda: self.get_regression_parameters())
+            self.reg_widget.gp_dim_red_nc_spinbox.valueChanged.connect(lambda: self.get_regression_parameters())
+            self.reg_widget.gp_rand_starts_spin.valueChanged.connect(lambda: self.get_regression_parameters())
+            self.reg_widget.gp_theta0_spin.valueChanged.connect(lambda: self.get_regression_parameters())
+            self.reg_widget.gp_thetaL_spin.valueChanged.connect(lambda: self.get_regression_parameters())
+            self.reg_widget.gp_thetaU_spin.valueChanged.connect(lambda: self.get_regression_parameters())
+            
         self.regression_vlayout.addWidget(self.reg_widget)
 
     def regression_ui(self):
@@ -202,6 +259,12 @@ class regression_:
         self.verticalLayout_8.addWidget(self.regression_train)
         self.regression_train.raise_()
         self.regression_train.setTitle(_translate("regression_train", "Regression - Train", None))
+        
+        self.regression_choosedata.currentIndexChanged.connect(lambda: self.get_regression_parameters())
+        self.regression_choosealg.currentIndexChanged.connect(lambda: self.get_regression_parameters())
+        self.regression_train_choosex.currentItemChanged.connect(lambda: self.get_regression_parameters())
+        self.regression_train_choosey.currentItemChanged.connect(lambda: self.get_regression_parameters())
+        
 
 def make_combobox(choices):
     combo = QtGui.QComboBox()

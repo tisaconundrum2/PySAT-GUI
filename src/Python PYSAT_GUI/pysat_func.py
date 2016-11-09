@@ -25,15 +25,24 @@ class pysat_func:
     """
     Getter and setter functions below
     """
+#TODO: combine these three functions into one, they're all doing the same thing!
+    def set_fun_list(self, fun,replacelast=False):
+        if replacelast:
+            self.fun_list[-1]=fun
+        else:
+            self.fun_list.append(fun)
 
-    def set_fun_list(self, fun):
-        self.fun_list.append(fun)
+    def set_arg_list(self, args,replacelast=False):
+        if replacelast:
+            self.arg_list[-1]=args
+        else:
+            self.arg_list.append(args)
 
-    def set_arg_list(self, fun):
-        self.arg_list.append(fun)
-
-    def set_kw_list(self, fun):
-        self.kw_list.append(fun)
+    def set_kw_list(self, kws,replacelast=False):
+        if replacelast:
+            self.kw_list[-1]=kws
+        else:
+            self.kw_list.append(kws)
 
     def getDataKeys(self):
         return self.datakeys
@@ -130,6 +139,7 @@ class pysat_func:
             self.modelkeys.append(modelkey)
             self.models[modelkey].fit(self.data[datakey].df[xvars], self.data[datakey].df[yvars])
             self.model_xvars[modelkey]=xvars
+            
         except Exception as e:
             error_print(e)
 
@@ -182,4 +192,5 @@ class pysat_func:
         # TODO this function will take all the enumerated functions and parameters and run them
         for i in range(len(self.fun_list)):
             print(i)
+
             self.fun_list[i](*self.arg_list[i], **self.kw_list[i])

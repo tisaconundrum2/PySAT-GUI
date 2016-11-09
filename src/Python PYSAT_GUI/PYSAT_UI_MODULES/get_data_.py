@@ -54,7 +54,7 @@ class get_data_u_:
         self.horizontalLayout.addWidget(self.get_data_u_button)
         self.verticalLayout_8.addWidget(self.get_data_u)
 
-        self.get_data_u.setTitle(_translate("MainWindow", "Load in Unknown data file", None))
+        self.get_data_u.setTitle(_translate("MainWindow", "Load Unknown Data", None))
         self.get_data_u_label.setText(_translate("MainWindow", "File Name", None))
         self.get_data_u_line_edit.setText(_translate("MainWindow", "*.csv", None))
         self.get_data_u_button.setText(_translate("MainWindow", "...", None))
@@ -106,7 +106,7 @@ class get_data_k_:
         self.horizontalLayout.addWidget(self.get_data_k_button)
         self.verticalLayout_8.addWidget(self.get_data_k)
 
-        self.get_data_k.setTitle(_translate("MainWindow", "Load in Known data file", None))
+        self.get_data_k.setTitle(_translate("MainWindow", "Load Known Data", None))
         self.get_data_k_label.setText(_translate("MainWindow", "File Name", None))
         self.get_data_k_line_edit.setText(_translate("MainWindow", "*.csv", None))
         self.get_data_k_button.setText(_translate("MainWindow", "...", None))
