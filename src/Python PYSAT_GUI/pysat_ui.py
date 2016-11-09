@@ -385,6 +385,9 @@ class pysat_ui(object):
 
     def do_regression_train(self):
         PYSAT_UI_MODULES.regression_(self.pysat_fun, self.verticalLayout_8)
+    
+    def do_regression_predict(self):
+        PYSAT_UI_MODULES.regression_predict_(self.pysat_fun, self.verticalLayout_8)
 
     def do_scatter_plot(self):
         pass
