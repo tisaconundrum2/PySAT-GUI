@@ -412,7 +412,7 @@ class pysat_ui(object):
         self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self))                # strat folds
         self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))                      # regression train
         self.actionPredict.triggered.connect(lambda: pysat_ui.do_regression_predict(self))                  #regression predict
-        self.actionScatter_Plot.connect(lambda: pysat_ui.do_scatter_plot(self))
+        self.actionScatter_Plot.triggered.connect(lambda: pysat_ui.do_scatter_plot(self))
     def saveworkflow(self):
         # TODO save the current window's data into a save file
         pass

@@ -167,8 +167,9 @@ class pysat_func:
             loadfig=self.figs[figname]
         except:
             loadfig=None
-
-        self.figs[figname]=scatterplot(x, y, self.outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle, ytitle=ytitle, title=title,
+       # outpath=self.outpath
+        outpath=r"C:\Users\rbanderson\Documents\Projects\LIBS PDART\Output"
+        self.figs[figname]=scatterplot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle, ytitle=ytitle, title=title,
                     lbls=lbls, one_to_one=one_to_one, dpi=dpi, colors=colors, annot_mask=annot_mask, alpha=alpha, cmap=cmap,
                     colortitle=colortitle,loadfig=loadfig)
                     
