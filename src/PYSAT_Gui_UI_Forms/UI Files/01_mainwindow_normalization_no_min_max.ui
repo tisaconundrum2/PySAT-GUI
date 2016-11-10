@@ -61,7 +61,7 @@ QGroupBox::title {
           </property>
           <layout class="QVBoxLayout" name="verticalLayout">
            <item>
-            <layout class="QHBoxLayout" name="normalization_choosedata_hlayout">
+            <layout class="QHBoxLayout" name="choosedata_layout">
              <item>
               <widget class="QLabel" name="regression_choosedata_label">
                <property name="text">
@@ -105,24 +105,21 @@ QGroupBox::title {
             </layout>
            </item>
            <item>
-            <layout class="QHBoxLayout" name="add_ranges_button_hlayout">
-             <item>
-              <spacer name="add_ranges_button_spacer">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
+            <layout class="QVBoxLayout" name="all_ranges_layout"/>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="min_max_horizontalLayout">
              <item>
               <widget class="QPushButton" name="add_ranges_button">
                <property name="text">
                 <string>Add Ranges</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="add_ranges_button_2">
+               <property name="text">
+                <string>delete Ranges</string>
                </property>
               </widget>
              </item>
