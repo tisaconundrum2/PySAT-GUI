@@ -70,8 +70,10 @@ class pysat_ui(object):
         self.ok.setMargin(11)
         self.ok.setSpacing(6)
         self.ok.setObjectName(_fromUtf8("ok"))
-        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.ok.addItem(spacerItem)
+        self.progressBar = QtGui.QProgressBar(self.OK)
+        self.progressBar.setProperty("value", 0)
+        self.progressBar.setObjectName(_fromUtf8("progressBar"))
+        self.ok.addWidget(self.progressBar)
         self.okButton = QtGui.QPushButton(self.OK)
         font = QtGui.QFont()
         font.setPointSize(8)
@@ -371,12 +373,15 @@ class pysat_ui(object):
 
     def file_outpath(self):
         PYSAT_UI_MODULES.file_outpath_(self.pysat_fun, self.verticalLayout_8)
+        self.progressBar.setProperty("value", 100)
 
     def get_unknown_data(self):
         self.flag = PYSAT_UI_MODULES.get_data_u_(self.pysat_fun, self.verticalLayout_8)
+        self.progressBar.setProperty("value", 100)
 
     def get_known_data(self):
         self.flag = PYSAT_UI_MODULES.get_data_k_(self.pysat_fun, self.verticalLayout_8)
+        self.progressBar.setProperty("value", 100)
 
     def do_mask(self):
         PYSAT_UI_MODULES.get_mask_(self.pysat_fun, self.verticalLayout_8)
@@ -394,7 +399,7 @@ class pysat_ui(object):
         PYSAT_UI_MODULES.regression_predict_(self.pysat_fun, self.verticalLayout_8)
 
     def do_scatter_plot(self):
-        PYSAT_UI_MODULES.scatterplot_(self.pysat_fun,self.verticalLayout_8)
+        PYSAT_UI_MODULES.scatterplot_(self.pysat_fun, self.verticalLayout_8)
 
     """ =============================================
     Please do not delete the functions below this line!
@@ -406,19 +411,16 @@ class pysat_ui(object):
         self.actionExit.setShortcut("ctrl+Q")
 
     def menu_item_functions(self, MainWindow):
-        self.actionSet_output_location.setDisabled(False)
-        self.actionSet_output_location.setVisible(False)
-        self.actionSet_output_location.triggered.connect(lambda: pysat_ui.file_outpath(self))               # output location
-        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.get_unknown_data(self))             # unknown data
-        self.actionLoad_reference_Data.triggered.connect(lambda: pysat_ui.get_known_data(self))             # known data
-        self.actionNormalization.triggered.connect(lambda: pysat_ui.submodel_ranges(self))                  # submodel
-        self.actionApply_Mask.triggered.connect(lambda: pysat_ui.do_mask(self))                             # get_mask
-        self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self))                # strat folds
-        self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))                      # regression train
-        self.actionPredict.triggered.connect(lambda: pysat_ui.do_regression_predict(self))                  #regression predict
+        self.actionSet_output_location.triggered.connect(lambda: pysat_ui.file_outpath(self))  # output location
+        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.get_unknown_data(self))  # unknown data
+        self.actionLoad_reference_Data.triggered.connect(lambda: pysat_ui.get_known_data(self))  # known data
+        self.actionNormalization.triggered.connect(lambda: pysat_ui.submodel_ranges(self))  # submodel
+        self.actionApply_Mask.triggered.connect(lambda: pysat_ui.do_mask(self))  # get_mask
+        self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self))  # strat folds
+        self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))  # regression train
+        self.actionPredict.triggered.connect(lambda: pysat_ui.do_regression_predict(self))  # regression predict
         self.actionScatter_Plot.triggered.connect(lambda: pysat_ui.do_scatter_plot(self))
         self.setGreyedOutItems(True)
-
 
     def setGreyedOutItems(self, bool):
         self.actionTrain.setDisabled(bool)
@@ -437,11 +439,9 @@ class pysat_ui(object):
         # TODO save the current window's data into a save file
         pass
 
-
     def openworkflow(self):
         # TODO open file dialog
         self.filename = QtGui.QFileDialog.getOpenFileName(self, "Open a Workflow File", '.', "(*.wrf)")
-
 
     def on_okButton_clicked(self):
         if self.flag:

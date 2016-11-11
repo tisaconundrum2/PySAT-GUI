@@ -94,8 +94,12 @@ class normalization_:
 
     def del_range_clicked(self, num):
         if self.num > 0:
-            self.data[num].
+            # self.data[num].
             self.num = self.num - 1
+
+    def get_norm_values(self):
+        # for loop going through all of data[num]
+        pass
 
 
 class min_max:
