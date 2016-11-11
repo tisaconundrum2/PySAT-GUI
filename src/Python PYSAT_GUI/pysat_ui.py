@@ -25,6 +25,10 @@ class pysat_ui(object):
     def __init__(self):
         self.pysat_fun = pysat_func()
         self.flag = False
+        self.myLongTask = TaskThread()
+        self.myLongTask.taskFinished.connect(self.onFinished)
+
+    finished = QtCore.pyqtSignal()
 
     # This is the backbone of the UI, without this portion we have nothing to work with
     # Keep this here
@@ -82,6 +86,7 @@ class pysat_ui(object):
         self.okButton.setObjectName(_fromUtf8("okButton"))
         self.ok.addWidget(self.okButton)
         self.verticalLayout_9.addWidget(self.OK)
+
         MainWindow.setCentralWidget(self.centralWidget)
         self.mainToolBar = QtGui.QToolBar(MainWindow)
         self.mainToolBar.setObjectName(_fromUtf8("mainToolBar"))
@@ -447,3 +452,35 @@ class pysat_ui(object):
         if self.flag:
             self.setGreyedOutItems(False)
             self.pysat_fun.press_ok()
+    
+    """
+    This is the progress bar, it will call upon a seperate Thread to do work for us
+    Once the thread terminates we will receive our result.
+    *What this means that we should be able to continue on our merry way adding modules
+
+    *Yet to be tested
+    """
+
+    def onStart(self):
+        self.progressBar.setRange(0,0)
+        self.myLongTask.start()
+
+    def onFinished(self):
+        # Stop the pulsation
+        self.progressBar.setRange(0,1)
+        self.progressBar.setValue(1)
+
+def make_combobox(choices):
+    combo = QtGui.QComboBox()
+    for i, choice in enumerate(choices):
+        combo.addItem(_fromUtf8(""))
+        combo.setItemText(i, _translate('', choice, None))
+
+    return combo
+
+class TaskThread(QtCore.QThread):
+    taskFinished = QtCore.pyqtSignal()
+    def run(self, function):
+        function
+        self.taskFinished.emit()
+

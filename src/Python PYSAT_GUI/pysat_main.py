@@ -30,7 +30,7 @@ class Main(QMainWindow):
         self.close()
 
 
-def main():
+if __name__ == "__main__":
     app = QApplication(sys.argv)
 
     splash_pix = QPixmap('splash.png')
