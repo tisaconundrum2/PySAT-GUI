@@ -18,42 +18,35 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 
+# Normalization creates a UI
+# and many smaller pieces of the UI called min_max
+#
+# normalization
+#     |_ min_max
+#     |_ min_max
+#     |_ min_max
+#
+# each of these min_max's have connections that tell us what was updated
+# each of these updates should return a value back to normalization so we can add it to a list
+#
+#      |---------------------|           |----------------------|
+#      |    Normalization    |           |       min_max        |
+#      |---------------------|           |----------------------|
+#      | returned val in lst | <-------- | return value and pos |
+#      | load UI/Boxes       | --------> |                      |
+#      |---------------------|           |----------------------|
+#
+# every time we change boxes, we should know which box is getting updated, and what the updated value is
+# so for example
+#
+#     min [      ]  max [      ]
+#     min [      ]  max [ 1000 ]*
+#     min [      ]  max [      ]
+# the above box* was update4d
+# it's position is data[1], max_lineEdit, and it's value is 1000
 class normalization_:
-    # Normalization creates a UI
-    # and many smaller pieces of the UI called min_max
-    #
-    # normalization
-    #     |_ min_max
-    #     |_ min_max
-    #     |_ min_max
-    #
-    # each of these min_max's have connections that tell us what was updated
-    # each of these updates should return a value back to normalization so we can add it to a list
-    #
-    #      |---------------------|           |----------------------|
-    #      |    Normalization    |           |       min_max        |
-    #      |---------------------|           |----------------------|
-    #      | returned val in lst | <-------- | return value and pos |
-    #      | load UI/Boxes       | --------> |                      |
-    #      |---------------------|           |----------------------|
-    #
-    # every time we change boxes, we should know which box is getting updated, and what the updated value is
-    # so for example
-    #
-    #     min [      ]  max [      ]
-    #     min [      ]  max [ 100  ]*
-    #     min [      ]  max [      ]
-    # the above box* was update4d
-    # it's position is data[1], max_lineEdit, and it's value is 100
-
     def __init__(self, pysat_fun, verticalLayout):
-        # normalization needs a list. It will look like this [(0,0), (0,0), (0,0)]
-        self.list = [(None, None)] * 24
-        self.pysat_fun = pysat_fun
-        # normalization needs the necessary layouts to work.
-        self.verticalLayout_8 = verticalLayout
-        # normalization_ needs a driver function main
-        self.main()
+        pass
 
     def main(self):
         # Load in function
@@ -110,11 +103,39 @@ class normalization_:
         self.regression_choosedata.setItemText(1, _translate("MainWindow", "Known Data", None))
         self.add_ranges_button.setText(_translate("MainWindow", "Add Ranges", None))
         self.del_ranges_button.setText(_translate("MainWindow", "delete Ranges", None))
-
-    def add_norm_value(self):
-        pass
+        # TODO: give functionality to the buttons on the UI
+        # self.add_ranges_button.clicked.connect(lambda: self.add_range_clicked(self.num))
+        # self.del_ranges_button.clicked.connect(lambda: self.del_range_clicked(self.num))
 
 
 class min_max:
-    def __init__(self):
-        pass
+    def __init__(self, pysat_fun, normalization, verticalLayout, num):
+        self.pysat_fun = pysat_fun
+        self.normalization = normalization
+        self.all_ranges_layout = verticalLayout
+
+    def min_max(self):
+        self.ranges_layout = QtGui.QHBoxLayout()
+        self.ranges_layout.setMargin(11)
+        self.ranges_layout.setSpacing(6)
+        self.ranges_layout.setObjectName(_fromUtf8("ranges_layout"))
+        self.min_label = QtGui.QLabel(self.normalization)
+        self.min_label.setObjectName(_fromUtf8("min_label"))
+        self.ranges_layout.addWidget(self.min_label)
+        self.min_lineEdit = QtGui.QLineEdit(self.normalization)
+        self.min_lineEdit.setObjectName(_fromUtf8("min_lineEdit"))
+        self.ranges_layout.addWidget(self.min_lineEdit)
+        self.max_label = QtGui.QLabel(self.normalization)
+        self.max_label.setObjectName(_fromUtf8("max_label"))
+        self.ranges_layout.addWidget(self.max_label)
+        self.max_lineEdit = QtGui.QLineEdit(self.normalization)
+        self.max_lineEdit.setObjectName(_fromUtf8("max_lineEdit"))
+        self.ranges_layout.addWidget(self.max_lineEdit)
+        self.all_ranges_layout.addLayout(self.ranges_layout)
+        self.min_label.setText(_translate("MainWindow", "Min", None))
+        self.max_label.setText(_translate("MainWindow", "Max", None))
+
+        # TODO each of these min_max's have connections that tell us what was updated
+        self.min_lineEdit.editingFinished.connect(lambda: self.set_list(self.min_lineEdit, self.max_lineEdit))
+        self.max_lineEdit.editingFinished.connect(lambda: self.set_list(self.min_lineEdit, self.max_lineEdit))
+

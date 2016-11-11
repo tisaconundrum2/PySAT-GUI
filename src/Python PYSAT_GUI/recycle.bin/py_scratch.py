@@ -66,8 +66,6 @@ class normalization_:
         self.add_ranges_button.setText(_translate("MainWindow", "Add Ranges", None))
         self.del_ranges_button.setText(_translate("MainWindow", "delete Ranges", None))
 
-        self.add_ranges_button.clicked.connect(lambda: self.add_range_clicked(self.num))
-        self.del_ranges_button.clicked.connect(lambda: self.del_range_clicked(self.num))
 
     def add_range_clicked(self, num):
         self.data[num] = min_max(self.pysat_fun, self.normalization, self.all_ranges_layout)
@@ -77,6 +75,7 @@ class normalization_:
         self.num = self.num + 1
 
     def del_range_clicked(self, num):
+        self.del_ranges_button.clicked.connect(lambda: self.del_range_clicked(self.num))
         if self.num > 0:
             # self.data[num].
             self.num = self.num - 1
