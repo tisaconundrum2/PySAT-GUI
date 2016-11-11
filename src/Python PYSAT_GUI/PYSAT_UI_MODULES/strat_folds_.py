@@ -25,14 +25,19 @@ class strat_folds_:
         self.verticalLayout_8 = verticalLayout_8
         self.main()
 
-
     def main(self):
         # TODO add function param call here
-        # TODO add try and except here
+        self.pysat_fun.set_fun_list(self.pysat_fun.do_strat_folds)
         self.stratified_folds_ui()
+        # TODO add try and except here
+        try:
+            # arg_list.append(['known data', 5, 2, ('meta', 'SiO2')])
+            self.create_folds.clicked.connect(
+                lambda: self.pysat_fun.arg_list.append(['known_data', 5, 2, ('meta', 'SiO2')]))
+        except:
+            print('There was a problem with creating stratified folds...')
 
     def stratified_folds_ui(self):
-        self.pysat_fun.fun_list.append(self.pysat_fun.do_strat_folds)
         self.strat_folds = QtGui.QGroupBox()
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -43,17 +48,17 @@ class strat_folds_:
         self.strat_folds_choose_data_label = QtGui.QLabel(self.strat_folds)
         self.strat_folds_choose_data_label.setObjectName(_fromUtf8("strat_folds_choose_data_label"))
         self.strat_folds_vlayout.addWidget(self.strat_folds_choose_data_label)
-        datachoices=self.pysat_fun.datakeys
-        if datachoices==[]:
+        datachoices = self.pysat_fun.datakeys
+        if datachoices == []:
             error_print('No data has been loaded!')
-            datachoices=['No data has been loaded!']
-        self.strat_folds_choose_data=make_combobox(datachoices)
+            datachoices = ['No data has been loaded!']
+        self.strat_folds_choose_data = make_combobox(datachoices)
         self.strat_folds_vlayout.addWidget(self.strat_folds_choose_data)
         self.strat_folds_choose_var_label = QtGui.QLabel(self.strat_folds)
         self.strat_folds_choose_var_label.setObjectName(_fromUtf8("strat_folds_choose_var_label"))
         self.strat_folds_vlayout.addWidget(self.strat_folds_choose_var_label)
-        varchoices=self.pysat_fun.data[self.strat_folds_choose_data.currentText()].df['comp'].columns.values
-        self.strat_folds_choose_var=make_combobox(varchoices)
+        varchoices = self.pysat_fun.data[self.strat_folds_choose_data.currentText()].df['comp'].columns.values
+        self.strat_folds_choose_var = make_combobox(varchoices)
         self.strat_folds_vlayout.addWidget(self.strat_folds_choose_var)
         self.strat_folds_choose_data.activated[int].connect(self.strat_fold_change_vars)
         self.strat_folds_hlayout = QtGui.QHBoxLayout()
@@ -71,7 +76,7 @@ class strat_folds_:
         self.test_fold_label = QtGui.QLabel(self.strat_folds)
         self.test_fold_label.setObjectName(_fromUtf8("test_fold_label"))
         self.strat_folds_hlayout.addWidget(self.test_fold_label)
-        foldchoices=['1']
+        foldchoices = ['1']
         self.choose_test_fold = make_combobox(foldchoices)
         self.choose_test_fold.setObjectName(_fromUtf8("choose_test_fold"))
         self.nfolds_spin.valueChanged.connect(self.strat_fold_change_testfolds)
@@ -91,11 +96,6 @@ class strat_folds_:
         self.create_folds.setText(_translate("strat_folds", "Create Folds", None))
         self.strat_folds_choose_data_label.setText(_translate("strat_folds", "Choose data to stratify:", None))
         self.strat_folds_choose_var_label.setText(_translate("strat_folds", "Choose variable on which to sort:", None))
-        try:
-            # arg_list.append(['known data', 5, 2, ('meta', 'SiO2')])
-            self.create_folds.clicked.connect(lambda: self.pysat_fun.arg_list.append(['known_data', 5, 2, ('meta', 'SiO2')]))
-        except:
-            print('There was a problem with creating stratified folds...')
 
     def strat_fold_change_vars(self):
         self.strat_folds_choose_var.clear()
@@ -108,4 +108,3 @@ class strat_folds_:
         choices = list(map(str, list(range(1, self.nfolds_spin.value() + 1))))
         print(choices)
         self.choose_test_fold.addItems(choices)
-

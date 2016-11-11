@@ -17,6 +17,7 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
+
 class normalization_:
     # Normalization creates a UI
     # and many smaller pieces of the UI called min_max
@@ -28,6 +29,14 @@ class normalization_:
     #
     #       each of these have connections that tell us what was updated
     # each of these updates should return a value back to normalization so we can add it to a list
+    #
+    #      |---------------------|           |----------------------|
+    #      |    Normalization    |           |       min_max        |
+    #      |---------------------|           |----------------------|
+    #      |                     | <-------- | return value/pos     |
+    #      | load UI/Boxes       | --------> |                      |
+    #      |---------------------|           |----------------------|
+    #
     # every time we change boxes, we should know which box is getting updated, and what the updated value is
     #
     # so for example
@@ -40,15 +49,17 @@ class normalization_:
 
     def __init__(self, pysat_fun, verticalLayout):
         # normalization needs a list. It will look like this [(0,0), (0,0), (0,0)]
-        self.list = [(None, None)]*24
-        # normalization needs the necessary layouts to work.
+        self.list = [(None, None)] * 24
         self.pysat_fun = pysat_fun
+        # normalization needs the necessary layouts to work.
         self.verticalLayout_8 = verticalLayout
         # normalization_ needs a driver function main
         self.main()
 
     def main(self):
-        #main needs to call the UI
+        # Load a in function
+        self.pysat_fun.set_arg_list(self.pysat_fun.do_norm)
+        # main needs to call the UI
         self.normalization_ui()
 
     def normalization_ui(self):
@@ -99,6 +110,9 @@ class normalization_:
         self.regression_choosedata.setItemText(1, _translate("MainWindow", "Known Data", None))
         self.add_ranges_button.setText(_translate("MainWindow", "Add Ranges", None))
         self.del_ranges_button.setText(_translate("MainWindow", "delete Ranges", None))
+
+    def add_norm_value(self):
+        pass
 
 
 class min_max:
