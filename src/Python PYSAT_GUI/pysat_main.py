@@ -44,7 +44,3 @@ if __name__ == "__main__":
     main_window.show()
     splash.finish(main_window)
     app.exec_()
-
-
-if __name__ == "__main__":
-    main()
