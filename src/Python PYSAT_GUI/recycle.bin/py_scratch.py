@@ -1,69 +1,154 @@
-import sys
-from PyQt4 import QtCore, QtGui
-from PyQt4.QtCore import Qt
 
 
-# very testable class (hint: you can use mock.Mock for the signals)
-class Worker(QtCore.QObject):
-    finished = QtCore.pyqtSignal()
-    dataReady = QtCore.pyqtSignal(list, dict)
-
-    @QtCore.pyqtSlot()
-    def processA(self):
-        print ("Worker.processA()")
-        self.finished.emit()
-
-    @QtCore.pyqtSlot(str, list, list)
-    def processB(self, foo, bar=None, baz=None):
-        print("Worker.processB()")
-        for thing in bar:
-            # lots of processing...
-            self.dataReady.emit(['dummy', 'data'], {'dummy': ['data']})
-        self.finished.emit()
 
 
-def onDataReady(aList, aDict):
-    print ('onDataReady')
-    print (repr(aList))
-    print (repr(aDict))
+
+class normalization_:
+    def __init__(self, pysat_fun, verticalLayout_8):
+        self.pysat_fun = pysat_fun
+        self.verticalLayout_8 = verticalLayout_8
+        self.data = [None] * 24
+        self.norm_list = [None] * 48
+        self.num = 0
+        self.main()
+
+    def main(self):
+        # append function to pysat
+        # self.pysat_fun.fun_list.append(self.pysat_fun.set_file_outpath)
+        self.normalization_ui()
+        try:
+            pass
+            # parameters here
+        except Exception as e:
+            error_print(e)
+
+    def normalization_ui(self):
+        self.normalization = QtGui.QGroupBox()
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.normalization.setFont(font)
+        self.normalization.setObjectName(_fromUtf8("normalization"))
+        self.verticalLayout = QtGui.QVBoxLayout(self.normalization)
+        self.verticalLayout.setMargin(11)
+        self.verticalLayout.setSpacing(6)
+        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
+        self.choosedata_layout = QtGui.QHBoxLayout()
+        self.choosedata_layout.setMargin(11)
+        self.choosedata_layout.setSpacing(6)
+        self.choosedata_layout.setObjectName(_fromUtf8("choosedata_layout"))
+        self.regression_choosedata_label = QtGui.QLabel(self.normalization)
+        self.regression_choosedata_label.setObjectName(_fromUtf8("regression_choosedata_label"))
+        self.choosedata_layout.addWidget(self.regression_choosedata_label)
+        self.regression_choosedata = QtGui.QComboBox(self.normalization)
+        self.regression_choosedata.setIconSize(QtCore.QSize(50, 20))
+        self.regression_choosedata.setObjectName(_fromUtf8("regression_choosedata"))
+        self.choosedata_layout.addWidget(self.regression_choosedata)
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.choosedata_layout.addItem(spacerItem)
+        self.verticalLayout.addLayout(self.choosedata_layout)
+        self.all_ranges_layout = QtGui.QVBoxLayout()
+        self.all_ranges_layout.setMargin(11)
+        self.all_ranges_layout.setSpacing(6)
+        self.all_ranges_layout.setObjectName(_fromUtf8("all_ranges_layout"))
+        self.verticalLayout.addLayout(self.all_ranges_layout)
+        self.min_max_horizontalLayout = QtGui.QHBoxLayout()
+        self.min_max_horizontalLayout.setMargin(11)
+        self.min_max_horizontalLayout.setSpacing(6)
+        self.min_max_horizontalLayout.setObjectName(_fromUtf8("min_max_horizontalLayout"))
+        self.add_ranges_button = QtGui.QPushButton(self.normalization)
+        self.add_ranges_button.setObjectName(_fromUtf8("add_ranges_button"))
+        self.min_max_horizontalLayout.addWidget(self.add_ranges_button)
+        self.del_ranges_button = QtGui.QPushButton(self.normalization)
+        self.del_ranges_button.setObjectName(_fromUtf8("add_ranges_button_2"))
+        self.min_max_horizontalLayout.addWidget(self.del_ranges_button)
+        self.verticalLayout.addLayout(self.min_max_horizontalLayout)
+        self.verticalLayout_8.addWidget(self.normalization)
+
+        self.normalization.setTitle(_translate("MainWindow", "Normalization", None))
+        self.regression_choosedata_label.setText(_translate("MainWindow", "Choose data: ", None))
+        self.regression_choosedata.setItemText(0, _translate("MainWindow", "Choose Data", None))
+        self.regression_choosedata.setItemText(1, _translate("MainWindow", "Known Data", None))
+        self.add_ranges_button.setText(_translate("MainWindow", "Add Ranges", None))
+        self.del_ranges_button.setText(_translate("MainWindow", "delete Ranges", None))
+
+        self.add_ranges_button.clicked.connect(lambda: self.add_range_clicked(self.num))
+        self.del_ranges_button.clicked.connect(lambda: self.del_range_clicked(self.num))
+
+    def add_range_clicked(self, num):
+        self.data[num] = min_max(self.pysat_fun, self.normalization, self.all_ranges_layout)
+        if self.data[num]:
+            self.get_norm_values()
+
+        self.num = self.num + 1
+
+    def del_range_clicked(self, num):
+        if self.num > 0:
+            # self.data[num].
+            self.num = self.num - 1
+
+    def get_norm_values(self):
+        print(['known data', [ (self.data[0].get_min(), self.data[0].get_max)
+                              ,(self.data[1].get_min(), self.data[1].get_max)
+                              ,(self.data[2].get_min(), self.data[2].get_max)
+                              ,(self.data[3].get_min(), self.data[3].get_max)
+                              ,(self.data[4].get_min(), self.data[4].get_max)
+                              ,(self.data[5].get_min(), self.data[5].get_max)
+                              ,(self.data[6].get_min(), self.data[6].get_max)
+                              ,(self.data[7].get_min(), self.data[7].get_max)
+                              ,(self.data[8].get_min(), self.data[8].get_max)
+                              ,(self.data[9].get_min(), self.data[9].get_max)]])
 
 
-app = QtGui.QApplication(sys.argv)
+class min_max:
+    def __init__(self, pysat_fun, normalization, verticalLayout):
+        self.pysat_fun = pysat_fun
+        self.normalization = normalization
+        self.all_ranges_layout = verticalLayout
+        self.small_tuple = (None, None)
+        self.min_max()
 
-thread = QtCore.QThread()  # no parent!
-obj = Worker()  # no parent!
-obj.dataReady.connect(onDataReady)
+    def min_max(self):
+        self.ranges_layout = QtGui.QHBoxLayout()
+        self.ranges_layout.setMargin(11)
+        self.ranges_layout.setSpacing(6)
+        self.ranges_layout.setObjectName(_fromUtf8("ranges_layout"))
+        self.min_label = QtGui.QLabel(self.normalization)
+        self.min_label.setObjectName(_fromUtf8("min_label"))
+        self.ranges_layout.addWidget(self.min_label)
+        self.min_lineEdit = QtGui.QLineEdit(self.normalization)
+        self.min_lineEdit.setObjectName(_fromUtf8("min_lineEdit"))
+        self.ranges_layout.addWidget(self.min_lineEdit)
+        self.max_label = QtGui.QLabel(self.normalization)
+        self.max_label.setObjectName(_fromUtf8("max_label"))
+        self.ranges_layout.addWidget(self.max_label)
+        self.max_lineEdit = QtGui.QLineEdit(self.normalization)
+        self.max_lineEdit.setObjectName(_fromUtf8("max_lineEdit"))
+        self.ranges_layout.addWidget(self.max_lineEdit)
+        self.all_ranges_layout.addLayout(self.ranges_layout)
+        self.min_label.setText(_translate("MainWindow", "Min", None))
+        self.max_label.setText(_translate("MainWindow", "Max", None))
 
-obj.moveToThread(thread)
+        self.min_lineEdit.editingFinished.connect(lambda: self.set_list(self.min_lineEdit, self.max_lineEdit))
+        self.max_lineEdit.editingFinished.connect(lambda: self.set_list(self.min_lineEdit, self.max_lineEdit))
 
-# if you want the thread to stop after the worker is done
-# you can always call thread.start() again later
-obj.finished.connect(thread.quit)
+    def set_list(self, min, max):
+        if min.text() == '' and max.text() == '':
+            error_print("Please fill in all boxes")
+        else:
+            try:
+                min = int(min.text())
+                max = int(max.text())
+                self.small_tuple = (min, max)
+                print(self.small_tuple)
+                return True
+            except:
+                pass
 
-# one way to do it is to start processing as soon as the thread starts
-# this is okay in some cases... but makes it harder to send data to
-# the worker object from the main gui thread.  As you can see I'm calling
-# processA() which takes no arguments
-thread.started.connect(obj.processA)
-thread.finished.connect(app.exit)
+    def get_min(self):
+        return self.min_lineEdit
 
-thread.start()
+    def get_max(self):
+        return self.max_lineEdit
 
-# another way to do it, which is a bit fancier, allows you to talk back and
-# forth with the object in a thread safe way by communicating through signals
-# and slots (now that the thread is running I can start calling methods on
-# the worker object)
-QtCore.QMetaObject.invokeMethod(obj, 'processB', Qt.QueuedConnection,
-                                QtCore.Q_ARG(str, "Hello World!"),
-                                QtCore.Q_ARG(list, ["args", 0, 1]),
-                                QtCore.Q_ARG(list, []))
-
-# that looks a bit scary, but its a totally ok thing to do in Qt,
-# we're simply using the system that Signals and Slots are built on top of,
-# the QMetaObject, to make it act like we safely emitted a signal for
-# the worker thread to pick up when its event loop resumes (so if its doing
-# a bunch of work you can call this method 10 times and it will just queue
-# up the calls.  Note: PyQt > 4.6 will not allow you to pass in a None
-# instead of an empty list, it has stricter type checking
-
-app.exec_()
+    def add_to_pysat(self):
+        self.pysat_fun.set_arg_list()
