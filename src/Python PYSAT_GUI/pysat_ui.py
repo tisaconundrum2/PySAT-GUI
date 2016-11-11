@@ -1,3 +1,4 @@
+import sys
 from PyQt4 import QtCore, QtGui
 from PyQt4.QtGui import QMenu
 
@@ -451,8 +452,12 @@ class pysat_ui(object):
     def on_okButton_clicked(self):
         if self.flag:
             self.setGreyedOutItems(False)
-            self.pysat_fun.press_ok()
-    
+            self.pysat_fun.press_ok()      
+            # TODO: this function needs to be looked at and understood.
+            # I'm thinking there should be a way to have a function be placed a seperate thread
+            # and then ran
+            self.myLongTask.start(lambda: self.pysat_fun.set_sm)
+
     """
     This is the progress bar, it will call upon a seperate Thread to do work for us
     Once the thread terminates we will receive our result.
