@@ -1,8 +1,3 @@
-
-
-
-
-
 class normalization_:
     def __init__(self, pysat_fun, verticalLayout_8):
         self.pysat_fun = pysat_fun
@@ -87,16 +82,16 @@ class normalization_:
             self.num = self.num - 1
 
     def get_norm_values(self):
-        print(['known data', [ (self.data[0].get_min(), self.data[0].get_max)
-                              ,(self.data[1].get_min(), self.data[1].get_max)
-                              ,(self.data[2].get_min(), self.data[2].get_max)
-                              ,(self.data[3].get_min(), self.data[3].get_max)
-                              ,(self.data[4].get_min(), self.data[4].get_max)
-                              ,(self.data[5].get_min(), self.data[5].get_max)
-                              ,(self.data[6].get_min(), self.data[6].get_max)
-                              ,(self.data[7].get_min(), self.data[7].get_max)
-                              ,(self.data[8].get_min(), self.data[8].get_max)
-                              ,(self.data[9].get_min(), self.data[9].get_max)]])
+        print(['known data', [(self.data[0].get_min(), self.data[0].get_max)
+            , (self.data[1].get_min(), self.data[1].get_max)
+            , (self.data[2].get_min(), self.data[2].get_max)
+            , (self.data[3].get_min(), self.data[3].get_max)
+            , (self.data[4].get_min(), self.data[4].get_max)
+            , (self.data[5].get_min(), self.data[5].get_max)
+            , (self.data[6].get_min(), self.data[6].get_max)
+            , (self.data[7].get_min(), self.data[7].get_max)
+            , (self.data[8].get_min(), self.data[8].get_max)
+            , (self.data[9].get_min(), self.data[9].get_max)]])
 
 
 class min_max:

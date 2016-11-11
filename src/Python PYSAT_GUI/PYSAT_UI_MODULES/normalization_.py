@@ -27,25 +27,24 @@ class normalization_:
     #     |_ min_max
     #     |_ min_max
     #
-    #       each of these have connections that tell us what was updated
+    # each of these min_max's have connections that tell us what was updated
     # each of these updates should return a value back to normalization so we can add it to a list
     #
     #      |---------------------|           |----------------------|
     #      |    Normalization    |           |       min_max        |
     #      |---------------------|           |----------------------|
-    #      |                     | <-------- | return value/pos     |
+    #      | returned val in lst | <-------- | return value and pos |
     #      | load UI/Boxes       | --------> |                      |
     #      |---------------------|           |----------------------|
     #
     # every time we change boxes, we should know which box is getting updated, and what the updated value is
-    #
     # so for example
     #
     #     min [      ]  max [      ]
     #     min [      ]  max [ 100  ]*
     #     min [      ]  max [      ]
     # the above box* was update4d
-    # it's position is data[1], max, and it's value is 100
+    # it's position is data[1], max_lineEdit, and it's value is 100
 
     def __init__(self, pysat_fun, verticalLayout):
         # normalization needs a list. It will look like this [(0,0), (0,0), (0,0)]
@@ -57,10 +56,11 @@ class normalization_:
         self.main()
 
     def main(self):
-        # Load a in function
+        # Load in function
         self.pysat_fun.set_arg_list(self.pysat_fun.do_norm)
         # main needs to call the UI
         self.normalization_ui()
+        # TODO Add your connections here
 
     def normalization_ui(self):
         self.normalization = QtGui.QGroupBox()
