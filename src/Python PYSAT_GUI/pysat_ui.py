@@ -1,7 +1,5 @@
-import sys
 from PyQt4 import QtCore, QtGui
-from PyQt4.QtGui import QMenu
-
+import QThreading
 from pysat_func import pysat_func
 import PYSAT_UI_MODULES
 
@@ -26,7 +24,7 @@ class pysat_ui(object):
     def __init__(self):
         self.pysat_fun = pysat_func()
         self.flag = False
-        self.myLongTask = TaskThread()
+        self.myLongTask = QThreading.TaskThread()
         self.myLongTask.taskFinished.connect(self.onFinished)
 
     finished = QtCore.pyqtSignal()
@@ -379,14 +377,13 @@ class pysat_ui(object):
 
     def file_outpath(self):
         PYSAT_UI_MODULES.file_outpath_(self.pysat_fun, self.verticalLayout_8)
-        self.progressBar.setProperty("value", 100)
 
     def get_unknown_data(self):
-        self.flag = PYSAT_UI_MODULES.get_data_u_(self.pysat_fun, self.verticalLayout_8)
+        PYSAT_UI_MODULES.get_data_u_(self.pysat_fun, self.verticalLayout_8)
         self.progressBar.setProperty("value", 100)
 
     def get_known_data(self):
-        self.flag = PYSAT_UI_MODULES.get_data_k_(self.pysat_fun, self.verticalLayout_8)
+        PYSAT_UI_MODULES.get_data_k_(self.pysat_fun, self.verticalLayout_8)
         self.progressBar.setProperty("value", 100)
 
     def do_mask(self):
@@ -415,6 +412,7 @@ class pysat_ui(object):
 
     def menu_item_shortcuts(self):
         self.actionExit.setShortcut("ctrl+Q")
+        self.actionCreate_New_Workflow.setShortcut("ctrl+N")
 
     def menu_item_functions(self, MainWindow):
         self.actionSet_output_location.triggered.connect(lambda: pysat_ui.file_outpath(self))  # output location
@@ -456,24 +454,9 @@ class pysat_ui(object):
             # TODO: this function needs to be looked at and understood.
             # I'm thinking there should be a way to have a function be placed a seperate thread
             # and then ran
-            self.myLongTask.start(lambda: self.pysat_fun.set_sm)
+            # self.myLongTask.start(lambda: self.pysat_fun.set_sm)
 
-    """
-    This is the progress bar, it will call upon a seperate Thread to do work for us
-    Once the thread terminates we will receive our result.
-    *What this means that we should be able to continue on our merry way adding modules
 
-    *Yet to be tested
-    """
-
-    def onStart(self):
-        self.progressBar.setRange(0,0)
-        self.myLongTask.start()
-
-    def onFinished(self):
-        # Stop the pulsation
-        self.progressBar.setRange(0,1)
-        self.progressBar.setValue(1)
 
 def make_combobox(choices):
     combo = QtGui.QComboBox()
@@ -482,10 +465,4 @@ def make_combobox(choices):
         combo.setItemText(i, _translate('', choice, None))
 
     return combo
-
-class TaskThread(QtCore.QThread):
-    taskFinished = QtCore.pyqtSignal()
-    def run(self, function):
-        function
-        self.taskFinished.emit()
 
