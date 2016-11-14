@@ -1,5 +1,4 @@
 from PyQt4 import QtCore, QtGui
-import QThreading
 from pysat_func import pysat_func
 import PYSAT_UI_MODULES
 
@@ -24,13 +23,12 @@ class pysat_ui(object):
     def __init__(self):
         self.pysat_fun = pysat_func()
         self.flag = False
-        self.myLongTask = QThreading.TaskThread()
-        self.myLongTask.taskFinished.connect(self.onFinished)
 
-    finished = QtCore.pyqtSignal()
 
-    # This is the backbone of the UI, without this portion we have nothing to work with
-    # Keep this here
+    """
+    This is the backbone of the UI, without this portion we have nothing to work with
+    """
+
     def mainframe(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(600, 843)
@@ -376,15 +374,13 @@ class pysat_ui(object):
         self.okButton.clicked.connect(lambda: self.on_okButton_clicked())
 
     def file_outpath(self):
-        PYSAT_UI_MODULES.file_outpath_(self.pysat_fun, self.verticalLayout_8)
+        self.flag = PYSAT_UI_MODULES.file_outpath_(self.pysat_fun, self.verticalLayout_8)
 
     def get_unknown_data(self):
-        PYSAT_UI_MODULES.get_data_u_(self.pysat_fun, self.verticalLayout_8)
-        self.progressBar.setProperty("value", 100)
+        self.flag = PYSAT_UI_MODULES.get_data_u_(self.pysat_fun, self.verticalLayout_8)
 
     def get_known_data(self):
-        PYSAT_UI_MODULES.get_data_k_(self.pysat_fun, self.verticalLayout_8)
-        self.progressBar.setProperty("value", 100)
+        self.flag = PYSAT_UI_MODULES.get_data_k_(self.pysat_fun, self.verticalLayout_8)
 
     def do_mask(self):
         PYSAT_UI_MODULES.get_mask_(self.pysat_fun, self.verticalLayout_8)
@@ -450,11 +446,17 @@ class pysat_ui(object):
     def on_okButton_clicked(self):
         if self.flag:
             self.setGreyedOutItems(False)
-            self.pysat_fun.press_ok()      
-            # TODO: this function needs to be looked at and understood.
-            # I'm thinking there should be a way to have a function be placed a seperate thread
-            # and then ran
-            # self.myLongTask.start(lambda: self.pysat_fun.set_sm)
+            self.onStart()
+            self.pysat_fun.taskFinished.connect(self.onFinished)
+
+    def onStart(self):                                              # onStart function
+        self.progressBar.setRange(0, 0)                             # make the bar pulse green
+        self.pysat_fun.start()                                      # TaskThread.start()
+                                                                    # This is multithreading thus run() == start()
+
+    def onFinished(self):                                           # onFinished function
+        self.progressBar.setRange(0,1)                              # stop the bar pulsing green
+        self.progressBar.setValue(1)                                # displays 100% after process is finished.
 
 
 

@@ -146,3 +146,86 @@ class min_max:
 
     def add_to_pysat(self):
         self.pysat_fun.set_arg_list()
+
+
+# ============================================================================================================
+
+
+
+
+        self.data = [None] * 42  # data holds the box objects
+        self.list = [(None, None)] * 42  # normalization needs a list. It will look like this [(0,0), (0,0), (0,0)]
+        self.pysat_fun = pysat_fun  # pysat holds all the functions used to run everything
+        self.num = 0  # num holds necessary position
+        self.verticalLayout_8 = verticalLayout  # normalization needs the necessary layouts to work.
+        self.main()  # normalization_ needs a driver function main
+
+    def add_range_clicked(self, num):
+        self.data[num] = min_max(self.pysat_fun, self.normalization, self.all_ranges_layout, num)
+        self.num = self.num + 1
+
+    def del_range_clicked(self, num):
+        if self.num > 0:
+            # self.data[num].
+            self.num = self.num - 1
+
+    def add_norm_value(self):
+        pass
+
+
+class min_max:
+    def __init__(self, pysat_fun, normalization, verticalLayout, num):
+        self.pysat_fun = pysat_fun
+        self.normalization = normalization
+        self.all_ranges_layout = verticalLayout
+        self.min_max()
+        self.num = num
+
+    def min_max(self):
+        self.ranges_layout = QtGui.QHBoxLayout()
+        self.ranges_layout.setMargin(11)
+        self.ranges_layout.setSpacing(6)
+        self.ranges_layout.setObjectName(_fromUtf8("ranges_layout"))
+        self.min_label = QtGui.QLabel(self.normalization)
+        self.min_label.setObjectName(_fromUtf8("min_label"))
+        self.ranges_layout.addWidget(self.min_label)
+        self.min_lineEdit = QtGui.QLineEdit(self.normalization)
+        self.min_lineEdit.setObjectName(_fromUtf8("min_lineEdit"))
+        self.ranges_layout.addWidget(self.min_lineEdit)
+        self.max_label = QtGui.QLabel(self.normalization)
+        self.max_label.setObjectName(_fromUtf8("max_label"))
+        self.ranges_layout.addWidget(self.max_label)
+        self.max_lineEdit = QtGui.QLineEdit(self.normalization)
+        self.max_lineEdit.setObjectName(_fromUtf8("max_lineEdit"))
+        self.ranges_layout.addWidget(self.max_lineEdit)
+        self.all_ranges_layout.addLayout(self.ranges_layout)
+        self.min_label.setText(_translate("MainWindow", "Min", None))
+        self.max_label.setText(_translate("MainWindow", "Max", None))
+
+        # TODO each of these min_max's have connections that tell us what was updated
+        self.min_lineEdit.editingFinished.connect(lambda: self.set_list(self.min_lineEdit, self.max_lineEdit))
+        self.max_lineEdit.editingFinished.connect(lambda: self.set_list(self.min_lineEdit, self.max_lineEdit))
+
+        # TODO each of these updates should return a value back to normalization so we can add it to a list
+
+    # These return the results, but where does position come in?
+    # Should we just return everything?
+    def get_min(self):
+        return self.min_lineEdit
+
+    def get_max(self):
+        return self.max_lineEdit
+
+    def set_list(self, min, max):
+        # TODO: Fix logic for displaying the error window
+        # if min.text() == '' and max.text() == '':
+        #     error_print("Please fill in all boxes")
+        # else:
+        try:
+            min = int(min.text())
+            max = int(max.text())
+            self.small_tuple = (min, max)
+            normalization_.list[self.num] = self.small_tuple
+            print(normalization_.list[self.num])
+        except:
+            pass

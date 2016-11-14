@@ -3,10 +3,14 @@ from pysat.regression import regression
 from pysat.plotting.plots import scatterplot, pca_ica_plot
 import pandas as pd
 from PYSAT_UI_MODULES.Error_ import error_print
+from PyQt4.QtCore import QThread
+from PyQt4 import QtCore
 
 
-class pysat_func:
+class pysat_func(QThread):
+    taskFinished = QtCore.pyqtSignal()
     def __init__(self):
+        QThread.__init__(self)
         self.leftOff = 0
         self.data = {}  # initialize with an empty dict to hold data frames
         self.datakeys = []
@@ -170,7 +174,7 @@ class pysat_func:
         except:
             loadfig = None
             # outpath=self.outpath
-        outpath = r"C:\Users\rbanderson\Documents\Projects\LIBS PDART\Output"
+        outpath = self.outpath
         self.figs[figname] = scatterplot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
                                          ytitle=ytitle, title=title,
                                          lbls=lbls, one_to_one=one_to_one, dpi=dpi, colors=colors,
@@ -192,9 +196,13 @@ class pysat_func:
         pca_ica_plot(self.data[datakey], x_component, y_component, colorvar=colorvar, cmap=cmap, method=method,
                      figpath=self.outpath, figfile=figfile)
 
-    def press_ok(self):
+    def __del__(self):
+        self.wait()
+
+    def run(self):
         # TODO this function will take all the enumerated functions and parameters and run them
         for i in range(self.leftOff, len(self.fun_list)):
             print(i)
             self.fun_list[i](*self.arg_list[i], **self.kw_list[i])
             self.leftOff = i + 1
+        self.taskFinished.emit()
