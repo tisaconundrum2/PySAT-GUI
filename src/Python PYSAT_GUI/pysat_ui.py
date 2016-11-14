@@ -24,7 +24,6 @@ class pysat_ui(object):
         self.pysat_fun = pysat_func()
         self.flag = False
 
-
     """
     This is the backbone of the UI, without this portion we have nothing to work with
     """
