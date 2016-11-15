@@ -7,6 +7,7 @@ from PYSAT_UI_MODULES.ransac_ import *
 from PYSAT_UI_MODULES.regression_ import *
 from PYSAT_UI_MODULES.regression_predict_ import *
 from PYSAT_UI_MODULES.strat_folds_ import *
+from PYSAT_UI_MODULES.interpolation_ import *
 from PYSAT_UI_MODULES.normalization_ import *
 from PYSAT_UI_MODULES.Error_ import *
 from PYSAT_UI_MODULES.scatterplot_ import *

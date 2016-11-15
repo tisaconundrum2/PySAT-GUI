@@ -399,6 +399,9 @@ class pysat_ui(object):
     def do_scatter_plot(self):
         PYSAT_UI_MODULES.scatterplot_(self.pysat_fun, self.verticalLayout_8)
 
+    def do_interp(self):
+        PYSAT_UI_MODULES.interpolation_(self.pysat_fun, self.verticalLayout_8)
+
     """ =============================================
     Please do not delete the functions below this line!
     These functions are the working functions
@@ -419,6 +422,7 @@ class pysat_ui(object):
         self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))  # regression train
         self.actionPredict.triggered.connect(lambda: pysat_ui.do_regression_predict(self))  # regression predict
         self.actionScatter_Plot.triggered.connect(lambda: pysat_ui.do_scatter_plot(self))
+        self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
         self.setGreyedOutItems(True)
 
     def setGreyedOutItems(self, bool):
