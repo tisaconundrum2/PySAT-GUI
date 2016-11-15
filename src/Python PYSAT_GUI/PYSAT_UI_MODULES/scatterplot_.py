@@ -299,9 +299,8 @@ class scatterplot_:
 
     def scatter_change_vars(self, obj):
         obj.clear()
-        choices = self.pysat_fun.data[self.scatter_choosedata.currentText()].df['meta', 'comp'].columns.values
-        print(choices)
-        obj.addItems(choices)
+        choices = self.pysat_fun.data[self.scatter_choosedata.currentText()].df[['meta', 'comp']].columns.values
+        for i in choices:        
 
     def get_minmax(self, objmin, objmax, var):
         varind = self.vars_level1.index(var)
@@ -318,7 +317,7 @@ def make_combobox(choices):
 
     for i, choice in enumerate(choices):
         combo.addItem(_fromUtf8(""))
-        combo.setItemText(i, choice)
+        combo.setItemText(i, str(choice))
 
     return combo
 

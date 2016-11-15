@@ -224,8 +224,10 @@ class regression_:
         self.regression_train_choosey_label = QtGui.QLabel(self.regression_train)
         self.regression_train_choosey_label.setObjectName(_fromUtf8("regression_train_choosey_label"))
         self.regression_choosevars_hlayout.addWidget(self.regression_train_choosey_label)
-
-        yvarchoices = self.pysat_fun.data[self.regression_choosedata.currentText()].df['comp'].columns.values
+        try:
+            yvarchoices = self.pysat_fun.data[self.regression_choosedata.currentText()].df['comp'].columns.values
+        except:
+            yvarchoices=['']
         self.regression_train_choosey = make_listwidget(yvarchoices)
         self.regression_choosevars_hlayout.addWidget(self.regression_train_choosey)
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
