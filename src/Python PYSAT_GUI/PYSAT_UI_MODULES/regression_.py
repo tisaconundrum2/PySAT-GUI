@@ -10,6 +10,8 @@ except AttributeError:
 
 try:
     _encoding = QtGui.QApplication.UnicodeUTF8
+
+
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig, _encoding)
 except AttributeError:
@@ -28,50 +30,50 @@ class regression_:
         self.pysat_fun.set_arg_list([])
         self.pysat_fun.set_kw_list({})
         self.regression_ui()
-        self.regression_ransac_checkbox.toggled.connect(lambda: self.make_ransac_widget(self.regression_ransac_checkbox.isChecked()))
-        self.regression_choosealg.currentIndexChanged.connect(lambda: self.make_regression_widget(self.regression_choosealg.currentText()))
-         
-              
+        self.regression_ransac_checkbox.toggled.connect(
+            lambda: self.make_ransac_widget(self.regression_ransac_checkbox.isChecked()))
+        self.regression_choosealg.currentIndexChanged.connect(
+            lambda: self.make_regression_widget(self.regression_choosealg.currentText()))
+
     def get_regression_parameters(self):
-        
-        method=self.regression_choosealg.currentText()
-        datakey=self.regression_choosedata.currentText()
-        xvars=[str(x.text()) for x in self.regression_train_choosex.selectedItems()]
-        yvars=[('comp',str(y.text())) for y in self.regression_train_choosey.selectedItems()]
-        params={}
-        ransacparams={}
-        kws={}        
+
+        method = self.regression_choosealg.currentText()
+        datakey = self.regression_choosedata.currentText()
+        xvars = [str(x.text()) for x in self.regression_train_choosex.selectedItems()]
+        yvars = [('comp', str(y.text())) for y in self.regression_train_choosey.selectedItems()]
+        params = {}
+        ransacparams = {}
+        kws = {}
         try:
-            if method=='PLS':
-                params={'n_components':self.reg_widget.pls_nc_spinbox.value(),
-                        'scale':False}
-                modelkey=method+' (nc='+str(self.reg_widget.pls_nc_spinbox.value())+')'
-                kws={'modelkey':modelkey}
-            if method=='GP':
-                params={'reduce_dim':self.reg_widget.gp_dim_red_combobox.currentText(),
-                        'n_components':self.reg_widget.gp_dim_red_nc_spinbox.value(),
-                        'random_start':self.reg_widget.gp_rand_starts_spin.value(),
-                        'theta0':self.reg_widget.gp_theta0_spin.value(),
-                        'thetaL':self.reg_widget.gp_thetaL_spin.value(),
-                        'thetaU':self.reg_widget.gp_thetaU_spin.value()}
-                modelkey=method  #TODO: make this somehow concisely summarize the GP parameters in a string label for the model
-                kws={'modelkey':modelkey}
+            if method == 'PLS':
+                params = {'n_components': self.reg_widget.pls_nc_spinbox.value(),
+                          'scale': False}
+                modelkey = method + ' (nc=' + str(self.reg_widget.pls_nc_spinbox.value()) + ')'
+                kws = {'modelkey': modelkey}
+            if method == 'GP':
+                params = {'reduce_dim': self.reg_widget.gp_dim_red_combobox.currentText(),
+                          'n_components': self.reg_widget.gp_dim_red_nc_spinbox.value(),
+                          'random_start': self.reg_widget.gp_rand_starts_spin.value(),
+                          'theta0': self.reg_widget.gp_theta0_spin.value(),
+                          'thetaL': self.reg_widget.gp_thetaL_spin.value(),
+                          'thetaU': self.reg_widget.gp_thetaU_spin.value()}
+                modelkey = method  # TODO: make this somehow concisely summarize the GP parameters in a string label for the model
+                kws = {'modelkey': modelkey}
         except:
             pass
         if self.regression_ransac_checkbox.isChecked():
-            lossval=self.ransac_widget.ransac_lossfunc_combobox.currentText()
-            if lossval=='Squared Error':
-                loss='squared_loss'
-            if lossval=='Absolute Error':
-                loss='absolute_loss'
-            ransacparams={'residual_threshold':self.ransac_widget.ransac_thresh_spin.value(),
-                          'loss':loss}
-        
-        args=[datakey,xvars,yvars,method,params,ransacparams]
-        self.pysat_fun.set_arg_list(args,replacelast=True)
-        self.pysat_fun.set_kw_list(kws,replacelast=True)
-        
-        
+            lossval = self.ransac_widget.ransac_lossfunc_combobox.currentText()
+            if lossval == 'Squared Error':
+                loss = 'squared_loss'
+            if lossval == 'Absolute Error':
+                loss = 'absolute_loss'
+            ransacparams = {'residual_threshold': self.ransac_widget.ransac_thresh_spin.value(),
+                            'loss': loss}
+
+        args = [datakey, xvars, yvars, method, params, ransacparams]
+        self.pysat_fun.set_arg_list(args, replacelast=True)
+        self.pysat_fun.set_kw_list(kws, replacelast=True)
+
     def make_ransac_widget(self, isChecked):
         if not isChecked:
             self.ransac_widget.deleteLater()
@@ -87,7 +89,7 @@ class regression_:
             self.ransac_widget.ransac_lossfunc_combobox.addItem(_fromUtf8("Absolute Error"))
             self.ransac_widget.ransac_lossfunc_hlayout.addWidget(self.ransac_widget.ransac_lossfunc_combobox)
             self.ransac_widget.ransac_lossfunc_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding,
-                                                       QtGui.QSizePolicy.Minimum)
+                                                                          QtGui.QSizePolicy.Minimum)
             self.ransac_widget.ransac_lossfunc_hlayout.addItem(self.ransac_widget.ransac_lossfunc_spacer)
             self.ransac_widget.ransac_widget_hlayout.addLayout(self.ransac_widget.ransac_lossfunc_hlayout)
             self.ransac_widget.ransac_thresh_hlayout = QtGui.QHBoxLayout()
@@ -96,12 +98,14 @@ class regression_:
             self.ransac_widget.ransac_thresh_hlayout.addWidget(self.ransac_widget.ransac_thresh_label)
             self.ransac_widget.ransac_thresh_spin = QtGui.QDoubleSpinBox(self.ransac_widget)
             self.ransac_widget.ransac_thresh_hlayout.addWidget(self.ransac_widget.ransac_thresh_spin)
-            self.ransac_widget.ransac_thresh_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+            self.ransac_widget.ransac_thresh_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding,
+                                                                        QtGui.QSizePolicy.Minimum)
             self.ransac_widget.ransac_thresh_hlayout.addItem(self.ransac_widget.ransac_thresh_spacer)
             self.ransac_widget.ransac_widget_hlayout.addLayout(self.ransac_widget.ransac_thresh_hlayout)
             self.ransac_hlayout.addWidget(self.ransac_widget)
-            
-            self.ransac_widget.ransac_lossfunc_combobox.currentIndexChanged.connect(lambda: self.get_regression_parameters())
+
+            self.ransac_widget.ransac_lossfunc_combobox.currentIndexChanged.connect(
+                lambda: self.get_regression_parameters())
             self.ransac_widget.ransac_thresh_spin.valueChanged.connect(lambda: self.get_regression_parameters())
 
     def make_regression_widget(self, alg):
@@ -118,10 +122,11 @@ class regression_:
             self.reg_widget.pls_hlayout.addWidget(self.reg_widget.pls_nc_label)
             self.reg_widget.pls_nc_spinbox = QtGui.QSpinBox(self.reg_widget)
             self.reg_widget.pls_hlayout.addWidget(self.reg_widget.pls_nc_spinbox)
-            self.reg_widget.pls_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+            self.reg_widget.pls_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding,
+                                                           QtGui.QSizePolicy.Minimum)
             self.reg_widget.pls_hlayout.addItem(self.reg_widget.pls_spacer)
             self.reg_widget.pls_nc_spinbox.valueChanged.connect(lambda: self.get_regression_parameters())
-            
+
         elif alg == 'GP':
             self.reg_widget = QtGui.QWidget()
             self.reg_widget.gp_vlayout = QtGui.QVBoxLayout(self.reg_widget)
@@ -138,7 +143,7 @@ class regression_:
             self.reg_widget.gp_dim_red_hlayout.addWidget(self.reg_widget.gp_dim_red_nc_label)
             self.reg_widget.gp_dim_red_nc_spinbox = QtGui.QSpinBox(self.reg_widget)
             self.reg_widget.gp_dim_red_hlayout.addWidget(self.reg_widget.gp_dim_red_nc_spinbox)
-            
+
             self.reg_widget.gp_vlayout.addLayout(self.reg_widget.gp_dim_red_hlayout)
             self.reg_widget.gp_rand_starts_hlayout = QtGui.QHBoxLayout()
             self.reg_widget.gp_rand_starts_label = QtGui.QLabel(self.reg_widget)
@@ -147,7 +152,8 @@ class regression_:
             self.reg_widget.gp_rand_starts_spin = QtGui.QSpinBox(self.reg_widget)
             self.reg_widget.gp_rand_starts_spin.setValue(1)
             self.reg_widget.gp_rand_starts_hlayout.addWidget(self.reg_widget.gp_rand_starts_spin)
-            self.reg_widget.spacerItem4 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+            self.reg_widget.spacerItem4 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding,
+                                                            QtGui.QSizePolicy.Minimum)
             self.reg_widget.gp_rand_starts_hlayout.addItem(self.reg_widget.spacerItem4)
             self.reg_widget.gp_vlayout.addLayout(self.reg_widget.gp_rand_starts_hlayout)
             self.reg_widget.gp_theta_vlayout = QtGui.QVBoxLayout()
@@ -171,17 +177,18 @@ class regression_:
             self.reg_widget.gp_thetaU_spin.setValue(100.0)
 
             self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_thetaU_spin)
-            self.reg_widget.spacerItem5 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+            self.reg_widget.spacerItem5 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding,
+                                                            QtGui.QSizePolicy.Minimum)
             self.reg_widget.gp_theta_vlayout.addItem(self.reg_widget.spacerItem5)
             self.reg_widget.gp_vlayout.addLayout(self.reg_widget.gp_theta_vlayout)
-            
+
             self.reg_widget.gp_dim_red_combobox.currentIndexChanged.connect(lambda: self.get_regression_parameters())
             self.reg_widget.gp_dim_red_nc_spinbox.valueChanged.connect(lambda: self.get_regression_parameters())
             self.reg_widget.gp_rand_starts_spin.valueChanged.connect(lambda: self.get_regression_parameters())
             self.reg_widget.gp_theta0_spin.valueChanged.connect(lambda: self.get_regression_parameters())
             self.reg_widget.gp_thetaL_spin.valueChanged.connect(lambda: self.get_regression_parameters())
             self.reg_widget.gp_thetaU_spin.valueChanged.connect(lambda: self.get_regression_parameters())
-            
+
         self.regression_vlayout.addWidget(self.reg_widget)
 
     def regression_ui(self):
@@ -227,7 +234,7 @@ class regression_:
         try:
             yvarchoices = self.pysat_fun.data[self.regression_choosedata.currentText()].df['comp'].columns.values
         except:
-            yvarchoices=['']
+            yvarchoices = ['']
         self.regression_train_choosey = make_listwidget(yvarchoices)
         self.regression_choosevars_hlayout.addWidget(self.regression_train_choosey)
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
@@ -261,12 +268,12 @@ class regression_:
         self.verticalLayout_8.addWidget(self.regression_train)
         self.regression_train.raise_()
         self.regression_train.setTitle(_translate("regression_train", "Regression - Train", None))
-        
+
         self.regression_choosedata.currentIndexChanged.connect(lambda: self.get_regression_parameters())
         self.regression_choosealg.currentIndexChanged.connect(lambda: self.get_regression_parameters())
         self.regression_train_choosex.currentItemChanged.connect(lambda: self.get_regression_parameters())
         self.regression_train_choosey.currentItemChanged.connect(lambda: self.get_regression_parameters())
-        
+
 
 def make_combobox(choices):
     combo = QtGui.QComboBox()
@@ -276,6 +283,7 @@ def make_combobox(choices):
         combo.setItemText(i, _translate('', choice, None))
 
     return combo
+
 
 def make_listwidget(choices):
     listwidget = QtGui.QListWidget()
