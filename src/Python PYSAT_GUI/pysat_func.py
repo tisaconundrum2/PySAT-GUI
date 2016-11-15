@@ -176,12 +176,15 @@ class pysat_func(QThread):
         except:
             loadfig = None
             # outpath=self.outpath
-        outpath = self.outpath
-        self.figs[figname] = scatterplot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
-                                         ytitle=ytitle, title=title,
-                                         lbls=lbls, one_to_one=one_to_one, dpi=dpi, colors=colors,
-                                         annot_mask=annot_mask, alpha=alpha, cmap=cmap,
-                                         colortitle=colortitle, loadfig=loadfig)
+        try:
+            outpath = self.outpath
+            self.figs[figname] = scatterplot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
+                                             ytitle=ytitle, title=title,
+                                             lbls=lbls, one_to_one=one_to_one, dpi=dpi, colors=colors,
+                                             annot_mask=annot_mask, alpha=alpha, cmap=cmap,
+                                             colortitle=colortitle, loadfig=loadfig)
+        except Exception as e:
+            error_print(e)
 
     def do_lineplot(self, datakey, x, y, xrange=None, yrange=None, xtitle='', ytitle='', title=None,
                     lbls=None, figpath=None, figfile=None, dpi=1000, colors=None, alphas=None, loadfig=None):

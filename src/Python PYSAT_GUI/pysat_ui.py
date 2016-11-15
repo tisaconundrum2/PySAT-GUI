@@ -318,7 +318,7 @@ class pysat_ui(object):
         self.actionCreate_New_Workflow.setText(_translate("MainWindow", "Create New Workflow", None))
         self.actionNoise_Reduction.setText(_translate("MainWindow", "Noise Reduction", None))
         self.actionApply_Mask.setText(_translate("MainWindow", "Apply Mask", None))
-        self.actionInterpolate.setText(_translate("MainWindow", "Interpolate (unknown to known)", None))
+        self.actionInterpolate.setText(_translate("MainWindow", "Interpolate", None))
         self.actionInstrument_Response.setText(_translate("MainWindow", "Instrument Response", None))
         self.actionALS.setText(_translate("MainWindow", "ALS", None))
         self.actionDietrich.setText(_translate("MainWindow", "Dietrich", None))
@@ -434,6 +434,7 @@ class pysat_ui(object):
         self.actionTrain.setDisabled(bool)
         self.actionPredict.setDisabled(bool)
         self.actionScatter_Plot.setDisabled(bool)
+        self.actionInterpolate.setDisabled(bool)
 
     def handleMenuHovered(self, action):
         QtGui.QToolTip.showText(self, None, action, None)
