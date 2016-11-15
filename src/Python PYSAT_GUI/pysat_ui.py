@@ -419,8 +419,7 @@ class pysat_ui(object):
         self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))  # regression train
         self.actionPredict.triggered.connect(lambda: pysat_ui.do_regression_predict(self))  # regression predict
         self.actionScatter_Plot.triggered.connect(lambda: pysat_ui.do_scatter_plot(self))
-        # TODO turn this  back to True!
-        self.setGreyedOutItems(False)
+        self.setGreyedOutItems(True)
 
     def setGreyedOutItems(self, bool):
         self.actionTrain.setDisabled(bool)
