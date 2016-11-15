@@ -301,6 +301,7 @@ class scatterplot_:
         obj.clear()
         choices = self.pysat_fun.data[self.scatter_choosedata.currentText()].df[['meta', 'comp']].columns.values
         for i in choices:        
+            obj.addItem(i[1])
 
     def get_minmax(self, objmin, objmax, var):
         varind = self.vars_level1.index(var)
