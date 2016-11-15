@@ -17,13 +17,12 @@ class pysat_func(QThread):
         self.models = {}
         self.modelkeys = []
         self.model_xvars = {}
-        self.addFunc = []
-        self.addPara = []
         self.figs = {}
         self.fignames = []
         self.fun_list = []
         self.arg_list = []
         self.kw_list = []
+        self.greyedItems = []
 
     """
     Getter and setter functions below
@@ -62,6 +61,9 @@ class pysat_func(QThread):
 
     def getModels(self):
         return self.models
+
+    def set_grey_items(self, items):
+        self.greyedItems.append(items)
 
     """
     Work functions below
@@ -205,4 +207,5 @@ class pysat_func(QThread):
             print(i)
             self.fun_list[i](*self.arg_list[i], **self.kw_list[i])
             self.leftOff = i + 1
+
         self.taskFinished.emit()
