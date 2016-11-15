@@ -25,7 +25,7 @@ kw_list.append({})
 fun_message.append('Interpolate unknown data to known data')
 fun_list.append(pysat.do_interp)
 arg_list.append(['unknown data','known data'])
-kw_list.append({})                                                                                                      
+kw_list.append({})
                                                                                   # do_regression_predict
 #fun_message.append('Plot a spectrum')
 #fun_list.append(pysat.do_lineplot)
@@ -42,15 +42,15 @@ fun_list.append(pysat.do_norm)
 arg_list.append(['known data', [(0, 350), (350, 470), (470, 1000)]])
 kw_list.append({})
 
-fun_message.append('Do PCA with 5 componenets')
-fun_list.append(pysat.do_pca)
-arg_list.append(['known data', 5, 'wvl'])
-kw_list.append({})
+# fun_message.append('Do PCA with 5 componenets')
+# fun_list.append(pysat.do_pca)
+# arg_list.append(['known data', 5, 'wvl'])
+# kw_list.append({})
 
-fun_message.append('Make the PCA plot')
-fun_list.append(pysat.do_pca_ica_plot)
-arg_list.append(['known data', 1, 2, 'PCA_plot_SiO2.png'])
-kw_list.append({'colorvar': ('comp', 'SiO2'), 'cmap': 'viridis', 'method': 'PCA'})
+# fun_message.append('Make the PCA plot')
+# fun_list.append(pysat.do_pca_ica_plot)
+# arg_list.append(['known data', 1, 2, 'PCA_plot_SiO2.png'])
+# kw_list.append({'colorvar': ('comp', 'SiO2'), 'cmap': 'viridis', 'method': 'PCA'})
 
 fun_message.append('Stratify the data into folds')
 fun_list.append(pysat.do_strat_folds)
@@ -86,7 +86,7 @@ fun_message.append('Plot test fold predictions')
 fun_list.append(pysat.do_scatterplot)
 arg_list.append(['known data-Test', ('comp', 'SiO2'), ('meta','PLS (nc=7) - known data-Test - Predict')])                       # do_scatterplot
 kw_list.append({'one_to_one': True,'title':'SiO2','figfile':'PLS_SiO2_nc7.png','figname':'testfig','colors':'g','lbls':'Test'})                                                                                    # do_scatterplot
-                  
+
 
 for i in range(len(fun_list)):
     print(fun_message[i] + "\n")

@@ -1,7 +1,6 @@
 from PYSAT_UI_MODULES.Error_ import error_print
 from PyQt4 import QtCore, QtGui
 
-
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
@@ -30,23 +29,20 @@ class regression_predict_:
         self.pysat_fun.set_arg_list([])
         self.pysat_fun.set_kw_list({})
         self.regression_ui()
-        
+
         self.regression_predict_choosedata.currentIndexChanged.connect(lambda: self.get_predict_parameters())
         self.regression_predict_choosemodel.currentIndexChanged.connect(lambda: self.get_predict_parameters())
 
-              
     def get_predict_parameters(self):
-        
-        datakey=self.regression_predict_choosedata.currentText()
-        modelkey=self.regression_predict_choosemodel.currentText()
-        predictname=('meta',modelkey+' - '+datakey+' - Predict')        
-        
-        args=[datakey,modelkey,predictname]
-        kws={}
-        self.pysat_fun.set_arg_list(args,replacelast=True)
-        self.pysat_fun.set_kw_list(kws,replacelast=True)
-        
-        
+
+        datakey = self.regression_predict_choosedata.currentText()
+        modelkey = self.regression_predict_choosemodel.currentText()
+        predictname = ('meta', modelkey + ' - ' + datakey + ' - Predict')
+
+        args = [datakey, modelkey, predictname]
+        kws = {}
+        self.pysat_fun.set_arg_list(args, replacelast=True)
+        self.pysat_fun.set_kw_list(kws, replacelast=True)
 
     def regression_ui(self):
         self.regression_predict = QtGui.QGroupBox()
@@ -56,13 +52,13 @@ class regression_predict_:
         self.regression_predict.setObjectName(_fromUtf8("regression_predict"))
         self.regression_predict_vlayout = QtGui.QVBoxLayout(self.regression_predict)
         self.regression_predict_vlayout.setObjectName(_fromUtf8("regression_vlayout"))
-        #create a layout for choosing data to predict on
+        # create a layout for choosing data to predict on
         self.regression_predict_choosedata_hlayout = QtGui.QHBoxLayout()
         self.regression_predict_choosedata_hlayout.setObjectName(_fromUtf8("regression_predict_choosedata_hlayout"))
         self.regression_predict_choosedata_label = QtGui.QLabel(self.regression_predict)
         self.regression_predict_choosedata_label.setObjectName(_fromUtf8("regression_predict_choosedata_label"))
         self.regression_predict_choosedata_hlayout.addWidget(self.regression_predict_choosedata_label)
-        #create the combobox with data choices        
+        # create the combobox with data choices
         datachoices = self.pysat_fun.datakeys
         if datachoices == []:
             error_print('No Data has been loaded')
@@ -74,13 +70,13 @@ class regression_predict_:
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.regression_predict_choosedata_hlayout.addItem(spacerItem)
         self.regression_predict_vlayout.addLayout(self.regression_predict_choosedata_hlayout)
-        #create a layout for choosing which model to use
+        # create a layout for choosing which model to use
         self.regression_predict_choosemodel_hlayout = QtGui.QHBoxLayout()
         self.regression_predict_choosemodel_hlayout.setObjectName(_fromUtf8("regression_predict_choosemodel_hlayout"))
         self.regression_predict_choosemodel_label = QtGui.QLabel(self.regression_predict)
         self.regression_predict_choosemodel_label.setObjectName(_fromUtf8("regression_predict_choosemodel_label"))
         self.regression_predict_choosemodel_hlayout.addWidget(self.regression_predict_choosemodel_label)
-        #create the combobox with model choices
+        # create the combobox with model choices
 
         modelchoices = self.pysat_fun.modelkeys
         if modelchoices == []:
@@ -93,13 +89,15 @@ class regression_predict_:
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.regression_predict_choosemodel_hlayout.addItem(spacerItem1)
         self.regression_predict_vlayout.addLayout(self.regression_predict_choosemodel_hlayout)
-        
+
         self.verticalLayout_8.addWidget(self.regression_predict)
         self.regression_predict.raise_()
         self.regression_predict.setTitle(_translate("regression_predict", "Regression - Predict", None))
         self.regression_predict_choosedata_label.setText(_translate("regression", "Choose data: ", None))
         self.regression_predict_choosemodel_label.setText(_translate("regression", "Choose Model: ", None))
         self.get_predict_parameters()
+
+
 def make_combobox(choices):
     combo = QtGui.QComboBox()
 
@@ -108,6 +106,7 @@ def make_combobox(choices):
         combo.setItemText(i, _translate('', choice, None))
 
     return combo
+
 
 def make_listwidget(choices):
     listwidget = QtGui.QListWidget()

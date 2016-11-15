@@ -1,6 +1,4 @@
 from PyQt4 import QtCore, QtGui
-from PyQt4.QtGui import QMenu
-
 from pysat_func import pysat_func
 import PYSAT_UI_MODULES
 
@@ -20,13 +18,19 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
+
 class pysat_ui(object):
     def __init__(self):
         self.pysat_fun = pysat_func()
+        self.flag = False
+
+    """
+    This is the backbone of the UI, without this portion we have nothing to work with
+    """
 
     def mainframe(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(600, 843)
+        MainWindow.resize(800, 1000)
         self.centralWidget = QtGui.QWidget(MainWindow)
         self.centralWidget.setObjectName(_fromUtf8("centralWidget"))
         self.verticalLayout_9 = QtGui.QVBoxLayout(self.centralWidget)
@@ -37,7 +41,7 @@ class pysat_ui(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName(_fromUtf8("scrollArea"))
         self.scrollAreaWidgetContents_2 = QtGui.QWidget()
-        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 557, 695))
+        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 557, 800))
         font = QtGui.QFont()
         font.setPointSize(8)
         self.scrollAreaWidgetContents_2.setFont(font)
@@ -66,8 +70,10 @@ class pysat_ui(object):
         self.ok.setMargin(11)
         self.ok.setSpacing(6)
         self.ok.setObjectName(_fromUtf8("ok"))
-        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.ok.addItem(spacerItem)
+        self.progressBar = QtGui.QProgressBar(self.OK)
+        self.progressBar.setProperty("value", 0)
+        self.progressBar.setObjectName(_fromUtf8("progressBar"))
+        self.ok.addWidget(self.progressBar)
         self.okButton = QtGui.QPushButton(self.OK)
         font = QtGui.QFont()
         font.setPointSize(8)
@@ -76,6 +82,7 @@ class pysat_ui(object):
         self.okButton.setObjectName(_fromUtf8("okButton"))
         self.ok.addWidget(self.okButton)
         self.verticalLayout_9.addWidget(self.OK)
+
         MainWindow.setCentralWidget(self.centralWidget)
         self.mainToolBar = QtGui.QToolBar(MainWindow)
         self.mainToolBar.setObjectName(_fromUtf8("mainToolBar"))
@@ -366,53 +373,67 @@ class pysat_ui(object):
         self.okButton.clicked.connect(lambda: self.on_okButton_clicked())
 
     def file_outpath(self):
-        PYSAT_UI_MODULES.file_outpath_(self.pysat_fun, self.verticalLayout_8)
+        self.flag = PYSAT_UI_MODULES.file_outpath_(self.pysat_fun, self.verticalLayout_8)
 
     def get_unknown_data(self):
-        PYSAT_UI_MODULES.get_data_u_(self.pysat_fun, self.verticalLayout_8)
+        self.flag = PYSAT_UI_MODULES.get_data_u_(self.pysat_fun, self.verticalLayout_8)
 
     def get_known_data(self):
-        PYSAT_UI_MODULES.get_data_k_(self.pysat_fun, self.verticalLayout_8)
+        self.flag = PYSAT_UI_MODULES.get_data_k_(self.pysat_fun, self.verticalLayout_8)
 
     def do_mask(self):
         PYSAT_UI_MODULES.get_mask_(self.pysat_fun, self.verticalLayout_8)
 
     def submodel_ranges(self):
-        PYSAT_UI_MODULES.submodel_(self.pysat_fun, self.verticalLayout_8)
+        PYSAT_UI_MODULES.normalization_(self.pysat_fun, self.verticalLayout_8)
 
     def do_strat_folds(self):
         PYSAT_UI_MODULES.strat_folds_(self.pysat_fun, self.verticalLayout_8)
 
     def do_regression_train(self):
         PYSAT_UI_MODULES.regression_(self.pysat_fun, self.verticalLayout_8)
-    
+
     def do_regression_predict(self):
         PYSAT_UI_MODULES.regression_predict_(self.pysat_fun, self.verticalLayout_8)
 
     def do_scatter_plot(self):
-        PYSAT_UI_MODULES.scatterplot_(self.pysat_fun,self.verticalLayout_8)
+        PYSAT_UI_MODULES.scatterplot_(self.pysat_fun, self.verticalLayout_8)
 
     """ =============================================
-    Please do not delete the files below this line!
-    These files are the working files that allow the UI
-    to operate and do work!
+    Please do not delete the functions below this line!
+    These functions are the working functions
+    that allow the UI to operate and do work!
     ============================================== """
 
     def menu_item_shortcuts(self):
         self.actionExit.setShortcut("ctrl+Q")
+        self.actionCreate_New_Workflow.setShortcut("ctrl+N")
 
     def menu_item_functions(self, MainWindow):
-        self.actionSet_output_location.setDisabled(False)
-        self.actionSet_output_location.setVisible(False)
-        self.actionSet_output_location.triggered.connect(lambda: pysat_ui.file_outpath(self))               # output location
-        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.get_unknown_data(self))             # unknown data
-        self.actionLoad_reference_Data.triggered.connect(lambda: pysat_ui.get_known_data(self))             # known data
-        self.actionNormalization.triggered.connect(lambda: pysat_ui.submodel_ranges(self))                  # submodel
-        self.actionApply_Mask.triggered.connect(lambda: pysat_ui.do_mask(self))                             # get_mask
-        self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self))                # strat folds
-        self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))                      # regression train
-        self.actionPredict.triggered.connect(lambda: pysat_ui.do_regression_predict(self))                  #regression predict
+        self.actionSet_output_location.triggered.connect(lambda: pysat_ui.file_outpath(self))  # output location
+        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.get_unknown_data(self))  # unknown data
+        self.actionLoad_reference_Data.triggered.connect(lambda: pysat_ui.get_known_data(self))  # known data
+        self.actionNormalization.triggered.connect(lambda: pysat_ui.submodel_ranges(self))  # submodel
+        self.actionApply_Mask.triggered.connect(lambda: pysat_ui.do_mask(self))  # get_mask
+        self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self))  # strat folds
+        self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))  # regression train
+        self.actionPredict.triggered.connect(lambda: pysat_ui.do_regression_predict(self))  # regression predict
         self.actionScatter_Plot.triggered.connect(lambda: pysat_ui.do_scatter_plot(self))
+        self.setGreyedOutItems(True)
+
+    def setGreyedOutItems(self, bool):
+        self.actionTrain.setDisabled(bool)
+        self.actionPredict.setDisabled(bool)
+        self.actionNormalization.setDisabled(bool)
+        self.actionApply_Mask.setDisabled(bool)
+        self.actionStratified_Folds.setDisabled(bool)
+        self.actionTrain.setDisabled(bool)
+        self.actionPredict.setDisabled(bool)
+        self.actionScatter_Plot.setDisabled(bool)
+
+    def handleMenuHovered(self, action):
+        QtGui.QToolTip.showText(self, None, action, None)
+
     def saveworkflow(self):
         # TODO save the current window's data into a save file
         pass
@@ -422,4 +443,27 @@ class pysat_ui(object):
         self.filename = QtGui.QFileDialog.getOpenFileName(self, "Open a Workflow File", '.', "(*.wrf)")
 
     def on_okButton_clicked(self):
-        self.pysat_fun.press_ok()
+        if self.flag:
+            self.setGreyedOutItems(False)
+            self.onStart()
+            self.pysat_fun.taskFinished.connect(self.onFinished)
+
+    def onStart(self):                                              # onStart function
+        self.progressBar.setRange(0, 0)                             # make the bar pulse green
+        self.pysat_fun.start()                                      # TaskThread.start()
+                                                                    # This is multithreading thus run() == start()
+
+    def onFinished(self):                                           # onFinished function
+        self.progressBar.setRange(0,1)                              # stop the bar pulsing green
+        self.progressBar.setValue(1)                                # displays 100% after process is finished.
+
+
+
+def make_combobox(choices):
+    combo = QtGui.QComboBox()
+    for i, choice in enumerate(choices):
+        combo.addItem(_fromUtf8(""))
+        combo.setItemText(i, _translate('', choice, None))
+
+    return combo
+
