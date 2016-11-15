@@ -45,12 +45,14 @@ except AttributeError:
 #     min [      ]  max [      ]
 # the above box* was update4d
 # it's position is data[1], max_lineEdit, and it's value is 1000
+
 class normalization_:
     def __init__(self, pysat_fun, verticalLayout_8):
         self.pysat_fun = pysat_fun
         self.verticalLayout_8 = verticalLayout_8
-        self.min = 0
-        self.max = 0
+        self.data = [None] * 24
+        self.norm_list = [None] * 48
+        self.num = 0
         self.main()
 
     def main(self):
@@ -63,6 +65,92 @@ class normalization_:
             self.del_ranges_button.clicked.connect(lambda: self.del_ranges())
         except:
             pass
+
+    def normalization_ui(self):
+        self.normalization = QtGui.QGroupBox()
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.normalization.setFont(font)
+        self.normalization.setObjectName(_fromUtf8("normalization"))
+        self.verticalLayout = QtGui.QVBoxLayout(self.normalization)
+        self.verticalLayout.setMargin(11)
+        self.verticalLayout.setSpacing(6)
+        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
+        self.choosedata_layout = QtGui.QHBoxLayout()
+        self.choosedata_layout.setMargin(11)
+        self.choosedata_layout.setSpacing(6)
+        self.choosedata_layout.setObjectName(_fromUtf8("choosedata_layout"))
+        self.regression_choosedata_label = QtGui.QLabel(self.normalization)
+        self.regression_choosedata_label.setObjectName(_fromUtf8("regression_choosedata_label"))
+        self.choosedata_layout.addWidget(self.regression_choosedata_label)
+        self.regression_choosedata = QtGui.QComboBox(self.normalization)
+        self.regression_choosedata.setIconSize(QtCore.QSize(50, 20))
+        self.regression_choosedata.setObjectName(_fromUtf8("regression_choosedata"))
+        self.choosedata_layout.addWidget(self.regression_choosedata)
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.choosedata_layout.addItem(spacerItem)
+        self.verticalLayout.addLayout(self.choosedata_layout)
+        self.all_ranges_layout = QtGui.QVBoxLayout()
+        self.all_ranges_layout.setMargin(11)
+        self.all_ranges_layout.setSpacing(6)
+        self.all_ranges_layout.setObjectName(_fromUtf8("all_ranges_layout"))
+        self.verticalLayout.addLayout(self.all_ranges_layout)
+        self.min_max_horizontalLayout = QtGui.QHBoxLayout()
+        self.min_max_horizontalLayout.setMargin(11)
+        self.min_max_horizontalLayout.setSpacing(6)
+        self.min_max_horizontalLayout.setObjectName(_fromUtf8("min_max_horizontalLayout"))
+        self.add_ranges_button = QtGui.QPushButton(self.normalization)
+        self.add_ranges_button.setObjectName(_fromUtf8("add_ranges_button"))
+        self.min_max_horizontalLayout.addWidget(self.add_ranges_button)
+        self.del_ranges_button = QtGui.QPushButton(self.normalization)
+        self.del_ranges_button.setObjectName(_fromUtf8("add_ranges_button_2"))
+        self.min_max_horizontalLayout.addWidget(self.del_ranges_button)
+        self.verticalLayout.addLayout(self.min_max_horizontalLayout)
+        self.verticalLayout_8.addWidget(self.normalization)
+
+        self.normalization.setTitle(_translate("MainWindow", "Normalization", None))
+        self.regression_choosedata_label.setText(_translate("MainWindow", "Choose data: ", None))
+        self.regression_choosedata.setItemText(0, _translate("MainWindow", "Choose Data", None))
+        self.regression_choosedata.setItemText(1, _translate("MainWindow", "Known Data", None))
+        self.add_ranges_button.setText(_translate("MainWindow", "Add Ranges", None))
+        self.del_ranges_button.setText(_translate("MainWindow", "delete Ranges", None))
+
+    def add_range_clicked(self, num):
+        self.data[num] = min_max(self.pysat_fun, self.normalization, self.all_ranges_layout)
+        if self.data[num]:
+            self.get_norm_values()
+
+        self.num = self.num + 1
+
+    def del_range_clicked(self, num):
+        self.del_ranges_button.clicked.connect(lambda: self.del_range_clicked(self.num))
+        if self.num > 0:
+            # self.data[num].
+            self.num = self.num - 1
+
+    def get_norm_values(self):
+        print(['known data', [(self.data[0].get_min(), self.data[0].get_max)
+            , (self.data[1].get_min(), self.data[1].get_max)
+            , (self.data[2].get_min(), self.data[2].get_max)
+            , (self.data[3].get_min(), self.data[3].get_max)
+            , (self.data[4].get_min(), self.data[4].get_max)
+            , (self.data[5].get_min(), self.data[5].get_max)
+            , (self.data[6].get_min(), self.data[6].get_max)
+            , (self.data[7].get_min(), self.data[7].get_max)
+            , (self.data[8].get_min(), self.data[8].get_max)
+            , (self.data[9].get_min(), self.data[9].get_max)]])
+
+
+
+class normalization_:
+    def __init__(self, pysat_fun, verticalLayout_8):
+        self.pysat_fun = pysat_fun
+        self.verticalLayout_8 = verticalLayout_8
+        self.min = 0
+        self.max = 0
+        self.main()
+
+
 
     def normalization_ui(self):
         # add all UI code here
