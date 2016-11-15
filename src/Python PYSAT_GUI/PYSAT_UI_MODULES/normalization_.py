@@ -111,7 +111,6 @@ class normalization_:
 
         self.normalization.setTitle(_translate("MainWindow", "Normalization", None))
         self.normalization_choosedata_label.setText(_translate("MainWindow", "Choose data: ", None))
-        self.normalization_choosedata.setItemText(0, _translate("MainWindow", "Choose Data", None))
         self.normalization_choosedata.setItemText(1, _translate("MainWindow", "Known Data", None))
         self.add_ranges_button.setText(_translate("MainWindow", "Add Ranges", None))
         self.finish_button.setText(_translate("MainWindow", "Finished", None))
