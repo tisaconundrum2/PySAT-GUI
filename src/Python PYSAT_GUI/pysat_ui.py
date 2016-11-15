@@ -384,7 +384,7 @@ class pysat_ui(object):
     def do_mask(self):
         PYSAT_UI_MODULES.get_mask_(self.pysat_fun, self.verticalLayout_8)
 
-    def submodel_ranges(self):
+    def normalization(self):
         PYSAT_UI_MODULES.normalization_(self.pysat_fun, self.verticalLayout_8)
 
     def do_strat_folds(self):
@@ -413,7 +413,7 @@ class pysat_ui(object):
         self.actionSet_output_location.triggered.connect(lambda: pysat_ui.file_outpath(self))  # output location
         self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.get_unknown_data(self))  # unknown data
         self.actionLoad_reference_Data.triggered.connect(lambda: pysat_ui.get_known_data(self))  # known data
-        self.actionNormalization.triggered.connect(lambda: pysat_ui.submodel_ranges(self))  # submodel
+        self.actionNormalization.triggered.connect(lambda: pysat_ui.normalization(self))  # submodel
         self.actionApply_Mask.triggered.connect(lambda: pysat_ui.do_mask(self))  # get_mask
         self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self))  # strat folds
         self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))  # regression train
