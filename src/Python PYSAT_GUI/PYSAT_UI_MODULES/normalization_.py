@@ -81,13 +81,13 @@ class normalization_:
         self.choosedata_layout.setMargin(11)
         self.choosedata_layout.setSpacing(6)
         self.choosedata_layout.setObjectName(_fromUtf8("choosedata_layout"))
-        self.regression_choosedata_label = QtGui.QLabel(self.normalization)
-        self.regression_choosedata_label.setObjectName(_fromUtf8("regression_choosedata_label"))
-        self.choosedata_layout.addWidget(self.regression_choosedata_label)
-        self.regression_choosedata = QtGui.QComboBox(self.normalization)
-        self.regression_choosedata.setIconSize(QtCore.QSize(50, 20))
-        self.regression_choosedata.setObjectName(_fromUtf8("regression_choosedata"))
-        self.choosedata_layout.addWidget(self.regression_choosedata)
+        self.normalization_choosedata_label = QtGui.QLabel(self.normalization)
+        self.normalization_choosedata_label.setObjectName(_fromUtf8("normalization_choosedata_label"))
+        self.choosedata_layout.addWidget(self.normalization_choosedata_label)
+        self.normalization_choosedata = make_combobox(datachoices)
+        self.normalization_choosedata.setIconSize(QtCore.QSize(50, 20))
+        self.normalization_choosedata.setObjectName(_fromUtf8("normalization_choosedata"))
+        self.choosedata_layout.addWidget(self.normalization_choosedata)
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.choosedata_layout.addItem(spacerItem)
         self.verticalLayout.addLayout(self.choosedata_layout)
@@ -110,9 +110,9 @@ class normalization_:
         self.verticalLayout_8.addWidget(self.normalization)
 
         self.normalization.setTitle(_translate("MainWindow", "Normalization", None))
-        self.regression_choosedata_label.setText(_translate("MainWindow", "Choose data: ", None))
-        self.regression_choosedata.setItemText(0, _translate("MainWindow", "Choose Data", None))
-        self.regression_choosedata.setItemText(1, _translate("MainWindow", "Known Data", None))
+        self.normalization_choosedata_label.setText(_translate("MainWindow", "Choose data: ", None))
+        self.normalization_choosedata.setItemText(0, _translate("MainWindow", "Choose Data", None))
+        self.normalization_choosedata.setItemText(1, _translate("MainWindow", "Known Data", None))
         self.add_ranges_button.setText(_translate("MainWindow", "Add Ranges", None))
         self.finish_button.setText(_translate("MainWindow", "Finished", None))
 
@@ -144,11 +144,10 @@ class normalization_:
                     # arg_list.append(['known data', [(0, 350), (350, 470), (470, 1000)]])
             except:
                 pass
-        self.pysat_fun.set_arg_list(['known', arg_list])
+        datakey = self.normalization_choosedata.currentText()
+        self.pysat_fun.set_arg_list([datakey, arg_list])
         self.pysat_fun.set_kw_list({})
         print(self.pysat_fun.arg_list)
-
-
 
 
 def make_combobox(choices):
@@ -157,3 +156,12 @@ def make_combobox(choices):
         combo.addItem(_fromUtf8(""))
         combo.setItemText(i, _translate('', choice, None))
     return combo
+
+
+def make_listwidget(choices):
+    listwidget = QtGui.QListWidget()
+    listwidget.setItemDelegate
+    for item in choices:
+        item = QtGui.QListWidgetItem(item)
+        listwidget.addItem(item)
+    return listwidget
