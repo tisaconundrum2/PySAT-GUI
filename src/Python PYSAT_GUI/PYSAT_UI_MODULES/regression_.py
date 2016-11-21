@@ -275,6 +275,10 @@ class regression_:
         self.regression_train_choosey.currentItemChanged.connect(lambda: self.get_regression_parameters())
 
 
+    def helper(self):
+        #setText
+        pass
+
 def make_combobox(choices):
     combo = QtGui.QComboBox()
 

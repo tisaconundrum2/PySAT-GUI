@@ -423,9 +423,10 @@ class pysat_ui(object):
         self.actionPredict.triggered.connect(lambda: pysat_ui.do_regression_predict(self))  # regression predict
         self.actionScatter_Plot.triggered.connect(lambda: pysat_ui.do_scatter_plot(self))
         self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
-        self.setGreyedOutItems(True)
+        self.set_greyed_out_items(True)
+        self.set_visible_items()
 
-    def setGreyedOutItems(self, bool):
+    def set_greyed_out_items(self, bool):
         self.actionTrain.setDisabled(bool)
         self.actionPredict.setDisabled(bool)
         self.actionNormalization.setDisabled(bool)
@@ -435,6 +436,15 @@ class pysat_ui(object):
         self.actionPredict.setDisabled(bool)
         self.actionScatter_Plot.setDisabled(bool)
         self.actionInterpolate.setDisabled(bool)
+
+
+    def set_visible_items(self):
+        self.actionNoise_Reduction.setVisible(False)
+        self.actionInstrument_Response.setVisible(False)
+        self.menuBaseline_Removal.setDisabled(True)
+        self.menuCalibration_Transfer.setDisabled(True)
+        self.actionICA.setVisible(False)
+        self.actionPCA.setVisible(False)
 
     def handleMenuHovered(self, action):
         QtGui.QToolTip.showText(self, None, action, None)
@@ -449,7 +459,7 @@ class pysat_ui(object):
 
     def on_okButton_clicked(self):
         if self.flag:
-            self.setGreyedOutItems(False)
+            self.set_greyed_out_items(False)
             self.onStart()
             self.pysat_fun.taskFinished.connect(self.onFinished)
 
