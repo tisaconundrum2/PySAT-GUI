@@ -28,8 +28,7 @@ class get_data_u_:
         self.get_data_ui()  # initiate the UI
         try:
             self.get_data_u_button.clicked.connect(
-                lambda: self.on_getDataButton_clicked(self.get_data_u_line_edit,
-                                                      "unknown"))  # when a button is clicked call the on_getDataButton_clicked function
+                lambda: self.on_getDataButton_clicked(self.get_data_u_line_edit, "unknown"))  # when a button is clicked call the on_getDataButton_clicked function
         except:
             pass
 
@@ -81,8 +80,7 @@ class get_data_k_:
         self.get_data_ui()  # initiate the UI
         try:
             self.get_data_k_button.clicked.connect(
-                lambda: self.on_getDataButton_clicked(self.get_data_k_line_edit,
-                                                      "known"))  # when a button is clicked call the on_getDataButton_clicked function
+                lambda: self.on_getDataButton_clicked(self.get_data_k_line_edit, "known"))  # when a button is clicked call the on_getDataButton_clicked function
         except:
             pass
 

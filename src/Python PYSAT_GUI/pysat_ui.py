@@ -437,7 +437,6 @@ class pysat_ui(object):
         self.actionScatter_Plot.setDisabled(bool)
         self.actionInterpolate.setDisabled(bool)
 
-
     def set_visible_items(self):
         self.actionNoise_Reduction.setVisible(False)
         self.actionInstrument_Response.setVisible(False)
@@ -451,6 +450,7 @@ class pysat_ui(object):
         self.actionCross_Validation.setVisible(False)
         self.actionLine_Plot.setVisible(False)
         self.action1_to_1_Plot.setVisible(False)
+
 
     def handleMenuHovered(self, action):
         QtGui.QToolTip.showText(self, None, action, None)
