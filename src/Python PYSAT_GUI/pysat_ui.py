@@ -424,7 +424,7 @@ class pysat_ui(object):
         self.actionScatter_Plot.triggered.connect(lambda: pysat_ui.do_scatter_plot(self))
         self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
         self.set_greyed_out_items(True)
-        self.set_visible_items()
+        self.set_visible_items() #Taking out menu items that don't have working UI modules yet. We don't want to delete them, so we'll make them disappear.
 
     def set_greyed_out_items(self, bool):
         self.actionTrain.setDisabled(bool)
@@ -441,10 +441,16 @@ class pysat_ui(object):
     def set_visible_items(self):
         self.actionNoise_Reduction.setVisible(False)
         self.actionInstrument_Response.setVisible(False)
-        self.menuBaseline_Removal.setDisabled(True)
-        self.menuCalibration_Transfer.setDisabled(True)
+        self.menuBaseline_Removal.deleteLater()
+        self.menuCalibration_Transfer.deleteLater()
         self.actionICA.setVisible(False)
         self.actionPCA.setVisible(False)
+        self.actionICA_2.setVisible(False)
+        self.actionPCA_2.setVisible(False)
+        self.menuClassification.setTitle("")
+        self.actionCross_Validation.setVisible(False)
+        self.actionLine_Plot.setVisible(False)
+        self.action1_to_1_Plot.setVisible(False)
 
     def handleMenuHovered(self, action):
         QtGui.QToolTip.showText(self, None, action, None)
