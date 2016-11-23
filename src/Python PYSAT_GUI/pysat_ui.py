@@ -398,6 +398,8 @@ class pysat_ui(object):
 
     def do_scatter_plot(self):
         PYSAT_UI_MODULES.scatterplot_(self.pysat_fun, self.verticalLayout_8)
+    def do_cv(self):
+        PYSAT_UI_MODULES.cv_(self.pysat_fun,self.verticalLayout_8)
 
     """ =============================================
     Please do not delete the functions below this line!
@@ -419,6 +421,7 @@ class pysat_ui(object):
         self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))  # regression train
         self.actionPredict.triggered.connect(lambda: pysat_ui.do_regression_predict(self))  # regression predict
         self.actionScatter_Plot.triggered.connect(lambda: pysat_ui.do_scatter_plot(self))
+        self.actionCross_Validation.triggered.connect(lambda: pysat_ui.do_cv(self))
         self.setGreyedOutItems(True)
 
     def setGreyedOutItems(self, bool):

@@ -65,6 +65,7 @@ class get_data_u_:
         lineEdit.setText(filename)
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")
+        
         self.pysat_fun.set_arg_list([filename, key])
         self.pysat_fun.set_kw_list({})
         return True
@@ -118,6 +119,7 @@ class get_data_k_:
         lineEdit.setText(filename)
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")
+        
         self.pysat_fun.set_arg_list([filename, key])
         self.pysat_fun.set_kw_list({})
         self.get_data_k.setDisabled(True)

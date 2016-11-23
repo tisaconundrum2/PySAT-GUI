@@ -227,7 +227,7 @@ class regression_:
         try:
             yvarchoices = self.pysat_fun.data[self.regression_choosedata.currentText()].df['comp'].columns.values
         except:
-            yvarchoices=['']
+            yvarchoices=['No valid options']
         self.regression_train_choosey = make_listwidget(yvarchoices)
         self.regression_choosevars_hlayout.addWidget(self.regression_train_choosey)
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
@@ -266,7 +266,16 @@ class regression_:
         self.regression_choosealg.currentIndexChanged.connect(lambda: self.get_regression_parameters())
         self.regression_train_choosex.currentItemChanged.connect(lambda: self.get_regression_parameters())
         self.regression_train_choosey.currentItemChanged.connect(lambda: self.get_regression_parameters())
+        self.regression_choosedata.activated[int].connect(lambda: self.regression_change_vars(self.regression_train_choosey))
         
+    def regression_change_vars(self, obj):
+        obj.clear()
+        try:
+            choices = self.pysat_fun.data[self.regression_choosedata.currentText()].df[['comp']].columns.values
+        except:
+            choices=['No valid options']
+        for i in choices:        
+            obj.addItem(i[1])
 
 def make_combobox(choices):
     combo = QtGui.QComboBox()
