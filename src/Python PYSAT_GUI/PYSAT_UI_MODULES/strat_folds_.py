@@ -44,7 +44,10 @@ class strat_folds_:
     def get_strat_fold_params(self):
         datakey=self.strat_folds_choose_data.currentText()
         nfolds=self.nfolds_spin.value()
-        testfold=int(self.choose_test_fold.currentText())
+        try:
+            testfold=int(self.choose_test_fold.currentText())
+        except:
+            testfold=1
         colname=('comp',self.strat_folds_choose_var.currentText())
         args=[datakey,nfolds,testfold,colname]
         kws={}
@@ -117,11 +120,11 @@ class strat_folds_:
     def strat_fold_change_vars(self):
         self.strat_folds_choose_var.clear()
         choices = self.pysat_fun.data[self.strat_folds_choose_data.currentText()].df['meta'].columns.values
-        print(choices)
+        
         self.strat_folds_choose_var.addItems(choices)
 
     def strat_fold_change_testfolds(self):
         self.choose_test_fold.clear()
         choices = list(map(str, list(range(1, self.nfolds_spin.value() + 1))))
-        print(choices)
+        
         self.choose_test_fold.addItems(choices)

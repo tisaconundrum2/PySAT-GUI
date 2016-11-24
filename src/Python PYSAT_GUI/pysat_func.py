@@ -1,5 +1,6 @@
 from pysat.spectral.spectral_data import spectral_data
 from pysat.regression import regression
+from pysat.regression import cv
 from pysat.plotting.plots import scatterplot, pca_ica_plot
 import pandas as pd
 from PYSAT_UI_MODULES.Error_ import error_print
@@ -81,7 +82,7 @@ class pysat_func(QThread):
             print('Loading data file: ' + str(filename))
             self.data[keyname] = spectral_data(pd.read_csv(filename, header=[0, 1]))
             self.datakeys.append(keyname)
-
+            pass
         except Exception as e:
             error_print('Problem reading data: {}'.format(e))
 
@@ -150,6 +151,17 @@ class pysat_func(QThread):
 
         except Exception as e:
             error_print(e)
+          
+    def do_cv_train(self, datakey, xvars, yvars, method, params):
+        
+        try:
+            
+            cv_obj=cv.cv(params)
+            self.data[datakey].df,self.cv_results=cv_obj.do_cv(self.data[datakey].df,xcols=xvars,ycol=yvars)
+            
+        except Exception as e:
+            error_print(e)
+            
 
     def do_regression_predict(self, datakey, modelkey, predictname):
         try:
@@ -163,10 +175,10 @@ class pysat_func(QThread):
                        figfile=None, xrange=None,
                        yrange=None, xtitle='Reference (wt.%)',
                        ytitle='Prediction (wt.%)', title=None,
-                       lbls=None, one_to_one=False,
-                       dpi=1000, colors=None,
-                       annot_mask=None, alpha=0.4,
-                       cmap=None, colortitle='', figname=None
+                       lbl=None, one_to_one=False,
+                       dpi=1000, color=None,
+                       annot_mask=None,
+                       cmap=None, colortitle='', figname=None,masklabel=''
                        ):
 
         x = [self.data[datakey].df[xvar]]
@@ -177,15 +189,22 @@ class pysat_func(QThread):
             loadfig = None
             # outpath=self.outpath
         try:
+            # Alpha is missing, fix this!
             outpath = self.outpath
             self.figs[figname] = scatterplot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
                                              ytitle=ytitle, title=title,
-                                             lbls=lbls, one_to_one=one_to_one, dpi=dpi, colors=colors,
+                                             lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
                                              annot_mask=annot_mask, alpha=alpha, cmap=cmap,
                                              colortitle=colortitle, loadfig=loadfig)
         except Exception as e:
             error_print(e)
-
+            # dealing with the a possibly missing outpath
+            outpath='./'
+            self.figs[figname] = scatterplot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
+                                         ytitle=ytitle, title=title,
+                                         lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
+                                         annot_mask=annot_mask, cmap=cmap,
+                                         colortitle=colortitle, loadfig=loadfig)
     def do_lineplot(self, datakey, x, y, xrange=None, yrange=None, xtitle='', ytitle='', title=None,
                     lbls=None, figpath=None, figfile=None, dpi=1000, colors=None, alphas=None, loadfig=None):
         pass
@@ -207,7 +226,7 @@ class pysat_func(QThread):
     def run(self):
         # TODO this function will take all the enumerated functions and parameters and run them
         for i in range(self.leftOff, len(self.fun_list)):
-            print(i)
+            print(self.fun_list[i])
             self.fun_list[i](*self.arg_list[i], **self.kw_list[i])
             self.leftOff = i + 1
 

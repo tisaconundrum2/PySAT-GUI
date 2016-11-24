@@ -12,3 +12,7 @@ from PYSAT_UI_MODULES.normalization_ import *
 from PYSAT_UI_MODULES.Error_ import *
 from PYSAT_UI_MODULES.scatterplot_ import *
 from PYSAT_UI_MODULES.progress_bar_status_ import *
+<<<<<<< HEAD
+=======
+from PYSAT_UI_MODULES.cv_ import *
+>>>>>>> c814dd3c0a73f79492fcaaaf47ae3c5dca340dbb
