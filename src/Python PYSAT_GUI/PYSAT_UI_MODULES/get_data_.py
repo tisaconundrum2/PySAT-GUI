@@ -122,5 +122,4 @@ class get_data_k_:
         
         self.pysat_fun.set_arg_list([filename, key])
         self.pysat_fun.set_kw_list({})
-        self.get_data_k.setDisabled(True)
         return True

@@ -109,24 +109,24 @@ QGroupBox::title {
              <item>
               <layout class="QHBoxLayout" name="ranges_layout">
                <item>
-                <widget class="QLabel" name="min_label_2">
+                <widget class="QLabel" name="min_label">
                  <property name="text">
                   <string>Min</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QLineEdit" name="min_lineEdit_2"/>
+                <widget class="QLineEdit" name="min_lineEdit"/>
                </item>
                <item>
-                <widget class="QLabel" name="max_label_2">
+                <widget class="QLabel" name="max_label">
                  <property name="text">
                   <string>Max</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QLineEdit" name="max_lineEdit_2"/>
+                <widget class="QLineEdit" name="max_lineEdit"/>
                </item>
               </layout>
              </item>
