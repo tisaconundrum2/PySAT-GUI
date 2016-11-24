@@ -49,7 +49,7 @@ class scatterplot_:
         lbls = self.legend_label_text.text()
         one_to_one = self.onetoone.isChecked()
         figfile = self.file_text.text()
-        colors = self.color_choices.currentText()
+        colors = [self.color_choices.currentText()]
         args = [datakey, xvar, yvar]
         kws = {'figname': figname,
                'title': title,
@@ -270,7 +270,7 @@ class scatterplot_:
         self.scatter_choosedata.activated[int].connect(lambda: self.scatter_change_vars(self.yvar_choices))
         self.yvar_choices.activated[int].connect(
             lambda: self.get_minmax(self.ymin_spin, self.ymax_spin, self.yvar_choices.currentText()))
-
+        self.color_choices.activated.connect(lambda: self.get_scatterplot_parameters())
         for name, obj in inspect.getmembers(self):
             if isinstance(obj, QtGui.QComboBox):
                 obj.currentIndexChanged.connect(lambda: self.get_scatterplot_parameters())

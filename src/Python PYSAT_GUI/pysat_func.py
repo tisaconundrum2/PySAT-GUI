@@ -157,9 +157,8 @@ class pysat_func(QThread):
         try:
             
             cv_obj=cv.cv(params)
-            self.data[datakey].df,cv_output=cv_obj.do_cv(self.data[datakey].df,xcols=xvars,ycol=yvars)
-            print(cv_output)
-            pass
+            self.data[datakey].df,cv_results=cv_obj.do_cv(self.data[datakey].df,xcols=xvars,ycol=yvars)
+            self.data['CV Results'].df=cv_results
             #self.models[modelkey] = regression.regression([method], [params], i=0, ransacparams=[ransacparams])
             #self.modelkeys.append(modelkey)
             #self.models[modelkey].fit(self.data[datakey].df[xvars], self.data[datakey].df[yvars])
