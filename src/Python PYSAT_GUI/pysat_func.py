@@ -157,13 +157,8 @@ class pysat_func(QThread):
         try:
             
             cv_obj=cv.cv(params)
-            self.data[datakey].df,cv_results=cv_obj.do_cv(self.data[datakey].df,xcols=xvars,ycol=yvars)
-            self.data['CV Results'].df=cv_results
-            #self.models[modelkey] = regression.regression([method], [params], i=0, ransacparams=[ransacparams])
-            #self.modelkeys.append(modelkey)
-            #self.models[modelkey].fit(self.data[datakey].df[xvars], self.data[datakey].df[yvars])
-            #self.model_xvars[modelkey] = xvars
-
+            self.data[datakey].df,self.cv_results=cv_obj.do_cv(self.data[datakey].df,xcols=xvars,ycol=yvars)
+            
         except Exception as e:
             error_print(e)
             
@@ -180,10 +175,10 @@ class pysat_func(QThread):
                        figfile=None, xrange=None,
                        yrange=None, xtitle='Reference (wt.%)',
                        ytitle='Prediction (wt.%)', title=None,
-                       lbls=None, one_to_one=False,
-                       dpi=1000, colors=None,
-                       annot_mask=None, alpha=0.4,
-                       cmap=None, colortitle='', figname=None
+                       lbl=None, one_to_one=False,
+                       dpi=1000, color=None,
+                       annot_mask=None,
+                       cmap=None, colortitle='', figname=None,masklabel=''
                        ):
 
         x = [self.data[datakey].df[xvar]]
@@ -199,8 +194,8 @@ class pysat_func(QThread):
             outpath='./'
         self.figs[figname] = scatterplot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
                                          ytitle=ytitle, title=title,
-                                         lbls=lbls, one_to_one=one_to_one, dpi=dpi, colors=colors,
-                                         annot_mask=annot_mask, alpha=alpha, cmap=cmap,
+                                         lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
+                                         annot_mask=annot_mask, cmap=cmap,
                                          colortitle=colortitle, loadfig=loadfig)
 
     def do_lineplot(self, datakey, x, y, xrange=None, yrange=None, xtitle='', ytitle='', title=None,

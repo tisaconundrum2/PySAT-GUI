@@ -37,19 +37,37 @@ class scatterplot_:
         datakey = self.scatter_choosedata.currentText()
         xvar = self.xvar_choices.currentText()
         yvar = self.yvar_choices.currentText()
-
-        xvar = (self.vars_level0[self.vars_level1.index(xvar)], xvar)
-        yvar = (self.vars_level0[self.vars_level1.index(yvar)], yvar)
+        try:
+            xvar = (self.vars_level0[self.vars_level1.index(xvar)], xvar)
+            yvar = (self.vars_level0[self.vars_level1.index(yvar)], yvar)
+        except:
+            pass
         figname = self.figname_text.text()
         title = self.plot_title_text.text()
-        xrange = [self.xmin_spin.value(), self.xmax_spin.value()]
-        yrange = [self.ymin_spin.value(), self.ymax_spin.value()]
+        xrange = self.xmin_spin.value(), self.xmax_spin.value()
+        yrange = self.ymin_spin.value(), self.ymax_spin.value()
         xtitle = self.xtitle_text.text()
         ytitle = self.ytitle_text.text()
-        lbls = self.legend_label_text.text()
+        lbl = self.legend_label_text.text()
         one_to_one = self.onetoone.isChecked()
         figfile = self.file_text.text()
-        colors = [self.color_choices.currentText()]
+        
+        color = self.color_choices.currentText()
+        if color=='Red':
+            color=[1,0,0,0.2]
+        if color=='Green':
+            color=[0,1,0,0.2]
+        if color=='Blue':
+            color=[0,0,1,0.2]
+        if color=='Cyan':
+            color=[0,1,1,0.2]
+        if color=='Yellow':
+            color=[1,1,0,0.2]
+        if color=='Magenta':
+            color=[1,0,1,0.2]
+        if color=='Black':
+            color=[0,0,0,0.2]
+        print(color)
         args = [datakey, xvar, yvar]
         kws = {'figname': figname,
                'title': title,
@@ -57,10 +75,10 @@ class scatterplot_:
                'yrange': yrange,
                'xtitle': xtitle,
                'ytitle': ytitle,
-               'lbls': lbls,
+               'lbl': lbl,
                'one_to_one': one_to_one,
                'figfile': figfile,
-               'colors': colors,
+               'color': color,
                }
         self.pysat_fun.set_arg_list(args, replacelast=True)
         self.pysat_fun.set_kw_list(kws, replacelast=True)
