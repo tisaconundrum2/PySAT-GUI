@@ -53,20 +53,22 @@ class plot_:
         figfile = self.file_text.text()
         
         color = self.color_choices.currentText()
+        alpha=self.alpha_spin.value()    
+
         if color=='Red':
-            color=[1,0,0,0.2]
+            color=[1,0,0,alpha]
         if color=='Green':
-            color=[0,1,0,0.2]
+            color=[0,1,0,alpha]
         if color=='Blue':
-            color=[0,0,1,0.2]
+            color=[0,0,1,alpha]
         if color=='Cyan':
-            color=[0,1,1,0.2]
+            color=[0,1,1,alpha]
         if color=='Yellow':
-            color=[1,1,0,0.2]
+            color=[1,1,0,alpha]
         if color=='Magenta':
-            color=[1,0,1,0.2]
+            color=[1,0,1,alpha]
         if color=='Black':
-            color=[0,0,0,0.2]
+            color=[0,0,0,alpha]
 
         
         marker=self.marker_choices.currentText()        
@@ -96,6 +98,7 @@ class plot_:
         if line=='Dotted Line':
             linestyle=':'
             
+            
         args = [datakey, xvar, yvar]
         kws = {'figname': figname,
                'title': title,
@@ -118,19 +121,19 @@ class plot_:
         font = QtGui.QFont()
         font.setPointSize(10)
         self.plot.setFont(font)
-        self.plot.setObjectName(_fromUtf8("scatter"))
+        self.plot.setObjectName(_fromUtf8("plot"))
         self.plot_vlayout = QtGui.QVBoxLayout(self.plot)
         self.plot_vlayout.setMargin(11)
         self.plot_vlayout.setSpacing(6)
-        self.plot_vlayout.setObjectName(_fromUtf8("scatter_vlayout"))
+        self.plot_vlayout.setObjectName(_fromUtf8("plot_vlayout"))
 
         self.plot_choosedata_hlayout = QtGui.QHBoxLayout()
         self.plot_choosedata_hlayout.setMargin(11)
         self.plot_choosedata_hlayout.setSpacing(6)
-        self.plot_choosedata_hlayout.setObjectName(_fromUtf8("scatter_choosedata_hlayout"))
+        self.plot_choosedata_hlayout.setObjectName(_fromUtf8("plot_choosedata_hlayout"))
 
         self.plot_choosedata_label = QtGui.QLabel(self.plot)
-        self.plot_choosedata_label.setObjectName(_fromUtf8("scatter_choosedata_label"))
+        self.plot_choosedata_label.setObjectName(_fromUtf8("plot_choosedata_label"))
         self.plot_choosedata_label.setText('Choose data: ')
         self.plot_choosedata_hlayout.addWidget(self.plot_choosedata_label)
 
@@ -140,7 +143,7 @@ class plot_:
             datachoices = ['No data has been loaded!']
         self.plot_choosedata = make_combobox(datachoices)
         self.plot_choosedata.setIconSize(QtCore.QSize(50, 20))
-        self.plot_choosedata.setObjectName(_fromUtf8("scatter_choosedata"))
+        self.plot_choosedata.setObjectName(_fromUtf8("plot_choosedata"))
         self.plot_choosedata_hlayout.addWidget(self.plot_choosedata)
 
         self.figname_label = QtGui.QLabel(self.plot)
@@ -278,14 +281,11 @@ class plot_:
         self.onetoone.setText('One to One')
         self.legend_hlayout.addWidget(self.onetoone)
         self.plot_vlayout.addLayout(self.legend_hlayout)
-        self.plot_color_file_hlayout = QtGui.QHBoxLayout()
-        self.plot_color_file_hlayout.setMargin(11)
-        self.plot_color_file_hlayout.setSpacing(6)
-        self.plot_color_file_hlayout.setObjectName(_fromUtf8("plot_color_file_hlayout"))
-        self.color_label = QtGui.QLabel(self.plot)
-        self.color_label.setObjectName(_fromUtf8("color_label"))
-        self.color_label.setText('Color: ')
-        self.plot_color_file_hlayout.addWidget(self.color_label)
+        
+        self.plot_appearance_options = QtGui.QHBoxLayout()
+        self.plot_appearance_options.setMargin(11)
+        self.plot_appearance_options.setSpacing(6)
+        self.plot_appearance_options.setObjectName(_fromUtf8("plot_appearance_options"))
         self.color_choices = QtGui.QComboBox(self.plot)
         self.color_choices.setIconSize(QtCore.QSize(50, 20))
         self.color_choices.setObjectName(_fromUtf8("color_choices"))
@@ -296,7 +296,7 @@ class plot_:
         self.color_choices.addItem(_fromUtf8("Yellow"))
         self.color_choices.addItem(_fromUtf8("Magenta"))
         self.color_choices.addItem(_fromUtf8("Black"))
-        self.plot_color_file_hlayout.addWidget(self.color_choices)
+        self.plot_appearance_options.addWidget(self.color_choices)
         self.line_choices = QtGui.QComboBox(self.plot)
         self.line_choices.setIconSize(QtCore.QSize(50, 20))
         self.line_choices.setObjectName(_fromUtf8("line_choices"))
@@ -304,7 +304,8 @@ class plot_:
         self.line_choices.addItem(_fromUtf8("Line"))
         self.line_choices.addItem(_fromUtf8("Dashed Line"))
         self.line_choices.addItem(_fromUtf8("Dotted Line"))
-        self.plot_color_file_hlayout.addWidget(self.line_choices)
+        self.plot_appearance_options.addWidget(self.line_choices)
+        
         self.marker_choices = QtGui.QComboBox(self.plot)
         self.marker_choices.setIconSize(QtCore.QSize(50, 20))
         self.marker_choices.setObjectName(_fromUtf8("marker_choices"))
@@ -316,22 +317,40 @@ class plot_:
         self.marker_choices.addItem(_fromUtf8("Triangle Left"))
         self.marker_choices.addItem(_fromUtf8("Triangle Right"))
         self.marker_choices.addItem(_fromUtf8("None"))
+        self.plot_appearance_options.addWidget(self.marker_choices)
+        
+                
+        self.alpha_label = QtGui.QLabel(self.plot)
+        self.alpha_label.setObjectName(_fromUtf8("alpha_label"))
+        self.alpha_label.setText('Alpha: ')
+        self.plot_appearance_options.addWidget(self.alpha_label)
 
-        self.plot_color_file_hlayout.addWidget(self.marker_choices)
-        #TODO: Make spinbox to choose alpha
+        self.alpha_spin = QtGui.QDoubleSpinBox(self.plot)
+        self.alpha_spin.setObjectName(_fromUtf8("alpha_spin"))
+        self.alpha_spin.setRange(0, 1)
+        self.alpha_spin.setValue(0.5)
+        self.alpha_spin.setSingleStep(0.1)
+        self.plot_appearance_options.addWidget(self.alpha_spin)
+
+        
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.plot_appearance_options.addItem(spacerItem)
+        self.plot_vlayout.addLayout(self.plot_appearance_options)
+        
+        self.file_hlayout = QtGui.QHBoxLayout()
 
         self.file_label = QtGui.QLabel(self.plot)
         self.file_label.setObjectName(_fromUtf8("file_label"))
         self.file_label.setText('Plot filename: ')
-        self.plot_color_file_hlayout.addWidget(self.file_label)
+        self.file_hlayout.addWidget(self.file_label)
         self.file_text = QtGui.QLineEdit(self.plot)
         self.file_text.setObjectName(_fromUtf8("file_text"))
-        self.plot_color_file_hlayout.addWidget(self.file_text)
-        
+        self.file_hlayout.addWidget(self.file_text)
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.plot_color_file_hlayout.addItem(spacerItem)
-        self.plot_vlayout.addLayout(self.plot_color_file_hlayout)
-
+        self.file_hlayout.addItem(spacerItem)
+                
+        self.plot_vlayout.addLayout(self.file_hlayout)
+        
         self.verticalLayout_8.addWidget(self.plot)
         self.plot.raise_()
         self.plot.setTitle(_translate("plot", "Plot", None))
@@ -370,7 +389,7 @@ class plot_:
                 #        self.color_choices.currentIndexChanged.connect(lambda: self.get_plot_parameters())
                 #        self.file_text.textChanged.connect(lambda: self.get_plot_parameters())
 
-    def scatter_change_vars(self, obj):
+    def plot_change_vars(self, obj):
         obj.clear()
         choices = self.pysat_fun.data[self.plot_choosedata.currentText()].df[['meta', 'comp']].columns.values
         for i in choices:        

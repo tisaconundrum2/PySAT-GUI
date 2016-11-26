@@ -9,6 +9,6 @@ from PYSAT_UI_MODULES.regression_predict_ import *
 from PYSAT_UI_MODULES.strat_folds_ import *
 from PYSAT_UI_MODULES.normalization_ import *
 from PYSAT_UI_MODULES.Error_ import *
-from PYSAT_UI_MODULES.scatterplot_ import *
+from PYSAT_UI_MODULES.plot_ import *
 from PYSAT_UI_MODULES.progress_bar_status_ import *
 from PYSAT_UI_MODULES.cv_ import *

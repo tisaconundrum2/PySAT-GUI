@@ -158,7 +158,7 @@ class pysat_func(QThread):
             
             cv_obj=cv.cv(params)
             self.data[datakey].df,self.cv_results=cv_obj.do_cv(self.data[datakey].df,xcols=xvars,ycol=yvars)
-            
+            self.data['CV Results'].df=self.cv_results
         except Exception as e:
             error_print(e)
             
