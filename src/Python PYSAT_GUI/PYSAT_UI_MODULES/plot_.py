@@ -174,11 +174,15 @@ class plot_:
         self.plot_choosex_label.setObjectName(_fromUtf8("plot_choosex_label"))
         self.plot_choosex_label.setText('Choose X variable: ')
         self.plot_choosex_vlayout.addWidget(self.plot_choosex_label)
-        self.vars_level0 = self.pysat_fun.data[self.plot_choosedata.currentText()].df.columns.get_level_values(0)
-        self.vars_level1 = self.pysat_fun.data[self.plot_choosedata.currentText()].df.columns.get_level_values(1)
-        self.vars_level1 = list(self.vars_level1[self.vars_level0 != 'wvl'])
-        self.vars_level0 = list(self.vars_level0[self.vars_level0 != 'wvl'])
-        xvarchoices = self.vars_level1
+        try:
+            self.vars_level0 = self.pysat_fun.data[self.plot_choosedata.currentText()].df.columns.get_level_values(0)
+            self.vars_level1 = self.pysat_fun.data[self.plot_choosedata.currentText()].df.columns.get_level_values(1)
+            self.vars_level1 = list(self.vars_level1[self.vars_level0 != 'wvl'])
+            self.vars_level0 = list(self.vars_level0[self.vars_level0 != 'wvl'])
+
+            xvarchoices = self.vars_level1
+        except:
+            xvarchoices = self.pysat_fun.data[self.plot_choosedata.currentText()].columns.values
         self.xvar_choices = make_combobox(xvarchoices)
         self.xvar_choices.SizeAdjustPolicy(0)
         self.plot_choosex_vlayout.addWidget(self.xvar_choices)
@@ -356,6 +360,9 @@ class plot_:
         self.plot.setTitle(_translate("plot", "Plot", None))
 
         self.plot_choosedata.activated[int].connect(lambda: self.plot_change_vars(self.xvar_choices))
+
+        self.get_minmax(self.xmin_spin, self.xmax_spin, self.xvar_choices.currentText())
+        self.get_minmax(self.ymin_spin, self.ymax_spin, self.yvar_choices.currentText())
         self.xvar_choices.activated[int].connect(
             lambda: self.get_minmax(self.xmin_spin, self.xmax_spin, self.xvar_choices.currentText()))
         self.plot_choosedata.activated[int].connect(lambda: self.plot_change_vars(self.yvar_choices))
@@ -391,14 +398,24 @@ class plot_:
 
     def plot_change_vars(self, obj):
         obj.clear()
-        choices = self.pysat_fun.data[self.plot_choosedata.currentText()].df[['meta', 'comp']].columns.values
-        for i in choices:        
-            obj.addItem(i[1])
+        try:
+            choices = self.pysat_fun.data[self.plot_choosedata.currentText()].df[['meta', 'comp']].columns.values
+            for i in choices:
+                obj.addItem(i[1])
+        except:
+            choices=self.pysat_fun.data[self.plot_choosedata.currentText()].columns.values
+            for i in choices:
+                obj.addItem(i)
+
 
     def get_minmax(self, objmin, objmax, var):
-        varind = self.vars_level1.index(var)
-        vartuple = (self.vars_level0[varind], self.vars_level1[varind])
-        vardata = self.pysat_fun.data[self.plot_choosedata.currentText()].df[vartuple]
+        try:
+            varind = self.vars_level1.index(var)
+            vartuple = (self.vars_level0[varind], self.vars_level1[varind])
+            vardata = self.pysat_fun.data[self.plot_choosedata.currentText()].df[vartuple]
+
+        except:
+            vardata=self.pysat_fun.data[self.plot_choosedata.currentText()][var]
         varmin = np.min(vardata)
         varmax = np.max(vardata)
         objmin.setValue(varmin)

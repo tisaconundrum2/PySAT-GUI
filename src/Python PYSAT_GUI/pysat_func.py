@@ -158,7 +158,8 @@ class pysat_func(QThread):
             
             cv_obj=cv.cv(params)
             self.data[datakey].df,self.cv_results=cv_obj.do_cv(self.data[datakey].df,xcols=xvars,ycol=yvars)
-            self.data['CV Results'].df=self.cv_results
+            self.data['CV Results']=self.cv_results
+            print(self.data['CV Results'].df)
         except Exception as e:
             error_print(e)
             
@@ -182,8 +183,12 @@ class pysat_func(QThread):
                        marker='o',linestyle='None'
                        ):
 
-        x = self.data[datakey].df[xvar]
-        y = self.data[datakey].df[yvar]
+        try:
+            x = self.data[datakey].df[xvar]
+            y = self.data[datakey].df[yvar]
+        except:
+            x=self.data[datakey][xvar]
+            y=self.data[datakey][yvar]
         try:
             loadfig = self.figs[figname]
         except:
@@ -198,10 +203,6 @@ class pysat_func(QThread):
                                          lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
                                          annot_mask=annot_mask, cmap=cmap,
                                          colortitle=colortitle, loadfig=loadfig,marker=marker,linestyle=linestyle)
-
-    def do_lineplot(self, datakey, x, y, xrange=None, yrange=None, xtitle='', ytitle='', title=None,
-                    lbls=None, figpath=None, figfile=None, dpi=1000, colors=None, alphas=None, loadfig=None):
-        pass
 
     def do_pca_ica_plot(self, datakey,
                         x_component,
