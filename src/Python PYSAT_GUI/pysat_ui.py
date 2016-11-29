@@ -221,12 +221,8 @@ class pysat_ui(object):
         self.actionTrain.setObjectName(_fromUtf8("actionTrain"))
         self.actionPredict = QtGui.QAction(MainWindow)
         self.actionPredict.setObjectName(_fromUtf8("actionPredict"))
-        self.actionLine_Plot = QtGui.QAction(MainWindow)
-        self.actionLine_Plot.setObjectName(_fromUtf8("actionLine_Plot"))
-        self.action1_to_1_Plot = QtGui.QAction(MainWindow)
-        self.action1_to_1_Plot.setObjectName(_fromUtf8("action1_to_1_Plot"))
-        self.actionScatter_Plot = QtGui.QAction(MainWindow)
-        self.actionScatter_Plot.setObjectName(_fromUtf8("actionScatter_Plot"))
+        self.actionPlot = QtGui.QAction(MainWindow)
+        self.actionPlot.setObjectName(_fromUtf8("actionPlot"))
         self.actionSet_output_location = QtGui.QAction(MainWindow)
         self.actionSet_output_location.setObjectName(_fromUtf8("actionSet_output_location"))
         self.actionCreate_N_Folds = QtGui.QAction(MainWindow)
@@ -287,9 +283,7 @@ class pysat_ui(object):
         self.menuClustering.addAction(self.actionHierarchical_2)
         self.menuClassification.addAction(self.menuSupervised.menuAction())
         self.menuClassification.addAction(self.menuClustering.menuAction())
-        self.menuVisualization.addAction(self.actionLine_Plot)
-        self.menuVisualization.addAction(self.action1_to_1_Plot)
-        self.menuVisualization.addAction(self.actionScatter_Plot)
+        self.menuVisualization.addAction(self.actionPlot)
         self.menuBar.addAction(self.menuFile.menuAction())
         self.menuBar.addAction(self.menuPreprocessing.menuAction())
         self.menuBar.addAction(self.menuClassification.menuAction())
@@ -364,9 +358,7 @@ class pysat_ui(object):
         self.actionCross_Validation.setText(_translate("MainWindow", "Cross Validation", None))
         self.actionTrain.setText(_translate("MainWindow", "Train", None))
         self.actionPredict.setText(_translate("MainWindow", "Predict", None))
-        self.actionLine_Plot.setText(_translate("MainWindow", "Line Plot", None))
-        self.action1_to_1_Plot.setText(_translate("MainWindow", "1 to 1 Plot", None))
-        self.actionScatter_Plot.setText(_translate("MainWindow", "Scatter Plot", None))
+        self.actionPlot.setText(_translate("MainWindow", "Plot", None))
         self.actionSet_output_location.setText(_translate("MainWindow", "Output Location", None))
         self.actionCreate_N_Folds.setText(_translate("MainWindow", "Create N Folds", None))
         self.actionStratified_Folds.setText(_translate("MainWindow", "Stratified Folds", None))
@@ -396,8 +388,11 @@ class pysat_ui(object):
     def do_regression_predict(self):
         PYSAT_UI_MODULES.regression_predict_(self.pysat_fun, self.verticalLayout_8)
 
-    def do_scatter_plot(self):
-        PYSAT_UI_MODULES.scatterplot_(self.pysat_fun, self.verticalLayout_8)
+    def do_plot(self):
+        PYSAT_UI_MODULES.plot_(self.pysat_fun, self.verticalLayout_8)
+
+    def do_cv(self):
+        PYSAT_UI_MODULES.cv_(self.pysat_fun, self.verticalLayout_8)
 
     def do_interp(self):
         PYSAT_UI_MODULES.interpolation_(self.pysat_fun, self.verticalLayout_8)
@@ -421,10 +416,11 @@ class pysat_ui(object):
         self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self))  # strat folds
         self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))  # regression train
         self.actionPredict.triggered.connect(lambda: pysat_ui.do_regression_predict(self))  # regression predict
-        self.actionScatter_Plot.triggered.connect(lambda: pysat_ui.do_scatter_plot(self))
         self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
         self.set_greyed_out_items(True)
-        self.set_visible_items() #Taking out menu items that don't have working UI modules yet. We don't want to delete them, so we'll make them disappear.
+        self.set_visible_items()  # Taking out menu items that don't have working UI modules yet. We don't want to delete them, so we'll make them disappear.
+        self.actionPlot.triggered.connect(lambda: pysat_ui.do_plot(self))
+        self.actionCross_Validation.triggered.connect(lambda: pysat_ui.do_cv(self))
 
     def set_greyed_out_items(self, bool):
         self.actionTrain.setDisabled(bool)
@@ -434,8 +430,8 @@ class pysat_ui(object):
         self.actionStratified_Folds.setDisabled(bool)
         self.actionTrain.setDisabled(bool)
         self.actionPredict.setDisabled(bool)
-        self.actionScatter_Plot.setDisabled(bool)
         self.actionInterpolate.setDisabled(bool)
+        self.actionPlot.setDisabled(bool)
 
     def set_visible_items(self):
         self.actionNoise_Reduction.setVisible(False)
@@ -448,9 +444,6 @@ class pysat_ui(object):
         self.actionPCA_2.setVisible(False)
         self.menuClassification.setTitle("")
         self.actionCross_Validation.setVisible(False)
-        self.actionLine_Plot.setVisible(False)
-        self.action1_to_1_Plot.setVisible(False)
-
 
     def handleMenuHovered(self, action):
         QtGui.QToolTip.showText(self, None, action, None)
@@ -469,15 +462,14 @@ class pysat_ui(object):
             self.onStart()
             self.pysat_fun.taskFinished.connect(self.onFinished)
 
-    def onStart(self):                                              # onStart function
-        self.progressBar.setRange(0, 0)                             # make the bar pulse green
-        self.pysat_fun.start()                                      # TaskThread.start()
-                                                                    # This is multithreading thus run() == start()
+    def onStart(self):  # onStart function
+        self.progressBar.setRange(0, 0)  # make the bar pulse green
+        self.pysat_fun.start()  # TaskThread.start()
+        # This is multithreading thus run() == start()
 
-    def onFinished(self):                                           # onFinished function
-        self.progressBar.setRange(0,1)                              # stop the bar pulsing green
-        self.progressBar.setValue(1)                                # displays 100% after process is finished.
-
+    def onFinished(self):  # onFinished function
+        self.progressBar.setRange(0, 1)  # stop the bar pulsing green
+        self.progressBar.setValue(1)  # displays 100% after process is finished.
 
 
 def make_combobox(choices):
@@ -487,4 +479,3 @@ def make_combobox(choices):
         combo.setItemText(i, _translate('', choice, None))
 
     return combo
-
