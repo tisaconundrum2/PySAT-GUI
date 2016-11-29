@@ -181,8 +181,11 @@ class plot_:
             self.vars_level0 = list(self.vars_level0[self.vars_level0 != 'wvl'])
 
             xvarchoices = self.vars_level1
+            pass
         except:
             xvarchoices = self.pysat_fun.data[self.plot_choosedata.currentText()].columns.values
+        xvarchoices = [i for i in xvarchoices if not 'Unnamed' in i] #remove unnamed columns from choices
+
         self.xvar_choices = make_combobox(xvarchoices)
         self.xvar_choices.SizeAdjustPolicy(0)
         self.plot_choosex_vlayout.addWidget(self.xvar_choices)
@@ -361,8 +364,11 @@ class plot_:
 
         self.plot_choosedata.activated[int].connect(lambda: self.plot_change_vars(self.xvar_choices))
 
-        self.get_minmax(self.xmin_spin, self.xmax_spin, self.xvar_choices.currentText())
-        self.get_minmax(self.ymin_spin, self.ymax_spin, self.yvar_choices.currentText())
+        self.plot_choosedata.activated[int].connect(
+            lambda: self.get_minmax(self.xmin_spin, self.xmax_spin, self.xvar_choices.currentText()))
+        self.plot_choosedata.activated[int].connect(
+            lambda: self.get_minmax(self.ymin_spin, self.ymax_spin, self.yvar_choices.currentText()))
+
         self.xvar_choices.activated[int].connect(
             lambda: self.get_minmax(self.xmin_spin, self.xmax_spin, self.xvar_choices.currentText()))
         self.plot_choosedata.activated[int].connect(lambda: self.plot_change_vars(self.yvar_choices))
@@ -403,10 +409,12 @@ class plot_:
             for i in choices:
                 obj.addItem(i[1])
         except:
-            choices=self.pysat_fun.data[self.plot_choosedata.currentText()].columns.values
-            for i in choices:
-                obj.addItem(i)
-
+            try:
+                choices=self.pysat_fun.data[self.plot_choosedata.currentText()].columns.values
+                for i in choices:
+                    obj.addItem(i)
+            except:
+                choices=['No valid choices']
 
     def get_minmax(self, objmin, objmax, var):
         try:
@@ -415,7 +423,10 @@ class plot_:
             vardata = self.pysat_fun.data[self.plot_choosedata.currentText()].df[vartuple]
 
         except:
-            vardata=self.pysat_fun.data[self.plot_choosedata.currentText()][var]
+            try:
+                vardata=self.pysat_fun.data[self.plot_choosedata.currentText()][var]
+            except:
+                vardata=[0,0]
         varmin = np.min(vardata)
         varmax = np.max(vardata)
         objmin.setValue(varmin)

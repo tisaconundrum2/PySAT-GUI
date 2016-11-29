@@ -114,6 +114,7 @@ class pysat_ui(object):
         self.menuVisualization = QtGui.QMenu(self.menuBar)
         self.menuVisualization.setObjectName(_fromUtf8("menuVisualization"))
         MainWindow.setMenuBar(self.menuBar)
+
         self.actionLoad_reference_Data = QtGui.QAction(MainWindow)
         self.actionLoad_reference_Data.setObjectName(_fromUtf8("actionLoad_reference_Data"))
         self.actionLoad_Unknown_Data = QtGui.QAction(MainWindow)
@@ -128,6 +129,9 @@ class pysat_ui(object):
         self.actionCreate_New_Workflow.setObjectName(_fromUtf8("actionCreate_New_Workflow"))
         self.actionNoise_Reduction = QtGui.QAction(MainWindow)
         self.actionNoise_Reduction.setObjectName(_fromUtf8("actionNoise_Reduction"))
+        self.actionRemoveNull = QtGui.QAction(MainWindow)
+        self.actionRemoveNull.setObjectName(_fromUtf8("actionRemoveNull"))
+
         self.actionApply_Mask = QtGui.QAction(MainWindow)
         self.actionApply_Mask.setObjectName(_fromUtf8("actionApply_Mask"))
         self.actionInterpolate = QtGui.QAction(MainWindow)
@@ -261,6 +265,7 @@ class pysat_ui(object):
         self.menuPreprocessing.addAction(self.actionNormalization)
         self.menuPreprocessing.addAction(self.actionNoise_Reduction)
         self.menuPreprocessing.addAction(self.actionApply_Mask)
+        self.menuPreprocessing.addAction(self.actionRemoveNull)
         self.menuPreprocessing.addAction(self.actionInterpolate)
         self.menuPreprocessing.addAction(self.actionInstrument_Response)
         self.menuPreprocessing.addAction(self.menuBaseline_Removal.menuAction())
@@ -312,6 +317,7 @@ class pysat_ui(object):
         self.actionCreate_New_Workflow.setText(_translate("MainWindow", "Create New Workflow", None))
         self.actionNoise_Reduction.setText(_translate("MainWindow", "Noise Reduction", None))
         self.actionApply_Mask.setText(_translate("MainWindow", "Apply Mask", None))
+        self.actionRemoveNull.setText(_translate("MainWindow", "Remove Null Data", None))
         self.actionInterpolate.setText(_translate("MainWindow", "Interpolate (unknown to known)", None))
         self.actionInstrument_Response.setText(_translate("MainWindow", "Instrument Response", None))
         self.actionALS.setText(_translate("MainWindow", "ALS", None))
@@ -376,6 +382,9 @@ class pysat_ui(object):
     def do_mask(self):
         PYSAT_UI_MODULES.get_mask_(self.pysat_fun, self.verticalLayout_8)
 
+    def do_removenull(self):
+        PYSAT_UI_MODULES.removenull_(self.pysat_fun,self.verticalLayout_8)
+
     def normalization(self):
         PYSAT_UI_MODULES.normalization_(self.pysat_fun, self.verticalLayout_8)
 
@@ -409,6 +418,7 @@ class pysat_ui(object):
         self.actionLoad_reference_Data.triggered.connect(lambda: pysat_ui.get_known_data(self))  # known data
         self.actionNormalization.triggered.connect(lambda: pysat_ui.normalization(self))  # submodel
         self.actionApply_Mask.triggered.connect(lambda: pysat_ui.do_mask(self))  # get_mask
+        self.actionRemoveNull.triggered.connect(lambda: pysat_ui.do_removenull(self))
         self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self))  # strat folds
         self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))  # regression train
         self.actionPredict.triggered.connect(lambda: pysat_ui.do_regression_predict(self))  # regression predict

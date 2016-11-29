@@ -86,6 +86,15 @@ class pysat_func(QThread):
         except Exception as e:
             error_print('Problem reading data: {}'.format(e))
 
+    def removenull(self,datakey,colname):
+        try:
+            print(self.data[datakey].df.shape)
+            self.data[datakey]=spectral_data(self.data[datakey].df.ix[-self.data[datakey].df[colname].isnull()])
+            print(self.data[datakey].df.shape)
+
+        except Exception as e:
+            error_print(e)
+
     def do_mask(self, datakey, maskfile):
         try:
             self.data[datakey].mask(maskfile)
