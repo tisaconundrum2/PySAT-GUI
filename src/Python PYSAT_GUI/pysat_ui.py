@@ -421,6 +421,7 @@ class pysat_ui(object):
         self.set_visible_items()  # Taking out menu items that don't have working UI modules yet. We don't want to delete them, so we'll make them disappear.
         self.actionPlot.triggered.connect(lambda: pysat_ui.do_plot(self))
         self.actionCross_Validation.triggered.connect(lambda: pysat_ui.do_cv(self))
+        self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
 
     def set_greyed_out_items(self, bool):
         self.actionTrain.setDisabled(bool)

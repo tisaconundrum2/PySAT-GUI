@@ -10,6 +10,7 @@ from PyQt4 import QtCore
 
 class pysat_func(QThread):
     taskFinished = QtCore.pyqtSignal()
+
     def __init__(self):
         QThread.__init__(self)
         self.leftOff = 0
@@ -151,17 +152,16 @@ class pysat_func(QThread):
 
         except Exception as e:
             error_print(e)
-          
+
     def do_cv_train(self, datakey, xvars, yvars, method, params):
-        
+
         try:
-            
-            cv_obj=cv.cv(params)
-            self.data[datakey].df,self.cv_results=cv_obj.do_cv(self.data[datakey].df,xcols=xvars,ycol=yvars)
-            self.data['CV Results'].df=self.cv_results
+
+            cv_obj = cv.cv(params)
+            self.data[datakey].df, self.cv_results = cv_obj.do_cv(self.data[datakey].df, xcols=xvars, ycol=yvars)
+            self.data['CV Results'].df = self.cv_results
         except Exception as e:
             error_print(e)
-            
 
     def do_regression_predict(self, datakey, modelkey, predictname):
         try:
@@ -171,16 +171,16 @@ class pysat_func(QThread):
             error_print(e)
 
     def do_plot(self, datakey,
-                       xvar, yvar,
-                       figfile=None, xrange=None,
-                       yrange=None, xtitle='Reference (wt.%)',
-                       ytitle='Prediction (wt.%)', title=None,
-                       lbl=None, one_to_one=False,
-                       dpi=1000, color=None,
-                       annot_mask=None,
-                       cmap=None, colortitle='', figname=None,masklabel='',
-                       marker='o',linestyle='None'
-                       ):
+                xvar, yvar,
+                figfile=None, xrange=None,
+                yrange=None, xtitle='Reference (wt.%)',
+                ytitle='Prediction (wt.%)', title=None,
+                lbl=None, one_to_one=False,
+                dpi=1000, color=None,
+                annot_mask=None,
+                cmap=None, colortitle='', figname=None, masklabel='',
+                marker='o', linestyle='None'
+                ):
 
         x = self.data[datakey].df[xvar]
         y = self.data[datakey].df[yvar]
@@ -190,19 +190,22 @@ class pysat_func(QThread):
             loadfig = None
             # outpath=self.outpath
         try:
+            # Alpha is missing, fix this!
             outpath = self.outpath
-            self.figs[figname] = scatterplot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
+            self.figs[figname] = make_plot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
                                              ytitle=ytitle, title=title,
-                                             lbls=lbls, one_to_one=one_to_one, dpi=dpi, colors=colors,
+                                             lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
                                              annot_mask=annot_mask, alpha=alpha, cmap=cmap,
                                              colortitle=colortitle, loadfig=loadfig)
-        except:
-            outpath='./'
-        self.figs[figname] = make_plot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
-                                         ytitle=ytitle, title=title,
-                                         lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
-                                         annot_mask=annot_mask, cmap=cmap,
-                                         colortitle=colortitle, loadfig=loadfig,marker=marker,linestyle=linestyle)
+        except Exception as e:
+            error_print(e)
+            # dealing with the a possibly missing outpath
+            outpath = './'
+            self.figs[figname] = make_plot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
+                                             ytitle=ytitle, title=title,
+                                             lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
+                                             annot_mask=annot_mask, cmap=cmap,
+                                             colortitle=colortitle, loadfig=loadfig)
 
     def do_lineplot(self, datakey, x, y, xrange=None, yrange=None, xtitle='', ytitle='', title=None,
                     lbls=None, figpath=None, figfile=None, dpi=1000, colors=None, alphas=None, loadfig=None):
