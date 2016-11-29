@@ -31,6 +31,7 @@ class plot_:
         self.pysat_fun.set_arg_list([])
         self.pysat_fun.set_kw_list({})
         self.plot_ui()
+        self.pysat_fun.set_greyed_modules(self.plot)
 
     def get_plot_parameters(self):
 

@@ -26,6 +26,7 @@ class get_mask_:
     def main(self):
         self.pysat_fun.set_fun_list(self.pysat_fun.do_mask)
         self.get_mask_ui()
+        self.pysat_fun.set_greyed_modules(self.get_mask)
         try:
             self.get_mask_button.clicked.connect(
                 lambda: self.on_getDataButton_clicked(self.get_mask_line_edit, "known")

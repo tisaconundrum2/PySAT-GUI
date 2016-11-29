@@ -26,6 +26,7 @@ class get_data_u_:
     def main(self):
         self.pysat_fun.set_fun_list(self.pysat_fun.get_data)  # add this function to the pysat list to be run
         self.get_data_ui()  # initiate the UI
+        self.pysat_fun.set_greyed_modules(self.get_data_u)
         try:
             self.get_data_u_button.clicked.connect(
                 lambda: self.on_getDataButton_clicked(self.get_data_u_line_edit, "unknown"))  # when a button is clicked call the on_getDataButton_clicked function
@@ -79,6 +80,7 @@ class get_data_k_:
     def main(self):
         self.pysat_fun.set_fun_list(self.pysat_fun.get_data)  # add this function to the pysat list to be run
         self.get_data_ui()  # initiate the UI
+        self.pysat_fun.set_greyed_modules(self.get_data_k)
         try:
             self.get_data_k_button.clicked.connect(
                 lambda: self.on_getDataButton_clicked(self.get_data_k_line_edit, "known"))  # when a button is clicked call the on_getDataButton_clicked function

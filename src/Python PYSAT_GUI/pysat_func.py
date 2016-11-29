@@ -20,20 +20,15 @@ class pysat_func(QThread):
         self.modelkeys = []
         self.model_xvars = {}
         self.figs = {}
-        self.fignames = []
         self.fun_list = []
         self.arg_list = []
         self.kw_list = []
-        self.greyedItems = []
+        self.greyed_modules = []
 
     """
     Getter and setter functions below
     """
 
-    # TODO: combine these three functions into one, they're all doing the same thing!
-    # TODO>> Re: we don't want to do that, because we're only updating a single value
-    # TODO>> And good programming practices say that we should keep them separate,
-    # TODO>> this the geneal rule for getters and setters
     def set_fun_list(self, fun, replacelast=False):
         if replacelast:
             self.fun_list[-1] = fun
@@ -52,6 +47,12 @@ class pysat_func(QThread):
         else:
             self.kw_list.append(kws)
 
+    def set_greyed_modules(self, modules, replacelast=False):
+        if replacelast:
+            self.greyed_modules[-1] = modules
+        else:
+            self.greyed_modules.append(modules)
+
     def getDataKeys(self):
         return self.datakeys
 
@@ -63,9 +64,6 @@ class pysat_func(QThread):
 
     def getModels(self):
         return self.models
-
-    def set_grey_items(self, items):
-        self.greyedItems.append(items)
 
     """
     Work functions below
@@ -230,6 +228,7 @@ class pysat_func(QThread):
         for i in range(self.leftOff, len(self.fun_list)):
             print(self.fun_list[i])
             self.fun_list[i](*self.arg_list[i], **self.kw_list[i])
+            self.greyed_modules[i].setDisabled(True)
             self.leftOff = i + 1
 
         self.taskFinished.emit()

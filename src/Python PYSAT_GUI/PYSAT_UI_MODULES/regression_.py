@@ -30,6 +30,7 @@ class regression_:
         self.pysat_fun.set_arg_list([])
         self.pysat_fun.set_kw_list({})
         self.regression_ui()
+        self.pysat_fun.set_greyed_modules(self.regression_train)
         self.regression_ransac_checkbox.toggled.connect(
             lambda: self.make_ransac_widget(self.regression_ransac_checkbox.isChecked()))
         self.regression_choosealg.currentIndexChanged.connect(

@@ -62,6 +62,7 @@ class normalization_:
         # driver function, calls UI and set's up connections
         # add function list calls here
         self.normalization_ui()
+        self.pysat_fun.set_greyed_modules(self.normalization)
         self.add_ranges_button.clicked.connect(lambda: self.add_ranges())
         self.finish_button.clicked.connect(lambda: self.finished())
 

@@ -32,6 +32,7 @@ class strat_folds_:
         self.pysat_fun.set_arg_list([])
         self.pysat_fun.set_kw_list({})
         self.stratified_folds_ui()
+        self.pysat_fun.set_greyed_modules(self.strat_folds)
         
         # TODO add try and except here
 #        try:

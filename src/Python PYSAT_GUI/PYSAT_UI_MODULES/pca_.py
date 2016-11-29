@@ -28,6 +28,7 @@ class pca_:
         # TODO add try and except here
         self.pca_ui()
 
+
     def pca_ui(self):
         self.pca = QtGui.QGroupBox()
         font = QtGui.QFont()
