@@ -56,9 +56,11 @@ class normalization_:
         self.main()
 
     def main(self):
+        self.pysat_fun.set_arg_list({})
+        self.pysat_fun.set_kw_list({})
+        self.pysat_fun.set_fun_list(self.pysat_fun.do_norm)
         # driver function, calls UI and set's up connections
         # add function list calls here
-        self.pysat_fun.set_fun_list(self.pysat_fun.do_norm)
         self.normalization_ui()
         self.add_ranges_button.clicked.connect(lambda: self.add_ranges())
         self.finish_button.clicked.connect(lambda: self.finished())
@@ -144,8 +146,7 @@ class normalization_:
             except:
                 pass
         datakey = self.normalization_choosedata.currentText()
-        self.pysat_fun.set_arg_list([datakey, arg_list])
-        self.pysat_fun.set_kw_list({})
+        self.pysat_fun.set_arg_list([datakey, arg_list], True)
         print(self.pysat_fun.arg_list)
 
 
