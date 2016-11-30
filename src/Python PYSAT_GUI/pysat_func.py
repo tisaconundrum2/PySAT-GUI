@@ -193,17 +193,17 @@ class pysat_func(QThread):
             self.figs[figname] = make_plot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
                                              ytitle=ytitle, title=title,
                                              lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
-                                             annot_mask=annot_mask, alpha=alpha, cmap=cmap,
+                                             annot_mask=annot_mask, cmap=cmap,
                                              colortitle=colortitle, loadfig=loadfig)
         except Exception as e:
             error_print(e)
             # dealing with the a possibly missing outpath
             outpath = './'
             self.figs[figname] = make_plot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
-                                             ytitle=ytitle, title=title,
-                                             lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
-                                             annot_mask=annot_mask, cmap=cmap,
-                                             colortitle=colortitle, loadfig=loadfig)
+                                           ytitle=ytitle, title=title,
+                                           lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
+                                           annot_mask=annot_mask, cmap=cmap,
+                                           colortitle=colortitle, loadfig=loadfig)
 
     def do_lineplot(self, datakey, x, y, xrange=None, yrange=None, xtitle='', ytitle='', title=None,
                     lbls=None, figpath=None, figfile=None, dpi=1000, colors=None, alphas=None, loadfig=None):

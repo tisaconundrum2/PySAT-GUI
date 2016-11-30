@@ -444,7 +444,6 @@ class pysat_ui(object):
         self.actionICA_2.setVisible(False)
         self.actionPCA_2.setVisible(False)
         self.menuClassification.setTitle("")
-        self.actionCross_Validation.setVisible(False)
 
     def handleMenuHovered(self, action):
         QtGui.QToolTip.showText(self, None, action, None)
@@ -462,6 +461,7 @@ class pysat_ui(object):
             self.set_greyed_out_items(False)
             self.onStart()
             self.pysat_fun.taskFinished.connect(self.onFinished)
+
 
     def onStart(self):  # onStart function
         self.progressBar.setRange(0, 0)  # make the bar pulse green

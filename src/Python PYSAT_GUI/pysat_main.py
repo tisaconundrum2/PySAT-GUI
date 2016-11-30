@@ -22,7 +22,6 @@ class Main(QMainWindow):
     def new(self):
         # TODO create a new window to work in. The old window does not disappear
         window = Main(self)
-        window.show()
         window.exec_()
 
     def exit(self):
@@ -37,7 +36,7 @@ if __name__ == "__main__":
     splash = QSplashScreen(splash_pix, Qt.WindowStaysOnTopHint)
     splash.setMask(splash_pix.mask())
     splash.show()
-    time.sleep(1.3)
+    time.sleep(1)
     app.processEvents()
 
     main_window = Main()
