@@ -1,4 +1,5 @@
 from PyQt4 import QtCore, QtGui
+from pysat.utils.gui_utils import make_combobox
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -25,13 +26,18 @@ class get_mask_:
 
     def main(self):
         self.pysat_fun.set_fun_list(self.pysat_fun.do_mask)
+        self.pysat_fun.set_arg_list([])
+        self.pysat_fun.set_kw_list({})
         self.get_mask_ui()
-        try:
-            self.get_mask_button.clicked.connect(
-                lambda: self.on_getDataButton_clicked(self.get_mask_line_edit, "known")
-            )
-        except:
-            pass
+
+
+    def get_mask_params(self):
+        datakey=self.mask_choosedata.currentText()
+        maskfile=self.get_mask_line_edit.text()
+        args=[datakey,maskfile]
+        kws={}
+        self.pysat_fun.set_arg_list(args, replacelast=True)
+        self.pysat_fun.set_kw_list(kws, replacelast=True)
 
     def get_mask_ui(self):
         self.get_mask = QtGui.QGroupBox()
@@ -43,6 +49,17 @@ class get_mask_:
         self.horizontalLayout.setMargin(11)
         self.horizontalLayout.setSpacing(6)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
+
+        self.choosedata_label = QtGui.QLabel(self.get_mask)
+        self.choosedata_label.setObjectName(_fromUtf8("choosedata_label"))
+        self.horizontalLayout.addWidget(self.choosedata_label)
+        datachoices = self.pysat_fun.datakeys
+        if datachoices == []:
+            error_print('No data has been loaded!')
+            datachoices = ['No data has been loaded!']
+        self.mask_choosedata = make_combobox(datachoices)
+        self.horizontalLayout.addWidget(self.mask_choosedata)
+
         self.get_mask_label = QtGui.QLabel(self.get_mask)
         self.get_mask_label.setObjectName(_fromUtf8("get_mask_label"))
         self.horizontalLayout.addWidget(self.get_mask_label)
@@ -55,15 +72,19 @@ class get_mask_:
         self.horizontalLayout.addWidget(self.get_mask_button)
         self.verticalLayout_8.addWidget(self.get_mask)
 
-        self.get_mask.setTitle(_translate("MainWindow", "Mask File", None))
-        self.get_mask_label.setText(_translate("MainWindow", "File Name", None))
+        self.get_mask.setTitle(_translate("MainWindow", "Mask Data", None))
+        self.choosedata_label.setText(_translate("MainWindow", "Choose data: ", None))
+        self.get_mask_label.setText(_translate("MainWindow", "Mask file: ", None))
         self.get_mask_line_edit.setText(_translate("MainWindow", "*.csv", None))
         self.get_mask_button.setText(_translate("MainWindow", "...", None))
+        self.get_mask_line_edit.textChanged.connect(lambda: self.get_mask_params())
+        self.mask_choosedata.currentIndexChanged.connect(lambda: self.get_mask_params())
+        self.get_mask_button.clicked.connect(lambda: self.on_getDataButton_clicked(self.get_mask_line_edit)
+        )
 
-    def on_getDataButton_clicked(self, lineEdit, key):
+    def on_getDataButton_clicked(self, lineEdit):
         filename = QtGui.QFileDialog.getOpenFileName(None, "Open Mask Data File", '.', "(*.csv)")
         lineEdit.setText(filename)
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")
-        self.pysat_fun.set_arg_list([key, filename])
-        self.pysat_fun.set_kw_list({})
+

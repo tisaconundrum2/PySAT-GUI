@@ -118,6 +118,6 @@ class removenull_:
         self.start_of_sentence.setText(_translate("MainWindow", "Remove rows where ", None))
 
         self.end_of_sentence.setText(_translate("MainWindow", "is null.", None))
-
+        self.get_removenull_parameters()
         self.colname_choices.currentIndexChanged.connect(lambda: self.get_removenull_parameters())
         self.removenull_choosedata.currentIndexChanged.connect(lambda: self.get_removenull_parameters())
