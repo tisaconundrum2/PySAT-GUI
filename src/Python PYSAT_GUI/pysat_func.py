@@ -85,6 +85,15 @@ class pysat_func(QThread):
         except Exception as e:
             error_print('Problem reading data: {}'.format(e))
 
+    def removenull(self,datakey,colname):
+        try:
+            print(self.data[datakey].df.shape)
+            self.data[datakey]=spectral_data(self.data[datakey].df.ix[-self.data[datakey].df[colname].isnull()])
+            print(self.data[datakey].df.shape)
+
+        except Exception as e:
+            error_print(e)
+
     def do_mask(self, datakey, maskfile):
         try:
             self.data[datakey].mask(maskfile)
@@ -154,10 +163,10 @@ class pysat_func(QThread):
     def do_cv_train(self, datakey, xvars, yvars, method, params):
 
         try:
+            cv_obj=cv.cv(params)
+            self.data[datakey].df,self.cv_results=cv_obj.do_cv(self.data[datakey].df,xcols=xvars,ycol=yvars)
+            self.data['CV Results']=self.cv_results
 
-            cv_obj = cv.cv(params)
-            self.data[datakey].df, self.cv_results = cv_obj.do_cv(self.data[datakey].df, xcols=xvars, ycol=yvars)
-            self.data['CV Results'].df = self.cv_results
         except Exception as e:
             error_print(e)
 
@@ -165,6 +174,7 @@ class pysat_func(QThread):
         try:
             prediction = self.models[modelkey].predict(self.data[datakey].df[self.model_xvars[modelkey]])
             self.data[datakey].df[predictname] = prediction
+            pass
         except Exception as e:
             error_print(e)
 
@@ -180,8 +190,12 @@ class pysat_func(QThread):
                 marker='o', linestyle='None'
                 ):
 
-        x = self.data[datakey].df[xvar]
-        y = self.data[datakey].df[yvar]
+        try:
+            x = self.data[datakey].df[xvar]
+            y = self.data[datakey].df[yvar]
+        except:
+            x=self.data[datakey][xvar]
+            y=self.data[datakey][yvar]
         try:
             loadfig = self.figs[figname]
         except:
@@ -204,10 +218,6 @@ class pysat_func(QThread):
                                            lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
                                            annot_mask=annot_mask, cmap=cmap,
                                            colortitle=colortitle, loadfig=loadfig)
-
-    def do_lineplot(self, datakey, x, y, xrange=None, yrange=None, xtitle='', ytitle='', title=None,
-                    lbls=None, figpath=None, figfile=None, dpi=1000, colors=None, alphas=None, loadfig=None):
-        pass
 
     def do_pca_ica_plot(self, datakey,
                         x_component,
