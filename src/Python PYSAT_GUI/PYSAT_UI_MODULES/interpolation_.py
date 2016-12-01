@@ -29,8 +29,9 @@ class interpolation_:
         self.pysat_fun.set_fun_list(self.pysat_fun.do_interp)
         self.pysat_fun.set_arg_list([])
         self.pysat_fun.set_kw_list({})
+        self.pysat_fun.set_greyed_modules({})
         self.interpolation_ui()
-        self.pysat_fun.set_greyed_modules(self.Interpolation)
+        self.pysat_fun.set_greyed_modules(self.Interpolation, True)
         self.interpoliation_choosedata.currentIndexChanged.connect(lambda: self.get_interp_parameters())
         self.interpolation_choosedata_2.currentIndexChanged.connect(lambda: self.get_interp_parameters())
 

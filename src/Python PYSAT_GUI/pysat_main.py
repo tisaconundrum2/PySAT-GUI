@@ -22,7 +22,7 @@ class Main(QMainWindow):
     def new(self):
         # TODO create a new window to work in. The old window does not disappear
         window = Main(self)
-        window.exec_()
+        window.show()
 
     def exit(self):
         # TODO close the current window

@@ -56,13 +56,14 @@ class normalization_:
         self.main()
 
     def main(self):
+        self.pysat_fun.set_fun_list(self.pysat_fun.do_norm)
         self.pysat_fun.set_arg_list({})
         self.pysat_fun.set_kw_list({})
-        self.pysat_fun.set_fun_list(self.pysat_fun.do_norm)
+        self.pysat_fun.set_greyed_modules({})
         # driver function, calls UI and set's up connections
         # add function list calls here
         self.normalization_ui()
-        self.pysat_fun.set_greyed_modules(self.normalization)
+        self.pysat_fun.set_greyed_modules(self.normalization, True)
         self.add_ranges_button.clicked.connect(lambda: self.add_ranges())
         self.finish_button.clicked.connect(lambda: self.finished())
 
@@ -114,7 +115,6 @@ class normalization_:
 
         self.normalization.setTitle(_translate("MainWindow", "Normalization", None))
         self.normalization_choosedata_label.setText(_translate("MainWindow", "Choose data: ", None))
-        self.normalization_choosedata.setItemText(1, _translate("MainWindow", "Known Data", None))
         self.add_ranges_button.setText(_translate("MainWindow", "Add Ranges", None))
         self.finish_button.setText(_translate("MainWindow", "Finished", None))
 
@@ -143,10 +143,10 @@ class normalization_:
                 if not self.min_lineEdits[i].text() == '' and not self.max_lineEdits[i].text() == '':
                     small_tuple = (int(self.min_lineEdits[i].text()), int(self.max_lineEdits[i].text()))
                     arg_list.append(small_tuple)
-                    # arg_list.append(['known data', [(0, 350), (350, 470), (470, 1000)]])
             except:
                 pass
         datakey = self.normalization_choosedata.currentText()
+        # arg_list.append(['known data', [(0, 350), (350, 470), (470, 1000)]])
         self.pysat_fun.set_arg_list([datakey, arg_list], True)
         print(self.pysat_fun.arg_list)
 
