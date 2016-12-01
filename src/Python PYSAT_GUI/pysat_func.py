@@ -168,7 +168,7 @@ class pysat_func(QThread):
             cv_obj=cv.cv(params)
             self.data[datakey].df,self.cv_results=cv_obj.do_cv(self.data[datakey].df,xcols=xvars,ycol=yvars)
             self.data['CV Results']=self.cv_results
-            print(self.data['CV Results'].df)
+
         except Exception as e:
             error_print(e)
             
@@ -177,6 +177,7 @@ class pysat_func(QThread):
         try:
             prediction = self.models[modelkey].predict(self.data[datakey].df[self.model_xvars[modelkey]])
             self.data[datakey].df[predictname] = prediction
+            pass
         except Exception as e:
             error_print(e)
 
