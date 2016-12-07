@@ -29,7 +29,10 @@ class get_mask_:
         self.pysat_fun.set_fun_list(self.pysat_fun.do_mask)
         self.pysat_fun.set_arg_list([])
         self.pysat_fun.set_kw_list({})
+        self.pysat_fun.set_greyed_modules({})
         self.get_mask_ui()
+        self.pysat_fun.set_greyed_modules(self.get_mask, True)
+
 
     def get_mask_params(self):
         datakey=self.mask_choosedata.currentText()

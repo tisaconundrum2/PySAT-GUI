@@ -65,7 +65,7 @@ class normalization_:
         self.normalization_ui()
         self.pysat_fun.set_greyed_modules(self.normalization, True)
         self.add_ranges_button.clicked.connect(lambda: self.add_ranges())
-        self.finish_button.clicked.connect(lambda: self.finished())
+        self.finish_button.clicked.connect(lambda: self.del_ranges())
 
     def normalization_ui(self):
         datachoices = self.pysat_fun.datakeys
@@ -116,24 +116,33 @@ class normalization_:
         self.normalization.setTitle(_translate("MainWindow", "Normalization", None))
         self.normalization_choosedata_label.setText(_translate("MainWindow", "Choose data: ", None))
         self.add_ranges_button.setText(_translate("MainWindow", "Add Ranges", None))
-        self.finish_button.setText(_translate("MainWindow", "Finished", None))
+        self.finish_button.setText(_translate("MainWindow", "Delete Ranges", None))
 
     def add_ranges(self):
-        self.ranges_layout = QtGui.QHBoxLayout()
-        self.min_label = QtGui.QLabel(self.normalization)
-        self.max_label = QtGui.QLabel(self.normalization)
-        self.min_lineEdit = QtGui.QLineEdit(self.normalization)
-        self.max_lineEdit = QtGui.QLineEdit(self.normalization)
-        self.all_ranges_layout.addLayout(self.ranges_layout)
-        self.ranges_layout.addWidget(self.min_label)
-        self.ranges_layout.addWidget(self.min_lineEdit)
-        self.ranges_layout.addWidget(self.max_label)
-        self.ranges_layout.addWidget(self.max_lineEdit)
-        self.min_label.setText(_translate("MainWindow", "Min", None))
-        self.max_label.setText(_translate("MainWindow", "Max", None))
+        self.ranges_layout = QtGui.QHBoxLayout()                            # setup the ranges_layout, it will be a child of all_ranges_layout
+        self.min_label = QtGui.QLabel(self.normalization)                   # setup the min label
+        self.max_label = QtGui.QLabel(self.normalization)                   # setup the max label
+        self.min_lineEdit = QtGui.QLineEdit(self.normalization)             # setup the min lineEdit
+        self.max_lineEdit = QtGui.QLineEdit(self.normalization)             # setup the max lineEdit
+        self.all_ranges_layout.addLayout(self.ranges_layout)                # make ranges_layout a child of all_ranges_layout
+        self.ranges_layout.addWidget(self.min_label)                        # apply the min label to the widget
+        self.ranges_layout.addWidget(self.min_lineEdit)                     # apply the min lineEdit to the widget
+        self.ranges_layout.addWidget(self.max_label)                        # apply the max label
+        self.ranges_layout.addWidget(self.max_lineEdit)                     # apply the max lineEdit
+        self.min_label.setText(_translate("MainWindow", "Min", None))       # set the text of the min label
+        self.max_label.setText(_translate("MainWindow", "Max", None))       # set the text of the max label
 
-        self.min_lineEdits.append(self.min_lineEdit)
-        self.max_lineEdits.append(self.max_lineEdit)
+        self.min_lineEdits.append(self.min_lineEdit)                        # set the location of these lineEdits
+        self.max_lineEdits.append(self.max_lineEdit)                        # this way we can reference the proper object.
+
+    def del_ranges(self):
+        self.ranges_layout.removeWidget(self.min_label)                        # apply the min label to the widget
+        self.ranges_layout.removeWidget(self.min_lineEdit)                     # apply the min lineEdit to the widget
+        self.ranges_layout.removeWidget(self.max_label)                        # apply the max label
+        self.ranges_layout.removeWidget(self.max_lineEdit)                     # apply the max lineEdit
+        del self.min_lineEdits[-1]                # un-append the min_lineEdit
+        del self.max_lineEdits[-1]                # un-append the max_lineEdit
+
 
     def finished(self):
         arg_list = []
