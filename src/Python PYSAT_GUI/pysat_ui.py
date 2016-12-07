@@ -74,14 +74,21 @@ class pysat_ui(object):
         self.progressBar.setProperty("value", 0)
         self.progressBar.setObjectName(_fromUtf8("progressBar"))
         self.ok.addWidget(self.progressBar)
+        self.delButton = QtGui.QPushButton(self.OK)
         self.okButton = QtGui.QPushButton(self.OK)
         font = QtGui.QFont()
         font.setPointSize(8)
+        self.delButton.setFont(font)
+        self.delButton.setMouseTracking(False)
+        self.delButton.setObjectName("delButton")
+        self.ok.addWidget(self.delButton)
         self.okButton.setFont(font)
         self.okButton.setMouseTracking(False)
         self.okButton.setObjectName(_fromUtf8("okButton"))
         self.ok.addWidget(self.okButton)
         self.verticalLayout_9.addWidget(self.OK)
+
+
 
         MainWindow.setCentralWidget(self.centralWidget)
         self.mainToolBar = QtGui.QToolBar(MainWindow)
@@ -299,6 +306,7 @@ class pysat_ui(object):
 
         MainWindow.setWindowTitle(_translate("MainWindow", "PYSAT", None))
         self.okButton.setText(_translate("MainWindow", "OK", None))
+        self.delButton.setText(_translate("MainWindow", "Delete Module", None))
         self.menuFile.setTitle(_translate("MainWindow", "File", None))
         self.menuPreprocessing.setTitle(_translate("MainWindow", "Preprocessing", None))
         self.menuBaseline_Removal.setTitle(_translate("MainWindow", "Baseline Removal", None))
@@ -472,6 +480,9 @@ class pysat_ui(object):
             self.set_greyed_out_items(False)
             self.onStart()
             self.pysat_fun.taskFinished.connect(self.onFinished)
+
+    def on_deleteButton_clicked(self):
+        pass
 
 
     def onStart(self):  # onStart function
