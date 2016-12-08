@@ -67,6 +67,9 @@ class normalization_:
         self.add_ranges_button.clicked.connect(lambda: self.add_ranges())
         self.finish_button.clicked.connect(lambda: self.del_ranges())
 
+    def get_normalization_parameters(self):
+        pass
+
     def normalization_ui(self):
         datachoices = self.pysat_fun.datakeys
         if datachoices == []:
@@ -132,16 +135,16 @@ class normalization_:
         self.min_label.setText(_translate("MainWindow", "Min", None))       # set the text of the min label
         self.max_label.setText(_translate("MainWindow", "Max", None))       # set the text of the max label
 
-        self.min_lineEdits.append(self.min_lineEdit)                        # set the location of these lineEdits
-        self.max_lineEdits.append(self.max_lineEdit)                        # this way we can reference the proper object.
+        self.min_lineEdits.append(self.min_lineEdit)                        # set up an array of lineEdits
+        self.max_lineEdits.append(self.max_lineEdit)
 
     def del_ranges(self):
-        self.ranges_layout.removeWidget(self.min_label)                        # apply the min label to the widget
-        self.ranges_layout.removeWidget(self.min_lineEdit)                     # apply the min lineEdit to the widget
-        self.ranges_layout.removeWidget(self.max_label)                        # apply the max label
-        self.ranges_layout.removeWidget(self.max_lineEdit)                     # apply the max lineEdit
-        del self.min_lineEdits[-1]                # un-append the min_lineEdit
-        del self.max_lineEdits[-1]                # un-append the max_lineEdit
+        self.ranges_layout.removeWidget(self.min_label)                     # remove the min label to the widget
+        self.ranges_layout.removeWidget(self.min_lineEdit)                  # remove the min lineEdit to the widget
+        self.ranges_layout.removeWidget(self.max_label)                     # remove the max label
+        self.ranges_layout.removeWidget(self.max_lineEdit)                  # remove the max lineEdit
+        del self.min_lineEdits[-1]                                          # un-append the min_lineEdit
+        del self.max_lineEdits[-1]                                          # un-append the max_lineEdit
 
 
     def finished(self):
@@ -159,14 +162,12 @@ class normalization_:
         self.pysat_fun.set_arg_list([datakey, arg_list], True)
         print(self.pysat_fun.arg_list)
 
-
 def make_combobox(choices):
     combo = QtGui.QComboBox()
     for i, choice in enumerate(choices):
         combo.addItem(_fromUtf8(""))
         combo.setItemText(i, _translate('', choice, None))
     return combo
-
 
 def make_listwidget(choices):
     listwidget = QtGui.QListWidget()
