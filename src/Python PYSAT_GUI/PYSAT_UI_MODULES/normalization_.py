@@ -48,6 +48,7 @@ except AttributeError:
 
 class normalization_:
     def __init__(self, pysat_fun, verticalLayout_8):
+        self.ranges_layout = [None]*120
         self.verticalLayout_8 = verticalLayout_8
         self.pysat_fun = pysat_fun
         self.min_lineEdits = []
@@ -122,29 +123,30 @@ class normalization_:
         self.finish_button.setText(_translate("MainWindow", "Delete Ranges", None))
 
     def add_ranges(self):
-        self.ranges_layout = QtGui.QHBoxLayout()                            # setup the ranges_layout, it will be a child of all_ranges_layout
+        self.ranges_layout[self.num] = QtGui.QHBoxLayout()                  # setup the ranges_layout, it will be a child of all_ranges_layout
         self.min_label = QtGui.QLabel(self.normalization)                   # setup the min label
         self.max_label = QtGui.QLabel(self.normalization)                   # setup the max label
         self.min_lineEdit = QtGui.QLineEdit(self.normalization)             # setup the min lineEdit
         self.max_lineEdit = QtGui.QLineEdit(self.normalization)             # setup the max lineEdit
-        self.all_ranges_layout.addLayout(self.ranges_layout)                # make ranges_layout a child of all_ranges_layout
-        self.ranges_layout.addWidget(self.min_label)                        # apply the min label to the widget
-        self.ranges_layout.addWidget(self.min_lineEdit)                     # apply the min lineEdit to the widget
-        self.ranges_layout.addWidget(self.max_label)                        # apply the max label
-        self.ranges_layout.addWidget(self.max_lineEdit)                     # apply the max lineEdit
+        self.all_ranges_layout.addLayout(self.ranges_layout[self.num])      # make ranges_layout a child of all_ranges_layout
+        self.ranges_layout[self.num].addWidget(self.min_label)              # apply the min label to the widget
+        self.ranges_layout[self.num].addWidget(self.min_lineEdit)           # apply the min lineEdit to the widget
+        self.ranges_layout[self.num].addWidget(self.max_label)              # apply the max label
+        self.ranges_layout[self.num].addWidget(self.max_lineEdit)           # apply the max lineEdit
         self.min_label.setText(_translate("MainWindow", "Min", None))       # set the text of the min label
         self.max_label.setText(_translate("MainWindow", "Max", None))       # set the text of the max label
 
         self.min_lineEdits.append(self.min_lineEdit)                        # set up an array of lineEdits
         self.max_lineEdits.append(self.max_lineEdit)
+        self.num = self.num + 1
+        print(self.num)
 
     def del_ranges(self):
-        self.ranges_layout.removeWidget(self.min_label)                     # remove the min label to the widget
-        self.ranges_layout.removeWidget(self.min_lineEdit)                  # remove the min lineEdit to the widget
-        self.ranges_layout.removeWidget(self.max_label)                     # remove the max label
-        self.ranges_layout.removeWidget(self.max_lineEdit)                  # remove the max lineEdit
+        self.ranges_layout[self.num].deleteLater()                          #
         del self.min_lineEdits[-1]                                          # un-append the min_lineEdit
         del self.max_lineEdits[-1]                                          # un-append the max_lineEdit
+        self.num = self.num - 1
+        print(self.num)
 
 
     def finished(self):
