@@ -135,18 +135,15 @@ class normalization_:
         print(self.pysat_fun.arg_list)
 
     def add_ranges(self):
-        data = Ranges_(self.pysat_fun, self.normalization)
+        data = Ranges_()
         data.add_ranges()
 
     def del_ranges(self):
         pass
 
 
-class Ranges_(normalization_):
-    def __init__(self, pysat_fun, verticalLayout_8):
-        super().__init__(pysat_fun, verticalLayout_8)
-
-    def add_ranges(self):
+class Ranges_:
+    def __init__(self):
         self.ranges_layout = QtGui.QHBoxLayout()                            # setup the ranges_layout, it will be a child of all_ranges_layout
         self.min_label = QtGui.QLabel(self.normalization)                   # setup the min label
         self.max_label = QtGui.QLabel(self.normalization)                   # setup the max label
