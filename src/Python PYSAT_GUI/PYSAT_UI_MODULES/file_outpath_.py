@@ -67,3 +67,4 @@ class file_outpath_:
             lineEdit.setText("*/*")
         self.pysat_fun.set_arg_list([filename])
         self.pysat_fun.set_kw_list({})
+        self.pysat_fun.set_greyed_modules(self.file_out_path)

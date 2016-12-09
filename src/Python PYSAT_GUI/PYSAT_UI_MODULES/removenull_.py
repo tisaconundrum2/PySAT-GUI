@@ -30,7 +30,9 @@ class removenull_:
         self.pysat_fun.set_fun_list(self.pysat_fun.removenull)  # add this function to the pysat list to be run
         self.pysat_fun.set_arg_list([])
         self.pysat_fun.set_kw_list({})
+        self.pysat_fun.set_greyed_modules({})
         self.removenull_ui()  # initiate the UI
+        self.pysat_fun.set_greyed_modules(self.removenull, True)
 
     def get_removenull_parameters(self):
 

@@ -26,17 +26,18 @@ class regression_:
         self.main()
 
     def main(self):
-        self.pysat_fun.set_fun_list(self.pysat_fun.do_regression_train)
-        self.pysat_fun.set_arg_list([])
-        self.pysat_fun.set_kw_list({})
-        self.regression_ui()
-        self.regression_ransac_checkbox.toggled.connect(
-            lambda: self.make_ransac_widget(self.regression_ransac_checkbox.isChecked()))
-        self.regression_choosealg.currentIndexChanged.connect(
-            lambda: self.make_regression_widget(self.regression_choosealg.currentText()))
+        self.pysat_fun.set_fun_list(self.pysat_fun.do_regression_train)                                                 # setting up the regression function
+        self.pysat_fun.set_arg_list([])                                                                                 # prepping list
+        self.pysat_fun.set_kw_list({})                                                                                  # prepping list
+        self.pysat_fun.set_greyed_modules({})                                                                           # prepping list
+        self.regression_ui()                                                                                            # start the regression UI. create our submodule
+        self.pysat_fun.set_greyed_modules(self.regression_train, True)                                                  # set the module grey after use.
+        self.regression_ransac_checkbox.toggled.connect(                                                                #
+            lambda: self.make_ransac_widget(self.regression_ransac_checkbox.isChecked()))                               #
+        self.regression_choosealg.currentIndexChanged.connect(                                                          #
+            lambda: self.make_regression_widget(self.regression_choosealg.currentText()))                               #
 
     def get_regression_parameters(self):
-
         method = self.regression_choosealg.currentText()
         datakey = self.regression_choosedata.currentText()
         xvars = [str(x.text()) for x in self.regression_train_choosex.selectedItems()]
@@ -62,6 +63,7 @@ class regression_:
                           'theta0': self.reg_widget.gp_theta0_spin.value(),
                           'thetaL': self.reg_widget.gp_thetaL_spin.value(),
                           'thetaU': self.reg_widget.gp_thetaU_spin.value()}
+
                 modelkey = modelkey+ str(params)
                 kws = {'modelkey': modelkey}
         except:
@@ -212,7 +214,7 @@ class regression_:
         self.regression_train_choosedata_label.setText(_translate("regression_train", "Choose data:", None))
         self.regression_choosedata_hlayout.addWidget(self.regression_train_choosedata_label)
         datachoices = self.pysat_fun.datakeys
-        datachoices=[i for i in datachoices if i!='CV Results']  #prevent CV results from showing up as an option
+        datachoices = [i for i in datachoices if i != 'CV Results']  # prevent CV results from showing up as an option
         if datachoices == []:
             error_print('No Data has been loaded')
             datachoices = ['No data has been loaded!']
@@ -310,12 +312,16 @@ class regression_:
         self.yvarmin_spin.valueChanged.connect(lambda: self.get_regression_parameters())
         self.yvarmax_spin.valueChanged.connect(lambda: self.get_regression_parameters())
         self.regression_choosedata.activated[int].connect(lambda: self.regression_change_vars(self.regression_train_choosey))
-        
     def regression_change_vars(self, obj):
         obj.clear()
         choices = self.pysat_fun.data[self.regression_choosedata.currentText()].df[['comp']].columns.values
         for i in choices:
             obj.addItem(i[1])
+
+    def helper(self):
+        # setText
+        pass
+
 
 def make_combobox(choices):
     combo = QtGui.QComboBox()

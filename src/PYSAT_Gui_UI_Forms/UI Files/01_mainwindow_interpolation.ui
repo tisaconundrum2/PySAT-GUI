@@ -50,124 +50,101 @@ QGroupBox::title {
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_8">
         <item>
-         <widget class="QGroupBox" name="removenull">
+         <widget class="QGroupBox" name="Interpolation">
           <property name="font">
            <font>
             <pointsize>10</pointsize>
            </font>
           </property>
           <property name="title">
-           <string>Remove Null</string>
+           <string>Interpolation</string>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout">
            <item>
-            <layout class="QVBoxLayout" name="removenull_vlayout">
+            <layout class="QHBoxLayout" name="choosedata_layout">
              <item>
-              <layout class="QHBoxLayout" name="removenull_choosedata_hlayout">
-               <item>
-                <widget class="QLabel" name="removenull_choosedata_label">
-                 <property name="text">
-                  <string>Choose data: </string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QComboBox" name="removenull_choosedata">
-                 <property name="iconSize">
-                  <size>
-                   <width>50</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                 <item>
-                  <property name="text">
-                   <string>Choose Data</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Known Data</string>
-                  </property>
-                 </item>
-                </widget>
-               </item>
-               <item>
-                <spacer name="removenull_choosedata_spacer">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-              </layout>
+              <widget class="QLabel" name="regression_choosedata_label">
+               <property name="text">
+                <string>Choose data: </string>
+               </property>
+              </widget>
              </item>
              <item>
-              <widget class="QWidget" name="removenull_widget" native="true">
-               <property name="minimumSize">
+              <widget class="QComboBox" name="regression_choosedata">
+               <property name="iconSize">
                 <size>
-                 <width>0</width>
-                 <height>0</height>
+                 <width>50</width>
+                 <height>20</height>
                 </size>
                </property>
-               <layout class="QHBoxLayout" name="horizontalLayout_2">
-                <item>
-                 <widget class="QLabel" name="start_of_sentence">
-                  <property name="text">
-                   <string>Each </string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QComboBox" name="rowcol_comboBox">
-                  <item>
-                   <property name="text">
-                    <string>Row</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Column</string>
-                   </property>
-                  </item>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="middle_of_sentence">
-                  <property name="text">
-                   <string>must have at least </string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QSpinBox" name="removenull_spinbox"/>
-                </item>
-                <item>
-                 <widget class="QLabel" name="end_of_sentence">
-                  <property name="text">
-                   <string>null values to be removed.</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <spacer name="removenull_spacer">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>40</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-               </layout>
+               <item>
+                <property name="text">
+                 <string>Choose Data</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Known Data</string>
+                </property>
+               </item>
               </widget>
+             </item>
+             <item>
+              <spacer name="regression_choosedata_spacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="choosedata_layout_2">
+             <item>
+              <widget class="QLabel" name="regression_choosedata_label_2">
+               <property name="text">
+                <string>Choose data: </string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="regression_choosedata_2">
+               <property name="iconSize">
+                <size>
+                 <width>50</width>
+                 <height>20</height>
+                </size>
+               </property>
+               <item>
+                <property name="text">
+                 <string>Choose Data</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Known Data</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item>
+              <spacer name="regression_choosedata_spacer_2">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
            </item>

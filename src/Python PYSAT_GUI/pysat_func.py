@@ -10,6 +10,7 @@ import numpy as np
 
 class pysat_func(QThread):
     taskFinished = QtCore.pyqtSignal()
+
     def __init__(self):
         QThread.__init__(self)
         self.leftOff = 0
@@ -19,20 +20,15 @@ class pysat_func(QThread):
         self.modelkeys = []
         self.model_xvars = {}
         self.figs = {}
-        self.fignames = []
         self.fun_list = []
         self.arg_list = []
         self.kw_list = []
-        self.greyedItems = []
+        self.greyed_modules = []
 
     """
     Getter and setter functions below
     """
 
-    # TODO: combine these three functions into one, they're all doing the same thing!
-    # TODO>> Re: we don't want to do that, because we're only updating a single value
-    # TODO>> And good programming practices say that we should keep them separate,
-    # TODO>> this the geneal rule for getters and setters
     def set_fun_list(self, fun, replacelast=False):
         if replacelast:
             self.fun_list[-1] = fun
@@ -51,6 +47,12 @@ class pysat_func(QThread):
         else:
             self.kw_list.append(kws)
 
+    def set_greyed_modules(self, modules, replacelast=False):
+        if replacelast:
+            self.greyed_modules[-1] = modules
+        else:
+            self.greyed_modules.append(modules)
+
     def getDataKeys(self):
         return self.datakeys
 
@@ -62,9 +64,6 @@ class pysat_func(QThread):
 
     def getModels(self):
         return self.models
-
-    def set_grey_items(self, items):
-        self.greyedItems.append(items)
 
     """
     Work functions below
@@ -167,18 +166,16 @@ class pysat_func(QThread):
 
         except Exception as e:
             error_print(e)
-          
+
     def do_cv_train(self, datakey, xvars, yvars, method, params):
-        
+
         try:
-            
             cv_obj=cv.cv(params)
             self.data[datakey].df,self.cv_results=cv_obj.do_cv(self.data[datakey].df,xcols=xvars,ycol=yvars)
             self.data['CV Results']=self.cv_results
 
         except Exception as e:
             error_print(e)
-            
 
     def do_regression_predict(self, datakey, modelkey, predictname):
         try:
@@ -189,16 +186,16 @@ class pysat_func(QThread):
             error_print(e)
 
     def do_plot(self, datakey,
-                       xvar, yvar,
-                       figfile=None, xrange=None,
-                       yrange=None, xtitle='Reference (wt.%)',
-                       ytitle='Prediction (wt.%)', title=None,
-                       lbl=None, one_to_one=False,
-                       dpi=1000, color=None,
-                       annot_mask=None,
-                       cmap=None, colortitle='', figname=None,masklabel='',
-                       marker='o',linestyle='None'
-                       ):
+                xvar, yvar,
+                figfile=None, xrange=None,
+                yrange=None, xtitle='Reference (wt.%)',
+                ytitle='Prediction (wt.%)', title=None,
+                lbl=None, one_to_one=False,
+                dpi=1000, color=None,
+                annot_mask=None,
+                cmap=None, colortitle='', figname=None, masklabel='',
+                marker='o', linestyle='None'
+                ):
 
         try:
             x = self.data[datakey].df[xvar]
@@ -212,14 +209,22 @@ class pysat_func(QThread):
             loadfig = None
             # outpath=self.outpath
         try:
+            # Alpha is missing, fix this!
             outpath = self.outpath
-        except:
-            outpath='./'
-        self.figs[figname] = make_plot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
-                                         ytitle=ytitle, title=title,
-                                         lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
-                                         annot_mask=annot_mask, cmap=cmap,
-                                         colortitle=colortitle, loadfig=loadfig,marker=marker,linestyle=linestyle)
+            self.figs[figname] = make_plot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
+                                             ytitle=ytitle, title=title,
+                                             lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
+                                             annot_mask=annot_mask, cmap=cmap,
+                                             colortitle=colortitle, loadfig=loadfig)
+        except Exception as e:
+            error_print(e)
+            # dealing with the a possibly missing outpath
+            outpath = './'
+            self.figs[figname] = make_plot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
+                                           ytitle=ytitle, title=title,
+                                           lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
+                                           annot_mask=annot_mask, cmap=cmap,
+                                           colortitle=colortitle, loadfig=loadfig)
 
     def do_pca_ica_plot(self, datakey,
                         x_component,
@@ -240,6 +245,7 @@ class pysat_func(QThread):
         for i in range(self.leftOff, len(self.fun_list)):
             print(self.fun_list[i])
             self.fun_list[i](*self.arg_list[i], **self.kw_list[i])
+            self.greyed_modules[i].setDisabled(True)
             self.leftOff = i + 1
 
         self.taskFinished.emit()

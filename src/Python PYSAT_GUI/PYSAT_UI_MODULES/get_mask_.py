@@ -1,5 +1,6 @@
 from PyQt4 import QtCore, QtGui
 from pysat.utils.gui_utils import make_combobox
+from PYSAT_UI_MODULES import error_print
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -28,7 +29,9 @@ class get_mask_:
         self.pysat_fun.set_fun_list(self.pysat_fun.do_mask)
         self.pysat_fun.set_arg_list([])
         self.pysat_fun.set_kw_list({})
+        self.pysat_fun.set_greyed_modules({})
         self.get_mask_ui()
+        self.pysat_fun.set_greyed_modules(self.get_mask, True)
 
 
     def get_mask_params(self):

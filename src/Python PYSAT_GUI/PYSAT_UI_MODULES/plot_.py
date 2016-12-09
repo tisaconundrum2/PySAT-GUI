@@ -30,7 +30,9 @@ class plot_:
         self.pysat_fun.set_fun_list(self.pysat_fun.do_plot)
         self.pysat_fun.set_arg_list([])
         self.pysat_fun.set_kw_list({})
+        self.pysat_fun.set_greyed_modules({})
         self.plot_ui()
+        self.pysat_fun.set_greyed_modules(self.plot, True)
 
     def get_plot_parameters(self):
 

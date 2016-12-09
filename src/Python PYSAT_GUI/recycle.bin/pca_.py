@@ -23,11 +23,11 @@ class pca_:
         self.verticalLayout_8 = verticalLayout_8
         self.main()
 
-
     def main(self):
         # TODO add function param call here
         # TODO add try and except here
         self.pca_ui()
+
 
     def pca_ui(self):
         self.pca = QtGui.QGroupBox()

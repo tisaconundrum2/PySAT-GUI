@@ -74,14 +74,21 @@ class pysat_ui(object):
         self.progressBar.setProperty("value", 0)
         self.progressBar.setObjectName(_fromUtf8("progressBar"))
         self.ok.addWidget(self.progressBar)
+        self.delButton = QtGui.QPushButton(self.OK)
         self.okButton = QtGui.QPushButton(self.OK)
         font = QtGui.QFont()
         font.setPointSize(8)
+        self.delButton.setFont(font)
+        self.delButton.setMouseTracking(False)
+        self.delButton.setObjectName("delButton")
+        self.ok.addWidget(self.delButton)
         self.okButton.setFont(font)
         self.okButton.setMouseTracking(False)
         self.okButton.setObjectName(_fromUtf8("okButton"))
         self.ok.addWidget(self.okButton)
         self.verticalLayout_9.addWidget(self.OK)
+
+
 
         MainWindow.setCentralWidget(self.centralWidget)
         self.mainToolBar = QtGui.QToolBar(MainWindow)
@@ -299,6 +306,7 @@ class pysat_ui(object):
 
         MainWindow.setWindowTitle(_translate("MainWindow", "PYSAT", None))
         self.okButton.setText(_translate("MainWindow", "OK", None))
+        self.delButton.setText(_translate("MainWindow", "Delete Module", None))
         self.menuFile.setTitle(_translate("MainWindow", "File", None))
         self.menuPreprocessing.setTitle(_translate("MainWindow", "Preprocessing", None))
         self.menuBaseline_Removal.setTitle(_translate("MainWindow", "Baseline Removal", None))
@@ -317,6 +325,7 @@ class pysat_ui(object):
         self.actionCreate_New_Workflow.setText(_translate("MainWindow", "Create New Workflow", None))
         self.actionNoise_Reduction.setText(_translate("MainWindow", "Noise Reduction", None))
         self.actionApply_Mask.setText(_translate("MainWindow", "Apply Mask", None))
+        self.actionInterpolate.setText(_translate("MainWindow", "Interpolate", None))
         self.actionRemoveNull.setText(_translate("MainWindow", "Remove Null Data", None))
         self.actionInterpolate.setText(_translate("MainWindow", "Interpolate (unknown to known)", None))
         self.actionInstrument_Response.setText(_translate("MainWindow", "Instrument Response", None))
@@ -369,6 +378,7 @@ class pysat_ui(object):
         self.actionCreate_N_Folds.setText(_translate("MainWindow", "Create N Folds", None))
         self.actionStratified_Folds.setText(_translate("MainWindow", "Stratified Folds", None))
         self.okButton.clicked.connect(lambda: self.on_okButton_clicked())
+        self.delButton.clicked.connect(lambda)
 
     def file_outpath(self):
         self.flag = PYSAT_UI_MODULES.file_outpath_(self.pysat_fun, self.verticalLayout_8)
@@ -399,8 +409,12 @@ class pysat_ui(object):
 
     def do_plot(self):
         PYSAT_UI_MODULES.plot_(self.pysat_fun, self.verticalLayout_8)
+
     def do_cv(self):
-        PYSAT_UI_MODULES.cv_(self.pysat_fun,self.verticalLayout_8)
+        PYSAT_UI_MODULES.cv_(self.pysat_fun, self.verticalLayout_8)
+
+    def do_interp(self):
+        PYSAT_UI_MODULES.interpolation_(self.pysat_fun, self.verticalLayout_8)
 
     """ =============================================
     Please do not delete the functions below this line!
@@ -422,11 +436,14 @@ class pysat_ui(object):
         self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self))  # strat folds
         self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))  # regression train
         self.actionPredict.triggered.connect(lambda: pysat_ui.do_regression_predict(self))  # regression predict
+        self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
+        self.set_greyed_out_items(True)
+        self.set_visible_items()  # Taking out menu items that don't have working UI modules yet. We don't want to delete them, so we'll make them disappear.
         self.actionPlot.triggered.connect(lambda: pysat_ui.do_plot(self))
         self.actionCross_Validation.triggered.connect(lambda: pysat_ui.do_cv(self))
-        self.setGreyedOutItems(True)
+        self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
 
-    def setGreyedOutItems(self, bool):
+    def set_greyed_out_items(self, bool):
         self.actionTrain.setDisabled(bool)
         self.actionPredict.setDisabled(bool)
         self.actionNormalization.setDisabled(bool)
@@ -434,7 +451,19 @@ class pysat_ui(object):
         self.actionStratified_Folds.setDisabled(bool)
         self.actionTrain.setDisabled(bool)
         self.actionPredict.setDisabled(bool)
+        self.actionInterpolate.setDisabled(bool)
         self.actionPlot.setDisabled(bool)
+
+    def set_visible_items(self):
+        self.actionNoise_Reduction.setVisible(False)
+        self.actionInstrument_Response.setVisible(False)
+        self.menuBaseline_Removal.deleteLater()
+        self.menuCalibration_Transfer.deleteLater()
+        self.actionICA.setVisible(False)
+        self.actionPCA.setVisible(False)
+        self.actionICA_2.setVisible(False)
+        self.actionPCA_2.setVisible(False)
+        self.menuClassification.setTitle("")
 
     def handleMenuHovered(self, action):
         QtGui.QToolTip.showText(self, None, action, None)
@@ -449,19 +478,22 @@ class pysat_ui(object):
 
     def on_okButton_clicked(self):
         if self.flag:
-            self.setGreyedOutItems(False)
+            self.set_greyed_out_items(False)
             self.onStart()
             self.pysat_fun.taskFinished.connect(self.onFinished)
 
-    def onStart(self):                                              # onStart function
-        self.progressBar.setRange(0, 0)                             # make the bar pulse green
-        self.pysat_fun.start()                                      # TaskThread.start()
-                                                                    # This is multithreading thus run() == start()
+    def on_deleteButton_clicked(self):
+        pass
 
-    def onFinished(self):                                           # onFinished function
-        self.progressBar.setRange(0,1)                              # stop the bar pulsing green
-        self.progressBar.setValue(1)                                # displays 100% after process is finished.
 
+    def onStart(self):  # onStart function
+        self.progressBar.setRange(0, 0)  # make the bar pulse green
+        self.pysat_fun.start()  # TaskThread.start()
+        # This is multithreading thus run() == start()
+
+    def onFinished(self):  # onFinished function
+        self.progressBar.setRange(0, 1)  # stop the bar pulsing green
+        self.progressBar.setValue(1)  # displays 100% after process is finished.
 
 
 def make_combobox(choices):
@@ -471,4 +503,3 @@ def make_combobox(choices):
         combo.setItemText(i, _translate('', choice, None))
 
     return combo
-

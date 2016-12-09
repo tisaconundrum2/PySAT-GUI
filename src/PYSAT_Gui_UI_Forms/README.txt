@@ -21,7 +21,7 @@ Example of how this works, and how this looks
        | <this is wrong>  |      convert         |  this is wrong   |  compare these      |                  |
        | <formatting>     |     using            |  formatting      |  two files using    |                  |
        | <technically>    |    UIconversion.bat  |  technically     |  compare.bat        |                  |
-       | <speaking>       | -------------------> |  speaking>       | ------------------> |                  |
+       | <speaking>       | -------------------> |  speaking        | ------------------> |                  |
        |                  |                      |                  |                     |                  |
        |------------------|                      |------------------|                     |------------------|
                                                                                                    |

@@ -28,7 +28,9 @@ class regression_predict_:
         self.pysat_fun.set_fun_list(self.pysat_fun.do_regression_predict)
         self.pysat_fun.set_arg_list([])
         self.pysat_fun.set_kw_list({})
+        self.pysat_fun.set_greyed_modules({})
         self.regression_ui()
+        self.pysat_fun.set_greyed_modules(self.regression_predict, True)
 
         self.regression_predict_choosedata.currentIndexChanged.connect(lambda: self.get_predict_parameters())
         self.regression_predict_choosemodel.currentIndexChanged.connect(lambda: self.get_predict_parameters())

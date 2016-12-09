@@ -50,18 +50,26 @@ class normalization_:
     def __init__(self, pysat_fun, verticalLayout_8):
         self.verticalLayout_8 = verticalLayout_8
         self.pysat_fun = pysat_fun
+        self.ranges = []
         self.min_lineEdits = []
         self.max_lineEdits = []
+        for i in range(1,20):
+            self.ranges.append(Ranges_(pysat_fun, verticalLayout_8))
+
         self.num = 0
         self.main()
 
     def main(self):
+        self.pysat_fun.set_fun_list(self.pysat_fun.do_norm)
+        self.pysat_fun.set_arg_list({})
+        self.pysat_fun.set_kw_list({})
+        self.pysat_fun.set_greyed_modules({})
         # driver function, calls UI and set's up connections
         # add function list calls here
-        self.pysat_fun.set_fun_list(self.pysat_fun.do_norm)
         self.normalization_ui()
+        self.pysat_fun.set_greyed_modules(self.normalization, True)
         self.add_ranges_button.clicked.connect(lambda: self.add_ranges())
-        self.finish_button.clicked.connect(lambda: self.finished())
+        self.finish_button.clicked.connect(lambda: self.del_ranges())
 
     def normalization_ui(self):
         datachoices = self.pysat_fun.datakeys
@@ -111,26 +119,8 @@ class normalization_:
 
         self.normalization.setTitle(_translate("MainWindow", "Normalization", None))
         self.normalization_choosedata_label.setText(_translate("MainWindow", "Choose data: ", None))
-        self.normalization_choosedata.setItemText(1, _translate("MainWindow", "Known Data", None))
         self.add_ranges_button.setText(_translate("MainWindow", "Add Ranges", None))
-        self.finish_button.setText(_translate("MainWindow", "Finished", None))
-
-    def add_ranges(self):
-        self.ranges_layout = QtGui.QHBoxLayout()
-        self.min_label = QtGui.QLabel(self.normalization)
-        self.max_label = QtGui.QLabel(self.normalization)
-        self.min_lineEdit = QtGui.QLineEdit(self.normalization)
-        self.max_lineEdit = QtGui.QLineEdit(self.normalization)
-        self.all_ranges_layout.addLayout(self.ranges_layout)
-        self.ranges_layout.addWidget(self.min_label)
-        self.ranges_layout.addWidget(self.min_lineEdit)
-        self.ranges_layout.addWidget(self.max_label)
-        self.ranges_layout.addWidget(self.max_lineEdit)
-        self.min_label.setText(_translate("MainWindow", "Min", None))
-        self.max_label.setText(_translate("MainWindow", "Max", None))
-
-        self.min_lineEdits.append(self.min_lineEdit)
-        self.max_lineEdits.append(self.max_lineEdit)
+        self.finish_button.setText(_translate("MainWindow", "Delete Ranges", None))
 
     def finished(self):
         arg_list = []
@@ -140,13 +130,48 @@ class normalization_:
                 if not self.min_lineEdits[i].text() == '' and not self.max_lineEdits[i].text() == '':
                     small_tuple = (int(self.min_lineEdits[i].text()), int(self.max_lineEdits[i].text()))
                     arg_list.append(small_tuple)
-                    # arg_list.append(['known data', [(0, 350), (350, 470), (470, 1000)]])
             except:
                 pass
         datakey = self.normalization_choosedata.currentText()
-        self.pysat_fun.set_arg_list([datakey, arg_list])
-        self.pysat_fun.set_kw_list({})
+        # arg_list.append(['known data', [(0, 350), (350, 470), (470, 1000)]])
+        self.pysat_fun.set_arg_list([datakey, arg_list], True)
         print(self.pysat_fun.arg_list)
+
+    def add_ranges(self):
+        pass
+
+    def del_ranges(self):
+        pass
+
+
+class Ranges_(normalization_):
+    def __init__(self, pysat_fun, verticalLayout_8):
+        super().__init__(pysat_fun, verticalLayout_8)
+
+    def add_ranges(self):
+        self.ranges_layout = QtGui.QHBoxLayout()                            # setup the ranges_layout, it will be a child of all_ranges_layout
+        self.min_label = QtGui.QLabel(self.normalization)                   # setup the min label
+        self.max_label = QtGui.QLabel(self.normalization)                   # setup the max label
+        self.min_lineEdit = QtGui.QLineEdit(self.normalization)             # setup the min lineEdit
+        self.max_lineEdit = QtGui.QLineEdit(self.normalization)             # setup the max lineEdit
+        self.ranges_layout.addWidget(self.min_label)                        # apply the min label to the widget
+        self.ranges_layout.addWidget(self.min_lineEdit)                     # apply the min lineEdit to the widget
+        self.ranges_layout.addWidget(self.max_label)                        # apply the max label
+        self.ranges_layout.addWidget(self.max_lineEdit)                     # apply the max lineEdit
+        self.min_label.setText(_translate("MainWindow", "Min", None))       # set the text of the min label
+        self.max_label.setText(_translate("MainWindow", "Max", None))       # set the text of the max label
+        self.all_ranges_layout.addLayout(self.ranges_layout)                # make ranges_layout a child of all_ranges_layout
+
+        self.min_lineEdits.append(self.min_lineEdit)                        # set up an array of lineEdits
+        self.max_lineEdits.append(self.max_lineEdit)
+
+    def del_ranges(self):
+        self.min_label.setVisible(False)                                    # remove the min label to the widget
+        self.min_lineEdit.setVisible(False)                                 # remove the min lineEdit to the widget
+        self.max_label.setVisible(False)                                    # remove the max label
+        self.max_lineEdit.setVisible(False)                                 # remove the max lineEdit
+        del self.min_lineEdits[-1]                                          # delete last element
+        del self.max_lineEdits[-1]                                          # delete last element
 
 
 def make_combobox(choices):
@@ -155,7 +180,6 @@ def make_combobox(choices):
         combo.addItem(_fromUtf8(""))
         combo.setItemText(i, _translate('', choice, None))
     return combo
-
 
 def make_listwidget(choices):
     listwidget = QtGui.QListWidget()
