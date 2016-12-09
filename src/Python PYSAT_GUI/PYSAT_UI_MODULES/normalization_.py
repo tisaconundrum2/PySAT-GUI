@@ -48,16 +48,13 @@ except AttributeError:
 
 class normalization_:
     def __init__(self, pysat_fun, verticalLayout_8):
-        self.verticalLayout_8 = verticalLayout_8
-        self.pysat_fun = pysat_fun
-        self.ranges = []
-        self.min_lineEdits = []
-        self.max_lineEdits = []
-        for i in range(1,20):
-            self.ranges.append(Ranges_(pysat_fun, verticalLayout_8))
-
-        self.num = 0
-        self.main()
+        self.pysat_fun = pysat_fun                                 # setting up pysat_fun
+        self.verticalLayout_8 = verticalLayout_8                   # setting up the vertical Layout
+        self.ranges = [None]*128                                   # a list that will hold the order of boxes
+        self.num = 0                                               # this will keep tabs on how far along we are in list
+        self.min_lineEdits = []                                    # left hand boxes
+        self.max_lineEdits = []                                    # right hand boxes
+        self.main()                                                # start the main method
 
     def main(self):
         self.pysat_fun.set_fun_list(self.pysat_fun.do_norm)
@@ -138,7 +135,8 @@ class normalization_:
         print(self.pysat_fun.arg_list)
 
     def add_ranges(self):
-        pass
+        data = Ranges_(self.pysat_fun, self.normalization)
+        data.add_ranges()
 
     def del_ranges(self):
         pass
@@ -165,11 +163,13 @@ class Ranges_(normalization_):
         self.min_lineEdits.append(self.min_lineEdit)                        # set up an array of lineEdits
         self.max_lineEdits.append(self.max_lineEdit)
 
-    def del_ranges(self):
-        self.min_label.setVisible(False)                                    # remove the min label to the widget
-        self.min_lineEdit.setVisible(False)                                 # remove the min lineEdit to the widget
-        self.max_label.setVisible(False)                                    # remove the max label
-        self.max_lineEdit.setVisible(False)                                 # remove the max lineEdit
+
+    def deleteLater(self):
+        self.ranges_layout.removeWidget(self.min_label)                        # apply the min label to the widget
+        self.ranges_layout.removeWidget(self.min_lineEdit)                     # apply the min lineEdit to the widget
+        self.ranges_layout.removeWidget(self.max_label)                        # apply the max label
+        self.ranges_layout.removeWidget(self.max_lineEdit)                     # apply the max lineEdiremoveWidget()
+        self.ranges_layout.deleteLater()
         del self.min_lineEdits[-1]                                          # delete last element
         del self.max_lineEdits[-1]                                          # delete last element
 
