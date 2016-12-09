@@ -26,16 +26,16 @@ class regression_:
         self.main()
 
     def main(self):
-        self.pysat_fun.set_fun_list(self.pysat_fun.do_regression_train)
-        self.pysat_fun.set_arg_list([])
-        self.pysat_fun.set_kw_list({})
-        self.pysat_fun.set_greyed_modules({})
-        self.regression_ui()
-        self.pysat_fun.set_greyed_modules(self.regression_train, True)
-        self.regression_ransac_checkbox.toggled.connect(
-            lambda: self.make_ransac_widget(self.regression_ransac_checkbox.isChecked()))
-        self.regression_choosealg.currentIndexChanged.connect(
-            lambda: self.make_regression_widget(self.regression_choosealg.currentText()))
+        self.pysat_fun.set_fun_list(self.pysat_fun.do_regression_train)                                                 # setting up the regression function
+        self.pysat_fun.set_arg_list([])                                                                                 # prepping list
+        self.pysat_fun.set_kw_list({})                                                                                  # prepping list
+        self.pysat_fun.set_greyed_modules({})                                                                           # prepping list
+        self.regression_ui()                                                                                            # start the regression UI. create our submodule
+        self.pysat_fun.set_greyed_modules(self.regression_train, True)                                                  # set the module grey after use.
+        self.regression_ransac_checkbox.toggled.connect(                                                                #
+            lambda: self.make_ransac_widget(self.regression_ransac_checkbox.isChecked()))                               #
+        self.regression_choosealg.currentIndexChanged.connect(                                                          #
+            lambda: self.make_regression_widget(self.regression_choosealg.currentText()))                               #
 
     def get_regression_parameters(self):
         method = self.regression_choosealg.currentText()
@@ -58,7 +58,7 @@ class regression_:
                           'theta0': self.reg_widget.gp_theta0_spin.value(),
                           'thetaL': self.reg_widget.gp_thetaL_spin.value(),
                           'thetaU': self.reg_widget.gp_thetaU_spin.value()}
-                modelkey = method  # TODO: make this somehow concisely summarize the GP parameters in a string label for the model
+                modelkey = method                                                                                       # TODO: make this somehow concisely summarize the GP parameters in a string label for the model
                 kws = {'modelkey': modelkey}
         except:
             pass
