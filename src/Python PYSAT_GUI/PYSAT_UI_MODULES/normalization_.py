@@ -50,8 +50,12 @@ class normalization_:
     def __init__(self, pysat_fun, verticalLayout_8):
         self.verticalLayout_8 = verticalLayout_8
         self.pysat_fun = pysat_fun
+        self.ranges = []
         self.min_lineEdits = []
         self.max_lineEdits = []
+        for i in range(1,20):
+            self.ranges.append(Ranges_(pysat_fun, verticalLayout_8))
+
         self.num = 0
         self.main()
 
@@ -166,8 +170,8 @@ class Ranges_(normalization_):
         self.min_lineEdit.setVisible(False)                                 # remove the min lineEdit to the widget
         self.max_label.setVisible(False)                                    # remove the max label
         self.max_lineEdit.setVisible(False)                                 # remove the max lineEdit
-        del self.min_lineEdits[-1]                                          # un-append the min_lineEdit
-        del self.max_lineEdits[-1]                                          # un-append the max_lineEdit
+        del self.min_lineEdits[-1]                                          # delete last element
+        del self.max_lineEdits[-1]                                          # delete last element
 
 
 def make_combobox(choices):
