@@ -41,14 +41,19 @@ class regression_:
         datakey = self.regression_choosedata.currentText()
         xvars = [str(x.text()) for x in self.regression_train_choosex.selectedItems()]
         yvars = [('comp', str(y.text())) for y in self.regression_train_choosey.selectedItems()]
+        yrange = [self.yvarmin_spin.value(), self.yvarmax_spin.value()]
         params = {}
         ransacparams = {}
         kws = {}
         try:
+            modelkey=method + ' - ' + str(yvars[0][-1]) + ' (' + str(yrange[0]) + '-' + str(yrange[1]) + ') '
+        except:
+            modelkey=method
+        try:
             if method == 'PLS':
                 params = {'n_components': self.reg_widget.pls_nc_spinbox.value(),
                           'scale': False}
-                modelkey = method + ' (nc=' + str(self.reg_widget.pls_nc_spinbox.value()) + ')'
+                modelkey =  modelkey+ str(params)
                 kws = {'modelkey': modelkey}
             if method == 'GP':
                 params = {'reduce_dim': self.reg_widget.gp_dim_red_combobox.currentText(),
@@ -57,7 +62,7 @@ class regression_:
                           'theta0': self.reg_widget.gp_theta0_spin.value(),
                           'thetaL': self.reg_widget.gp_thetaL_spin.value(),
                           'thetaU': self.reg_widget.gp_thetaU_spin.value()}
-                modelkey = method  # TODO: make this somehow concisely summarize the GP parameters in a string label for the model
+                modelkey = modelkey+ str(params)
                 kws = {'modelkey': modelkey}
         except:
             pass
@@ -70,7 +75,7 @@ class regression_:
             ransacparams = {'residual_threshold': self.ransac_widget.ransac_thresh_spin.value(),
                             'loss': loss}
 
-        args = [datakey, xvars, yvars, method, params, ransacparams]
+        args = [datakey, xvars, yvars, yrange, method, params, ransacparams]
         self.pysat_fun.set_arg_list(args, replacelast=True)
         self.pysat_fun.set_kw_list(kws, replacelast=True)
 
@@ -221,22 +226,51 @@ class regression_:
         # choose variables
         self.regression_choosevars_hlayout = QtGui.QHBoxLayout()
         self.regression_choosevars_hlayout.setObjectName(_fromUtf8("regression_choosevars_hlayout"))
+        self.regression_choosexvars_vlayout = QtGui.QVBoxLayout()
+        self.regression_chooseyvars_vlayout = QtGui.QVBoxLayout()
+        self.regression_choosevars_hlayout.addLayout(self.regression_choosexvars_vlayout)
+        self.regression_choosevars_hlayout.addLayout(self.regression_chooseyvars_vlayout)
+        #choose x variables
         self.regression_train_choosex_label = QtGui.QLabel(self.regression_train)
         self.regression_train_choosex_label.setObjectName(_fromUtf8("regression_train_choosex_label"))
-        self.regression_choosevars_hlayout.addWidget(self.regression_train_choosex_label)
-
+        self.regression_train_choosex_label.setText('X variable:')
+        self.regression_choosexvars_vlayout.addWidget(self.regression_train_choosex_label)
         xvarchoices = self.pysat_fun.data[self.regression_choosedata.currentText()].df.columns.levels[0].values
-
         self.regression_train_choosex = make_listwidget(xvarchoices)
         self.regression_train_choosex.setObjectName(_fromUtf8("regression_train_choosex"))
-        self.regression_choosevars_hlayout.addWidget(self.regression_train_choosex)
+        self.regression_choosexvars_vlayout.addWidget(self.regression_train_choosex)
+
+
+        #choose y variables
         self.regression_train_choosey_label = QtGui.QLabel(self.regression_train)
         self.regression_train_choosey_label.setObjectName(_fromUtf8("regression_train_choosey_label"))
-        self.regression_choosevars_hlayout.addWidget(self.regression_train_choosey_label)
+        self.regression_train_choosey_label.setText('Y variable:')
+        self.regression_chooseyvars_vlayout.addWidget(self.regression_train_choosey_label)
         yvarchoices = self.pysat_fun.data[self.regression_choosedata.currentText()].df['comp'].columns.values
-
         self.regression_train_choosey = make_listwidget(yvarchoices)
-        self.regression_choosevars_hlayout.addWidget(self.regression_train_choosey)
+        self.regression_chooseyvars_vlayout.addWidget(self.regression_train_choosey)
+        self.regression_yvarlimits_hlayout = QtGui.QHBoxLayout()
+        self.yvarmin_label=QtGui.QLabel(self.regression_train)
+        self.yvarmin_label.setText('Min:')
+        self.regression_yvarlimits_hlayout.addWidget(self.yvarmin_label)
+        self.yvarmin_spin=QtGui.QDoubleSpinBox()
+        # TODO: eventually we may want the ability to handle values outside 0-100 for regressions not dealing with wt.%
+        self.yvarmin_spin.setMaximum(100)
+        self.yvarmin_spin.setMinimum(0)
+        self.regression_yvarlimits_hlayout.addWidget(self.yvarmin_label)
+        self.regression_yvarlimits_hlayout.addWidget(self.yvarmin_spin)
+
+        self.yvarmax_label=QtGui.QLabel(self.regression_train)
+        self.yvarmax_label.setText('Max:')
+        self.regression_yvarlimits_hlayout.addWidget(self.yvarmax_label)
+        self.yvarmax_spin=QtGui.QDoubleSpinBox()
+        self.yvarmax_spin.setMaximum(100)
+        self.yvarmax_spin.setMinimum(0)
+        self.yvarmax_spin.setValue(100)
+        self.regression_yvarlimits_hlayout.addWidget(self.yvarmax_label)
+        self.regression_yvarlimits_hlayout.addWidget(self.yvarmax_spin)
+        self.regression_chooseyvars_vlayout.addLayout(self.regression_yvarlimits_hlayout)
+
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.regression_choosevars_hlayout.addItem(spacerItem1)
         self.regression_vlayout.addLayout(self.regression_choosevars_hlayout)
@@ -273,7 +307,8 @@ class regression_:
         self.regression_choosealg.currentIndexChanged.connect(lambda: self.get_regression_parameters())
         self.regression_train_choosex.currentItemChanged.connect(lambda: self.get_regression_parameters())
         self.regression_train_choosey.currentItemChanged.connect(lambda: self.get_regression_parameters())
-
+        self.yvarmin_spin.valueChanged.connect(lambda: self.get_regression_parameters())
+        self.yvarmax_spin.valueChanged.connect(lambda: self.get_regression_parameters())
         self.regression_choosedata.activated[int].connect(lambda: self.regression_change_vars(self.regression_train_choosey))
         
     def regression_change_vars(self, obj):
@@ -295,6 +330,7 @@ def make_combobox(choices):
 def make_listwidget(choices):
     listwidget = QtGui.QListWidget()
     listwidget.setItemDelegate
+    #listwidget.setMaximumHeight(100)
     for item in choices:
         item = QtGui.QListWidgetItem(item)
         listwidget.addItem(item)

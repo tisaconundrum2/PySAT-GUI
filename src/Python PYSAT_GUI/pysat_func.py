@@ -6,7 +6,7 @@ import pandas as pd
 from PYSAT_UI_MODULES.Error_ import error_print
 from PyQt4.QtCore import QThread
 from PyQt4 import QtCore
-
+import numpy as np
 
 class pysat_func(QThread):
     taskFinished = QtCore.pyqtSignal()
@@ -149,13 +149,20 @@ class pysat_func(QThread):
         print(self.data[datakey + '-Test'].df.index.shape)
         print(self.data[datakey + '-Train'].df.index.shape)
 
-    def do_regression_train(self, datakey, xvars, yvars, method, params, ransacparams, modelkey=None):
+    def do_regression_train(self, datakey, xvars, yvars, yrange, method, params, ransacparams, modelkey=None):
         try:
             if modelkey is None:
-                modelkey = method
+                modelkey = method+'-'+str(yvars)+' ('+str(yrange[0])+'-'+str(yrange([1])+') ')
             self.models[modelkey] = regression.regression([method], [params], i=0, ransacparams=[ransacparams])
             self.modelkeys.append(modelkey)
-            self.models[modelkey].fit(self.data[datakey].df[xvars], self.data[datakey].df[yvars])
+            x = self.data[datakey].df[xvars]
+            y = self.data[datakey].df[yvars]
+            x=np.array(x)
+            y=np.array(y)
+            ymask = np.squeeze((y > yrange[0]) & (y < yrange[1]))
+            y=y[ymask]
+            x=x[ymask,:]
+            self.models[modelkey].fit(x, y)
             self.model_xvars[modelkey] = xvars
 
         except Exception as e:
