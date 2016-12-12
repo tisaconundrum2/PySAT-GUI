@@ -244,6 +244,8 @@ class pysat_ui(object):
         self.actionStratified_Folds.setObjectName(_fromUtf8("actionStratified_Folds"))
         self.actionTrain_Submodels = QtGui.QAction(MainWindow)
         self.actionTrain_Submodels.setObjectName(_fromUtf8("actionTrain_Submodels"))
+        self.actionSubmodelPredict=QtGui.QAction(MainWindow)
+        self.actionSubmodelPredict.setObjectName(_fromUtf8("actionSubmodelPredict"))
         self.menuFile.addAction(self.actionLoad_reference_Data)
         self.menuFile.addAction(self.actionLoad_Unknown_Data)
         self.menuFile.addAction(self.actionSet_output_location)
@@ -282,6 +284,7 @@ class pysat_ui(object):
         self.menuPreprocessing.addAction(self.actionStratified_Folds)
         self.menuRegression.addAction(self.actionCross_Validation)
         self.menuRegression.addAction(self.actionTrain)
+        self.menuRegression.addAction(self.actionSubmodelPredict)
         # self.menuRegression.addAction(self.actionTrain_Submodels)
         self.menuRegression.addAction(self.actionPredict)
         self.menuHelp.addAction(self.actionIndex)
@@ -372,13 +375,14 @@ class pysat_ui(object):
         self.actionHierarchical_2.setText(_translate("MainWindow", "Hierarchical", None))
         self.actionCross_Validation.setText(_translate("MainWindow", "Cross Validation", None))
         self.actionTrain.setText(_translate("MainWindow", "Train", None))
+        self.actionSubmodelPredict.setText(_translate("MainWindow","Submodel Predict",None))
         self.actionPredict.setText(_translate("MainWindow", "Predict", None))
         self.actionPlot.setText(_translate("MainWindow", "Plot", None))
         self.actionSet_output_location.setText(_translate("MainWindow", "Output Location", None))
         self.actionCreate_N_Folds.setText(_translate("MainWindow", "Create N Folds", None))
         self.actionStratified_Folds.setText(_translate("MainWindow", "Stratified Folds", None))
         self.okButton.clicked.connect(lambda: self.on_okButton_clicked())
-        self.delButton.clicked.connect(lambda)
+        #self.delButton.clicked.connect(lambda)
 
     def file_outpath(self):
         self.flag = PYSAT_UI_MODULES.file_outpath_(self.pysat_fun, self.verticalLayout_8)
@@ -406,6 +410,9 @@ class pysat_ui(object):
 
     def do_regression_predict(self):
         PYSAT_UI_MODULES.regression_predict_(self.pysat_fun, self.verticalLayout_8)
+
+    def do_submodel_predict(self):
+        PYSAT_UI_MODULES.sm_(self.pysat_fun,self.verticalLayout_8)
 
     def do_plot(self):
         PYSAT_UI_MODULES.plot_(self.pysat_fun, self.verticalLayout_8)
@@ -442,6 +449,7 @@ class pysat_ui(object):
         self.actionPlot.triggered.connect(lambda: pysat_ui.do_plot(self))
         self.actionCross_Validation.triggered.connect(lambda: pysat_ui.do_cv(self))
         self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
+        self.actionSubmodelPredict.triggered.connect(lambda:pysat_ui.do_submodel_predict(self))
 
     def set_greyed_out_items(self, bool):
         self.actionTrain.setDisabled(bool)

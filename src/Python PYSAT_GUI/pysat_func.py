@@ -18,6 +18,7 @@ class pysat_func(QThread):
         self.datakeys = []
         self.models = {}
         self.modelkeys = []
+        self.modelranges = []
         self.model_xvars = {}
         self.figs = {}
         self.fun_list = []
@@ -152,8 +153,9 @@ class pysat_func(QThread):
         try:
             if modelkey is None:
                 modelkey = method+'-'+str(yvars)+' ('+str(yrange[0])+'-'+str(yrange([1])+') ')
-            self.models[modelkey] = regression.regression([method], [params], i=0, ransacparams=[ransacparams])
+            self.models[modelkey] = regression.regression([method], [yrange], [params], i=0, ransacparams=[ransacparams])
             self.modelkeys.append(modelkey)
+
             x = self.data[datakey].df[xvars]
             y = self.data[datakey].df[yvars]
             x=np.array(x)

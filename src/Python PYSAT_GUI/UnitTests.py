@@ -86,7 +86,6 @@ fun_list.append(pysat.do_regression_predict)
 arg_list.append(['known data-Test', 'PLS (nc=7)', ('meta','PLS (nc=7) - known data-Test - Predict')])                                                                           # do_regression_predict
 kw_list.append({})                                                                                                      # do_regression_predict
 
-
 fun_message.append('Plot training data predictions')
 fun_list.append(pysat.do_scatterplot)
 arg_list.append(['known data-Train', ('comp', 'SiO2'), ('meta', 'PLS (nc=7) - known data-Train - Predict')])                       # do_scatterplot
