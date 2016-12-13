@@ -50,17 +50,14 @@ class sm_:
     def __init__(self, pysat_fun, verticalLayout_8):
         self.pysat_fun = pysat_fun
         self.verticalLayout_8 = verticalLayout_8
-        self.submodel_layout_list=[]
+        self.submodel_layout_list = []
         self.main()
-
 
     def main(self):
         # driver function, calls UI and set's up connections
         # add function list calls here
         self.pysat_fun.set_fun_list(self.pysat_fun.do_submodel_predict)
         self.sm_ui()
-
-
 
     def sm_ui(self):
         self.submodel_opt = QtGui.QGroupBox()
@@ -72,7 +69,7 @@ class sm_:
         self.verticalLayout.setMargin(11)
         self.verticalLayout.setSpacing(6)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
-        #choose reference/full model
+        # choose reference/full model
         self.choosemodel_hlayout = QtGui.QHBoxLayout()
         self.choosemodel_hlayout.setMargin(11)
         self.choosemodel_hlayout.setSpacing(6)
@@ -88,13 +85,13 @@ class sm_:
         self.choosemodel_hlayout.addItem(spacerItem)
         self.verticalLayout.addLayout(self.choosemodel_hlayout)
 
-        #organize submodels vertically
+        # organize submodels vertically
         self.submodels_vlayout = QtGui.QVBoxLayout()
         self.submodels_vlayout.setMargin(11)
         self.submodels_vlayout.setSpacing(6)
         self.submodels_vlayout.setObjectName(_fromUtf8("submodels_vlayout"))
 
-        #always have a low submodel
+        # always have a low submodel
         self.low_model_hlayout = QtGui.QHBoxLayout()
         self.low_model_hlayout.setMargin(11)
         self.low_model_hlayout.setSpacing(6)
@@ -112,12 +109,11 @@ class sm_:
         self.low_model_hlayout.addItem(spacerItem1)
         self.submodels_vlayout.addLayout(self.low_model_hlayout)
 
-
-        #middle submodels go here
-        self.midmodel_vlayout=QtGui.QVBoxLayout()
+        # middle submodels go here
+        self.midmodel_vlayout = QtGui.QVBoxLayout()
         self.submodels_vlayout.addLayout(self.midmodel_vlayout)
 
-        #always have a high submodel
+        # always have a high submodel
         self.high_model_hlayout = QtGui.QHBoxLayout()
         self.high_model_hlayout.setMargin(11)
         self.high_model_hlayout.setSpacing(6)
@@ -136,7 +132,7 @@ class sm_:
         self.submodels_vlayout.addLayout(self.high_model_hlayout)
         self.verticalLayout.addLayout(self.submodels_vlayout)
 
-        #add or delete submodel buttons
+        # add or delete submodel buttons
         self.add_delete_hlayout = QtGui.QHBoxLayout()
         self.add_delete_hlayout.setMargin(11)
         self.add_delete_hlayout.setSpacing(6)
@@ -154,7 +150,7 @@ class sm_:
         self.add_delete_hlayout.addItem(spacerItem4)
         self.verticalLayout.addLayout(self.add_delete_hlayout)
 
-        #choose data to optimize blending
+        # choose data to optimize blending
         self.choosedata_hlayout = QtGui.QHBoxLayout()
         self.choosedata_hlayout.setMargin(11)
         self.choosedata_hlayout.setSpacing(6)
@@ -169,7 +165,7 @@ class sm_:
         self.choosedata_hlayout.addItem(spacerItem5)
         self.verticalLayout.addLayout(self.choosedata_hlayout)
 
-        #choose data to predict
+        # choose data to predict
         self.predictdata_vlayout = QtGui.QVBoxLayout()
         self.predictdata_vlayout.setMargin(11)
         self.predictdata_vlayout.setSpacing(6)
@@ -201,7 +197,6 @@ class sm_:
 
         self.add_submodel_button.clicked.connect(lambda: self.add_submodel())
         self.delete_submodel_button.clicked.connect(lambda: self.del_submodel())
-
 
     def add_submodel(self):
         submodel_hlayout = QtGui.QHBoxLayout()
@@ -238,11 +233,8 @@ class sm_:
         self.midmodel_vlayout.addLayout(submodel_hlayout)
         self.submodel_layout_list.append(submodel_hlayout)
 
-
-
-
     def del_submodel(self):
-        submodel_to_delete=self.midmodel_vlayout.takeAt(self.midmodel_vlayout.count()-1)
+        submodel_to_delete = self.midmodel_vlayout.takeAt(self.midmodel_vlayout.count() - 1)
         if submodel_to_delete is not None:
             while submodel_to_delete.count():
                 item = submodel_to_delete.takeAt(0)
@@ -250,11 +242,7 @@ class sm_:
                 if widget is not None:
                     widget.deleteLater()
                 else:
-                    pass#self.del_submodel(item.layout())
-
-
-
-
+                    pass  # self.del_submodel(item.layout())
 
 
 class min_max:

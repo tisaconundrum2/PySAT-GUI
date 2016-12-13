@@ -33,12 +33,11 @@ class get_mask_:
         self.get_mask_ui()
         self.pysat_fun.set_greyed_modules(self.get_mask, True)
 
-
     def get_mask_params(self):
-        datakey=self.mask_choosedata.currentText()
-        maskfile=self.get_mask_line_edit.text()
-        args=[datakey,maskfile]
-        kws={}
+        datakey = self.mask_choosedata.currentText()
+        maskfile = self.get_mask_line_edit.text()
+        args = [datakey, maskfile]
+        kws = {}
         self.pysat_fun.set_arg_list(args, replacelast=True)
         self.pysat_fun.set_kw_list(kws, replacelast=True)
 
@@ -82,12 +81,10 @@ class get_mask_:
         self.get_mask_button.setText(_translate("MainWindow", "...", None))
         self.get_mask_line_edit.textChanged.connect(lambda: self.get_mask_params())
         self.mask_choosedata.currentIndexChanged.connect(lambda: self.get_mask_params())
-        self.get_mask_button.clicked.connect(lambda: self.on_getDataButton_clicked(self.get_mask_line_edit)
-        )
+        self.get_mask_button.clicked.connect(lambda: self.on_getDataButton_clicked(self.get_mask_line_edit))
 
     def on_getDataButton_clicked(self, lineEdit):
         filename = QtGui.QFileDialog.getOpenFileName(None, "Open Mask Data File", '.', "(*.csv)")
         lineEdit.setText(filename)
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")
-
