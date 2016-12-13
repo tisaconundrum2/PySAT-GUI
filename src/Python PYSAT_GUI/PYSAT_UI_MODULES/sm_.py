@@ -49,21 +49,22 @@ except AttributeError:
 class sm_:
     def __init__(self, pysat_fun, verticalLayout_8):
         self.pysat_fun = pysat_fun
+        self.verticalLayout_8 = verticalLayout_8
+        self.submodel_layout_list=[]
         self.main()
+
 
     def main(self):
         # driver function, calls UI and set's up connections
         # add function list calls here
-        self.pysat_fun.set_fun_list(self.pysat_fun.do_norm)
+        self.pysat_fun.set_fun_list(self.pysat_fun.do_submodel_predict)
         self.sm_ui()
-        try:
-            self.add_ranges_button.clicked.connect(lambda: self.add_ranges())
-            self.del_ranges_button.clicked.connect(lambda: self.del_ranges())
-        except:
-            pass
+
+
 
     def sm_ui(self):
-        self.submodel_opt = QtGui.QGroupBox(self.)
+        self.submodel_opt = QtGui.QGroupBox()
+        font = QtGui.QFont()
         font.setPointSize(10)
         self.submodel_opt.setFont(font)
         self.submodel_opt.setObjectName(_fromUtf8("submodel_opt"))
@@ -111,29 +112,10 @@ class sm_:
         self.low_model_hlayout.addItem(spacerItem1)
         self.submodels_vlayout.addLayout(self.low_model_hlayout)
 
+
         #middle submodels go here
-        self.submodel_hlayout = QtGui.QHBoxLayout()
-        self.submodel_hlayout.setMargin(11)
-        self.submodel_hlayout.setSpacing(6)
-        self.submodel_hlayout.setObjectName(_fromUtf8("submodel_hlayout"))
-        self.choose_submodel = QtGui.QComboBox(self.submodel_opt)
-        self.choose_submodel.setObjectName(_fromUtf8("choose_submodel"))
-        self.submodel_hlayout.addWidget(self.choose_submodel)
-        self.submodel_min_label = QtGui.QLabel(self.submodel_opt)
-        self.submodel_min_label.setObjectName(_fromUtf8("submodel_min_label"))
-        self.submodel_hlayout.addWidget(self.submodel_min_label)
-        self.submodel_min = QtGui.QDoubleSpinBox(self.submodel_opt)
-        self.submodel_min.setObjectName(_fromUtf8("submodel_min"))
-        self.submodel_hlayout.addWidget(self.submodel_min)
-        self.submodel_max_label = QtGui.QLabel(self.submodel_opt)
-        self.submodel_max_label.setObjectName(_fromUtf8("submodel_max_label"))
-        self.submodel_hlayout.addWidget(self.submodel_max_label)
-        self.submodel_max = QtGui.QDoubleSpinBox(self.submodel_opt)
-        self.submodel_max.setObjectName(_fromUtf8("submodel_max"))
-        self.submodel_hlayout.addWidget(self.submodel_max)
-        spacerItem2 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.submodel_hlayout.addItem(spacerItem2)
-        self.submodels_vlayout.addLayout(self.submodel_hlayout)
+        self.midmodel_vlayout=QtGui.QVBoxLayout()
+        self.submodels_vlayout.addLayout(self.midmodel_vlayout)
 
         #always have a high submodel
         self.high_model_hlayout = QtGui.QHBoxLayout()
@@ -209,24 +191,69 @@ class sm_:
         self.choosemodel.setItemText(0, _translate("MainWindow", "Model", None))
         self.choose_low_model.setItemText(0, _translate("MainWindow", "Submodel", None))
         self.low_model_max_label.setText(_translate("MainWindow", "Max:", None))
-        self.submodel_min_label.setText(_translate("MainWindow", "Min: ", None))
-        self.submodel_max_label.setText(_translate("MainWindow", "Max: ", None))
+
         self.high_model_min_label.setText(_translate("MainWindow", "Min: ", None))
         self.add_submodel_button.setText(_translate("MainWindow", "Add Submodel", None))
         self.delete_submodel_button.setText(_translate("MainWindow", "Delete Submodel", None))
         self.optimize_checkbox.setText(_translate("MainWindow", "Optimize", None))
         self.choosedata_label.setText(_translate("MainWindow", "Choose known data:", None))
         self.choosedata_predict_label.setText(_translate("MainWindow", "Choose data to predict:", None))
-        self.actionTommy_s_Methgod.setText(_translate("MainWindow", "Tommy\'s Method", None))
 
         self.add_submodel_button.clicked.connect(lambda: self.add_submodel())
         self.delete_submodel_button.clicked.connect(lambda: self.del_submodel())
 
+
     def add_submodel(self):
-        pass
+        submodel_hlayout = QtGui.QHBoxLayout()
+        font = QtGui.QFont()
+        font.setPointSize(10)
+
+        submodel_hlayout.setMargin(11)
+        submodel_hlayout.setSpacing(6)
+        submodel_hlayout.setObjectName(_fromUtf8("submodel_hlayout"))
+        choose_submodel = QtGui.QComboBox()
+        choose_submodel.setObjectName(_fromUtf8("choose_submodel"))
+        choose_submodel.setFont(font)
+        submodel_hlayout.addWidget(choose_submodel)
+        submodel_min_label = QtGui.QLabel()
+        submodel_min_label.setObjectName(_fromUtf8("submodel_min_label"))
+        submodel_min_label.setFont(font)
+        submodel_hlayout.addWidget(submodel_min_label)
+        submodel_min = QtGui.QDoubleSpinBox()
+        submodel_min.setObjectName(_fromUtf8("submodel_min"))
+        submodel_min.setFont(font)
+        submodel_hlayout.addWidget(submodel_min)
+        submodel_max_label = QtGui.QLabel()
+        submodel_max_label.setObjectName(_fromUtf8("submodel_max_label"))
+        submodel_max_label.setFont(font)
+        submodel_hlayout.addWidget(submodel_max_label)
+        submodel_max = QtGui.QDoubleSpinBox()
+        submodel_max.setObjectName(_fromUtf8("submodel_max"))
+        submodel_max.setFont(font)
+        submodel_hlayout.addWidget(submodel_max)
+        spacerItem2 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        submodel_hlayout.addItem(spacerItem2)
+        submodel_min_label.setText(_translate("MainWindow", "Min: ", None))
+        submodel_max_label.setText(_translate("MainWindow", "Max: ", None))
+        self.midmodel_vlayout.addLayout(submodel_hlayout)
+        self.submodel_layout_list.append(submodel_hlayout)
+
+
+
 
     def del_submodel(self):
-        pass
+        submodel_to_delete=self.midmodel_vlayout.takeAt(self.midmodel_vlayout.count()-1)
+        if submodel_to_delete is not None:
+            while submodel_to_delete.count():
+                item = submodel_to_delete.takeAt(0)
+                widget = item.widget()
+                if widget is not None:
+                    widget.deleteLater()
+                else:
+                    pass#self.del_submodel(item.layout())
+
+
+
 
 
 

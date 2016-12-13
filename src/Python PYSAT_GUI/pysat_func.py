@@ -187,6 +187,9 @@ class pysat_func(QThread):
         except Exception as e:
             error_print(e)
 
+    def do_submodel_predict(self):
+        pass
+
     def do_plot(self, datakey,
                 xvar, yvar,
                 figfile=None, xrange=None,

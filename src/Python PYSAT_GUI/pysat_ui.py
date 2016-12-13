@@ -412,7 +412,7 @@ class pysat_ui(object):
         PYSAT_UI_MODULES.regression_predict_(self.pysat_fun, self.verticalLayout_8)
 
     def do_submodel_predict(self):
-        PYSAT_UI_MODULES.sm_(self.pysat_fun,self.verticalLayout_8)
+        PYSAT_UI_MODULES.sm_(self.pysat_fun, self.verticalLayout_8)
 
     def do_plot(self):
         PYSAT_UI_MODULES.plot_(self.pysat_fun, self.verticalLayout_8)
