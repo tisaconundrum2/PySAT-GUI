@@ -48,13 +48,14 @@ except AttributeError:
 
 class normalization_:
     def __init__(self, pysat_fun, verticalLayout_8):
-        self.pysat_fun = pysat_fun                                 # setting up pysat_fun
-        self.verticalLayout_8 = verticalLayout_8                   # setting up the vertical Layout
-        self.ranges = [None]*128                                   # a list that will hold the order of boxes
-        self.num = 0                                               # this will keep tabs on how far along we are in list
-        self.min_lineEdits = []                                    # left hand boxes
-        self.max_lineEdits = []                                    # right hand boxes
-        self.main()                                                # start the main method
+        super().__init__()
+        self.pysat_fun = pysat_fun                                                       # setting up pysat_fun
+        self.verticalLayout_8 = verticalLayout_8                                         # setting up the vertical Layout
+        self.ranges = [None]*128                                                         # a list that will hold the order of boxes
+        self.num = 0                                                                     # this will keep tabs on how far along we are in list
+        self.min_list = []                                                               # left hand boxes
+        self.max_list = []                                                               # right hand boxes
+        self.main()                                                                      # start the main method
 
     def main(self):
         self.pysat_fun.set_fun_list(self.pysat_fun.do_norm)
@@ -119,56 +120,63 @@ class normalization_:
         self.add_ranges_button.setText(_translate("MainWindow", "Add Ranges", None))
         self.finish_button.setText(_translate("MainWindow", "Delete Ranges", None))
 
-    def finished(self):
-        arg_list = []
-        len_of_lineEdits = len(self.min_lineEdits) + len(self.max_lineEdits)
-        for i in range(len_of_lineEdits):
-            try:
-                if not self.min_lineEdits[i].text() == '' and not self.max_lineEdits[i].text() == '':
-                    small_tuple = (int(self.min_lineEdits[i].text()), int(self.max_lineEdits[i].text()))
-                    arg_list.append(small_tuple)
-            except:
-                pass
-        datakey = self.normalization_choosedata.currentText()
-        # arg_list.append(['known data', [(0, 350), (350, 470), (470, 1000)]])
-        self.pysat_fun.set_arg_list([datakey, arg_list], True)
-        print(self.pysat_fun.arg_list)
+    def finished(self, min_list, max_list):
+        arg_list = []                                                                    # prep the argument list. it will hold the tuples
+        len_of_lineEdits = len(min_list) + len(max_list)                                 # get the total length of min and max together
+        for i in range(len_of_lineEdits):                                                # iterate through each box
+            try:                                                                         # try the below code
+                if not min_list[i].text() == '' and not max_list[i].text() == '':        # as long as their is not a blank space, we can move forward
+                    small_tuple = (int(min_list[i].text()), int(max_list[i].text()))     # have small_tuple hold the min and max box's data
+                    arg_list.append(small_tuple)                                         # add the min and max tuples to the arg_list
+            except:                                                                      #
+                pass                                                                     #
+        datakey = self.normalization_choosedata.currentText()                            #
+        # arg_list.append(['known data', [(0, 350), (350, 470), (470, 1000)]])           #
+        self.pysat_fun.set_arg_list([datakey, arg_list], True)                           # add the new data to the argument list
+        print(self.pysat_fun.arg_list)                                                   # print out the data for debugging purposes
 
     def add_ranges(self):
-        data = Ranges_()
-        data.add_ranges()
+        self.data = Ranges_()
+        self.data.add_ranges()
+        self.all_ranges_layout.addLayout(self.data.get_layout())                         # make ranges_layout a child of all_ranges_layout
+
 
     def del_ranges(self):
-        pass
+        self.data.deleteLater()
 
 
-class Ranges_:
+class Ranges_():
     def __init__(self):
-        self.ranges_layout = QtGui.QHBoxLayout()                            # setup the ranges_layout, it will be a child of all_ranges_layout
-        self.min_label = QtGui.QLabel(self.normalization)                   # setup the min label
-        self.max_label = QtGui.QLabel(self.normalization)                   # setup the max label
-        self.min_lineEdit = QtGui.QLineEdit(self.normalization)             # setup the min lineEdit
-        self.max_lineEdit = QtGui.QLineEdit(self.normalization)             # setup the max lineEdit
-        self.ranges_layout.addWidget(self.min_label)                        # apply the min label to the widget
-        self.ranges_layout.addWidget(self.min_lineEdit)                     # apply the min lineEdit to the widget
-        self.ranges_layout.addWidget(self.max_label)                        # apply the max label
-        self.ranges_layout.addWidget(self.max_lineEdit)                     # apply the max lineEdit
-        self.min_label.setText(_translate("MainWindow", "Min", None))       # set the text of the min label
-        self.max_label.setText(_translate("MainWindow", "Max", None))       # set the text of the max label
-        self.all_ranges_layout.addLayout(self.ranges_layout)                # make ranges_layout a child of all_ranges_layout
+        self.min_list = []
+        self.max_list = []
 
-        self.min_lineEdits.append(self.min_lineEdit)                        # set up an array of lineEdits
-        self.max_lineEdits.append(self.max_lineEdit)
+    def add_ranges(self):
+        self.ranges_layout = QtGui.QHBoxLayout()                                         # setup the ranges_layout, it will be a child of all_ranges_layout
+        self.min_label = QtGui.QLabel()                                                  # setup the min label
+        self.max_label = QtGui.QLabel()                                                  # setup the max label
+        self.min_lineEdit = QtGui.QLineEdit()                                            # setup the min lineEdit
+        self.max_lineEdit = QtGui.QLineEdit()                                            # setup the max lineEdit
+        self.ranges_layout.addWidget(self.min_label)                                     # apply the min label to the widget
+        self.ranges_layout.addWidget(self.min_lineEdit)                                  # apply the min lineEdit to the widget
+        self.ranges_layout.addWidget(self.max_label)                                     # apply the max label
+        self.ranges_layout.addWidget(self.max_lineEdit)                                  # apply the max lineEdit
+        self.min_label.setText(_translate("MainWindow", "Min", None))                    # set the text of the min label
+        self.max_label.setText(_translate("MainWindow", "Max", None))                    # set the text of the max label
+        self.min_list.append(self.min_lineEdit)                                          # set up an array of lineEdits
+        self.max_list.append(self.max_lineEdit)
 
+    def get_layout(self):
+        return self.ranges_layout                                                        # make ranges_layout a child of all_ranges_layout
 
     def deleteLater(self):
-        self.ranges_layout.removeWidget(self.min_label)                        # apply the min label to the widget
-        self.ranges_layout.removeWidget(self.min_lineEdit)                     # apply the min lineEdit to the widget
-        self.ranges_layout.removeWidget(self.max_label)                        # apply the max label
-        self.ranges_layout.removeWidget(self.max_lineEdit)                     # apply the max lineEdiremoveWidget()
+        self.ranges_layout.removeWidget(self.min_label)                                  # apply the min label to the widget
+        self.ranges_layout.removeWidget(self.min_lineEdit)                               # apply the min lineEdit to the widget
+        self.ranges_layout.removeWidget(self.max_label)                                  # apply the max label
+        self.ranges_layout.removeWidget(self.max_lineEdit)                               # apply the max lineEdit removeWidget()
         self.ranges_layout.deleteLater()
-        del self.min_lineEdits[-1]                                          # delete last element
-        del self.max_lineEdits[-1]                                          # delete last element
+        del self.min_list[-1]                                                            # delete last element
+        del self.max_list[-1]                                                            # delete last element
+
 
 
 def make_combobox(choices):
