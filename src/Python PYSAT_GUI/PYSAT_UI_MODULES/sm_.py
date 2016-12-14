@@ -1,6 +1,7 @@
 from PyQt4 import QtCore, QtGui
 
 from PYSAT_UI_MODULES.Error_ import error_print
+from PYSAT_UI_MODULES.del_layout_ import del_layout_
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -196,7 +197,7 @@ class sm_:
         self.choosedata_predict_label.setText(_translate("MainWindow", "Choose data to predict:", None))
 
         self.add_submodel_button.clicked.connect(lambda: self.add_submodel())
-        self.delete_submodel_button.clicked.connect(lambda: self.del_submodel())
+        self.delete_submodel_button.clicked.connect(lambda: del_layout_(self.midmodel_vlayout))
 
     def add_submodel(self):
         submodel_hlayout = QtGui.QHBoxLayout()
@@ -232,18 +233,6 @@ class sm_:
         submodel_max_label.setText(_translate("MainWindow", "Max: ", None))
         self.midmodel_vlayout.addLayout(submodel_hlayout)
         self.submodel_layout_list.append(submodel_hlayout)
-
-    def del_submodel(self):
-        submodel_to_delete = self.midmodel_vlayout.takeAt(self.midmodel_vlayout.count() - 1)
-        if submodel_to_delete is not None:
-            while submodel_to_delete.count():
-                item = submodel_to_delete.takeAt(0)
-                widget = item.widget()
-                if widget is not None:
-                    widget.deleteLater()
-                else:
-                    pass  # self.del_submodel(item.layout())
-
 
 class min_max:
     def __init__(self, pysat_fun, sm, verticalLayout):

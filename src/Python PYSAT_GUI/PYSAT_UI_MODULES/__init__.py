@@ -18,3 +18,4 @@ from PYSAT_UI_MODULES.strat_folds_ import *
 from PYSAT_UI_MODULES.cv_ import *
 from PYSAT_UI_MODULES.removenull_ import *
 from PYSAT_UI_MODULES.sm_ import *
+from PYSAT_UI_MODULES.del_layout_ import del_layout_

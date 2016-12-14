@@ -1,6 +1,7 @@
 from PyQt4 import QtCore, QtGui
 
 from PYSAT_UI_MODULES.Error_ import error_print
+from PYSAT_UI_MODULES.del_layout_ import del_layout_
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -67,7 +68,7 @@ class normalization_:
         self.normalization_ui()
         self.pysat_fun.set_greyed_modules(self.normalization, True)
         self.add_ranges_button.clicked.connect(lambda: self.add_ranges())
-        self.finish_button.clicked.connect(lambda: self.del_ranges(self.all_ranges_layout))
+        self.finish_button.clicked.connect(lambda: del_layout_(self.all_ranges_layout))
 
     def normalization_ui(self):
         datachoices = self.pysat_fun.datakeys
@@ -151,16 +152,6 @@ class normalization_:
         self.max_list.append(self.max_lineEdit)
         self.all_ranges_layout.addLayout(self.ranges_layout)
 
-    def del_ranges(self, QLayout):
-        to_delete = QLayout.takeAt(QLayout.count() - 1)     # remove the layout item at n-1 index
-        if to_delete is not None:                                                         # We run this method as long as there are objects
-            while to_delete.count():                                                      # while the count is not 0
-                item = to_delete.takeAt(0)                                                # grab the layout item at 0th index
-                widget = item.widget()                                                    # get the widget at this location
-                if widget is not None:                                                    # if there is an object in this widget
-                    widget.deleteLater()                                                  # delete this widget
-                else:
-                    pass
 
 
 def make_combobox(choices):
@@ -172,7 +163,6 @@ def make_combobox(choices):
 
 def make_listwidget(choices):
     listwidget = QtGui.QListWidget()
-    listwidget.setItemDelegate
     for item in choices:
         item = QtGui.QListWidgetItem(item)
         listwidget.addItem(item)
