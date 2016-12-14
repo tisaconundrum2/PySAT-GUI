@@ -67,7 +67,7 @@ class normalization_:
         self.normalization_ui()
         self.pysat_fun.set_greyed_modules(self.normalization, True)
         self.add_ranges_button.clicked.connect(lambda: self.add_ranges())
-        self.finish_button.clicked.connect(lambda: self.del_ranges())
+        self.finish_button.clicked.connect(lambda: self.del_ranges(self.all_ranges_layout))
 
     def normalization_ui(self):
         datachoices = self.pysat_fun.datakeys
@@ -151,8 +151,8 @@ class normalization_:
         self.max_list.append(self.max_lineEdit)
         self.all_ranges_layout.addLayout(self.ranges_layout)
 
-    def del_ranges(self):
-        to_delete = self.all_ranges_layout.takeAt(self.all_ranges_layout.count() - 1)     # remove the layout item at n-1 index
+    def del_ranges(self, QLayout):
+        to_delete = QLayout.takeAt(QLayout.count() - 1)     # remove the layout item at n-1 index
         if to_delete is not None:                                                         # We run this method as long as there are objects
             while to_delete.count():                                                      # while the count is not 0
                 item = to_delete.takeAt(0)                                                # grab the layout item at 0th index
