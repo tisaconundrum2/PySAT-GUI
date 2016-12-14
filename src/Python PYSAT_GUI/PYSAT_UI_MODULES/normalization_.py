@@ -136,47 +136,31 @@ class normalization_:
         print(self.pysat_fun.arg_list)                                                   # print out the data for debugging purposes
 
     def add_ranges(self):
-        self.data = Ranges_()
-        self.data.add_ranges()
-        self.all_ranges_layout.addLayout(self.data.get_layout())                         # make ranges_layout a child of all_ranges_layout
-
+        self.ranges_layout = QtGui.QHBoxLayout()  # setup the ranges_layout, it will be a child of all_ranges_layout
+        self.min_label = QtGui.QLabel()  # setup the min label
+        self.max_label = QtGui.QLabel()  # setup the max label
+        self.min_lineEdit = QtGui.QLineEdit()  # setup the min lineEdit
+        self.max_lineEdit = QtGui.QLineEdit()  # setup the max lineEdit
+        self.ranges_layout.addWidget(self.min_label)  # apply the min label to the widget
+        self.ranges_layout.addWidget(self.min_lineEdit)  # apply the min lineEdit to the widget
+        self.ranges_layout.addWidget(self.max_label)  # apply the max label
+        self.ranges_layout.addWidget(self.max_lineEdit)  # apply the max lineEdit
+        self.min_label.setText(_translate("MainWindow", "Min", None))  # set the text of the min label
+        self.max_label.setText(_translate("MainWindow", "Max", None))  # set the text of the max label
+        self.min_list.append(self.min_lineEdit)  # set up an array of lineEdits
+        self.max_list.append(self.max_lineEdit)
+        self.all_ranges_layout.addLayout(self.ranges_layout)
 
     def del_ranges(self):
-        self.data.deleteLater()
-
-
-class Ranges_():
-    def __init__(self):
-        self.min_list = []
-        self.max_list = []
-
-    def add_ranges(self):
-        self.ranges_layout = QtGui.QHBoxLayout()                                         # setup the ranges_layout, it will be a child of all_ranges_layout
-        self.min_label = QtGui.QLabel()                                                  # setup the min label
-        self.max_label = QtGui.QLabel()                                                  # setup the max label
-        self.min_lineEdit = QtGui.QLineEdit()                                            # setup the min lineEdit
-        self.max_lineEdit = QtGui.QLineEdit()                                            # setup the max lineEdit
-        self.ranges_layout.addWidget(self.min_label)                                     # apply the min label to the widget
-        self.ranges_layout.addWidget(self.min_lineEdit)                                  # apply the min lineEdit to the widget
-        self.ranges_layout.addWidget(self.max_label)                                     # apply the max label
-        self.ranges_layout.addWidget(self.max_lineEdit)                                  # apply the max lineEdit
-        self.min_label.setText(_translate("MainWindow", "Min", None))                    # set the text of the min label
-        self.max_label.setText(_translate("MainWindow", "Max", None))                    # set the text of the max label
-        self.min_list.append(self.min_lineEdit)                                          # set up an array of lineEdits
-        self.max_list.append(self.max_lineEdit)
-
-    def get_layout(self):
-        return self.ranges_layout                                                        # make ranges_layout a child of all_ranges_layout
-
-    def deleteLater(self):
-        self.ranges_layout.removeWidget(self.min_label)                                  # apply the min label to the widget
-        self.ranges_layout.removeWidget(self.min_lineEdit)                               # apply the min lineEdit to the widget
-        self.ranges_layout.removeWidget(self.max_label)                                  # apply the max label
-        self.ranges_layout.removeWidget(self.max_lineEdit)                               # apply the max lineEdit removeWidget()
-        self.ranges_layout.deleteLater()
-        del self.min_list[-1]                                                            # delete last element
-        del self.max_list[-1]                                                            # delete last element
-
+        to_delete = self.all_ranges_layout.takeAt(self.all_ranges_layout.count() - 1)
+        if to_delete is not None:
+            while to_delete.count():
+                item = to_delete.takeAt(0)
+                widget = item.widget()
+                if widget is not None:
+                    widget.deleteLater()
+                else:
+                    pass
 
 
 def make_combobox(choices):
