@@ -18,7 +18,6 @@ class pysat_func(QThread):
         self.datakeys = []
         self.models = {}
         self.modelkeys = []
-        self.modelranges = []
         self.model_xvars = {}
         self.figs = {}
         self.fun_list = []
