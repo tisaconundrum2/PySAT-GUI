@@ -136,29 +136,29 @@ class normalization_:
         print(self.pysat_fun.arg_list)                                                   # print out the data for debugging purposes
 
     def add_ranges(self):
-        self.ranges_layout = QtGui.QHBoxLayout()  # setup the ranges_layout, it will be a child of all_ranges_layout
-        self.min_label = QtGui.QLabel()  # setup the min label
-        self.max_label = QtGui.QLabel()  # setup the max label
-        self.min_lineEdit = QtGui.QLineEdit()  # setup the min lineEdit
-        self.max_lineEdit = QtGui.QLineEdit()  # setup the max lineEdit
-        self.ranges_layout.addWidget(self.min_label)  # apply the min label to the widget
-        self.ranges_layout.addWidget(self.min_lineEdit)  # apply the min lineEdit to the widget
-        self.ranges_layout.addWidget(self.max_label)  # apply the max label
-        self.ranges_layout.addWidget(self.max_lineEdit)  # apply the max lineEdit
-        self.min_label.setText(_translate("MainWindow", "Min", None))  # set the text of the min label
-        self.max_label.setText(_translate("MainWindow", "Max", None))  # set the text of the max label
-        self.min_list.append(self.min_lineEdit)  # set up an array of lineEdits
+        self.ranges_layout = QtGui.QHBoxLayout()                                          # setup the ranges_layout, it will be a child of all_ranges_layout
+        self.min_label = QtGui.QLabel()                                                   # setup the min label
+        self.max_label = QtGui.QLabel()                                                   # setup the max label
+        self.min_lineEdit = QtGui.QLineEdit()                                             # setup the min lineEdit
+        self.max_lineEdit = QtGui.QLineEdit()                                             # setup the max lineEdit
+        self.ranges_layout.addWidget(self.min_label)                                      # apply the min label to the widget
+        self.ranges_layout.addWidget(self.min_lineEdit)                                   # apply the min lineEdit to the widget
+        self.ranges_layout.addWidget(self.max_label)                                      # apply the max label
+        self.ranges_layout.addWidget(self.max_lineEdit)                                   # apply the max lineEdit
+        self.min_label.setText(_translate("MainWindow", "Min", None))                     # set the text of the min label
+        self.max_label.setText(_translate("MainWindow", "Max", None))                     # set the text of the max label
+        self.min_list.append(self.min_lineEdit)                                           # set up an array of lineEdits
         self.max_list.append(self.max_lineEdit)
         self.all_ranges_layout.addLayout(self.ranges_layout)
 
     def del_ranges(self):
-        to_delete = self.all_ranges_layout.takeAt(self.all_ranges_layout.count() - 1)
-        if to_delete is not None:
-            while to_delete.count():
-                item = to_delete.takeAt(0)
-                widget = item.widget()
-                if widget is not None:
-                    widget.deleteLater()
+        to_delete = self.all_ranges_layout.takeAt(self.all_ranges_layout.count() - 1)     # remove the layout item at n-1 index
+        if to_delete is not None:                                                         # We run this method as long as there are objects
+            while to_delete.count():                                                      # while the count is not 0
+                item = to_delete.takeAt(0)                                                # grab the layout item at 0th index
+                widget = item.widget()                                                    # get the widget at this location
+                if widget is not None:                                                    # if there is an object in this widget
+                    widget.deleteLater()                                                  # delete this widget
                 else:
                     pass
 
