@@ -68,7 +68,7 @@ class normalization_:
         self.normalization_ui()
         self.pysat_fun.set_greyed_modules(self.normalization, True)
         self.add_ranges_button.clicked.connect(lambda: self.add_ranges())
-        self.finish_button.clicked.connect(lambda: del_layout_(self.all_ranges_layout))
+        self.del_button.clicked.connect(lambda: self.del_ranges())
 
     def normalization_ui(self):
         datachoices = self.pysat_fun.datakeys
@@ -110,16 +110,16 @@ class normalization_:
         self.add_ranges_button = QtGui.QPushButton(self.normalization)
         self.add_ranges_button.setObjectName(_fromUtf8("add_ranges_button"))
         self.min_max_horizontalLayout.addWidget(self.add_ranges_button)
-        self.finish_button = QtGui.QPushButton(self.normalization)
-        self.finish_button.setObjectName(_fromUtf8("add_ranges_button_2"))
-        self.min_max_horizontalLayout.addWidget(self.finish_button)
+        self.del_button = QtGui.QPushButton(self.normalization)
+        self.del_button.setObjectName(_fromUtf8("add_ranges_button_2"))
+        self.min_max_horizontalLayout.addWidget(self.del_button)
         self.verticalLayout.addLayout(self.min_max_horizontalLayout)
         self.verticalLayout_8.addWidget(self.normalization)
 
         self.normalization.setTitle(_translate("MainWindow", "Normalization", None))
         self.normalization_choosedata_label.setText(_translate("MainWindow", "Choose data: ", None))
         self.add_ranges_button.setText(_translate("MainWindow", "Add Ranges", None))
-        self.finish_button.setText(_translate("MainWindow", "Delete Ranges", None))
+        self.del_button.setText(_translate("MainWindow", "Delete Ranges", None))
 
     def finished(self, min_list, max_list):
         arg_list = []                                                                    # prep the argument list. it will hold the tuples
@@ -134,7 +134,7 @@ class normalization_:
         datakey = self.normalization_choosedata.currentText()                            #
         # arg_list.append(['known data', [(0, 350), (350, 470), (470, 1000)]])           #
         self.pysat_fun.set_arg_list([datakey, arg_list], True)                           # add the new data to the argument list
-        print(self.pysat_fun.arg_list)                                                   # print out the data for debugging purposes
+        print(arg_list)                                                                  # print out the data for debugging purposes
 
     def add_ranges(self):
         self.ranges_layout = QtGui.QHBoxLayout()                                          # setup the ranges_layout, it will be a child of all_ranges_layout
@@ -151,7 +151,14 @@ class normalization_:
         self.min_list.append(self.min_lineEdit)                                           # set up an array of lineEdits
         self.max_list.append(self.max_lineEdit)
         self.all_ranges_layout.addLayout(self.ranges_layout)
+        self.min_lineEdit.editingFinished.connect(lambda: self.finished(self.min_list, self.max_list))
+        self.max_lineEdit.editingFinished.connect(lambda: self.finished(self.min_list, self.max_list))
 
+    def del_ranges(self):
+        del_layout_(self.all_ranges_layout)
+        self.min_list[-1] = None
+        self.max_list[-1] = None
+        self.finished(self.min_list, self.max_list)
 
 
 def make_combobox(choices):
