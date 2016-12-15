@@ -4,6 +4,7 @@ from pysat.regression import cv
 from pysat.plotting.plots import make_plot, pca_ica_plot
 import pandas as pd
 from PYSAT_UI_MODULES.Error_ import error_print
+from PYSAT_UI_MODULES.del_layout_ import *
 from PyQt4.QtCore import QThread
 from PyQt4 import QtCore
 import numpy as np
@@ -244,12 +245,22 @@ class pysat_func(QThread):
     def __del__(self):
         self.wait()
 
+    def del_layout(self):
+        del_qwidget_(self.greyed_modules[-1])
+        if len(self.greyed_modules) > 0:
+            del self.greyed_modules[-1]
+            del self.fun_list[-1]
+            del self.arg_list[-1]
+            del self.kw_list[-1]
+
     def run(self):
         # TODO this function will take all the enumerated functions and parameters and run them
-        for i in range(self.leftOff, len(self.fun_list)):
-            print(self.fun_list[i])
-            self.fun_list[i](*self.arg_list[i], **self.kw_list[i])
-            self.greyed_modules[i].setDisabled(True)
-            self.leftOff = i + 1
-
-        self.taskFinished.emit()
+        try:
+            for i in range(self.leftOff, len(self.fun_list)):
+                print(self.fun_list[i])
+                self.fun_list[i](*self.arg_list[i], **self.kw_list[i])
+                self.greyed_modules[i].setDisabled(True)
+                self.leftOff = i + 1
+                self.taskFinished.emit()
+        except:
+            self.taskFinished.emit()
