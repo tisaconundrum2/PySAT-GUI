@@ -461,6 +461,11 @@ class pysat_ui(object):
         self.actionPredict.setDisabled(bool)
         self.actionInterpolate.setDisabled(bool)
         self.actionPlot.setDisabled(bool)
+        self.actionRemoveNull.setDisabled(bool)
+        self.actionCross_Validation.setDisabled(bool)
+        self.actionSubmodelPredict.setDisabled(bool)
+        self.actionSave_Current_Data.setDisabled(bool)
+        self.actionSave_Current_Plots.setDisabled(bool)
 
     def set_visible_items(self):
         self.actionNoise_Reduction.setVisible(False)
