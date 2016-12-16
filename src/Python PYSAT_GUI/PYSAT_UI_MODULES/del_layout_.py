@@ -8,3 +8,7 @@ def del_layout_(QLayout):
                 widget.deleteLater()  # delete this widget
             else:
                 pass
+
+
+def del_qwidget_(QWidget):
+    QWidget.close()

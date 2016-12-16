@@ -382,7 +382,7 @@ class pysat_ui(object):
         self.actionCreate_N_Folds.setText(_translate("MainWindow", "Create N Folds", None))
         self.actionStratified_Folds.setText(_translate("MainWindow", "Stratified Folds", None))
         self.okButton.clicked.connect(lambda: self.on_okButton_clicked())
-        # self.delButton.clicked.connect(lambda)
+        self.delButton.clicked.connect(lambda: self.pysat_fun.del_layout())
 
     def file_outpath(self):
         self.flag = PYSAT_UI_MODULES.file_outpath_(self.pysat_fun, self.verticalLayout_8)
