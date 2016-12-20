@@ -122,6 +122,11 @@ class normalization_:
         self.del_button.setText(_translate("MainWindow", "Delete Ranges", None))
 
     def finished(self, min_list, max_list):
+        #
+        # as long as previous number is smaller
+        # move forward.
+        #
+
         arg_list = []                                                                    # prep the argument list. it will hold the tuples
         len_of_lineEdits = len(min_list) + len(max_list)                                 # get the total length of min and max together
         for i in range(len_of_lineEdits):                                                # iterate through each box

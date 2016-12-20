@@ -49,7 +49,6 @@ Example of how this works, and how this looks
         |
    compare these    
    two files using  
-   compare.bat      
         |
         |
         v
