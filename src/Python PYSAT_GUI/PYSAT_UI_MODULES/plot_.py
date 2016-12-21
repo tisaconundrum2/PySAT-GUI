@@ -129,6 +129,10 @@ class plot_:
         self.verticalLayout.setMargin(11)
         self.verticalLayout.setSpacing(6)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
+
+
+
+
         self.scatter_choosedata_form = QtGui.QFormLayout()
         self.scatter_choosedata_form.setMargin(11)
         self.scatter_choosedata_form.setSpacing(6)
@@ -285,8 +289,13 @@ class plot_:
 
         self.scatter.setTitle(_translate("MainWindow", "Scatter Plot", None))
         self.scatter_choosedata_label.setText(_translate("MainWindow", "Choose data: ", None))
-        self.scatter_choosedata.setItemText(0, _translate("MainWindow", "Choose Data", None))
-        self.scatter_choosedata.setItemText(1, _translate("MainWindow", "Known Data", None))
+
+        datachoices = self.pysat_fun.datakeys
+        if datachoices == []:
+            error_print('No Data has been loaded')
+            datachoices = ['No data has been loaded!']
+        self.plot_choosedata = make_combobox(datachoices)
+
         self.figname_label.setText(_translate("MainWindow", "Figure name:", None))
         self.plot_title_label.setText(_translate("MainWindow", "Plot Title: ", None))
         self.scatter_choosex_label.setText(_translate("MainWindow", "Choose X variable: ", None))
@@ -378,21 +387,21 @@ class plot_:
             if isinstance(obj, QtGui.QCheckBox):
                 obj.toggled.connect(lambda: self.get_plot_parameters())
 
-                       self.plot_choosedata.currentIndexChanged.connect(lambda: self.get_plot_parameters())
-                       self.xvar_choices.currentIndexChanged.connect(lambda: self.get_plot_parameters())
-                       self.yvar_choices.currentIndexChanged.connect(lambda: self.get_plot_parameters())
-                       self.xmin_spin.valueChanged.connect(lambda: self.get_plot_parameters())
-                       self.ymin_spin.valueChanged.connect(lambda: self.get_plot_parameters())
-                       self.xmax_spin.valueChanged.connect(lambda: self.get_plot_parameters())
-                       self.ymax_spin.valueChanged.connect(lambda: self.get_plot_parameters())
-                       self.xtitle_text.textChanged.connect(lambda: self.get_plot_parameters())
-                       self.ytitle_text.textChanged.connect(lambda: self.get_plot_parameters())
-                       self.legend_label_text.textChanged.connect(lambda: self.get_plot_parameters())
-                       self.figname_text.textChanged.connect(lambda: self.get_plot_parameters())
-                       self.plot_title_text.textChanged.connect(lambda: self.get_plot_parameters())
-                       self.onetoone.toggled.connect(lambda: self.get_plot_parameters())
-                       self.color_choices.currentIndexChanged.connect(lambda: self.get_plot_parameters())
-                       self.file_text.textChanged.connect(lambda: self.get_plot_parameters())
+                       # self.plot_choosedata.currentIndexChanged.connect(lambda: self.get_plot_parameters())
+                       # self.xvar_choices.currentIndexChanged.connect(lambda: self.get_plot_parameters())
+                       # self.yvar_choices.currentIndexChanged.connect(lambda: self.get_plot_parameters())
+                       # self.xmin_spin.valueChanged.connect(lambda: self.get_plot_parameters())
+                       # self.ymin_spin.valueChanged.connect(lambda: self.get_plot_parameters())
+                       # self.xmax_spin.valueChanged.connect(lambda: self.get_plot_parameters())
+                       # self.ymax_spin.valueChanged.connect(lambda: self.get_plot_parameters())
+                       # self.xtitle_text.textChanged.connect(lambda: self.get_plot_parameters())
+                       # self.ytitle_text.textChanged.connect(lambda: self.get_plot_parameters())
+                       # self.legend_label_text.textChanged.connect(lambda: self.get_plot_parameters())
+                       # self.figname_text.textChanged.connect(lambda: self.get_plot_parameters())
+                       # self.plot_title_text.textChanged.connect(lambda: self.get_plot_parameters())
+                       # self.onetoone.toggled.connect(lambda: self.get_plot_parameters())
+                       # self.color_choices.currentIndexChanged.connect(lambda: self.get_plot_parameters())
+                       # self.file_text.textChanged.connect(lambda: self.get_plot_parameters())
 
     def plot_change_vars(self, obj):
         obj.clear()
