@@ -1,3 +1,10 @@
+# Process
+
+Start UIconversion.bat
+then run compare.bat
+
+# How it works
+
 - "UI Files" holds many *.UI
 - process all these UI files with "UIconversion.bat"
 - UI conversion converts all the *.ui files to *.py and puts them into "PythonUI"
