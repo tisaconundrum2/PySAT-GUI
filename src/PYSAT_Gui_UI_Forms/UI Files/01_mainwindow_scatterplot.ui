@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>758</width>
-    <height>689</height>
+    <width>900</width>
+    <height>827</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,9 +24,9 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>0</y>
-         <width>704</width>
-         <height>700</height>
+         <y>-141</y>
+         <width>846</width>
+         <height>792</height>
         </rect>
        </property>
        <property name="font">
@@ -50,7 +50,7 @@ QGroupBox::title {
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_8">
         <item>
-         <widget class="QGroupBox" name="scatter">
+         <widget class="QGroupBox" name="plot">
           <property name="font">
            <font>
             <pointsize>10</pointsize>
@@ -61,7 +61,7 @@ QGroupBox::title {
           </property>
           <layout class="QVBoxLayout" name="verticalLayout">
            <item>
-            <layout class="QFormLayout" name="scatter_choosedata_form">
+            <layout class="QFormLayout" name="scatter_choosedata_flayout">
              <item row="0" column="0">
               <widget class="QLabel" name="scatter_choosedata_label">
                <property name="text">
@@ -106,14 +106,30 @@ QGroupBox::title {
             </layout>
            </item>
            <item>
-            <widget class="Line" name="line">
+            <spacer name="horizontalSpacer_2">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
              </property>
-            </widget>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
            </item>
            <item>
-            <layout class="QFormLayout" name="scatter_choosex_form">
+            <layout class="QFormLayout" name="scatter_choosex_flayout">
+             <property name="fieldGrowthPolicy">
+              <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+             </property>
+             <item row="0" column="0">
+              <widget class="QLabel" name="scatter_choosex_label">
+               <property name="text">
+                <string>Choose X variable:</string>
+               </property>
+              </widget>
+             </item>
              <item row="0" column="1">
               <widget class="QComboBox" name="xvar_choices"/>
              </item>
@@ -147,17 +163,23 @@ QGroupBox::title {
              <item row="3" column="1">
               <widget class="QDoubleSpinBox" name="xmax_spin"/>
              </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="scatter_choosex_label">
-               <property name="text">
-                <string>Choose X variable:</string>
-               </property>
-              </widget>
-             </item>
             </layout>
            </item>
            <item>
-            <layout class="QFormLayout" name="scatter_choosey_form">
+            <spacer name="horizontalSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <layout class="QFormLayout" name="scatter_choosey_flayout">
              <item row="0" column="1">
               <widget class="QComboBox" name="yvar_choices"/>
              </item>
@@ -201,11 +223,17 @@ QGroupBox::title {
             </layout>
            </item>
            <item>
-            <widget class="Line" name="line_1">
+            <spacer name="horizontalSpacer_3">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
              </property>
-            </widget>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
            </item>
            <item>
             <layout class="QHBoxLayout" name="legend_hlayout">
@@ -229,7 +257,20 @@ QGroupBox::title {
             </layout>
            </item>
            <item>
-            <layout class="QFormLayout" name="formLayout">
+            <spacer name="horizontalSpacer_4">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <layout class="QFormLayout" name="scatter_chooseline_flayout">
              <property name="fieldGrowthPolicy">
               <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
              </property>
@@ -458,7 +499,7 @@ QGroupBox::title {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>758</width>
+     <width>900</width>
      <height>31</height>
     </rect>
    </property>
