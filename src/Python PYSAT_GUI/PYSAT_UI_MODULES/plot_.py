@@ -35,8 +35,7 @@ class plot_:
         self.pysat_fun.set_greyed_modules(self.plot, True)
 
     def get_plot_parameters(self):
-
-        datakey = self.plot_choosedata.currentText()
+        datakey = self.scatter_choosedata.currentText()
         xvar = self.xvar_choices.currentText()
         yvar = self.yvar_choices.currentText()
         try:
@@ -168,9 +167,24 @@ class plot_:
         self.scatter_choosex_label = QtGui.QLabel(self.plot)
         self.scatter_choosex_label.setObjectName(_fromUtf8("scatter_choosex_label"))
         self.scatter_choosex_flayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.scatter_choosex_label)
-        self.xvar_choices = QtGui.QComboBox(self.plot)
+
+        try:
+            self.vars_level0 = self.pysat_fun.data[self.scatter_choosedata.currentText()].df.columns.get_level_values(0)
+            self.vars_level1 = self.pysat_fun.data[self.scatter_choosedata.currentText()].df.columns.get_level_values(1)
+            self.vars_level1 = list(self.vars_level1[self.vars_level0 != 'wvl'])
+            self.vars_level0 = list(self.vars_level0[self.vars_level0 != 'wvl'])
+            xvarchoices = self.vars_level1
+            pass
+        except:
+            xvarchoices = self.pysat_fun.data[self.scatter_choosedata.currentText()].columns.values
+        try:
+            xvarchoices = [i for i in xvarchoices if not 'Unnamed' in i]  # remove unnamed columns from choices
+        except:
+            pass
+        self.xvar_choices = make_combobox(xvarchoices)
         self.xvar_choices.setObjectName(_fromUtf8("xvar_choices"))
         self.scatter_choosex_flayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.xvar_choices)
+
         self.xtitle_label = QtGui.QLabel(self.plot)
         self.xtitle_label.setObjectName(_fromUtf8("xtitle_label"))
         self.scatter_choosex_flayout.setWidget(1, QtGui.QFormLayout.LabelRole, self.xtitle_label)
@@ -182,12 +196,14 @@ class plot_:
         self.scatter_choosex_flayout.setWidget(2, QtGui.QFormLayout.LabelRole, self.xmin_labe)
         self.xmin_spin = QtGui.QDoubleSpinBox(self.plot)
         self.xmin_spin.setObjectName(_fromUtf8("xmin_spin"))
+        self.xmin_spin.setRange(-10000000, 10000000)
         self.scatter_choosex_flayout.setWidget(2, QtGui.QFormLayout.FieldRole, self.xmin_spin)
         self.xmax_label = QtGui.QLabel(self.plot)
         self.xmax_label.setObjectName(_fromUtf8("xmax_label"))
         self.scatter_choosex_flayout.setWidget(3, QtGui.QFormLayout.LabelRole, self.xmax_label)
         self.xmax_spin = QtGui.QDoubleSpinBox(self.plot)
         self.xmax_spin.setObjectName(_fromUtf8("xmax_spin"))
+        self.xmax_spin.setRange(-10000000, 10000000)
         self.scatter_choosex_flayout.setWidget(3, QtGui.QFormLayout.FieldRole, self.xmax_spin)
         self.verticalLayout.addLayout(self.scatter_choosex_flayout)
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
@@ -196,7 +212,8 @@ class plot_:
         self.scatter_choosey_flayout.setMargin(11)
         self.scatter_choosey_flayout.setSpacing(6)
         self.scatter_choosey_flayout.setObjectName(_fromUtf8("scatter_choosey_flayout"))
-        self.yvar_choices = QtGui.QComboBox(self.plot)
+        yvarchoices = xvarchoices
+        self.yvar_choices = make_combobox(yvarchoices)
         self.yvar_choices.setObjectName(_fromUtf8("yvar_choices"))
         self.scatter_choosey_flayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.yvar_choices)
         self.ytitle_label = QtGui.QLabel(self.plot)
@@ -210,12 +227,14 @@ class plot_:
         self.scatter_choosey_flayout.setWidget(2, QtGui.QFormLayout.LabelRole, self.ymin_label)
         self.ymin_spin = QtGui.QDoubleSpinBox(self.plot)
         self.ymin_spin.setObjectName(_fromUtf8("ymin_spin"))
+        self.ymin_spin.setRange(-10000000, 10000000)
         self.scatter_choosey_flayout.setWidget(2, QtGui.QFormLayout.FieldRole, self.ymin_spin)
         self.ymax_label = QtGui.QLabel(self.plot)
         self.ymax_label.setObjectName(_fromUtf8("ymax_label"))
         self.scatter_choosey_flayout.setWidget(3, QtGui.QFormLayout.LabelRole, self.ymax_label)
         self.ymax_spin = QtGui.QDoubleSpinBox(self.plot)
         self.ymax_spin.setObjectName(_fromUtf8("ymax_spin"))
+        self.ymax_spin.setRange(-10000000, 10000000)
         self.scatter_choosey_flayout.setWidget(3, QtGui.QFormLayout.FieldRole, self.ymax_spin)
         self.scatter_choosey_label = QtGui.QLabel(self.plot)
         self.scatter_choosey_label.setObjectName(_fromUtf8("scatter_choosey_label"))
@@ -299,37 +318,54 @@ class plot_:
         self.legend_label.setText(_translate("MainWindow", "Legend Label: ", None))
         self.onetoone.setText(_translate("MainWindow", "One to One", None))
         self.color_label.setText(_translate("MainWindow", "Color:", None))
-        self.color_choices.setItemText(0, _translate("MainWindow", "Red", None))
-        self.color_choices.setItemText(1, _translate("MainWindow", "Green", None))
-        self.color_choices.setItemText(2, _translate("MainWindow", "Blue", None))
-        self.color_choices.setItemText(3, _translate("MainWindow", "Cyan", None))
-        self.color_choices.setItemText(4, _translate("MainWindow", "Magenta", None))
-        self.color_choices.setItemText(5, _translate("MainWindow", "Yellow", None))
-        self.color_choices.setItemText(6, _translate("MainWindow", "Black", None))
+        self.color_choices.addItem(_fromUtf8("Red"))
+        self.color_choices.addItem(_fromUtf8("Green"))
+        self.color_choices.addItem(_fromUtf8("Blue"))
+        self.color_choices.addItem(_fromUtf8("Cyan"))
+        self.color_choices.addItem(_fromUtf8("Yellow"))
+        self.color_choices.addItem(_fromUtf8("Magenta"))
+        self.color_choices.addItem(_fromUtf8("Black"))
         self.line_label.setText(_translate("MainWindow", "Line:", None))
-        self.line_choices.setItemText(0, _translate("MainWindow", "No Line", None))
-        self.line_choices.setItemText(1, _translate("MainWindow", "Line", None))
-        self.line_choices.setItemText(2, _translate("MainWindow", "Dashed Line", None))
-        self.line_choices.setItemText(3, _translate("MainWindow", "Dotted Line", None))
+        self.line_choices.addItem("No Line")
+        self.line_choices.addItem("Line")
+        self.line_choices.addItem("Dashed Line")
+        self.line_choices.addItem("Dotted Line")
         self.marker_label.setText(_translate("MainWindow", "Marker:", None))
-        self.marker_choices.setItemText(0, _translate("MainWindow", "Circles", None))
-        self.marker_choices.setItemText(1, _translate("MainWindow", "Squares", None))
-        self.marker_choices.setItemText(2, _translate("MainWindow", "Diamonds", None))
-        self.marker_choices.setItemText(3, _translate("MainWindow", "Triangle Up", None))
-        self.marker_choices.setItemText(4, _translate("MainWindow", "Triangle Down", None))
-        self.marker_choices.setItemText(5, _translate("MainWindow", "Triangle Left", None))
-        self.marker_choices.setItemText(6, _translate("MainWindow", "Triangle Right", None))
-        self.marker_choices.setItemText(7, _translate("MainWindow", "None", None))
+        self.marker_choices.addItem("Circles")
+        self.marker_choices.addItem("Squares")
+        self.marker_choices.addItem("Diamonds")
+        self.marker_choices.addItem("Triangle Up")
+        self.marker_choices.addItem("Triangle Down")
+        self.marker_choices.addItem("Triangle Left")
+        self.marker_choices.addItem("Triangle Right")
+        self.marker_choices.addItem("None")
         self.file_label.setText(_translate("MainWindow", "Plot Filename:", None))
         self.alpha_label.setText(_translate("MainWindow", "Alpha:", None))
 
+        self.plot.setTitle(_translate("plot", "Plot", None))
+        self.scatter_choosedata.activated[int].connect(lambda: self.plot_change_vars(self.xvar_choices))
+        self.scatter_choosedata.activated[int].connect(lambda: self.get_minmax(self.xmin_spin, self.xmax_spin, self.xvar_choices.currentText()))
+        self.scatter_choosedata.activated[int].connect(lambda: self.get_minmax(self.ymin_spin, self.ymax_spin, self.yvar_choices.currentText()))
+        self.xvar_choices.activated[int].connect(lambda: self.get_minmax(self.xmin_spin, self.xmax_spin, self.xvar_choices.currentText()))
+        self.scatter_choosedata.activated[int].connect(lambda: self.plot_change_vars(self.yvar_choices))
+        self.yvar_choices.activated[int].connect(lambda: self.get_minmax(self.ymin_spin, self.ymax_spin, self.yvar_choices.currentText()))
+        self.color_choices.activated.connect(lambda: self.get_plot_parameters())
 
+        for name, obj in inspect.getmembers(self):
+            if isinstance(obj, QtGui.QComboBox):
+                obj.currentIndexChanged.connect(lambda: self.get_plot_parameters())
+            if isinstance(obj, QtGui.QLineEdit):
+                obj.textChanged.connect(lambda: self.get_plot_parameters())
+            if isinstance(obj, QtGui.QDoubleSpinBox):
+                obj.valueChanged.connect(lambda: self.get_plot_parameters())
+            if isinstance(obj, QtGui.QCheckBox):
+                obj.toggled.connect(lambda: self.get_plot_parameters())
 
     def plot_change_vars(self, obj):
         obj.clear()
         try:
-            self.vars_level0 = self.pysat_fun.data[self.plot_choosedata.currentText()].df.columns.get_level_values(0)
-            self.vars_level1 = self.pysat_fun.data[self.plot_choosedata.currentText()].df.columns.get_level_values(1)
+            self.vars_level0 = self.pysat_fun.data[self.scatter_choosedata.currentText()].df.columns.get_level_values(0)
+            self.vars_level1 = self.pysat_fun.data[self.scatter_choosedata.currentText()].df.columns.get_level_values(1)
             self.vars_level1 = list(self.vars_level1[self.vars_level0 != 'wvl'])
             self.vars_level0 = list(self.vars_level0[self.vars_level0 != 'wvl'])
 
@@ -339,7 +375,7 @@ class plot_:
                 obj.addItem(i)
         except:
             try:
-                choices = self.pysat_fun.data[self.plot_choosedata.currentText()].columns.values
+                choices = self.pysat_fun.data[self.scatter_choosedata.currentText()].columns.values
                 for i in choices:
                     obj.addItem(i)
             except:
@@ -349,11 +385,10 @@ class plot_:
         try:
             varind = self.vars_level1.index(var)
             vartuple = (self.vars_level0[varind], self.vars_level1[varind])
-            vardata = self.pysat_fun.data[self.plot_choosedata.currentText()].df[vartuple]
-
+            vardata = self.pysat_fun.data[self.scatter_choosedata.currentText()].df[vartuple]
         except:
             try:
-                vardata = self.pysat_fun.data[self.plot_choosedata.currentText()][var]
+                vardata = self.pysat_fun.data[self.scatter_choosedata.currentText()][var]
             except:
                 vardata = [0, 0]
         varmin = np.min(vardata)
