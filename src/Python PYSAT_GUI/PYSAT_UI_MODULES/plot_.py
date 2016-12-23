@@ -19,7 +19,6 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-
 class plot_:
     def __init__(self, pysat_fun, verticalLayout_8):
         self.pysat_fun = pysat_fun
@@ -396,7 +395,6 @@ class plot_:
         objmin.setValue(varmin)
         objmax.setValue(varmax)
 
-
 def make_combobox(choices):
     combo = QtGui.QComboBox()
 
@@ -405,7 +403,6 @@ def make_combobox(choices):
         combo.setItemText(i, str(choice))
 
     return combo
-
 
 def make_listwidget(choices):
     listwidget = QtGui.QListWidget()
