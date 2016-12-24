@@ -20,6 +20,13 @@ from PyQt4.QtGui import QDialog
 
 class error_print(QDialog):
     def __init__(self, message):
+        """
+        Outputs an error to the user in a separate window
+
+        Usage
+
+        :param message: error_print("Error message here")
+        """
         super().__init__()
         self.message = message
         self.error_print(self.message)

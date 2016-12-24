@@ -134,6 +134,7 @@ class normalization_:
                 if not min_list[i].text() == '' and not max_list[i].text() == '':        # as long as their is not a blank space, we can move forward
                     small_tuple = (int(min_list[i].text()), int(max_list[i].text()))     # have small_tuple hold the min and max box's data
                     arg_list.append(small_tuple)                                         # add the min and max tuples to the arg_list
+                    error_print()
             except:                                                                      #
                 pass                                                                     #
         datakey = self.normalization_choosedata.currentText()                            #
