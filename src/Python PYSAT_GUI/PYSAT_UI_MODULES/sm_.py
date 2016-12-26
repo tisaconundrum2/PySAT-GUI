@@ -19,40 +19,14 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 
-# sm creates a UI
-# and many smaller pieces of the UI called min_max
-#
-# sm
-#     |_ min_max
-#     |_ min_max
-#     |_ min_max
-#
-# each of these min_max's have connections that tell us what was updated
-# each of these updates should return a value back to sm so we can add it to a list
-#
-#      |---------------------|           |----------------------|
-#      |    sm    |           |       min_max        |
-#      |---------------------|           |----------------------|
-#      | returned val in lst | <-------- | return value and pos |
-#      | load UI/Boxes       | --------> |                      |
-#      |---------------------|           |----------------------|
-#
-# every time we change boxes, we should know which box is getting updated, and what the updated value is
-# so for example
-#
-#     min [      ]  max [      ]
-#     min [      ]  max [ 1000 ]*
-#     min [      ]  max [      ]
-# the above box* was update4d
-# it's position is data[1], max_lineEdit, and it's value is 1000
-
 class sm_:
     def __init__(self, pysat_fun, verticalLayout_8):
         self.pysat_fun = pysat_fun
         self.verticalLayout_8 = verticalLayout_8
-        self.submodel_layout_list=[]
         self.main()
 
+    def get_sm_params(self):
+        pass
 
     def main(self):
         # driver function, calls UI and set's up connections
@@ -201,6 +175,8 @@ class sm_:
 
         self.add_submodel_button.clicked.connect(lambda: self.add_submodel())
         self.delete_submodel_button.clicked.connect(lambda: self.del_submodel())
+        self.choose_low_model.currentIndexChanged.connect(lambda: self.get_sm_params())
+        self.choose_high_model.currentIndexChanged.connect(lambda: self.get_sm_params())
 
 
     def add_submodel(self):
@@ -236,10 +212,9 @@ class sm_:
         submodel_min_label.setText(_translate("MainWindow", "Min: ", None))
         submodel_max_label.setText(_translate("MainWindow", "Max: ", None))
         self.midmodel_vlayout.addLayout(submodel_hlayout)
-        self.submodel_layout_list.append(submodel_hlayout)
-
-
-
+        submodel_min.valueChanged.connect(lambda: self.get_sm_params())
+        submodel_max.valueChanged.connect(lambda: self.get_sm_params())
+        choose_submodel.currentIndexChanged.connect(lambda: self.get_sm_params())
 
     def del_submodel(self):
         submodel_to_delete=self.midmodel_vlayout.takeAt(self.midmodel_vlayout.count()-1)
@@ -250,61 +225,9 @@ class sm_:
                 if widget is not None:
                     widget.deleteLater()
                 else:
-                    pass#self.del_submodel(item.layout())
+                    pass
 
 
 
 
 
-
-class min_max:
-    def __init__(self, pysat_fun, sm, verticalLayout):
-        self.pysat_fun = pysat_fun
-        self.sm = sm
-        self.all_ranges_layout = verticalLayout
-        self.small_tuple = (None, None)
-        self.min_max()
-
-    def min_max(self, ):
-        self.ranges_layout = QtGui.QHBoxLayout()
-        self.ranges_layout.setMargin(11)
-        self.ranges_layout.setSpacing(6)
-        self.ranges_layout.setObjectName(_fromUtf8("ranges_layout"))
-        self.min_label = QtGui.QLabel(self.sm)
-        self.min_label.setObjectName(_fromUtf8("min_label"))
-        self.ranges_layout.addWidget(self.min_label)
-        self.min_lineEdit = QtGui.QLineEdit(self.sm)
-        self.min_lineEdit.setObjectName(_fromUtf8("min_lineEdit"))
-        self.ranges_layout.addWidget(self.min_lineEdit)
-        self.max_label = QtGui.QLabel(self.sm)
-        self.max_label.setObjectName(_fromUtf8("max_label"))
-        self.ranges_layout.addWidget(self.max_label)
-        self.max_lineEdit = QtGui.QLineEdit(self.sm)
-        self.max_lineEdit.setObjectName(_fromUtf8("max_lineEdit"))
-        self.ranges_layout.addWidget(self.max_lineEdit)
-        self.all_ranges_layout.addLayout(self.ranges_layout)
-        self.min_label.setText(_translate("MainWindow", "Min", None))
-        self.max_label.setText(_translate("MainWindow", "Max", None))
-
-        self.min_lineEdit.editingFinished.connect(lambda: self.set_list(self.min_lineEdit, self.max_lineEdit))
-        self.max_lineEdit.editingFinished.connect(lambda: self.set_list(self.min_lineEdit, self.max_lineEdit))
-
-    def set_list(self, min, max):
-        if min.text() == '' and max.text() == '':
-            error_print("Please fill in all boxes")
-        else:
-            try:
-                min = int(min.text())
-                max = int(max.text())
-                self.small_tuple = (min, max)
-                print(self.small_tuple)
-                sm_.get_norm_values()
-                return True
-            except:
-                pass
-
-    def get_min(self):
-        return self.min_lineEdit
-
-    def get_max(self):
-        return self.max_lineEdit
