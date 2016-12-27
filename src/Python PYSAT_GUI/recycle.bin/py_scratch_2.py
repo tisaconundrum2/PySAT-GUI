@@ -1,26 +1,33 @@
 import sys
-from PyQt4 import QtGui, QtCore
-from pysat_ui import *
-count = 1
-
-class Main(QtGui.QMainWindow):
-    def __init__(self):
-        QtGui.QMainWindow.__init__(self)
-        self.initUI(self)
-
-    def initUI(self, MainWindow):
-        pysat_ui.mainframe(self, MainWindow)
-        button = QtGui.QPushButton('close',)
+from PyQt4.QtGui import QApplication
+from PyQt4.QtGui import QSpinBox
+from PyQt4.QtGui import QVBoxLayout
+from PyQt4.QtGui import QWidget
 
 
+class SpinboxWidget(QWidget):
+    def __init__(self, parent=None):
+        QWidget.__init__(self, parent)
+        self.layout = QVBoxLayout()
+        self.addSpinboxes(10)
+        self.setLayout(self.layout)
 
-def main():
-    app = QtGui.QApplication(sys.argv)
-    main = Main()
-    main.show()
+    def addSpinboxes(self, n):
+        spb = []
+        for i in range(n):
+            spinbox = QSpinBox()
+            spinbox.setMaximum(1000)
+            spb.append(spinbox)
+            self.layout.addWidget(spinbox)
 
-    sys.exit(app.exec_())
+        for i in range(n-1):
+            spb[i].valueChanged.connect(spb[i + 1].setMinimum)
 
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    app.setStyle('plastique')
+    widget = SpinboxWidget()
+    widget.setWindowTitle('Spinbox Tester')
+    widget.show()
 
-if __name__ == "__main__":
-    main()
+sys.exit(app.exec_())
