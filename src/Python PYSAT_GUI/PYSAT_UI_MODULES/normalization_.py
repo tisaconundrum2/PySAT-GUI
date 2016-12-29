@@ -155,8 +155,8 @@ class normalization_:
 
     def del_ranges(self):
         del_layout_(self.all_ranges_layout)
-        self.box_list[-1] = None
-        self.box_list[-1] = None
+        del self.box_list[-1]                                                            # delete left box
+        del self.box_list[-1]                                                            # delete right box
         self.finished(self.box_list)
 
 def make_combobox(choices):
