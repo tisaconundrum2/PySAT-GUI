@@ -123,9 +123,12 @@ class normalization_:
     def finished(self, box_list):
         arg_list = []
         len_box_list = len(box_list)
-        for i in range(0, len_box_list, 2):
-            small_tuple = (int(box_list[i].text()), int(box_list[i+1].text()))
-            arg_list.append(small_tuple)
+        try:
+            for i in range(0, len_box_list, 2):
+                small_tuple = (int(box_list[i].text()), int(box_list[i+1].text()))
+                arg_list.append(small_tuple)
+        except Exception as e:
+            print(e)
         for i in range(len_box_list-1):
             self.box_list[i].valueChanged.connect(self.box_list[i+1].setMinimum)
         datakey = self.normalization_choosedata.currentText()                            #
