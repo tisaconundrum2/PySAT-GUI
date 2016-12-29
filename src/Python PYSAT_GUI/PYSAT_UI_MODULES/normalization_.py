@@ -50,12 +50,11 @@ except AttributeError:
 class normalization_:
     def __init__(self, pysat_fun, verticalLayout_8):
         super().__init__()
+        self.box_list = []
         self.pysat_fun = pysat_fun                                                       # setting up pysat_fun
         self.verticalLayout_8 = verticalLayout_8                                         # setting up the vertical Layout
         self.ranges = [None]*128                                                         # a list that will hold the order of boxes
         self.num = 0                                                                     # this will keep tabs on how far along we are in list
-        self.min_list = []                                                               # left hand boxes
-        self.max_list = []                                                               # right hand boxes
         self.main()                                                                      # start the main method
 
     def main(self):
@@ -121,17 +120,14 @@ class normalization_:
         self.add_ranges_button.setText(_translate("MainWindow", "Add Ranges", None))
         self.del_button.setText(_translate("MainWindow", "Delete Ranges", None))
 
-    def finished(self, min_list, max_list):
-        arg_list = []                                                                    # prep the argument list. it will hold the tuples
-        len_of_lineEdits = len(min_list) + len(max_list)                                 # get the total length of min and max together
-        for i in range(len_of_lineEdits):                                                # iterate through each box
-            try:                                                                         # try the below code
-                if not min_list[i].text() == '' and not max_list[i].text() == '':        # as long as their is not a blank space, we can move forward
-                    small_tuple = (int(min_list[i].text()), int(max_list[i].text()))     # have small_tuple hold the min and max box's data
-                    arg_list.append(small_tuple)                                         # add the min and max tuples to the arg_list
-            except Exception as e:                                                       #
-                print(e)
-
+    def finished(self, box_list):
+        arg_list = []
+        len_box_list = len(box_list)
+        for i in range(0, len_box_list, 2):
+            small_tuple = (int(box_list[i].text()), int(box_list[i+1].text()))
+            arg_list.append(small_tuple)
+        for i in range(len_box_list-1):
+            self.box_list[i].valueChanged.connect(self.box_list[i+1].setMinimum)
         datakey = self.normalization_choosedata.currentText()                            #
         # arg_list.append(['known data', [(0, 350), (350, 470), (470, 1000)]])           #
         self.pysat_fun.set_arg_list([datakey, arg_list], True)                           # add the new data to the argument list
@@ -141,26 +137,27 @@ class normalization_:
         self.ranges_layout = QtGui.QHBoxLayout()                                          # setup the ranges_layout, it will be a child of all_ranges_layout
         self.min_label = QtGui.QLabel()                                                   # setup the min label
         self.max_label = QtGui.QLabel()                                                   # setup the max label
-        self.min_lineEdit = QtGui.QLineEdit()                                             # setup the min lineEdit
-        self.max_lineEdit = QtGui.QLineEdit()                                             # setup the max lineEdit
+        self.min_spinbox = QtGui.QSpinBox()                                               # setup the min lineEdit
+        self.max_spinbox = QtGui.QSpinBox()                                               # setup the max lineEdit
+        self.max_spinbox.setMaximum(9999)
+        self.min_spinbox.setMaximum(9999)
         self.ranges_layout.addWidget(self.min_label)                                      # apply the min label to the widget
-        self.ranges_layout.addWidget(self.min_lineEdit)                                   # apply the min lineEdit to the widget
+        self.ranges_layout.addWidget(self.min_spinbox)                                    # apply the min lineEdit to the widget
         self.ranges_layout.addWidget(self.max_label)                                      # apply the max label
-        self.ranges_layout.addWidget(self.max_lineEdit)                                   # apply the max lineEdit
+        self.ranges_layout.addWidget(self.max_spinbox)                                    # apply the max lineEdit
         self.min_label.setText(_translate("MainWindow", "Min", None))                     # set the text of the min label
         self.max_label.setText(_translate("MainWindow", "Max", None))                     # set the text of the max label
-        self.min_list.append(self.min_lineEdit)                                           # set up an array of lineEdits
-        self.max_list.append(self.max_lineEdit)
+        self.box_list.append(self.min_spinbox)                                            # set up an array of lineEdits
+        self.box_list.append(self.max_spinbox)
         self.all_ranges_layout.addLayout(self.ranges_layout)
-        self.min_lineEdit.editingFinished.connect(lambda: self.finished(self.min_list, self.max_list))
-        self.max_lineEdit.editingFinished.connect(lambda: self.finished(self.min_list, self.max_list))
+        self.min_spinbox.valueChanged.connect(lambda: self.finished(self.box_list))
+        self.max_spinbox.valueChanged.connect(lambda: self.finished(self.box_list))
 
     def del_ranges(self):
         del_layout_(self.all_ranges_layout)
-        self.min_list[-1] = None
-        self.max_list[-1] = None
-        self.finished(self.min_list, self.max_list)
-
+        self.box_list[-1] = None
+        self.box_list[-1] = None
+        self.finished(self.box_list)
 
 def make_combobox(choices):
     combo = QtGui.QComboBox()
