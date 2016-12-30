@@ -144,6 +144,12 @@ class normalization_:
         self.max_spinbox = QtGui.QSpinBox()                                               # setup the max lineEdit
         self.max_spinbox.setMaximum(9999)
         self.min_spinbox.setMaximum(9999)
+        try:
+            minimum = int(self.box_list[-1].text())                                       # go to the last item in the list
+            self.max_spinbox.setMinimum(minimum)                                          # set this as the minimum value
+            self.min_spinbox.setMinimum(minimum)                                          # set this as the minimum value
+        except:
+            pass
         self.ranges_layout.addWidget(self.min_label)                                      # apply the min label to the widget
         self.ranges_layout.addWidget(self.min_spinbox)                                    # apply the min lineEdit to the widget
         self.ranges_layout.addWidget(self.max_label)                                      # apply the max label
