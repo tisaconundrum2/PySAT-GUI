@@ -19,3 +19,4 @@ from PYSAT_UI_MODULES.cv_ import *
 from PYSAT_UI_MODULES.removenull_ import *
 from PYSAT_UI_MODULES.sm_ import *
 from PYSAT_UI_MODULES.del_layout_ import *
+from PYSAT_UI_MODULES.restore_ import *
