@@ -88,8 +88,6 @@ class pysat_ui(object):
         self.ok.addWidget(self.okButton)
         self.verticalLayout_9.addWidget(self.OK)
 
-
-
         MainWindow.setCentralWidget(self.centralWidget)
         self.mainToolBar = QtGui.QToolBar(MainWindow)
         self.mainToolBar.setObjectName(_fromUtf8("mainToolBar"))
@@ -134,6 +132,8 @@ class pysat_ui(object):
         self.actionSave_Current_Data.setObjectName(_fromUtf8("actionSave_Current_Data"))
         self.actionCreate_New_Workflow = QtGui.QAction(MainWindow)
         self.actionCreate_New_Workflow.setObjectName(_fromUtf8("actionCreate_New_Workflow"))
+        self.actionOpen_Workflow = QtGui.QAction(MainWindow)
+        self.actionOpen_Workflow.setObjectName(_fromUtf8("actionOpen_Workflow"))
         self.actionNoise_Reduction = QtGui.QAction(MainWindow)
         self.actionNoise_Reduction.setObjectName(_fromUtf8("actionNoise_Reduction"))
         self.actionRemoveNull = QtGui.QAction(MainWindow)
@@ -244,7 +244,7 @@ class pysat_ui(object):
         self.actionStratified_Folds.setObjectName(_fromUtf8("actionStratified_Folds"))
         self.actionTrain_Submodels = QtGui.QAction(MainWindow)
         self.actionTrain_Submodels.setObjectName(_fromUtf8("actionTrain_Submodels"))
-        self.actionSubmodelPredict=QtGui.QAction(MainWindow)
+        self.actionSubmodelPredict = QtGui.QAction(MainWindow)
         self.actionSubmodelPredict.setObjectName(_fromUtf8("actionSubmodelPredict"))
         self.menuFile.addAction(self.actionLoad_reference_Data)
         self.menuFile.addAction(self.actionLoad_Unknown_Data)
@@ -254,6 +254,7 @@ class pysat_ui(object):
         self.menuFile.addAction(self.actionSave_Current_Data)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionCreate_New_Workflow)
+        self.menuFile.addAction(self.actionOpen_Workflow)
         self.menuFile.addAction(self.actionSave_Current_Workflow)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionExit)
@@ -326,6 +327,7 @@ class pysat_ui(object):
         self.actionSave_Current_Plots.setText(_translate("MainWindow", "Save Current Plots", None))
         self.actionSave_Current_Data.setText(_translate("MainWindow", "Save Current Data", None))
         self.actionCreate_New_Workflow.setText(_translate("MainWindow", "Create New Workflow", None))
+        self.actionOpen_Workflow.setText(_translate("MainWindow", "Open Workflow", None))
         self.actionNoise_Reduction.setText(_translate("MainWindow", "Noise Reduction", None))
         self.actionApply_Mask.setText(_translate("MainWindow", "Apply Mask", None))
         self.actionInterpolate.setText(_translate("MainWindow", "Interpolate", None))
@@ -375,7 +377,7 @@ class pysat_ui(object):
         self.actionHierarchical_2.setText(_translate("MainWindow", "Hierarchical", None))
         self.actionCross_Validation.setText(_translate("MainWindow", "Cross Validation", None))
         self.actionTrain.setText(_translate("MainWindow", "Train", None))
-        self.actionSubmodelPredict.setText(_translate("MainWindow","Submodel Predict",None))
+        self.actionSubmodelPredict.setText(_translate("MainWindow", "Submodel Predict", None))
         self.actionPredict.setText(_translate("MainWindow", "Predict", None))
         self.actionPlot.setText(_translate("MainWindow", "Plot", None))
         self.actionSet_output_location.setText(_translate("MainWindow", "Output Location", None))
@@ -397,7 +399,7 @@ class pysat_ui(object):
         PYSAT_UI_MODULES.get_mask_(self.pysat_fun, self.verticalLayout_8)
 
     def do_removenull(self):
-        PYSAT_UI_MODULES.removenull_(self.pysat_fun,self.verticalLayout_8)
+        PYSAT_UI_MODULES.removenull_(self.pysat_fun, self.verticalLayout_8)
 
     def normalization(self):
         PYSAT_UI_MODULES.normalization_(self.pysat_fun, self.verticalLayout_8)
@@ -432,6 +434,8 @@ class pysat_ui(object):
     def menu_item_shortcuts(self):
         self.actionExit.setShortcut("ctrl+Q")
         self.actionCreate_New_Workflow.setShortcut("ctrl+N")
+        self.actionOpen_Workflow.setShortcut("ctrl+O")
+        self.actionSave_Current_Workflow.setShortcut("ctrl+S")
 
     def menu_item_functions(self, MainWindow):
         self.actionSet_output_location.triggered.connect(lambda: pysat_ui.file_outpath(self))  # output location
@@ -449,7 +453,7 @@ class pysat_ui(object):
         self.actionPlot.triggered.connect(lambda: pysat_ui.do_plot(self))
         self.actionCross_Validation.triggered.connect(lambda: pysat_ui.do_cv(self))
         self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
-        self.actionSubmodelPredict.triggered.connect(lambda:pysat_ui.do_submodel_predict(self))
+        self.actionSubmodelPredict.triggered.connect(lambda: pysat_ui.do_submodel_predict(self))
 
     def set_greyed_out_items(self, bool):
         self.actionTrain.setDisabled(bool)
@@ -487,7 +491,8 @@ class pysat_ui(object):
 
     def openworkflow(self):
         # TODO open file dialog
-        self.filename = QtGui.QFileDialog.getOpenFileName(self, "Open a Workflow File", '.', "(*.wrf)")
+        self.filename = QtGui.QFileDialog.getOpenFileName(None, "Open a Workflow File", '.', "(*.wrf)")
+        PYSAT_UI_MODULES.restore_(ui, settings)
 
     def on_okButton_clicked(self):
         if self.flag:
@@ -497,7 +502,6 @@ class pysat_ui(object):
 
     def on_deleteButton_clicked(self):
         pass
-
 
     def onStart(self):  # onStart function
         self.progressBar.setRange(0, 0)  # make the bar pulse green

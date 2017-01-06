@@ -6,12 +6,7 @@ import inspect
 # this is the restore class
 # use guisave to save the current layout/module
 # use guirestore to restore the module.
-#
-#
-#
-#
-#
-#
+
 
 class restore_:
     def __init__(self, ui, settings):
@@ -19,8 +14,6 @@ class restore_:
         self.ui = ui
 
     def guisave(self):
-        self.settings.setValue('size', self.size())
-        self.settings.setValue('pos', self.pos())
         for name, obj in inspect.getmembers(self.ui):
             # if type(obj) is QComboBox:  # this works similar to isinstance, but missed some field... not sure why?
             if isinstance(obj, QComboBox):
@@ -51,6 +44,11 @@ class restore_:
                 name = obj.objectName()
                 state = obj.checkState()
                 self.settings.setValue(name, state)
+
+            if isinstance(obj, QRadioButton):
+                name = obj.objectName()
+                value = obj.isChecked()  # get stored value from registry
+                self.settings.setValue(name, value)
 
             if isinstance(obj, QSlider):
                 name = obj.objectName()

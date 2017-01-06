@@ -18,6 +18,7 @@ class Main(QMainWindow):
         #### These are the triggers for exit and new
         pysat.actionExit.triggered.connect(lambda: self.exit())  # Exit out of the current workflow
         pysat.actionCreate_New_Workflow.triggered.connect(lambda: self.new())  # Create a new window. It will be blank
+        pysat.actionOpen_Workflow.triggered.connect(lambda: pysat.openworkflow())  # trigger the loading of workflow.
 
     def new(self):
         # TODO create a new window to work in. The old window does not disappear
