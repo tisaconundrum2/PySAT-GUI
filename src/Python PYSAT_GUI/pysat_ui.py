@@ -491,10 +491,11 @@ class pysat_ui(object):
 
     def saveworkflow(self):
         # TODO save the current window's data into a save file
-        self.filename = QtGui.QFileDialog.getSaveFileName(None, "Save Workflow to folder", '.', "(*.ini)")
-        print(self.filename)
-        self.restore = PYSAT_UI_MODULES.restore_(self.scrollAreaWidgetContents_2, QtCore.QSettings(self.filename, QtCore.QSettings.IniFormat))
-        self.restore.guirestore()
+        # self.filename = QtGui.QFileDialog.getSaveFileName(None, "Save Workflow to folder", '.', "(*.ini)")
+        # print(self.filename)
+        self.restore = PYSAT_UI_MODULES.restore_(self.scrollArea, QtCore.QSettings())
+        self.restore.guisave()
+
 
     def openworkflow(self):
         # TODO open file dialog
