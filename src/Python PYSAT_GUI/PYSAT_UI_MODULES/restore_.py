@@ -11,6 +11,7 @@ class restore_:
     def guisave(self):
         for name, obj in inspect.getmembers(self.ui):
 
+            print(obj, name)
             if isinstance(obj, QComboBox):
                 index = obj.currentIndex()
                 name = obj.objectName()

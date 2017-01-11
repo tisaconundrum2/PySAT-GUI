@@ -19,6 +19,7 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
+
 class plot_:
     def __init__(self, pysat_fun, verticalLayout_8):
         self.pysat_fun = pysat_fun
@@ -343,11 +344,15 @@ class plot_:
 
         self.plot.setTitle(_translate("plot", "Plot", None))
         self.scatter_choosedata.activated[int].connect(lambda: self.plot_change_vars(self.xvar_choices))
-        self.scatter_choosedata.activated[int].connect(lambda: self.get_minmax(self.xmin_spin, self.xmax_spin, self.xvar_choices.currentText()))
-        self.scatter_choosedata.activated[int].connect(lambda: self.get_minmax(self.ymin_spin, self.ymax_spin, self.yvar_choices.currentText()))
-        self.xvar_choices.activated[int].connect(lambda: self.get_minmax(self.xmin_spin, self.xmax_spin, self.xvar_choices.currentText()))
+        self.scatter_choosedata.activated[int].connect(
+            lambda: self.get_minmax(self.xmin_spin, self.xmax_spin, self.xvar_choices.currentText()))
+        self.scatter_choosedata.activated[int].connect(
+            lambda: self.get_minmax(self.ymin_spin, self.ymax_spin, self.yvar_choices.currentText()))
+        self.xvar_choices.activated[int].connect(
+            lambda: self.get_minmax(self.xmin_spin, self.xmax_spin, self.xvar_choices.currentText()))
         self.scatter_choosedata.activated[int].connect(lambda: self.plot_change_vars(self.yvar_choices))
-        self.yvar_choices.activated[int].connect(lambda: self.get_minmax(self.ymin_spin, self.ymax_spin, self.yvar_choices.currentText()))
+        self.yvar_choices.activated[int].connect(
+            lambda: self.get_minmax(self.ymin_spin, self.ymax_spin, self.yvar_choices.currentText()))
         self.color_choices.activated.connect(lambda: self.get_plot_parameters())
 
         for name, obj in inspect.getmembers(self):
@@ -395,6 +400,7 @@ class plot_:
         objmin.setValue(varmin)
         objmax.setValue(varmax)
 
+
 def make_combobox(choices):
     combo = QtGui.QComboBox()
 
@@ -403,6 +409,7 @@ def make_combobox(choices):
         combo.setItemText(i, str(choice))
 
     return combo
+
 
 def make_listwidget(choices):
     listwidget = QtGui.QListWidget()

@@ -456,8 +456,6 @@ class pysat_ui(object):
         self.actionCross_Validation.triggered.connect(lambda: pysat_ui.do_cv(self))
         self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
         self.actionSubmodelPredict.triggered.connect(lambda: pysat_ui.do_submodel_predict(self))
-        self.actionSave_Current_Workflow.triggered.connect(lambda: pysat_ui.saveworkflow(self))
-        self.actionOpen_Workflow.triggered.connect(lambda: pysat_ui.openworkflow(self))
 
     def set_greyed_out_items(self, bool):
         self.actionTrain.setDisabled(bool)
@@ -488,22 +486,6 @@ class pysat_ui(object):
 
     def handleMenuHovered(self, action):
         QtGui.QToolTip.showText(self, None, action, None)
-
-    def saveworkflow(self):
-        # TODO save the current window's data into a save file
-        # self.filename = QtGui.QFileDialog.getSaveFileName(None, "Save Workflow to folder", '.', "(*.ini)")
-        # print(self.filename)
-        self.restore = PYSAT_UI_MODULES.restore_(self.scrollArea, QtCore.QSettings())
-        self.restore.guisave()
-
-
-    def openworkflow(self):
-        # TODO open file dialog
-        self.filename = QtGui.QFileDialog.getOpenFileName(None, "Open a Workflow File", '.', "(*.ini)")
-        programname = os.path.basename(self.filename)
-        programbase, ext = os.path.splitext(programname)  # extract basename and ext from filename
-        settings = QtCore.QSettings("company", programbase)
-        PYSAT_UI_MODULES.restore_(self.scrollAreaWidgetContents_2, settings)
 
     def on_okButton_clicked(self):
         if self.flag:

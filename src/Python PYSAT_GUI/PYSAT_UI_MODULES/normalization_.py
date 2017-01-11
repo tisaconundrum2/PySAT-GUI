@@ -51,11 +51,11 @@ class normalization_:
     def __init__(self, pysat_fun, verticalLayout_8):
         super().__init__()
         self.box_list = []
-        self.pysat_fun = pysat_fun                                                       # setting up pysat_fun
-        self.verticalLayout_8 = verticalLayout_8                                         # setting up the vertical Layout
-        self.ranges = [None]*128                                                         # a list that will hold the order of boxes
-        self.num = 0                                                                     # this will keep tabs on how far along we are in list
-        self.main()                                                                      # start the main method
+        self.pysat_fun = pysat_fun  # setting up pysat_fun
+        self.verticalLayout_8 = verticalLayout_8  # setting up the vertical Layout
+        self.ranges = [None] * 128  # a list that will hold the order of boxes
+        self.num = 0  # this will keep tabs on how far along we are in list
+        self.main()  # start the main method
 
     def main(self):
         self.pysat_fun.set_fun_list(self.pysat_fun.do_norm)
@@ -125,38 +125,38 @@ class normalization_:
         len_box_list = len(box_list)
         try:
             for i in range(0, len_box_list, 2):
-                small_tuple = (int(box_list[i].text()), int(box_list[i+1].text()))
+                small_tuple = (int(box_list[i].text()), int(box_list[i + 1].text()))
                 arg_list.append(small_tuple)
         except Exception as e:
             print(e)
-        for i in range(len_box_list-1):
-            self.box_list[i].valueChanged.connect(self.box_list[i+1].setMinimum)
-        datakey = self.normalization_choosedata.currentText()                            #
+        for i in range(len_box_list - 1):
+            self.box_list[i].valueChanged.connect(self.box_list[i + 1].setMinimum)
+        datakey = self.normalization_choosedata.currentText()  #
         # arg_list.append(['known data', [(0, 350), (350, 470), (470, 1000)]])           #
-        self.pysat_fun.set_arg_list([datakey, arg_list], True)                           # add the new data to the argument list
-        print(arg_list)                                                                  # print out the data for debugging purposes
+        self.pysat_fun.set_arg_list([datakey, arg_list], True)  # add the new data to the argument list
+        print(arg_list)  # print out the data for debugging purposes
 
     def add_ranges(self):
-        self.ranges_layout = QtGui.QHBoxLayout()                                          # setup the ranges_layout, it will be a child of all_ranges_layout
-        self.min_label = QtGui.QLabel()                                                   # setup the min label
-        self.max_label = QtGui.QLabel()                                                   # setup the max label
-        self.min_spinbox = QtGui.QSpinBox()                                               # setup the min lineEdit
-        self.max_spinbox = QtGui.QSpinBox()                                               # setup the max lineEdit
+        self.ranges_layout = QtGui.QHBoxLayout()  # setup the ranges_layout, it will be a child of all_ranges_layout
+        self.min_label = QtGui.QLabel()  # setup the min label
+        self.max_label = QtGui.QLabel()  # setup the max label
+        self.min_spinbox = QtGui.QSpinBox()  # setup the min lineEdit
+        self.max_spinbox = QtGui.QSpinBox()  # setup the max lineEdit
         self.max_spinbox.setMaximum(9999)
         self.min_spinbox.setMaximum(9999)
         try:
-            minimum = int(self.box_list[-1].text())                                       # go to the last item in the list
-            self.max_spinbox.setMinimum(minimum)                                          # set this as the minimum value
-            self.min_spinbox.setMinimum(minimum)                                          # set this as the minimum value
+            minimum = int(self.box_list[-1].text())  # go to the last item in the list
+            self.max_spinbox.setMinimum(minimum)  # set this as the minimum value
+            self.min_spinbox.setMinimum(minimum)  # set this as the minimum value
         except:
             pass
-        self.ranges_layout.addWidget(self.min_label)                                      # apply the min label to the widget
-        self.ranges_layout.addWidget(self.min_spinbox)                                    # apply the min lineEdit to the widget
-        self.ranges_layout.addWidget(self.max_label)                                      # apply the max label
-        self.ranges_layout.addWidget(self.max_spinbox)                                    # apply the max lineEdit
-        self.min_label.setText(_translate("MainWindow", "Min", None))                     # set the text of the min label
-        self.max_label.setText(_translate("MainWindow", "Max", None))                     # set the text of the max label
-        self.box_list.append(self.min_spinbox)                                            # set up an array of lineEdits
+        self.ranges_layout.addWidget(self.min_label)  # apply the min label to the widget
+        self.ranges_layout.addWidget(self.min_spinbox)  # apply the min lineEdit to the widget
+        self.ranges_layout.addWidget(self.max_label)  # apply the max label
+        self.ranges_layout.addWidget(self.max_spinbox)  # apply the max lineEdit
+        self.min_label.setText(_translate("MainWindow", "Min", None))  # set the text of the min label
+        self.max_label.setText(_translate("MainWindow", "Max", None))  # set the text of the max label
+        self.box_list.append(self.min_spinbox)  # set up an array of lineEdits
         self.box_list.append(self.max_spinbox)
         self.all_ranges_layout.addLayout(self.ranges_layout)
         self.min_spinbox.valueChanged.connect(lambda: self.finished(self.box_list))
@@ -164,9 +164,10 @@ class normalization_:
 
     def del_ranges(self):
         del_layout_(self.all_ranges_layout)
-        del self.box_list[-1]                                                            # delete left box
-        del self.box_list[-1]                                                            # delete right box
+        del self.box_list[-1]  # delete left box
+        del self.box_list[-1]  # delete right box
         self.finished(self.box_list)
+
 
 def make_combobox(choices):
     combo = QtGui.QComboBox()
@@ -174,6 +175,7 @@ def make_combobox(choices):
         combo.addItem(_fromUtf8(""))
         combo.setItemText(i, _translate('', choice, None))
     return combo
+
 
 def make_listwidget(choices):
     listwidget = QtGui.QListWidget()

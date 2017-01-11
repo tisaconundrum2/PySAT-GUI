@@ -8,6 +8,11 @@ class Main(QMainWindow):
     def __init__(self, parent=None):
         QMainWindow.__init__(self, parent)
         self.runningFunctions(self)
+        self.org_name = "USGS"
+        self.app_name = "PYSAT"
+
+    def closeEvent(self):
+        self.saveworkflow()
 
     def runningFunctions(self, MainWindow):
         pysat = pysat_ui()
@@ -18,7 +23,24 @@ class Main(QMainWindow):
         #### These are the triggers for exit and new
         pysat.actionExit.triggered.connect(lambda: self.exit())  # Exit out of the current workflow
         pysat.actionCreate_New_Workflow.triggered.connect(lambda: self.new())  # Create a new window. It will be blank
-        pysat.actionOpen_Workflow.triggered.connect(lambda: pysat.openworkflow())  # trigger the loading of workflow.
+        pysat.actionOpen_Workflow.triggered.connect(lambda: self.openworkflow())  # trigger the loading of workflow.
+        pysat.actionSave_Current_Workflow.triggered.connect(lambda: self.closeEvent())
+
+    def openworkflow(self):
+        settings = QtCore.QSettings(self.org_name, self.app_name)
+        main_window.restoreGeometry(settings.value('geometry'))
+        main_window.restoreState(settings.value('state'))
+        main_window._ui.dockWin.setFloating(settings.value('dockWin/isFloating') == 'true')
+
+    def saveworkflow(self):
+        settings = QtCore.QSettings(self.org_name, self.app_name)
+        is_floating = main_window._ui.dockWin.isFloating()
+        settings.setValue('dockWin/isFloating', is_floating)
+        main_window._ui.dockWin.setFloating(True)
+        settings.setValue('geometry', main_window.saveGeometry())
+        settings.setValue('state', main_window.saveState())
+
+
 
     def new(self):
         # TODO create a new window to work in. The old window does not disappear
