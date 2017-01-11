@@ -15,7 +15,7 @@ class restore_:
             if isinstance(obj, QComboBox):
                 index = obj.currentIndex()
                 name = obj.objectName()
-                value = self.settings.vale(name)
+                value = self.settings.value(name)
 
                 if value == "":
                     continue
