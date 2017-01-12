@@ -35,7 +35,7 @@ class Main(QMainWindow):
         widgets = self.findChildren(QLineEdit)
         print('\n')
         for w in widgets:
-            print(w)
+            print(w.text())
         # lineEdits = pysat_ui.scrollAreaWidgetContents_2.findChildren(QLineEdit)
         # settings = QtCore.QSettings(self.org_name, self.app_name)
         # settings.setValue('geometry', main_window.saveGeometry())
