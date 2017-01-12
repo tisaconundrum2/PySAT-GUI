@@ -13,7 +13,6 @@ class Main(QMainWindow):
 
     def closeEvent(self, event):
         self.saveworkflow()
-        QMainWindow.closeEvent(event)
 
     def runningFunctions(self, MainWindow):
         pysat = pysat_ui()
@@ -33,10 +32,14 @@ class Main(QMainWindow):
         main_window.restoreState(settings.value('state'))
 
     def saveworkflow(self):
-        lineEdits = pysat_ui.scrollAreaWidgetContents_2.findChildren(QLineEdit)
-        settings = QtCore.QSettings(self.org_name, self.app_name)
-        settings.setValue('geometry', main_window.saveGeometry())
-        settings.setValue('state', main_window.saveState())
+        widgets = self.findChildren(QLineEdit)
+        print('\n')
+        for w in widgets:
+            print(w)
+        # lineEdits = pysat_ui.scrollAreaWidgetContents_2.findChildren(QLineEdit)
+        # settings = QtCore.QSettings(self.org_name, self.app_name)
+        # settings.setValue('geometry', main_window.saveGeometry())
+        # settings.setValue('state', main_window.saveState())
 
 
 
