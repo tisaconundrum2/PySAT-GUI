@@ -34,14 +34,13 @@ class Main(QMainWindow):
     def saveworkflow(self):
         widgets = self.findChildren(QLineEdit)
         print('\n')
-        for w in widgets:
-            print(w.text())
-        # lineEdits = pysat_ui.scrollAreaWidgetContents_2.findChildren(QLineEdit)
-        # settings = QtCore.QSettings(self.org_name, self.app_name)
-        # settings.setValue('geometry', main_window.saveGeometry())
-        # settings.setValue('state', main_window.saveState())
-
-
+        print(widgets)
+        # for w in widgets:
+        #     settings = QtCore.QSettings(self.org_name, self.app_name)
+        #     name = w.objectName()
+        #     value = w.text()
+        #     settings.setValue(name, value)
+        QGroupBox
 
     def new(self):
         # TODO create a new window to work in. The old window does not disappear
