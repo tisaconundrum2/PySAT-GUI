@@ -261,5 +261,5 @@ class pysat_func(QThread):
                 self.greyed_modules[i].setDisabled(True)
                 self.leftOff = i + 1
                 self.taskFinished.emit()
-        except:
+        except: #Output error message
             self.taskFinished.emit()

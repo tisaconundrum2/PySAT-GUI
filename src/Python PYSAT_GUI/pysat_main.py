@@ -35,12 +35,6 @@ class Main(QMainWindow):
         widgets = self.findChildren(QLineEdit)
         print('\n')
         print(widgets)
-        # for w in widgets:
-        #     settings = QtCore.QSettings(self.org_name, self.app_name)
-        #     name = w.objectName()
-        #     value = w.text()
-        #     settings.setValue(name, value)
-        QGroupBox
 
     def new(self):
         # TODO create a new window to work in. The old window does not disappear
