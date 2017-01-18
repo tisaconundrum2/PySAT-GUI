@@ -30,7 +30,7 @@ class pysat_ui(object):
     This is the backbone of the UI, without this portion we have nothing to work with
     """
 
-    def mainframe(self, MainWindow):
+    def main_window(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(800, 1000)
         self.centralWidget = QtGui.QWidget(MainWindow)
