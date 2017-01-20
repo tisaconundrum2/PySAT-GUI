@@ -457,6 +457,23 @@ class pysat_ui(object):
         self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
         self.actionSubmodelPredict.triggered.connect(lambda: pysat_ui.do_submodel_predict(self))
 
+
+        # self.actionSet_output_location.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.file_outpath(self)))  # output location
+        # self.actionLoad_Unknown_Data.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.get_unknown_data(self)))  # unknown data
+        # self.actionLoad_reference_Data.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.get_known_data(self)))  # known data
+        # self.actionNormalization.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.normalization(self)))  # submodel
+        # self.actionApply_Mask.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.do_mask(self)))  # get_mask
+        # self.actionRemoveNull.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.do_removenull(self)))
+        # self.actionStratified_Folds.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.do_strat_folds(self)))  # strat folds
+        # self.actionTrain.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.do_regression_train(self)))  # regression train
+        # self.actionPredict.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.do_regression_predict(self)))  # regression predict
+        # self.actionInterpolate.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.do_interp(self)))
+        # self.actionPlot.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.do_plot(self)))
+        # self.actionCross_Validation.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.do_cv(self)))
+        # self.actionInterpolate.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.do_interp(self)))
+        # self.actionSubmodelPredict.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.do_submodel_predict(self)))
+
+
     def set_greyed_out_items(self, bool):
         self.actionTrain.setDisabled(bool)
         self.actionPredict.setDisabled(bool)

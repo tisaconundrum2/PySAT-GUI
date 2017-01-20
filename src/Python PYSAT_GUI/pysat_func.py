@@ -9,6 +9,7 @@ from PyQt4.QtCore import QThread
 from PyQt4 import QtCore
 import numpy as np
 
+
 class pysat_func(QThread):
     taskFinished = QtCore.pyqtSignal()
 
@@ -25,6 +26,7 @@ class pysat_func(QThread):
         self.arg_list = []
         self.kw_list = []
         self.greyed_modules = []
+        self.ui_list = []
 
     """
     Getter and setter functions below
@@ -86,10 +88,10 @@ class pysat_func(QThread):
         except Exception as e:
             error_print('Problem reading data: {}'.format(e))
 
-    def removenull(self,datakey,colname):
+    def removenull(self, datakey, colname):
         try:
             print(self.data[datakey].df.shape)
-            self.data[datakey]=spectral_data(self.data[datakey].df.ix[-self.data[datakey].df[colname].isnull()])
+            self.data[datakey] = spectral_data(self.data[datakey].df.ix[-self.data[datakey].df[colname].isnull()])
             print(self.data[datakey].df.shape)
 
         except Exception as e:
@@ -152,17 +154,18 @@ class pysat_func(QThread):
     def do_regression_train(self, datakey, xvars, yvars, yrange, method, params, ransacparams, modelkey=None):
         try:
             if modelkey is None:
-                modelkey = method+'-'+str(yvars)+' ('+str(yrange[0])+'-'+str(yrange([1])+') ')
-            self.models[modelkey] = regression.regression([method], [yrange], [params], i=0, ransacparams=[ransacparams])
+                modelkey = method + '-' + str(yvars) + ' (' + str(yrange[0]) + '-' + str(yrange([1]) + ') ')
+            self.models[modelkey] = regression.regression([method], [yrange], [params], i=0,
+                                                          ransacparams=[ransacparams])
             self.modelkeys.append(modelkey)
 
             x = self.data[datakey].df[xvars]
             y = self.data[datakey].df[yvars]
-            x=np.array(x)
-            y=np.array(y)
+            x = np.array(x)
+            y = np.array(y)
             ymask = np.squeeze((y > yrange[0]) & (y < yrange[1]))
-            y=y[ymask]
-            x=x[ymask,:]
+            y = y[ymask]
+            x = x[ymask, :]
             self.models[modelkey].fit(x, y)
             self.model_xvars[modelkey] = xvars
 
@@ -172,9 +175,9 @@ class pysat_func(QThread):
     def do_cv_train(self, datakey, xvars, yvars, method, params):
 
         try:
-            cv_obj=cv.cv(params)
-            self.data[datakey].df,self.cv_results=cv_obj.do_cv(self.data[datakey].df,xcols=xvars,ycol=yvars)
-            self.data['CV Results']=self.cv_results
+            cv_obj = cv.cv(params)
+            self.data[datakey].df, self.cv_results = cv_obj.do_cv(self.data[datakey].df, xcols=xvars, ycol=yvars)
+            self.data['CV Results'] = self.cv_results
 
         except Exception as e:
             error_print(e)
@@ -206,8 +209,8 @@ class pysat_func(QThread):
             x = self.data[datakey].df[xvar]
             y = self.data[datakey].df[yvar]
         except:
-            x=self.data[datakey][xvar]
-            y=self.data[datakey][yvar]
+            x = self.data[datakey][xvar]
+            y = self.data[datakey][yvar]
         try:
             loadfig = self.figs[figname]
         except:
@@ -217,10 +220,10 @@ class pysat_func(QThread):
             # Alpha is missing, fix this!
             outpath = self.outpath
             self.figs[figname] = make_plot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
-                                             ytitle=ytitle, title=title,
-                                             lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
-                                             annot_mask=annot_mask, cmap=cmap,
-                                             colortitle=colortitle, loadfig=loadfig)
+                                           ytitle=ytitle, title=title,
+                                           lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
+                                           annot_mask=annot_mask, cmap=cmap,
+                                           colortitle=colortitle, loadfig=loadfig)
         except Exception as e:
             error_print(e)
             # dealing with the a possibly missing outpath
@@ -245,8 +248,6 @@ class pysat_func(QThread):
     def __del__(self):
         self.wait()
 
-
-
     def del_layout(self):
         del_qwidget_(self.greyed_modules[-1])
         if len(self.greyed_modules) > 0:
@@ -261,5 +262,6 @@ class pysat_func(QThread):
                 self.greyed_modules[i].setDisabled(True)
                 self.leftOff = i + 1
                 self.taskFinished.emit()
-        except: #Output error message
+        except Exception as e:
+            error_print(e)
             self.taskFinished.emit()

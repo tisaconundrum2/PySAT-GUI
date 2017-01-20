@@ -1,4 +1,6 @@
 import inspect
+
+from PYSAT_UI_MODULES import error_print
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 import sys, time
@@ -27,7 +29,7 @@ class Main(QMainWindow):
         pysat.actionExit.triggered.connect(lambda: self.exit())  # Exit out of the current workflow
         pysat.actionCreate_New_Workflow.triggered.connect(lambda: self.new())  # Create a new window. It will be blank
         pysat.actionOpen_Workflow.triggered.connect(lambda: self.read_settings())  # trigger the loading of workflow.
-        pysat.actionSave_Current_Workflow.triggered.connect(lambda: self.write_settings())
+        # pysat.actionSave_Current_Workflow.triggered.connect(lambda: self.write_settings())
 
     # void MainWindow::writeSettings() {
     #   QSettings settings("reaffer Soft", "reafferApp");
@@ -36,54 +38,54 @@ class Main(QMainWindow):
     #   settings.setValue("pos", pos());
     #   settings.endGroup();
     # }
-    def write_settings(self):
-        for name, obj in inspect.getmembers(self.ui):
-
-            if isinstance(obj, QComboBox):
-                index = obj.currentIndex()
-                name = obj.objectName()
-                value = self.settings.value(name)
-
-                if value == "":
-                    continue
-
-                index = obj.findText(value)
-
-                if index == -1:
-                    obj.insertItems(0, [value])
-                    index = obj.findText(value)
-                    obj.setCurrentIndex(index)
-                else:
-                    obj.setCurrentIndex(index)
-
-            if isinstance(obj, QLineEdit):
-                name = obj.objectName()
-                value = self.settings.value(name)  # get stored value from registry
-                obj.setText(value)  # restore lineEditFile
-
-            if isinstance(obj, QCheckBox):
-                name = obj.objectName()
-                value = self.settings.value(name)  # get stored value from registry
-                if value != None:
-                    obj.setChecked(value)  # restore checkbox
-
-            if isinstance(obj, QRadioButton):
-                name = obj.objectName()
-                value = self.settings.value(name)  # get stored value from registry
-                if value != None:
-                    obj.setChecked(value)
-
-            if isinstance(obj, QSlider):
-                name = obj.objectName()
-                value = self.settings.value(name)  # get stored value from registry
-                if value != None:
-                    obj.setValue(int(value))  # restore value from registry
-
-            if isinstance(obj, QSpinBox):
-                name = obj.objectName()
-                value = self.settings.value(name)  # get stored value from registry
-                if value != None:
-                    obj.setValue(int(value))  # restore value from registry
+    # def write_settings(self):
+    #     for name, obj in inspect.getmembers(self.ui):
+    #
+    #         if isinstance(obj, QComboBox):
+    #             index = obj.currentIndex()
+    #             name = obj.objectName()
+    #             value = self.settings.value(name)
+    #
+    #             if value == "":
+    #                 continue
+    #
+    #             index = obj.findText(value)
+    #
+    #             if index == -1:
+    #                 obj.insertItems(0, [value])
+    #                 index = obj.findText(value)
+    #                 obj.setCurrentIndex(index)
+    #             else:
+    #                 obj.setCurrentIndex(index)
+    #
+    #         if isinstance(obj, QLineEdit):
+    #             name = obj.objectName()
+    #             value = self.settings.value(name)  # get stored value from registry
+    #             obj.setText(value)  # restore lineEditFile
+    #
+    #         if isinstance(obj, QCheckBox):
+    #             name = obj.objectName()
+    #             value = self.settings.value(name)  # get stored value from registry
+    #             if value != None:
+    #                 obj.setChecked(value)  # restore checkbox
+    #
+    #         if isinstance(obj, QRadioButton):
+    #             name = obj.objectName()
+    #             value = self.settings.value(name)  # get stored value from registry
+    #             if value != None:
+    #                 obj.setChecked(value)
+    #
+    #         if isinstance(obj, QSlider):
+    #             name = obj.objectName()
+    #             value = self.settings.value(name)  # get stored value from registry
+    #             if value != None:
+    #                 obj.setValue(int(value))  # restore value from registry
+    #
+    #         if isinstance(obj, QSpinBox):
+    #             name = obj.objectName()
+    #             value = self.settings.value(name)  # get stored value from registry
+    #             if value != None:
+    #                 # obj.setValue(int(value))  # restore value from registry
 
     #
     # void MainWindow::readSettings(){
@@ -94,65 +96,12 @@ class Main(QMainWindow):
     #   settings.endGroup();
     # }
     def read_settings(self):
-        for name, obj in inspect.getmembers(self.ui):
+        try:
+            for i in range(len(pysat_func.ui_list)):
+                pysat_func.ui_list[i]()
 
-            print(obj, name)
-            if isinstance(obj, QComboBox):
-                index = obj.currentIndex()
-                name = obj.objectName()
-                value = self.settings.value(name)
-
-                if value == "":
-                    continue
-
-                index = obj.findText(value)
-
-                if index == -1:
-                    obj.insertItems(0, [value])
-                    index = obj.findText(value)
-                    obj.setCurrentIndex(index)
-                else:
-                    obj.setCurrentIndex(index)
-
-            if isinstance(obj, QLineEdit):
-                name = obj.objectName()
-                value = obj.text()
-                # self.settings.setValue(name, state)
-                print(value)
-
-            if isinstance(obj, QCheckBox):
-                name = obj.objectName()
-                state = obj.checkState()
-                # self.settings.setValue(name, state)
-                print(state)
-
-            if isinstance(obj, QRadioButton):
-                name = obj.objectName()
-                value = obj.isChecked()  # get stored value from registry
-                # self.settings.setValue(name, value)
-                print(value)
-
-            if isinstance(obj, QSlider):
-                name = obj.objectName()
-                value = obj.value()  # get stored value from registry
-                # self.settings.setValue(name, value)
-                print(value)
-
-            if isinstance(obj, QSpinBox):
-                name = obj.objectName()
-                value = obj.value()  # get stored value from registry
-                # self.settings.setValue(name, value)
-                print(value)
-
-
-    def new(self):
-        # TODO create a new window to work in. The old window does not disappear
-        window = Main(self)
-        window.show()
-
-    def exit(self):
-        # TODO close the current window
-        self.close()
+        except Exception as e:
+            error_print(e)
 
 
 if __name__ == "__main__":
