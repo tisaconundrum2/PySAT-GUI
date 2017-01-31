@@ -458,6 +458,8 @@ class pysat_ui(object):
         self.actionSubmodelPredict.triggered.connect(lambda: pysat_ui.do_submodel_predict(self))
 
 
+        self.actionSet_output_location.triggered.connect(lambda: self.pysat_fun.set_ui_list(self.file_outpath(self)))
+
         # self.actionSet_output_location.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.file_outpath(self)))  # output location
         # self.actionLoad_Unknown_Data.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.get_unknown_data(self)))  # unknown data
         # self.actionLoad_reference_Data.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.get_known_data(self)))  # known data

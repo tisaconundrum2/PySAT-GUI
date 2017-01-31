@@ -56,6 +56,13 @@ class pysat_func(QThread):
         else:
             self.greyed_modules.append(modules)
 
+    def set_ui_list(self, ui, replacelast=False):
+        if replacelast:
+            self.greyed_modules[-1] = ui
+        else:
+            self.ui_list.append(ui)
+        print(self.ui_list)
+
     def getDataKeys(self):
         return self.datakeys
 
@@ -247,6 +254,14 @@ class pysat_func(QThread):
 
     def __del__(self):
         self.wait()
+
+    def restore(self):
+        try:
+            for i in range(0, len(self.ui_list)):
+                self.ui_list[i]()
+        except:
+            pass
+
 
     def del_layout(self):
         del_qwidget_(self.greyed_modules[-1])
