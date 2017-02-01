@@ -15,8 +15,8 @@ class Main(QMainWindow):
         self.read_settings()
         self.runningFunctions(self)
 
-    def closeEvent(self, event):
-        self.write_settings()
+    # def closeEvent(self, event):
+    #     self.write_settings()
 
     def runningFunctions(self, MainWindow):
         pysat = pysat_ui()

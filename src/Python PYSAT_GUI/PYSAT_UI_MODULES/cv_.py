@@ -220,6 +220,7 @@ class cv_:
         self.cv_choosealg.setIconSize(QtCore.QSize(50, 20))
         self.cv_choosealg.setObjectName(_fromUtf8("cv_choosealg"))
         self.cv_choosealg_hlayout.addWidget(self.cv_choosealg)
+        # TODO add logic that knows when args and kwargs are added.
         cv_choosealg_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding,
                                                 QtGui.QSizePolicy.Minimum)
         self.cv_choosealg_hlayout.addItem(cv_choosealg_spacer)

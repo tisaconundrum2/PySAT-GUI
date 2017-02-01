@@ -24,6 +24,7 @@ except AttributeError:
 class pysat_ui(object):
     def __init__(self):
         self.pysat_fun = pysat_func()
+        self.ui_list = []
         self.flag = False
 
     """
@@ -456,25 +457,23 @@ class pysat_ui(object):
         self.actionCross_Validation.triggered.connect(lambda: pysat_ui.do_cv(self))
         self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
         self.actionSubmodelPredict.triggered.connect(lambda: pysat_ui.do_submodel_predict(self))
+        self.actionOpen_Workflow.triggered.connect(lambda: pysat_ui.restore(self))
 
-
-        self.actionSet_output_location.triggered.connect(lambda: self.pysat_fun.set_ui_list(self.file_outpath(self)))
-
-        # self.actionSet_output_location.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.file_outpath(self)))  # output location
-        # self.actionLoad_Unknown_Data.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.get_unknown_data(self)))  # unknown data
-        # self.actionLoad_reference_Data.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.get_known_data(self)))  # known data
-        # self.actionNormalization.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.normalization(self)))  # submodel
-        # self.actionApply_Mask.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.do_mask(self)))  # get_mask
-        # self.actionRemoveNull.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.do_removenull(self)))
-        # self.actionStratified_Folds.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.do_strat_folds(self)))  # strat folds
-        # self.actionTrain.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.do_regression_train(self)))  # regression train
-        # self.actionPredict.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.do_regression_predict(self)))  # regression predict
-        # self.actionInterpolate.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.do_interp(self)))
-        # self.actionPlot.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.do_plot(self)))
-        # self.actionCross_Validation.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.do_cv(self)))
+        # self.actionSet_output_location.triggered.connect(lambda: self.pysat_fun.set_ui_list(pysat_ui.file_outpath(self)))
+        self.actionSet_output_location.triggered.connect(lambda: self.set_ui_list(pysat_ui.file_outpath))
+        self.actionLoad_Unknown_Data.triggered.connect(lambda: self.set_ui_list(pysat_ui.get_unknown_data))  # unknown data
+        self.actionLoad_reference_Data.triggered.connect(lambda: self.set_ui_list(pysat_ui.get_known_data))  # known data
+        self.actionNormalization.triggered.connect(lambda: self.set_ui_list(pysat_ui.normalization))  # submodel
+        self.actionApply_Mask.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_mask))  # get_mask
+        self.actionRemoveNull.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_removenull))
+        self.actionStratified_Folds.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_strat_folds))  # strat folds
+        self.actionTrain.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_regression_train))  # regression train
+        self.actionPredict.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_regression_predict))  # regression predict
+        self.actionInterpolate.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_interp))
+        self.actionPlot.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_plot))
+        self.actionCross_Validation.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_cv))
         # self.actionInterpolate.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.do_interp(self)))
         # self.actionSubmodelPredict.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.do_submodel_predict(self)))
-
 
     def set_greyed_out_items(self, bool):
         self.actionTrain.setDisabled(bool)
@@ -514,6 +513,20 @@ class pysat_ui(object):
 
     def on_deleteButton_clicked(self):
         pass
+
+    def set_ui_list(self, ui, replacelast=False):
+        if replacelast:
+            self.ui_list[-1] = ui
+        else:
+            self.ui_list.append(ui)
+        print(self.ui_list)
+
+    def restore(self):
+        try:
+            for i in range(0, len(self.ui_list)):
+                self.ui_list[i](self)
+        except:
+            pass
 
     def onStart(self):  # onStart function
         self.progressBar.setRange(0, 0)  # make the bar pulse green
