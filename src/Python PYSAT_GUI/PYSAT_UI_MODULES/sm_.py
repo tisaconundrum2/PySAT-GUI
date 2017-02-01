@@ -1,5 +1,5 @@
 from PyQt4 import QtCore, QtGui
-
+from pysat.utils.gui_utils import make_combobox
 from PYSAT_UI_MODULES.Error_ import error_print
 
 try:
@@ -54,9 +54,11 @@ class sm_:
         self.choosemodel_label = QtGui.QLabel(self.submodel_opt)
         self.choosemodel_label.setObjectName(_fromUtf8("choosemodel_label"))
         self.choosemodel_hlayout.addWidget(self.choosemodel_label)
-        self.choosemodel = QtGui.QComboBox(self.submodel_opt)
-        self.choosemodel.setIconSize(QtCore.QSize(50, 20))
-        self.choosemodel.setObjectName(_fromUtf8("choosemodel"))
+        modelchoices = self.pysat_fun.modelkeys
+        if modelchoices == []:
+            error_print('No model has been trained')
+            modelchoices = ['No model has been trained!']
+        self.choosemodel = make_combobox(modelchoices)
         self.choosemodel_hlayout.addWidget(self.choosemodel)
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.choosemodel_hlayout.addItem(spacerItem)
@@ -73,19 +75,21 @@ class sm_:
         self.low_model_hlayout.setMargin(11)
         self.low_model_hlayout.setSpacing(6)
         self.low_model_hlayout.setObjectName(_fromUtf8("low_model_hlayout"))
-        self.choose_low_model = QtGui.QComboBox(self.submodel_opt)
-        self.choose_low_model.setObjectName(_fromUtf8("choose_low_model"))
+        self.choose_low_model = make_combobox(modelchoices)
         self.low_model_hlayout.addWidget(self.choose_low_model)
         self.low_model_max_label = QtGui.QLabel(self.submodel_opt)
         self.low_model_max_label.setObjectName(_fromUtf8("low_model_max_label"))
         self.low_model_hlayout.addWidget(self.low_model_max_label)
         self.low_model_max = QtGui.QDoubleSpinBox(self.submodel_opt)
         self.low_model_max.setObjectName(_fromUtf8("low_model_max"))
+        self.low_model_max.setMaximum(1000)
+        self.low_model_max.setMinimum(-1000)
+
         self.low_model_hlayout.addWidget(self.low_model_max)
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.low_model_hlayout.addItem(spacerItem1)
         self.submodels_vlayout.addLayout(self.low_model_hlayout)
-
+        self.set_ranges(self.choose_low_model.currentText(), maxspin=self.low_model_max)
 
         #middle submodels go here
         self.midmodel_vlayout=QtGui.QVBoxLayout()
@@ -96,19 +100,21 @@ class sm_:
         self.high_model_hlayout.setMargin(11)
         self.high_model_hlayout.setSpacing(6)
         self.high_model_hlayout.setObjectName(_fromUtf8("high_model_hlayout"))
-        self.choose_high_model = QtGui.QComboBox(self.submodel_opt)
-        self.choose_high_model.setObjectName(_fromUtf8("choose_high_model"))
+        self.choose_high_model = make_combobox(modelchoices)
         self.high_model_hlayout.addWidget(self.choose_high_model)
         self.high_model_min_label = QtGui.QLabel(self.submodel_opt)
         self.high_model_min_label.setObjectName(_fromUtf8("high_model_min_label"))
         self.high_model_hlayout.addWidget(self.high_model_min_label)
         self.high_model_min = QtGui.QDoubleSpinBox(self.submodel_opt)
         self.high_model_min.setObjectName(_fromUtf8("high_model_min"))
+        self.high_model_min.setMaximum(1000)
+        self.high_model_min.setMinimum(-1000)
         self.high_model_hlayout.addWidget(self.high_model_min)
         spacerItem3 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.high_model_hlayout.addItem(spacerItem3)
         self.submodels_vlayout.addLayout(self.high_model_hlayout)
         self.verticalLayout.addLayout(self.submodels_vlayout)
+        self.set_ranges(self.choose_high_model.currentText(), minspin=self.high_model_min)
 
         #add or delete submodel buttons
         self.add_delete_hlayout = QtGui.QHBoxLayout()
@@ -128,19 +134,16 @@ class sm_:
         self.add_delete_hlayout.addItem(spacerItem4)
         self.verticalLayout.addLayout(self.add_delete_hlayout)
 
+        datachoices = self.pysat_fun.datakeys
+        if datachoices == []:
+            error_print('No Data has been loaded')
+            datachoices = ['No data has been loaded!']
+
         #choose data to optimize blending
         self.choosedata_hlayout = QtGui.QHBoxLayout()
         self.choosedata_hlayout.setMargin(11)
         self.choosedata_hlayout.setSpacing(6)
         self.choosedata_hlayout.setObjectName(_fromUtf8("choosedata_hlayout"))
-        self.choosedata_label = QtGui.QLabel(self.submodel_opt)
-        self.choosedata_label.setObjectName(_fromUtf8("choosedata_label"))
-        self.choosedata_hlayout.addWidget(self.choosedata_label)
-        self.choosedata = QtGui.QComboBox(self.submodel_opt)
-        self.choosedata.setObjectName(_fromUtf8("choosedata"))
-        self.choosedata_hlayout.addWidget(self.choosedata)
-        spacerItem5 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.choosedata_hlayout.addItem(spacerItem5)
         self.verticalLayout.addLayout(self.choosedata_hlayout)
 
         #choose data to predict
@@ -151,8 +154,9 @@ class sm_:
         self.choosedata_predict_label = QtGui.QLabel(self.submodel_opt)
         self.choosedata_predict_label.setObjectName(_fromUtf8("choosedata_predict_label"))
         self.predictdata_vlayout.addWidget(self.choosedata_predict_label)
-        self.choosedata_predict = QtGui.QListWidget(self.submodel_opt)
-        self.choosedata_predict.setObjectName(_fromUtf8("choosedata_predict"))
+
+
+        self.choosedata_predict = make_combobox(datachoices)
         self.predictdata_vlayout.addWidget(self.choosedata_predict)
         spacerItem6 = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         self.predictdata_vlayout.addItem(spacerItem6)
@@ -162,21 +166,23 @@ class sm_:
 
         self.submodel_opt.setTitle(_translate("MainWindow", "Submodel - Predict", None))
         self.choosemodel_label.setText(_translate("MainWindow", "Choose reference model:", None))
-        self.choosemodel.setItemText(0, _translate("MainWindow", "Model", None))
-        self.choose_low_model.setItemText(0, _translate("MainWindow", "Submodel", None))
         self.low_model_max_label.setText(_translate("MainWindow", "Max:", None))
 
         self.high_model_min_label.setText(_translate("MainWindow", "Min: ", None))
         self.add_submodel_button.setText(_translate("MainWindow", "Add Submodel", None))
         self.delete_submodel_button.setText(_translate("MainWindow", "Delete Submodel", None))
         self.optimize_checkbox.setText(_translate("MainWindow", "Optimize", None))
-        self.choosedata_label.setText(_translate("MainWindow", "Choose known data:", None))
         self.choosedata_predict_label.setText(_translate("MainWindow", "Choose data to predict:", None))
 
         self.add_submodel_button.clicked.connect(lambda: self.add_submodel())
         self.delete_submodel_button.clicked.connect(lambda: self.del_submodel())
+        self.choose_low_model.currentIndexChanged.connect(
+            lambda: self.set_ranges(self.choose_low_model.currentText(),maxspin=self.low_model_max))
         self.choose_low_model.currentIndexChanged.connect(lambda: self.get_sm_params())
+        self.choose_high_model.currentIndexChanged.connect(
+            lambda: self.set_ranges(self.choose_high_model.currentText(), minspin=self.high_model_min))
         self.choose_high_model.currentIndexChanged.connect(lambda: self.get_sm_params())
+        self.optimize_checkbox.toggled.connect(lambda: self.optimize_ranges(self.optimize_checkbox.isChecked(),datachoices))
 
 
     def add_submodel(self):
@@ -187,9 +193,11 @@ class sm_:
         submodel_hlayout.setMargin(11)
         submodel_hlayout.setSpacing(6)
         submodel_hlayout.setObjectName(_fromUtf8("submodel_hlayout"))
-        choose_submodel = QtGui.QComboBox()
-        choose_submodel.setObjectName(_fromUtf8("choose_submodel"))
-        choose_submodel.setFont(font)
+        modelchoices = self.pysat_fun.modelkeys
+        if modelchoices == []:
+            error_print('No model has been trained')
+            modelchoices = ['No model has been trained!']
+        choose_submodel = make_combobox(modelchoices)
         submodel_hlayout.addWidget(choose_submodel)
         submodel_min_label = QtGui.QLabel()
         submodel_min_label.setObjectName(_fromUtf8("submodel_min_label"))
@@ -198,6 +206,8 @@ class sm_:
         submodel_min = QtGui.QDoubleSpinBox()
         submodel_min.setObjectName(_fromUtf8("submodel_min"))
         submodel_min.setFont(font)
+        submodel_min.setMaximum(1000)
+        submodel_min.setMinimum(-1000)
         submodel_hlayout.addWidget(submodel_min)
         submodel_max_label = QtGui.QLabel()
         submodel_max_label.setObjectName(_fromUtf8("submodel_max_label"))
@@ -206,6 +216,8 @@ class sm_:
         submodel_max = QtGui.QDoubleSpinBox()
         submodel_max.setObjectName(_fromUtf8("submodel_max"))
         submodel_max.setFont(font)
+        submodel_max.setMaximum(1000)
+        submodel_max.setMinimum(-1000)
         submodel_hlayout.addWidget(submodel_max)
         spacerItem2 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         submodel_hlayout.addItem(spacerItem2)
@@ -214,7 +226,10 @@ class sm_:
         self.midmodel_vlayout.addLayout(submodel_hlayout)
         submodel_min.valueChanged.connect(lambda: self.get_sm_params())
         submodel_max.valueChanged.connect(lambda: self.get_sm_params())
+        self.set_ranges(choose_submodel.currentText(), minspin=submodel_min, maxspin=submodel_max)
+        choose_submodel.currentIndexChanged.connect(lambda: self.set_ranges(choose_submodel.currentText(),minspin=submodel_min,maxspin=submodel_max))
         choose_submodel.currentIndexChanged.connect(lambda: self.get_sm_params())
+
 
     def del_submodel(self):
         submodel_to_delete=self.midmodel_vlayout.takeAt(self.midmodel_vlayout.count()-1)
@@ -228,6 +243,29 @@ class sm_:
                     pass
 
 
+    def optimize_ranges(self,ischecked,datachoices):
+        if not ischecked:
+            self.choosedata_label.deleteLater()
+            self.choosedata.deleteLater()
 
+        else:
+            font = QtGui.QFont()
+            font.setPointSize(10)
+            self.choosedata_label = QtGui.QLabel(self.submodel_opt)
+            self.choosedata_label.setObjectName(_fromUtf8("choosedata_label"))
+            self.choosedata_label.setText(
+                _translate("MainWindow", "Choose known data to optimize submodel ranges:", None))
+            self.choosedata_label.setFont(font)
+            self.choosedata_hlayout.addWidget(self.choosedata_label)
 
+            self.choosedata = make_combobox(datachoices)
+            self.choosedata_hlayout.addWidget(self.choosedata)
+            self.choosedata.currentIndexChanged.connect(lambda: self.get_sm_params())
+
+    def set_ranges(self,model,minspin=None,maxspin=None):
+        range=self.pysat_fun.models[model].yrange
+        if minspin:
+            minspin.setValue(range[0])
+        if maxspin:
+            maxspin.setValue(range[1])
 
