@@ -457,9 +457,9 @@ class pysat_ui(object):
         self.actionCross_Validation.triggered.connect(lambda: pysat_ui.do_cv(self))
         self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
         self.actionSubmodelPredict.triggered.connect(lambda: pysat_ui.do_submodel_predict(self))
-        self.actionOpen_Workflow.triggered.connect(lambda: pysat_ui.restore(self))
 
-        # self.actionSet_output_location.triggered.connect(lambda: self.pysat_fun.set_ui_list(pysat_ui.file_outpath(self)))
+        # Restore functions down below
+        self.actionOpen_Workflow.triggered.connect(lambda: pysat_ui.restore(self))
         self.actionSet_output_location.triggered.connect(lambda: self.set_ui_list(pysat_ui.file_outpath))
         self.actionLoad_Unknown_Data.triggered.connect(lambda: self.set_ui_list(pysat_ui.get_unknown_data))  # unknown data
         self.actionLoad_reference_Data.triggered.connect(lambda: self.set_ui_list(pysat_ui.get_known_data))  # known data
@@ -472,8 +472,8 @@ class pysat_ui(object):
         self.actionInterpolate.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_interp))
         self.actionPlot.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_plot))
         self.actionCross_Validation.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_cv))
-        # self.actionInterpolate.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.do_interp(self)))
-        # self.actionSubmodelPredict.triggered.connect(self.pysat_fun.ui_list.append(lambda: pysat_ui.do_submodel_predict(self)))
+        self.actionInterpolate.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_interp))
+        self.actionSubmodelPredict.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_submodel_predict))
 
     def set_greyed_out_items(self, bool):
         self.actionTrain.setDisabled(bool)

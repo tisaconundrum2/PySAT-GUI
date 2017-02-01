@@ -28,70 +28,6 @@ class Main(QMainWindow):
         pysat.actionOpen_Workflow.triggered.connect(lambda: self.read_settings())  # trigger the loading of workflow.
         # pysat.actionSave_Current_Workflow.triggered.connect(lambda: self.write_settings())
 
-    # void MainWindow::writeSettings() {
-    #   QSettings settings("reaffer Soft", "reafferApp");
-    #   settings.beginGroup("MainWindow");
-    #   settings.setValue("size", size());
-    #   settings.setValue("pos", pos());
-    #   settings.endGroup();
-    # }
-    # def write_settings(self):
-    #     for name, obj in inspect.getmembers(self.ui):
-    #
-    #         if isinstance(obj, QComboBox):
-    #             index = obj.currentIndex()
-    #             name = obj.objectName()
-    #             value = self.settings.value(name)
-    #
-    #             if value == "":
-    #                 continue
-    #
-    #             index = obj.findText(value)
-    #
-    #             if index == -1:
-    #                 obj.insertItems(0, [value])
-    #                 index = obj.findText(value)
-    #                 obj.setCurrentIndex(index)
-    #             else:
-    #                 obj.setCurrentIndex(index)
-    #
-    #         if isinstance(obj, QLineEdit):
-    #             name = obj.objectName()
-    #             value = self.settings.value(name)  # get stored value from registry
-    #             obj.setText(value)  # restore lineEditFile
-    #
-    #         if isinstance(obj, QCheckBox):
-    #             name = obj.objectName()
-    #             value = self.settings.value(name)  # get stored value from registry
-    #             if value != None:
-    #                 obj.setChecked(value)  # restore checkbox
-    #
-    #         if isinstance(obj, QRadioButton):
-    #             name = obj.objectName()
-    #             value = self.settings.value(name)  # get stored value from registry
-    #             if value != None:
-    #                 obj.setChecked(value)
-    #
-    #         if isinstance(obj, QSlider):
-    #             name = obj.objectName()
-    #             value = self.settings.value(name)  # get stored value from registry
-    #             if value != None:
-    #                 obj.setValue(int(value))  # restore value from registry
-    #
-    #         if isinstance(obj, QSpinBox):
-    #             name = obj.objectName()
-    #             value = self.settings.value(name)  # get stored value from registry
-    #             if value != None:
-    #                 # obj.setValue(int(value))  # restore value from registry
-
-    #
-    # void MainWindow::readSettings(){
-    #   QSettings  settings("reaffer Soft", "reafferApp");
-    #   settings.beginGroup("MainWindow");
-    #   resize(settings.value("size", QSize(400, 400)).toSize());
-    #   move(settings.value("pos", QPoint(200, 200)).toPoint());
-    #   settings.endGroup();
-    # }
     def read_settings(self):
         try:
             for i in range(len(pysat_func.ui_list)):
@@ -100,6 +36,16 @@ class Main(QMainWindow):
         except Exception as e:
             error_print(e)
 
+
+    def new(self):
+        # TODO create a new window to work in. The old window does not disappear
+        window = Main(self)
+        window.show()
+
+
+    def exit(self):
+        # TODO close the current window
+        self.close()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
