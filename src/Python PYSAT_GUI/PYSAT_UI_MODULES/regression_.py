@@ -54,7 +54,7 @@ class regression_:
             if method == 'PLS':
                 params = {'n_components': self.reg_widget.pls_nc_spinbox.value(),
                           'scale': False}
-                modelkey =  modelkey+ str(params)
+                modelkey =  modelkey+ '( nc='+str(params['n_components'])+')'
                 kws = {'modelkey': modelkey}
             if method == 'GP':
                 params = {'reduce_dim': self.reg_widget.gp_dim_red_combobox.currentText(),
