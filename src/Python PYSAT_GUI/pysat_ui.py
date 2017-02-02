@@ -389,8 +389,8 @@ class pysat_ui(object):
         self.okButton.clicked.connect(lambda: self.on_okButton_clicked())
         self.delButton.clicked.connect(lambda: self.pysat_fun.del_layout())
 
-    def file_outpath(self):
-        self.flag = PYSAT_UI_MODULES.file_outpath_(self.pysat_fun, self.verticalLayout_8)
+    def file_outpath(self, args=None, ):
+        self.flag = PYSAT_UI_MODULES.file_outpath_(self.pysat_fun, self.verticalLayout_8, )
 
     def get_unknown_data(self):
         self.flag = PYSAT_UI_MODULES.get_data_u_(self.pysat_fun, self.verticalLayout_8)
@@ -451,14 +451,15 @@ class pysat_ui(object):
         self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))  # regression train
         self.actionPredict.triggered.connect(lambda: pysat_ui.do_regression_predict(self))  # regression predict
         self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
-        self.set_greyed_out_items(True)
-        self.set_visible_items()  # Taking out menu items that don't have working UI modules yet. We don't want to delete them, so we'll make them disappear.
         self.actionPlot.triggered.connect(lambda: pysat_ui.do_plot(self))
         self.actionCross_Validation.triggered.connect(lambda: pysat_ui.do_cv(self))
         self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
         self.actionSubmodelPredict.triggered.connect(lambda: pysat_ui.do_submodel_predict(self))
+        # Taking out menu items that don't have working UI modules yet. We don't want to delete them, so we'll make them disappear.
+        self.set_greyed_out_items(True)
+        self.set_visible_items()
 
-        # Restore functions down below
+        # These are the Restore functions
         self.actionOpen_Workflow.triggered.connect(lambda: pysat_ui.restore(self))
         self.actionSet_output_location.triggered.connect(lambda: self.set_ui_list(pysat_ui.file_outpath))
         self.actionLoad_Unknown_Data.triggered.connect(lambda: self.set_ui_list(pysat_ui.get_unknown_data))  # unknown data
@@ -519,7 +520,7 @@ class pysat_ui(object):
             self.ui_list[-1] = ui
         else:
             self.ui_list.append(ui)
-        print(self.ui_list)
+        # print(self.ui_list) debug purposes
 
     def restore(self):
         try:
