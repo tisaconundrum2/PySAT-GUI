@@ -190,7 +190,7 @@ class pysat_func(QThread):
         except Exception as e:
             error_print(e)
 
-    def do_submodel_predict(self,datakey,submodel_names,blendranges,trueval_data):
+    def do_submodel_predict(self,datakey,submodel_names,modelranges,trueval_data):
         #Check if reference data name has been provided
         #if so, get reference data values
         if trueval_data is not None:
@@ -198,7 +198,6 @@ class pysat_func(QThread):
             x_ref=[]
         else:
             truevals=None
-
 
         #step through the submodel names and get the actual models and the x data
         x=[]
@@ -209,14 +208,26 @@ class pysat_func(QThread):
             if trueval_data is not None:
                 x_ref.append(self.data[trueval_data].df[self.model_xvars[i]])
 
-        # create the submodel object
-        sm_obj = sm.sm(blendranges, submodels)
-        predictions=sm_obj.predict(x)
+        #create the submodel object
+        sm_obj = sm.sm(modelranges, submodels)
+
+        #optimize blending if reference data is provided (otherwise, modelranges will be used as blending ranges)
         if truevals is not None:
             ref_predictions=sm_obj.predict(x_ref)
             ref_predictions_blended=sm_obj.do_blend(ref_predictions,truevals=truevals)
-            #predictions_blended=sm_obj.do_blend()
-        print('do submodel predict')
+
+        # get predictions for each submodel separately
+        predictions = sm_obj.predict(x)
+
+        #blend the predictions together
+        predictions_blended=sm_obj.do_blend(predictions)
+
+
+        #save the individual and blended predictions
+        for i,j in enumerate(predictions):
+            self.data[datakey].df[submodel_names[i]+'-Predict'] = j
+        self.data[datakey].df['Blended-Predict ('+str(sm_obj.blendranges)+')'] = predictions_blended
+
 
     def do_plot(self, datakey,
                 xvar, yvar,
