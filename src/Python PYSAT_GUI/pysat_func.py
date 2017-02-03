@@ -2,6 +2,7 @@ from pysat.spectral.spectral_data import spectral_data
 from pysat.regression import regression
 from pysat.regression import cv
 from pysat.plotting.plots import make_plot, pca_ica_plot
+from pysat.regression import sm
 import pandas as pd
 from PYSAT_UI_MODULES.Error_ import error_print
 from PyQt4.QtCore import QThread
@@ -20,6 +21,7 @@ class pysat_func(QThread):
         self.modelkeys = []
         self.modelranges = []
         self.model_xvars = {}
+        self.model_yvars = {}
         self.figs = {}
         self.fun_list = []
         self.arg_list = []
@@ -165,7 +167,8 @@ class pysat_func(QThread):
             x=x[ymask,:]
             self.models[modelkey].fit(x, y)
             self.model_xvars[modelkey] = xvars
-
+            self.model_yvars[modelkey] = yvars
+            print('foo')
         except Exception as e:
             error_print(e)
 
@@ -187,8 +190,33 @@ class pysat_func(QThread):
         except Exception as e:
             error_print(e)
 
-    def do_submodel_predict(self):
-        pass
+    def do_submodel_predict(self,datakey,submodel_names,blendranges,trueval_data):
+        #Check if reference data name has been provided
+        #if so, get reference data values
+        if trueval_data is not None:
+            truevals=self.data[trueval_data].df[self.model_yvars[submodel_names[0]]]
+            x_ref=[]
+        else:
+            truevals=None
+
+
+        #step through the submodel names and get the actual models and the x data
+        x=[]
+        submodels=[]
+        for i in submodel_names:
+            x.append(self.data[datakey].df[self.model_xvars[i]])
+            submodels.append(self.models[i])
+            if trueval_data is not None:
+                x_ref.append(self.data[trueval_data].df[self.model_xvars[i]])
+
+        # create the submodel object
+        sm_obj = sm.sm(blendranges, submodels)
+        predictions=sm_obj.predict(x)
+        if truevals is not None:
+            ref_predictions=sm_obj.predict(x_ref)
+            ref_predictions_blended=sm_obj.do_blend(ref_predictions,truevals=truevals)
+            #predictions_blended=sm_obj.do_blend()
+        print('do submodel predict')
 
     def do_plot(self, datakey,
                 xvar, yvar,
