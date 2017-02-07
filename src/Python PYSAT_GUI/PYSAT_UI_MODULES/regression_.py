@@ -81,6 +81,9 @@ class regression_:
         self.pysat_fun.set_arg_list(args, replacelast=True)
         self.pysat_fun.set_kw_list(kws, replacelast=True)
 
+    def set_regression_parameters(self):
+        pass
+
     def make_ransac_widget(self, isChecked):
         if not isChecked:
             self.ransac_widget.deleteLater()

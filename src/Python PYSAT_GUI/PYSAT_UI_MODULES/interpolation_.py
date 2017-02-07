@@ -35,6 +35,9 @@ class interpolation_:
         self.interpoliation_choosedata.currentIndexChanged.connect(lambda: self.get_interp_parameters())
         self.interpolation_choosedata_2.currentIndexChanged.connect(lambda: self.get_interp_parameters())
 
+    def set_interp_parameters(self):
+        pass
+
     def get_interp_parameters(self):
         key1 = self.interpoliation_choosedata.currentText()
         key2 = self.interpolation_choosedata_2.currentText()

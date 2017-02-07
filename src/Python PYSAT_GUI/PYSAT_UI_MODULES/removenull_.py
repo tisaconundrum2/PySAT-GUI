@@ -45,6 +45,9 @@ class removenull_:
         self.pysat_fun.set_arg_list(args, replacelast=True)
         self.pysat_fun.set_kw_list(kws, replacelast=True)
 
+    def set_removenull_parameters(self):
+        pass
+
     def removenull_ui(self):
         self.removenull = QtGui.QGroupBox()
         font = QtGui.QFont()

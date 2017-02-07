@@ -69,6 +69,9 @@ class normalization_:
         self.add_ranges_button.clicked.connect(lambda: self.add_ranges())
         self.del_button.clicked.connect(lambda: self.del_ranges())
 
+    def set_normalization_parameters(self):
+        pass
+
     def normalization_ui(self):
         datachoices = self.pysat_fun.datakeys
         if datachoices == []:

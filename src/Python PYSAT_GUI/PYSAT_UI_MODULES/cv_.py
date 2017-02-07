@@ -31,6 +31,10 @@ class cv_:
         self.cv_ui()
         self.cv_choosealg.currentIndexChanged.connect(lambda: self.make_reg_widget(self.cv_choosealg.currentText()))
 
+    def set_cv_parameters(self):
+        # TODO add restoring functionality here
+        pass
+
     def get_cv_parameters(self):
 
         method = self.cv_choosealg.currentText()

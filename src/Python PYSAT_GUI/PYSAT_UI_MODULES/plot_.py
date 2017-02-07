@@ -115,6 +115,9 @@ class plot_:
         self.pysat_fun.set_arg_list(args, replacelast=True)
         self.pysat_fun.set_kw_list(kws, replacelast=True)
 
+    def set_plot_parameters(self):
+        pass
+
     def plot_ui(self):
         self.plot = QtGui.QGroupBox()
         font = QtGui.QFont()

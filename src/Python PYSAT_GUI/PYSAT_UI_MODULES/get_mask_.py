@@ -41,6 +41,9 @@ class get_mask_:
         self.pysat_fun.set_arg_list(args, replacelast=True)
         self.pysat_fun.set_kw_list(kws, replacelast=True)
 
+    def set_mask_params(self):
+        pass
+
     def get_mask_ui(self):
         self.get_mask = QtGui.QGroupBox()
         font = QtGui.QFont()

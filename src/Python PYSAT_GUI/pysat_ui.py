@@ -335,7 +335,7 @@ class pysat_ui(object):
         self.actionApply_Mask.setText(_translate("MainWindow", "Apply Mask", None))
         self.actionInterpolate.setText(_translate("MainWindow", "Interpolate", None))
         self.actionRemoveNull.setText(_translate("MainWindow", "Remove Null Data", None))
-        self.actionInterpolate.setText(_translate("MainWindow", "Interpolate (unknown to known)", None))
+        self.actionInterpolate.setText(_translate("MainWindow", "Interpolate", None))
         self.actionInstrument_Response.setText(_translate("MainWindow", "Instrument Response", None))
         self.actionALS.setText(_translate("MainWindow", "ALS", None))
         self.actionDietrich.setText(_translate("MainWindow", "Dietrich", None))
@@ -389,14 +389,14 @@ class pysat_ui(object):
         self.okButton.clicked.connect(lambda: self.on_okButton_clicked())
         self.delButton.clicked.connect(lambda: self.pysat_fun.del_layout())
 
-    def file_outpath(self, args=None, ):
+    def file_outpath(self):
         self.flag = PYSAT_UI_MODULES.file_outpath_(self.pysat_fun, self.verticalLayout_8, )
 
     def get_unknown_data(self):
-        self.flag = PYSAT_UI_MODULES.get_data_u_(self.pysat_fun, self.verticalLayout_8)
+        self.flag = PYSAT_UI_MODULES.get_data_u_(self.pysat_fun, self.verticalLayout_8, self.pysat_fun.arg_list, self.pysat_fun.kw_list)
 
     def get_known_data(self):
-        self.flag = PYSAT_UI_MODULES.get_data_k_(self.pysat_fun, self.verticalLayout_8)
+        self.flag = PYSAT_UI_MODULES.get_data_k_(self.pysat_fun, self.verticalLayout_8, self.pysat_fun.arg_list, self.pysat_fun.kw_list)
 
     def do_mask(self):
         PYSAT_UI_MODULES.get_mask_(self.pysat_fun, self.verticalLayout_8)
@@ -453,7 +453,6 @@ class pysat_ui(object):
         self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
         self.actionPlot.triggered.connect(lambda: pysat_ui.do_plot(self))
         self.actionCross_Validation.triggered.connect(lambda: pysat_ui.do_cv(self))
-        self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
         self.actionSubmodelPredict.triggered.connect(lambda: pysat_ui.do_submodel_predict(self))
         # Taking out menu items that don't have working UI modules yet. We don't want to delete them, so we'll make them disappear.
         self.set_greyed_out_items(True)
@@ -473,7 +472,6 @@ class pysat_ui(object):
         self.actionInterpolate.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_interp))
         self.actionPlot.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_plot))
         self.actionCross_Validation.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_cv))
-        self.actionInterpolate.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_interp))
         self.actionSubmodelPredict.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_submodel_predict))
 
     def set_greyed_out_items(self, bool):

@@ -44,6 +44,9 @@ class strat_folds_:
     #        except:
     #            print('There was a problem with creating stratified folds...')
 
+    def set_strat_fold_params(self):
+        pass
+
     def get_strat_fold_params(self):
         datakey = self.strat_folds_choose_data.currentText()
         nfolds = self.nfolds_spin.value()

@@ -252,11 +252,13 @@ class pysat_func(QThread):
         if len(self.greyed_modules) > 0:
             del self.greyed_modules[-1]
 
-    def start(self):
+    def run(self):
         # TODO this function will take all the enumerated functions and parameters and run them
         try:
             for i in range(self.leftOff, len(self.fun_list)):
                 print(self.fun_list[i])
+                print("arg_list: {}".format(self.arg_list))
+                print("kw_list: {}".format(self.kw_list))
                 self.fun_list[i](*self.arg_list[i], **self.kw_list[i])
                 self.greyed_modules[i].setDisabled(True)
                 self.leftOff = i + 1

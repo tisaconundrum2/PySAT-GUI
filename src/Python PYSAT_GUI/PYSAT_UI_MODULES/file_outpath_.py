@@ -60,6 +60,9 @@ class file_outpath_:
         self.file_out_path_line_edit.setText(_translate("MainWindow", "*/", None))
         self.file_out_path_button.setText(_translate("MainWindow", "...", None))
 
+    def set_outpath_parameters(self):
+        pass
+
     def on_outPutLocationButton_clicked(self, lineEdit):
         filename = QtGui.QFileDialog.getExistingDirectory(None, "Select Output Directory", '.')
         lineEdit.setText(filename)

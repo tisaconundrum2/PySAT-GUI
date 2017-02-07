@@ -18,9 +18,12 @@ except AttributeError:
 
 
 class get_data_u_:
-    def __init__(self, pysat_fun, verticalLayout_8):
+    def __init__(self, pysat_fun, verticalLayout_8, fun_list, arg_list, kw_list):
         self.pysat_fun = pysat_fun
         self.verticalLayout_8 = verticalLayout_8
+        self.fun_list = fun_list
+        self.arg_list = arg_list
+        self.kwlist = kw_list
         self.main()
 
     def main(self):
@@ -58,8 +61,13 @@ class get_data_u_:
 
         self.get_data_u.setTitle(_translate("MainWindow", "Load Unknown Data", None))
         self.get_data_u_label.setText(_translate("MainWindow", "File Name", None))
-        self.get_data_u_line_edit.setText(_translate("MainWindow", "*.csv", None))
         self.get_data_u_button.setText(_translate("MainWindow", "...", None))
+
+    def set_data_parameters(self):
+        if self.arg_list == []:
+            self.get_data_u_line_edit.setText(_translate("MainWindow", "*.csv", None))
+        else:
+            self.get_data_u_line_edit.setText(self.arg_list[0][0])
 
     def on_getDataButton_clicked(self, lineEdit, key):
         filename = QtGui.QFileDialog.getOpenFileName(None, "Open " + key + " Data File", '.', "(*.csv)")
@@ -73,9 +81,11 @@ class get_data_u_:
 
 
 class get_data_k_:
-    def __init__(self, pysat_fun, verticalLayout_8):
+    def __init__(self, pysat_fun, verticalLayout_8, arg_list, kw_list):
         self.pysat_fun = pysat_fun
         self.verticalLayout_8 = verticalLayout_8
+        self.arg_list = arg_list
+        self.kwlist = kw_list
         self.main()
 
     def main(self):
@@ -115,6 +125,9 @@ class get_data_k_:
         self.get_data_k_label.setText(_translate("MainWindow", "File Name", None))
         self.get_data_k_line_edit.setText(_translate("MainWindow", "*.csv", None))
         self.get_data_k_button.setText(_translate("MainWindow", "...", None))
+
+    def set_data_parameters(self):
+        pass
 
     def on_getDataButton_clicked(self, lineEdit, key):
         filename = QtGui.QFileDialog.getOpenFileName(None, "Open " + key + " Data File", '.', "(*.csv)")

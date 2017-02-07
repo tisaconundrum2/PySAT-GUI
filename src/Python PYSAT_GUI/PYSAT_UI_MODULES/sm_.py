@@ -28,6 +28,9 @@ class sm_:
     def get_sm_params(self):
         pass
 
+    def set_sm_params(self):
+        pass
+
     def main(self):
         # driver function, calls UI and set's up connections
         # add function list calls here
