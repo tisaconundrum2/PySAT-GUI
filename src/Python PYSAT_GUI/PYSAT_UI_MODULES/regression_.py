@@ -54,7 +54,7 @@ class regression_:
             if method == 'PLS':
                 params = {'n_components': self.reg_widget.pls_nc_spinbox.value(),
                           'scale': False}
-                modelkey = modelkey + str(params)
+                modelkey =  modelkey+ '(nc='+str(params['n_components'])+')'
                 kws = {'modelkey': modelkey}
             if method == 'GP':
                 params = {'reduce_dim': self.reg_widget.gp_dim_red_combobox.currentText(),
@@ -191,7 +191,6 @@ class regression_:
                                                             QtGui.QSizePolicy.Minimum)
             self.reg_widget.gp_theta_vlayout.addItem(self.reg_widget.spacerItem5)
             self.reg_widget.gp_vlayout.addLayout(self.reg_widget.gp_theta_vlayout)
-
             self.reg_widget.gp_dim_red_combobox.currentIndexChanged.connect(lambda: self.get_regression_parameters())
             self.reg_widget.gp_dim_red_nc_spinbox.valueChanged.connect(lambda: self.get_regression_parameters())
             self.reg_widget.gp_rand_starts_spin.valueChanged.connect(lambda: self.get_regression_parameters())
