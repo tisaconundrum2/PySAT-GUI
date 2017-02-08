@@ -257,6 +257,9 @@ class pysat_func(QThread):
         try:
             for i in range(self.leftOff, len(self.fun_list)):
                 print(self.fun_list[i])
+                print("fun_list: {}".format(self.fun_list))
+                if "pysat_func.do_norm" in self.fun_list:
+                    print("True")
                 print("arg_list: {}".format(self.arg_list))
                 print("kw_list: {}".format(self.kw_list))
                 self.fun_list[i](*self.arg_list[i], **self.kw_list[i])

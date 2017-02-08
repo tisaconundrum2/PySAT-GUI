@@ -18,10 +18,10 @@ except AttributeError:
 
 
 class get_data_u_:
-    def __init__(self, pysat_fun, verticalLayout_8, fun_list, arg_list, kw_list):
+    def __init__(self, pysat_fun, verticalLayout_8, arg_list, kw_list):
         self.pysat_fun = pysat_fun
         self.verticalLayout_8 = verticalLayout_8
-        self.fun_list = fun_list
+        # self.fun_list = fun_list
         self.arg_list = arg_list
         self.kwlist = kw_list
         self.main()
