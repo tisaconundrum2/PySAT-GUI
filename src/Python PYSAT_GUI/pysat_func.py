@@ -192,44 +192,42 @@ class pysat_func(QThread):
         except Exception as e:
             error_print(e)
 
-    def do_submodel_predict(self,datakey,submodel_names,modelranges,trueval_data):
-        #Check if reference data name has been provided
-        #if so, get reference data values
+    def do_submodel_predict(self, datakey, submodel_names, modelranges, trueval_data):
+        # Check if reference data name has been provided
+        # if so, get reference data values
         if trueval_data is not None:
-            truevals=self.data[trueval_data].df[self.model_yvars[submodel_names[0]]]
-            x_ref=[]
+            truevals = self.data[trueval_data].df[self.model_yvars[submodel_names[0]]]
+            x_ref = []
         else:
-            truevals=None
+            truevals = None
 
-        #step through the submodel names and get the actual models and the x data
-        x=[]
-        submodels=[]
+        # step through the submodel names and get the actual models and the x data
+        x = []
+        submodels = []
         for i in submodel_names:
             x.append(self.data[datakey].df[self.model_xvars[i]])
             submodels.append(self.models[i])
             if trueval_data is not None:
                 x_ref.append(self.data[trueval_data].df[self.model_xvars[i]])
 
-        #create the submodel object
+        # create the submodel object
         sm_obj = sm.sm(modelranges, submodels)
 
-        #optimize blending if reference data is provided (otherwise, modelranges will be used as blending ranges)
+        # optimize blending if reference data is provided (otherwise, modelranges will be used as blending ranges)
         if truevals is not None:
-            ref_predictions=sm_obj.predict(x_ref)
-            ref_predictions_blended=sm_obj.do_blend(ref_predictions,truevals=truevals)
+            ref_predictions = sm_obj.predict(x_ref)
+            ref_predictions_blended = sm_obj.do_blend(ref_predictions, truevals=truevals)
 
         # get predictions for each submodel separately
         predictions = sm_obj.predict(x)
 
-        #blend the predictions together
-        predictions_blended=sm_obj.do_blend(predictions)
+        # blend the predictions together
+        predictions_blended = sm_obj.do_blend(predictions)
 
-
-        #save the individual and blended predictions
-        for i,j in enumerate(predictions):
-            self.data[datakey].df[submodel_names[i]+'-Predict'] = j
-        self.data[datakey].df['Blended-Predict ('+str(sm_obj.blendranges)+')'] = predictions_blended
-
+        # save the individual and blended predictions
+        for i, j in enumerate(predictions):
+            self.data[datakey].df[submodel_names[i] + '-Predict'] = j
+        self.data[datakey].df['Blended-Predict (' + str(sm_obj.blendranges) + ')'] = predictions_blended
 
     def do_plot(self, datakey,
                 xvar, yvar,
@@ -294,13 +292,27 @@ class pysat_func(QThread):
     def run(self):
         # TODO this function will take all the enumerated functions and parameters and run them
         try:
+            #################################################### Begin Printing out debugging information
+            for i in range(0, len(self.fun_list)):
+                print("fun_list: {}".format(self.fun_list[i]))
+            print("")
+
+            for i in range(0, len(self.arg_list)):
+                print("arg_list: {}".format(self.arg_list[i]))
+            print("")
+
+            for i in range(0, len(self.kw_list)):
+                print("kw_list: {}".format(self.kw_list[i]))
+            print("")
+            #################################################### Endof Printing out debugging information
+            print(self.do_norm in self.fun_list)
+
             for i in range(self.leftOff, len(self.fun_list)):
-                print(self.fun_list[i])
-                print("fun_list: {}".format(self.fun_list))
-                if "pysat_func.do_norm" in self.fun_list:
+                if pysat_func.do_norm == self.fun_list[i]:
                     print("True")
-                print("arg_list: {}".format(self.arg_list))
-                print("kw_list: {}".format(self.kw_list))
+                    break
+
+            for i in range(self.leftOff, len(self.fun_list)):
                 self.fun_list[i](*self.arg_list[i], **self.kw_list[i])
                 self.greyed_modules[i].setDisabled(True)
                 self.leftOff = i + 1

@@ -169,6 +169,7 @@ class normalization_:
         del_layout_(self.all_ranges_layout)
         del self.box_list[-1]  # delete left box
         del self.box_list[-1]  # delete right box
+        del self.pysat_fun.fun_list[-1]  # delete a function item
         self.finished(self.box_list)
 
 
