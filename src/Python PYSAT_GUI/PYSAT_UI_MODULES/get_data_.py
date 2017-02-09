@@ -18,10 +18,10 @@ except AttributeError:
 
 
 class get_data_u_:
-    def __init__(self, pysat_fun, verticalLayout_8, arg_list, kw_list):
+    def __init__(self, pysat_fun, verticalLayout_8, fun_list, arg_list, kw_list):
         self.pysat_fun = pysat_fun
         self.verticalLayout_8 = verticalLayout_8
-        # self.fun_list = fun_list
+        self.fun_list = fun_list
         self.arg_list = arg_list
         self.kwlist = kw_list
         self.main()
@@ -67,7 +67,11 @@ class get_data_u_:
         if self.arg_list == []:
             self.get_data_u_line_edit.setText(_translate("MainWindow", "*.csv", None))
         else:
-            self.get_data_u_line_edit.setText(self.arg_list[0][0])
+            for i in range(0, len(self.fun_list)):
+                if self.pysat_fun.get_data == self.fun_list[i]:
+                    print("True {}".format(i))
+                    self.get_data_u_line_edit.setText(self.arg_list[0][i])
+                    break
 
     def on_getDataButton_clicked(self, lineEdit, key):
         filename = QtGui.QFileDialog.getOpenFileName(None, "Open " + key + " Data File", '.', "(*.csv)")

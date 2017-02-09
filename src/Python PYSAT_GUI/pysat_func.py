@@ -57,18 +57,6 @@ class pysat_func(QThread):
         else:
             self.greyed_modules.append(modules)
 
-    def getDataKeys(self):
-        return self.datakeys
-
-    def getModelKeys(self):
-        return self.modelkeys
-
-    def getData(self):
-        return self.data
-
-    def getModels(self):
-        return self.models
-
     """
     Work functions below
     """
@@ -289,6 +277,12 @@ class pysat_func(QThread):
         if len(self.greyed_modules) > 0:
             del self.greyed_modules[-1]
 
+    def restore(self):
+        for i in range(self.leftOff, len(self.fun_list)):
+            if self.do_norm == self.fun_list[i]:
+                print("True {}".format(i))
+                break
+
     def run(self):
         # TODO this function will take all the enumerated functions and parameters and run them
         try:
@@ -305,12 +299,7 @@ class pysat_func(QThread):
                 print("kw_list: {}".format(self.kw_list[i]))
             print("")
             #################################################### Endof Printing out debugging information
-            print(self.do_norm in self.fun_list)
 
-            for i in range(self.leftOff, len(self.fun_list)):
-                if pysat_func.do_norm == self.fun_list[i]:
-                    print("True")
-                    break
 
             for i in range(self.leftOff, len(self.fun_list)):
                 self.fun_list[i](*self.arg_list[i], **self.kw_list[i])

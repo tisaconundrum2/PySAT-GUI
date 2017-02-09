@@ -393,10 +393,12 @@ class pysat_ui(object):
         self.flag = PYSAT_UI_MODULES.file_outpath_(self.pysat_fun, self.verticalLayout_8, )
 
     def get_unknown_data(self):
-        self.flag = PYSAT_UI_MODULES.get_data_u_(self.pysat_fun, self.verticalLayout_8, self.pysat_fun.arg_list, self.pysat_fun.kw_list)
+        self.flag = PYSAT_UI_MODULES.get_data_u_(self.pysat_fun, self.verticalLayout_8, self.pysat_fun.fun_list,
+                                                 self.pysat_fun.arg_list, self.pysat_fun.kw_list)
 
     def get_known_data(self):
-        self.flag = PYSAT_UI_MODULES.get_data_k_(self.pysat_fun, self.verticalLayout_8, self.pysat_fun.arg_list, self.pysat_fun.kw_list)
+        self.flag = PYSAT_UI_MODULES.get_data_k_(self.pysat_fun, self.verticalLayout_8, self.pysat_fun.arg_list,
+                                                 self.pysat_fun.kw_list)
 
     def do_mask(self):
         PYSAT_UI_MODULES.get_mask_(self.pysat_fun, self.verticalLayout_8)
@@ -458,17 +460,23 @@ class pysat_ui(object):
         self.set_greyed_out_items(True)
         self.set_visible_items()
 
+        # TODO add auto scroll down feature
+        # self.scrollArea.findChildren().triggered.connect(self.scrollArea.verticalScrollBar().setValue(self.scrollArea.verticalScrollBar().value()+10))
+
         # These are the Restore functions
         self.actionOpen_Workflow.triggered.connect(lambda: pysat_ui.restore(self))
         self.actionSet_output_location.triggered.connect(lambda: self.set_ui_list(pysat_ui.file_outpath))
-        self.actionLoad_Unknown_Data.triggered.connect(lambda: self.set_ui_list(pysat_ui.get_unknown_data))  # unknown data
-        self.actionLoad_reference_Data.triggered.connect(lambda: self.set_ui_list(pysat_ui.get_known_data))  # known data
+        self.actionLoad_Unknown_Data.triggered.connect(
+            lambda: self.set_ui_list(pysat_ui.get_unknown_data))  # unknown data
+        self.actionLoad_reference_Data.triggered.connect(
+            lambda: self.set_ui_list(pysat_ui.get_known_data))  # known data
         self.actionNormalization.triggered.connect(lambda: self.set_ui_list(pysat_ui.normalization))  # submodel
         self.actionApply_Mask.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_mask))  # get_mask
         self.actionRemoveNull.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_removenull))
         self.actionStratified_Folds.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_strat_folds))  # strat folds
         self.actionTrain.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_regression_train))  # regression train
-        self.actionPredict.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_regression_predict))  # regression predict
+        self.actionPredict.triggered.connect(
+            lambda: self.set_ui_list(pysat_ui.do_regression_predict))  # regression predict
         self.actionInterpolate.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_interp))
         self.actionPlot.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_plot))
         self.actionCross_Validation.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_cv))
@@ -510,22 +518,17 @@ class pysat_ui(object):
             self.onStart()
             self.pysat_fun.taskFinished.connect(self.onFinished)
 
-    def on_deleteButton_clicked(self):
-        pass
-
+    # Restore functionality
     def set_ui_list(self, ui, replacelast=False):
         if replacelast:
             self.ui_list[-1] = ui
         else:
             self.ui_list.append(ui)
-        # print(self.ui_list) debug purposes
+            # print(self.ui_list) debug purposes
 
     def restore(self):
-        try:
-            for i in range(0, len(self.ui_list)):
+        for i in range(0, len(self.ui_list)):
                 self.ui_list[i](self)
-        except:
-            pass
 
     def onStart(self):  # onStart function
         self.progressBar.setRange(0, 0)  # make the bar pulse green
