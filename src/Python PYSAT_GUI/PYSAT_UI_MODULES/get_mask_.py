@@ -91,7 +91,9 @@ class get_mask_:
             self.get_mask_line_edit.setText(_translate("MainWindow", "*.csv", None))
         else:
             self.get_mask_line_edit.setText(self.arg_list[1])
-            self.mask_choosedata.setItemText(1, str(self.arg_list[0]))
+            index = self.mask_choosedata.findText(str(self.arg_list[0]))
+            if index is not -1:
+                self.mask_choosedata.setCurrentIndex(index)
 
     def on_getDataButton_clicked(self, lineEdit):
         filename = QtGui.QFileDialog.getOpenFileName(None, "Open Mask Data File", '.', "(*.csv)")
