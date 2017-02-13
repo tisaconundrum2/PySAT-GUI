@@ -276,9 +276,12 @@ class pysat_func(QThread):
         del_qwidget_(self.greyed_modules[-1])
         if len(self.greyed_modules) > 0:
             del self.greyed_modules[-1]
-            del self.kw_list[-1]
-            del self.arg_list[-1]
-            del self.fun_list[-1]
+            try: del self.fun_list[-1]
+            except: pass
+            try: del self.kw_list[-1]
+            except: pass
+            try: del self.arg_list[-1]
+            except: pass
 
     def run(self):
         # TODO this function will take all the enumerated functions and parameters and run them
