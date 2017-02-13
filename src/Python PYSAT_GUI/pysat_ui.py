@@ -392,42 +392,40 @@ class pysat_ui(object):
     def file_outpath(self):
         self.flag = PYSAT_UI_MODULES.file_outpath_(self.pysat_fun, self.verticalLayout_8, )
 
-    def get_unknown_data(self):
-        self.flag = PYSAT_UI_MODULES.get_data_u_(self.pysat_fun, self.verticalLayout_8, self.pysat_fun.fun_list,
-                                                 self.pysat_fun.arg_list, self.pysat_fun.kw_list)
+    def get_unknown_data(self, arg_list=None, kw_list=None):
+        self.flag = PYSAT_UI_MODULES.get_data_u_(self.pysat_fun, self.verticalLayout_8, arg_list, kw_list)
 
-    def get_known_data(self):
-        self.flag = PYSAT_UI_MODULES.get_data_k_(self.pysat_fun, self.verticalLayout_8, self.pysat_fun.arg_list,
-                                                 self.pysat_fun.kw_list)
+    def get_known_data(self, arg_list=None, kw_list=None):
+        self.flag = PYSAT_UI_MODULES.get_data_k_(self.pysat_fun, self.verticalLayout_8, arg_list, kw_list)
 
-    def do_mask(self):
-        PYSAT_UI_MODULES.get_mask_(self.pysat_fun, self.verticalLayout_8)
+    def do_mask(self, arg_list=None, kw_list=None):
+        PYSAT_UI_MODULES.get_mask_(self.pysat_fun, self.verticalLayout_8, arg_list, kw_list)
 
-    def do_removenull(self):
+    def do_removenull(self, arg_list=None, kw_list=None):
         PYSAT_UI_MODULES.removenull_(self.pysat_fun, self.verticalLayout_8)
 
-    def normalization(self):
+    def normalization(self, arg_list=None, kw_list=None):
         PYSAT_UI_MODULES.normalization_(self.pysat_fun, self.verticalLayout_8)
 
-    def do_strat_folds(self):
+    def do_strat_folds(self, arg_list=None, kw_list=None):
         PYSAT_UI_MODULES.strat_folds_(self.pysat_fun, self.verticalLayout_8)
 
-    def do_regression_train(self):
+    def do_regression_train(self, arg_list=None, kw_list=None):
         PYSAT_UI_MODULES.regression_(self.pysat_fun, self.verticalLayout_8)
 
-    def do_regression_predict(self):
+    def do_regression_predict(self, arg_list=None, kw_list=None):
         PYSAT_UI_MODULES.regression_predict_(self.pysat_fun, self.verticalLayout_8)
 
-    def do_submodel_predict(self):
+    def do_submodel_predict(self, arg_list=None, kw_list=None):
         PYSAT_UI_MODULES.sm_(self.pysat_fun, self.verticalLayout_8)
 
-    def do_plot(self):
+    def do_plot(self, arg_list=None, kw_list=None):
         PYSAT_UI_MODULES.plot_(self.pysat_fun, self.verticalLayout_8)
 
-    def do_cv(self):
+    def do_cv(self, arg_list=None, kw_list=None):
         PYSAT_UI_MODULES.cv_(self.pysat_fun, self.verticalLayout_8)
 
-    def do_interp(self):
+    def do_interp(self, arg_list=None, kw_list=None):
         PYSAT_UI_MODULES.interpolation_(self.pysat_fun, self.verticalLayout_8)
 
     """ =============================================
@@ -528,7 +526,7 @@ class pysat_ui(object):
 
     def restore(self):
         for i in range(0, len(self.ui_list)):
-                self.ui_list[i](self)
+            self.ui_list[i](self, self.pysat_fun.arg_list[i], self.pysat_fun.kw_list[i])
 
     def onStart(self):  # onStart function
         self.progressBar.setRange(0, 0)  # make the bar pulse green
