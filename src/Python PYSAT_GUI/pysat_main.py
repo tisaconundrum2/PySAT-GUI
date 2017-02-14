@@ -12,7 +12,6 @@ class Main(QMainWindow):
         QMainWindow.__init__(self, parent)
         self.org_name = "USGS"
         self.app_name = "PYSAT"
-        self.read_settings()
         self.runningFunctions(self)
 
     def runningFunctions(self, MainWindow):
@@ -25,16 +24,7 @@ class Main(QMainWindow):
         #### These are the triggers for exit and new
         pysat.actionExit.triggered.connect(lambda: self.exit())  # Exit out of the current workflow
         pysat.actionCreate_New_Workflow.triggered.connect(lambda: self.new())  # Create a new window. It will be blank
-        pysat.actionOpen_Workflow.triggered.connect(lambda: self.read_settings())  # trigger the loading of workflow.
         # pysat.actionSave_Current_Workflow.triggered.connect(lambda: self.write_settings())
-
-    def read_settings(self):
-        try:
-            for i in range(len(pysat_func.ui_list)):
-                pysat_func.ui_list[i]()
-
-        except Exception as e:
-            error_print(e)
 
 
     def new(self):

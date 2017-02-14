@@ -1,8 +1,8 @@
 import os
-
 from PyQt4 import QtCore, QtGui
 from pysat_func import pysat_func
 import PYSAT_UI_MODULES
+import pickle
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -27,9 +27,9 @@ class pysat_ui(object):
         self.ui_list = []
         self.flag = False
 
-    """
+    """ =============================================
     This is the backbone of the UI, without this portion we have nothing to work with
-    """
+    ============================================== """
 
     def main_window(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
@@ -462,23 +462,21 @@ class pysat_ui(object):
         # self.scrollArea.findChildren().triggered.connect(self.scrollArea.verticalScrollBar().setValue(self.scrollArea.verticalScrollBar().value()+10))
 
         # These are the Restore functions
-        self.actionOpen_Workflow.triggered.connect(lambda: pysat_ui.restore(self))
-        self.actionSet_output_location.triggered.connect(lambda: self.set_ui_list(pysat_ui.file_outpath))
-        self.actionLoad_Unknown_Data.triggered.connect(
-            lambda: self.set_ui_list(pysat_ui.get_unknown_data))  # unknown data
-        self.actionLoad_reference_Data.triggered.connect(
-            lambda: self.set_ui_list(pysat_ui.get_known_data))  # known data
+        self.actionOpen_Workflow.triggered.connect(lambda: self.on_load_clicked())
+        self.actionSet_output_location.triggered.connect(lambda: self.set_ui_list("file_outpath"))
+        self.actionLoad_Unknown_Data.triggered.connect(lambda: self.set_ui_list(pysat_ui.get_unknown_data))  # unknown data
+        self.actionLoad_reference_Data.triggered.connect(lambda: self.set_ui_list(pysat_ui.get_known_data))  # known data
         self.actionNormalization.triggered.connect(lambda: self.set_ui_list(pysat_ui.normalization))  # submodel
         self.actionApply_Mask.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_mask))  # get_mask
         self.actionRemoveNull.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_removenull))
         self.actionStratified_Folds.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_strat_folds))  # strat folds
         self.actionTrain.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_regression_train))  # regression train
-        self.actionPredict.triggered.connect(
-            lambda: self.set_ui_list(pysat_ui.do_regression_predict))  # regression predict
+        self.actionPredict.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_regression_predict))  # regression predict
         self.actionInterpolate.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_interp))
         self.actionPlot.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_plot))
         self.actionCross_Validation.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_cv))
         self.actionSubmodelPredict.triggered.connect(lambda: self.set_ui_list(pysat_ui.do_submodel_predict))
+        self.actionSave_Current_Workflow.triggered.connect(lambda: self.on_save_clicked())
 
     def set_greyed_out_items(self, bool):
         self.actionTrain.setDisabled(bool)
@@ -516,6 +514,32 @@ class pysat_ui(object):
             self.onStart()
             self.pysat_fun.taskFinished.connect(self.onFinished)
 
+    ################# Restoration toolset below
+
+    def on_save_clicked(self):
+        filename = QtGui.QFileDialog.getSaveFileName(None, "Choose where you want save your file", '.', '(*.wrf)')
+        print(filename)
+        fun_list = self.pysat_fun.fun_list
+        arg_list = self.pysat_fun.arg_list
+        kw_list = self.pysat_fun.kw_list
+        with open(filename, 'wb') as fp:
+            # pickle.dump(fun_list, fp)
+            pickle.dump(arg_list, fp)
+            pickle.dump(kw_list, fp)
+        print(pysat_func)
+
+    def on_load_clicked(self):
+        # filename = QtGui.QFileDialog.getOpenFileName(None, "Open Workflow File", '.', "(*.wrf)")
+        # print(filename)
+        # with open(filename, 'rb') as fp:
+        #     # self.pysat_fun.fun_list = pickle.load(fp)
+        #     self.pysat_fun.arg_list = pickle.load(fp)
+        #     self.pysat_fun.kw_list = pickle.load(fp)
+        # print(self.pysat_fun.fun_list)
+        # print(self.pysat_fun.arg_list)
+        # print(self.pysat_fun.kw_list)
+        self.restore()
+
     # Restore functionality
     def set_ui_list(self, ui, replacelast=False):
         if replacelast:
@@ -528,6 +552,8 @@ class pysat_ui(object):
         for i in range(0, len(self.ui_list)):
             self.ui_list[i](self, self.pysat_fun.arg_list[i], self.pysat_fun.kw_list[i])
 
+    ################# Progress bar toolset below
+
     def onStart(self):  # onStart function
         self.progressBar.setRange(0, 0)  # make the bar pulse green
         self.pysat_fun.start()  # TaskThread.start()
@@ -536,12 +562,3 @@ class pysat_ui(object):
     def onFinished(self):  # onFinished function
         self.progressBar.setRange(0, 1)  # stop the bar pulsing green
         self.progressBar.setValue(1)  # displays 100% after process is finished.
-
-
-def make_combobox(choices):
-    combo = QtGui.QComboBox()
-    for i, choice in enumerate(choices):
-        combo.addItem(_fromUtf8(""))
-        combo.setItemText(i, _translate('', choice, None))
-
-    return combo
