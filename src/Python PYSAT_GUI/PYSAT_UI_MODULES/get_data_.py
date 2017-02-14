@@ -64,7 +64,7 @@ class get_data_u_:
         self.set_data_parameters()
 
     def set_data_parameters(self):
-        if self.arg_list == None:
+        if self.arg_list is None:
             self.get_data_u_line_edit.setText(_translate("MainWindow", "*.csv", None))
         else:
             self.get_data_u_line_edit.setText(self.arg_list[0])
@@ -77,7 +77,6 @@ class get_data_u_:
 
         self.pysat_fun.set_arg_list([filename, key])
         self.pysat_fun.set_kw_list({})
-        return True
 
 
 class get_data_k_:
@@ -123,12 +122,11 @@ class get_data_k_:
 
         self.get_data_k.setTitle(_translate("MainWindow", "Load Known Data", None))
         self.get_data_k_label.setText(_translate("MainWindow", "File Name", None))
-        self.get_data_k_line_edit.setText(_translate("MainWindow", "*.csv", None))
         self.get_data_k_button.setText(_translate("MainWindow", "...", None))
         self.set_data_parameters()
 
     def set_data_parameters(self):
-        if self.arg_list == None:
+        if self.arg_list is None:
             self.get_data_k_line_edit.setText(_translate("MainWindow", "*.csv", None))
         else:
             self.get_data_k_line_edit.setText(self.arg_list[0])
@@ -141,4 +139,3 @@ class get_data_k_:
 
         self.pysat_fun.set_arg_list([filename, key])
         self.pysat_fun.set_kw_list({})
-        return True

@@ -273,9 +273,11 @@ class pysat_func(QThread):
         self.wait()
 
     def del_layout(self):
-        del_qwidget_(self.greyed_modules[-1])
+        try: del_qwidget_(self.greyed_modules[-1])
+        except: pass
         if len(self.greyed_modules) > 0:
-            del self.greyed_modules[-1]
+            try: del self.greyed_modules[-1]
+            except: pass
             try: del self.fun_list[-1]
             except: pass
             try: del self.kw_list[-1]

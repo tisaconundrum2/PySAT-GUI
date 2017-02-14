@@ -1,6 +1,6 @@
 from PyQt4 import QtCore, QtGui
-
 from PYSAT_UI_MODULES.Error_ import error_print
+from pysat.utils.gui_utils import make_combobox
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -20,8 +20,10 @@ except AttributeError:
 
 
 class interpolation_:
-    def __init__(self, pysat_fun, verticalLayout_8):
+    def __init__(self, pysat_fun, verticalLayout_8, arg_list, kw_list):
         self.verticalLayout_8 = verticalLayout_8
+        self.arg_list = arg_list
+        self.kw_list = kw_list
         self.pysat_fun = pysat_fun
         self.main()
 
@@ -34,9 +36,6 @@ class interpolation_:
         self.pysat_fun.set_greyed_modules(self.Interpolation, True)
         self.interpoliation_choosedata.currentIndexChanged.connect(lambda: self.get_interp_parameters())
         self.interpolation_choosedata_2.currentIndexChanged.connect(lambda: self.get_interp_parameters())
-
-    def set_interp_parameters(self):
-        pass
 
     def get_interp_parameters(self):
         key1 = self.interpoliation_choosedata.currentText()
@@ -95,20 +94,14 @@ class interpolation_:
         self.Interpolation.setTitle(_translate("MainWindow", "Interpolation", None))
         self.interpolation_choosedata_label.setText(_translate("MainWindow", "Choose data: ", None))
         self.interpolation_choosedata_label_2.setText(_translate("MainWindow", "Choose data: ", None))
+        self.set_interp_parameters()
 
-
-def make_combobox(choices):
-    combo = QtGui.QComboBox()
-    for i, choice in enumerate(choices):
-        combo.addItem(_fromUtf8(""))
-        combo.setItemText(i, _translate('', choice, None))
-    return combo
-
-
-def make_listwidget(choices):
-    listwidget = QtGui.QListWidget()
-    listwidget.setItemDelegate
-    for item in choices:
-        item = QtGui.QListWidgetItem(item)
-        listwidget.addItem(item)
-    return listwidget
+    def set_interp_parameters(self):
+        if self.arg_list is None:
+            pass
+        else:
+            index = self.interpoliation_choosedata.findText(str(self.arg_list[0]))
+            index2 = self.interpolation_choosedata_2.findText(str(self.arg_list[1]))
+            if index is not -1 and index2 is not -1:
+                self.interpoliation_choosedata.setCurrentIndex(index)
+                self.interpolation_choosedata_2.setCurrentIndex(index2)

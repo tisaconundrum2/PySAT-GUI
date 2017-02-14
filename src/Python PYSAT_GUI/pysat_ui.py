@@ -389,8 +389,8 @@ class pysat_ui(object):
         self.okButton.clicked.connect(lambda: self.on_okButton_clicked())
         self.delButton.clicked.connect(lambda: self.pysat_fun.del_layout())
 
-    def file_outpath(self):
-        self.flag = PYSAT_UI_MODULES.file_outpath_(self.pysat_fun, self.verticalLayout_8, )
+    def file_outpath(self, arg_list=None, kw_list=None):
+        self.flag = PYSAT_UI_MODULES.file_outpath_(self.pysat_fun, self.verticalLayout_8, arg_list, kw_list)
 
     def get_unknown_data(self, arg_list=None, kw_list=None):
         self.flag = PYSAT_UI_MODULES.get_data_u_(self.pysat_fun, self.verticalLayout_8, arg_list, kw_list)
@@ -426,7 +426,7 @@ class pysat_ui(object):
         PYSAT_UI_MODULES.cv_(self.pysat_fun, self.verticalLayout_8)
 
     def do_interp(self, arg_list=None, kw_list=None):
-        PYSAT_UI_MODULES.interpolation_(self.pysat_fun, self.verticalLayout_8)
+        PYSAT_UI_MODULES.interpolation_(self.pysat_fun, self.verticalLayout_8, arg_list, kw_list)
 
     """ =============================================
     Please do not delete the functions below this line!

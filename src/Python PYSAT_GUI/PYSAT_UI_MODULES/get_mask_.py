@@ -87,12 +87,12 @@ class get_mask_:
         self.set_mask_params()
 
     def set_mask_params(self):
-        if self.arg_list == None:
+        if self.arg_list is None:
             self.get_mask_line_edit.setText(_translate("MainWindow", "*.csv", None))
         else:
             self.get_mask_line_edit.setText(self.arg_list[1])
-            index = self.mask_choosedata.findText(str(self.arg_list[0]))
-            if index is not -1:
+            index = self.mask_choosedata.findText(str(self.arg_list[0]))  # findText 'unknown' or 'known'
+            if index is not -1:  # if it's there choose it based on the returned index
                 self.mask_choosedata.setCurrentIndex(index)
 
     def on_getDataButton_clicked(self, lineEdit):

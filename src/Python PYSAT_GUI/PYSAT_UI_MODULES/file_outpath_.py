@@ -18,8 +18,10 @@ except AttributeError:
 
 
 class file_outpath_:
-    def __init__(self, pysat_fun, verticalLayout_8):
+    def __init__(self, pysat_fun, verticalLayout_8, arg_list, kw_list):
         self.pysat_fun = pysat_fun
+        self.arg_list = arg_list
+        self.kw_list = kw_list
         self.verticalLayout_8 = verticalLayout_8
         self.main()
 
@@ -57,10 +59,14 @@ class file_outpath_:
 
         self.file_out_path.setTitle(_translate("MainWindow", "Ouput Folder", None))
         self.file_out_path_label.setText(_translate("MainWindow", "Folder Name", None))
-        self.file_out_path_line_edit.setText(_translate("MainWindow", "*/", None))
         self.file_out_path_button.setText(_translate("MainWindow", "...", None))
+        self.set_outpath_parameters()
 
     def set_outpath_parameters(self):
+        if self.arg_list is None:
+            self.file_out_path_line_edit.setText(_translate("MainWindow", "*/", None))
+        else:
+            self.file_out_path_line_edit.setText(self.arg_list[0])
         pass
 
     def on_outPutLocationButton_clicked(self, lineEdit):
