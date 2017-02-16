@@ -517,12 +517,16 @@ class pysat_ui(object):
     ################# Restoration toolset below
 
     def on_save_clicked(self):
-        filename = QtGui.QFileDialog.getSaveFileName(None, "Choose where you want save your file", '.', '(*.wrf)')
-        print(filename)
-        with open(filename, 'wb') as fp:
-            pickle.dump(self.ui_list, fp)
-            pickle.dump(self.pysat_fun.arg_list, fp)
-            pickle.dump(self.pysat_fun.kw_list, fp)
+        try:
+            filename = QtGui.QFileDialog.getSaveFileName(None, "Choose where you want save your file", '.', '(*.wrf)')
+            print(filename)
+            with open(filename, 'wb') as fp:
+                pickle.dump(self.ui_list, fp)
+                pickle.dump(self.pysat_fun.arg_list, fp)
+                pickle.dump(self.pysat_fun.kw_list, fp)
+        except:
+            print("File not loaded")
+            pass
 
     def on_load_clicked(self):
         filename = QtGui.QFileDialog.getOpenFileName(None, "Open Workflow File", '.', "(*.wrf)")
@@ -563,14 +567,18 @@ class pysat_ui(object):
     def restore_rest(self):
         if self.restore_flag is False:
             for i in range(self.leftOff, len(self.ui_list)):
-                getattr(pysat_ui, self.ui_list[i])(self, self.pysat_fun.arg_list[i], self.pysat_fun.kw_list[i])
-            self.restore_flag = True
+                try:
+                    getattr(pysat_ui, self.ui_list[i])(self, self.pysat_fun.arg_list[i], self.pysat_fun.kw_list[i])
+                except:
+                    pass
             # Get the lengths of the list back on track. They are longer than they are supposed to be
+            while len(self.pysat_fun.fun_list) < len(self.ui_list):  # restore ui_list alignment
+                del self.ui_list[-1]
             while len(self.pysat_fun.fun_list) < len(self.pysat_fun.arg_list):
                 del self.pysat_fun.arg_list[-1]
-
             while len(self.pysat_fun.fun_list) < len(self.pysat_fun.kw_list):
                 del self.pysat_fun.kw_list[-1]
+            self.restore_flag = True
 
     ################# Progress bar toolset below
 
