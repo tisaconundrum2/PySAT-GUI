@@ -1,6 +1,5 @@
 import inspect
 
-from PYSAT_UI_MODULES import error_print
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 import sys, time

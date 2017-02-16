@@ -273,17 +273,30 @@ class pysat_func(QThread):
         self.wait()
 
     def del_layout(self):
+        # Deleting a whole lotta lists... >_<
+        try: del self.pysat_ui.ui_list
+        except: pass
         try: del_qwidget_(self.greyed_modules[-1])
         except: pass
-        if len(self.greyed_modules) > 0:
-            try: del self.greyed_modules[-1]
-            except: pass
-            try: del self.fun_list[-1]
-            except: pass
-            try: del self.kw_list[-1]
-            except: pass
-            try: del self.arg_list[-1]
-            except: pass
+        try: del self.greyed_modules[-1]
+        except: pass
+        try: del self.fun_list[-1]
+        except: pass
+        try: del self.kw_list[-1]
+        except: pass
+        try: del self.arg_list[-1]
+        except: pass
+        #################################################### Begin Printing out debugging information
+        for i in range(0, len(self.fun_list)):
+            print("fun_list: {}".format(self.fun_list[i]))
+        print("")
+        for i in range(0, len(self.arg_list)):
+            print("arg_list: {}".format(self.arg_list[i]))
+        print("")
+        for i in range(0, len(self.kw_list)):
+            print("kw_list: {}".format(self.kw_list[i]))
+        print("")
+        #################################################### Endof Printing out debugging information
 
     def run(self):
         # TODO this function will take all the enumerated functions and parameters and run them
@@ -302,11 +315,10 @@ class pysat_func(QThread):
             print("")
             #################################################### Endof Printing out debugging information
 
-
             for i in range(self.leftOff, len(self.fun_list)):
                 self.fun_list[i](*self.arg_list[i], **self.kw_list[i])
                 self.greyed_modules[i].setDisabled(True)
-                self.leftOff = i + 1
+                self.leftOff += 1
             self.taskFinished.emit()
         except Exception as e:
             error_print(e)
