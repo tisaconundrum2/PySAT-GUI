@@ -20,8 +20,10 @@ except AttributeError:
 
 
 class strat_folds_:
-    def __init__(self, pysat_fun, verticalLayout_8):
+    def __init__(self, pysat_fun, verticalLayout_8, arg_list, kw_list):
         self.pysat_fun = pysat_fun
+        self.arg_list = arg_list
+        self.kw_list = kw_list
         self.verticalLayout_8 = verticalLayout_8
         self.main()
 
@@ -43,9 +45,6 @@ class strat_folds_:
     #                lambda: self.pysat_fun.arg_list.append(['known_data', 5, 2, ('meta', 'SiO2')]))
     #        except:
     #            print('There was a problem with creating stratified folds...')
-
-    def set_strat_fold_params(self):
-        pass
 
     def get_strat_fold_params(self):
         datakey = self.strat_folds_choose_data.currentText()
@@ -122,6 +121,11 @@ class strat_folds_:
         self.choose_test_fold.currentIndexChanged.connect(lambda: self.get_strat_fold_params())
         self.nfolds_spin.valueChanged.connect(lambda: self.get_strat_fold_params())
         self.strat_folds_choose_data.currentIndexChanged.connect(lambda: self.get_strat_fold_params())
+        self.set_strat_fold_params()
+
+    def set_strat_fold_params(self):
+        if self.arg_list is not None:
+            pass
 
     def strat_fold_change_vars(self):
         self.strat_folds_choose_var.clear()

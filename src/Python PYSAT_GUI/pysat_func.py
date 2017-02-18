@@ -33,28 +33,20 @@ class pysat_func(QThread):
     Getter and setter functions below
     """
 
-    def set_fun_list(self, fun, replacelast=False):
-        if replacelast:
-            self.fun_list[-1] = fun
-        else:
+    def set_fun_list(self, fun, index=None):
+        if index is None:
             self.fun_list.append(fun)
 
-    def set_arg_list(self, args, replacelast=False):
-        if replacelast:
-            self.arg_list[-1] = args
-        else:
+    def set_arg_list(self, args, index):
+        if index is None:
             self.arg_list.append(args)
 
-    def set_kw_list(self, kws, replacelast=False):
-        if replacelast:
-            self.kw_list[-1] = kws
-        else:
+    def set_kw_list(self, kws, index):
+        if index is None:
             self.kw_list.append(kws)
 
-    def set_greyed_modules(self, modules, replacelast=False):
-        if replacelast:
-            self.greyed_modules[-1] = modules
-        else:
+    def set_greyed_modules(self, modules, index):
+        if index is None:
             self.greyed_modules.append(modules)
 
     """
