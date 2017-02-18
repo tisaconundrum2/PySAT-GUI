@@ -18,8 +18,9 @@ except AttributeError:
 
 
 class get_data_u_:
-    def __init__(self, pysat_fun, verticalLayout_8, arg_list, kw_list):
+    def __init__(self, pysat_fun, locality, verticalLayout_8, arg_list, kw_list):
         self.pysat_fun = pysat_fun
+        self.locality = locality
         self.verticalLayout_8 = verticalLayout_8
         self.arg_list = arg_list
         self.kwlist = kw_list
@@ -28,7 +29,7 @@ class get_data_u_:
     def main(self):
         self.pysat_fun.set_fun_list(self.pysat_fun.get_data)  # add this function to the pysat list to be run
         self.get_data_ui()  # initiate the UI
-        self.pysat_fun.set_greyed_modules(self.get_data_u)
+        self.pysat_fun.set_greyed_modules(self.get_data_u, self.locality)
         try:
             self.get_data_u_button.clicked.connect(
                 lambda: self.on_getDataButton_clicked(self.get_data_u_line_edit,
@@ -75,13 +76,14 @@ class get_data_u_:
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")
 
-        self.pysat_fun.set_arg_list([filename, key])
-        self.pysat_fun.set_kw_list({})
+        self.pysat_fun.set_arg_list([filename, key], self.locality)
+        self.pysat_fun.set_kw_list({}, self.locality)
 
 
 class get_data_k_:
-    def __init__(self, pysat_fun, verticalLayout_8, arg_list, kw_list):
+    def __init__(self, pysat_fun, locality, verticalLayout_8, arg_list, kw_list):
         self.pysat_fun = pysat_fun
+        self.locality = locality
         self.verticalLayout_8 = verticalLayout_8
         self.arg_list = arg_list
         self.kwlist = kw_list
@@ -90,7 +92,7 @@ class get_data_k_:
     def main(self):
         self.pysat_fun.set_fun_list(self.pysat_fun.get_data)  # add this function to the pysat list to be run
         self.get_data_ui()  # initiate the UI
-        self.pysat_fun.set_greyed_modules(self.get_data_k)
+        self.pysat_fun.set_greyed_modules(self.get_data_k, self.locality)
         try:
             self.get_data_k_button.clicked.connect(
                 lambda: self.on_getDataButton_clicked(self.get_data_k_line_edit,
@@ -137,5 +139,5 @@ class get_data_k_:
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")
 
-        self.pysat_fun.set_arg_list([filename, key])
-        self.pysat_fun.set_kw_list({})
+        self.pysat_fun.set_arg_list([filename, key], self.locality)
+        self.pysat_fun.set_kw_list({}, self.locality)

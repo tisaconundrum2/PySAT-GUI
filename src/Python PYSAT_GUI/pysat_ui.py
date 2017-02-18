@@ -390,21 +390,21 @@ class pysat_ui(object):
         self.okButton.clicked.connect(lambda: self.on_okButton_clicked())
         self.delButton.clicked.connect(lambda: self.pysat_fun.del_layout())
 
-    def file_outpath(self, arg_list=None, kw_list=None):
+    def get_known_data(self, arg_list=None, kw_list=None):
         self.locality += 1
-        self.flag = PYSAT_UI_MODULES.file_outpath_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list, kw_list)
+        self.flag = PYSAT_UI_MODULES.get_data_k_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list, kw_list)
 
     def get_unknown_data(self, arg_list=None, kw_list=None):
         self.locality += 1
         self.flag = PYSAT_UI_MODULES.get_data_u_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list, kw_list)
 
-    def get_known_data(self, arg_list=None, kw_list=None):
-        self.locality += 1
-        self.flag = PYSAT_UI_MODULES.get_data_k_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list, kw_list)
-
     def do_mask(self, arg_list=None, kw_list=None):
         self.locality += 1
         PYSAT_UI_MODULES.get_mask_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list, kw_list)
+
+    def file_outpath(self, arg_list=None, kw_list=None):
+        self.locality += 1
+        self.flag = PYSAT_UI_MODULES.file_outpath_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list, kw_list)
 
     def do_removenull(self, arg_list=None, kw_list=None):
         self.locality += 1

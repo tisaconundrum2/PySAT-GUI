@@ -12,6 +12,7 @@ except AttributeError:
 class file_outpath_:
     def __init__(self, pysat_fun, locality, verticalLayout_8, arg_list, kw_list):
         self.pysat_fun = pysat_fun
+        self.locality = locality
         self.arg_list = arg_list
         self.kw_list = kw_list
         self.verticalLayout_8 = verticalLayout_8
@@ -19,10 +20,9 @@ class file_outpath_:
 
     def main(self):
         self.pysat_fun.set_fun_list(self.pysat_fun.set_file_outpath)  # add this function to the pysat list to be run
-        if self.arg_list is None:
-            self.pysat_fun.set_arg_list([])
-            self.pysat_fun.set_kw_list({})
-            self.pysat_fun.set_greyed_modules({})
+        self.pysat_fun.set_arg_list([])
+        self.pysat_fun.set_kw_list({})
+        self.pysat_fun.set_greyed_modules({})
         self.file_outpath_ui()
         self.pysat_fun.set_greyed_modules(self.file_out_path, True)
         try:
@@ -68,7 +68,7 @@ class file_outpath_:
         args = [filename]
         kws = {}
         self.pysat_fun.set_arg_list(args, self.locality)
-        self.pysat_fun.set_kw_list(kws, replacelast=True)
+        self.pysat_fun.set_kw_list(kws, self.locality)
 
     def on_outPutLocationButton_clicked(self):
         filename = QtGui.QFileDialog.getExistingDirectory(None, "Select Output Directory", '.')
