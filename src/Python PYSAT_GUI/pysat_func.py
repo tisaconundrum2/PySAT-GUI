@@ -11,6 +11,119 @@ from PyQt4 import QtCore
 import numpy as np
 
 
+class Node:
+    nodeCount = 0
+
+    def __init__(self, fun_list=None, arg_data=None, kw_data=None):
+        self.fun_data = fun_list
+        self.arg_data = arg_data
+        self.kw_data = kw_data
+        self.next = None
+        self.UI_ID = Node.nodeCount
+        Node.nodeCount += 1
+
+    def setData(self, fun_data=None, arg_data=None, kw_data=None):
+        if fun_data is not None:
+            self.fun_data = fun_data
+        if arg_data is not None:
+            self.arg_data = arg_data
+        if kw_data is not None:
+            self.kw_data = kw_data
+
+    def getData(self, fun_data=False, arg_data=False, kw_data=False):
+        """
+        Put True as a parameter in order to get specific Data.
+        :param fun_data:
+        :param arg_data:
+        :param kw_data:
+        :return:
+        """
+        if fun_data:
+            return self.fun_data
+        if arg_data:
+            return self.arg_data
+        if kw_data:
+            return self.kw_data
+
+    def setNext(self, next):
+        self.next = next
+
+    def getNext(self):
+        return self.next
+
+    def getID(self):
+        return self.UI_ID
+
+
+class List:
+    def __init__(self):
+        self.head = None
+
+    def __len__(self):
+        current = self.head
+        count = 0
+        while current is not None:
+            count += 1
+            current = current.getNext()
+        return count
+
+    def push(self, fun_data=None, arg_data=None, kw_data=None, UI_ID=None):  # push new data into proper place.
+        if not self.amend(fun_data, arg_data, kw_data, UI_ID):
+            pass
+
+    def amend(self, fun_data=None, arg_data=None, kw_data=None, UI_ID=None):
+        current = self.head
+        found = False
+        while current is not None and not found:
+            if current.getID() == UI_ID:
+                found = True
+                current.setData(fun_data, arg_data, kw_data)
+            else:
+                current = current.getNext()
+        return found
+
+    def pop(self, fun_data=False, arg_data=False, kw_data=False):
+        current = self.head
+        previous = None
+        while current.getNext() is not None:
+            previous = current
+            current = current.getNext()
+        if previous is None:
+            self.head = current.getNext()
+        else:
+            previous.setNext(current.getNext())
+            return current.getData(fun_data, arg_data, kw_data)
+
+    def remove(self, UI_ID):
+        """
+            Remove an item in the List based on UI_ID
+
+            :param UI_ID: UI ID for identifying Node with content
+
+            :return False: if we do not find the Node
+            """
+        current = self.head
+        previous = None
+        found = False
+        while not found:
+            if current.getID() == UI_ID:
+                found = True
+            else:
+                previous = current
+                current = current.getNext()
+
+        if previous == None:
+            self.head = current.getNext()
+        else:
+            previous.setNext(current.getNext())
+
+    def display(self):
+        current = self.head
+        while current is not None:
+            print(current.getData())
+            current = current.getNext()
+
+
 class pysat_func(QThread):
     taskFinished = QtCore.pyqtSignal()
 
@@ -24,30 +137,27 @@ class pysat_func(QThread):
         self.model_xvars = {}
         self.model_yvars = {}
         self.figs = {}
-        self.fun_list = []
-        self.arg_list = []
-        self.kw_list = []
-        self.greyed_modules = []
+        self.fun_list = List()
+        self.arg_list = List()
+        self.kw_list = List()
+        self.greyed_modules = List()
 
     """
     Getter and setter functions below
     """
 
-    def set_fun_list(self, fun, index=None):
-        if index is None:
-            self.fun_list.append(fun)
+    def set_fun_list(self, fun, index):
+        self.fun_list.push(fun, index)
+        print("")
 
     def set_arg_list(self, args, index):
-        if index is None:
-            self.arg_list.append(args)
+        self.arg_list.push(args, index)
 
     def set_kw_list(self, kws, index):
-        if index is None:
-            self.kw_list.append(kws)
+        self.kw_list.push(kws, index)
 
     def set_greyed_modules(self, modules, index):
-        if index is None:
-            self.greyed_modules.append(modules)
+        self.greyed_modules.push(modules, index)
 
     """
     Work functions below
@@ -92,7 +202,7 @@ class pysat_func(QThread):
         except Exception as e:
             error_print(e)
 
-    def do_pca(self, datakey, nc, col, load_fit=None):
+    def do_pca(self, datakey, nc, col, load_fit):
         print(self.data[datakey].df.columns.levels[0])
         try:
             self.data[datakey].pca(col, nc=nc, load_fit=load_fit)
@@ -266,18 +376,30 @@ class pysat_func(QThread):
 
     def del_layout(self):
         # Deleting a whole lotta lists... >_<
-        try: del self.pysat_ui.ui_list
-        except: pass
-        try: del_qwidget_(self.greyed_modules[-1])
-        except: pass
-        try: del self.greyed_modules[-1]
-        except: pass
-        try: del self.fun_list[-1]
-        except: pass
-        try: del self.kw_list[-1]
-        except: pass
-        try: del self.arg_list[-1]
-        except: pass
+        try:
+            del self.pysat_ui.ui_list
+        except:
+            pass
+        try:
+            del_qwidget_(self.greyed_modules[-1])
+        except:
+            pass
+        try:
+            del self.greyed_modules[-1]
+        except:
+            pass
+        try:
+            del self.fun_list[-1]
+        except:
+            pass
+        try:
+            del self.kw_list[-1]
+        except:
+            pass
+        try:
+            del self.arg_list[-1]
+        except:
+            pass
         #################################################### Begin Printing out debugging information
         for i in range(0, len(self.fun_list)):
             print("fun_list: {}".format(self.fun_list[i]))
@@ -294,23 +416,18 @@ class pysat_func(QThread):
         # TODO this function will take all the enumerated functions and parameters and run them
         try:
             #################################################### Begin Printing out debugging information
-            for i in range(0, len(self.fun_list)):
-                print("fun_list: {}".format(self.fun_list[i]))
+            self.fun_list.display()
             print("")
+            self.arg_list.display()
+            print("")
+            self.kw_list.display()
 
-            for i in range(0, len(self.arg_list)):
-                print("arg_list: {}".format(self.arg_list[i]))
-            print("")
-
-            for i in range(0, len(self.kw_list)):
-                print("kw_list: {}".format(self.kw_list[i]))
-            print("")
             #################################################### Endof Printing out debugging information
 
-            for i in range(self.leftOff, len(self.fun_list)):
-                self.fun_list[i](*self.arg_list[i], **self.kw_list[i])
-                self.greyed_modules[i].setDisabled(True)
-                self.leftOff = i + 1
+            # for i in range(self.leftOff, self.fun_list.size()):
+            #     self.fun_list[i](*self.arg_list[i], **self.kw_list[i])
+            #     self.greyed_modules[i].setDisabled(True)
+            #     self.leftOff = i + 1
             self.taskFinished.emit()
         except Exception as e:
             error_print(e)

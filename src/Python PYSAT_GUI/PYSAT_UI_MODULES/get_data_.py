@@ -27,7 +27,7 @@ class get_data_u_:
         self.main()
 
     def main(self):
-        self.pysat_fun.set_fun_list(self.pysat_fun.get_data)  # add this function to the pysat list to be run
+        self.pysat_fun.set_fun_list(self.pysat_fun.get_data, self.locality)  # add this function to the pysat list to be run
         self.get_data_ui()  # initiate the UI
         self.pysat_fun.set_greyed_modules(self.get_data_u, self.locality)
         try:
@@ -90,7 +90,7 @@ class get_data_k_:
         self.main()
 
     def main(self):
-        self.pysat_fun.set_fun_list(self.pysat_fun.get_data)  # add this function to the pysat list to be run
+        self.pysat_fun.set_fun_list("get_data", self.locality)  # add this function to the pysat list to be run
         self.get_data_ui()  # initiate the UI
         self.pysat_fun.set_greyed_modules(self.get_data_k, self.locality)
         try:
