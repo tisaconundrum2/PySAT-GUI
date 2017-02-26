@@ -90,7 +90,6 @@ class get_data_k_:
         self.main()
 
     def main(self):
-        self.pysat_fun.set_fun_list("get_data", self.locality)  # add this function to the pysat list to be run
         self.get_data_ui()  # initiate the UI
         self.pysat_fun.set_greyed_modules(self.get_data_k, self.locality)
         try:
@@ -138,6 +137,7 @@ class get_data_k_:
         lineEdit.setText(filename)
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")
-
-        self.pysat_fun.set_arg_list([filename, key], self.locality)
-        self.pysat_fun.set_kw_list({}, self.locality)
+        fun_list = "get_data"
+        kw_list = {}
+        arg_list = [filename, key]
+        self.pysat_fun.set_list(fun_list, arg_list, kw_list)

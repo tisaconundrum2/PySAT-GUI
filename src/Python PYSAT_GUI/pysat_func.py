@@ -14,36 +14,36 @@ import numpy as np
 class Node:
     nodeCount = 0
 
-    def __init__(self, fun_list=None, arg_data=None, kw_data=None):
-        self.fun_data = fun_list
-        self.arg_data = arg_data
-        self.kw_data = kw_data
+    def __init__(self, fun_list=None, arg_list=None, kw_list=None):
+        self.fun_list = fun_list
+        self.arg_list = arg_list
+        self.kw_list = kw_list
         self.next = None
         self.UI_ID = Node.nodeCount
         Node.nodeCount += 1
 
-    def setData(self, fun_data=None, arg_data=None, kw_data=None):
-        if fun_data is not None:
-            self.fun_data = fun_data
-        if arg_data is not None:
-            self.arg_data = arg_data
-        if kw_data is not None:
-            self.kw_data = kw_data
+    def setData(self, fun_list=None, arg_list=None, kw_list=None):
+        if fun_list is not None:
+            self.fun_list = fun_list
+        if arg_list is not None:
+            self.arg_list = arg_list
+        if kw_list is not None:
+            self.kw_list = kw_list
 
-    def getData(self, fun_data=False, arg_data=False, kw_data=False):
+    def getData(self, fun_list=False, arg_list=False, kw_list=False):
         """
         Put True as a parameter in order to get specific Data.
-        :param fun_data:
-        :param arg_data:
-        :param kw_data:
+        :param fun_list:
+        :param arg_list:
+        :param kw_list:
         :return:
         """
-        if fun_data:
-            return self.fun_data
-        if arg_data:
-            return self.arg_data
-        if kw_data:
-            return self.kw_data
+        if fun_list:
+            return self.fun_list
+        if arg_list:
+            return self.arg_list
+        if kw_list:
+            return self.kw_list
 
     def setNext(self, next):
         self.next = next
@@ -67,22 +67,34 @@ class List:
             current = current.getNext()
         return count
 
-    def push(self, fun_data=None, arg_data=None, kw_data=None, UI_ID=None):  # push new data into proper place.
-        if not self.amend(fun_data, arg_data, kw_data, UI_ID):
+    def push(self, fun_list=None, arg_list=None, kw_list=None, UI_ID=None):
+        """
+        Push new data into proper place.
+        If that place doesn't exist then we'll create a new item to the end of the "List"
+        :param fun_list:
+        :param arg_list:
+        :param kw_list:
+        :param UI_ID:
+        :return:
+        """
+        if not self.amend(fun_list, arg_list, kw_list, UI_ID):
+            temp = Node(fun_list, arg_list, kw_list)
+            temp.setNext(self.head)
+            self.head = temp
             pass
 
-    def amend(self, fun_data=None, arg_data=None, kw_data=None, UI_ID=None):
+    def amend(self, fun_list=None, arg_list=None, kw_list=None, UI_ID=None):
         current = self.head
         found = False
         while current is not None and not found:
             if current.getID() == UI_ID:
                 found = True
-                current.setData(fun_data, arg_data, kw_data)
+                current.setData(fun_list, arg_list, kw_list)
             else:
                 current = current.getNext()
         return found
 
-    def pop(self, fun_data=False, arg_data=False, kw_data=False):
+    def pop(self, fun_list=False, arg_list=False, kw_list=False):
         current = self.head
         previous = None
         while current.getNext() is not None:
@@ -92,7 +104,7 @@ class List:
             self.head = current.getNext()
         else:
             previous.setNext(current.getNext())
-            return current.getData(fun_data, arg_data, kw_data)
+            return current.getData(fun_list, arg_list, kw_list)
 
     def remove(self, UI_ID):
         """
@@ -146,15 +158,9 @@ class pysat_func(QThread):
     Getter and setter functions below
     """
 
-    def set_fun_list(self, fun, index):
-        self.fun_list.push(fun, index)
-        print("")
-
-    def set_arg_list(self, args, index):
-        self.arg_list.push(args, index)
-
-    def set_kw_list(self, kws, index):
-        self.kw_list.push(kws, index)
+    def set_list(self, fun, arg, kw):
+        self.fun_list.push(fun, arg, kw)
+        pass
 
     def set_greyed_modules(self, modules, index):
         self.greyed_modules.push(modules, index)
