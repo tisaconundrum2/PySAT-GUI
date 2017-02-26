@@ -141,18 +141,13 @@ class pysat_func(QThread):
 
     def __init__(self):
         QThread.__init__(self)
-        self.leftOff = 0
         self.data = {}  # initialize with an empty dict to hold data frames
         self.datakeys = []
         self.models = {}
         self.modelkeys = []
         self.model_xvars = {}
         self.model_yvars = {}
-        self.figs = {}
-        self.fun_list = List()
-        self.arg_list = List()
-        self.kw_list = List()
-        self.greyed_modules = List()
+        self.greyed_modules = []
 
     """
     Getter and setter functions below
@@ -336,7 +331,7 @@ class pysat_func(QThread):
                 cmap=None, colortitle='', figname=None, masklabel='',
                 marker='o', linestyle='None'
                 ):
-
+        self.figs = {}
         try:
             x = self.data[datakey].df[xvar]
             y = self.data[datakey].df[yvar]
