@@ -29,7 +29,7 @@ class List:
             self.head = current.getNext()
         else:
             previous.setNext(current.getNext())
-            return current.getData()
+            return current.display()
 
     def size(self):  # We'll want the size so that we don't go over limit when working with for loops
         current = self.head
@@ -65,6 +65,6 @@ class List:
         current = self.head
         previous = None
         while current != None:
-            print(current.getData())
+            print(current.display())
             previous = current
             current = current.getNext()

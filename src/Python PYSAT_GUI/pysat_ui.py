@@ -390,46 +390,43 @@ class pysat_ui(object):
         self.delButton.clicked.connect(lambda: self.pysat_fun.del_layout())
 
     def get_known_data(self, arg_list=None, kw_list=None):
-        self.flag = PYSAT_UI_MODULES.get_data_k_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list,
-                                                 kw_list)
+        self.flag = PYSAT_UI_MODULES.get_data_k_(self.pysat_fun, self.verticalLayout_8, arg_list, kw_list)
 
     def get_unknown_data(self, arg_list=None, kw_list=None):
-        self.flag = PYSAT_UI_MODULES.get_data_u_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list,
-                                                 kw_list)
+        self.flag = PYSAT_UI_MODULES.get_data_u_(self.pysat_fun, self.verticalLayout_8, arg_list, kw_list)
 
     def do_mask(self, arg_list=None, kw_list=None):
-        PYSAT_UI_MODULES.get_mask_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list, kw_list)
+        PYSAT_UI_MODULES.get_mask_(self.pysat_fun, self.verticalLayout_8, arg_list, kw_list)
 
     def file_outpath(self, arg_list=None, kw_list=None):
-        self.flag = PYSAT_UI_MODULES.file_outpath_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list,
-                                                   kw_list)
+        self.flag = PYSAT_UI_MODULES.file_outpath_(self.pysat_fun, self.verticalLayout_8, arg_list, kw_list)
 
     def do_removenull(self, arg_list=None, kw_list=None):
-        PYSAT_UI_MODULES.removenull_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list, kw_list)
+        PYSAT_UI_MODULES.removenull_(self.pysat_fun, self.verticalLayout_8, arg_list, kw_list)
 
     def normalization(self, arg_list=None, kw_list=None):
-        PYSAT_UI_MODULES.normalization_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list, kw_list)
+        PYSAT_UI_MODULES.normalization_(self.pysat_fun, self.verticalLayout_8, arg_list, kw_list)
 
     def do_strat_folds(self, arg_list=None, kw_list=None):
-        PYSAT_UI_MODULES.strat_folds_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list, kw_list)
+        PYSAT_UI_MODULES.strat_folds_(self.pysat_fun, self.verticalLayout_8, arg_list, kw_list)
 
     def do_regression_train(self, arg_list=None, kw_list=None):
-        PYSAT_UI_MODULES.regression_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list, kw_list)
+        PYSAT_UI_MODULES.regression_(self.pysat_fun, self.verticalLayout_8, arg_list, kw_list)
 
     def do_regression_predict(self, arg_list=None, kw_list=None):
-        PYSAT_UI_MODULES.regression_predict_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list, kw_list)
+        PYSAT_UI_MODULES.regression_predict_(self.pysat_fun, self.verticalLayout_8, arg_list, kw_list)
 
     def do_submodel_predict(self, arg_list=None, kw_list=None):
-        PYSAT_UI_MODULES.sm_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list, kw_list)
+        PYSAT_UI_MODULES.sm_(self.pysat_fun, self.verticalLayout_8, arg_list, kw_list)
 
     def do_plot(self, arg_list=None, kw_list=None):
-        PYSAT_UI_MODULES.plot_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list, kw_list)
+        PYSAT_UI_MODULES.plot_(self.pysat_fun, self.verticalLayout_8, arg_list, kw_list)
 
     def do_cv(self, arg_list=None, kw_list=None):
-        PYSAT_UI_MODULES.cv_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list, kw_list)
+        PYSAT_UI_MODULES.cv_(self.pysat_fun, self.verticalLayout_8, arg_list, kw_list)
 
     def do_interp(self, arg_list=None, kw_list=None):
-        PYSAT_UI_MODULES.interpolation_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list, kw_list)
+        PYSAT_UI_MODULES.interpolation_(self.pysat_fun, self.verticalLayout_8, arg_list, kw_list)
 
     """ =============================================
     Please do not delete the functions below this line!
@@ -575,11 +572,11 @@ class pysat_ui(object):
                 except:
                     pass
             # Get the lengths of the list back on track. They are longer than they are supposed to be
-            while len(self.pysat_fun.fun_list) < len(self.ui_list):  # restore ui_list alignment
+            while len(self.pysat_fun._list) < len(self.ui_list):  # restore ui_list alignment
                 del self.ui_list[-1]
-            while len(self.pysat_fun.fun_list) < len(self.pysat_fun.arg_list):
+            while len(self.pysat_fun._list) < len(self.pysat_fun.arg_list):
                 del self.pysat_fun.arg_list[-1]
-            while len(self.pysat_fun.fun_list) < len(self.pysat_fun.kw_list):
+            while len(self.pysat_fun._list) < len(self.pysat_fun.kw_list):
                 del self.pysat_fun.kw_list[-1]
             self.restore_flag = True
 

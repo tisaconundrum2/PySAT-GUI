@@ -14,7 +14,7 @@ import numpy as np
 class Node:
     nodeCount = 0
 
-    def __init__(self, fun_list=None, arg_list=None, kw_list=None):
+    def __init__(self, fun_list, arg_list, kw_list):
         self.fun_list = fun_list
         self.arg_list = arg_list
         self.kw_list = kw_list
@@ -22,37 +22,27 @@ class Node:
         self.UI_ID = Node.nodeCount
         Node.nodeCount += 1
 
-    def setData(self, fun_list=None, arg_list=None, kw_list=None):
-        if fun_list is not None:
-            self.fun_list = fun_list
-        if arg_list is not None:
-            self.arg_list = arg_list
-        if kw_list is not None:
-            self.kw_list = kw_list
+    def setData(self, fun_list, arg_list, kw_list):
+        self.fun_list = fun_list
+        self.arg_list = arg_list
+        self.kw_list = kw_list
 
-    def getData(self, fun_list=False, arg_list=False, kw_list=False):
-        """
-        Put True as a parameter in order to get specific Data.
-        :param fun_list:
-        :param arg_list:
-        :param kw_list:
-        :return:
-        """
-        if fun_list:
-            return self.fun_list
-        if arg_list:
-            return self.arg_list
-        if kw_list:
-            return self.kw_list
+    def getID(self):
+        return self.UI_ID
+
+    def display(self):
+        list = []
+        list.append(self.getID())
+        list.append(self.fun_list)
+        list.append(self.arg_list)
+        list.append(self.kw_list)
+        return list
 
     def setNext(self, next):
         self.next = next
 
     def getNext(self):
         return self.next
-
-    def getID(self):
-        return self.UI_ID
 
 
 class List:
@@ -67,23 +57,13 @@ class List:
             current = current.getNext()
         return count
 
-    def push(self, fun_list=None, arg_list=None, kw_list=None, UI_ID=None):
-        """
-        Push new data into proper place.
-        If that place doesn't exist then we'll create a new item to the end of the "List"
-        :param fun_list:
-        :param arg_list:
-        :param kw_list:
-        :param UI_ID:
-        :return:
-        """
+    def push(self, fun_list, arg_list, kw_list, UI_ID=None):
         if not self.amend(fun_list, arg_list, kw_list, UI_ID):
             temp = Node(fun_list, arg_list, kw_list)
             temp.setNext(self.head)
             self.head = temp
-            pass
 
-    def amend(self, fun_list=None, arg_list=None, kw_list=None, UI_ID=None):
+    def amend(self, fun_list, arg_list, kw_list, UI_ID=None):
         current = self.head
         found = False
         while current is not None and not found:
@@ -94,7 +74,7 @@ class List:
                 current = current.getNext()
         return found
 
-    def pop(self, fun_list=False, arg_list=False, kw_list=False):
+    def pop(self):
         current = self.head
         previous = None
         while current.getNext() is not None:
@@ -104,16 +84,9 @@ class List:
             self.head = current.getNext()
         else:
             previous.setNext(current.getNext())
-            return current.getData(fun_list, arg_list, kw_list)
+            return current.display()
 
     def remove(self, UI_ID):
-        """
-            Remove an item in the List based on UI_ID
-
-            :param UI_ID: UI ID for identifying Node with content
-
-            :return False: if we do not find the Node
-            """
         current = self.head
         previous = None
         found = False
@@ -123,7 +96,6 @@ class List:
             else:
                 previous = current
                 current = current.getNext()
-
         if previous == None:
             self.head = current.getNext()
         else:
@@ -132,7 +104,8 @@ class List:
     def display(self):
         current = self.head
         while current is not None:
-            print(current.getData())
+            for items in current.display():
+                print(items)
             current = current.getNext()
 
 
@@ -141,24 +114,26 @@ class pysat_func(QThread):
 
     def __init__(self):
         QThread.__init__(self)
+        self.leftOff = 0
         self.data = {}  # initialize with an empty dict to hold data frames
         self.datakeys = []
         self.models = {}
         self.modelkeys = []
         self.model_xvars = {}
         self.model_yvars = {}
+        self.figs = {}
+        self._list = List()
         self.greyed_modules = []
 
     """
     Getter and setter functions below
     """
 
-    def set_list(self, fun, arg, kw):
-        self.fun_list.push(fun, arg, kw)
-        pass
+    def set_list(self, fun, arg, kw, ui_id=None):
+        self._list.push(fun, arg, kw, ui_id)
 
-    def set_greyed_modules(self, modules, index):
-        self.greyed_modules.push(modules, index)
+    def set_greyed_modules(self, modules):
+        self.greyed_modules.append(modules)
 
     """
     Work functions below
@@ -331,7 +306,7 @@ class pysat_func(QThread):
                 cmap=None, colortitle='', figname=None, masklabel='',
                 marker='o', linestyle='None'
                 ):
-        self.figs = {}
+
         try:
             x = self.data[datakey].df[xvar]
             y = self.data[datakey].df[yvar]
@@ -390,7 +365,7 @@ class pysat_func(QThread):
         except:
             pass
         try:
-            del self.fun_list[-1]
+            del self._list[-1]
         except:
             pass
         try:
@@ -401,27 +376,13 @@ class pysat_func(QThread):
             del self.arg_list[-1]
         except:
             pass
-        #################################################### Begin Printing out debugging information
-        for i in range(0, len(self.fun_list)):
-            print("fun_list: {}".format(self.fun_list[i]))
-        print("")
-        for i in range(0, len(self.arg_list)):
-            print("arg_list: {}".format(self.arg_list[i]))
-        print("")
-        for i in range(0, len(self.kw_list)):
-            print("kw_list: {}".format(self.kw_list[i]))
-        print("")
-        #################################################### Endof Printing out debugging information
 
     def run(self):
         # TODO this function will take all the enumerated functions and parameters and run them
         try:
             #################################################### Begin Printing out debugging information
-            self.fun_list.display()
+            print(self._list.display())
             print("")
-            self.arg_list.display()
-            print("")
-            self.kw_list.display()
 
             #################################################### Endof Printing out debugging information
 
