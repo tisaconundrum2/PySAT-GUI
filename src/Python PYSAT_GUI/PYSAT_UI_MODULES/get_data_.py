@@ -18,22 +18,18 @@ except AttributeError:
 
 
 class get_data_u_:
-    def __init__(self, pysat_fun, locality, verticalLayout_8, arg_list, kw_list):
+    def __init__(self, pysat_fun, verticalLayout_8):
         self.pysat_fun = pysat_fun
-        self.locality = locality
         self.verticalLayout_8 = verticalLayout_8
-        self.arg_list = arg_list
-        self.kwlist = kw_list
         self.main()
 
     def main(self):
-        self.pysat_fun.set_fun_list(self.pysat_fun.get_data, self.locality)  # add this function to the pysat list to be run
+        self.pysat_fun.set_fun_list(self.pysat_fun.get_data)  # add this function to the pysat list to be run
         self.get_data_ui()  # initiate the UI
-        self.pysat_fun.set_greyed_modules(self.get_data_u, self.locality)
+        self.pysat_fun.set_greyed_modules(self.get_data_u)
         try:
             self.get_data_u_button.clicked.connect(
-                lambda: self.on_getDataButton_clicked(self.get_data_u_line_edit,
-                                                      "unknown"))  # when a button is clicked call the on_getDataButton_clicked function
+                lambda: self.on_getDataButton_clicked(self.get_data_u_line_edit, "unknown"))  # when a button is clicked call the on_getDataButton_clicked function
         except:
             pass
 
@@ -61,42 +57,33 @@ class get_data_u_:
 
         self.get_data_u.setTitle(_translate("MainWindow", "Load Unknown Data", None))
         self.get_data_u_label.setText(_translate("MainWindow", "File Name", None))
+        self.get_data_u_line_edit.setText(_translate("MainWindow", "*.csv", None))
         self.get_data_u_button.setText(_translate("MainWindow", "...", None))
-        self.set_data_parameters()
-
-    def set_data_parameters(self):
-        if self.arg_list is None:
-            self.get_data_u_line_edit.setText(_translate("MainWindow", "*.csv", None))
-        else:
-            self.get_data_u_line_edit.setText(self.arg_list[0])
 
     def on_getDataButton_clicked(self, lineEdit, key):
         filename = QtGui.QFileDialog.getOpenFileName(None, "Open " + key + " Data File", '.', "(*.csv)")
         lineEdit.setText(filename)
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")
-
-        self.pysat_fun.set_arg_list([filename, key], self.locality)
-        self.pysat_fun.set_kw_list({}, self.locality)
+        
+        self.pysat_fun.set_arg_list([filename, key])
+        self.pysat_fun.set_kw_list({})
+        return True
 
 
 class get_data_k_:
-    def __init__(self, pysat_fun, locality, verticalLayout_8, arg_list, kw_list):
+    def __init__(self, pysat_fun, verticalLayout_8):
         self.pysat_fun = pysat_fun
-        self.locality = locality
         self.verticalLayout_8 = verticalLayout_8
-        self.arg_list = arg_list
-        self.kwlist = kw_list
         self.main()
 
     def main(self):
-        self.pysat_fun.set_fun_list("get_data", self.locality)  # add this function to the pysat list to be run
+        self.pysat_fun.set_fun_list(self.pysat_fun.get_data)  # add this function to the pysat list to be run
         self.get_data_ui()  # initiate the UI
-        self.pysat_fun.set_greyed_modules(self.get_data_k, self.locality)
+        self.pysat_fun.set_greyed_modules(self.get_data_k)
         try:
             self.get_data_k_button.clicked.connect(
-                lambda: self.on_getDataButton_clicked(self.get_data_k_line_edit,
-                                                      "known"))  # when a button is clicked call the on_getDataButton_clicked function
+                lambda: self.on_getDataButton_clicked(self.get_data_k_line_edit, "known"))  # when a button is clicked call the on_getDataButton_clicked function
         except:
             pass
 
@@ -124,20 +111,15 @@ class get_data_k_:
 
         self.get_data_k.setTitle(_translate("MainWindow", "Load Known Data", None))
         self.get_data_k_label.setText(_translate("MainWindow", "File Name", None))
+        self.get_data_k_line_edit.setText(_translate("MainWindow", "*.csv", None))
         self.get_data_k_button.setText(_translate("MainWindow", "...", None))
-        self.set_data_parameters()
-
-    def set_data_parameters(self):
-        if self.arg_list is None:
-            self.get_data_k_line_edit.setText(_translate("MainWindow", "*.csv", None))
-        else:
-            self.get_data_k_line_edit.setText(self.arg_list[0])
 
     def on_getDataButton_clicked(self, lineEdit, key):
         filename = QtGui.QFileDialog.getOpenFileName(None, "Open " + key + " Data File", '.', "(*.csv)")
         lineEdit.setText(filename)
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")
-
-        self.pysat_fun.set_arg_list([filename, key], self.locality)
-        self.pysat_fun.set_kw_list({}, self.locality)
+        
+        self.pysat_fun.set_arg_list([filename, key])
+        self.pysat_fun.set_kw_list({})
+        return True

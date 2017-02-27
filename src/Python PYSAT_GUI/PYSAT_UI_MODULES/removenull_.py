@@ -37,16 +37,13 @@ class removenull_:
     def get_removenull_parameters(self):
 
         datakey = self.removenull_choosedata.currentText()
-        colname = self.colname_choices.currentText()
+        colname=self.colname_choices.currentText()
         colname = (self.vars_level0[self.vars_level1.index(colname)], colname)
 
-        args = [datakey, colname]
+        args = [datakey,colname]
         kws = {}
         self.pysat_fun.set_arg_list(args, replacelast=True)
         self.pysat_fun.set_kw_list(kws, replacelast=True)
-
-    def set_removenull_parameters(self):
-        pass
 
     def removenull_ui(self):
         self.removenull = QtGui.QGroupBox()
@@ -78,6 +75,7 @@ class removenull_:
         self.removenull_choosedata_hlayout.addWidget(self.removenull_choosedata)
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.removenull_choosedata_hlayout.addItem(spacerItem)
+
 
         self.removenull_vlayout.addLayout(self.removenull_choosedata_hlayout)
         self.removenull_widget = QtGui.QWidget(self.removenull)
