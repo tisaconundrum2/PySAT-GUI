@@ -1,7 +1,6 @@
 from PyQt4 import QtCore, QtGui
 from pysat_func import pysat_func
 import PYSAT_UI_MODULES
-import pickle
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -23,16 +22,13 @@ except AttributeError:
 class pysat_ui(object):
     def __init__(self):
         self.pysat_fun = pysat_func()
-        self.ui_list = []
-        self.locality = -1
         self.flag = False
-        self.restore_flag = False
 
-    """ =============================================
+    """
     This is the backbone of the UI, without this portion we have nothing to work with
-    ============================================== """
+    """
 
-    def main_window(self, MainWindow):
+    def mainframe(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(800, 1000)
         self.centralWidget = QtGui.QWidget(MainWindow)
@@ -92,6 +88,8 @@ class pysat_ui(object):
         self.ok.addWidget(self.okButton)
         self.verticalLayout_9.addWidget(self.OK)
 
+
+
         MainWindow.setCentralWidget(self.centralWidget)
         self.mainToolBar = QtGui.QToolBar(MainWindow)
         self.mainToolBar.setObjectName(_fromUtf8("mainToolBar"))
@@ -136,8 +134,6 @@ class pysat_ui(object):
         self.actionSave_Current_Data.setObjectName(_fromUtf8("actionSave_Current_Data"))
         self.actionCreate_New_Workflow = QtGui.QAction(MainWindow)
         self.actionCreate_New_Workflow.setObjectName(_fromUtf8("actionCreate_New_Workflow"))
-        self.actionOpen_Workflow = QtGui.QAction(MainWindow)
-        self.actionOpen_Workflow.setObjectName(_fromUtf8("actionOpen_Workflow"))
         self.actionNoise_Reduction = QtGui.QAction(MainWindow)
         self.actionNoise_Reduction.setObjectName(_fromUtf8("actionNoise_Reduction"))
         self.actionRemoveNull = QtGui.QAction(MainWindow)
@@ -248,7 +244,7 @@ class pysat_ui(object):
         self.actionStratified_Folds.setObjectName(_fromUtf8("actionStratified_Folds"))
         self.actionTrain_Submodels = QtGui.QAction(MainWindow)
         self.actionTrain_Submodels.setObjectName(_fromUtf8("actionTrain_Submodels"))
-        self.actionSubmodelPredict = QtGui.QAction(MainWindow)
+        self.actionSubmodelPredict=QtGui.QAction(MainWindow)
         self.actionSubmodelPredict.setObjectName(_fromUtf8("actionSubmodelPredict"))
         self.menuFile.addAction(self.actionLoad_reference_Data)
         self.menuFile.addAction(self.actionLoad_Unknown_Data)
@@ -258,7 +254,6 @@ class pysat_ui(object):
         self.menuFile.addAction(self.actionSave_Current_Data)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionCreate_New_Workflow)
-        self.menuFile.addAction(self.actionOpen_Workflow)
         self.menuFile.addAction(self.actionSave_Current_Workflow)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionExit)
@@ -331,12 +326,11 @@ class pysat_ui(object):
         self.actionSave_Current_Plots.setText(_translate("MainWindow", "Save Current Plots", None))
         self.actionSave_Current_Data.setText(_translate("MainWindow", "Save Current Data", None))
         self.actionCreate_New_Workflow.setText(_translate("MainWindow", "Create New Workflow", None))
-        self.actionOpen_Workflow.setText(_translate("MainWindow", "Open Workflow", None))
         self.actionNoise_Reduction.setText(_translate("MainWindow", "Noise Reduction", None))
         self.actionApply_Mask.setText(_translate("MainWindow", "Apply Mask", None))
         self.actionInterpolate.setText(_translate("MainWindow", "Interpolate", None))
         self.actionRemoveNull.setText(_translate("MainWindow", "Remove Null Data", None))
-        self.actionInterpolate.setText(_translate("MainWindow", "Interpolate", None))
+        self.actionInterpolate.setText(_translate("MainWindow", "Interpolate (unknown to known)", None))
         self.actionInstrument_Response.setText(_translate("MainWindow", "Instrument Response", None))
         self.actionALS.setText(_translate("MainWindow", "ALS", None))
         self.actionDietrich.setText(_translate("MainWindow", "Dietrich", None))
@@ -381,66 +375,53 @@ class pysat_ui(object):
         self.actionHierarchical_2.setText(_translate("MainWindow", "Hierarchical", None))
         self.actionCross_Validation.setText(_translate("MainWindow", "Cross Validation", None))
         self.actionTrain.setText(_translate("MainWindow", "Train", None))
-        self.actionSubmodelPredict.setText(_translate("MainWindow", "Submodel Predict", None))
+        self.actionSubmodelPredict.setText(_translate("MainWindow","Submodel Predict",None))
         self.actionPredict.setText(_translate("MainWindow", "Predict", None))
         self.actionPlot.setText(_translate("MainWindow", "Plot", None))
         self.actionSet_output_location.setText(_translate("MainWindow", "Output Location", None))
         self.actionCreate_N_Folds.setText(_translate("MainWindow", "Create N Folds", None))
         self.actionStratified_Folds.setText(_translate("MainWindow", "Stratified Folds", None))
         self.okButton.clicked.connect(lambda: self.on_okButton_clicked())
-        self.delButton.clicked.connect(lambda: self.pysat_fun.del_layout())
+        #self.delButton.clicked.connect(lambda)
 
-    def get_known_data(self, arg_list=None, kw_list=None):
-        self.locality += 1
-        self.flag = PYSAT_UI_MODULES.get_data_k_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list, kw_list)
+    def file_outpath(self):
+        self.flag = PYSAT_UI_MODULES.file_outpath_(self.pysat_fun, self.verticalLayout_8)
 
-    def get_unknown_data(self, arg_list=None, kw_list=None):
-        self.locality += 1
-        self.flag = PYSAT_UI_MODULES.get_data_u_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list, kw_list)
+    def get_unknown_data(self):
+        self.flag = PYSAT_UI_MODULES.get_data_u_(self.pysat_fun, self.verticalLayout_8)
 
-    def do_mask(self, arg_list=None, kw_list=None):
-        self.locality += 1
-        PYSAT_UI_MODULES.get_mask_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list, kw_list)
+    def get_known_data(self):
+        self.flag = PYSAT_UI_MODULES.get_data_k_(self.pysat_fun, self.verticalLayout_8)
 
-    def file_outpath(self, arg_list=None, kw_list=None):
-        self.locality += 1
-        self.flag = PYSAT_UI_MODULES.file_outpath_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list, kw_list)
+    def do_mask(self):
+        PYSAT_UI_MODULES.get_mask_(self.pysat_fun, self.verticalLayout_8)
 
-    def do_removenull(self, arg_list=None, kw_list=None):
-        self.locality += 1
-        PYSAT_UI_MODULES.removenull_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list, kw_list)
+    def do_removenull(self):
+        PYSAT_UI_MODULES.removenull_(self.pysat_fun,self.verticalLayout_8)
 
-    def normalization(self, arg_list=None, kw_list=None):
-        self.locality += 1
-        PYSAT_UI_MODULES.normalization_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list, kw_list)
+    def normalization(self):
+        PYSAT_UI_MODULES.normalization_(self.pysat_fun, self.verticalLayout_8)
 
-    def do_strat_folds(self, arg_list=None, kw_list=None):
-        self.locality += 1
-        PYSAT_UI_MODULES.strat_folds_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list, kw_list)
+    def do_strat_folds(self):
+        PYSAT_UI_MODULES.strat_folds_(self.pysat_fun, self.verticalLayout_8)
 
-    def do_regression_train(self, arg_list=None, kw_list=None):
-        self.locality += 1
-        PYSAT_UI_MODULES.regression_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list, kw_list)
+    def do_regression_train(self):
+        PYSAT_UI_MODULES.regression_(self.pysat_fun, self.verticalLayout_8)
 
-    def do_regression_predict(self, arg_list=None, kw_list=None):
-        self.locality += 1
-        PYSAT_UI_MODULES.regression_predict_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list, kw_list)
+    def do_regression_predict(self):
+        PYSAT_UI_MODULES.regression_predict_(self.pysat_fun, self.verticalLayout_8)
 
-    def do_submodel_predict(self, arg_list=None, kw_list=None):
-        self.locality += 1
-        PYSAT_UI_MODULES.sm_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list, kw_list)
+    def do_submodel_predict(self):
+        PYSAT_UI_MODULES.sm_(self.pysat_fun, self.verticalLayout_8)
 
-    def do_plot(self, arg_list=None, kw_list=None):
-        self.locality += 1
-        PYSAT_UI_MODULES.plot_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list, kw_list)
+    def do_plot(self):
+        PYSAT_UI_MODULES.plot_(self.pysat_fun, self.verticalLayout_8)
 
-    def do_cv(self, arg_list=None, kw_list=None):
-        self.locality += 1
-        PYSAT_UI_MODULES.cv_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list, kw_list)
+    def do_cv(self):
+        PYSAT_UI_MODULES.cv_(self.pysat_fun, self.verticalLayout_8)
 
-    def do_interp(self, arg_list=None, kw_list=None):
-        self.locality += 1
-        PYSAT_UI_MODULES.interpolation_(self.pysat_fun, self.locality, self.verticalLayout_8, arg_list, kw_list)
+    def do_interp(self):
+        PYSAT_UI_MODULES.interpolation_(self.pysat_fun, self.verticalLayout_8)
 
     """ =============================================
     Please do not delete the functions below this line!
@@ -451,8 +432,6 @@ class pysat_ui(object):
     def menu_item_shortcuts(self):
         self.actionExit.setShortcut("ctrl+Q")
         self.actionCreate_New_Workflow.setShortcut("ctrl+N")
-        self.actionOpen_Workflow.setShortcut("ctrl+O")
-        self.actionSave_Current_Workflow.setShortcut("ctrl+S")
 
     def menu_item_functions(self, MainWindow):
         self.actionSet_output_location.triggered.connect(lambda: pysat_ui.file_outpath(self))  # output location
@@ -465,32 +444,12 @@ class pysat_ui(object):
         self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))  # regression train
         self.actionPredict.triggered.connect(lambda: pysat_ui.do_regression_predict(self))  # regression predict
         self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
+        self.set_greyed_out_items(True)
+        self.set_visible_items()  # Taking out menu items that don't have working UI modules yet. We don't want to delete them, so we'll make them disappear.
         self.actionPlot.triggered.connect(lambda: pysat_ui.do_plot(self))
         self.actionCross_Validation.triggered.connect(lambda: pysat_ui.do_cv(self))
-        self.actionSubmodelPredict.triggered.connect(lambda: pysat_ui.do_submodel_predict(self))
-        # Taking out menu items that don't have working UI modules yet. We don't want to delete them, so we'll make them disappear.
-        self.set_greyed_out_items(True)
-        self.set_visible_items()
-
-        # TODO add auto scroll down feature
-        # self.scrollArea.findChildren().triggered.connect(self.scrollArea.verticalScrollBar().setValue(self.scrollArea.verticalScrollBar().value()+10))
-
-        # These are the Restore functions
-        self.actionOpen_Workflow.triggered.connect(lambda: self.on_load_clicked())
-        self.actionSet_output_location.triggered.connect(lambda: self.set_ui_list("file_outpath"))
-        self.actionLoad_Unknown_Data.triggered.connect(lambda: self.set_ui_list("get_unknown_data"))  # unknown data
-        self.actionLoad_reference_Data.triggered.connect(lambda: self.set_ui_list("get_known_data"))  # known data
-        self.actionNormalization.triggered.connect(lambda: self.set_ui_list("normalization"))  # submodel
-        self.actionApply_Mask.triggered.connect(lambda: self.set_ui_list("do_mask"))  # get_mask
-        self.actionRemoveNull.triggered.connect(lambda: self.set_ui_list("do_removenull"))
-        self.actionStratified_Folds.triggered.connect(lambda: self.set_ui_list("do_strat_folds"))  # strat folds
-        self.actionTrain.triggered.connect(lambda: self.set_ui_list("do_regression_train"))  # regression train
-        self.actionPredict.triggered.connect(lambda: self.set_ui_list("do_regression_predict"))  # regression predict
-        self.actionInterpolate.triggered.connect(lambda: self.set_ui_list("do_interp"))
-        self.actionPlot.triggered.connect(lambda: self.set_ui_list("do_plot"))
-        self.actionCross_Validation.triggered.connect(lambda: self.set_ui_list("do_cv"))
-        self.actionSubmodelPredict.triggered.connect(lambda: self.set_ui_list("do_submodel_predict"))
-        self.actionSave_Current_Workflow.triggered.connect(lambda: self.on_save_clicked())
+        self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
+        self.actionSubmodelPredict.triggered.connect(lambda:pysat_ui.do_submodel_predict(self))
 
     def set_greyed_out_items(self, bool):
         self.actionTrain.setDisabled(bool)
@@ -502,11 +461,6 @@ class pysat_ui(object):
         self.actionPredict.setDisabled(bool)
         self.actionInterpolate.setDisabled(bool)
         self.actionPlot.setDisabled(bool)
-        self.actionRemoveNull.setDisabled(bool)
-        self.actionCross_Validation.setDisabled(bool)
-        self.actionSubmodelPredict.setDisabled(bool)
-        self.actionSave_Current_Data.setDisabled(bool)
-        self.actionSave_Current_Plots.setDisabled(bool)
 
     def set_visible_items(self):
         self.actionNoise_Reduction.setVisible(False)
@@ -522,79 +476,23 @@ class pysat_ui(object):
     def handleMenuHovered(self, action):
         QtGui.QToolTip.showText(self, None, action, None)
 
+    def saveworkflow(self):
+        # TODO save the current window's data into a save file
+        pass
+
+    def openworkflow(self):
+        # TODO open file dialog
+        self.filename = QtGui.QFileDialog.getOpenFileName(self, "Open a Workflow File", '.', "(*.wrf)")
+
     def on_okButton_clicked(self):
         if self.flag:
             self.set_greyed_out_items(False)
             self.onStart()
             self.pysat_fun.taskFinished.connect(self.onFinished)
 
-    ################# Restoration toolset below
+    def on_deleteButton_clicked(self):
+        pass
 
-    def on_save_clicked(self):
-        try:
-            filename = QtGui.QFileDialog.getSaveFileName(None, "Choose where you want save your file", '.', '(*.wrf)')
-            print(filename)
-            with open(filename, 'wb') as fp:
-                pickle.dump(self.ui_list, fp)
-                pickle.dump(self.pysat_fun.arg_list, fp)
-                pickle.dump(self.pysat_fun.kw_list, fp)
-        except:
-            print("File not loaded")
-            pass
-
-    def on_load_clicked(self):
-        filename = QtGui.QFileDialog.getOpenFileName(None, "Open Workflow File", '.', "(*.wrf)")
-        print(filename)
-        try:
-            with open(filename, 'rb') as fp:
-                self.ui_list = pickle.load(fp)
-                self.pysat_fun.arg_list = pickle.load(fp)
-                self.pysat_fun.kw_list = pickle.load(fp)
-        except:
-            print("File was not loaded")
-        print(self.ui_list)
-        print(self.pysat_fun.arg_list)
-        print(self.pysat_fun.kw_list)
-        self.restore_first()
-
-    # Restore functionality
-    def set_ui_list(self, ui, replacelast=False):
-        if replacelast:
-            self.ui_list[-1] = ui
-        else:
-            self.ui_list.append(ui)
-            # print(self.ui_list) debug purposes
-
-    def restore_first(self):
-        # first run a single or double instance of getattr depending on what data is in the queue
-        #   We'll need to remember 'i' so we don't accidentally run the instance too many times
-        # then press ok
-        # then we'll have another loop continue on it's merry way adding everything in.
-        self.leftOff = 0
-        for i in range(0, len(self.ui_list)):
-            if self.ui_list[i] == "get_unknown_data" or self.ui_list[i] == "get_known_data":
-                getattr(pysat_ui, self.ui_list[i])(self, i, self.pysat_fun.arg_list[i], self.pysat_fun.kw_list[i])
-                self.leftOff += 1
-        self.on_okButton_clicked()
-        self.pysat_fun.taskFinished.connect(self.restore_rest)
-
-    def restore_rest(self):
-        if self.restore_flag is False:
-            for i in range(self.leftOff, len(self.ui_list)):
-                try:
-                    getattr(pysat_ui, self.ui_list[i])(self, self.pysat_fun.arg_list[i], self.pysat_fun.kw_list[i])
-                except:
-                    pass
-            # Get the lengths of the list back on track. They are longer than they are supposed to be
-            while len(self.pysat_fun.fun_list) < len(self.ui_list):  # restore ui_list alignment
-                del self.ui_list[-1]
-            while len(self.pysat_fun.fun_list) < len(self.pysat_fun.arg_list):
-                del self.pysat_fun.arg_list[-1]
-            while len(self.pysat_fun.fun_list) < len(self.pysat_fun.kw_list):
-                del self.pysat_fun.kw_list[-1]
-            self.restore_flag = True
-
-    ################# Progress bar toolset below
 
     def onStart(self):  # onStart function
         self.progressBar.setRange(0, 0)  # make the bar pulse green
@@ -604,3 +502,12 @@ class pysat_ui(object):
     def onFinished(self):  # onFinished function
         self.progressBar.setRange(0, 1)  # stop the bar pulsing green
         self.progressBar.setValue(1)  # displays 100% after process is finished.
+
+
+def make_combobox(choices):
+    combo = QtGui.QComboBox()
+    for i, choice in enumerate(choices):
+        combo.addItem(_fromUtf8(""))
+        combo.setItemText(i, _translate('', choice, None))
+
+    return combo

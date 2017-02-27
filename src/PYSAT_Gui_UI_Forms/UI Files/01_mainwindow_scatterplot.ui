@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>900</width>
-    <height>827</height>
+    <width>666</width>
+    <height>500</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,9 +24,9 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>-141</y>
-         <width>846</width>
-         <height>792</height>
+         <y>0</y>
+         <width>642</width>
+         <height>352</height>
         </rect>
        </property>
        <property name="font">
@@ -50,7 +50,7 @@ QGroupBox::title {
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_8">
         <item>
-         <widget class="QGroupBox" name="plot">
+         <widget class="QGroupBox" name="scatter">
           <property name="font">
            <font>
             <pointsize>10</pointsize>
@@ -61,384 +61,265 @@ QGroupBox::title {
           </property>
           <layout class="QVBoxLayout" name="verticalLayout">
            <item>
-            <layout class="QFormLayout" name="scatter_choosedata_flayout">
-             <item row="0" column="0">
-              <widget class="QLabel" name="scatter_choosedata_label">
-               <property name="text">
-                <string>Choose data: </string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QComboBox" name="scatter_choosedata">
-               <property name="iconSize">
-                <size>
-                 <width>50</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="figname_label">
-               <property name="text">
-                <string>Figure name:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QLineEdit" name="figname_text"/>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="plot_title_label">
-               <property name="text">
-                <string>Plot Title: </string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QLineEdit" name="plot_title_text">
-               <property name="enabled">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer_2">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <layout class="QFormLayout" name="scatter_choosex_flayout">
-             <property name="fieldGrowthPolicy">
-              <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-             </property>
-             <item row="0" column="0">
-              <widget class="QLabel" name="scatter_choosex_label">
-               <property name="text">
-                <string>Choose X variable:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QComboBox" name="xvar_choices"/>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="xtitle_label">
-               <property name="text">
-                <string>X title:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QLineEdit" name="xtitle_text"/>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="xmin_labe">
-               <property name="text">
-                <string>X min:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QDoubleSpinBox" name="xmin_spin"/>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="xmax_label">
-               <property name="text">
-                <string>X max:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QDoubleSpinBox" name="xmax_spin"/>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <layout class="QFormLayout" name="scatter_choosey_flayout">
-             <item row="0" column="1">
-              <widget class="QComboBox" name="yvar_choices"/>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="ytitle_label">
-               <property name="text">
-                <string>Y title:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QLineEdit" name="ytitle_text"/>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="ymin_label">
-               <property name="text">
-                <string>Y min:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QDoubleSpinBox" name="ymin_spin"/>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="ymax_label">
-               <property name="text">
-                <string>Y max:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QDoubleSpinBox" name="ymax_spin"/>
-             </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="scatter_choosey_label">
-               <property name="text">
-                <string>Choose Y variable:</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer_3">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="legend_hlayout">
+            <layout class="QVBoxLayout" name="scatter_vlayout">
              <item>
-              <widget class="QLabel" name="legend_label">
-               <property name="text">
-                <string>Legend Label: </string>
-               </property>
-              </widget>
+              <layout class="QHBoxLayout" name="scatter_choosedata_hlayout">
+               <item>
+                <widget class="QLabel" name="scatter_choosedata_label">
+                 <property name="text">
+                  <string>Choose data: </string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="scatter_choosedata">
+                 <property name="iconSize">
+                  <size>
+                   <width>50</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                 <item>
+                  <property name="text">
+                   <string>Choose Data</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Known Data</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="figname_label">
+                 <property name="text">
+                  <string>Figure name:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="figname_text"/>
+               </item>
+               <item>
+                <widget class="QLabel" name="plot_title_label">
+                 <property name="text">
+                  <string>Plot Title: </string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="plot_title_text"/>
+               </item>
+              </layout>
              </item>
              <item>
-              <widget class="QLineEdit" name="legend_label_text"/>
+              <layout class="QHBoxLayout" name="scatter_choosevars_hlayout">
+               <item>
+                <layout class="QVBoxLayout" name="scatter_choosex_vlayout">
+                 <item>
+                  <widget class="QLabel" name="scatter_choosex_label">
+                   <property name="text">
+                    <string>Choose X variable: </string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="xvar_choices"/>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="xtitle_hlayout">
+                   <item>
+                    <widget class="QLabel" name="xtitle_label">
+                     <property name="text">
+                      <string>X title:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLineEdit" name="xtitle_text"/>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="xrange_hlayout">
+                   <item>
+                    <widget class="QLabel" name="xmin_label">
+                     <property name="text">
+                      <string>X min:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QDoubleSpinBox" name="xmin_spin"/>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="xmax_label">
+                     <property name="text">
+                      <string>X max:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QDoubleSpinBox" name="xmax_spin"/>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QVBoxLayout" name="scatter_choosey_vlayout">
+                 <item>
+                  <widget class="QLabel" name="scatter_choosey_label">
+                   <property name="text">
+                    <string>Choose Y variable:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="yvar_choices"/>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="ytitle_hlayout">
+                   <item>
+                    <widget class="QLabel" name="ytitle_label">
+                     <property name="text">
+                      <string>Y title:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLineEdit" name="ytitle_text"/>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="yrange_hlayout">
+                   <item>
+                    <widget class="QLabel" name="ymin_label">
+                     <property name="text">
+                      <string>Y min:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QDoubleSpinBox" name="ymin_spin"/>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="ymax_label">
+                     <property name="text">
+                      <string>Y max:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QDoubleSpinBox" name="ymax_spin"/>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </item>
+              </layout>
              </item>
              <item>
-              <widget class="QCheckBox" name="onetoone">
-               <property name="text">
-                <string>One to One</string>
-               </property>
-              </widget>
+              <layout class="QHBoxLayout" name="legend_hlayout">
+               <item>
+                <widget class="QLabel" name="legend_label">
+                 <property name="text">
+                  <string>Legend Label: </string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="legend_label_text"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="onetoone">
+                 <property name="text">
+                  <string>One to One</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
-            </layout>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer_4">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <layout class="QFormLayout" name="scatter_chooseline_flayout">
-             <property name="fieldGrowthPolicy">
-              <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-             </property>
-             <item row="0" column="0">
-              <widget class="QLabel" name="color_label">
-               <property name="text">
-                <string>Color:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QComboBox" name="color_choices">
-               <property name="iconSize">
-                <size>
-                 <width>50</width>
-                 <height>20</height>
-                </size>
-               </property>
+             <item>
+              <layout class="QHBoxLayout" name="scatter_color_file_hlayout">
                <item>
-                <property name="text">
-                 <string>Red</string>
-                </property>
+                <widget class="QLabel" name="color_label">
+                 <property name="text">
+                  <string>Color:</string>
+                 </property>
+                </widget>
                </item>
                <item>
-                <property name="text">
-                 <string>Green</string>
-                </property>
+                <widget class="QComboBox" name="color_choices">
+                 <property name="iconSize">
+                  <size>
+                   <width>50</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                 <item>
+                  <property name="text">
+                   <string>Red</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Green</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Blue</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Cyan</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Magenta</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Yellow</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Black</string>
+                  </property>
+                 </item>
+                </widget>
                </item>
                <item>
-                <property name="text">
-                 <string>Blue</string>
-                </property>
+                <widget class="QLabel" name="file_label">
+                 <property name="text">
+                  <string>Plot Filename:</string>
+                 </property>
+                </widget>
                </item>
                <item>
-                <property name="text">
-                 <string>Cyan</string>
-                </property>
+                <widget class="QLineEdit" name="file_text"/>
                </item>
                <item>
-                <property name="text">
-                 <string>Magenta</string>
-                </property>
+                <spacer name="scatter_color_file_spacer">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
-               <item>
-                <property name="text">
-                 <string>Yellow</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Black</string>
-                </property>
-               </item>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="line_label">
-               <property name="text">
-                <string>Line:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QComboBox" name="line_choices">
-               <property name="iconSize">
-                <size>
-                 <width>50</width>
-                 <height>20</height>
-                </size>
-               </property>
-               <item>
-                <property name="text">
-                 <string>No Line</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Line</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Dashed Line</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Dotted Line</string>
-                </property>
-               </item>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="marker_label">
-               <property name="text">
-                <string>Marker:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QComboBox" name="marker_choices">
-               <property name="iconSize">
-                <size>
-                 <width>50</width>
-                 <height>20</height>
-                </size>
-               </property>
-               <item>
-                <property name="text">
-                 <string>Circles</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Squares</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Diamonds</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Triangle Up</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Triangle Down</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Triangle Left</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Triangle Right</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>None</string>
-                </property>
-               </item>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="file_label">
-               <property name="text">
-                <string>Plot Filename:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QLineEdit" name="file_text"/>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="alpha_label">
-               <property name="text">
-                <string>Alpha:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QDoubleSpinBox" name="alpha_spin"/>
+              </layout>
              </item>
             </layout>
            </item>
@@ -499,8 +380,8 @@ QGroupBox::title {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>900</width>
-     <height>31</height>
+     <width>666</width>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
