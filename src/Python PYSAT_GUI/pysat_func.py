@@ -215,7 +215,7 @@ class pysat_func(QThread):
         if truevals is not None:
             ref_predictions=sm_obj.predict(x_ref)
             ref_predictions_blended=sm_obj.do_blend(ref_predictions,truevals=truevals)
-
+            pass
         # get predictions for each submodel separately
         predictions = sm_obj.predict(x)
 
@@ -225,9 +225,9 @@ class pysat_func(QThread):
 
         #save the individual and blended predictions
         for i,j in enumerate(predictions):
-            self.data[datakey].df[submodel_names[i]+'-Predict'] = j
-        self.data[datakey].df['Blended-Predict ('+str(sm_obj.blendranges)+')'] = predictions_blended
-
+            self.data[datakey].df[('meta',submodel_names[i]+'-Predict')] = j
+        self.data[datakey].df[('meta','Blended-Predict (Range boundaries: '+str(sm_obj.blendranges[1:-1])+')')] = predictions_blended
+        pass
 
     def do_plot(self, datakey,
                 xvar, yvar,
