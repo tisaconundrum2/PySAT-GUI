@@ -21,49 +21,49 @@ except AttributeError:
 
 class sm_:
     def __init__(self, pysat_fun, verticalLayout_8):
-        self.submodel_gui_info=[]
-        self.new_submodel_index=1
+        self.submodel_gui_info = []
+        self.new_submodel_index = 1
         self.pysat_fun = pysat_fun
 
         self.verticalLayout_8 = verticalLayout_8
 
         self.main()
 
-
-
     def get_sm_params(self):
-        blendranges=[]
-        submodel_names=[]
-        kws={}
+        blendranges = []
+        submodel_names = []
+        kws = {}
 
         try:
-            datakey=self.choosedata_predict.currentText()
+            datakey = self.choosedata_predict.currentText()
         except:
-            datakey=None
+            datakey = None
 
         for i in self.submodel_gui_info:
             try:
-                min_temp=i[1][0].value()
+                min_temp = i[1][0].value()
             except:
-                min_temp=i[1][0]
+                min_temp = i[1][0]
 
             try:
-                max_temp=i[1][1].value()
+                max_temp = i[1][1].value()
             except:
-                max_temp=i[1][1]
+                max_temp = i[1][1]
 
-            blendranges.append([min_temp,max_temp])
+            blendranges.append([min_temp, max_temp])
             submodel_names.append(i[0].currentText())
 
         try:
-            trueval_data=self.choosedata.currentText()
+            trueval_data = self.choosedata.currentText()
         except:
-            trueval_data=None
+            trueval_data = None
 
-
-        args = [datakey,submodel_names,blendranges,trueval_data]
+        args = [datakey, submodel_names, blendranges, trueval_data]
         self.pysat_fun.set_arg_list(args, replacelast=True)
         self.pysat_fun.set_kw_list(kws, replacelast=True)
+
+    def set_sm_params(self):
+        pass
 
     def main(self):
         # driver function, calls UI and set's up connections
@@ -74,8 +74,6 @@ class sm_:
         self.pysat_fun.set_fun_list(self.pysat_fun.do_submodel_predict)
         self.sm_ui()
         self.pysat_fun.set_greyed_modules(self.submodel_predict, True)  # set the module grey after use.
-
-
 
     def sm_ui(self):
 
@@ -89,7 +87,7 @@ class sm_:
         self.verticalLayout.setSpacing(6)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
 
-        #choose reference/full model
+        # choose reference/full model
         self.choosemodel_hlayout = QtGui.QHBoxLayout()
         self.choosemodel_hlayout.setMargin(11)
         self.choosemodel_hlayout.setSpacing(6)
@@ -108,18 +106,18 @@ class sm_:
         self.choosemodel_hlayout.addItem(spacerItem)
         self.verticalLayout.addLayout(self.choosemodel_hlayout)
 
-        #organize submodels vertically
+        # organize submodels vertically
         self.submodels_vlayout = QtGui.QVBoxLayout()
         self.submodels_vlayout.setMargin(11)
         self.submodels_vlayout.setSpacing(6)
         self.submodels_vlayout.setObjectName(_fromUtf8("submodels_vlayout"))
 
-        #always have a low submodel
+        # always have a low submodel
         self.low_model_hlayout = QtGui.QHBoxLayout()
         self.low_model_hlayout.setMargin(11)
         self.low_model_hlayout.setSpacing(6)
         self.low_model_hlayout.setObjectName(_fromUtf8("low_model_hlayout"))
-        self.low_model_label=QtGui.QLabel(self.submodel_predict)
+        self.low_model_label = QtGui.QLabel(self.submodel_predict)
         self.low_model_label.setText('Low Model:')
         self.low_model_hlayout.addWidget(self.low_model_label)
         self.choose_low_model = make_combobox(modelchoices)
@@ -136,11 +134,11 @@ class sm_:
         self.low_model_hlayout.addItem(spacerItem1)
         self.submodels_vlayout.addLayout(self.low_model_hlayout)
 
-        #middle submodels go here
-        self.midmodel_vlayout=QtGui.QVBoxLayout()
+        # middle submodels go here
+        self.midmodel_vlayout = QtGui.QVBoxLayout()
         self.submodels_vlayout.addLayout(self.midmodel_vlayout)
 
-        #always have a high submodel
+        # always have a high submodel
         self.high_model_hlayout = QtGui.QHBoxLayout()
         self.high_model_hlayout.setMargin(11)
         self.high_model_hlayout.setSpacing(6)
@@ -163,11 +161,11 @@ class sm_:
         self.submodels_vlayout.addLayout(self.high_model_hlayout)
         self.verticalLayout.addLayout(self.submodels_vlayout)
 
-        #set the spinbox ranges based on the models
+        # set the spinbox ranges based on the models
         self.set_ranges(self.choose_high_model.currentText(), minspin=self.high_model_min)
         self.set_ranges(self.choose_low_model.currentText(), maxspin=self.low_model_max)
 
-        #add or delete submodel buttons
+        # add or delete submodel buttons
         self.add_delete_hlayout = QtGui.QHBoxLayout()
         self.add_delete_hlayout.setMargin(11)
         self.add_delete_hlayout.setSpacing(6)
@@ -190,14 +188,14 @@ class sm_:
             error_print('No Data has been loaded')
             datachoices = ['No data has been loaded!']
 
-        #choose data to optimize blending
+        # choose data to optimize blending
         self.choosedata_hlayout = QtGui.QHBoxLayout()
         self.choosedata_hlayout.setMargin(11)
         self.choosedata_hlayout.setSpacing(6)
         self.choosedata_hlayout.setObjectName(_fromUtf8("choosedata_hlayout"))
         self.verticalLayout.addLayout(self.choosedata_hlayout)
 
-        #choose data to predict
+        # choose data to predict
         self.predictdata_vlayout = QtGui.QVBoxLayout()
         self.predictdata_vlayout.setMargin(11)
         self.predictdata_vlayout.setSpacing(6)
@@ -213,11 +211,10 @@ class sm_:
 
         self.verticalLayout_8.addWidget(self.submodel_predict)
 
-        #put submodel objects in a list
-        self.submodel_gui_info=[[self.choose_low_model,[-9999,self.low_model_max]],
-                                 [self.choose_high_model,[self.high_model_min,9999]],
-                                [self.choosemodel,[-9999,9999]]]
-
+        # put submodel objects in a list
+        self.submodel_gui_info = [[self.choose_low_model, [-9999, self.low_model_max]],
+                                  [self.choose_high_model, [self.high_model_min, 9999]],
+                                  [self.choosemodel, [-9999, 9999]]]
 
         self.submodel_predict.setTitle(_translate("MainWindow", "Submodel - Predict", None))
         self.choosemodel_label.setText(_translate("MainWindow", "Choose reference model:", None))
@@ -228,16 +225,15 @@ class sm_:
         self.optimize_checkbox.setText(_translate("MainWindow", "Optimize", None))
         self.choosedata_predict_label.setText(_translate("MainWindow", "Choose data to predict:", None))
 
-
-        #connect the add and delete submodel buttons and opt checkbox
+        # connect the add and delete submodel buttons and opt checkbox
         self.add_submodel_button.clicked.connect(lambda: self.add_submodel())
         self.delete_submodel_button.clicked.connect(lambda: self.del_submodel())
         self.optimize_checkbox.toggled.connect(
             lambda: self.optimize_ranges(self.optimize_checkbox.isChecked(), datachoices))
 
-        #connect the low and high models so spinbox ranges are updated
+        # connect the low and high models so spinbox ranges are updated
         self.choose_low_model.currentIndexChanged.connect(
-            lambda: self.set_ranges(self.choose_low_model.currentText(),maxspin=self.low_model_max))
+            lambda: self.set_ranges(self.choose_low_model.currentText(), maxspin=self.low_model_max))
         self.choose_high_model.currentIndexChanged.connect(
             lambda: self.set_ranges(self.choose_high_model.currentText(), minspin=self.high_model_min))
 
@@ -248,7 +244,7 @@ class sm_:
         self.choose_low_model.currentIndexChanged.connect(lambda: self.get_sm_params())
         self.choose_high_model.currentIndexChanged.connect(lambda: self.get_sm_params())
 
-        self.get_sm_params() #get initial parameters
+        self.get_sm_params()  # get initial parameters
 
     def add_submodel(self):
 
@@ -288,7 +284,6 @@ class sm_:
         spacerItem2 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         submodel_hlayout.addItem(spacerItem2)
 
-
         submodel_min_label.setText(_translate("MainWindow", "Min: ", None))
         submodel_max_label.setText(_translate("MainWindow", "Max: ", None))
         self.midmodel_vlayout.addLayout(submodel_hlayout)
@@ -296,9 +291,10 @@ class sm_:
         # insert the new submodel objects into the list
         self.submodel_gui_info.insert(-1, [choose_submodel, [submodel_min, submodel_max]])
 
-        #connect dropdown so spinbox ranges are updated
-        choose_submodel.currentIndexChanged.connect(lambda: self.set_ranges(choose_submodel.currentText(),minspin=submodel_min,maxspin=submodel_max))
-        #connect so parameters are updated when things are changed
+        # connect dropdown so spinbox ranges are updated
+        choose_submodel.currentIndexChanged.connect(
+            lambda: self.set_ranges(choose_submodel.currentText(), minspin=submodel_min, maxspin=submodel_max))
+        # connect so parameters are updated when things are changed
         choose_submodel.currentIndexChanged.connect(lambda: self.get_sm_params())
         submodel_min.valueChanged.connect(lambda: self.get_sm_params())
         submodel_max.valueChanged.connect(lambda: self.get_sm_params())
@@ -307,8 +303,7 @@ class sm_:
         self.get_sm_params()
 
     def del_submodel(self):
-
-        submodel_to_delete=self.midmodel_vlayout.takeAt(self.midmodel_vlayout.count()-1)
+        submodel_to_delete = self.midmodel_vlayout.takeAt(self.midmodel_vlayout.count() - 1)
         if submodel_to_delete is not None:
             while submodel_to_delete.count():
                 item = submodel_to_delete.takeAt(0)
@@ -322,8 +317,7 @@ class sm_:
 
         self.get_sm_params()
 
-
-    def optimize_ranges(self,ischecked,datachoices):
+    def optimize_ranges(self, ischecked, datachoices):
         if not ischecked:
             self.choosedata_label.deleteLater()
             self.choosedata.deleteLater()
@@ -344,11 +338,9 @@ class sm_:
 
         self.get_sm_params()
 
-    def set_ranges(self,model,minspin=None,maxspin=None):
-        range=self.pysat_fun.models[model].yrange
+    def set_ranges(self, model, minspin=None, maxspin=None):
+        range = self.pysat_fun.models[model].yrange
         if minspin:
             minspin.setValue(range[0])
         if maxspin:
             maxspin.setValue(range[1])
-
-

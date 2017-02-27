@@ -20,8 +20,10 @@ except AttributeError:
 
 
 class get_mask_:
-    def __init__(self, pysat_fun, verticalLayout_8):
+    def __init__(self, pysat_fun, verticalLayout_8, arg_list, kw_list):
         self.pysat_fun = pysat_fun
+        self.arg_list = arg_list
+        self.kw_list = kw_list
         self.verticalLayout_8 = verticalLayout_8
         self.main()
 
@@ -33,12 +35,11 @@ class get_mask_:
         self.get_mask_ui()
         self.pysat_fun.set_greyed_modules(self.get_mask, True)
 
-
     def get_mask_params(self):
-        datakey=self.mask_choosedata.currentText()
-        maskfile=self.get_mask_line_edit.text()
-        args=[datakey,maskfile]
-        kws={}
+        datakey = self.mask_choosedata.currentText()
+        maskfile = self.get_mask_line_edit.text()
+        args = [datakey, maskfile]
+        kws = {}
         self.pysat_fun.set_arg_list(args, replacelast=True)
         self.pysat_fun.set_kw_list(kws, replacelast=True)
 
@@ -82,12 +83,20 @@ class get_mask_:
         self.get_mask_button.setText(_translate("MainWindow", "...", None))
         self.get_mask_line_edit.textChanged.connect(lambda: self.get_mask_params())
         self.mask_choosedata.currentIndexChanged.connect(lambda: self.get_mask_params())
-        self.get_mask_button.clicked.connect(lambda: self.on_getDataButton_clicked(self.get_mask_line_edit)
-        )
+        self.get_mask_button.clicked.connect(lambda: self.on_getDataButton_clicked(self.get_mask_line_edit))
+        self.set_mask_params()
+
+    def set_mask_params(self):
+        if self.arg_list is None:
+            self.get_mask_line_edit.setText(_translate("MainWindow", "*.csv", None))
+        else:
+            self.get_mask_line_edit.setText(self.arg_list[1])
+            index = self.mask_choosedata.findText(str(self.arg_list[0]))  # findText 'unknown' or 'known'
+            if index is not -1:  # if it's there choose it based on the returned index
+                self.mask_choosedata.setCurrentIndex(index)
 
     def on_getDataButton_clicked(self, lineEdit):
         filename = QtGui.QFileDialog.getOpenFileName(None, "Open Mask Data File", '.', "(*.csv)")
         lineEdit.setText(filename)
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")
-

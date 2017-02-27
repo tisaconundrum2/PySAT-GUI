@@ -46,6 +46,9 @@ class regression_predict_:
         self.pysat_fun.set_arg_list(args, replacelast=True)
         self.pysat_fun.set_kw_list(kws, replacelast=True)
 
+    def set_predict_parameters(self):
+        pass
+
     def regression_ui(self):
         self.regression_predict = QtGui.QGroupBox()
         font = QtGui.QFont()
