@@ -43,7 +43,6 @@ class plot_:
             xvar = (self.vars_level0[self.vars_level1.index(xvar)], xvar)
             yvar = (self.vars_level0[self.vars_level1.index(yvar)], yvar)
         except:
-            print('Problem setting x and/or y variable!')
             pass
         figname = self.figname_text.text()
         title = self.plot_title_text.text()
@@ -390,22 +389,7 @@ class plot_:
                 obj.valueChanged.connect(lambda: self.get_plot_parameters())
             if isinstance(obj, QtGui.QCheckBox):
                 obj.toggled.connect(lambda: self.get_plot_parameters())
-                #
-                #        self.plot_choosedata.currentIndexChanged.connect(lambda: self.get_plot_parameters())
-                #        self.xvar_choices.currentIndexChanged.connect(lambda: self.get_plot_parameters())
-                #        self.yvar_choices.currentIndexChanged.connect(lambda: self.get_plot_parameters())
-                #        self.xmin_spin.valueChanged.connect(lambda: self.get_plot_parameters())
-                #        self.ymin_spin.valueChanged.connect(lambda: self.get_plot_parameters())
-                #        self.xmax_spin.valueChanged.connect(lambda: self.get_plot_parameters())
-                #        self.ymax_spin.valueChanged.connect(lambda: self.get_plot_parameters())
-                #        self.xtitle_text.textChanged.connect(lambda: self.get_plot_parameters())
-                #        self.ytitle_text.textChanged.connect(lambda: self.get_plot_parameters())
-                #        self.legend_label_text.textChanged.connect(lambda: self.get_plot_parameters())
-                #        self.figname_text.textChanged.connect(lambda: self.get_plot_parameters())
-                #        self.plot_title_text.textChanged.connect(lambda: self.get_plot_parameters())
-                #        self.onetoone.toggled.connect(lambda: self.get_plot_parameters())
-                #        self.color_choices.currentIndexChanged.connect(lambda: self.get_plot_parameters())
-                #        self.file_text.textChanged.connect(lambda: self.get_plot_parameters())
+
 
     def plot_change_vars(self, obj):
         obj.clear()
@@ -414,7 +398,14 @@ class plot_:
             self.vars_level1 = self.pysat_fun.data[self.plot_choosedata.currentText()].df.columns.get_level_values(1)
             self.vars_level1 = list(self.vars_level1[self.vars_level0 != 'wvl'])
             self.vars_level0 = list(self.vars_level0[self.vars_level0 != 'wvl'])
-
+            try:
+                self.vars_level0 = [i for i in self.vars_level0 if not 'Unnamed' in i]  # remove unnamed columns from choices
+            except:
+                pass
+            try:
+                self.vars_level1 = [i for i in self.vars_level1 if not 'Unnamed' in i]  # remove unnamed columns from choices
+            except:
+                pass
             choices = self.vars_level1
 
             for i in choices:
@@ -438,10 +429,14 @@ class plot_:
                 vardata=self.pysat_fun.data[self.plot_choosedata.currentText()][var]
             except:
                 vardata=[0,0]
-        varmin = np.min(vardata)
-        varmax = np.max(vardata)
-        objmin.setValue(varmin)
-        objmax.setValue(varmax)
+        try:
+            varmin = np.min(vardata)
+            varmax = np.max(vardata)
+            objmin.setValue(varmin)
+            objmax.setValue(varmax)
+        except:
+            objmin.setValue(0)
+            objmax.setValue(0)
 
 
 def make_combobox(choices):
