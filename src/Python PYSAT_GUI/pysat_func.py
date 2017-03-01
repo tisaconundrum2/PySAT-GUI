@@ -11,7 +11,7 @@ from PyQt4 import QtCore
 import numpy as np
 
 
-class Node:
+class Module:
     nodeCount = 0
 
     def __init__(self, fun_list, arg_list, kw_list):
@@ -19,8 +19,8 @@ class Node:
         self.arg_list = arg_list
         self.kw_list = kw_list
         self.next = None
-        self.UI_ID = Node.nodeCount
-        Node.nodeCount += 1
+        self.UI_ID = Module.nodeCount
+        Module.nodeCount += 1
 
     def setData(self, fun_list, arg_list, kw_list):
         self.fun_list = fun_list
@@ -45,7 +45,7 @@ class Node:
         return self.next
 
 
-class List:
+class listOfModules:
     def __init__(self):
         self.head = None
 
@@ -59,9 +59,10 @@ class List:
 
     def push(self, fun_list, arg_list, kw_list, UI_ID=None):
         if not self.amend(fun_list, arg_list, kw_list, UI_ID):
-            temp = Node(fun_list, arg_list, kw_list)
+            temp = Module(fun_list, arg_list, kw_list)
             temp.setNext(self.head)
             self.head = temp
+        return self.head.getID()
 
     def amend(self, fun_list, arg_list, kw_list, UI_ID=None):
         current = self.head
@@ -122,7 +123,7 @@ class pysat_func(QThread):
         self.model_xvars = {}
         self.model_yvars = {}
         self.figs = {}
-        self._list = List()
+        self._list = listOfModules()
         self.greyed_modules = []
 
     """
@@ -130,7 +131,12 @@ class pysat_func(QThread):
     """
 
     def set_list(self, fun, arg, kw, ui_id=None):
-        self._list.push(fun, arg, kw, ui_id)
+        # pushing new information as well as returning the UI_ID
+        # we'll need the UI_ID in order to maintain order and bookkeeping
+        return self._list.push(fun, arg, kw, ui_id)
+
+    def get_list(self):
+        return self._list
 
     def set_greyed_modules(self, modules):
         self.greyed_modules.append(modules)

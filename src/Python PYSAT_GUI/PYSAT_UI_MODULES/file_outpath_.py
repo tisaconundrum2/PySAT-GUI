@@ -10,21 +10,18 @@ except AttributeError:
 
 
 class file_outpath_:
-    def __init__(self, pysat_fun, locality, verticalLayout_8, arg_list, kw_list):
+    def __init__(self, pysat_fun, verticalLayout_8, arg_list, kw_list):
+        self.ui_id = None
         self.pysat_fun = pysat_fun
-        self.locality = locality
         self.arg_list = arg_list
         self.kw_list = kw_list
         self.verticalLayout_8 = verticalLayout_8
         self.main()
 
     def main(self):
-        self.pysat_fun.set_fun_list(self.pysat_fun.set_file_outpath)  # add this function to the pysat list to be run
-        self.pysat_fun.set_arg_list([])
-        self.pysat_fun.set_kw_list({})
         self.pysat_fun.set_greyed_modules({})
         self.file_outpath_ui()
-        self.pysat_fun.set_greyed_modules(self.file_out_path, True)
+        self.pysat_fun.set_greyed_modules(self.file_out_path)
         try:
             self.file_out_path_button.clicked.connect(self.on_outPutLocationButton_clicked)
         except:
@@ -63,12 +60,20 @@ class file_outpath_:
             self.file_out_path_line_edit.setText(self.arg_list[0])
             self.get_parameters()
 
+    # def get_parameters(self):
+    #     filename = self.file_out_path_line_edit.text()
+    #     args = [filename]
+    #     kws = {}
+    #     self.pysat_fun.set_arg_list(args, self.locality)
+    #     self.pysat_fun.set_kw_list(kws, self.locality)
+
     def get_parameters(self):
         filename = self.file_out_path_line_edit.text()
-        args = [filename]
-        kws = {}
-        self.pysat_fun.set_arg_list(args, self.locality)
-        self.pysat_fun.set_kw_list(kws, self.locality)
+        fun_list = "set_file_outpath"
+        kw_list = {}
+        arg_list = [filename]
+        self.ui_id = self.pysat_fun.set_list(fun_list, arg_list, kw_list, self.ui_id)
+        pass
 
     def on_outPutLocationButton_clicked(self):
         filename = QtGui.QFileDialog.getExistingDirectory(None, "Select Output Directory", '.')

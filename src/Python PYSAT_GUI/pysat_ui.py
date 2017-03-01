@@ -521,9 +521,10 @@ class pysat_ui(object):
             filename = QtGui.QFileDialog.getSaveFileName(None, "Choose where you want save your file", '.', '(*.wrf)')
             print(filename)
             with open(filename, 'wb') as fp:
-                pickle.dump(self.ui_list, fp)
-                pickle.dump(self.pysat_fun.arg_list, fp)
-                pickle.dump(self.pysat_fun.kw_list, fp)
+                # pickle.dump(self.ui_list, fp)
+                # pickle.dump(self.pysat_fun.arg_list, fp)
+                # pickle.dump(self.pysat_fun.kw_list, fp)
+                pickle.dump(self.pysat_fun.get_list(), fp)
         except:
             print("File not loaded")
             pass
