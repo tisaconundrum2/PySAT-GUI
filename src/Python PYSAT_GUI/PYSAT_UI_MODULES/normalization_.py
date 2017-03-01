@@ -1,6 +1,7 @@
 from PyQt4 import QtCore, QtGui
 
 from PYSAT_UI_MODULES.Error_ import error_print
+from PYSAT_UI_MODULES.del_layout_ import del_layout_
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -48,16 +49,13 @@ except AttributeError:
 
 class normalization_:
     def __init__(self, pysat_fun, verticalLayout_8):
-        self.verticalLayout_8 = verticalLayout_8
-        self.pysat_fun = pysat_fun
-        self.ranges = []
-        self.min_lineEdits = []
-        self.max_lineEdits = []
-        for i in range(1,20):
-            self.ranges.append(Ranges_(pysat_fun, verticalLayout_8))
-
-        self.num = 0
-        self.main()
+        super().__init__()
+        self.box_list = []
+        self.pysat_fun = pysat_fun  # setting up pysat_fun
+        self.verticalLayout_8 = verticalLayout_8  # setting up the vertical Layout
+        self.ranges = [None] * 128  # a list that will hold the order of boxes
+        self.num = 0  # this will keep tabs on how far along we are in list
+        self.main()  # start the main method
 
     def main(self):
         self.pysat_fun.set_fun_list(self.pysat_fun.do_norm)
@@ -69,7 +67,10 @@ class normalization_:
         self.normalization_ui()
         self.pysat_fun.set_greyed_modules(self.normalization, True)
         self.add_ranges_button.clicked.connect(lambda: self.add_ranges())
-        self.finish_button.clicked.connect(lambda: self.del_ranges())
+        self.del_button.clicked.connect(lambda: self.del_ranges())
+
+    def set_normalization_parameters(self):
+        pass
 
     def normalization_ui(self):
         datachoices = self.pysat_fun.datakeys
@@ -111,67 +112,65 @@ class normalization_:
         self.add_ranges_button = QtGui.QPushButton(self.normalization)
         self.add_ranges_button.setObjectName(_fromUtf8("add_ranges_button"))
         self.min_max_horizontalLayout.addWidget(self.add_ranges_button)
-        self.finish_button = QtGui.QPushButton(self.normalization)
-        self.finish_button.setObjectName(_fromUtf8("add_ranges_button_2"))
-        self.min_max_horizontalLayout.addWidget(self.finish_button)
+        self.del_button = QtGui.QPushButton(self.normalization)
+        self.del_button.setObjectName(_fromUtf8("add_ranges_button_2"))
+        self.min_max_horizontalLayout.addWidget(self.del_button)
         self.verticalLayout.addLayout(self.min_max_horizontalLayout)
         self.verticalLayout_8.addWidget(self.normalization)
 
         self.normalization.setTitle(_translate("MainWindow", "Normalization", None))
         self.normalization_choosedata_label.setText(_translate("MainWindow", "Choose data: ", None))
         self.add_ranges_button.setText(_translate("MainWindow", "Add Ranges", None))
-        self.finish_button.setText(_translate("MainWindow", "Delete Ranges", None))
+        self.del_button.setText(_translate("MainWindow", "Delete Ranges", None))
 
-    def finished(self):
+    def finished(self, box_list):
         arg_list = []
-        len_of_lineEdits = len(self.min_lineEdits) + len(self.max_lineEdits)
-        for i in range(len_of_lineEdits):
-            try:
-                if not self.min_lineEdits[i].text() == '' and not self.max_lineEdits[i].text() == '':
-                    small_tuple = (int(self.min_lineEdits[i].text()), int(self.max_lineEdits[i].text()))
-                    arg_list.append(small_tuple)
-            except:
-                pass
-        datakey = self.normalization_choosedata.currentText()
-        # arg_list.append(['known data', [(0, 350), (350, 470), (470, 1000)]])
-        self.pysat_fun.set_arg_list([datakey, arg_list], True)
-        print(self.pysat_fun.arg_list)
+        len_box_list = len(box_list)
+        try:
+            for i in range(0, len_box_list, 2):
+                small_tuple = (int(box_list[i].text()), int(box_list[i + 1].text()))
+                arg_list.append(small_tuple)
+        except Exception as e:
+            print(e)
+        for i in range(len_box_list - 1):
+            self.box_list[i].valueChanged.connect(self.box_list[i + 1].setMinimum)
+        datakey = self.normalization_choosedata.currentText()  #
+        # arg_list.append(['known data', [(0, 350), (350, 470), (470, 1000)]])           #
+        self.pysat_fun.set_arg_list([datakey, arg_list], True)  # add the new data to the argument list
+        print(arg_list)  # print out the data for debugging purposes
 
     def add_ranges(self):
-        pass
+        self.ranges_layout = QtGui.QHBoxLayout()  # setup the ranges_layout, it will be a child of all_ranges_layout
+        self.min_label = QtGui.QLabel()  # setup the min label
+        self.max_label = QtGui.QLabel()  # setup the max label
+        self.min_spinbox = QtGui.QSpinBox()  # setup the min lineEdit
+        self.max_spinbox = QtGui.QSpinBox()  # setup the max lineEdit
+        self.max_spinbox.setMaximum(9999)
+        self.min_spinbox.setMaximum(9999)
+        try:
+            minimum = int(self.box_list[-1].text())  # go to the last item in the list
+            self.max_spinbox.setMinimum(minimum)  # set this as the minimum value
+            self.min_spinbox.setMinimum(minimum)  # set this as the minimum value
+        except:
+            pass
+        self.ranges_layout.addWidget(self.min_label)  # apply the min label to the widget
+        self.ranges_layout.addWidget(self.min_spinbox)  # apply the min lineEdit to the widget
+        self.ranges_layout.addWidget(self.max_label)  # apply the max label
+        self.ranges_layout.addWidget(self.max_spinbox)  # apply the max lineEdit
+        self.min_label.setText(_translate("MainWindow", "Min", None))  # set the text of the min label
+        self.max_label.setText(_translate("MainWindow", "Max", None))  # set the text of the max label
+        self.box_list.append(self.min_spinbox)  # set up an array of lineEdits
+        self.box_list.append(self.max_spinbox)
+        self.all_ranges_layout.addLayout(self.ranges_layout)
+        self.min_spinbox.valueChanged.connect(lambda: self.finished(self.box_list))
+        self.max_spinbox.valueChanged.connect(lambda: self.finished(self.box_list))
 
     def del_ranges(self):
-        pass
-
-
-class Ranges_(normalization_):
-    def __init__(self, pysat_fun, verticalLayout_8):
-        super().__init__(pysat_fun, verticalLayout_8)
-
-    def add_ranges(self):
-        self.ranges_layout = QtGui.QHBoxLayout()                            # setup the ranges_layout, it will be a child of all_ranges_layout
-        self.min_label = QtGui.QLabel(self.normalization)                   # setup the min label
-        self.max_label = QtGui.QLabel(self.normalization)                   # setup the max label
-        self.min_lineEdit = QtGui.QLineEdit(self.normalization)             # setup the min lineEdit
-        self.max_lineEdit = QtGui.QLineEdit(self.normalization)             # setup the max lineEdit
-        self.ranges_layout.addWidget(self.min_label)                        # apply the min label to the widget
-        self.ranges_layout.addWidget(self.min_lineEdit)                     # apply the min lineEdit to the widget
-        self.ranges_layout.addWidget(self.max_label)                        # apply the max label
-        self.ranges_layout.addWidget(self.max_lineEdit)                     # apply the max lineEdit
-        self.min_label.setText(_translate("MainWindow", "Min", None))       # set the text of the min label
-        self.max_label.setText(_translate("MainWindow", "Max", None))       # set the text of the max label
-        self.all_ranges_layout.addLayout(self.ranges_layout)                # make ranges_layout a child of all_ranges_layout
-
-        self.min_lineEdits.append(self.min_lineEdit)                        # set up an array of lineEdits
-        self.max_lineEdits.append(self.max_lineEdit)
-
-    def del_ranges(self):
-        self.min_label.setVisible(False)                                    # remove the min label to the widget
-        self.min_lineEdit.setVisible(False)                                 # remove the min lineEdit to the widget
-        self.max_label.setVisible(False)                                    # remove the max label
-        self.max_lineEdit.setVisible(False)                                 # remove the max lineEdit
-        del self.min_lineEdits[-1]                                          # delete last element
-        del self.max_lineEdits[-1]                                          # delete last element
+        del_layout_(self.all_ranges_layout)
+        del self.box_list[-1]  # delete left box
+        del self.box_list[-1]  # delete right box
+        del self.pysat_fun.fun_list[-1]  # delete a function item
+        self.finished(self.box_list)
 
 
 def make_combobox(choices):
@@ -181,9 +180,9 @@ def make_combobox(choices):
         combo.setItemText(i, _translate('', choice, None))
     return combo
 
+
 def make_listwidget(choices):
     listwidget = QtGui.QListWidget()
-    listwidget.setItemDelegate
     for item in choices:
         item = QtGui.QListWidgetItem(item)
         listwidget.addItem(item)
