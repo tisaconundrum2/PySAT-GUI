@@ -31,22 +31,22 @@
 #     widget.show()
 #
 # sys.exit(app.exec_())
-
-class A:
-    def f(self):
-        print('f')
-
-    def g(self):
-        print('g')
-
-
-a1 = A()
-# a2 = A()
-
-# aList = [a1.f, a2.g]
-aList = [a1.f, a1.g]
-
-print(a1.f in aList)
-print(a1.g in aList)
-# print(a2.f in aList)
-# print(a2.g in aList)
+#
+# class A:
+#     def f(self):
+#         print('f')
+#
+#     def g(self):
+#         print('g')
+#
+#
+# a1 = A()
+# # a2 = A()
+#
+# # aList = [a1.f, a2.g]
+# aList = [a1.f, a1.g]
+#
+# print(a1.f in aList)
+# print(a1.g in aList)
+# # print(a2.f in aList)
+# # print(a2.g in aList)
