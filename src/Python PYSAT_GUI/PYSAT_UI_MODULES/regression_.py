@@ -52,16 +52,17 @@ class regression_:
             modelkey=method
         try:
             if method == 'OLS':
-                params={'fit_intercept':self.reg_widget.ols_intercept_checkbox.isChecked(),'normalize':False,'n_jobs':-1}
+                params={'fit_intercept':self.reg_widget.ols_intercept_checkbox.isChecked()}
+                modelkey=modelkey+str(params)
             if method == 'OMP':
-                params={'fit_intercept':self.reg_widget.omp_intercept_checkbox.isChecked(),'normalize':False,
-                        'n_nonzero_coefs':self.reg_widget.omp_nfeatures.value(),'precompute':'auto'}
-
+                params={'fit_intercept':self.reg_widget.omp_intercept_checkbox.isChecked(),
+                        'n_nonzero_coefs':self.reg_widget.omp_nfeatures.value(),'CV':self.reg_widget.omp_cv_checkbox.isChecked()}
+                modelkey=modelkey+str(params)
             if method == 'Lasso':
                 params={'alpha':self.reg_widget.lasso_alpha.value(),'fit_intercept':self.reg_widget.lasso_intercept_checkbox.isChecked(),
-                        'normalize':False, 'max_iter':self.reg_widget.lasso_max.value(),'tol':self.reg_widget.lasso_tol.value(),
-                        'positive':self.reg_widget.lasso_positive_checkbox.isChecked(),
-                        'precompute':'auto','selection':'random'}
+                        'max_iter':self.reg_widget.lasso_max.value(),'tol':self.reg_widget.lasso_tol.value(),
+                        'positive':self.reg_widget.lasso_positive_checkbox.isChecked(),'selection':'random',
+                        'CV':self.reg_widget.lasso_cv_checkbox.isChecked()}
                 print(params)
             if method == 'Elastic Net':
                 pass
@@ -94,9 +95,10 @@ class regression_:
                           'thetaU': self.reg_widget.gp_thetaU_spin.value()}
 
                 modelkey = modelkey+ str(params)
-            kws = {'modelkey': modelkey}
+
         except:
             pass
+        kws = {'modelkey': modelkey}
         if self.regression_ransac_checkbox.isChecked():
             lossval = self.ransac_widget.ransac_lossfunc_combobox.currentText()
             if lossval == 'Squared Error':
@@ -249,8 +251,16 @@ class regression_:
             self.reg_widget.omp_intercept_checkbox.setText('Fit Intercept')
             self.reg_widget.omp_intercept_checkbox.setChecked(True)
             self.reg_widget.omp_hlayout.addWidget(self.reg_widget.omp_intercept_checkbox)
+
+            self.reg_widget.omp_cv_checkbox=QtGui.QCheckBox(self.reg_widget)
+            self.reg_widget.omp_cv_checkbox.setText('Optimize with Cross Validation? (Ignores # of coeffs)')
+            self.reg_widget.omp_cv_checkbox.setChecked(True)
+            self.reg_widget.omp_hlayout.addWidget(self.reg_widget.omp_cv_checkbox)
+
             self.reg_widget.omp_intercept_checkbox.stateChanged.connect(lambda: self.get_regression_parameters())
+            self.reg_widget.omp_cv_checkbox.stateChanged.connect(lambda: self.get_regression_parameters())
             self.reg_widget.omp_nfeatures.valueChanged.connect(lambda: self.get_regression_parameters())
+
         if alg == 'Lasso':
             self.reg_widget.lasso_vlayout = QtGui.QVBoxLayout(self.reg_widget)
             self.reg_widget.lasso_alpha_hlayout = QtGui.QHBoxLayout(self.reg_widget)
@@ -307,6 +317,12 @@ class regression_:
             self.reg_widget.lasso_positive_checkbox.setChecked(False)
             self.reg_widget.lasso_checkboxes_hlayout.addWidget(self.reg_widget.lasso_positive_checkbox)
 
+            self.reg_widget.lasso_cv_checkbox=QtGui.QCheckBox(self.reg_widget)
+            self.reg_widget.lasso_cv_checkbox.setText('Optimize with Cross Validation? (Ignores alpha)')
+            self.reg_widget.lasso_cv_checkbox.setChecked(True)
+            self.reg_widget.lasso_checkboxes_hlayout.addWidget(self.reg_widget.lasso_cv_checkbox)
+
+
             self.reg_widget.lasso_checkbox_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding,
                                                                   QtGui.QSizePolicy.Minimum)
             self.reg_widget.lasso_checkboxes_hlayout.addItem(self.reg_widget.lasso_checkbox_spacer)
@@ -317,6 +333,7 @@ class regression_:
             self.reg_widget.lasso_tol.valueChanged.connect(lambda: self.get_regression_parameters())
             self.reg_widget.lasso_intercept_checkbox.stateChanged.connect(lambda: self.get_regression_parameters())
             self.reg_widget.lasso_positive_checkbox.stateChanged.connect(lambda: self.get_regression_parameters())
+            self.reg_widget.lasso_cv_checkbox.stateChanged.connect(lambda: self.get_regression_parameters())
 
         if alg == 'Elastic Net':
             pass
@@ -336,7 +353,7 @@ class regression_:
             pass
 
         self.regression_vlayout.addWidget(self.reg_widget)
-
+        self.get_regression_parameters()
     def regression_ui(self):
         self.regression_train = QtGui.QGroupBox()
         font = QtGui.QFont()
@@ -377,6 +394,7 @@ class regression_:
         self.regression_train_choosex_label.setText('X variable:')
         self.regression_choosexvars_vlayout.addWidget(self.regression_train_choosex_label)
         xvarchoices = self.pysat_fun.data[self.regression_choosedata.currentText()].df.columns.levels[0].values
+        xvarchoices = [i for i in xvarchoices if not 'Unnamed' in i]  # remove unnamed columns from choices
         self.regression_train_choosex = make_listwidget(xvarchoices)
         self.regression_train_choosex.setObjectName(_fromUtf8("regression_train_choosex"))
         self.regression_choosexvars_vlayout.addWidget(self.regression_train_choosex)
@@ -388,6 +406,7 @@ class regression_:
         self.regression_train_choosey_label.setText('Y variable:')
         self.regression_chooseyvars_vlayout.addWidget(self.regression_train_choosey_label)
         yvarchoices = self.pysat_fun.data[self.regression_choosedata.currentText()].df['comp'].columns.values
+        yvarchoices = [i for i in yvarchoices if not 'Unnamed' in i]  # remove unnamed columns from choices
         self.regression_train_choosey = make_listwidget(yvarchoices)
         self.regression_chooseyvars_vlayout.addWidget(self.regression_train_choosey)
         self.regression_yvarlimits_hlayout = QtGui.QHBoxLayout()
