@@ -74,10 +74,11 @@ class get_data_u_:
         lineEdit.setText(filename)
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")
+        ui_list = "get_unknown_data"
         fun_list = "get_data"
         kw_list = {}
         arg_list = [filename, key]
-        self.ui_id = self.pysat_fun.set_list(fun_list, arg_list, kw_list, self.ui_id)
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, arg_list, kw_list, self.ui_id)
         pass
 
 
@@ -138,11 +139,12 @@ class get_data_k_:
         lineEdit.setText(filename)
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")
+        ui_list = "get_known_data"
         fun_list = "get_data"
         kw_list = {}
         arg_list = [filename, key]
         # when we call this function we will also set the ui_id
         # this way we can always keep track of the specific ui_id that we are messing with.
-        self.ui_id = self.pysat_fun.set_list(fun_list, arg_list, kw_list, self.ui_id)
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, arg_list, kw_list, self.ui_id)
         pass
 

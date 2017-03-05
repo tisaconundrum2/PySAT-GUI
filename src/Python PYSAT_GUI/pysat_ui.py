@@ -24,6 +24,7 @@ class pysat_ui(object):
     def __init__(self):
         self.pysat_fun = pysat_func()
         self.ui_list = []
+        self.restore_list = None
         self.flag = False
         self.restore_flag = False
 
@@ -464,8 +465,6 @@ class pysat_ui(object):
         # These are the Restore functions
         self.actionOpen_Workflow.triggered.connect(lambda: self.on_load_clicked())
         self.actionSet_output_location.triggered.connect(lambda: self.set_ui_list("file_outpath"))
-        self.actionLoad_Unknown_Data.triggered.connect(lambda: self.set_ui_list("get_unknown_data"))  # unknown data
-        self.actionLoad_reference_Data.triggered.connect(lambda: self.set_ui_list("get_known_data"))  # known data
         self.actionNormalization.triggered.connect(lambda: self.set_ui_list("normalization"))  # submodel
         self.actionApply_Mask.triggered.connect(lambda: self.set_ui_list("do_mask"))  # get_mask
         self.actionRemoveNull.triggered.connect(lambda: self.set_ui_list("do_removenull"))
@@ -521,7 +520,7 @@ class pysat_ui(object):
             filename = QtGui.QFileDialog.getSaveFileName(None, "Choose where you want save your file", '.', '(*.wrf)')
             print(filename)
             with open(filename, 'wb') as fp:
-                # pickle.dump(self.ui_list, fp)
+                pickle.dump(self.ui_list, fp)
                 # pickle.dump(self.pysat_fun.arg_list, fp)
                 # pickle.dump(self.pysat_fun.kw_list, fp)
                 pickle.dump(self.pysat_fun.get_list(), fp)
@@ -535,13 +534,12 @@ class pysat_ui(object):
         try:
             with open(filename, 'rb') as fp:
                 self.ui_list = pickle.load(fp)
-                self.pysat_fun.arg_list = pickle.load(fp)
-                self.pysat_fun.kw_list = pickle.load(fp)
+                # self.pysat_fun.arg_list = pickle.load(fp)
+                # self.pysat_fun.kw_list = pickle.load(fp)
+                self.restore_list = pickle.load(fp)
         except:
             print("File was not loaded")
         print(self.ui_list)
-        print(self.pysat_fun.arg_list)
-        print(self.pysat_fun.kw_list)
         self.restore_first()
 
     # Restore functionality
@@ -552,18 +550,26 @@ class pysat_ui(object):
             self.ui_list.append(ui)
             # print(self.ui_list) debug purposes
 
+    # def restore_first(self):
+    #     # first run a single or double instance of getattr depending on what data is in the queue
+    #     #   We'll need to remember 'i' so we don't accidentally run the instance too many times
+    #     # then press ok
+    #     # then we'll have another loop continue on it's merry way adding everything in.
+    #     self.leftOff = 0
+    #     for i in range(0, len(self.ui_list)):
+    #         if self.ui_list[i] == "get_unknown_data" or self.ui_list[i] == "get_known_data":
+    #             getattr(pysat_ui, self.ui_list[i])(self, i, self.pysat_fun.arg_list[i], self.pysat_fun.kw_list[i])
+    #             self.leftOff += 1
+    #     self.on_okButton_clicked()
+    #     self.pysat_fun.taskFinished.connect(self.restore_rest)
+
     def restore_first(self):
-        # first run a single or double instance of getattr depending on what data is in the queue
-        #   We'll need to remember 'i' so we don't accidentally run the instance too many times
-        # then press ok
-        # then we'll have another loop continue on it's merry way adding everything in.
-        self.leftOff = 0
-        for i in range(0, len(self.ui_list)):
-            if self.ui_list[i] == "get_unknown_data" or self.ui_list[i] == "get_known_data":
-                getattr(pysat_ui, self.ui_list[i])(self, i, self.pysat_fun.arg_list[i], self.pysat_fun.kw_list[i])
-                self.leftOff += 1
-        self.on_okButton_clicked()
-        self.pysat_fun.taskFinished.connect(self.restore_rest)
+        # TODO finish this!
+        r_list = None
+        while not self.restore_list.isEmpty():
+            r_list = self.restore_list.pop()
+            print(r_list)
+            pass
 
     def restore_rest(self):
         if self.restore_flag is False:

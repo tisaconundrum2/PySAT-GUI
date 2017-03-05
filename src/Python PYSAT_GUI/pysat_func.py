@@ -14,7 +14,8 @@ import numpy as np
 class Module:
     nodeCount = 0
 
-    def __init__(self, fun_list, arg_list, kw_list):
+    def __init__(self, ui_list, fun_list, arg_list, kw_list):
+        self.ui_list = ui_list
         self.fun_list = fun_list
         self.arg_list = arg_list
         self.kw_list = kw_list
@@ -22,7 +23,8 @@ class Module:
         self.UI_ID = Module.nodeCount
         Module.nodeCount += 1
 
-    def setData(self, fun_list, arg_list, kw_list):
+    def setData(self, ui_list, fun_list, arg_list, kw_list):
+        self.ui_list = ui_list
         self.fun_list = fun_list
         self.arg_list = arg_list
         self.kw_list = kw_list
@@ -30,9 +32,10 @@ class Module:
     def getID(self):
         return self.UI_ID
 
-    def display(self):
+    def getData(self):
         list = []
         list.append(self.getID())
+        list.append(self.ui_list)
         list.append(self.fun_list)
         list.append(self.arg_list)
         list.append(self.kw_list)
@@ -57,35 +60,38 @@ class listOfModules:
             current = current.getNext()
         return count
 
-    def push(self, fun_list, arg_list, kw_list, UI_ID=None):
-        if not self.amend(fun_list, arg_list, kw_list, UI_ID):
-            temp = Module(fun_list, arg_list, kw_list)
-            temp.setNext(self.head)
-            self.head = temp
+    def push(self, ui_list, fun_list, arg_list, kw_list, UI_ID=None):
+        if not self.amend(ui_list, fun_list, arg_list, kw_list, UI_ID):
+            if len(self) == 0:
+                temp = Module(ui_list, fun_list, arg_list, kw_list)
+                temp.setNext(self.head)
+                self.head = temp
+            else:
+                temp = Module(ui_list, fun_list, arg_list, kw_list)
+                current = self.head
+                while current.getNext() != None:
+                    current = current.getNext()
+                current.setNext(temp)
         return self.head.getID()
 
-    def amend(self, fun_list, arg_list, kw_list, UI_ID=None):
+    def amend(self, ui_list, fun_list, arg_list, kw_list, UI_ID=None):
         current = self.head
         found = False
         while current is not None and not found:
             if current.getID() == UI_ID:
                 found = True
-                current.setData(fun_list, arg_list, kw_list)
+                current.setData(ui_list, fun_list, arg_list, kw_list)
             else:
                 current = current.getNext()
         return found
 
     def pop(self):
         current = self.head
-        previous = None
-        while current.getNext() is not None:
-            previous = current
-            current = current.getNext()
-        if previous is None:
-            self.head = current.getNext()
-        else:
-            previous.setNext(current.getNext())
-            return current.display()
+        self.head = self.head.getNext()
+        return current.getData()
+
+    def isEmpty(self):
+        return self.head == None
 
     def remove(self, UI_ID):
         current = self.head
@@ -105,7 +111,7 @@ class listOfModules:
     def display(self):
         current = self.head
         while current is not None:
-            for items in current.display():
+            for items in current.getData():
                 print(items)
             current = current.getNext()
 
@@ -130,13 +136,16 @@ class pysat_func(QThread):
     Getter and setter functions below
     """
 
-    def set_list(self, fun, arg, kw, ui_id=None):
+    def set_list(self, ui, fun, arg, kw, ui_id=None):
         # pushing new information as well as returning the UI_ID
         # we'll need the UI_ID in order to maintain order and bookkeeping
-        return self._list.push(fun, arg, kw, ui_id)
+        return self._list.push(ui, fun, arg, kw, ui_id)
 
     def get_list(self):
         return self._list
+
+    def display_list(self):
+        return self._list.display
 
     def set_greyed_modules(self, modules):
         self.greyed_modules.append(modules)
@@ -396,6 +405,10 @@ class pysat_func(QThread):
             #     self.fun_list[i](*self.arg_list[i], **self.kw_list[i])
             #     self.greyed_modules[i].setDisabled(True)
             #     self.leftOff = i + 1
+            for i in range(len(self._list)):
+                r_list = self._list.pop()
+                print(r_list)
+                self.greyed_modules[i].setDisabled(True)
             self.taskFinished.emit()
         except Exception as e:
             error_print(e)
