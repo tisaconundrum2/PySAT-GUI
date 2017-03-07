@@ -408,7 +408,9 @@ class pysat_func(QThread):
             for i in range(len(self._list)):
                 r_list = self._list.pop()
                 print(r_list)
-                self.greyed_modules[i].setDisabled(True)
+                getattr(self, r_list[2])(*r_list[3], **r_list[4])
+                self.greyed_modules[0].setDisabled(True)
+                del self.greyed_modules[0]
             self.taskFinished.emit()
         except Exception as e:
             error_print(e)

@@ -25,16 +25,15 @@ class Main(QMainWindow):
         pysat.actionCreate_New_Workflow.triggered.connect(lambda: self.new())  # Create a new window. It will be blank
         # pysat.actionSave_Current_Workflow.triggered.connect(lambda: self.write_settings())
 
-
     def new(self):
         # TODO create a new window to work in. The old window does not disappear
         window = Main(self)
         window.show()
 
-
     def exit(self):
         # TODO close the current window
         self.close()
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

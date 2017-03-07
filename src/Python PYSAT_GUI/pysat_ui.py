@@ -464,7 +464,6 @@ class pysat_ui(object):
 
         # These are the Restore functions
         self.actionOpen_Workflow.triggered.connect(lambda: self.on_load_clicked())
-        self.actionSet_output_location.triggered.connect(lambda: self.set_ui_list("file_outpath"))
         self.actionNormalization.triggered.connect(lambda: self.set_ui_list("normalization"))  # submodel
         self.actionApply_Mask.triggered.connect(lambda: self.set_ui_list("do_mask"))  # get_mask
         self.actionRemoveNull.triggered.connect(lambda: self.set_ui_list("do_removenull"))
@@ -509,7 +508,7 @@ class pysat_ui(object):
 
     def on_okButton_clicked(self):
         if self.flag:
-            self.set_greyed_out_items(False)
+            self.set_greyed_out_items(True)
             self.onStart()
             self.pysat_fun.taskFinished.connect(self.onFinished)
 
@@ -520,9 +519,6 @@ class pysat_ui(object):
             filename = QtGui.QFileDialog.getSaveFileName(None, "Choose where you want save your file", '.', '(*.wrf)')
             print(filename)
             with open(filename, 'wb') as fp:
-                pickle.dump(self.ui_list, fp)
-                # pickle.dump(self.pysat_fun.arg_list, fp)
-                # pickle.dump(self.pysat_fun.kw_list, fp)
                 pickle.dump(self.pysat_fun.get_list(), fp)
         except:
             print("File not loaded")
@@ -533,58 +529,31 @@ class pysat_ui(object):
         print(filename)
         try:
             with open(filename, 'rb') as fp:
-                self.ui_list = pickle.load(fp)
-                # self.pysat_fun.arg_list = pickle.load(fp)
-                # self.pysat_fun.kw_list = pickle.load(fp)
                 self.restore_list = pickle.load(fp)
         except:
-            print("File was not loaded")
-        print(self.ui_list)
+            PYSAT_UI_MODULES.error_print("File was not loaded")
         self.restore_first()
 
-    # Restore functionality
-    def set_ui_list(self, ui, replacelast=False):
-        if replacelast:
-            self.ui_list[-1] = ui
-        else:
-            self.ui_list.append(ui)
-            # print(self.ui_list) debug purposes
-
-    # def restore_first(self):
-    #     # first run a single or double instance of getattr depending on what data is in the queue
-    #     #   We'll need to remember 'i' so we don't accidentally run the instance too many times
-    #     # then press ok
-    #     # then we'll have another loop continue on it's merry way adding everything in.
-    #     self.leftOff = 0
-    #     for i in range(0, len(self.ui_list)):
-    #         if self.ui_list[i] == "get_unknown_data" or self.ui_list[i] == "get_known_data":
-    #             getattr(pysat_ui, self.ui_list[i])(self, i, self.pysat_fun.arg_list[i], self.pysat_fun.kw_list[i])
-    #             self.leftOff += 1
-    #     self.on_okButton_clicked()
-    #     self.pysat_fun.taskFinished.connect(self.restore_rest)
-
     def restore_first(self):
-        # TODO finish this!
-        r_list = None
-        while not self.restore_list.isEmpty():
-            r_list = self.restore_list.pop()
-            print(r_list)
-            pass
+        # first run a single or double instance of getattr depending on what data is in the queue
+        #   We'll need to remember 'i' so we don't accidentally run the instance too many times
+        # then press ok
+        # then we'll have another loop continue on it's merry way adding everything in.
+        self.r_list = self.restore_list.pop()
+        while self.r_list[1] == "get_unknown_data" or self.r_list[1] == "get_known_data":
+            getattr(pysat_ui, self.r_list[1])(self, self.r_list[3], self.r_list[4])
+            print(self.r_list)
+            self.r_list = self.restore_list.pop()
+        self.on_okButton_clicked()
+        self.pysat_fun.taskFinished.connect(self.restore_rest)
 
     def restore_rest(self):
+        getattr(pysat_ui, self.r_list[1])(self, self.r_list[3], self.r_list[4])
         if self.restore_flag is False:
-            for i in range(self.leftOff, len(self.ui_list)):
-                try:
-                    getattr(pysat_ui, self.ui_list[i])(self, self.pysat_fun.arg_list[i], self.pysat_fun.kw_list[i])
-                except:
-                    pass
-            # Get the lengths of the list back on track. They are longer than they are supposed to be
-            while len(self.pysat_fun._list) < len(self.ui_list):  # restore ui_list alignment
-                del self.ui_list[-1]
-            while len(self.pysat_fun._list) < len(self.pysat_fun.arg_list):
-                del self.pysat_fun.arg_list[-1]
-            while len(self.pysat_fun._list) < len(self.pysat_fun.kw_list):
-                del self.pysat_fun.kw_list[-1]
+            for i in range(len(self.restore_list)):
+                self.r_list = self.restore_list.pop()
+                print(self.r_list)
+                getattr(pysat_ui, self.r_list[1])(self, self.r_list[3], self.r_list[4])
             self.restore_flag = True
 
     ################# Progress bar toolset below
