@@ -29,6 +29,8 @@ class sm_:
 
         self.main()
 
+
+
     def get_sm_params(self):
         blendranges = []
         submodel_names = []
@@ -74,6 +76,8 @@ class sm_:
         self.pysat_fun.set_fun_list(self.pysat_fun.do_submodel_predict)
         self.sm_ui()
         self.pysat_fun.set_greyed_modules(self.submodel_predict, True)  # set the module grey after use.
+
+
 
     def sm_ui(self):
 
@@ -233,7 +237,7 @@ class sm_:
 
         # connect the low and high models so spinbox ranges are updated
         self.choose_low_model.currentIndexChanged.connect(
-            lambda: self.set_ranges(self.choose_low_model.currentText(), maxspin=self.low_model_max))
+            lambda: self.set_ranges(self.choose_low_model.currentText(),maxspin=self.low_model_max))
         self.choose_high_model.currentIndexChanged.connect(
             lambda: self.set_ranges(self.choose_high_model.currentText(), minspin=self.high_model_min))
 
@@ -283,6 +287,7 @@ class sm_:
         submodel_hlayout.addWidget(submodel_max)
         spacerItem2 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         submodel_hlayout.addItem(spacerItem2)
+
 
         submodel_min_label.setText(_translate("MainWindow", "Min: ", None))
         submodel_max_label.setText(_translate("MainWindow", "Max: ", None))
@@ -344,3 +349,5 @@ class sm_:
             minspin.setValue(range[0])
         if maxspin:
             maxspin.setValue(range[1])
+
+

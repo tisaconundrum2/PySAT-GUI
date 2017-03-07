@@ -31,8 +31,7 @@ class get_data_u_:
         self.pysat_fun.set_greyed_modules(self.get_data_u)
         try:
             self.get_data_u_button.clicked.connect(
-                lambda: self.on_getDataButton_clicked(self.get_data_u_line_edit,
-                                                      "unknown"))  # when a button is clicked call the on_getDataButton_clicked function
+                lambda: self.on_getDataButton_clicked(self.get_data_u_line_edit, "unknown"))  # when a button is clicked call the on_getDataButton_clicked function
         except:
             pass
 

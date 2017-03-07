@@ -193,7 +193,7 @@ class pysat_func(QThread):
         except Exception as e:
             error_print(e)
 
-    def do_pca(self, datakey, nc, col, load_fit):
+    def do_pca(self, datakey, nc, col, load_fit=None):
         print(self.data[datakey].df.columns.levels[0])
         try:
             self.data[datakey].pca(col, nc=nc, load_fit=load_fit)
@@ -395,12 +395,8 @@ class pysat_func(QThread):
     def run(self):
         # TODO this function will take all the enumerated functions and parameters and run them
         try:
-            #################################################### Begin Printing out debugging information
             print(self._list.display())
             print("")
-
-            #################################################### Endof Printing out debugging information
-
             # for i in range(self.leftOff, self.fun_list.size()):
             #     self.fun_list[i](*self.arg_list[i], **self.kw_list[i])
             #     self.greyed_modules[i].setDisabled(True)

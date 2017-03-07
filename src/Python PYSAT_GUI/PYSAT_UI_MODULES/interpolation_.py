@@ -32,6 +32,7 @@ class interpolation_:
         self.interpolation_choosedata_2.currentIndexChanged.connect(lambda: self.get_parameters())
 
     def interpolation_ui(self):
+        # TODO have the comboboxes called
         datachoices = self.pysat_fun.datakeys
         if datachoices == []:
             error_print('No Data has been loaded')

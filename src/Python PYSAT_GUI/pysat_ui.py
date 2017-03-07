@@ -92,6 +92,8 @@ class pysat_ui(object):
         self.ok.addWidget(self.okButton)
         self.verticalLayout_9.addWidget(self.OK)
 
+
+
         MainWindow.setCentralWidget(self.centralWidget)
         self.mainToolBar = QtGui.QToolBar(MainWindow)
         self.mainToolBar.setObjectName(_fromUtf8("mainToolBar"))

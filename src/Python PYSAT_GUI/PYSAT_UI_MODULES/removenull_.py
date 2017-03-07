@@ -79,6 +79,7 @@ class removenull_:
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.removenull_choosedata_hlayout.addItem(spacerItem)
 
+
         self.removenull_vlayout.addLayout(self.removenull_choosedata_hlayout)
         self.removenull_widget = QtGui.QWidget(self.removenull)
         self.removenull_widget.setMinimumSize(QtCore.QSize(0, 0))

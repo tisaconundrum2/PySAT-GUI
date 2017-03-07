@@ -251,12 +251,14 @@ class plot_:
         self.legend_hlayout.setObjectName(_fromUtf8("legend_hlayout"))
         self.legend_label = QtGui.QLabel(self.plot)
         self.legend_label.setObjectName(_fromUtf8("legend_label"))
+        self.legend_label.setText('Legend label: ')
         self.legend_hlayout.addWidget(self.legend_label)
         self.legend_label_text = QtGui.QLineEdit(self.plot)
         self.legend_label_text.setObjectName(_fromUtf8("legend_label_text"))
         self.legend_hlayout.addWidget(self.legend_label_text)
         self.onetoone = QtGui.QCheckBox(self.plot)
         self.onetoone.setObjectName(_fromUtf8("onetoone"))
+        self.onetoone.setText('One to One')
         self.legend_hlayout.addWidget(self.onetoone)
         self.verticalLayout.addLayout(self.legend_hlayout)
         spacerItem3 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
@@ -375,7 +377,14 @@ class plot_:
             self.vars_level1 = self.pysat_fun.data[self.scatter_choosedata.currentText()].df.columns.get_level_values(1)
             self.vars_level1 = list(self.vars_level1[self.vars_level0 != 'wvl'])
             self.vars_level0 = list(self.vars_level0[self.vars_level0 != 'wvl'])
-
+            try:
+                self.vars_level0 = [i for i in self.vars_level0 if not 'Unnamed' in i]  # remove unnamed columns from choices
+            except:
+                pass
+            try:
+                self.vars_level1 = [i for i in self.vars_level1 if not 'Unnamed' in i]  # remove unnamed columns from choices
+            except:
+                pass
             choices = self.vars_level1
 
             for i in choices:

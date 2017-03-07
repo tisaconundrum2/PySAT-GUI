@@ -51,6 +51,36 @@ class regression_:
         except:
             modelkey = method
         try:
+            if method == 'OLS':
+                params={'fit_intercept':self.reg_widget.ols_intercept_checkbox.isChecked()}
+                modelkey=modelkey+str(params)
+            if method == 'OMP':
+                params={'fit_intercept':self.reg_widget.omp_intercept_checkbox.isChecked(),
+                        'n_nonzero_coefs':self.reg_widget.omp_nfeatures.value(),'CV':self.reg_widget.omp_cv_checkbox.isChecked()}
+                modelkey=modelkey+str(params)
+            if method == 'Lasso':
+                params={'alpha':self.reg_widget.lasso_alpha.value(),'fit_intercept':self.reg_widget.lasso_intercept_checkbox.isChecked(),
+                        'max_iter':self.reg_widget.lasso_max.value(),'tol':self.reg_widget.lasso_tol.value(),
+                        'positive':self.reg_widget.lasso_positive_checkbox.isChecked(),'selection':'random',
+                        'CV':self.reg_widget.lasso_cv_checkbox.isChecked()}
+                print(params)
+            if method == 'Elastic Net':
+                pass
+            if method == 'Ridge':
+                pass
+            if method == 'Bayesian Ridge':
+                pass
+            if method == 'ARD':
+                pass
+            if method == 'LARS':
+                pass
+            if method == 'Lasso LARS':
+                pass
+            if method == 'SVR':
+                pass
+            if method == 'KRR':
+                pass
+
             if method == 'PLS':
                 params = {'n_components': self.reg_widget.pls_nc_spinbox.value(),
                           'scale': False}
@@ -64,10 +94,11 @@ class regression_:
                           'thetaL': self.reg_widget.gp_thetaL_spin.value(),
                           'thetaU': self.reg_widget.gp_thetaU_spin.value()}
 
-                modelkey = modelkey + str(params)
-                kws = {'modelkey': modelkey}
+                modelkey = modelkey+ str(params)
+
         except:
             pass
+        kws = {'modelkey': modelkey}
         if self.regression_ransac_checkbox.isChecked():
             lossval = self.ransac_widget.ransac_lossfunc_combobox.currentText()
             if lossval == 'Squared Error':
@@ -197,9 +228,135 @@ class regression_:
             self.reg_widget.gp_theta0_spin.valueChanged.connect(lambda: self.get_regression_parameters())
             self.reg_widget.gp_thetaL_spin.valueChanged.connect(lambda: self.get_regression_parameters())
             self.reg_widget.gp_thetaU_spin.valueChanged.connect(lambda: self.get_regression_parameters())
+        elif alg == 'OLS':
+            self.reg_widget.ols_hlayout = QtGui.QHBoxLayout(self.reg_widget)
+            self.reg_widget.ols_intercept_checkbox = QtGui.QCheckBox(self.reg_widget)
+            self.reg_widget.ols_intercept_checkbox.setText('Fit Intercept')
+            self.reg_widget.ols_intercept_checkbox.setChecked(True)
+            self.reg_widget.ols_hlayout.addWidget(self.reg_widget.ols_intercept_checkbox)
+            self.reg_widget.ols_intercept_checkbox.stateChanged.connect(lambda: self.get_regression_parameters())
+
+        elif alg == 'OMP':
+            self.reg_widget.omp_hlayout = QtGui.QHBoxLayout(self.reg_widget)
+            self.reg_widget.omp_label=QtGui.QLabel(self.reg_widget)
+            self.reg_widget.omp_label.setText('# of nonzero coefficients:')
+            self.reg_widget.omp_hlayout.addWidget(self.reg_widget.omp_label)
+            self.reg_widget.omp_nfeatures=QtGui.QSpinBox(self.reg_widget)
+            self.reg_widget.omp_nfeatures.setMaximum(9999)
+            try:
+                xvars = [str(x.text()) for x in self.regression_train_choosex.selectedItems()]
+                nfeatures_default=0.1*self.pysat_fun.data[self.regression_choosedata.currentText()].df[xvars].columns.levels[1].size
+                self.reg_widget.omp_nfeatures.setValue(nfeatures_default)
+            except:
+                self.reg_widget.omp_nfeatures.setValue(10)
+            self.reg_widget.omp_hlayout.addWidget(self.reg_widget.omp_nfeatures)
+            self.reg_widget.omp_intercept_checkbox = QtGui.QCheckBox(self.reg_widget)
+            self.reg_widget.omp_intercept_checkbox.setText('Fit Intercept')
+            self.reg_widget.omp_intercept_checkbox.setChecked(True)
+            self.reg_widget.omp_hlayout.addWidget(self.reg_widget.omp_intercept_checkbox)
+
+            self.reg_widget.omp_cv_checkbox=QtGui.QCheckBox(self.reg_widget)
+            self.reg_widget.omp_cv_checkbox.setText('Optimize with Cross Validation? (Ignores # of coeffs)')
+            self.reg_widget.omp_cv_checkbox.setChecked(True)
+            self.reg_widget.omp_hlayout.addWidget(self.reg_widget.omp_cv_checkbox)
+
+            self.reg_widget.omp_intercept_checkbox.stateChanged.connect(lambda: self.get_regression_parameters())
+            self.reg_widget.omp_cv_checkbox.stateChanged.connect(lambda: self.get_regression_parameters())
+            self.reg_widget.omp_nfeatures.valueChanged.connect(lambda: self.get_regression_parameters())
+
+        elif alg == 'Lasso':
+            self.reg_widget.lasso_vlayout = QtGui.QVBoxLayout(self.reg_widget)
+            self.reg_widget.lasso_alpha_hlayout = QtGui.QHBoxLayout(self.reg_widget)
+            self.reg_widget.lasso_iter_hlayout = QtGui.QHBoxLayout(self.reg_widget)
+            self.reg_widget.lasso_checkboxes_hlayout = QtGui.QHBoxLayout(self.reg_widget)
+
+            self.reg_widget.lasso_alphalabel = QtGui.QLabel(self.reg_widget)
+            self.reg_widget.lasso_alphalabel.setText('Alpha:')
+            self.reg_widget.lasso_alpha_hlayout.addWidget(self.reg_widget.lasso_alphalabel)
+
+            self.reg_widget.lasso_alpha = QtGui.QDoubleSpinBox(self.reg_widget)
+            self.reg_widget.lasso_alpha.setMaximum(1000)
+            self.reg_widget.lasso_alpha.setMinimum(0.0001)
+            self.reg_widget.lasso_alpha.setValue(1.0)
+            self.reg_widget.lasso_alpha_hlayout.addWidget(self.reg_widget.lasso_alpha)
+
+            self.reg_widget.lasso_alpha_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+            self.reg_widget.lasso_alpha_hlayout.addItem(self.reg_widget.lasso_alpha_spacer)
+            self.reg_widget.lasso_vlayout.addItem(self.reg_widget.lasso_alpha_hlayout)
+
+            self.reg_widget.lasso_maxlabel = QtGui.QLabel(self.reg_widget)
+            self.reg_widget.lasso_maxlabel.setText('Max # of iterations:')
+            self.reg_widget.lasso_iter_hlayout.addWidget(self.reg_widget.lasso_maxlabel)
+
+            self.reg_widget.lasso_max = QtGui.QSpinBox(self.reg_widget)
+            self.reg_widget.lasso_max.setMaximum(100000)
+            self.reg_widget.lasso_max.setMinimum(1)
+            self.reg_widget.lasso_max.setValue(1000)
+            self.reg_widget.lasso_iter_hlayout.addWidget(self.reg_widget.lasso_max)
+
+            self.reg_widget.lasso_tollabel = QtGui.QLabel(self.reg_widget)
+            self.reg_widget.lasso_tollabel.setText('Tolerance:')
+            self.reg_widget.lasso_iter_hlayout.addWidget(self.reg_widget.lasso_tollabel)
+
+            self.reg_widget.lasso_tol = QtGui.QDoubleSpinBox(self.reg_widget)
+            self.reg_widget.lasso_tol.setMaximum(1000)
+            self.reg_widget.lasso_tol.setMinimum(0.0000001)
+            self.reg_widget.lasso_tol.setDecimals(5)
+            self.reg_widget.lasso_tol.setValue(0.0001)
+            self.reg_widget.lasso_iter_hlayout.addWidget(self.reg_widget.lasso_tol)
+
+
+            self.reg_widget.lasso_iter_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+            self.reg_widget.lasso_iter_hlayout.addItem(self.reg_widget.lasso_iter_spacer)
+            self.reg_widget.lasso_vlayout.addItem(self.reg_widget.lasso_iter_hlayout)
+
+            self.reg_widget.lasso_intercept_checkbox = QtGui.QCheckBox(self.reg_widget)
+            self.reg_widget.lasso_intercept_checkbox.setText('Fit Intercept')
+            self.reg_widget.lasso_intercept_checkbox.setChecked(True)
+            self.reg_widget.lasso_checkboxes_hlayout.addWidget(self.reg_widget.lasso_intercept_checkbox)
+
+            self.reg_widget.lasso_positive_checkbox = QtGui.QCheckBox(self.reg_widget)
+            self.reg_widget.lasso_positive_checkbox.setText('Force positive coefficients')
+            self.reg_widget.lasso_positive_checkbox.setChecked(False)
+            self.reg_widget.lasso_checkboxes_hlayout.addWidget(self.reg_widget.lasso_positive_checkbox)
+
+            self.reg_widget.lasso_cv_checkbox=QtGui.QCheckBox(self.reg_widget)
+            self.reg_widget.lasso_cv_checkbox.setText('Optimize with Cross Validation? (Ignores alpha)')
+            self.reg_widget.lasso_cv_checkbox.setChecked(True)
+            self.reg_widget.lasso_checkboxes_hlayout.addWidget(self.reg_widget.lasso_cv_checkbox)
+
+
+            self.reg_widget.lasso_checkbox_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding,
+                                                                  QtGui.QSizePolicy.Minimum)
+            self.reg_widget.lasso_checkboxes_hlayout.addItem(self.reg_widget.lasso_checkbox_spacer)
+            self.reg_widget.lasso_vlayout.addItem(self.reg_widget.lasso_checkboxes_hlayout)
+
+            self.reg_widget.lasso_alpha.valueChanged.connect(lambda: self.get_regression_parameters())
+            self.reg_widget.lasso_max.valueChanged.connect(lambda: self.get_regression_parameters())
+            self.reg_widget.lasso_tol.valueChanged.connect(lambda: self.get_regression_parameters())
+            self.reg_widget.lasso_intercept_checkbox.stateChanged.connect(lambda: self.get_regression_parameters())
+            self.reg_widget.lasso_positive_checkbox.stateChanged.connect(lambda: self.get_regression_parameters())
+            self.reg_widget.lasso_cv_checkbox.stateChanged.connect(lambda: self.get_regression_parameters())
+
+        if alg == 'Elastic Net':
+            pass
+        if alg == 'Ridge':
+            pass
+        if alg == 'Bayesian Ridge':
+            pass
+        if alg == 'ARD':
+            pass
+        if alg == 'LARS':
+            pass
+        if alg == 'Lasso LARS':
+            pass
+        if alg == 'SVR':
+            pass
+        if alg == 'KRR':
+            pass
 
         self.regression_vlayout.addWidget(self.reg_widget)
-
+        self.get_regression_parameters()
     def regression_ui(self):
         self.regression_train = QtGui.QGroupBox()
         font = QtGui.QFont()
@@ -240,6 +397,7 @@ class regression_:
         self.regression_train_choosex_label.setText('X variable:')
         self.regression_choosexvars_vlayout.addWidget(self.regression_train_choosex_label)
         xvarchoices = self.pysat_fun.data[self.regression_choosedata.currentText()].df.columns.levels[0].values
+        xvarchoices = [i for i in xvarchoices if not 'Unnamed' in i]  # remove unnamed columns from choices
         self.regression_train_choosex = make_listwidget(xvarchoices)
         self.regression_train_choosex.setObjectName(_fromUtf8("regression_train_choosex"))
         self.regression_choosexvars_vlayout.addWidget(self.regression_train_choosex)
@@ -250,6 +408,7 @@ class regression_:
         self.regression_train_choosey_label.setText('Y variable:')
         self.regression_chooseyvars_vlayout.addWidget(self.regression_train_choosey_label)
         yvarchoices = self.pysat_fun.data[self.regression_choosedata.currentText()].df['comp'].columns.values
+        yvarchoices = [i for i in yvarchoices if not 'Unnamed' in i]  # remove unnamed columns from choices
         self.regression_train_choosey = make_listwidget(yvarchoices)
         self.regression_chooseyvars_vlayout.addWidget(self.regression_train_choosey)
         self.regression_yvarlimits_hlayout = QtGui.QHBoxLayout()
@@ -292,7 +451,7 @@ class regression_:
         self.regression_choosealg_label = QtGui.QLabel(self.regression_train)
         self.regression_choosealg_label.setObjectName(_fromUtf8("regression_choosealg_label"))
         self.regression_choosealg_hlayout.addWidget(self.regression_choosealg_label)
-        self.regression_alg_choices = ['Choose an algorithm', 'PLS', 'GP', 'More to come...']
+        self.regression_alg_choices = ['Choose an algorithm', 'PLS', 'GP', 'OLS','OMP','Lasso','More to come...']
         self.regression_choosealg = make_combobox(self.regression_alg_choices)
         self.regression_choosealg.setIconSize(QtCore.QSize(50, 20))
         self.regression_choosealg.setObjectName(_fromUtf8("regression_choosealg"))
@@ -312,9 +471,7 @@ class regression_:
         self.regression_train_choosey.currentItemChanged.connect(lambda: self.get_regression_parameters())
         self.yvarmin_spin.valueChanged.connect(lambda: self.get_regression_parameters())
         self.yvarmax_spin.valueChanged.connect(lambda: self.get_regression_parameters())
-        self.regression_choosedata.activated[int].connect(
-            lambda: self.regression_change_vars(self.regression_train_choosey))
-
+        self.regression_choosedata.activated[int].connect(lambda: self.regression_change_vars(self.regression_train_choosey))
     def regression_change_vars(self, obj):
         obj.clear()
         choices = self.pysat_fun.data[self.regression_choosedata.currentText()].df[['comp']].columns.values
