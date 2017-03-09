@@ -15,19 +15,16 @@ except AttributeError:
 
 class interpolation_:
     def __init__(self, pysat_fun, verticalLayout_8, arg_list, kw_list):
+        self.pysat_fun = pysat_fun
         self.verticalLayout_8 = verticalLayout_8
         self.arg_list = arg_list
         self.kw_list = kw_list
-        self.pysat_fun = pysat_fun
+        self.ui_id = None
         self.main()
 
     def main(self):
-        self.pysat_fun.set_fun_list(self.pysat_fun.do_interp)
-        self.pysat_fun.set_arg_list([])
-        self.pysat_fun.set_kw_list({})
-        self.pysat_fun.set_greyed_modules({})
         self.interpolation_ui()
-        self.pysat_fun.set_greyed_modules(self.Interpolation, True)
+        self.pysat_fun.set_greyed_modules(self.Interpolation)
         self.interpoliation_choosedata.currentIndexChanged.connect(lambda: self.get_parameters())
         self.interpolation_choosedata_2.currentIndexChanged.connect(lambda: self.get_parameters())
 
@@ -96,5 +93,9 @@ class interpolation_:
         # arg_list.append(['unknown data','known data'])
         args = [key1, key2]
         kws = {}
-        self.pysat_fun.set_arg_list(args, replacelast=True)
-        self.pysat_fun.set_kw_list(kws, replacelast=True)
+        self.push_parameters(args, kws)
+
+    def push_parameters(self, arg_list, kw_list):
+        ui_list = "do_interp"
+        fun_list = "do_interp"
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, arg_list, kw_list, self.ui_id)

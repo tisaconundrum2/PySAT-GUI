@@ -1,5 +1,5 @@
 from PyQt4 import QtCore, QtGui
-
+from PYSAT_UI_MODULES import make_combobox
 from PYSAT_UI_MODULES.Error_ import error_print
 from PYSAT_UI_MODULES.del_layout_ import del_layout_
 
@@ -48,29 +48,22 @@ except AttributeError:
 # it's position is data[1], max_lineEdit, and it's value is 1000
 
 class normalization_:
-    def __init__(self, pysat_fun, verticalLayout_8):
-        super().__init__()
+    def __init__(self, pysat_fun, verticalLayout_8, arg_list, kw_list):
         self.box_list = []
-        self.pysat_fun = pysat_fun  # setting up pysat_fun
-        self.verticalLayout_8 = verticalLayout_8  # setting up the vertical Layout
-        self.ranges = [None] * 128  # a list that will hold the order of boxes
-        self.num = 0  # this will keep tabs on how far along we are in list
-        self.main()  # start the main method
+        self.pysat_fun = pysat_fun
+        self.verticalLayout_8 = verticalLayout_8
+        self.arg_list = arg_list
+        self.kw_list = kw_list
+        self.ui_id = None
+        self.main()
 
     def main(self):
-        self.pysat_fun.set_fun_list(self.pysat_fun.do_norm)
-        self.pysat_fun.set_arg_list({})
-        self.pysat_fun.set_kw_list({})
-        self.pysat_fun.set_greyed_modules({})
         # driver function, calls UI and set's up connections
         # add function list calls here
         self.normalization_ui()
-        self.pysat_fun.set_greyed_modules(self.normalization, True)
+        self.pysat_fun.set_greyed_modules(self.normalization)
         self.add_ranges_button.clicked.connect(lambda: self.add_ranges())
         self.del_button.clicked.connect(lambda: self.del_ranges())
-
-    def set_normalization_parameters(self):
-        pass
 
     def normalization_ui(self):
         datachoices = self.pysat_fun.datakeys
@@ -123,22 +116,6 @@ class normalization_:
         self.add_ranges_button.setText(_translate("MainWindow", "Add Ranges", None))
         self.del_button.setText(_translate("MainWindow", "Delete Ranges", None))
 
-    def finished(self, box_list):
-        arg_list = []
-        len_box_list = len(box_list)
-        try:
-            for i in range(0, len_box_list, 2):
-                small_tuple = (int(box_list[i].text()), int(box_list[i + 1].text()))
-                arg_list.append(small_tuple)
-        except Exception as e:
-            print(e)
-        for i in range(len_box_list - 1):
-            self.box_list[i].valueChanged.connect(self.box_list[i + 1].setMinimum)
-        datakey = self.normalization_choosedata.currentText()  #
-        # arg_list.append(['known data', [(0, 350), (350, 470), (470, 1000)]])           #
-        self.pysat_fun.set_arg_list([datakey, arg_list], True)  # add the new data to the argument list
-        print(arg_list)  # print out the data for debugging purposes
-
     def add_ranges(self):
         self.ranges_layout = QtGui.QHBoxLayout()  # setup the ranges_layout, it will be a child of all_ranges_layout
         self.min_label = QtGui.QLabel()  # setup the min label
@@ -169,21 +146,32 @@ class normalization_:
         del_layout_(self.all_ranges_layout)
         del self.box_list[-1]  # delete left box
         del self.box_list[-1]  # delete right box
-        del self.pysat_fun.fun_list[-1]  # delete a function item
         self.finished(self.box_list)
 
+    def set_data_parameters(self):
+        # TODO finish
+        if self.arg_list is None:
+            self.get_data_line_edit.setText(_translate("MainWindow", "*.csv", None))
+        else:
+            # the 0'th element has the name of the file that we want to work with.
+            self.get_data_line_edit.setText(self.arg_list[0])
+            self.push_parameters(self.arg_list, self.kw_list)
 
-def make_combobox(choices):
-    combo = QtGui.QComboBox()
-    for i, choice in enumerate(choices):
-        combo.addItem(_fromUtf8(""))
-        combo.setItemText(i, _translate('', choice, None))
-    return combo
+    def push_parameters(self, arg_list, kw_list):
+        ui_list = "normalization"
+        fun_list = "do_norm"
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, arg_list, kw_list, self.ui_id)
+        pass
 
-
-def make_listwidget(choices):
-    listwidget = QtGui.QListWidget()
-    for item in choices:
-        item = QtGui.QListWidgetItem(item)
-        listwidget.addItem(item)
-    return listwidget
+    def finished(self, box_list):
+        arg_list = []
+        len_box_list = len(box_list)
+        try:
+            for i in range(0, len_box_list, 2):
+                arg_list.append((int(box_list[i].text()), int(box_list[i + 1].text())))
+            for i in range(len_box_list - 1):
+                self.box_list[i].valueChanged.connect(self.box_list[i + 1].setMinimum)
+        except Exception as e:
+            error_print(e)
+        datakey = self.normalization_choosedata.currentText()
+        self.push_parameters([datakey, arg_list], {})

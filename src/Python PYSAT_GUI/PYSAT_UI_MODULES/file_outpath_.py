@@ -57,9 +57,9 @@ class file_outpath_:
     def set_parameters(self):
         if self.arg_list is not None:
             self.file_out_path_line_edit.setText(self.arg_list[0])
-            self.get_parameters()
+            self.push_parameters()
 
-    def get_parameters(self):
+    def push_parameters(self):
         filename = self.file_out_path_line_edit.text()
         ui_list = "file_outpath"
         fun_list = "set_file_outpath"
@@ -73,4 +73,4 @@ class file_outpath_:
         self.file_out_path_line_edit.setText(filename)
         if self.file_out_path_line_edit.text() == "":
             self.file_out_path_line_edit.setText("*/")
-        self.get_parameters()
+        self.push_parameters()

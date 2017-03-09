@@ -51,6 +51,7 @@ class Module:
 class listOfModules:
     def __init__(self):
         self.head = None
+        self.curr_count = 0
 
     def __len__(self):
         current = self.head
@@ -61,23 +62,27 @@ class listOfModules:
         return count
 
     def push(self, ui_list, fun_list, arg_list, kw_list, UI_ID=None):
-        if not self.amend(ui_list, fun_list, arg_list, kw_list, UI_ID):
+        if not self.amend(ui_list, fun_list, arg_list, kw_list, UI_ID): # if the UI_ID that we are playing with exists, amend it, otherwise make something new
             if len(self) == 0:
-                temp = Module(ui_list, fun_list, arg_list, kw_list)
-                temp.setNext(self.head)
-                self.head = temp
+                # Create a new head
+                temp = Module(ui_list, fun_list, arg_list, kw_list)     # self.head = None; temp = 0x085817F0
+                temp.setNext(self.head)                                 # temp = 0x085817F0; temp.next = None
+                self.head = temp                                        # self.head = 0x085817F0; self.head.next = None; temp = 0x085817F0; temp.next = None
+                return temp.getID()
             else:
-                temp = Module(ui_list, fun_list, arg_list, kw_list)
-                current = self.head
-                while current.getNext() != None:
-                    current = current.getNext()
-                current.setNext(temp)
-        return self.head.getID()
+                # Append new data into .next
+                temp = Module(ui_list, fun_list, arg_list, kw_list)     # self.head = 0x085817F0; temp = 0x00568330
+                current = self.head                                     # current = 0x085817F0; current.next = None; self.head = 0x085817F0; temp = 0x00568330
+                while current.getNext() != None:                        #
+                    current = current.getNext()                         #
+                current.setNext(temp)                                   # current = 0x085817F0; current.next = 0x00568330;
+                return temp.getID()
+        return UI_ID
 
     def amend(self, ui_list, fun_list, arg_list, kw_list, UI_ID=None):
         current = self.head
         found = False
-        while current is not None and not found:
+        while current is not None and not found and UI_ID is not None:
             if current.getID() == UI_ID:
                 found = True
                 current.setData(ui_list, fun_list, arg_list, kw_list)
@@ -86,8 +91,12 @@ class listOfModules:
         return found
 
     def pop(self):
+        i = 0
         current = self.head
-        self.head = self.head.getNext()
+        while i < self.curr_count and current.getNext() is not None:
+            current = current.getNext()
+            i += 1
+        self.curr_count += 1
         return current.getData()
 
     def isEmpty(self):
@@ -121,7 +130,6 @@ class pysat_func(QThread):
 
     def __init__(self):
         QThread.__init__(self)
-        self.leftOff = 0
         self.data = {}  # initialize with an empty dict to hold data frames
         self.datakeys = []
         self.models = {}
@@ -395,13 +403,7 @@ class pysat_func(QThread):
     def run(self):
         # TODO this function will take all the enumerated functions and parameters and run them
         try:
-            print(self._list.display())
-            print("")
-            # for i in range(self.leftOff, self.fun_list.size()):
-            #     self.fun_list[i](*self.arg_list[i], **self.kw_list[i])
-            #     self.greyed_modules[i].setDisabled(True)
-            #     self.leftOff = i + 1
-            for i in range(len(self._list)):
+            for i in range(len(self.greyed_modules)):
                 r_list = self._list.pop()
                 print(r_list)
                 getattr(self, r_list[2])(*r_list[3], **r_list[4])

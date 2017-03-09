@@ -458,6 +458,8 @@ class pysat_ui(object):
         self.actionCross_Validation.triggered.connect(lambda: pysat_ui.do_cv(self))
         self.actionSubmodelPredict.triggered.connect(lambda: pysat_ui.do_submodel_predict(self))
         # Taking out menu items that don't have working UI modules yet. We don't want to delete them, so we'll make them disappear.
+        self.actionOpen_Workflow.triggered.connect(lambda: self.on_load_clicked())
+        self.actionSave_Current_Workflow.triggered.connect(lambda: self.on_save_clicked())
         self.set_greyed_out_items(True)
         self.set_visible_items()
 
@@ -465,18 +467,13 @@ class pysat_ui(object):
         # self.scrollArea.findChildren().triggered.connect(self.scrollArea.verticalScrollBar().setValue(self.scrollArea.verticalScrollBar().value()+10))
 
         # These are the Restore functions
-        self.actionOpen_Workflow.triggered.connect(lambda: self.on_load_clicked())
-        self.actionNormalization.triggered.connect(lambda: self.set_ui_list("normalization"))  # submodel
-        self.actionApply_Mask.triggered.connect(lambda: self.set_ui_list("do_mask"))  # get_mask
         self.actionRemoveNull.triggered.connect(lambda: self.set_ui_list("do_removenull"))
         self.actionStratified_Folds.triggered.connect(lambda: self.set_ui_list("do_strat_folds"))  # strat folds
         self.actionTrain.triggered.connect(lambda: self.set_ui_list("do_regression_train"))  # regression train
         self.actionPredict.triggered.connect(lambda: self.set_ui_list("do_regression_predict"))  # regression predict
-        self.actionInterpolate.triggered.connect(lambda: self.set_ui_list("do_interp"))
         self.actionPlot.triggered.connect(lambda: self.set_ui_list("do_plot"))
         self.actionCross_Validation.triggered.connect(lambda: self.set_ui_list("do_cv"))
         self.actionSubmodelPredict.triggered.connect(lambda: self.set_ui_list("do_submodel_predict"))
-        self.actionSave_Current_Workflow.triggered.connect(lambda: self.on_save_clicked())
 
     def set_greyed_out_items(self, bool):
         self.actionTrain.setDisabled(bool)
@@ -510,7 +507,7 @@ class pysat_ui(object):
 
     def on_okButton_clicked(self):
         if self.flag:
-            self.set_greyed_out_items(True)
+            self.set_greyed_out_items(False)
             self.onStart()
             self.pysat_fun.taskFinished.connect(self.onFinished)
 
@@ -541,13 +538,16 @@ class pysat_ui(object):
         #   We'll need to remember 'i' so we don't accidentally run the instance too many times
         # then press ok
         # then we'll have another loop continue on it's merry way adding everything in.
-        self.r_list = self.restore_list.pop()
-        while self.r_list[1] == "get_unknown_data" or self.r_list[1] == "get_known_data":
-            getattr(pysat_ui, self.r_list[1])(self, self.r_list[3], self.r_list[4])
-            print(self.r_list)
+        try:
             self.r_list = self.restore_list.pop()
-        self.on_okButton_clicked()
-        self.pysat_fun.taskFinished.connect(self.restore_rest)
+            while self.r_list[1] == "get_unknown_data" or self.r_list[1] == "get_known_data":
+                getattr(pysat_ui, self.r_list[1])(self, self.r_list[3], self.r_list[4])
+                print(self.r_list)
+                self.r_list = self.restore_list.pop()
+            self.on_okButton_clicked()
+            self.pysat_fun.taskFinished.connect(self.restore_rest)
+        except:
+            pass
 
     def restore_rest(self):
         getattr(pysat_ui, self.r_list[1])(self, self.r_list[3], self.r_list[4])
