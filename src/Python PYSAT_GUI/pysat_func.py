@@ -47,7 +47,6 @@ class Module:
     def getNext(self):
         return self.next
 
-
 class listOfModules:
     def __init__(self):
         self.head = None
@@ -91,6 +90,11 @@ class listOfModules:
         return found
 
     def pop(self):
+        current = self.head
+        self.head = self.head.getNext()
+        return current.getData()
+
+    def pull(self):
         i = 0
         current = self.head
         while i < self.curr_count and current.getNext() is not None:
@@ -123,7 +127,6 @@ class listOfModules:
             for items in current.getData():
                 print(items)
             current = current.getNext()
-
 
 class pysat_func(QThread):
     taskFinished = QtCore.pyqtSignal()
@@ -404,7 +407,7 @@ class pysat_func(QThread):
         # TODO this function will take all the enumerated functions and parameters and run them
         try:
             for i in range(len(self.greyed_modules)):
-                r_list = self._list.pop()
+                r_list = self._list.pull()
                 print(r_list)
                 getattr(self, r_list[2])(*r_list[3], **r_list[4])
                 self.greyed_modules[0].setDisabled(True)

@@ -468,12 +468,10 @@ class pysat_ui(object):
 
         # These are the Restore functions
         self.actionRemoveNull.triggered.connect(lambda: self.set_ui_list("do_removenull"))
-        self.actionStratified_Folds.triggered.connect(lambda: self.set_ui_list("do_strat_folds"))  # strat folds
         self.actionTrain.triggered.connect(lambda: self.set_ui_list("do_regression_train"))  # regression train
         self.actionPredict.triggered.connect(lambda: self.set_ui_list("do_regression_predict"))  # regression predict
         self.actionPlot.triggered.connect(lambda: self.set_ui_list("do_plot"))
         self.actionCross_Validation.triggered.connect(lambda: self.set_ui_list("do_cv"))
-        self.actionSubmodelPredict.triggered.connect(lambda: self.set_ui_list("do_submodel_predict"))
 
     def set_greyed_out_items(self, bool):
         self.actionTrain.setDisabled(bool)
@@ -521,7 +519,6 @@ class pysat_ui(object):
                 pickle.dump(self.pysat_fun.get_list(), fp)
         except:
             print("File not loaded")
-            pass
 
     def on_load_clicked(self):
         filename = QtGui.QFileDialog.getOpenFileName(None, "Open Workflow File", '.', "(*.wrf)")
@@ -546,12 +543,12 @@ class pysat_ui(object):
                 self.r_list = self.restore_list.pop()
             self.on_okButton_clicked()
             self.pysat_fun.taskFinished.connect(self.restore_rest)
-        except:
-            pass
+        except Exception as e:
+            print(e)
 
     def restore_rest(self):
-        getattr(pysat_ui, self.r_list[1])(self, self.r_list[3], self.r_list[4])
         if self.restore_flag is False:
+            getattr(pysat_ui, self.r_list[1])(self, self.r_list[3], self.r_list[4])
             for i in range(len(self.restore_list)):
                 self.r_list = self.restore_list.pop()
                 print(self.r_list)

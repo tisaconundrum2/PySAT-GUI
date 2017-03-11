@@ -25,17 +25,14 @@ class strat_folds_:
         self.arg_list = arg_list
         self.kw_list = kw_list
         self.verticalLayout_8 = verticalLayout_8
+        self.ui_id = None
         self.main()
 
     def main(self):
         # TODO add function param call here
 
-        self.pysat_fun.set_fun_list(self.pysat_fun.do_strat_folds)
-        self.pysat_fun.set_arg_list([])
-        self.pysat_fun.set_kw_list({})
-        self.pysat_fun.set_greyed_modules({})
         self.stratified_folds_ui()
-        self.pysat_fun.set_greyed_modules(self.strat_folds, True)
+        self.pysat_fun.set_greyed_modules(self.strat_folds)
 
         # TODO add try and except here
 
@@ -56,8 +53,9 @@ class strat_folds_:
         colname = ('comp', self.strat_folds_choose_var.currentText())
         args = [datakey, nfolds, testfold, colname]
         kws = {}
-        self.pysat_fun.set_arg_list(args, replacelast=True)
-        self.pysat_fun.set_kw_list(kws, replacelast=True)
+        ui_list = "do_strat_folds"
+        fun_list = "do_strat_folds"
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
 
     def stratified_folds_ui(self):
         self.strat_folds = QtGui.QGroupBox()

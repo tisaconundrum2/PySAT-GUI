@@ -20,18 +20,19 @@ except AttributeError:
 
 
 class sm_:
-    def __init__(self, pysat_fun, verticalLayout_8):
+    def __init__(self, pysat_fun, verticalLayout_8, arg_list, kw_list):
         self.submodel_gui_info = []
         self.new_submodel_index = 1
         self.pysat_fun = pysat_fun
-
+        self.arg_list = arg_list
+        self.kw_list = kw_list
         self.verticalLayout_8 = verticalLayout_8
 
         self.main()
 
-
-
     def get_sm_params(self):
+        ui_list = "do_submodel_predict"
+        fun_list = "do_submodel_predict"
         blendranges = []
         submodel_names = []
         kws = {}
@@ -61,6 +62,7 @@ class sm_:
             trueval_data = None
 
         args = [datakey, submodel_names, blendranges, trueval_data]
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
         self.pysat_fun.set_arg_list(args, replacelast=True)
         self.pysat_fun.set_kw_list(kws, replacelast=True)
 
@@ -70,14 +72,8 @@ class sm_:
     def main(self):
         # driver function, calls UI and set's up connections
         # add function list calls here
-        self.pysat_fun.set_arg_list([])  # prepping list
-        self.pysat_fun.set_kw_list({})
-        self.pysat_fun.set_greyed_modules({})
-        self.pysat_fun.set_fun_list(self.pysat_fun.do_submodel_predict)
         self.sm_ui()
-        self.pysat_fun.set_greyed_modules(self.submodel_predict, True)  # set the module grey after use.
-
-
+        self.pysat_fun.set_greyed_modules(self.submodel_predict)  # set the module grey after use.
 
     def sm_ui(self):
 
@@ -237,7 +233,7 @@ class sm_:
 
         # connect the low and high models so spinbox ranges are updated
         self.choose_low_model.currentIndexChanged.connect(
-            lambda: self.set_ranges(self.choose_low_model.currentText(),maxspin=self.low_model_max))
+            lambda: self.set_ranges(self.choose_low_model.currentText(), maxspin=self.low_model_max))
         self.choose_high_model.currentIndexChanged.connect(
             lambda: self.set_ranges(self.choose_high_model.currentText(), minspin=self.high_model_min))
 
@@ -287,7 +283,6 @@ class sm_:
         submodel_hlayout.addWidget(submodel_max)
         spacerItem2 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         submodel_hlayout.addItem(spacerItem2)
-
 
         submodel_min_label.setText(_translate("MainWindow", "Min: ", None))
         submodel_max_label.setText(_translate("MainWindow", "Max: ", None))
@@ -344,10 +339,11 @@ class sm_:
         self.get_sm_params()
 
     def set_ranges(self, model, minspin=None, maxspin=None):
-        range = self.pysat_fun.models[model].yrange
-        if minspin:
-            minspin.setValue(range[0])
-        if maxspin:
-            maxspin.setValue(range[1])
-
-
+        try:
+            range = self.pysat_fun.models[model].yrange
+            if minspin:
+                minspin.setValue(range[0])
+            if maxspin:
+                maxspin.setValue(range[1])
+        except:
+            pass
