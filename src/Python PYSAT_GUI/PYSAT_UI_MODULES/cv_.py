@@ -37,6 +37,7 @@ class cv_:
         datakey=self.cv_choosedata.currentText()
         xvars=[str(x.text()) for x in self.cv_train_choosex.selectedItems()]
         yvars=[('comp',str(y.text())) for y in self.cv_train_choosey.selectedItems()]
+        yrange = [self.yvarmin_spin.value(), self.yvarmax_spin.value()]
         params={}
         kws={}        
         try:
@@ -65,7 +66,7 @@ class cv_:
             pass
 
         
-        args=[datakey,xvars,yvars,method,params]
+        args=[datakey,xvars,yvars,yrange,method,params]
         self.pysat_fun.set_arg_list(args,replacelast=True)
         self.pysat_fun.set_kw_list(kws,replacelast=True)
         
@@ -179,23 +180,54 @@ class cv_:
         # choose variables
         self.cv_choosevars_hlayout = QtGui.QHBoxLayout()
         self.cv_choosevars_hlayout.setObjectName(_fromUtf8("cv_choosevars_hlayout"))
+        self.cv_choosexvars_vlayout = QtGui.QVBoxLayout()
+        self.cv_chooseyvars_vlayout = QtGui.QVBoxLayout()
+        self.cv_choosevars_hlayout.addLayout(self.cv_choosexvars_vlayout)
+        self.cv_choosevars_hlayout.addLayout(self.cv_chooseyvars_vlayout)
+
+        #choose x variables
         self.cv_train_choosex_label = QtGui.QLabel(self.cv_train)
         self.cv_train_choosex_label.setObjectName(_fromUtf8("cv_train_choosex_label"))
-        self.cv_choosevars_hlayout.addWidget(self.cv_train_choosex_label)
-
+        self.cv_train_choosex_label.setText('X variable:')
+        self.cv_choosexvars_vlayout.addWidget(self.cv_train_choosex_label)
         xvarchoices = self.pysat_fun.data[self.cv_choosedata.currentText()].df.columns.levels[0].values
+        xvarchoices = [i for i in xvarchoices if not 'Unnamed' in i]  # remove unnamed columns from choices
         self.cv_train_choosex = make_listwidget(xvarchoices)
         self.cv_train_choosex.setObjectName(_fromUtf8("cv_train_choosex"))
-        self.cv_choosevars_hlayout.addWidget(self.cv_train_choosex)
+        self.cv_choosexvars_vlayout.addWidget(self.cv_train_choosex)
+
+        #choose y variables
         self.cv_train_choosey_label = QtGui.QLabel(self.cv_train)
         self.cv_train_choosey_label.setObjectName(_fromUtf8("cv_train_choosey_label"))
-        self.cv_choosevars_hlayout.addWidget(self.cv_train_choosey_label)
-        try:
-            yvarchoices = self.pysat_fun.data[self.cv_choosedata.currentText()].df['comp'].columns.values
-        except:
-            yvarchoices=['No valid options']
+        self.cv_train_choosey_label.setText('Y variable:')
+        self.cv_chooseyvars_vlayout.addWidget(self.cv_train_choosey_label)
+        yvarchoices = self.pysat_fun.data[self.cv_choosedata.currentText()].df['comp'].columns.values
+        yvarchoices = [i for i in yvarchoices if not 'Unnamed' in i]  # remove unnamed columns from choices
         self.cv_train_choosey = make_listwidget(yvarchoices)
-        self.cv_choosevars_hlayout.addWidget(self.cv_train_choosey)
+        self.cv_chooseyvars_vlayout.addWidget(self.cv_train_choosey)
+
+        #set limits
+        self.cv_yvarlimits_hlayout = QtGui.QHBoxLayout()
+        self.yvarmin_label = QtGui.QLabel(self.cv_train)
+        self.yvarmin_label.setText('Min:')
+        self.cv_yvarlimits_hlayout.addWidget(self.yvarmin_label)
+        self.yvarmin_spin = QtGui.QDoubleSpinBox()
+        self.yvarmin_spin.setMaximum(99999)
+        self.yvarmin_spin.setMinimum(0)
+        self.cv_yvarlimits_hlayout.addWidget(self.yvarmin_label)
+        self.cv_yvarlimits_hlayout.addWidget(self.yvarmin_spin)
+
+        self.yvarmax_label = QtGui.QLabel(self.cv_train)
+        self.yvarmax_label.setText('Max:')
+        self.cv_yvarlimits_hlayout.addWidget(self.yvarmax_label)
+        self.yvarmax_spin = QtGui.QDoubleSpinBox()
+        self.yvarmax_spin.setMaximum(99999)
+        self.yvarmax_spin.setMinimum(0)
+        self.yvarmax_spin.setValue(100)
+        self.cv_yvarlimits_hlayout.addWidget(self.yvarmax_label)
+        self.cv_yvarlimits_hlayout.addWidget(self.yvarmax_spin)
+        self.cv_chooseyvars_vlayout.addLayout(self.cv_yvarlimits_hlayout)
+
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.cv_choosevars_hlayout.addItem(spacerItem1)
         self.cv_vlayout.addLayout(self.cv_choosevars_hlayout)
