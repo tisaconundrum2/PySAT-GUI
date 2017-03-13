@@ -393,6 +393,9 @@ class pysat_ui(object):
     def get_known_data(self):
         self.flag = PYSAT_UI_MODULES.get_data_k_(self.pysat_fun, self.verticalLayout_8)
 
+    def save_data(self):
+        self.flag = PYSAT_UI_MODULES.write_data_(self.pysat_fun,self.verticalLayout_8)
+
     def do_mask(self):
         PYSAT_UI_MODULES.get_mask_(self.pysat_fun, self.verticalLayout_8)
 
@@ -437,6 +440,7 @@ class pysat_ui(object):
         self.actionSet_output_location.triggered.connect(lambda: pysat_ui.file_outpath(self))  # output location
         self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.get_unknown_data(self))  # unknown data
         self.actionLoad_reference_Data.triggered.connect(lambda: pysat_ui.get_known_data(self))  # known data
+        self.actionSave_Current_Data.triggered.connect(lambda: pysat_ui.save_data(self))
         self.actionNormalization.triggered.connect(lambda: pysat_ui.normalization(self))  # submodel
         self.actionApply_Mask.triggered.connect(lambda: pysat_ui.do_mask(self))  # get_mask
         self.actionRemoveNull.triggered.connect(lambda: pysat_ui.do_removenull(self))

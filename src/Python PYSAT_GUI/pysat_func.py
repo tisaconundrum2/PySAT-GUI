@@ -88,6 +88,15 @@ class pysat_func(QThread):
         except Exception as e:
             error_print('Problem reading data: {}'.format(e))
 
+    def do_write_data(self, filename,datakey):
+        try:
+            self.data[datakey].to_csv(filename)
+        except:
+            try:
+                self.data[datakey].df.to_csv(self.outpath+'/'+filename)
+            except:
+                self.data[datakey].df.to_csv(filename)
+
     def removenull(self,datakey,colname):
         try:
             print(self.data[datakey].df.shape)
@@ -259,7 +268,7 @@ class pysat_func(QThread):
                                              ytitle=ytitle, title=title,
                                              lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
                                              annot_mask=annot_mask, cmap=cmap,
-                                             colortitle=colortitle, loadfig=loadfig)
+                                             colortitle=colortitle, loadfig=loadfig,marker=marker,linestyle=linestyle)
         except Exception as e:
             error_print(e)
             # dealing with the a possibly missing outpath
@@ -268,7 +277,7 @@ class pysat_func(QThread):
                                            ytitle=ytitle, title=title,
                                            lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
                                            annot_mask=annot_mask, cmap=cmap,
-                                           colortitle=colortitle, loadfig=loadfig)
+                                           colortitle=colortitle, loadfig=loadfig,marker=marker,linestyle=linestyle)
 
     def do_pca_ica_plot(self, datakey,
                         x_component,
@@ -289,7 +298,7 @@ class pysat_func(QThread):
         for i in range(self.leftOff, len(self.fun_list)):
             print(self.fun_list[i])
             self.fun_list[i](*self.arg_list[i], **self.kw_list[i])
-            self.greyed_modules[i].setDisabled(True)
+#            self.greyed_modules[i].setDisabled(True)
             self.leftOff = i + 1
 
         self.taskFinished.emit()
