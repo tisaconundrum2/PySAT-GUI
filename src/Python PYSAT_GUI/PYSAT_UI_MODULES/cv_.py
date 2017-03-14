@@ -26,9 +26,7 @@ class cv_:
         self.main()
 
     def main(self):
-        self.pysat_fun.set_fun_list(self.pysat_fun.do_cv_train)
-        self.pysat_fun.set_arg_list([])
-        self.pysat_fun.set_kw_list({})
+        self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
         self.cv_ui()
         self.cv_choosealg.currentIndexChanged.connect(lambda: self.make_reg_widget(self.cv_choosealg.currentText()))
          

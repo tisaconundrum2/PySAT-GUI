@@ -27,6 +27,7 @@ class get_data_u_:
         self.main()
 
     def main(self):
+        self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
         self.get_data_ui()  # initiate the UI
         self.pysat_fun.set_greyed_modules(self.get_data)
         try:
@@ -93,6 +94,7 @@ class get_data_k_:
         self.main()
 
     def main(self):
+        self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
         self.get_data_ui()  # initiate the UI
         self.pysat_fun.set_greyed_modules(self.get_data)
         try:

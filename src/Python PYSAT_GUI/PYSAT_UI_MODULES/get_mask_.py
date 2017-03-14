@@ -28,6 +28,7 @@ class get_mask_:
         self.main()
 
     def main(self):
+        self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
         self.get_mask_ui()
         self.pysat_fun.set_greyed_modules(self.get_mask)
 

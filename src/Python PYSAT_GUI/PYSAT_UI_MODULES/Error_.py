@@ -30,7 +30,10 @@ class error_print(QDialog):
         """
         super().__init__()
         self.message = message
-        self.error_print(self.message)
+        try:
+            self.error_print(self.message)
+        except:
+            print(self.message)
 
     def error_print(self, message):
         print(message)

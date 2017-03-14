@@ -60,6 +60,7 @@ class normalization_:
     def main(self):
         # driver function, calls UI and set's up connections
         # add function list calls here
+        self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
         self.normalization_ui()
         self.pysat_fun.set_greyed_modules(self.normalization)
         self.add_ranges_button.clicked.connect(lambda: self.add_ranges())
@@ -150,9 +151,8 @@ class normalization_:
 
     def set_data_parameters(self):
         # TODO finish
-        if self.arg_list is None:
-            self.get_data_line_edit.setText(_translate("MainWindow", "*.csv", None))
-        else:
+        if self.arg_list is not None:
+            self.normalization_choosedata.findText(str(self.arg_list[0]))
             # the 0'th element has the name of the file that we want to work with.
             self.get_data_line_edit.setText(self.arg_list[0])
             self.push_parameters(self.arg_list, self.kw_list)

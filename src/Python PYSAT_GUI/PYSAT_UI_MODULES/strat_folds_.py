@@ -30,7 +30,7 @@ class strat_folds_:
 
     def main(self):
         # TODO add function param call here
-
+        self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
         self.stratified_folds_ui()
         self.pysat_fun.set_greyed_modules(self.strat_folds)
 
@@ -122,8 +122,18 @@ class strat_folds_:
         self.set_strat_fold_params()
 
     def set_strat_fold_params(self):
+        # self.strat_folds_choose_data.setItemText()
         if self.arg_list is not None:
-            pass
+            datakey = self.arg_list[0]
+            nfolds = self.arg_list[1]
+            testfold = self.arg_list[2]
+            colname = self.arg_list[3][1]
+            self.strat_folds_choose_data.setCurrentIndex(self.strat_folds_choose_data.findText(datakey))
+            self.strat_folds_choose_var.setCurrentIndex(self.strat_folds_choose_var.findText(colname))
+            self.nfolds_spin.setValue(nfolds)
+            self.get_strat_fold_params()
+            self.choose_test_fold.setCurrentIndex(self.choose_test_fold.findText(str(testfold)))
+            self.get_strat_fold_params()
 
     def strat_fold_change_vars(self):
         self.strat_folds_choose_var.clear()

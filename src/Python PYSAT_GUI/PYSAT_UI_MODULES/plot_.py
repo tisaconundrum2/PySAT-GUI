@@ -27,12 +27,9 @@ class plot_:
         self.main()
 
     def main(self):
-        self.pysat_fun.set_fun_list(self.pysat_fun.do_plot)
-        self.pysat_fun.set_arg_list([])
-        self.pysat_fun.set_kw_list({})
-        self.pysat_fun.set_greyed_modules({})
+        self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
         self.plot_ui()
-        self.pysat_fun.set_greyed_modules(self.plot, True)
+        self.pysat_fun.set_greyed_modules(self.plot)
 
     def get_plot_parameters(self):
         datakey = self.scatter_choosedata.currentText()

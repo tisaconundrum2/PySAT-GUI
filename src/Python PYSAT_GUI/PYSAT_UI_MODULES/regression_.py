@@ -26,12 +26,9 @@ class regression_:
         self.main()
 
     def main(self):
-        self.pysat_fun.set_fun_list(self.pysat_fun.do_regression_train)  # setting up the regression function
-        self.pysat_fun.set_arg_list([])  # prepping list
-        self.pysat_fun.set_kw_list({})  # prepping list
-        self.pysat_fun.set_greyed_modules({})  # prepping list
+        self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
         self.regression_ui()  # start the regression UI. create our submodule
-        self.pysat_fun.set_greyed_modules(self.regression_train, True)  # set the module grey after use.
+        self.pysat_fun.set_greyed_modules(self.regression_train)  # set the module grey after use.
         self.regression_ransac_checkbox.toggled.connect(  #
             lambda: self.make_ransac_widget(self.regression_ransac_checkbox.isChecked()))  #
         self.regression_choosealg.currentIndexChanged.connect(  #

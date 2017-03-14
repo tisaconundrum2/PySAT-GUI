@@ -72,6 +72,7 @@ class sm_:
     def main(self):
         # driver function, calls UI and set's up connections
         # add function list calls here
+        self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
         self.sm_ui()
         self.pysat_fun.set_greyed_modules(self.submodel_predict)  # set the module grey after use.
 

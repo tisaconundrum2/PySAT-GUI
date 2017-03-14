@@ -19,6 +19,7 @@ class file_outpath_:
         self.main()
 
     def main(self):
+        self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
         self.file_outpath_ui()
         self.pysat_fun.set_greyed_modules(self.file_out_path)
         try:
