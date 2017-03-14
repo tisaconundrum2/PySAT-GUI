@@ -181,7 +181,16 @@ class pysat_func(QThread):
         except Exception as e:
             error_print('Problem reading data: {}'.format(e))
 
-    def removenull(self, datakey, colname):
+    def do_write_data(self, filename,datakey):
+        try:
+            self.data[datakey].to_csv(filename)
+        except:
+            try:
+                self.data[datakey].df.to_csv(self.outpath+'/'+filename)
+            except:
+                self.data[datakey].df.to_csv(filename)
+
+    def removenull(self,datakey,colname):
         try:
             print(self.data[datakey].df.shape)
             self.data[datakey] = spectral_data(self.data[datakey].df.ix[-self.data[datakey].df[colname].isnull()])
@@ -266,12 +275,12 @@ class pysat_func(QThread):
         except Exception as e:
             error_print(e)
 
-    def do_cv_train(self, datakey, xvars, yvars, method, params):
+    def do_cv_train(self, datakey, xvars, yvars, yrange, method, params):
 
         try:
-            cv_obj = cv.cv(params)
-            self.data[datakey].df, self.cv_results = cv_obj.do_cv(self.data[datakey].df, xcols=xvars, ycol=yvars)
-            self.data['CV Results'] = self.cv_results
+            cv_obj=cv.cv(params)
+            self.data[datakey].df,self.cv_results=cv_obj.do_cv(self.data[datakey].df,xcols=xvars,ycol=yvars,yrange=yrange,method=method)
+            self.data['CV Results']=self.cv_results
 
         except Exception as e:
             error_print(e)
@@ -348,10 +357,10 @@ class pysat_func(QThread):
             # Alpha is missing, fix this!
             outpath = self.outpath
             self.figs[figname] = make_plot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
-                                           ytitle=ytitle, title=title,
-                                           lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
-                                           annot_mask=annot_mask, cmap=cmap,
-                                           colortitle=colortitle, loadfig=loadfig)
+                                             ytitle=ytitle, title=title,
+                                             lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
+                                             annot_mask=annot_mask, cmap=cmap,
+                                             colortitle=colortitle, loadfig=loadfig,marker=marker,linestyle=linestyle)
         except Exception as e:
             error_print(e)
             # dealing with the a possibly missing outpath
@@ -360,7 +369,7 @@ class pysat_func(QThread):
                                            ytitle=ytitle, title=title,
                                            lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
                                            annot_mask=annot_mask, cmap=cmap,
-                                           colortitle=colortitle, loadfig=loadfig)
+                                           colortitle=colortitle, loadfig=loadfig,marker=marker,linestyle=linestyle)
 
     def do_pca_ica_plot(self, datakey,
                         x_component,

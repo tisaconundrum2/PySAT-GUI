@@ -414,7 +414,7 @@ class regression_:
         self.regression_yvarlimits_hlayout.addWidget(self.yvarmin_label)
         self.yvarmin_spin = QtGui.QDoubleSpinBox()
         # TODO: eventually we may want the ability to handle values outside 0-100 for regressions not dealing with wt.%
-        self.yvarmin_spin.setMaximum(100)
+        self.yvarmin_spin.setMaximum(99999)
         self.yvarmin_spin.setMinimum(0)
         self.regression_yvarlimits_hlayout.addWidget(self.yvarmin_label)
         self.regression_yvarlimits_hlayout.addWidget(self.yvarmin_spin)
@@ -423,7 +423,7 @@ class regression_:
         self.yvarmax_label.setText('Max:')
         self.regression_yvarlimits_hlayout.addWidget(self.yvarmax_label)
         self.yvarmax_spin = QtGui.QDoubleSpinBox()
-        self.yvarmax_spin.setMaximum(100)
+        self.yvarmax_spin.setMaximum(99999)
         self.yvarmax_spin.setMinimum(0)
         self.yvarmax_spin.setValue(100)
         self.regression_yvarlimits_hlayout.addWidget(self.yvarmax_label)
