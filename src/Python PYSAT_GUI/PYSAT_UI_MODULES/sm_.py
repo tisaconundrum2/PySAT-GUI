@@ -26,6 +26,7 @@ class sm_:
         self.pysat_fun = pysat_fun
         self.arg_list = arg_list
         self.kw_list = kw_list
+        self.ui_id = None
         self.verticalLayout_8 = verticalLayout_8
 
         self.main()

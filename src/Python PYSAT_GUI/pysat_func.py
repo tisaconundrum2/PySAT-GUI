@@ -94,6 +94,16 @@ class listOfModules:
         self.head = self.head.getNext()
         return current.getData()
 
+    def del_module(self):
+        current = self.head
+        if len(self) == 1:
+            self.head = None
+            return 1
+        while current.getNext().getNext() is not None:
+            current = current.getNext()
+        current.setNext(None)
+        return 1
+
     def pull(self):
         i = 0
         current = self.head
@@ -387,30 +397,9 @@ class pysat_func(QThread):
 
     def del_layout(self):
         # Deleting a whole lotta lists... >_<
-        try:
-            del self.pysat_ui.ui_list
-        except:
-            pass
-        try:
-            del_qwidget_(self.greyed_modules[-1])
-        except:
-            pass
-        try:
-            del self.greyed_modules[-1]
-        except:
-            pass
-        try:
-            del self._list[-1]
-        except:
-            pass
-        try:
-            del self.kw_list[-1]
-        except:
-            pass
-        try:
-            del self.arg_list[-1]
-        except:
-            pass
+        del_qwidget_(self.greyed_modules[-1])
+        del self.greyed_modules[-1]
+        self._list.del_module()
 
     def run(self):
         # TODO this function will take all the enumerated functions and parameters and run them

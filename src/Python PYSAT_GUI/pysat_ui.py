@@ -474,7 +474,7 @@ class pysat_ui(object):
         self.actionRemoveNull.triggered.connect(lambda: self.set_ui_list("do_removenull"))
         self.actionTrain.triggered.connect(lambda: self.set_ui_list("do_regression_train"))  # regression train
         self.actionPredict.triggered.connect(lambda: self.set_ui_list("do_regression_predict"))  # regression predict
-        self.actionPlot.triggered.connect(lambda: self.set_ui_list("do_plot"))
+        # self.actionPlot.triggered.connect(lambda: self.set_ui_list("do_plot"))
         self.actionCross_Validation.triggered.connect(lambda: self.set_ui_list("do_cv"))
 
     def set_greyed_out_items(self, bool):

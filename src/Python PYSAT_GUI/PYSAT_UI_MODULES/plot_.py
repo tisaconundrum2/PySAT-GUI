@@ -21,9 +21,10 @@ except AttributeError:
 
 
 class plot_:
-    def __init__(self, pysat_fun, verticalLayout_8):
+    def __init__(self, pysat_fun, verticalLayout_8, arg_list, kw_list):
         self.pysat_fun = pysat_fun
         self.verticalLayout_8 = verticalLayout_8
+        self.ui_id = None
         self.main()
 
     def main(self):
