@@ -417,7 +417,7 @@ class pysat_ui(object):
         PYSAT_UI_MODULES.strat_folds_(self.pysat_fun, self.verticalLayout_8, arg_list, kw_list)
 
     def do_regression_train(self, arg_list=None, kw_list=None):
-        PYSAT_UI_MODULES.regression_(self.pysat_fun, self.verticalLayout_8, arg_list, kw_list)
+        PYSAT_UI_MODULES.regression_train_(self.pysat_fun, self.verticalLayout_8, arg_list, kw_list)
 
     def do_regression_predict(self, arg_list=None, kw_list=None):
         PYSAT_UI_MODULES.regression_predict_(self.pysat_fun, self.verticalLayout_8, arg_list, kw_list)

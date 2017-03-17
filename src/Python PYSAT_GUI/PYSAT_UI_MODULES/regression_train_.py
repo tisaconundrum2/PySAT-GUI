@@ -18,7 +18,7 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-class regression_:
+class regression_train_:
     def __init__(self, pysat_fun, verticalLayout_8, arg_list, kw_list):
         self.arg_list = arg_list
         self.kw_list = kw_list
