@@ -158,8 +158,16 @@ class pysat_func(QThread):
     """
 
     def set_list(self, ui, fun, arg, kw, ui_id=None):
-        # pushing new information as well as returning the UI_ID
-        # we'll need the UI_ID in order to maintain order and bookkeeping
+        """
+        pushing new information as well as returning the UI_ID
+        we'll need the UI_ID in order to maintain order and bookkeeping
+        :param ui:
+        :param fun:
+        :param arg:
+        :param kw:
+        :param ui_id:
+        :return:
+        """
         return self._list.push(ui, fun, arg, kw, ui_id)
 
     def get_list(self):
@@ -397,9 +405,12 @@ class pysat_func(QThread):
 
     def del_layout(self):
         # Deleting a whole lotta lists... >_<
-        del_qwidget_(self.greyed_modules[-1])
-        del self.greyed_modules[-1]
-        self._list.del_module()
+        try:
+            del_qwidget_(self.greyed_modules[-1])
+            del self.greyed_modules[-1]
+            self._list.del_module()
+        except:
+            error_print("Cannot delete")
 
     def run(self):
         # TODO this function will take all the enumerated functions and parameters and run them

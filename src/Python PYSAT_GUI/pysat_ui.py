@@ -472,7 +472,6 @@ class pysat_ui(object):
 
         # These are the Restore functions
         self.actionRemoveNull.triggered.connect(lambda: self.set_ui_list("do_removenull"))
-        self.actionTrain.triggered.connect(lambda: self.set_ui_list("do_regression_train"))  # regression train
         self.actionPredict.triggered.connect(lambda: self.set_ui_list("do_regression_predict"))  # regression predict
         # self.actionPlot.triggered.connect(lambda: self.set_ui_list("do_plot"))
         self.actionCross_Validation.triggered.connect(lambda: self.set_ui_list("do_cv"))

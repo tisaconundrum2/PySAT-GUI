@@ -64,11 +64,14 @@ class sm_:
 
         args = [datakey, submodel_names, blendranges, trueval_data]
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
-        self.pysat_fun.set_arg_list(args, replacelast=True)
-        self.pysat_fun.set_kw_list(kws, replacelast=True)
 
     def set_sm_params(self):
-        pass
+        datakey = self.arg_list[0]
+        submodel_names = self.arg_list[1]
+        blendranges = self.arg_list[2]
+        trueval_data = self.arg_list[3]
+        self.choosedata_predict.currentIndex(self.choosedata_predict.findText(str(datakey)))
+
 
     def main(self):
         # driver function, calls UI and set's up connections

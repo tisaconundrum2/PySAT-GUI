@@ -1,6 +1,6 @@
+from PYSAT_UI_MODULES import make_combobox, make_listwidget
 from PYSAT_UI_MODULES.Error_ import error_print
 from PyQt4 import QtCore, QtGui
-import inspect
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -18,10 +18,12 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-
 class regression_:
-    def __init__(self, pysat_fun, verticalLayout_8):
+    def __init__(self, pysat_fun, verticalLayout_8, arg_list, kw_list):
+        self.arg_list = arg_list
+        self.kw_list = kw_list
         self.pysat_fun = pysat_fun
+        self.ui_id = None
         self.verticalLayout_8 = verticalLayout_8
         self.main()
 
@@ -49,17 +51,19 @@ class regression_:
             modelkey = method
         try:
             if method == 'OLS':
-                params={'fit_intercept':self.reg_widget.ols_intercept_checkbox.isChecked()}
-                modelkey=modelkey+str(params)
+                params = {'fit_intercept': self.reg_widget.ols_intercept_checkbox.isChecked()}
+                modelkey = modelkey + str(params)
             if method == 'OMP':
-                params={'fit_intercept':self.reg_widget.omp_intercept_checkbox.isChecked(),
-                        'n_nonzero_coefs':self.reg_widget.omp_nfeatures.value(),'CV':self.reg_widget.omp_cv_checkbox.isChecked()}
-                modelkey=modelkey+str(params)
+                params = {'fit_intercept': self.reg_widget.omp_intercept_checkbox.isChecked(),
+                          'n_nonzero_coefs': self.reg_widget.omp_nfeatures.value(),
+                          'CV': self.reg_widget.omp_cv_checkbox.isChecked()}
+                modelkey = modelkey + str(params)
             if method == 'Lasso':
-                params={'alpha':self.reg_widget.lasso_alpha.value(),'fit_intercept':self.reg_widget.lasso_intercept_checkbox.isChecked(),
-                        'max_iter':self.reg_widget.lasso_max.value(),'tol':self.reg_widget.lasso_tol.value(),
-                        'positive':self.reg_widget.lasso_positive_checkbox.isChecked(),'selection':'random',
-                        'CV':self.reg_widget.lasso_cv_checkbox.isChecked()}
+                params = {'alpha': self.reg_widget.lasso_alpha.value(),
+                          'fit_intercept': self.reg_widget.lasso_intercept_checkbox.isChecked(),
+                          'max_iter': self.reg_widget.lasso_max.value(), 'tol': self.reg_widget.lasso_tol.value(),
+                          'positive': self.reg_widget.lasso_positive_checkbox.isChecked(), 'selection': 'random',
+                          'CV': self.reg_widget.lasso_cv_checkbox.isChecked()}
                 print(params)
             if method == 'Elastic Net':
                 pass
@@ -81,7 +85,7 @@ class regression_:
             if method == 'PLS':
                 params = {'n_components': self.reg_widget.pls_nc_spinbox.value(),
                           'scale': False}
-                modelkey =  modelkey+ '(nc='+str(params['n_components'])+')'
+                modelkey = modelkey + '(nc=' + str(params['n_components']) + ')'
                 kws = {'modelkey': modelkey}
             if method == 'GP':
                 params = {'reduce_dim': self.reg_widget.gp_dim_red_combobox.currentText(),
@@ -91,7 +95,7 @@ class regression_:
                           'thetaL': self.reg_widget.gp_thetaL_spin.value(),
                           'thetaU': self.reg_widget.gp_thetaU_spin.value()}
 
-                modelkey = modelkey+ str(params)
+                modelkey = modelkey + str(params)
 
         except:
             pass
@@ -104,13 +108,22 @@ class regression_:
                 loss = 'absolute_loss'
             ransacparams = {'residual_threshold': self.ransac_widget.ransac_thresh_spin.value(),
                             'loss': loss}
+        ui_list = "do_regression_train"
+        fun_list = "do_regression_train"
 
         args = [datakey, xvars, yvars, yrange, method, params, ransacparams]
-        self.pysat_fun.set_arg_list(args, replacelast=True)
-        self.pysat_fun.set_kw_list(kws, replacelast=True)
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
 
     def set_regression_parameters(self):
-        pass
+        datakey = self.arg_list[0]
+        xvars = self.arg_list[1]
+        yvars = self.arg_list[2]
+        yrange = self.arg_list[3]
+        method = self.arg_list[4]
+        params = self.arg_list[5]
+        ransacparams = self.arg_list[6]
+        self.regression_choosedata.currentIndex(self.regression_choosedata.findText(str(datakey)))
+
 
     def make_ransac_widget(self, isChecked):
         if not isChecked:
@@ -235,14 +248,15 @@ class regression_:
 
         elif alg == 'OMP':
             self.reg_widget.omp_hlayout = QtGui.QHBoxLayout(self.reg_widget)
-            self.reg_widget.omp_label=QtGui.QLabel(self.reg_widget)
+            self.reg_widget.omp_label = QtGui.QLabel(self.reg_widget)
             self.reg_widget.omp_label.setText('# of nonzero coefficients:')
             self.reg_widget.omp_hlayout.addWidget(self.reg_widget.omp_label)
-            self.reg_widget.omp_nfeatures=QtGui.QSpinBox(self.reg_widget)
+            self.reg_widget.omp_nfeatures = QtGui.QSpinBox(self.reg_widget)
             self.reg_widget.omp_nfeatures.setMaximum(9999)
             try:
                 xvars = [str(x.text()) for x in self.regression_train_choosex.selectedItems()]
-                nfeatures_default=0.1*self.pysat_fun.data[self.regression_choosedata.currentText()].df[xvars].columns.levels[1].size
+                nfeatures_default = 0.1 * self.pysat_fun.data[self.regression_choosedata.currentText()].df[
+                    xvars].columns.levels[1].size
                 self.reg_widget.omp_nfeatures.setValue(nfeatures_default)
             except:
                 self.reg_widget.omp_nfeatures.setValue(10)
@@ -252,7 +266,7 @@ class regression_:
             self.reg_widget.omp_intercept_checkbox.setChecked(True)
             self.reg_widget.omp_hlayout.addWidget(self.reg_widget.omp_intercept_checkbox)
 
-            self.reg_widget.omp_cv_checkbox=QtGui.QCheckBox(self.reg_widget)
+            self.reg_widget.omp_cv_checkbox = QtGui.QCheckBox(self.reg_widget)
             self.reg_widget.omp_cv_checkbox.setText('Optimize with Cross Validation? (Ignores # of coeffs)')
             self.reg_widget.omp_cv_checkbox.setChecked(True)
             self.reg_widget.omp_hlayout.addWidget(self.reg_widget.omp_cv_checkbox)
@@ -277,7 +291,8 @@ class regression_:
             self.reg_widget.lasso_alpha.setValue(1.0)
             self.reg_widget.lasso_alpha_hlayout.addWidget(self.reg_widget.lasso_alpha)
 
-            self.reg_widget.lasso_alpha_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+            self.reg_widget.lasso_alpha_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding,
+                                                                   QtGui.QSizePolicy.Minimum)
             self.reg_widget.lasso_alpha_hlayout.addItem(self.reg_widget.lasso_alpha_spacer)
             self.reg_widget.lasso_vlayout.addItem(self.reg_widget.lasso_alpha_hlayout)
 
@@ -302,8 +317,8 @@ class regression_:
             self.reg_widget.lasso_tol.setValue(0.0001)
             self.reg_widget.lasso_iter_hlayout.addWidget(self.reg_widget.lasso_tol)
 
-
-            self.reg_widget.lasso_iter_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+            self.reg_widget.lasso_iter_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding,
+                                                                  QtGui.QSizePolicy.Minimum)
             self.reg_widget.lasso_iter_hlayout.addItem(self.reg_widget.lasso_iter_spacer)
             self.reg_widget.lasso_vlayout.addItem(self.reg_widget.lasso_iter_hlayout)
 
@@ -317,14 +332,13 @@ class regression_:
             self.reg_widget.lasso_positive_checkbox.setChecked(False)
             self.reg_widget.lasso_checkboxes_hlayout.addWidget(self.reg_widget.lasso_positive_checkbox)
 
-            self.reg_widget.lasso_cv_checkbox=QtGui.QCheckBox(self.reg_widget)
+            self.reg_widget.lasso_cv_checkbox = QtGui.QCheckBox(self.reg_widget)
             self.reg_widget.lasso_cv_checkbox.setText('Optimize with Cross Validation? (Ignores alpha)')
             self.reg_widget.lasso_cv_checkbox.setChecked(True)
             self.reg_widget.lasso_checkboxes_hlayout.addWidget(self.reg_widget.lasso_cv_checkbox)
 
-
             self.reg_widget.lasso_checkbox_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding,
-                                                                  QtGui.QSizePolicy.Minimum)
+                                                                      QtGui.QSizePolicy.Minimum)
             self.reg_widget.lasso_checkboxes_hlayout.addItem(self.reg_widget.lasso_checkbox_spacer)
             self.reg_widget.lasso_vlayout.addItem(self.reg_widget.lasso_checkboxes_hlayout)
 
@@ -354,6 +368,7 @@ class regression_:
 
         self.regression_vlayout.addWidget(self.reg_widget)
         self.get_regression_parameters()
+
     def regression_ui(self):
         self.regression_train = QtGui.QGroupBox()
         font = QtGui.QFont()
@@ -448,7 +463,7 @@ class regression_:
         self.regression_choosealg_label = QtGui.QLabel(self.regression_train)
         self.regression_choosealg_label.setObjectName(_fromUtf8("regression_choosealg_label"))
         self.regression_choosealg_hlayout.addWidget(self.regression_choosealg_label)
-        self.regression_alg_choices = ['Choose an algorithm', 'PLS', 'GP', 'OLS','OMP','Lasso','More to come...']
+        self.regression_alg_choices = ['Choose an algorithm', 'PLS', 'GP', 'OLS', 'OMP', 'Lasso', 'More to come...']
         self.regression_choosealg = make_combobox(self.regression_alg_choices)
         self.regression_choosealg.setIconSize(QtCore.QSize(50, 20))
         self.regression_choosealg.setObjectName(_fromUtf8("regression_choosealg"))
@@ -468,7 +483,9 @@ class regression_:
         self.regression_train_choosey.currentItemChanged.connect(lambda: self.get_regression_parameters())
         self.yvarmin_spin.valueChanged.connect(lambda: self.get_regression_parameters())
         self.yvarmax_spin.valueChanged.connect(lambda: self.get_regression_parameters())
-        self.regression_choosedata.activated[int].connect(lambda: self.regression_change_vars(self.regression_train_choosey))
+        self.regression_choosedata.activated[int].connect(
+            lambda: self.regression_change_vars(self.regression_train_choosey))
+
     def regression_change_vars(self, obj):
         obj.clear()
         choices = self.pysat_fun.data[self.regression_choosedata.currentText()].df[['comp']].columns.values
@@ -478,23 +495,3 @@ class regression_:
     def helper(self):
         # setText
         pass
-
-
-def make_combobox(choices):
-    combo = QtGui.QComboBox()
-
-    for i, choice in enumerate(choices):
-        combo.addItem(_fromUtf8(""))
-        combo.setItemText(i, _translate('', choice, None))
-
-    return combo
-
-
-def make_listwidget(choices):
-    listwidget = QtGui.QListWidget()
-    listwidget.setItemDelegate
-    # listwidget.setMaximumHeight(100)
-    for item in choices:
-        item = QtGui.QListWidgetItem(item)
-        listwidget.addItem(item)
-    return listwidget
