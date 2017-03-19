@@ -27,23 +27,23 @@ class removenull_:
         self.main()
 
     def main(self):
-        self.pysat_fun.set_fun_list(self.pysat_fun.removenull)  # add this function to the pysat list to be run
-        self.pysat_fun.set_arg_list([])
-        self.pysat_fun.set_kw_list({})
-        self.pysat_fun.set_greyed_modules({})
+        self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
         self.removenull_ui()  # initiate the UI
-        self.pysat_fun.set_greyed_modules(self.removenull, True)
+        self.pysat_fun.set_greyed_modules(self.removenull)
 
     def get_removenull_parameters(self):
 
         datakey = self.removenull_choosedata.currentText()
-        colname=self.colname_choices.currentText()
+        colname = self.colname_choices.currentText()
         colname = (self.vars_level0[self.vars_level1.index(colname)], colname)
 
-        args = [datakey,colname]
+        args = [datakey, colname]
         kws = {}
         self.pysat_fun.set_arg_list(args, replacelast=True)
         self.pysat_fun.set_kw_list(kws, replacelast=True)
+
+    def set_removenull_parameters(self):
+        pass
 
     def removenull_ui(self):
         self.removenull = QtGui.QGroupBox()
