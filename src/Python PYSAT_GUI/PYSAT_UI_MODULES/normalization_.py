@@ -62,8 +62,7 @@ class normalization_:
         # add function list calls here
         self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
         self.normalization_ui()
-        self.set_data_parameters()
-        self.get_data_parameters()
+        self.pysat_fun.set_greyed_modules(self.normalization)
         self.add_ranges_button.clicked.connect(lambda: self.add_ranges())
         self.del_button.clicked.connect(lambda: self.del_ranges())
 
@@ -141,22 +140,30 @@ class normalization_:
         self.box_list.append(self.min_spinbox)  # set up an array of lineEdits
         self.box_list.append(self.max_spinbox)
         self.all_ranges_layout.addLayout(self.ranges_layout)
-        self.min_spinbox.valueChanged.connect(lambda: self.get_data_parameters(self.box_list))
-        self.max_spinbox.valueChanged.connect(lambda: self.get_data_parameters(self.box_list))
+        self.min_spinbox.valueChanged.connect(lambda: self.finished(self.box_list))
+        self.max_spinbox.valueChanged.connect(lambda: self.finished(self.box_list))
 
     def del_ranges(self):
         del_layout_(self.all_ranges_layout)
         del self.box_list[-1]  # delete left box
         del self.box_list[-1]  # delete right box
-        self.get_data_parameters(self.box_list)
+        self.finished(self.box_list)
 
     def set_data_parameters(self):
+        # [1, 'normalization', 'do_norm', ['known', [(0, 100), (100, 200)]], {}]
+        # [0]        [1]           [2]              [3][2]
         # TODO finish
         if self.arg_list is not None:
+            temp = self.arg_list[3][2]
             pass
+
+    def push_parameters(self, arg_list, kw_list):
+        ui_list = "normalization"
+        fun_list = "do_norm"
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, arg_list, kw_list, self.ui_id)
         pass
 
-    def get_data_parameters(self, box_list):
+    def finished(self, box_list):
         arg_list = []
         len_box_list = len(box_list)
         try:
@@ -167,7 +174,4 @@ class normalization_:
         except Exception as e:
             error_print(e)
         datakey = self.normalization_choosedata.currentText()
-        kws = {}
-        ui_list = "normalization"
-        fun_list = "do_norm"
-        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, [datakey, arg_list], kws, self.ui_id)
+        self.push_parameters([datakey, arg_list], {})
