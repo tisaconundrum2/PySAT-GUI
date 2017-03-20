@@ -220,6 +220,8 @@ class pysat_ui(object):
         self.actionExit.setObjectName(_fromUtf8("actionExit"))
         self.actionNormalization = QtGui.QAction(MainWindow)
         self.actionNormalization.setObjectName(_fromUtf8("actionNormalization"))
+        self.actionDimRed=QtGui.QAction(MainWindow)
+        self.actionDimRed.setObjectName(_fromUtf8("actionDimRed"))
         self.actionICA_2 = QtGui.QAction(MainWindow)
         self.actionICA_2.setObjectName(_fromUtf8("actionICA_2"))
         self.actionPCA_2 = QtGui.QAction(MainWindow)
@@ -288,6 +290,7 @@ class pysat_ui(object):
         self.menuPreprocessing.addAction(self.menuCalibration_Transfer.menuAction())
         self.menuPreprocessing.addAction(self.actionICA_2)
         self.menuPreprocessing.addAction(self.actionPCA_2)
+        self.menuPreprocessing.addAction(self.actionDimRed)
         self.menuPreprocessing.addAction(self.actionStratified_Folds)
         self.menuRegression.addAction(self.actionCross_Validation)
         self.menuRegression.addAction(self.actionTrain)
@@ -356,6 +359,7 @@ class pysat_ui(object):
             _translate("MainWindow", "Piecewise Direct Standardization", None))
         self.actionPCA.setText(_translate("MainWindow", "PCA", None))
         self.actionICA.setText(_translate("MainWindow", "ICA", None))
+        self.actionDimRed.setText((_translate("MainWindow","Dimensionality Reduction",None)))
         self.actionK_Means.setText(_translate("MainWindow", "K-Means", None))
         self.actionHierarchical.setText(_translate("MainWindow", "Hierarchical", None))
         self.actionOthers.setText(_translate("MainWindow", "Others...", None))
@@ -416,6 +420,9 @@ class pysat_ui(object):
     def do_strat_folds(self, arg_list=None, kw_list=None):
         PYSAT_UI_MODULES.strat_folds_(self.pysat_fun, self.verticalLayout_8, arg_list, kw_list)
 
+    def do_dim_red(self, arg_list=None, kw_list=None):
+        PYSAT_UI_MODULES.dim_reduction_(self.pysat_fun, self.verticalLayout_8)
+
     def do_regression_train(self, arg_list=None, kw_list=None):
         PYSAT_UI_MODULES.regression_train_(self.pysat_fun, self.verticalLayout_8, arg_list, kw_list)
 
@@ -460,6 +467,9 @@ class pysat_ui(object):
         self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
         self.actionPlot.triggered.connect(lambda: pysat_ui.do_plot(self))
         self.actionCross_Validation.triggered.connect(lambda: pysat_ui.do_cv(self))
+        self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
+        self.actionSubmodelPredict.triggered.connect(lambda:pysat_ui.do_submodel_predict(self))
+        self.actionDimRed.triggered.connect(lambda: pysat_ui.do_dim_red(self))
         self.actionSubmodelPredict.triggered.connect(lambda: pysat_ui.do_submodel_predict(self))
         # Taking out menu items that don't have working UI modules yet. We don't want to delete them, so we'll make them disappear.
         self.actionOpen_Workflow.triggered.connect(lambda: self.on_load_clicked())

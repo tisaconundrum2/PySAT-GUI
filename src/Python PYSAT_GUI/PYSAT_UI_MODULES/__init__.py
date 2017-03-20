@@ -19,5 +19,5 @@ from PYSAT_UI_MODULES.strat_folds_ import *
 from PYSAT_UI_MODULES.cv_ import *
 from PYSAT_UI_MODULES.removenull_ import *
 from PYSAT_UI_MODULES.sm_ import *
-from PYSAT_UI_MODULES.strat_folds_ import *
 from PYSAT_UI_MODULES.write_data_ import *
+from PYSAT_UI_MODULES.dim_reduction_ import *
