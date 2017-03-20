@@ -36,6 +36,10 @@ class dim_reduction_:
             lambda: self.make_dim_red_widget(self.dim_red_choosealg.currentText()))  #
         self.get_dim_red_params()
         self.pysat_fun.set_greyed_modules(self.dim_reduction)
+        self.get_dim_red_params()
+        self.pysat_fun.set_greyed_modules(self.dim_reduction)
+        self.dim_red_choosealg.currentIndexChanged.connect(  #
+            lambda: self.make_dim_red_widget(self.dim_red_choosealg.currentText()))  #
 
     def set_dim_red_params(self):
         if self.arg_list is not None:
