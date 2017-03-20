@@ -214,6 +214,8 @@ class pysat_ui(object):
         self.actionExit.setObjectName(_fromUtf8("actionExit"))
         self.actionNormalization = QtGui.QAction(MainWindow)
         self.actionNormalization.setObjectName(_fromUtf8("actionNormalization"))
+        self.actionDimRed=QtGui.QAction(MainWindow)
+        self.actionDimRed.setObjectName(_fromUtf8("actionDimRed"))
         self.actionICA_2 = QtGui.QAction(MainWindow)
         self.actionICA_2.setObjectName(_fromUtf8("actionICA_2"))
         self.actionPCA_2 = QtGui.QAction(MainWindow)
@@ -281,6 +283,7 @@ class pysat_ui(object):
         self.menuPreprocessing.addAction(self.menuCalibration_Transfer.menuAction())
         self.menuPreprocessing.addAction(self.actionICA_2)
         self.menuPreprocessing.addAction(self.actionPCA_2)
+        self.menuPreprocessing.addAction(self.actionDimRed)
         self.menuPreprocessing.addAction(self.actionStratified_Folds)
         self.menuRegression.addAction(self.actionCross_Validation)
         self.menuRegression.addAction(self.actionTrain)
@@ -348,6 +351,7 @@ class pysat_ui(object):
             _translate("MainWindow", "Piecewise Direct Standardization", None))
         self.actionPCA.setText(_translate("MainWindow", "PCA", None))
         self.actionICA.setText(_translate("MainWindow", "ICA", None))
+        self.actionDimRed.setText((_translate("MainWindow","Dimensionality Reduction",None)))
         self.actionK_Means.setText(_translate("MainWindow", "K-Means", None))
         self.actionHierarchical.setText(_translate("MainWindow", "Hierarchical", None))
         self.actionOthers.setText(_translate("MainWindow", "Others...", None))
@@ -408,6 +412,9 @@ class pysat_ui(object):
     def do_strat_folds(self):
         PYSAT_UI_MODULES.strat_folds_(self.pysat_fun, self.verticalLayout_8)
 
+    def do_dim_red(self):
+        PYSAT_UI_MODULES.dim_reduction_(self.pysat_fun, self.verticalLayout_8)
+
     def do_regression_train(self):
         PYSAT_UI_MODULES.regression_(self.pysat_fun, self.verticalLayout_8)
 
@@ -454,7 +461,7 @@ class pysat_ui(object):
         self.actionCross_Validation.triggered.connect(lambda: pysat_ui.do_cv(self))
         self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
         self.actionSubmodelPredict.triggered.connect(lambda:pysat_ui.do_submodel_predict(self))
-
+        self.actionDimRed.triggered.connect(lambda: pysat_ui.do_dim_red(self))
     def set_greyed_out_items(self, bool):
         self.actionTrain.setDisabled(bool)
         self.actionPredict.setDisabled(bool)

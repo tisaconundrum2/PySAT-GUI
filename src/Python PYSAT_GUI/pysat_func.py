@@ -22,6 +22,8 @@ class pysat_func(QThread):
         self.modelranges = []
         self.model_xvars = {}
         self.model_yvars = {}
+        self.dim_reds={}
+        self.dim_red_keys=[]
         self.figs = {}
         self.fun_list = []
         self.arg_list = []
@@ -117,6 +119,13 @@ class pysat_func(QThread):
         print(self.data[datakey_ref].df.columns.levels[0])
         try:
             self.data[datakey_to_interp].interp(self.data[datakey_ref].df['wvl'].columns)
+        except Exception as e:
+            error_print(e)
+
+    def do_dim_red(self,datakey,method,params,kws,col='wvl',load_fit=None,dim_red_key=None):
+        try:
+            self.dim_reds[dim_red_key]=self.data[datakey].dim_red(col, method, params, kws, load_fit=load_fit)
+            self.dim_red_keys.append(dim_red_key)
         except Exception as e:
             error_print(e)
 
