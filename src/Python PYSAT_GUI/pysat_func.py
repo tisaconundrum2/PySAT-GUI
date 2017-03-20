@@ -233,9 +233,9 @@ class pysat_func(QThread):
         except Exception as e:
             error_print(e)
 
-    def do_dim_red(self,datakey,method,params,kws,col='wvl',load_fit=None,dim_red_key=None):
+    def do_dim_red(self,datakey,method,params,method_kws={},col='wvl',load_fit=None,dim_red_key=None):
         try:
-            self.dim_reds[dim_red_key]=self.data[datakey].dim_red(col, method, params, kws, load_fit=load_fit)
+            self.dim_reds[dim_red_key]=self.data[datakey].dim_red(col, method, params, method_kws, load_fit=load_fit)
             self.dim_red_keys.append(dim_red_key)
         except Exception as e:
             error_print(e)
