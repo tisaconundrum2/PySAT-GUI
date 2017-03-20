@@ -10,6 +10,8 @@ except AttributeError:
 
 try:
     _encoding = QtGui.QApplication.UnicodeUTF8
+
+
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig, _encoding)
 except AttributeError:
@@ -24,9 +26,7 @@ class cv_:
         self.main()
 
     def main(self):
-        self.pysat_fun.set_fun_list(self.pysat_fun.do_cv_train)
-        self.pysat_fun.set_arg_list([])
-        self.pysat_fun.set_kw_list({})
+        self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
         self.cv_ui()
         self.cv_choosealg.currentIndexChanged.connect(lambda: self.make_reg_widget(self.cv_choosealg.currentText()))
          
@@ -65,12 +65,9 @@ class cv_:
         except:
             pass
 
-        
         args=[datakey,xvars,yvars,yrange,method,params]
         self.pysat_fun.set_arg_list(args,replacelast=True)
         self.pysat_fun.set_kw_list(kws,replacelast=True)
-        
-        
     def make_reg_widget(self, alg):
         print(alg)
         try:
@@ -251,6 +248,7 @@ class cv_:
         self.cv_choosealg.setIconSize(QtCore.QSize(50, 20))
         self.cv_choosealg.setObjectName(_fromUtf8("cv_choosealg"))
         self.cv_choosealg_hlayout.addWidget(self.cv_choosealg)
+        # TODO add logic that knows when args and kwargs are added.
         cv_choosealg_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding,
                                                         QtGui.QSizePolicy.Minimum)
         self.cv_choosealg_hlayout.addItem(cv_choosealg_spacer)
@@ -271,9 +269,10 @@ class cv_:
         try:
             choices = self.pysat_fun.data[self.cv_choosedata.currentText()].df[['comp']].columns.values
         except:
-            choices=['No valid options']
-        for i in choices:        
+            choices = ['No valid options']
+        for i in choices:
             obj.addItem(i[1])
+
 
 def make_combobox(choices):
     combo = QtGui.QComboBox()
@@ -283,6 +282,7 @@ def make_combobox(choices):
         combo.setItemText(i, _translate('', choice, None))
 
     return combo
+
 
 def make_listwidget(choices):
     listwidget = QtGui.QListWidget()

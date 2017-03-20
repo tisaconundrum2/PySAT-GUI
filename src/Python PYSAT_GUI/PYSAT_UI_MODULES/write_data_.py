@@ -28,13 +28,11 @@ class write_data_:
     def main(self):
         # TODO add function param call here
         
-        self.pysat_fun.set_fun_list(self.pysat_fun.do_write_data)
-        self.pysat_fun.set_arg_list([])
-        self.pysat_fun.set_kw_list({})
-        self.pysat_fun.set_greyed_modules({})
+        self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
+        # self.pysat_fun.set_fun_list(self.pysat_fun.do_write_data)
         self.write_data_ui()
-        self.pysat_fun.set_greyed_modules(self.write_data, True)
-        
+        self.pysat_fun.set_greyed_modules(self.write_data)
+
 
     def get_write_params(self):
         datakey=self.write_data_choose_data.currentText()

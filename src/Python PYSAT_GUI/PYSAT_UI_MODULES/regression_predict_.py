@@ -25,12 +25,9 @@ class regression_predict_:
         self.main()
 
     def main(self):
-        self.pysat_fun.set_fun_list(self.pysat_fun.do_regression_predict)
-        self.pysat_fun.set_arg_list([])
-        self.pysat_fun.set_kw_list({})
-        self.pysat_fun.set_greyed_modules({})
+        self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
         self.regression_ui()
-        self.pysat_fun.set_greyed_modules(self.regression_predict, True)
+        self.pysat_fun.set_greyed_modules(self.regression_predict)
 
         self.regression_predict_choosedata.currentIndexChanged.connect(lambda: self.get_predict_parameters())
         self.regression_predict_choosemodel.currentIndexChanged.connect(lambda: self.get_predict_parameters())
@@ -45,6 +42,9 @@ class regression_predict_:
         kws = {}
         self.pysat_fun.set_arg_list(args, replacelast=True)
         self.pysat_fun.set_kw_list(kws, replacelast=True)
+
+    def set_predict_parameters(self):
+        pass
 
     def regression_ui(self):
         self.regression_predict = QtGui.QGroupBox()
