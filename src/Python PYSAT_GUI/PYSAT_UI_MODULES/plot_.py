@@ -110,8 +110,11 @@ class plot_:
                'marker': marker,
                'linestyle': linestyle
                }
-        self.pysat_fun.set_arg_list(args, replacelast=True)
-        self.pysat_fun.set_kw_list(kws, replacelast=True)
+        ui_list = "do_plot"
+        fun_list = "do_plot"
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
+#        self.pysat_fun.set_arg_list(args, replacelast=True)
+#        self.pysat_fun.set_kw_list(kws, replacelast=True)
 
     def set_plot_parameters(self):
         pass
@@ -172,8 +175,10 @@ class plot_:
         try:
             self.vars_level0 = self.pysat_fun.data[self.scatter_choosedata.currentText()].df.columns.get_level_values(0)
             self.vars_level1 = self.pysat_fun.data[self.scatter_choosedata.currentText()].df.columns.get_level_values(1)
-            self.vars_level1 = list(self.vars_level1[self.vars_level0 != 'wvl'])
-            self.vars_level0 = list(self.vars_level0[self.vars_level0 != 'wvl'])
+            self.vars_level1 = self.vars_level1[self.vars_level0 != 'wvl']
+            self.vars_level0 = self.vars_level0[self.vars_level0 != 'wvl']
+            self.vars_level1 = self.vars_level1[self.vars_level0 != 'masked']
+            self.vars_level0 = self.vars_level0[self.vars_level0 != 'masked']
             xvarchoices = self.vars_level1
             pass
         except:

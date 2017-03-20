@@ -32,10 +32,10 @@ class dim_reduction_:
         self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
         self.dim_reduction_ui()
         self.set_dim_red_params()
-        self.get_dim_red_params()
-        self.pysat_fun.set_greyed_modules(self.dim_reduction)
         self.dim_red_choosealg.currentIndexChanged.connect(  #
             lambda: self.make_dim_red_widget(self.dim_red_choosealg.currentText()))  #
+        self.get_dim_red_params()
+        self.pysat_fun.set_greyed_modules(self.dim_reduction)
 
     def set_dim_red_params(self):
         if self.arg_list is not None:
@@ -44,6 +44,17 @@ class dim_reduction_:
             params = self.arg_list[2]
             self.dim_reduction_choose_data.setCurrentIndex(self.dim_reduction_choose_data.findText(datakey))
             self.dim_red_choosealg.setCurrentIndex(self.dim_red_choosealg.findText(method))
+            self.make_dim_red_widget(method)
+            if method=='PCA':
+                nc=self.kw_list['method_kws']['n_components']
+                self.dim_red_widget.pca_nc_spinbox.setValue(nc)
+            if method == 'ICA':
+                nc = self.kw_list['method_kws']['n_components']
+                self.dim_red_widget.ica_nc_spinbox.setValue(nc)
+            if method == 'ICA-JADE':
+                nc = self.kw_list['method_kws']['n_components']
+                self.dim_red_widget.ica_jade_nc_spinbox.setValue(nc)
+
 
     def get_dim_red_params(self):
         datakey=self.dim_reduction_choose_data.currentText()
@@ -82,6 +93,7 @@ class dim_reduction_:
             self.dim_red_widget.pca_nc_label.setText('# of components:')
             self.dim_red_widget.pca_hlayout.addWidget(self.dim_red_widget.pca_nc_label)
             self.dim_red_widget.pca_nc_spinbox = QtGui.QSpinBox(self.dim_red_widget)
+
             self.dim_red_widget.pca_hlayout.addWidget(self.dim_red_widget.pca_nc_spinbox)
             self.dim_red_widget.pca_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding,
                                                            QtGui.QSizePolicy.Minimum)
