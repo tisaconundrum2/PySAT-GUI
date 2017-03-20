@@ -341,7 +341,6 @@ class pysat_ui(object):
         self.actionApply_Mask.setText(_translate("MainWindow", "Apply Mask", None))
         self.actionInterpolate.setText(_translate("MainWindow", "Interpolate", None))
         self.actionRemoveNull.setText(_translate("MainWindow", "Remove Null Data", None))
-        self.actionInterpolate.setText(_translate("MainWindow", "Interpolate", None))
         self.actionInstrument_Response.setText(_translate("MainWindow", "Instrument Response", None))
         self.actionALS.setText(_translate("MainWindow", "ALS", None))
         self.actionDietrich.setText(_translate("MainWindow", "Dietrich", None))
@@ -421,7 +420,7 @@ class pysat_ui(object):
         PYSAT_UI_MODULES.strat_folds_(self.pysat_fun, self.verticalLayout_8, arg_list, kw_list)
 
     def do_dim_red(self, arg_list=None, kw_list=None):
-        PYSAT_UI_MODULES.dim_reduction_(self.pysat_fun, self.verticalLayout_8)
+        PYSAT_UI_MODULES.dim_reduction_(self.pysat_fun, self.verticalLayout_8,arg_list,kw_list)
 
     def do_regression_train(self, arg_list=None, kw_list=None):
         PYSAT_UI_MODULES.regression_train_(self.pysat_fun, self.verticalLayout_8, arg_list, kw_list)
@@ -467,12 +466,8 @@ class pysat_ui(object):
         self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
         self.actionPlot.triggered.connect(lambda: pysat_ui.do_plot(self))
         self.actionCross_Validation.triggered.connect(lambda: pysat_ui.do_cv(self))
-<<<<<<< HEAD
-        self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
         self.actionSubmodelPredict.triggered.connect(lambda:pysat_ui.do_submodel_predict(self))
         self.actionDimRed.triggered.connect(lambda: pysat_ui.do_dim_red(self))
-=======
-        self.actionSubmodelPredict.triggered.connect(lambda: pysat_ui.do_submodel_predict(self))
         # Taking out menu items that don't have working UI modules yet. We don't want to delete them, so we'll make them disappear.
         self.actionOpen_Workflow.triggered.connect(lambda: self.on_load_clicked())
         self.actionSave_Current_Workflow.triggered.connect(lambda: self.on_save_clicked())
@@ -488,7 +483,6 @@ class pysat_ui(object):
         # self.actionPlot.triggered.connect(lambda: self.set_ui_list("do_plot"))
         self.actionCross_Validation.triggered.connect(lambda: self.set_ui_list("do_cv"))
 
->>>>>>> origin/master
     def set_greyed_out_items(self, bool):
         self.actionTrain.setDisabled(bool)
         self.actionPredict.setDisabled(bool)

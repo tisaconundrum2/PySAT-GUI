@@ -20,53 +20,63 @@ except AttributeError:
 
 
 class dim_reduction_:
-    def __init__(self, pysat_fun, verticalLayout_8):
+    def __init__(self, pysat_fun, verticalLayout_8,arg_list,kw_list):
         self.pysat_fun = pysat_fun
+        self.arg_list = arg_list
+        self.kw_list = kw_list
+        self.ui_id = None
         self.verticalLayout_8 = verticalLayout_8
         self.main()
 
     def main(self):
-        # TODO add function param call here
-        
-        self.pysat_fun.set_fun_list(self.pysat_fun.do_dim_red)
-        self.pysat_fun.set_arg_list([])
-        self.pysat_fun.set_kw_list({})
-        self.pysat_fun.set_greyed_modules({})
+        self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
         self.dim_reduction_ui()
-        self.pysat_fun.set_greyed_modules(self.dim_reduction, True)
-        
-        # TODO add try and except here
-#        try:
-#            # arg_list.append(['known data', 5, 2, ('meta', 'SiO2')])
-#            self.create_folds.clicked.connect(
-#                lambda: self.pysat_fun.arg_list.append(['known_data', 5, 2, ('meta', 'SiO2')]))
-#        except:
-#            print('There was a problem with creating stratified folds...')
+        self.set_dim_red_params()
+        self.get_dim_red_params()
+        self.pysat_fun.set_greyed_modules(self.dim_reduction)
+        self.dim_red_choosealg.currentIndexChanged.connect(  #
+            lambda: self.make_dim_red_widget(self.dim_red_choosealg.currentText()))  #
+
+    def set_dim_red_params(self):
+        if self.arg_list is not None:
+            datakey = self.arg_list[0]
+            method = self.arg_list[1]
+            params = self.arg_list[2]
+            self.dim_reduction_choose_data.setCurrentIndex(self.dim_reduction_choose_data.findText(datakey))
+            self.dim_red_choosealg.setCurrentIndex(self.dim_red_choosealg.findText(method))
 
     def get_dim_red_params(self):
         datakey=self.dim_reduction_choose_data.currentText()
         method=self.dim_red_choosealg.currentText()
-        if method=='PCA':
-            params={'nc':self.dim_red_widget.pca_nc_spinbox.value()}
-        if method=='ICA':
-            params = {'nc': self.dim_red_widget.ica_nc_spinbox.value()}
-        if method=='ICA-JADE':
-            params = {'nc': self.dim_red_widget.ica_jade_nc_spinbox.value()}
+        params=[]
+        method_kws={}
+        try:
+            if method=='PCA':
+                method_kws={'n_components':self.dim_red_widget.pca_nc_spinbox.value()}
 
+            if method=='ICA':
+                method_kws = {'n_components': self.dim_red_widget.ica_nc_spinbox.value()}
+
+            if method=='ICA-JADE':
+                method_kws = {'n_components': self.dim_red_widget.ica_jade_nc_spinbox.value()}
+
+        except:
+            pass
         args=[datakey,method,params]
-        kws={}
-        self.pysat_fun.set_arg_list(args,replacelast=True)
-        self.pysat_fun.set_kw_list(kws,replacelast=True)
+        kws = {'method_kws':method_kws}
+        ui_list = "do_dim_red"
+        fun_list = "do_dim_red"
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
 
 
     def make_dim_red_widget(self,method):
-        print(alg)
+        print(method)
         try:
             self.dim_red_widget.deleteLater()
         except:
             pass
         self.dim_red_widget = QtGui.QWidget()
-        if alg == 'PCA':
+        if method == 'PCA':
             self.dim_red_widget.pca_hlayout = QtGui.QHBoxLayout(self.dim_red_widget)
             self.dim_red_widget.pca_nc_label = QtGui.QLabel(self.dim_red_widget)
             self.dim_red_widget.pca_nc_label.setText('# of components:')
@@ -76,8 +86,8 @@ class dim_reduction_:
             self.dim_red_widget.pca_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding,
                                                            QtGui.QSizePolicy.Minimum)
             self.dim_red_widget.pca_hlayout.addItem(self.dim_red_widget.pca_spacer)
-            self.dim_red_widget.pca_nc_spinbox.valueChanged.connect(lambda: self.get_dim_red_parameters())
-        if alg == 'ICA':
+            self.dim_red_widget.pca_nc_spinbox.valueChanged.connect(lambda: self.get_dim_red_params())
+        if method == 'ICA':
             self.dim_red_widget.ica_hlayout = QtGui.QHBoxLayout(self.dim_red_widget)
             self.dim_red_widget.ica_nc_label = QtGui.QLabel(self.dim_red_widget)
             self.dim_red_widget.ica_nc_label.setText('# of components:')
@@ -87,8 +97,8 @@ class dim_reduction_:
             self.dim_red_widget.ica_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding,
                                                            QtGui.QSizePolicy.Minimum)
             self.dim_red_widget.ica_hlayout.addItem(self.dim_red_widget.ica_spacer)
-            self.dim_red_widget.ica_nc_spinbox.valueChanged.connect(lambda: self.get_dim_red_parameters())
-        if alg == 'ICA-JADE':
+            self.dim_red_widget.ica_nc_spinbox.valueChanged.connect(lambda: self.get_dim_red_params())
+        if method == 'ICA-JADE':
             self.dim_red_widget.ica_jade_hlayout = QtGui.QHBoxLayout(self.dim_red_widget)
             self.dim_red_widget.ica_jade_nc_label = QtGui.QLabel(self.dim_red_widget)
             self.dim_red_widget.ica_jade_nc_label.setText('# of components:')
@@ -98,7 +108,7 @@ class dim_reduction_:
             self.dim_red_widget.ica_jade_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding,
                                                            QtGui.QSizePolicy.Minimum)
             self.dim_red_widget.ica_jade_hlayout.addItem(self.dim_red_widget.ica_jade_spacer)
-            self.dim_red_widget.ica_jade_nc_spinbox.valueChanged.connect(lambda: self.get_dim_red_parameters())
+            self.dim_red_widget.ica_jade_nc_spinbox.valueChanged.connect(lambda: self.get_dim_red_params())
 
         self.dim_reduction_vlayout.addWidget(self.dim_red_widget)
         self.get_dim_red_params()
@@ -125,7 +135,7 @@ class dim_reduction_:
         #Choose the algorithm to apply
         self.dim_red_choosealg_label=QtGui.QLabel(self.dim_reduction)
         self.dim_reduction_vlayout.addWidget(self.dim_red_choosealg_label)
-        alg_choices=['PCA','ICA','ICA-JADE']
+        alg_choices=['Choose a method','PCA','ICA','ICA-JADE']
         self.dim_red_choosealg=make_combobox(alg_choices)
         self.dim_reduction_vlayout.addWidget(self.dim_red_choosealg)
 
