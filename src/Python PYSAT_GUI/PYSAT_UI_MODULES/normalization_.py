@@ -153,13 +153,12 @@ class normalization_:
     def set_data_parameters(self):
         # TODO finish
         if self.arg_list is not None:
-            for i in range(len(self.arg_list)):
+            for i in range(len(self.arg_list[1])):
                 box_list = self.arg_list[1]
                 box_list = box_list[i]
                 self.add_ranges()
                 self.min_spinbox.setValue(box_list[0])
                 self.max_spinbox.setValue(box_list[1])
-            pass
 
     def push_parameters(self, arg_list, kw_list):
         ui_list = "normalization"
