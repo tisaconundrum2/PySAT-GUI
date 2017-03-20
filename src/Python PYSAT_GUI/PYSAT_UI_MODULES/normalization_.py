@@ -62,6 +62,7 @@ class normalization_:
         # add function list calls here
         self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
         self.normalization_ui()
+        self.set_data_parameters()
         self.pysat_fun.set_greyed_modules(self.normalization)
         self.add_ranges_button.clicked.connect(lambda: self.add_ranges())
         self.del_button.clicked.connect(lambda: self.del_ranges())
@@ -150,11 +151,14 @@ class normalization_:
         self.finished(self.box_list)
 
     def set_data_parameters(self):
-        # [1, 'normalization', 'do_norm', ['known', [(0, 100), (100, 200)]], {}]
-        # [0]        [1]           [2]              [3][2]
         # TODO finish
         if self.arg_list is not None:
-            temp = self.arg_list[3][2]
+            for i in range(len(self.arg_list)):
+                box_list = self.arg_list[1]
+                box_list = box_list[i]
+                self.add_ranges()
+                self.min_spinbox.setValue(box_list[0])
+                self.max_spinbox.setValue(box_list[1])
             pass
 
     def push_parameters(self, arg_list, kw_list):
