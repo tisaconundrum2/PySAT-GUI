@@ -21,3 +21,4 @@ from PYSAT_UI_MODULES.removenull_ import *
 from PYSAT_UI_MODULES.sm_ import *
 from PYSAT_UI_MODULES.write_data_ import *
 from PYSAT_UI_MODULES.dim_reduction_ import *
+from PYSAT_UI_MODULES.dim_red_plot_ import *

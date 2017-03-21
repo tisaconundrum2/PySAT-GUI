@@ -242,6 +242,9 @@ class pysat_ui(object):
         self.actionPredict.setObjectName(_fromUtf8("actionPredict"))
         self.actionPlot = QtGui.QAction(MainWindow)
         self.actionPlot.setObjectName(_fromUtf8("actionPlot"))
+        self.actionPlotDimRed = QtGui.QAction(MainWindow)
+        self.actionPlotDimRed.setObjectName(_fromUtf8("actionPlot"))
+
         self.actionSet_output_location = QtGui.QAction(MainWindow)
         self.actionSet_output_location.setObjectName(_fromUtf8("actionSet_output_location"))
         self.actionCreate_N_Folds = QtGui.QAction(MainWindow)
@@ -309,6 +312,8 @@ class pysat_ui(object):
         self.menuClassification.addAction(self.menuSupervised.menuAction())
         self.menuClassification.addAction(self.menuClustering.menuAction())
         self.menuVisualization.addAction(self.actionPlot)
+        self.menuVisualization.addAction(self.actionPlotDimRed)
+
         self.menuBar.addAction(self.menuFile.menuAction())
         self.menuBar.addAction(self.menuPreprocessing.menuAction())
         self.menuBar.addAction(self.menuClassification.menuAction())
@@ -389,6 +394,8 @@ class pysat_ui(object):
         self.actionSubmodelPredict.setText(_translate("MainWindow", "Submodel Predict", None))
         self.actionPredict.setText(_translate("MainWindow", "Predict", None))
         self.actionPlot.setText(_translate("MainWindow", "Plot", None))
+        self.actionPlotDimRed.setText(_translate("MainWindow", "Plot ICA/PCA", None))
+
         self.actionSet_output_location.setText(_translate("MainWindow", "Output Location", None))
         self.actionCreate_N_Folds.setText(_translate("MainWindow", "Create N Folds", None))
         self.actionStratified_Folds.setText(_translate("MainWindow", "Stratified Folds", None))
@@ -434,6 +441,9 @@ class pysat_ui(object):
     def do_plot(self, arg_list=None, kw_list=None):
         PYSAT_UI_MODULES.plot_(self.pysat_fun, self.verticalLayout_8, arg_list, kw_list)
 
+    def do_plot_dim_red(self, arg_list=None, kw_list=None):
+        PYSAT_UI_MODULES.dim_red_plot_(self.pysat_fun, self.verticalLayout_8,arg_list,kw_list)
+
     def do_cv(self, arg_list=None, kw_list=None):
         PYSAT_UI_MODULES.cv_(self.pysat_fun, self.verticalLayout_8, arg_list, kw_list)
 
@@ -465,6 +475,7 @@ class pysat_ui(object):
         self.actionPredict.triggered.connect(lambda: pysat_ui.do_regression_predict(self))  # regression predict
         self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
         self.actionPlot.triggered.connect(lambda: pysat_ui.do_plot(self))
+        self.actionPlotDimRed.triggered.connect(lambda: pysat_ui.do_plot_dim_red(self))
         self.actionCross_Validation.triggered.connect(lambda: pysat_ui.do_cv(self))
         self.actionSubmodelPredict.triggered.connect(lambda:pysat_ui.do_submodel_predict(self))
         self.actionDimRed.triggered.connect(lambda: pysat_ui.do_dim_red(self))

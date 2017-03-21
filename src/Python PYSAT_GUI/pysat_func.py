@@ -154,7 +154,7 @@ class pysat_func(QThread):
         self.figs = {}
         self._list = listOfModules()
         self.greyed_modules = []
-
+        self.outpath='./'
     """
     Getter and setter functions below
     """
@@ -398,7 +398,7 @@ class pysat_func(QThread):
                                            annot_mask=annot_mask, cmap=cmap,
                                            colortitle=colortitle, loadfig=loadfig,marker=marker,linestyle=linestyle)
 
-    def do_pca_ica_plot(self, datakey,
+    def do_plot_dim_red(self, datakey,
                         x_component,
                         y_component,
                         figfile,
