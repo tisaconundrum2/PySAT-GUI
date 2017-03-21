@@ -170,22 +170,8 @@ class plot_:
         self.scatter_choosex_label.setObjectName(_fromUtf8("scatter_choosex_label"))
         self.scatter_choosex_flayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.scatter_choosex_label)
 
-        try:
-            self.vars_level0 = self.pysat_fun.data[self.scatter_choosedata.currentText()].df.columns.get_level_values(0)
-            self.vars_level1 = self.pysat_fun.data[self.scatter_choosedata.currentText()].df.columns.get_level_values(1)
-            self.vars_level1 = self.vars_level1[self.vars_level0 != 'wvl']
-            self.vars_level0 = self.vars_level0[self.vars_level0 != 'wvl']
-            self.vars_level1 = self.vars_level1[self.vars_level0 != 'masked']
-            self.vars_level0 = self.vars_level0[self.vars_level0 != 'masked']
-            xvarchoices = self.vars_level1
-            pass
-        except:
-            xvarchoices = self.pysat_fun.data[self.scatter_choosedata.currentText()].columns.values
-        try:
-            xvarchoices = [i for i in xvarchoices if not 'Unnamed' in i]  # remove unnamed columns from choices
-        except:
-            pass
-        self.xvar_choices = make_combobox(xvarchoices)
+        self.xvar_choices = make_combobox([''])
+        self.plot_change_vars(self.xvar_choices)
         self.xvar_choices.setObjectName(_fromUtf8("xvar_choices"))
         self.scatter_choosex_flayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.xvar_choices)
 
@@ -216,8 +202,8 @@ class plot_:
         self.scatter_choosey_flayout.setMargin(11)
         self.scatter_choosey_flayout.setSpacing(6)
         self.scatter_choosey_flayout.setObjectName(_fromUtf8("scatter_choosey_flayout"))
-        yvarchoices = xvarchoices
-        self.yvar_choices = make_combobox(yvarchoices)
+        self.yvar_choices = make_combobox([''])
+        self.plot_change_vars(self.yvar_choices)
         self.yvar_choices.setObjectName(_fromUtf8("yvar_choices"))
         self.scatter_choosey_flayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.yvar_choices)
         self.ytitle_label = QtGui.QLabel(self.plot)
@@ -376,27 +362,27 @@ class plot_:
         try:
             self.vars_level0 = self.pysat_fun.data[self.scatter_choosedata.currentText()].df.columns.get_level_values(0)
             self.vars_level1 = self.pysat_fun.data[self.scatter_choosedata.currentText()].df.columns.get_level_values(1)
-            self.vars_level1 = list(self.vars_level1[self.vars_level0 != 'wvl'])
-            self.vars_level0 = list(self.vars_level0[self.vars_level0 != 'wvl'])
+            self.vars_level1 = self.vars_level1[self.vars_level0 != 'wvl']
+            self.vars_level0 = self.vars_level0[self.vars_level0 != 'wvl']
+            self.vars_level1 = list(self.vars_level1[self.vars_level0 != 'masked'])
+            self.vars_level0 = list(self.vars_level0[self.vars_level0 != 'masked'])
             try:
-                self.vars_level0 = [i for i in self.vars_level0 if not 'Unnamed' in i]  # remove unnamed columns from choices
+                self.vars_level0 = [i for i in self.vars_level0 if 'Unnamed' not in str(i)]  # remove unnamed columns from choices
             except:
                 pass
             try:
-                self.vars_level1 = [i for i in self.vars_level1 if not 'Unnamed' in i]  # remove unnamed columns from choices
+                self.vars_level1 = [i for i in self.vars_level1 if 'Unnamed' not in str(i)]  # remove unnamed columns from choices
             except:
                 pass
             choices = self.vars_level1
 
-            for i in choices:
-                obj.addItem(i)
         except:
             try:
                 choices = self.pysat_fun.data[self.scatter_choosedata.currentText()].columns.values
-                for i in choices:
-                    obj.addItem(i)
             except:
                 choices = ['No valid choices']
+        for i in choices:
+            obj.addItem(str(i))
 
     def get_minmax(self, objmin, objmax, var):
         try:
