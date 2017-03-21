@@ -19,8 +19,9 @@ except AttributeError:
 
 
 class regression_predict_:
-    def __init__(self, pysat_fun, verticalLayout_8):
+    def __init__(self, pysat_fun, verticalLayout_8,arg_list,kw_list):
         self.pysat_fun = pysat_fun
+        self.ui_id = None
         self.verticalLayout_8 = verticalLayout_8
         self.main()
 
@@ -40,8 +41,10 @@ class regression_predict_:
 
         args = [datakey, modelkey, predictname]
         kws = {}
-        self.pysat_fun.set_arg_list(args, replacelast=True)
-        self.pysat_fun.set_kw_list(kws, replacelast=True)
+        ui_list='do_regression_predict'
+        fun_list='do_regression_predict'
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
+
 
     def set_predict_parameters(self):
         pass

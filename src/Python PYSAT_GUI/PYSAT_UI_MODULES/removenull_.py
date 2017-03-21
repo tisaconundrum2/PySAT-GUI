@@ -21,8 +21,9 @@ except AttributeError:
 
 
 class removenull_:
-    def __init__(self, pysat_fun, verticalLayout_8):
+    def __init__(self, pysat_fun, verticalLayout_8,arg_list,kw_list):
         self.pysat_fun = pysat_fun
+        self.ui_id=None
         self.verticalLayout_8 = verticalLayout_8
         self.main()
 

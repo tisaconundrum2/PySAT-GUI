@@ -408,8 +408,11 @@ class regression_train_:
         self.regression_train_choosex_label.setObjectName(_fromUtf8("regression_train_choosex_label"))
         self.regression_train_choosex_label.setText('X variable:')
         self.regression_choosexvars_vlayout.addWidget(self.regression_train_choosex_label)
-        xvarchoices = self.pysat_fun.data[self.regression_choosedata.currentText()].df.columns.levels[0].values
-        xvarchoices = [i for i in xvarchoices if not 'Unnamed' in i]  # remove unnamed columns from choices
+        try:
+            xvarchoices = self.pysat_fun.data[self.regression_choosedata.currentText()].df.columns.levels[0].values
+            xvarchoices = [i for i in xvarchoices if not 'Unnamed' in i]  # remove unnamed columns from choices
+        except:
+            xvarchoices = ['None']
         self.regression_train_choosex = make_listwidget(xvarchoices)
         self.regression_train_choosex.setObjectName(_fromUtf8("regression_train_choosex"))
         self.regression_choosexvars_vlayout.addWidget(self.regression_train_choosex)
@@ -419,8 +422,11 @@ class regression_train_:
         self.regression_train_choosey_label.setObjectName(_fromUtf8("regression_train_choosey_label"))
         self.regression_train_choosey_label.setText('Y variable:')
         self.regression_chooseyvars_vlayout.addWidget(self.regression_train_choosey_label)
-        yvarchoices = self.pysat_fun.data[self.regression_choosedata.currentText()].df['comp'].columns.values
-        yvarchoices = [i for i in yvarchoices if not 'Unnamed' in i]  # remove unnamed columns from choices
+        try:
+            yvarchoices = self.pysat_fun.data[self.regression_choosedata.currentText()].df['comp'].columns.values
+            yvarchoices = [i for i in yvarchoices if not 'Unnamed' in i]  # remove unnamed columns from choices
+        except:
+            yvarchoices = ['None']
         self.regression_train_choosey = make_listwidget(yvarchoices)
         self.regression_chooseyvars_vlayout.addWidget(self.regression_train_choosey)
         self.regression_yvarlimits_hlayout = QtGui.QHBoxLayout()
@@ -488,9 +494,12 @@ class regression_train_:
 
     def regression_change_vars(self, obj):
         obj.clear()
-        choices = self.pysat_fun.data[self.regression_choosedata.currentText()].df[['comp']].columns.values
-        for i in choices:
-            obj.addItem(i[1])
+        try:
+            choices = self.pysat_fun.data[self.regression_choosedata.currentText()].df[['comp']].columns.values
+            for i in choices:
+                obj.addItem(i[1])
+        except:
+            obj.addItem('None')
 
     def helper(self):
         # setText

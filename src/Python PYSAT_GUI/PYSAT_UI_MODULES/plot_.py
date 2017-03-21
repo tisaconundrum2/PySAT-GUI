@@ -394,11 +394,14 @@ class plot_:
                 vardata = self.pysat_fun.data[self.scatter_choosedata.currentText()][var]
             except:
                 vardata = [0, 0]
-        varmin = np.min(vardata)
-        varmax = np.max(vardata)
-        objmin.setValue(varmin)
-        objmax.setValue(varmax)
-
+        try:
+            varmin = float(np.min(vardata))
+            varmax = float(np.max(vardata))
+            objmin.setValue(varmin)
+            objmax.setValue(varmax)
+        except:
+            objmin.setValue(0)
+            objmax.setValue(1)
 
 def make_combobox(choices):
     combo = QtGui.QComboBox()

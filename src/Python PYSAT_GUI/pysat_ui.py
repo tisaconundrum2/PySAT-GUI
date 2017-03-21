@@ -489,10 +489,10 @@ class pysat_ui(object):
         # self.scrollArea.findChildren().triggered.connect(self.scrollArea.verticalScrollBar().setValue(self.scrollArea.verticalScrollBar().value()+10))
 
         # These are the Restore functions
-        self.actionRemoveNull.triggered.connect(lambda: self.set_ui_list("do_removenull"))
-        self.actionPredict.triggered.connect(lambda: self.set_ui_list("do_regression_predict"))  # regression predict
+        #self.actionRemoveNull.triggered.connect(lambda: self.set_ui_list("do_removenull"))
+        #self.actionPredict.triggered.connect(lambda: self.set_ui_list("do_regression_predict"))  # regression predict
         # self.actionPlot.triggered.connect(lambda: self.set_ui_list("do_plot"))
-        self.actionCross_Validation.triggered.connect(lambda: self.set_ui_list("do_cv"))
+       # self.actionCross_Validation.triggered.connect(lambda: self.set_ui_list("do_cv"))
 
     def set_greyed_out_items(self, bool):
         self.actionTrain.setDisabled(bool)

@@ -153,6 +153,8 @@ class normalization_:
     def set_data_parameters(self):
         # TODO finish
         if self.arg_list is not None:
+            self.normalization_choosedata.setCurrentIndex(self.normalization_choosedata.findText(self.arg_list[0]))
+
             for i in range(len(self.arg_list[1])):
                 box_list = self.arg_list[1]
                 box_list = box_list[i]
