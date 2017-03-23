@@ -23,6 +23,8 @@ except AttributeError:
 class removenull_:
     def __init__(self, pysat_fun, verticalLayout_8,arg_list,kw_list):
         self.pysat_fun = pysat_fun
+        self.arg_list = arg_list
+        self.kw_list = kw_list
         self.ui_id=None
         self.verticalLayout_8 = verticalLayout_8
         self.main()
@@ -44,6 +46,12 @@ class removenull_:
         self.pysat_fun.set_kw_list(kws, replacelast=True)
 
     def set_removenull_parameters(self):
+        if self.arg_list is not None:
+            pass
+            # datakey = self.arg_list[]
+            # colname = self.arg_list[]
+            # colname = self.arg_list[]
+
         pass
 
     def removenull_ui(self):

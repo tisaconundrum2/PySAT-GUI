@@ -18,6 +18,7 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
+
 class regression_train_:
     def __init__(self, pysat_fun, verticalLayout_8, arg_list, kw_list):
         self.arg_list = arg_list
@@ -123,7 +124,6 @@ class regression_train_:
         params = self.arg_list[5]
         ransacparams = self.arg_list[6]
         self.regression_choosedata.currentIndex(self.regression_choosedata.findText(str(datakey)))
-
 
     def make_ransac_widget(self, isChecked):
         if not isChecked:
@@ -500,7 +500,3 @@ class regression_train_:
                 obj.addItem(i[1])
         except:
             obj.addItem('None')
-
-    def helper(self):
-        # setText
-        pass
