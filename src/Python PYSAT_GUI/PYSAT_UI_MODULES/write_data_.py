@@ -20,9 +20,10 @@ except AttributeError:
 
 
 class write_data_:
-    def __init__(self, pysat_fun, verticalLayout_8):
+    def __init__(self, pysat_fun, module_layout):
         self.pysat_fun = pysat_fun
-        self.verticalLayout_8 = verticalLayout_8
+        self.ui_id = None
+        self.module_layout = module_layout
         self.main()
 
     def main(self):
@@ -69,7 +70,7 @@ class write_data_:
         self.write_data_file.setText('output.csv')
         self.write_data_vlayout.addWidget(self.write_data_file)
 
-        self.verticalLayout_8.addWidget(self.write_data)
+        self.module_layout.addWidget(self.write_data)
         self.write_data.raise_()
         self.write_data.setTitle(_translate("MainWindow", "Write to CSV", None))
 
