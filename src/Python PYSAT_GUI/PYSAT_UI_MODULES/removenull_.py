@@ -40,17 +40,17 @@ class removenull_:
         colname = self.colname_choices.currentText()
         colname = (self.vars_level0[self.vars_level1.index(colname)], colname)
 
+        ui_list = "do_removenull"
+        fun_list = "do_removenull"
         args = [datakey, colname]
         kws = {}
-        self.pysat_fun.set_arg_list(args, replacelast=True)
-        self.pysat_fun.set_kw_list(kws, replacelast=True)
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
 
     def set_removenull_parameters(self):
         if self.arg_list is not None:
-            pass
-            # datakey = self.arg_list[]
-            # colname = self.arg_list[]
-            # colname = self.arg_list[]
+            datakey = self.arg_list[0]
+            colname = self.arg_list[1]
+
 
         pass
 
