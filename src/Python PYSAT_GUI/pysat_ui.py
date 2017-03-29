@@ -45,7 +45,7 @@ class pysat_ui(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName(_fromUtf8("scrollArea"))
         self.scrollAreaWidgetContents_2 = QtGui.QWidget()
-        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 557, 800))
+        #self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 557, 800))
         font = QtGui.QFont()
         font.setPointSize(8)
         self.scrollAreaWidgetContents_2.setFont(font)
@@ -117,6 +117,8 @@ class pysat_ui(object):
         MainWindow.setMenuBar(self.menuBar)
 
         #set up data actions
+        self.actionRead_ccam = QtGui.QAction(MainWindow)
+        self.actionRead_ccam.setObjectName(_fromUtf8("actionRead_ccam"))
         self.actionLoad_reference_Data = QtGui.QAction(MainWindow)
         self.actionLoad_reference_Data.setObjectName(_fromUtf8("actionLoad_reference_Data"))
         self.actionLoad_Unknown_Data = QtGui.QAction(MainWindow)
@@ -172,6 +174,7 @@ class pysat_ui(object):
         self.actionSubmodelPredict.setObjectName(_fromUtf8("actionSubmodelPredict"))
 
         #add actions to file menu
+        self.menuFile.addAction(self.actionRead_ccam)
         self.menuFile.addAction(self.actionLoad_reference_Data)
         self.menuFile.addAction(self.actionLoad_Unknown_Data)
         self.menuFile.addAction(self.actionSet_output_location)
@@ -223,12 +226,13 @@ class pysat_ui(object):
         self.menuRegression.setTitle(_translate("MainWindow", "Regression", None))
         self.menuHelp.setTitle(_translate("MainWindow", "Help", None))
         self.menuVisualization.setTitle(_translate("MainWindow", "Visualization", None))
+        self.actionRead_ccam.setText(_translate("MainWindow","Read ChemCam Data",None))
         self.actionLoad_reference_Data.setText(_translate("MainWindow", "Load Reference Data", None))
         self.actionLoad_Unknown_Data.setText(_translate("MainWindow", "Load Unknown Data", None))
         self.actionSave_Current_Workflow.setText(_translate("MainWindow", "Save Current Workflow", None))
         self.actionSave_Current_Data.setText(_translate("MainWindow", "Save Current Data", None))
         self.actionCreate_New_Workflow.setText(_translate("MainWindow", "Create New Workflow", None))
-        self.actionOpen_Workflow.setText(_translate("MainWindow", "Open Workflow", None))
+        self.actionOpen_Workflow.setText(_translate("MainWindow", "Restore Workflow", None))
         self.actionApply_Mask.setText(_translate("MainWindow", "Apply Mask", None))
         self.actionInterpolate.setText(_translate("MainWindow", "Interpolate", None))
         self.actionRemoveNull.setText(_translate("MainWindow", "Remove Null Data", None))
@@ -255,6 +259,9 @@ class pysat_ui(object):
 
     def get_unknown_data(self, arg_list=None, kw_list=None):
         self.flag = PYSAT_UI_MODULES.get_data_u_(self.pysat_fun, self.module_layout, arg_list, kw_list)
+
+    def do_read_ccam(self,arg_list=None,kw_list=None):
+        self.flag = PYSAT_UI_MODULES.read_ccam_(self.pysat_fun,self.module_layout,arg_list,kw_list)
 
     def do_mask(self, arg_list=None, kw_list=None):
         PYSAT_UI_MODULES.get_mask_(self.pysat_fun, self.module_layout, arg_list, kw_list)
@@ -311,6 +318,7 @@ class pysat_ui(object):
         self.actionSave_Current_Workflow.setShortcut("ctrl+S")
 
     def menu_item_functions(self, MainWindow):
+        self.actionRead_ccam.triggered.connect(lambda: pysat_ui.do_read_ccam(self))
         self.actionSet_output_location.triggered.connect(lambda: pysat_ui.file_outpath(self))  # output location
         self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.get_unknown_data(self))  # unknown data
         self.actionLoad_reference_Data.triggered.connect(lambda: pysat_ui.get_known_data(self))  # known data
@@ -403,9 +411,12 @@ class pysat_ui(object):
         #   We'll need to remember 'i' so we don't accidentally run the instance too many times
         # then press ok
         # then we'll have another loop continue on it's merry way adding everything in.
+
+        #TODO: Don't run the function until the UI has been loaded
+        #TODO: allow set outpath to be run before loading data
         try:
             self.r_list = self.restore_list.pop()
-            while self.r_list[1] == "get_unknown_data" or self.r_list[1] == "get_known_data":
+            while self.r_list[1] == "get_unknown_data" or self.r_list[1] == "get_known_data" or self.r_list[1] == 'do_read_ccam':
                 getattr(pysat_ui, self.r_list[1])(self, self.r_list[3], self.r_list[4])
                 print(self.r_list)
                 self.r_list = self.restore_list.pop()
