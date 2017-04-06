@@ -31,8 +31,8 @@ class regression_train_:
         self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
         self.regression_ui()  # start the regression UI. create our submodule
         self.pysat_fun.set_greyed_modules(self.regression_train)  # set the module grey after use.
-        self.regression_ransac_checkbox.toggled.connect(  #
-            lambda: self.make_ransac_widget(self.regression_ransac_checkbox.isChecked()))  #
+        # self.regression_ransac_checkbox.toggled.connect(  #
+        #     lambda: self.make_ransac_widget(self.regression_ransac_checkbox.isChecked()))  #
         self.regression_choosealg.currentIndexChanged.connect(  #
             lambda: self.make_regression_widget(self.regression_choosealg.currentText()))  #
 
@@ -100,14 +100,14 @@ class regression_train_:
         except:
             pass
         kws = {'modelkey': modelkey}
-        if self.regression_ransac_checkbox.isChecked():
-            lossval = self.ransac_widget.ransac_lossfunc_combobox.currentText()
-            if lossval == 'Squared Error':
-                loss = 'squared_loss'
-            if lossval == 'Absolute Error':
-                loss = 'absolute_loss'
-            ransacparams = {'residual_threshold': self.ransac_widget.ransac_thresh_spin.value(),
-                            'loss': loss}
+        # if self.regression_ransac_checkbox.isChecked():
+        #     lossval = self.ransac_widget.ransac_lossfunc_combobox.currentText()
+        #     if lossval == 'Squared Error':
+        #         loss = 'squared_loss'
+        #     if lossval == 'Absolute Error':
+        #         loss = 'absolute_loss'
+        #     ransacparams = {'residual_threshold': self.ransac_widget.ransac_thresh_spin.value(),
+        #                     'loss': loss}
         ui_list = "do_regression_train"
         fun_list = "do_regression_train"
 
@@ -456,12 +456,12 @@ class regression_train_:
         self.regression_vlayout.addLayout(self.regression_choosevars_hlayout)
 
         # ransac options
-        self.ransac_hlayout = QtGui.QHBoxLayout()
-        self.regression_ransac_checkbox = QtGui.QCheckBox(self.regression_train)
-        self.regression_ransac_checkbox.setObjectName(_fromUtf8("regression_ransac_checkbox"))
-        self.regression_ransac_checkbox.setText('RANSAC')
-        self.ransac_hlayout.addWidget(self.regression_ransac_checkbox)
-        self.regression_vlayout.addLayout(self.ransac_hlayout)
+        # self.ransac_hlayout = QtGui.QHBoxLayout()
+        # self.regression_ransac_checkbox = QtGui.QCheckBox(self.regression_train)
+        # self.regression_ransac_checkbox.setObjectName(_fromUtf8("regression_ransac_checkbox"))
+        # self.regression_ransac_checkbox.setText('RANSAC')
+        # self.ransac_hlayout.addWidget(self.regression_ransac_checkbox)
+        # self.regression_vlayout.addLayout(self.ransac_hlayout)
 
         # choose regression algorithm
         self.regression_choosealg_hlayout = QtGui.QHBoxLayout()
