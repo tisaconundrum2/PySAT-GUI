@@ -33,7 +33,7 @@ class Main(QMainWindow):
         self.close()
 
 
-if __name__ == "__main__":
+def run():
     app = QApplication(sys.argv)
 
     splash_pix = QPixmap('splash.png')
@@ -47,3 +47,6 @@ if __name__ == "__main__":
     main_window.show()
     splash.finish(main_window)
     app.exec_()
+
+if __name__ == '__main__':
+    run()

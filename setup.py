@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 from os import path
 import point_spectra_gui
 
@@ -18,6 +18,11 @@ setup(
     author="Ryan B. Anderson, Nicholas Finch",
     author_email='rbanderson@usgs.gov, ngf4@nau.edu',
     license="Public Domain",
+    entry_points={
+        'console_scripts': [
+            'point_spectra_gui = point_spectra_gui.__main__:main'
+        ]
+    },
     install_requires=[
         'numpy',
         'pandas',
@@ -38,5 +43,5 @@ setup(
         'Programming Language :: Python :: 3.5',
     ],
     keywords="planetary io",
-    packages=('point_spectra_gui', 'point_spectra_gui.ui', 'point_spectra_gui.ui_modules'),
+    packages=('point_spectra_gui', 'point_spectra_gui.ui', 'point_spectra_gui.ui_modules')
 )
