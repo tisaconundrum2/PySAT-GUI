@@ -36,7 +36,7 @@ class Main(QMainWindow):
 def run():
     app = QApplication(sys.argv)
 
-    splash_pix = QPixmap('splash.png')
+    splash_pix = QPixmap('point_spectra_gui/splash.png')
     splash = QSplashScreen(splash_pix, Qt.WindowStaysOnTopHint)
     splash.setMask(splash_pix.mask())
     splash.show()

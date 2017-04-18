@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 from os import path
 import point_spectra_gui
 
@@ -30,7 +30,6 @@ setup(
     extras_requires=[
         'inspect',
         'pickle',
-        'PyQt4',
     ],
     classifiers=[
         "Development Status :: 3 - Alpha",
@@ -43,5 +42,5 @@ setup(
         'Programming Language :: Python :: 3.5',
     ],
     keywords="planetary io",
-    packages=('point_spectra_gui', 'point_spectra_gui.ui', 'point_spectra_gui.ui_modules')
+    packages=find_packages()
 )
