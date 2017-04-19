@@ -18,25 +18,5 @@ install:
     else
       wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
     fi
-  - bash miniconda.sh -b -p $HOME/miniconda
-  - export PATH="$HOME/miniconda/bin:$PATH"
-  - hash -r
-  - conda config --set always_yes yes --set changeps1 no
-  - conda update -q conda
-  # Useful for debugging any issues with conda
-  - conda info -a
-
-  # Create a virtual env and install dependencies
-  - conda env create
-  # Activate the env
-  - source activate pysat
-
-  # Dev packages
-  - pip install coverage
-  - pip install coveralls
-
-script:
-  - nosetests --with-coverage --cover-package=pysat
-
-after_success:
-  - coveralls
+  - python setup.py install
+  - pip install .
