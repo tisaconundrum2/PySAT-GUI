@@ -1,3 +1,4 @@
+import os.path
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 import sys, time
@@ -33,10 +34,12 @@ class Main(QMainWindow):
         self.close()
 
 
-if __name__ == "__main__":
+def main():
     app = QApplication(sys.argv)
+    splash_pix = QPixmap('splash.png')  # default
+    if os.path.exists('point_spectra_gui/splash.png'):
+        splash_pix = QPixmap('point_spectra_gui/splash.png')
 
-    splash_pix = QPixmap('splash.png')
     splash = QSplashScreen(splash_pix, Qt.WindowStaysOnTopHint)
     splash.setMask(splash_pix.mask())
     splash.show()
@@ -47,3 +50,7 @@ if __name__ == "__main__":
     main_window.show()
     splash.finish(main_window)
     app.exec_()
+
+
+if __name__ == '__main__':
+    main()

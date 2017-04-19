@@ -1,11 +1,10 @@
 name: pysat
 dependencies:
   - python=3
+  - inspect
   - numpy
   - pandas
-  - scipy
-  - scikit-learn
-  - yaml
-  - pip
-  - pip:
-    - pvl
+  - pickle
+  - point_spectra_gui
+  - PyQt4
+  - pysat
