@@ -2,22 +2,6 @@ from point_spectra_gui.ui_modules import make_combobox, make_listwidget
 from point_spectra_gui.ui_modules.Error_ import error_print
 from PyQt5 import QtGui, QtCore, QtWidgets
 
-try:
-    _fromUtf8 = QtCore.QString.fromUtf8
-except AttributeError:
-    def _fromUtf8(s):
-        return s
-
-try:
-    _encoding = QtWidgets.QApplication.UnicodeUTF8
-
-
-    def _translate(context, text, disambig):
-        return QtWidgets.QApplication.translate(context, text, disambig, _encoding)
-except AttributeError:
-    def _translate(context, text, disambig):
-        return QtWidgets.QApplication.translate(context, text, disambig)
-
 
 class regression_train_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list):
@@ -127,13 +111,15 @@ class regression_train_:
             params = self.arg_list[5]
             ransacparams = self.arg_list[6]
             self.regression_choosedata.setCurrentIndex(self.regression_choosedata.findText(str(datakey)))
-            #TODO: figure out how to handle multiple selections
-            self.regression_train_choosex.setCurrentItem(self.regression_train_choosex.findItems(xvars[0],QtCore.Qt.MatchExactly)[0])
-            self.regression_train_choosey.setCurrentItem(self.regression_train_choosey.findItems(yvars[0][1],QtCore.Qt.MatchExactly)[0])
+            # TODO: figure out how to handle multiple selections
+            self.regression_train_choosex.setCurrentItem(
+                self.regression_train_choosex.findItems(xvars[0], QtCore.Qt.MatchExactly)[0])
+            self.regression_train_choosey.setCurrentItem(
+                self.regression_train_choosey.findItems(yvars[0][1], QtCore.Qt.MatchExactly)[0])
             self.yvarmin_spin.setValue(yrange[0])
             self.yvarmax_spin.setValue(yrange[1])
             self.regression_choosealg.setCurrentIndex(self.regression_choosealg.findText(str(method)))
-            self.make_regression_widget(self.regression_choosealg.currentText(),params=params)
+            self.make_regression_widget(self.regression_choosealg.currentText(), params=params)
 
     def make_ransac_widget(self, isChecked):
         if not isChecked:
@@ -146,11 +132,11 @@ class regression_train_:
             self.ransac_widget.ransac_lossfunc_label.setText('Loss function:')
             self.ransac_widget.ransac_lossfunc_hlayout.addWidget(self.ransac_widget.ransac_lossfunc_label)
             self.ransac_widget.ransac_lossfunc_combobox = QtWidgets.QComboBox(self.ransac_widget)
-            self.ransac_widget.ransac_lossfunc_combobox.addItem(_fromUtf8("Squared Error"))
-            self.ransac_widget.ransac_lossfunc_combobox.addItem(_fromUtf8("Absolute Error"))
+            self.ransac_widget.ransac_lossfunc_combobox.addItem(("Squared Error"))
+            self.ransac_widget.ransac_lossfunc_combobox.addItem(("Absolute Error"))
             self.ransac_widget.ransac_lossfunc_hlayout.addWidget(self.ransac_widget.ransac_lossfunc_combobox)
             self.ransac_widget.ransac_lossfunc_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
-                                                                          QtWidgets.QSizePolicy.Minimum)
+                                                                              QtWidgets.QSizePolicy.Minimum)
             self.ransac_widget.ransac_lossfunc_hlayout.addItem(self.ransac_widget.ransac_lossfunc_spacer)
             self.ransac_widget.ransac_widget_hlayout.addLayout(self.ransac_widget.ransac_lossfunc_hlayout)
             self.ransac_widget.ransac_thresh_hlayout = QtWidgets.QHBoxLayout()
@@ -160,7 +146,7 @@ class regression_train_:
             self.ransac_widget.ransac_thresh_spin = QtWidgets.QDoubleSpinBox(self.ransac_widget)
             self.ransac_widget.ransac_thresh_hlayout.addWidget(self.ransac_widget.ransac_thresh_spin)
             self.ransac_widget.ransac_thresh_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
-                                                                        QtWidgets.QSizePolicy.Minimum)
+                                                                            QtWidgets.QSizePolicy.Minimum)
             self.ransac_widget.ransac_thresh_hlayout.addItem(self.ransac_widget.ransac_thresh_spacer)
             self.ransac_widget.ransac_widget_hlayout.addLayout(self.ransac_widget.ransac_thresh_hlayout)
             self.ransac_hlayout.addWidget(self.ransac_widget)
@@ -169,7 +155,7 @@ class regression_train_:
                 lambda: self.get_regression_parameters())
             self.ransac_widget.ransac_thresh_spin.valueChanged.connect(lambda: self.get_regression_parameters())
 
-    def make_regression_widget(self, alg,params=None):
+    def make_regression_widget(self, alg, params=None):
         print(alg)
         try:
             self.reg_widget.deleteLater()
@@ -184,7 +170,7 @@ class regression_train_:
             self.reg_widget.pls_nc_spinbox = QtWidgets.QSpinBox(self.reg_widget)
             self.reg_widget.pls_hlayout.addWidget(self.reg_widget.pls_nc_spinbox)
             self.reg_widget.pls_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
-                                                           QtWidgets.QSizePolicy.Minimum)
+                                                               QtWidgets.QSizePolicy.Minimum)
             self.reg_widget.pls_hlayout.addItem(self.reg_widget.pls_spacer)
             self.reg_widget.pls_nc_spinbox.valueChanged.connect(lambda: self.get_regression_parameters())
             if params is not None:
@@ -197,8 +183,8 @@ class regression_train_:
             self.reg_widget.gp_dim_red_label.setText('Choose dimensionality reduction method:')
             self.reg_widget.gp_dim_red_hlayout.addWidget(self.reg_widget.gp_dim_red_label)
             self.reg_widget.gp_dim_red_combobox = QtWidgets.QComboBox(self.reg_widget)
-            self.reg_widget.gp_dim_red_combobox.addItem(_fromUtf8("PCA"))
-            self.reg_widget.gp_dim_red_combobox.addItem(_fromUtf8("ICA"))
+            self.reg_widget.gp_dim_red_combobox.addItem(("PCA"))
+            self.reg_widget.gp_dim_red_combobox.addItem(("ICA"))
             self.reg_widget.gp_dim_red_hlayout.addWidget(self.reg_widget.gp_dim_red_combobox)
             self.reg_widget.gp_dim_red_nc_label = QtWidgets.QLabel()
             self.reg_widget.gp_dim_red_nc_label.setText('# of components:')
@@ -215,7 +201,7 @@ class regression_train_:
             self.reg_widget.gp_rand_starts_spin.setValue(1)
             self.reg_widget.gp_rand_starts_hlayout.addWidget(self.reg_widget.gp_rand_starts_spin)
             self.reg_widget.spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
-                                                            QtWidgets.QSizePolicy.Minimum)
+                                                                QtWidgets.QSizePolicy.Minimum)
             self.reg_widget.gp_rand_starts_hlayout.addItem(self.reg_widget.spacerItem4)
             self.reg_widget.gp_vlayout.addLayout(self.reg_widget.gp_rand_starts_hlayout)
             self.reg_widget.gp_theta_vlayout = QtWidgets.QVBoxLayout()
@@ -240,7 +226,7 @@ class regression_train_:
 
             self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_thetaU_spin)
             self.reg_widget.spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
-                                                            QtWidgets.QSizePolicy.Minimum)
+                                                                QtWidgets.QSizePolicy.Minimum)
             self.reg_widget.gp_theta_vlayout.addItem(self.reg_widget.spacerItem5)
             self.reg_widget.gp_vlayout.addLayout(self.reg_widget.gp_theta_vlayout)
             self.reg_widget.gp_dim_red_combobox.currentIndexChanged.connect(lambda: self.get_regression_parameters())
@@ -250,7 +236,8 @@ class regression_train_:
             self.reg_widget.gp_thetaL_spin.valueChanged.connect(lambda: self.get_regression_parameters())
             self.reg_widget.gp_thetaU_spin.valueChanged.connect(lambda: self.get_regression_parameters())
             if params is not None:
-                self.reg_widget.gp_dim_red_combobox.setCurrentIndex(self.reg_widget.gp_dim_red_combobox.findText(params['reduce_dim']))
+                self.reg_widget.gp_dim_red_combobox.setCurrentIndex(
+                    self.reg_widget.gp_dim_red_combobox.findText(params['reduce_dim']))
                 self.reg_widget.gp_dim_red_nc_spinbox.setValue(params['n_components'])
                 self.reg_widget.gp_rand_starts_spin.setValue(params['random_start'])
                 self.reg_widget.gp_theta0_spin.setValue(params['theta0'])
@@ -318,7 +305,7 @@ class regression_train_:
             self.reg_widget.lasso_alpha_hlayout.addWidget(self.reg_widget.lasso_alpha)
 
             self.reg_widget.lasso_alpha_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
-                                                                   QtWidgets.QSizePolicy.Minimum)
+                                                                       QtWidgets.QSizePolicy.Minimum)
             self.reg_widget.lasso_alpha_hlayout.addItem(self.reg_widget.lasso_alpha_spacer)
             self.reg_widget.lasso_vlayout.addItem(self.reg_widget.lasso_alpha_hlayout)
 
@@ -344,7 +331,7 @@ class regression_train_:
             self.reg_widget.lasso_iter_hlayout.addWidget(self.reg_widget.lasso_tol)
 
             self.reg_widget.lasso_iter_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
-                                                                  QtWidgets.QSizePolicy.Minimum)
+                                                                      QtWidgets.QSizePolicy.Minimum)
             self.reg_widget.lasso_iter_hlayout.addItem(self.reg_widget.lasso_iter_spacer)
             self.reg_widget.lasso_vlayout.addItem(self.reg_widget.lasso_iter_hlayout)
 
@@ -364,7 +351,7 @@ class regression_train_:
             self.reg_widget.lasso_checkboxes_hlayout.addWidget(self.reg_widget.lasso_cv_checkbox)
 
             self.reg_widget.lasso_checkbox_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
-                                                                      QtWidgets.QSizePolicy.Minimum)
+                                                                          QtWidgets.QSizePolicy.Minimum)
             self.reg_widget.lasso_checkboxes_hlayout.addItem(self.reg_widget.lasso_checkbox_spacer)
             self.reg_widget.lasso_vlayout.addItem(self.reg_widget.lasso_checkboxes_hlayout)
 
@@ -408,15 +395,15 @@ class regression_train_:
         font = QtGui.QFont()
         font.setPointSize(10)
         self.regression_train.setFont(font)
-        self.regression_train.setObjectName(_fromUtf8("regression_train"))
+        self.regression_train.setObjectName(("regression_train"))
         self.regression_vlayout = QtWidgets.QVBoxLayout(self.regression_train)
-        self.regression_vlayout.setObjectName(_fromUtf8("regression_vlayout"))
+        self.regression_vlayout.setObjectName(("regression_vlayout"))
         # choose data
         self.regression_choosedata_hlayout = QtWidgets.QHBoxLayout()
-        self.regression_choosedata_hlayout.setObjectName(_fromUtf8("regression_choosedata_hlayout"))
+        self.regression_choosedata_hlayout.setObjectName(("regression_choosedata_hlayout"))
         self.regression_train_choosedata_label = QtWidgets.QLabel(self.regression_train)
-        self.regression_train_choosedata_label.setObjectName(_fromUtf8("regression_train_choosedata_label"))
-        self.regression_train_choosedata_label.setText(_translate("regression_train", "Choose data:", None))
+        self.regression_train_choosedata_label.setObjectName(("regression_train_choosedata_label"))
+        self.regression_train_choosedata_label.setText(("regression_train", "Choose data:", None))
         self.regression_choosedata_hlayout.addWidget(self.regression_train_choosedata_label)
         datachoices = self.pysat_fun.datakeys
         datachoices = [i for i in datachoices if i != 'CV Results']  # prevent CV results from showing up as an option
@@ -425,21 +412,21 @@ class regression_train_:
             datachoices = ['No data has been loaded!']
         self.regression_choosedata = make_combobox(datachoices)
         self.regression_choosedata.setIconSize(QtCore.QSize(50, 20))
-        self.regression_choosedata.setObjectName(_fromUtf8("regression_choosedata"))
+        self.regression_choosedata.setObjectName(("regression_choosedata"))
         self.regression_choosedata_hlayout.addWidget(self.regression_choosedata)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.regression_choosedata_hlayout.addItem(spacerItem)
         self.regression_vlayout.addLayout(self.regression_choosedata_hlayout)
         # choose variables
         self.regression_choosevars_hlayout = QtWidgets.QHBoxLayout()
-        self.regression_choosevars_hlayout.setObjectName(_fromUtf8("regression_choosevars_hlayout"))
+        self.regression_choosevars_hlayout.setObjectName(("regression_choosevars_hlayout"))
         self.regression_choosexvars_vlayout = QtWidgets.QVBoxLayout()
         self.regression_chooseyvars_vlayout = QtWidgets.QVBoxLayout()
         self.regression_choosevars_hlayout.addLayout(self.regression_choosexvars_vlayout)
         self.regression_choosevars_hlayout.addLayout(self.regression_chooseyvars_vlayout)
         # choose x variables
         self.regression_train_choosex_label = QtWidgets.QLabel(self.regression_train)
-        self.regression_train_choosex_label.setObjectName(_fromUtf8("regression_train_choosex_label"))
+        self.regression_train_choosex_label.setObjectName(("regression_train_choosex_label"))
         self.regression_train_choosex_label.setText('X variable:')
         self.regression_choosexvars_vlayout.addWidget(self.regression_train_choosex_label)
         try:
@@ -448,12 +435,12 @@ class regression_train_:
         except:
             xvarchoices = ['None']
         self.regression_train_choosex = make_listwidget(xvarchoices)
-        self.regression_train_choosex.setObjectName(_fromUtf8("regression_train_choosex"))
+        self.regression_train_choosex.setObjectName(("regression_train_choosex"))
         self.regression_choosexvars_vlayout.addWidget(self.regression_train_choosex)
 
         # choose y variables
         self.regression_train_choosey_label = QtWidgets.QLabel(self.regression_train)
-        self.regression_train_choosey_label.setObjectName(_fromUtf8("regression_train_choosey_label"))
+        self.regression_train_choosey_label.setObjectName(("regression_train_choosey_label"))
         self.regression_train_choosey_label.setText('Y variable:')
         self.regression_chooseyvars_vlayout.addWidget(self.regression_train_choosey_label)
         try:
@@ -492,30 +479,30 @@ class regression_train_:
         # ransac options
         # self.ransac_hlayout = QtWidgets.QHBoxLayout()
         # self.regression_ransac_checkbox = QtWidgets.QCheckBox(self.regression_train)
-        # self.regression_ransac_checkbox.setObjectName(_fromUtf8("regression_ransac_checkbox"))
+        # self.regression_ransac_checkbox.setObjectName(("regression_ransac_checkbox"))
         # self.regression_ransac_checkbox.setText('RANSAC')
         # self.ransac_hlayout.addWidget(self.regression_ransac_checkbox)
         # self.regression_vlayout.addLayout(self.ransac_hlayout)
 
         # choose regression algorithm
         self.regression_choosealg_hlayout = QtWidgets.QHBoxLayout()
-        self.regression_choosealg_hlayout.setObjectName(_fromUtf8("regression_choosealg_hlayout"))
+        self.regression_choosealg_hlayout.setObjectName(("regression_choosealg_hlayout"))
         self.regression_choosealg_label = QtWidgets.QLabel(self.regression_train)
-        self.regression_choosealg_label.setObjectName(_fromUtf8("regression_choosealg_label"))
+        self.regression_choosealg_label.setObjectName(("regression_choosealg_label"))
         self.regression_choosealg_hlayout.addWidget(self.regression_choosealg_label)
         self.regression_alg_choices = ['Choose an algorithm', 'PLS', 'GP', 'OLS', 'OMP', 'Lasso', 'More to come...']
         self.regression_choosealg = make_combobox(self.regression_alg_choices)
         self.regression_choosealg.setIconSize(QtCore.QSize(50, 20))
-        self.regression_choosealg.setObjectName(_fromUtf8("regression_choosealg"))
+        self.regression_choosealg.setObjectName(("regression_choosealg"))
         self.regression_choosealg_hlayout.addWidget(self.regression_choosealg)
         regression_choosealg_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
-                                                        QtWidgets.QSizePolicy.Minimum)
+                                                            QtWidgets.QSizePolicy.Minimum)
         self.regression_choosealg_hlayout.addItem(regression_choosealg_spacer)
         self.regression_vlayout.addLayout(self.regression_choosealg_hlayout)
 
         self.module_layout.addWidget(self.regression_train)
         self.regression_train.raise_()
-        self.regression_train.setTitle(_translate("regression_train", "Regression - Train", None))
+        self.regression_train.setTitle(("regression_train", "Regression - Train", None))
 
         self.regression_choosedata.currentIndexChanged.connect(lambda: self.get_regression_parameters())
         self.regression_choosealg.currentIndexChanged.connect(lambda: self.get_regression_parameters())

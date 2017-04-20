@@ -4,22 +4,6 @@ from point_spectra_gui import ui_modules
 from point_spectra_gui.pysat_func import pysat_func
 import pickle
 
-try:
-    _fromUtf8 = QtCore.QString.fromUtf8
-except AttributeError:
-    def _fromUtf8(s):
-        return s
-
-try:
-    _encoding = QtWidgets.QApplication.UnicodeUTF8
-
-
-    def _translate(context, text, disambig):
-        return QtWidgets.QApplication.translate(context, text, disambig, _encoding)
-except AttributeError:
-    def _translate(context, text, disambig):
-        return QtWidgets.QApplication.translate(context, text, disambig)
-
 
 class pysat_ui(object):
     def __init__(self):
@@ -34,50 +18,50 @@ class pysat_ui(object):
     ============================================== """
 
     def main_window(self, MainWindow):
-        MainWindow.setObjectName(_fromUtf8("MainWindow"))
+        MainWindow.setObjectName(("MainWindow"))
         MainWindow.resize(800, 1000)
         self.centralWidget = QtWidgets.QWidget(MainWindow)
-        self.centralWidget.setObjectName(_fromUtf8("centralWidget"))
+        self.centralWidget.setObjectName(("centralWidget"))
         self.scrollarea_layout = QtWidgets.QVBoxLayout(self.centralWidget)
         self.scrollarea_layout.setContentsMargins(11, 11, 11, 11)
         self.scrollarea_layout.setSpacing(6)
-        self.scrollarea_layout.setObjectName(_fromUtf8("scrollarea_layout"))
+        self.scrollarea_layout.setObjectName(("scrollarea_layout"))
         self.scrollArea = QtWidgets.QScrollArea(self.centralWidget)
         self.scrollArea.setWidgetResizable(True)
-        self.scrollArea.setObjectName(_fromUtf8("scrollArea"))
+        self.scrollArea.setObjectName(("scrollArea"))
         self.scrollAreaWidgetContents_2 = QtWidgets.QWidget()
-        #self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 557, 800))
+        # self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 557, 800))
         font = QtGui.QFont()
         font.setPointSize(8)
         self.scrollAreaWidgetContents_2.setFont(font)
-        self.scrollAreaWidgetContents_2.setStyleSheet(_fromUtf8("QGroupBox {\n"
-                                                                "  border: 2px solid gray;\n"
-                                                                "  border-radius: 6px;\n"
-                                                                "  margin-top: 0.5em;\n"
-                                                                "}\n"
-                                                                "\n"
-                                                                "QGroupBox::title {\n"
-                                                                "\n"
-                                                                "  padding-top: -14px;\n"
-                                                                "  padding-left: 8px;\n"
-                                                                "}\n"
-                                                                ""))
-        self.scrollAreaWidgetContents_2.setObjectName(_fromUtf8("scrollAreaWidgetContents_2"))
+        self.scrollAreaWidgetContents_2.setStyleSheet(("QGroupBox {\n"
+                                                       "  border: 2px solid gray;\n"
+                                                       "  border-radius: 6px;\n"
+                                                       "  margin-top: 0.5em;\n"
+                                                       "}\n"
+                                                       "\n"
+                                                       "QGroupBox::title {\n"
+                                                       "\n"
+                                                       "  padding-top: -14px;\n"
+                                                       "  padding-left: 8px;\n"
+                                                       "}\n"
+                                                       ""))
+        self.scrollAreaWidgetContents_2.setObjectName(("scrollAreaWidgetContents_2"))
         self.module_layout = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.module_layout.setContentsMargins(11, 11, 11, 11)
         self.module_layout.setSpacing(6)
-        self.module_layout.setObjectName(_fromUtf8("module_layout"))
+        self.module_layout.setObjectName(("module_layout"))
         self.scrollArea.setWidget(self.scrollAreaWidgetContents_2)
         self.scrollarea_layout.addWidget(self.scrollArea)
         self.OK = QtWidgets.QGroupBox(self.centralWidget)
-        self.OK.setObjectName(_fromUtf8("OK"))
+        self.OK.setObjectName(("OK"))
         self.ok = QtWidgets.QHBoxLayout(self.OK)
         self.ok.setContentsMargins(11, 11, 11, 11)
         self.ok.setSpacing(6)
-        self.ok.setObjectName(_fromUtf8("ok"))
+        self.ok.setObjectName(("ok"))
         self.progressBar = QtWidgets.QProgressBar(self.OK)
         self.progressBar.setProperty("value", 0)
-        self.progressBar.setObjectName(_fromUtf8("progressBar"))
+        self.progressBar.setObjectName(("progressBar"))
         self.ok.addWidget(self.progressBar)
         self.delButton = QtWidgets.QPushButton(self.OK)
         self.okButton = QtWidgets.QPushButton(self.OK)
@@ -89,92 +73,90 @@ class pysat_ui(object):
         self.ok.addWidget(self.delButton)
         self.okButton.setFont(font)
         self.okButton.setMouseTracking(False)
-        self.okButton.setObjectName(_fromUtf8("okButton"))
+        self.okButton.setObjectName(("okButton"))
         self.ok.addWidget(self.okButton)
         self.scrollarea_layout.addWidget(self.OK)
 
-
-
         MainWindow.setCentralWidget(self.centralWidget)
         self.mainToolBar = QtWidgets.QToolBar(MainWindow)
-        self.mainToolBar.setObjectName(_fromUtf8("mainToolBar"))
+        self.mainToolBar.setObjectName(("mainToolBar"))
         MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.mainToolBar)
         self.statusBar = QtWidgets.QStatusBar(MainWindow)
-        self.statusBar.setObjectName(_fromUtf8("statusBar"))
+        self.statusBar.setObjectName(("statusBar"))
         MainWindow.setStatusBar(self.statusBar)
         self.menuBar = QtWidgets.QMenuBar(MainWindow)
         self.menuBar.setGeometry(QtCore.QRect(0, 0, 581, 26))
-        self.menuBar.setObjectName(_fromUtf8("menuBar"))
+        self.menuBar.setObjectName(("menuBar"))
         self.menuFile = QtWidgets.QMenu(self.menuBar)
-        self.menuFile.setObjectName(_fromUtf8("menuFile"))
+        self.menuFile.setObjectName(("menuFile"))
         self.menuPreprocessing = QtWidgets.QMenu(self.menuBar)
-        self.menuPreprocessing.setObjectName(_fromUtf8("menuPreprocessing"))
+        self.menuPreprocessing.setObjectName(("menuPreprocessing"))
         self.menuRegression = QtWidgets.QMenu(self.menuBar)
-        self.menuRegression.setObjectName(_fromUtf8("menuRegression"))
+        self.menuRegression.setObjectName(("menuRegression"))
         self.menuHelp = QtWidgets.QMenu(self.menuBar)
-        self.menuHelp.setObjectName(_fromUtf8("menuHelp"))
+        self.menuHelp.setObjectName(("menuHelp"))
         self.menuVisualization = QtWidgets.QMenu(self.menuBar)
-        self.menuVisualization.setObjectName(_fromUtf8("menuVisualization"))
+        self.menuVisualization.setObjectName(("menuVisualization"))
         MainWindow.setMenuBar(self.menuBar)
 
-        #set up data actions
+        # set up data actions
         self.actionRead_ccam = QtWidgets.QAction(MainWindow)
-        self.actionRead_ccam.setObjectName(_fromUtf8("actionRead_ccam"))
+        self.actionRead_ccam.setObjectName(("actionRead_ccam"))
         self.actionLoad_reference_Data = QtWidgets.QAction(MainWindow)
-        self.actionLoad_reference_Data.setObjectName(_fromUtf8("actionLoad_reference_Data"))
+        self.actionLoad_reference_Data.setObjectName(("actionLoad_reference_Data"))
         self.actionLoad_Unknown_Data = QtWidgets.QAction(MainWindow)
-        self.actionLoad_Unknown_Data.setObjectName(_fromUtf8("actionLoad_Unknown_Data"))
+        self.actionLoad_Unknown_Data.setObjectName(("actionLoad_Unknown_Data"))
         self.actionSave_Current_Workflow = QtWidgets.QAction(MainWindow)
-        self.actionSave_Current_Workflow.setObjectName(_fromUtf8("actionSave_Current_Workflow"))
+        self.actionSave_Current_Workflow.setObjectName(("actionSave_Current_Workflow"))
         self.actionSave_Current_Data = QtWidgets.QAction(MainWindow)
-        self.actionSave_Current_Data.setObjectName(_fromUtf8("actionSave_Current_Data"))
+        self.actionSave_Current_Data.setObjectName(("actionSave_Current_Data"))
         self.actionCreate_New_Workflow = QtWidgets.QAction(MainWindow)
-        self.actionCreate_New_Workflow.setObjectName(_fromUtf8("actionCreate_New_Workflow"))
+        self.actionCreate_New_Workflow.setObjectName(("actionCreate_New_Workflow"))
         self.actionOpen_Workflow = QtWidgets.QAction(MainWindow)
-        self.actionOpen_Workflow.setObjectName(_fromUtf8("actionOpen_Workflow"))
+        self.actionOpen_Workflow.setObjectName(("actionOpen_Workflow"))
         self.actionSet_output_location = QtWidgets.QAction(MainWindow)
-        self.actionSet_output_location.setObjectName(_fromUtf8("actionSet_output_location"))
+        self.actionSet_output_location.setObjectName(("actionSet_output_location"))
 
-        #set up preprocessing actions
+        # set up preprocessing actions
         self.actionRemoveNull = QtWidgets.QAction(MainWindow)
-        self.actionRemoveNull.setObjectName(_fromUtf8("actionRemoveNull"))
+        self.actionRemoveNull.setObjectName(("actionRemoveNull"))
         self.actionApply_Mask = QtWidgets.QAction(MainWindow)
-        self.actionApply_Mask.setObjectName(_fromUtf8("actionApply_Mask"))
+        self.actionApply_Mask.setObjectName(("actionApply_Mask"))
         self.actionInterpolate = QtWidgets.QAction(MainWindow)
-        self.actionInterpolate.setObjectName(_fromUtf8("actionInterpolate"))
+        self.actionInterpolate.setObjectName(("actionInterpolate"))
         self.actionStratified_Folds = QtWidgets.QAction(MainWindow)
-        self.actionStratified_Folds.setObjectName(_fromUtf8("actionStratified_Folds"))
+        self.actionStratified_Folds.setObjectName(("actionStratified_Folds"))
         self.actionAbout = QtWidgets.QAction(MainWindow)
-        self.actionAbout.setObjectName(_fromUtf8("actionAbout"))
+        self.actionAbout.setObjectName(("actionAbout"))
         self.actionAbout_QtCreator = QtWidgets.QAction(MainWindow)
-        self.actionAbout_QtCreator.setObjectName(_fromUtf8("actionAbout_QtCreator"))
+        self.actionAbout_QtCreator.setObjectName(("actionAbout_QtCreator"))
         self.actionExit = QtWidgets.QAction(MainWindow)
-        self.actionExit.setObjectName(_fromUtf8("actionExit"))
+        self.actionExit.setObjectName(("actionExit"))
         self.actionNormalization = QtWidgets.QAction(MainWindow)
-        self.actionNormalization.setObjectName(_fromUtf8("actionNormalization"))
-        self.actionDimRed=QtWidgets.QAction(MainWindow)
-        self.actionDimRed.setObjectName(_fromUtf8("actionDimRed"))
+        self.actionNormalization.setObjectName(("actionNormalization"))
+        self.actionDimRed = QtWidgets.QAction(MainWindow)
+        self.actionDimRed.setObjectName(("actionDimRed"))
 
-#set up regression actions
+        # set up regression actions
         self.actionCross_Validation = QtWidgets.QAction(MainWindow)
-        self.actionCross_Validation.setObjectName(_fromUtf8("actionCross_Validation"))
+        self.actionCross_Validation.setObjectName(("actionCross_Validation"))
         self.actionTrain = QtWidgets.QAction(MainWindow)
-        self.actionTrain.setObjectName(_fromUtf8("actionTrain"))
+        self.actionTrain.setObjectName(("actionTrain"))
         self.actionPredict = QtWidgets.QAction(MainWindow)
-        self.actionPredict.setObjectName(_fromUtf8("actionPredict"))
+        self.actionPredict.setObjectName(("actionPredict"))
 
-#set up plotting actions
+        # set up plotting actions
         self.actionPlot = QtWidgets.QAction(MainWindow)
-        self.actionPlot.setObjectName(_fromUtf8("actionPlot"))
+        self.actionPlot.setObjectName(("actionPlot"))
         self.actionPlotDimRed = QtWidgets.QAction(MainWindow)
-        self.actionPlotDimRed.setObjectName(_fromUtf8("actionPlot"))
+        self.actionPlotDimRed.setObjectName(("actionPlot"))
 
         self.actionTrain_Submodels = QtWidgets.QAction(MainWindow)
-        self.actionTrain_Submodels.setObjectName(_fromUtf8("actionTrain_Submodels"))
+        self.actionTrain_Submodels.setObjectName(("actionTrain_Submodels"))
         self.actionSubmodelPredict = QtWidgets.QAction(MainWindow)
-        self.actionSubmodelPredict.setObjectName(_fromUtf8("actionSubmodelPredict"))
+        self.actionSubmodelPredict.setObjectName(("actionSubmodelPredict"))
 
-        #add actions to file menu
+        # add actions to file menu
         self.menuFile.addAction(self.actionRead_ccam)
         self.menuFile.addAction(self.actionLoad_reference_Data)
         self.menuFile.addAction(self.actionLoad_Unknown_Data)
@@ -188,7 +170,7 @@ class pysat_ui(object):
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionExit)
 
-        #add actions to preprocessing
+        # add actions to preprocessing
         self.menuPreprocessing.addAction(self.actionRemoveNull)
         self.menuPreprocessing.addAction(self.actionInterpolate)
         self.menuPreprocessing.addAction(self.actionApply_Mask)
@@ -196,22 +178,22 @@ class pysat_ui(object):
         self.menuPreprocessing.addAction(self.actionDimRed)
         self.menuPreprocessing.addAction(self.actionStratified_Folds)
 
-        #add actions to regression menu
+        # add actions to regression menu
         self.menuRegression.addAction(self.actionCross_Validation)
         self.menuRegression.addAction(self.actionTrain)
         self.menuRegression.addAction(self.actionSubmodelPredict)
         self.menuRegression.addAction(self.actionPredict)
 
-        #add actions to help menu
+        # add actions to help menu
         self.menuHelp.addSeparator()
         self.menuHelp.addAction(self.actionAbout)
         self.menuHelp.addAction(self.actionAbout_QtCreator)
 
-        #add actions to plot menu
+        # add actions to plot menu
         self.menuVisualization.addAction(self.actionPlot)
         self.menuVisualization.addAction(self.actionPlotDimRed)
 
-        #add menu actions
+        # add menu actions
         self.menuBar.addAction(self.menuFile.menuAction())
         self.menuBar.addAction(self.menuPreprocessing.menuAction())
         self.menuBar.addAction(self.menuRegression.menuAction())
@@ -219,39 +201,39 @@ class pysat_ui(object):
         self.menuBar.addAction(self.menuHelp.menuAction())
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        MainWindow.setWindowTitle(_translate("MainWindow", "PYSAT", None))
-        self.okButton.setText(_translate("MainWindow", "OK", None))
-        self.delButton.setText(_translate("MainWindow", "Delete Module", None))
-        self.menuFile.setTitle(_translate("MainWindow", "File", None))
-        self.menuPreprocessing.setTitle(_translate("MainWindow", "Preprocessing", None))
-        self.menuRegression.setTitle(_translate("MainWindow", "Regression", None))
-        self.menuHelp.setTitle(_translate("MainWindow", "Help", None))
-        self.menuVisualization.setTitle(_translate("MainWindow", "Visualization", None))
-        self.actionRead_ccam.setText(_translate("MainWindow","Read ChemCam Data",None))
-        self.actionLoad_reference_Data.setText(_translate("MainWindow", "Load Reference Data", None))
-        self.actionLoad_Unknown_Data.setText(_translate("MainWindow", "Load Unknown Data", None))
-        self.actionSave_Current_Workflow.setText(_translate("MainWindow", "Save Current Workflow", None))
-        self.actionSave_Current_Data.setText(_translate("MainWindow", "Save Current Data", None))
-        self.actionCreate_New_Workflow.setText(_translate("MainWindow", "Create New Workflow", None))
-        self.actionOpen_Workflow.setText(_translate("MainWindow", "Restore Workflow", None))
-        self.actionApply_Mask.setText(_translate("MainWindow", "Apply Mask", None))
-        self.actionInterpolate.setText(_translate("MainWindow", "Interpolate", None))
-        self.actionRemoveNull.setText(_translate("MainWindow", "Remove Null Data", None))
-        self.actionDimRed.setText((_translate("MainWindow","Dimensionality Reduction",None)))
-        self.actionAbout.setText(_translate("MainWindow", "About...", None))
-        self.actionAbout_QtCreator.setText(_translate("MainWindow", "About Qt...", None))
-        self.actionExit.setText(_translate("MainWindow", "Exit", None))
-        self.actionNormalization.setText(_translate("MainWindow", "Normalization", None))
-        self.actionCross_Validation.setText(_translate("MainWindow", "Cross Validation", None))
-        self.actionTrain.setText(_translate("MainWindow", "Train", None))
-        self.actionSubmodelPredict.setText(_translate("MainWindow", "Submodel Predict", None))
-        self.actionPredict.setText(_translate("MainWindow", "Predict", None))
-        self.actionPlot.setText(_translate("MainWindow", "Plot", None))
-        self.actionPlotDimRed.setText(_translate("MainWindow", "Plot ICA/PCA", None))
+        MainWindow.setWindowTitle(("MainWindow", "PYSAT", None))
+        self.okButton.setText(("MainWindow", "OK", None))
+        self.delButton.setText(("MainWindow", "Delete Module", None))
+        self.menuFile.setTitle(("MainWindow", "File", None))
+        self.menuPreprocessing.setTitle(("MainWindow", "Preprocessing", None))
+        self.menuRegression.setTitle(("MainWindow", "Regression", None))
+        self.menuHelp.setTitle(("MainWindow", "Help", None))
+        self.menuVisualization.setTitle(("MainWindow", "Visualization", None))
+        self.actionRead_ccam.setText(("MainWindow", "Read ChemCam Data", None))
+        self.actionLoad_reference_Data.setText(("MainWindow", "Load Reference Data", None))
+        self.actionLoad_Unknown_Data.setText(("MainWindow", "Load Unknown Data", None))
+        self.actionSave_Current_Workflow.setText(("MainWindow", "Save Current Workflow", None))
+        self.actionSave_Current_Data.setText(("MainWindow", "Save Current Data", None))
+        self.actionCreate_New_Workflow.setText(("MainWindow", "Create New Workflow", None))
+        self.actionOpen_Workflow.setText(("MainWindow", "Restore Workflow", None))
+        self.actionApply_Mask.setText(("MainWindow", "Apply Mask", None))
+        self.actionInterpolate.setText(("MainWindow", "Interpolate", None))
+        self.actionRemoveNull.setText(("MainWindow", "Remove Null Data", None))
+        self.actionDimRed.setText((("MainWindow", "Dimensionality Reduction", None)))
+        self.actionAbout.setText(("MainWindow", "About...", None))
+        self.actionAbout_QtCreator.setText(("MainWindow", "About Qt...", None))
+        self.actionExit.setText(("MainWindow", "Exit", None))
+        self.actionNormalization.setText(("MainWindow", "Normalization", None))
+        self.actionCross_Validation.setText(("MainWindow", "Cross Validation", None))
+        self.actionTrain.setText(("MainWindow", "Train", None))
+        self.actionSubmodelPredict.setText(("MainWindow", "Submodel Predict", None))
+        self.actionPredict.setText(("MainWindow", "Predict", None))
+        self.actionPlot.setText(("MainWindow", "Plot", None))
+        self.actionPlotDimRed.setText(("MainWindow", "Plot ICA/PCA", None))
 
-        self.actionSet_output_location.setText(_translate("MainWindow", "Set Output Path", None))
+        self.actionSet_output_location.setText(("MainWindow", "Set Output Path", None))
 
-        self.actionStratified_Folds.setText(_translate("MainWindow", "Stratified Folds", None))
+        self.actionStratified_Folds.setText(("MainWindow", "Stratified Folds", None))
         self.okButton.clicked.connect(lambda: self.on_okButton_clicked())
         self.delButton.clicked.connect(lambda: self.pysat_fun.del_layout())
 
@@ -261,14 +243,14 @@ class pysat_ui(object):
     def get_unknown_data(self, arg_list=None, kw_list=None):
         self.flag = ui_modules.get_data_u_(self.pysat_fun, self.module_layout, arg_list, kw_list)
 
-    def do_read_ccam(self,arg_list=None,kw_list=None):
-        self.flag = ui_modules.read_ccam_(self.pysat_fun,self.module_layout,arg_list,kw_list)
+    def do_read_ccam(self, arg_list=None, kw_list=None):
+        self.flag = ui_modules.read_ccam_(self.pysat_fun, self.module_layout, arg_list, kw_list)
 
     def do_mask(self, arg_list=None, kw_list=None):
         ui_modules.get_mask_(self.pysat_fun, self.module_layout, arg_list, kw_list)
 
     def do_write_data(self):
-        self.flag = ui_modules.write_data_(self.pysat_fun,self.module_layout)
+        self.flag = ui_modules.write_data_(self.pysat_fun, self.module_layout)
 
     def file_outpath(self, arg_list=None, kw_list=None):
         self.flag = ui_modules.file_outpath_(self.pysat_fun, self.module_layout, arg_list, kw_list)
@@ -283,7 +265,7 @@ class pysat_ui(object):
         ui_modules.strat_folds_(self.pysat_fun, self.module_layout, arg_list, kw_list)
 
     def do_dim_red(self, arg_list=None, kw_list=None):
-        ui_modules.dim_reduction_(self.pysat_fun, self.module_layout,arg_list,kw_list)
+        ui_modules.dim_reduction_(self.pysat_fun, self.module_layout, arg_list, kw_list)
 
     def do_regression_train(self, arg_list=None, kw_list=None):
         ui_modules.regression_train_(self.pysat_fun, self.module_layout, arg_list, kw_list)
@@ -298,7 +280,7 @@ class pysat_ui(object):
         ui_modules.plot_(self.pysat_fun, self.module_layout, arg_list, kw_list)
 
     def do_plot_dim_red(self, arg_list=None, kw_list=None):
-        ui_modules.dim_red_plot_(self.pysat_fun, self.module_layout,arg_list,kw_list)
+        ui_modules.dim_red_plot_(self.pysat_fun, self.module_layout, arg_list, kw_list)
 
     def do_cv(self, arg_list=None, kw_list=None):
         ui_modules.cv_(self.pysat_fun, self.module_layout, arg_list, kw_list)
@@ -334,21 +316,22 @@ class pysat_ui(object):
         self.actionPlot.triggered.connect(lambda: pysat_ui.do_plot(self))
         self.actionPlotDimRed.triggered.connect(lambda: pysat_ui.do_plot_dim_red(self))
         self.actionCross_Validation.triggered.connect(lambda: pysat_ui.do_cv(self))
-        self.actionSubmodelPredict.triggered.connect(lambda:pysat_ui.do_submodel_predict(self))
+        self.actionSubmodelPredict.triggered.connect(lambda: pysat_ui.do_submodel_predict(self))
         self.actionDimRed.triggered.connect(lambda: pysat_ui.do_dim_red(self))
         self.actionOpen_Workflow.triggered.connect(lambda: self.on_load_clicked())
         self.actionSave_Current_Workflow.triggered.connect(lambda: self.on_save_clicked())
         self.set_greyed_out_items(True)
-#        self.set_visible_items()
 
-        # TODO add auto scroll down feature
-        # self.scrollArea.findChildren().triggered.connect(self.scrollArea.verticalScrollBar().setValue(self.scrollArea.verticalScrollBar().value()+10))
+    #        self.set_visible_items()
 
-        # These are the Restore functions
-        #self.actionRemoveNull.triggered.connect(lambda: self.set_ui_list("do_removenull"))
-        #self.actionPredict.triggered.connect(lambda: self.set_ui_list("do_regression_predict"))  # regression predict
-        # self.actionPlot.triggered.connect(lambda: self.set_ui_list("do_plot"))
-        # self.actionCross_Validation.triggered.connect(lambda: self.set_ui_list("do_cv"))
+    # TODO add auto scroll down feature
+    # self.scrollArea.findChildren().triggered.connect(self.scrollArea.verticalScrollBar().setValue(self.scrollArea.verticalScrollBar().value()+10))
+
+    # These are the Restore functions
+    # self.actionRemoveNull.triggered.connect(lambda: self.set_ui_list("do_removenull"))
+    # self.actionPredict.triggered.connect(lambda: self.set_ui_list("do_regression_predict"))  # regression predict
+    # self.actionPlot.triggered.connect(lambda: self.set_ui_list("do_plot"))
+    # self.actionCross_Validation.triggered.connect(lambda: self.set_ui_list("do_cv"))
 
     def set_greyed_out_items(self, bool):
         self.actionTrain.setDisabled(bool)
@@ -367,17 +350,17 @@ class pysat_ui(object):
         self.actionDimRed.setDisabled(bool)
         self.actionPlotDimRed.setDisabled(bool)
 
-#    def set_visible_items(self):
-#    def set_visible_items(self):
-        # self.actionNoise_Reduction.setVisible(False)
-        # self.actionInstrument_Response.setVisible(False)
-        # self.menuBaseline_Removal.deleteLater()
-        # self.menuCalibration_Transfer.deleteLater()
-        # self.actionICA.setVisible(False)
-        # self.actionPCA.setVisible(False)
-        # self.actionICA_2.setVisible(False)
-        # self.actionPCA_2.setVisible(False)
-        # self.menuClassification.setTitle("")
+    #    def set_visible_items(self):
+    #    def set_visible_items(self):
+    # self.actionNoise_Reduction.setVisible(False)
+    # self.actionInstrument_Response.setVisible(False)
+    # self.menuBaseline_Removal.deleteLater()
+    # self.menuCalibration_Transfer.deleteLater()
+    # self.actionICA.setVisible(False)
+    # self.actionPCA.setVisible(False)
+    # self.actionICA_2.setVisible(False)
+    # self.actionPCA_2.setVisible(False)
+    # self.menuClassification.setTitle("")
 
     def handleMenuHovered(self, action):
         QtWidgets.QToolTip.showText(self, None, action, None)
@@ -392,7 +375,8 @@ class pysat_ui(object):
 
     def on_save_clicked(self):
         try:
-            filename, _filter = QtWidgets.QFileDialog.getSaveFileName(None, "Choose where you want save your file", '.', '(*.wrf)')
+            filename, _filter = QtWidgets.QFileDialog.getSaveFileName(None, "Choose where you want save your file", '.',
+                                                                      '(*.wrf)')
             print(filename)
             with open(filename, 'wb') as fp:
                 pickle.dump(self.pysat_fun.get_list(), fp)
@@ -415,11 +399,12 @@ class pysat_ui(object):
         # then press ok
         # then we'll have another loop continue on it's merry way adding everything in.
 
-        #TODO: Don't run the function until the UI has been loaded
-        #TODO: allow set outpath to be run before loading data
+        # TODO: Don't run the function until the UI has been loaded
+        # TODO: allow set outpath to be run before loading data
         try:
             self.r_list = self.restore_list.pop()
-            while self.r_list[1] == "get_unknown_data" or self.r_list[1] == "get_known_data" or self.r_list[1] == 'do_read_ccam':
+            while self.r_list[1] == "get_unknown_data" or self.r_list[1] == "get_known_data" or self.r_list[
+                1] == 'do_read_ccam':
                 getattr(pysat_ui, self.r_list[1])(self, self.r_list[3], self.r_list[4])
                 print(self.r_list)
                 self.r_list = self.restore_list.pop()

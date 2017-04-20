@@ -2,16 +2,6 @@ from PyQt5 import QtGui, QtCore, QtWidgets
 from point_spectra_gui.ui_modules.Error_ import error_print
 from pysat.utils.gui_utils import make_combobox
 
-try:
-    _encoding = QtWidgets.QApplication.UnicodeUTF8
-
-
-    def _translate(context, text, disambig):
-        return QtWidgets.QApplication.translate(context, text, disambig, _encoding)
-except AttributeError:
-    def _translate(context, text, disambig):
-        return QtWidgets.QApplication.translate(context, text, disambig)
-
 
 class interpolation_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list):
@@ -74,9 +64,9 @@ class interpolation_:
         self.verticalLayout.addLayout(self.choosedata_layout_2)
         self.module_layout.addWidget(self.Interpolation)
 
-        self.Interpolation.setTitle(_translate("MainWindow", "Interpolation", None))
-        self.interpolation_choosedata_label.setText(_translate("MainWindow", "Choose data to interpolate: ", None))
-        self.interpolation_choosedata_label_2.setText(_translate("MainWindow", "Choose data to use as reference: ", None))
+        self.Interpolation.setTitle(("MainWindow", "Interpolation", None))
+        self.interpolation_choosedata_label.setText(("MainWindow", "Choose data to interpolate: ", None))
+        self.interpolation_choosedata_label_2.setText(("MainWindow", "Choose data to use as reference: ", None))
         self.set_parameters()
 
     def set_parameters(self):

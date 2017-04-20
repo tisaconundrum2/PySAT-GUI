@@ -1,11 +1,11 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
 
 try:
-    def _translate(context, text, disambig):
+    def (context, text, disambig):
         return QtWidgets.QApplication.translate(context, text, disambig, QtWidgets.QApplication.UnicodeUTF8)
 
 except AttributeError:
-    def _translate(context, text, disambig):
+    def (context, text, disambig):
         return QtWidgets.QApplication.translate(context, text, disambig)
 
 
@@ -49,10 +49,10 @@ class file_outpath_:
         self.horizontalLayout.addWidget(self.file_out_path_button)
         self.module_layout.addWidget(self.file_out_path)
 
-        self.file_out_path.setTitle(_translate("MainWindow", "Ouput Folder", None))
-        self.file_out_path_label.setText(_translate("MainWindow", "Folder Name", None))
-        self.file_out_path_line_edit.setText(_translate("MainWindow", "*/", None))
-        self.file_out_path_button.setText(_translate("MainWindow", "...", None))
+        self.file_out_path.setTitle(("MainWindow", "Ouput Folder", None))
+        self.file_out_path_label.setText(("MainWindow", "Folder Name", None))
+        self.file_out_path_line_edit.setText(("MainWindow", "*/", None))
+        self.file_out_path_button.setText(("MainWindow", "...", None))
         self.set_parameters()
 
     def set_parameters(self):

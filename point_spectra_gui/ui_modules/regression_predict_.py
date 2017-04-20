@@ -1,25 +1,9 @@
 from point_spectra_gui.ui_modules.Error_ import error_print
 from PyQt5 import QtGui, QtCore, QtWidgets
 
-try:
-    _fromUtf8 = QtCore.QString.fromUtf8
-except AttributeError:
-    def _fromUtf8(s):
-        return s
-
-try:
-    _encoding = QtWidgets.QApplication.UnicodeUTF8
-
-
-    def _translate(context, text, disambig):
-        return QtWidgets.QApplication.translate(context, text, disambig, _encoding)
-except AttributeError:
-    def _translate(context, text, disambig):
-        return QtWidgets.QApplication.translate(context, text, disambig)
-
 
 class regression_predict_:
-    def __init__(self, pysat_fun, module_layout,arg_list,kw_list):
+    def __init__(self, pysat_fun, module_layout, arg_list, kw_list):
         self.pysat_fun = pysat_fun
         self.ui_id = None
         self.module_layout = module_layout
@@ -41,10 +25,9 @@ class regression_predict_:
 
         args = [datakey, modelkey, predictname]
         kws = {}
-        ui_list='do_regression_predict'
-        fun_list='do_regression_predict'
+        ui_list = 'do_regression_predict'
+        fun_list = 'do_regression_predict'
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
-
 
     def set_predict_parameters(self):
         pass
@@ -54,14 +37,14 @@ class regression_predict_:
         font = QtGui.QFont()
         font.setPointSize(10)
         self.regression_predict.setFont(font)
-        self.regression_predict.setObjectName(_fromUtf8("regression_predict"))
+        self.regression_predict.setObjectName(("regression_predict"))
         self.regression_predict_vlayout = QtWidgets.QVBoxLayout(self.regression_predict)
-        self.regression_predict_vlayout.setObjectName(_fromUtf8("regression_vlayout"))
+        self.regression_predict_vlayout.setObjectName(("regression_vlayout"))
         # create a layout for choosing data to predict on
         self.regression_predict_choosedata_hlayout = QtWidgets.QHBoxLayout()
-        self.regression_predict_choosedata_hlayout.setObjectName(_fromUtf8("regression_predict_choosedata_hlayout"))
+        self.regression_predict_choosedata_hlayout.setObjectName(("regression_predict_choosedata_hlayout"))
         self.regression_predict_choosedata_label = QtWidgets.QLabel(self.regression_predict)
-        self.regression_predict_choosedata_label.setObjectName(_fromUtf8("regression_predict_choosedata_label"))
+        self.regression_predict_choosedata_label.setObjectName(("regression_predict_choosedata_label"))
         self.regression_predict_choosedata_hlayout.addWidget(self.regression_predict_choosedata_label)
         # create the combobox with data choices
         datachoices = self.pysat_fun.datakeys
@@ -70,16 +53,16 @@ class regression_predict_:
             datachoices = ['No data has been loaded!']
         self.regression_predict_choosedata = make_combobox(datachoices)
         self.regression_predict_choosedata.setIconSize(QtCore.QSize(50, 20))
-        self.regression_predict_choosedata.setObjectName(_fromUtf8("regression_predict_choosedata"))
+        self.regression_predict_choosedata.setObjectName(("regression_predict_choosedata"))
         self.regression_predict_choosedata_hlayout.addWidget(self.regression_predict_choosedata)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.regression_predict_choosedata_hlayout.addItem(spacerItem)
         self.regression_predict_vlayout.addLayout(self.regression_predict_choosedata_hlayout)
         # create a layout for choosing which model to use
         self.regression_predict_choosemodel_hlayout = QtWidgets.QHBoxLayout()
-        self.regression_predict_choosemodel_hlayout.setObjectName(_fromUtf8("regression_predict_choosemodel_hlayout"))
+        self.regression_predict_choosemodel_hlayout.setObjectName(("regression_predict_choosemodel_hlayout"))
         self.regression_predict_choosemodel_label = QtWidgets.QLabel(self.regression_predict)
-        self.regression_predict_choosemodel_label.setObjectName(_fromUtf8("regression_predict_choosemodel_label"))
+        self.regression_predict_choosemodel_label.setObjectName(("regression_predict_choosemodel_label"))
         self.regression_predict_choosemodel_hlayout.addWidget(self.regression_predict_choosemodel_label)
         # create the combobox with model choices
 
@@ -89,7 +72,7 @@ class regression_predict_:
             modelchoices = ['No model has been trained!']
         self.regression_predict_choosemodel = make_combobox(modelchoices)
         self.regression_predict_choosemodel.setIconSize(QtCore.QSize(50, 20))
-        self.regression_predict_choosemodel.setObjectName(_fromUtf8("regression_predict_choosedata"))
+        self.regression_predict_choosemodel.setObjectName(("regression_predict_choosedata"))
         self.regression_predict_choosemodel_hlayout.addWidget(self.regression_predict_choosemodel)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.regression_predict_choosemodel_hlayout.addItem(spacerItem1)
@@ -97,9 +80,9 @@ class regression_predict_:
 
         self.module_layout.addWidget(self.regression_predict)
         self.regression_predict.raise_()
-        self.regression_predict.setTitle(_translate("regression_predict", "Regression - Predict", None))
-        self.regression_predict_choosedata_label.setText(_translate("regression", "Choose data: ", None))
-        self.regression_predict_choosemodel_label.setText(_translate("regression", "Choose Model: ", None))
+        self.regression_predict.setTitle(("regression_predict", "Regression - Predict", None))
+        self.regression_predict_choosedata_label.setText(("regression", "Choose data: ", None))
+        self.regression_predict_choosemodel_label.setText(("regression", "Choose Model: ", None))
         self.get_predict_parameters()
 
 
@@ -107,8 +90,8 @@ def make_combobox(choices):
     combo = QtWidgets.QComboBox()
 
     for i, choice in enumerate(choices):
-        combo.addItem(_fromUtf8(""))
-        combo.setItemText(i, _translate('', choice, None))
+        combo.addItem((""))
+        combo.setItemText(i, ('', choice, None))
 
     return combo
 

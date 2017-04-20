@@ -5,7 +5,7 @@ for filename in glob.iglob('**/*.py', recursive=True):
         filedata = file.read()
 
     # Replace the target string
-    filedata = filedata.replace('filename, _filter = QtWidgets', 'filename, _filter = QtWidgets')
+    filedata = filedata.replace('', '')
 
     # Write the file out again
     with open(filename, 'w') as file:

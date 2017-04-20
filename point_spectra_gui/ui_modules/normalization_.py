@@ -3,22 +3,6 @@ from point_spectra_gui.ui_modules import make_combobox
 from point_spectra_gui.ui_modules.Error_ import error_print
 from point_spectra_gui.ui_modules.del_layout_ import del_layout_
 
-try:
-    _fromUtf8 = QtCore.QString.fromUtf8
-except AttributeError:
-    def _fromUtf8(s):
-        return s
-
-try:
-    _encoding = QtWidgets.QApplication.UnicodeUTF8
-
-
-    def _translate(context, text, disambig):
-        return QtWidgets.QApplication.translate(context, text, disambig, _encoding)
-except AttributeError:
-    def _translate(context, text, disambig):
-        return QtWidgets.QApplication.translate(context, text, disambig)
-
 
 # Normalization creates a UI
 # and many smaller pieces of the UI called min_max
@@ -76,21 +60,21 @@ class normalization_:
         font = QtGui.QFont()
         font.setPointSize(10)
         self.normalization.setFont(font)
-        self.normalization.setObjectName(_fromUtf8("normalization"))
+        self.normalization.setObjectName(("normalization"))
         self.verticalLayout = QtWidgets.QVBoxLayout(self.normalization)
         self.verticalLayout.setContentsMargins(11, 11, 11, 11)
         self.verticalLayout.setSpacing(6)
-        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
+        self.verticalLayout.setObjectName(("verticalLayout"))
         self.choosedata_layout = QtWidgets.QHBoxLayout()
         self.choosedata_layout.setContentsMargins(11, 11, 11, 11)
         self.choosedata_layout.setSpacing(6)
-        self.choosedata_layout.setObjectName(_fromUtf8("choosedata_layout"))
+        self.choosedata_layout.setObjectName(("choosedata_layout"))
         self.normalization_choosedata_label = QtWidgets.QLabel(self.normalization)
-        self.normalization_choosedata_label.setObjectName(_fromUtf8("normalization_choosedata_label"))
+        self.normalization_choosedata_label.setObjectName(("normalization_choosedata_label"))
         self.choosedata_layout.addWidget(self.normalization_choosedata_label)
         self.normalization_choosedata = make_combobox(datachoices)
         self.normalization_choosedata.setIconSize(QtCore.QSize(50, 20))
-        self.normalization_choosedata.setObjectName(_fromUtf8("normalization_choosedata"))
+        self.normalization_choosedata.setObjectName(("normalization_choosedata"))
         self.choosedata_layout.addWidget(self.normalization_choosedata)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.choosedata_layout.addItem(spacerItem)
@@ -98,25 +82,25 @@ class normalization_:
         self.all_ranges_layout = QtWidgets.QVBoxLayout()
         self.all_ranges_layout.setContentsMargins(11, 11, 11, 11)
         self.all_ranges_layout.setSpacing(6)
-        self.all_ranges_layout.setObjectName(_fromUtf8("all_ranges_layout"))
+        self.all_ranges_layout.setObjectName(("all_ranges_layout"))
         self.verticalLayout.addLayout(self.all_ranges_layout)
         self.min_max_horizontalLayout = QtWidgets.QHBoxLayout()
         self.min_max_horizontalLayout.setContentsMargins(11, 11, 11, 11)
         self.min_max_horizontalLayout.setSpacing(6)
-        self.min_max_horizontalLayout.setObjectName(_fromUtf8("min_max_horizontalLayout"))
+        self.min_max_horizontalLayout.setObjectName(("min_max_horizontalLayout"))
         self.add_ranges_button = QtWidgets.QPushButton(self.normalization)
-        self.add_ranges_button.setObjectName(_fromUtf8("add_ranges_button"))
+        self.add_ranges_button.setObjectName(("add_ranges_button"))
         self.min_max_horizontalLayout.addWidget(self.add_ranges_button)
         self.del_button = QtWidgets.QPushButton(self.normalization)
-        self.del_button.setObjectName(_fromUtf8("add_ranges_button_2"))
+        self.del_button.setObjectName(("add_ranges_button_2"))
         self.min_max_horizontalLayout.addWidget(self.del_button)
         self.verticalLayout.addLayout(self.min_max_horizontalLayout)
         self.module_layout.addWidget(self.normalization)
 
-        self.normalization.setTitle(_translate("MainWindow", "Normalization", None))
-        self.normalization_choosedata_label.setText(_translate("MainWindow", "Choose data to normalize: ", None))
-        self.add_ranges_button.setText(_translate("MainWindow", "Add Range", None))
-        self.del_button.setText(_translate("MainWindow", "Delete Range", None))
+        self.normalization.setTitle(("MainWindow", "Normalization", None))
+        self.normalization_choosedata_label.setText(("MainWindow", "Choose data to normalize: ", None))
+        self.add_ranges_button.setText(("MainWindow", "Add Range", None))
+        self.del_button.setText(("MainWindow", "Delete Range", None))
 
     def add_ranges(self):
 
@@ -143,8 +127,8 @@ class normalization_:
         self.ranges_layout.addWidget(self.min_spinbox)  # apply the min lineEdit to the widget
         self.ranges_layout.addWidget(self.max_label)  # apply the max label
         self.ranges_layout.addWidget(self.max_spinbox)  # apply the max lineEdit
-        self.min_label.setText(_translate("MainWindow", "Minimum wavelength", None))  # set the text of the min label
-        self.max_label.setText(_translate("MainWindow", "Maximum wavelength", None))  # set the text of the max label
+        self.min_label.setText(("MainWindow", "Minimum wavelength", None))  # set the text of the min label
+        self.max_label.setText(("MainWindow", "Maximum wavelength", None))  # set the text of the max label
         self.box_list.append(self.min_spinbox)  # set up an array of lineEdits
         self.box_list.append(self.max_spinbox)
         self.all_ranges_layout.addLayout(self.ranges_layout)
