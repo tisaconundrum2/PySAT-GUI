@@ -1,5 +1,5 @@
-from ui_modules.Error_ import error_print
-from PyQt4 import QtCore, QtGui
+from point_spectra_gui.ui_modules.Error_ import error_print
+from PyQt5 import QtGui, QtCore, QtWidgets
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -8,14 +8,14 @@ except AttributeError:
         return s
 
 try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
+    _encoding = QtWidgets.QApplication.UnicodeUTF8
 
 
     def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+        return QtWidgets.QApplication.translate(context, text, disambig, _encoding)
 except AttributeError:
     def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
+        return QtWidgets.QApplication.translate(context, text, disambig)
 
 
 class regression_predict_:
@@ -50,17 +50,17 @@ class regression_predict_:
         pass
 
     def regression_ui(self):
-        self.regression_predict = QtGui.QGroupBox()
+        self.regression_predict = QtWidgets.QGroupBox()
         font = QtGui.QFont()
         font.setPointSize(10)
         self.regression_predict.setFont(font)
         self.regression_predict.setObjectName(_fromUtf8("regression_predict"))
-        self.regression_predict_vlayout = QtGui.QVBoxLayout(self.regression_predict)
+        self.regression_predict_vlayout = QtWidgets.QVBoxLayout(self.regression_predict)
         self.regression_predict_vlayout.setObjectName(_fromUtf8("regression_vlayout"))
         # create a layout for choosing data to predict on
-        self.regression_predict_choosedata_hlayout = QtGui.QHBoxLayout()
+        self.regression_predict_choosedata_hlayout = QtWidgets.QHBoxLayout()
         self.regression_predict_choosedata_hlayout.setObjectName(_fromUtf8("regression_predict_choosedata_hlayout"))
-        self.regression_predict_choosedata_label = QtGui.QLabel(self.regression_predict)
+        self.regression_predict_choosedata_label = QtWidgets.QLabel(self.regression_predict)
         self.regression_predict_choosedata_label.setObjectName(_fromUtf8("regression_predict_choosedata_label"))
         self.regression_predict_choosedata_hlayout.addWidget(self.regression_predict_choosedata_label)
         # create the combobox with data choices
@@ -72,13 +72,13 @@ class regression_predict_:
         self.regression_predict_choosedata.setIconSize(QtCore.QSize(50, 20))
         self.regression_predict_choosedata.setObjectName(_fromUtf8("regression_predict_choosedata"))
         self.regression_predict_choosedata_hlayout.addWidget(self.regression_predict_choosedata)
-        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.regression_predict_choosedata_hlayout.addItem(spacerItem)
         self.regression_predict_vlayout.addLayout(self.regression_predict_choosedata_hlayout)
         # create a layout for choosing which model to use
-        self.regression_predict_choosemodel_hlayout = QtGui.QHBoxLayout()
+        self.regression_predict_choosemodel_hlayout = QtWidgets.QHBoxLayout()
         self.regression_predict_choosemodel_hlayout.setObjectName(_fromUtf8("regression_predict_choosemodel_hlayout"))
-        self.regression_predict_choosemodel_label = QtGui.QLabel(self.regression_predict)
+        self.regression_predict_choosemodel_label = QtWidgets.QLabel(self.regression_predict)
         self.regression_predict_choosemodel_label.setObjectName(_fromUtf8("regression_predict_choosemodel_label"))
         self.regression_predict_choosemodel_hlayout.addWidget(self.regression_predict_choosemodel_label)
         # create the combobox with model choices
@@ -91,7 +91,7 @@ class regression_predict_:
         self.regression_predict_choosemodel.setIconSize(QtCore.QSize(50, 20))
         self.regression_predict_choosemodel.setObjectName(_fromUtf8("regression_predict_choosedata"))
         self.regression_predict_choosemodel_hlayout.addWidget(self.regression_predict_choosemodel)
-        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.regression_predict_choosemodel_hlayout.addItem(spacerItem1)
         self.regression_predict_vlayout.addLayout(self.regression_predict_choosemodel_hlayout)
 
@@ -104,7 +104,7 @@ class regression_predict_:
 
 
 def make_combobox(choices):
-    combo = QtGui.QComboBox()
+    combo = QtWidgets.QComboBox()
 
     for i, choice in enumerate(choices):
         combo.addItem(_fromUtf8(""))
@@ -114,9 +114,9 @@ def make_combobox(choices):
 
 
 def make_listwidget(choices):
-    listwidget = QtGui.QListWidget()
+    listwidget = QtWidgets.QListWidget()
     listwidget.setItemDelegate
     for item in choices:
-        item = QtGui.QListWidgetItem(item)
+        item = QtWidgets.QListWidgetItem(item)
         listwidget.addItem(item)
     return listwidget

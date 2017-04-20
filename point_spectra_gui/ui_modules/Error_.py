@@ -1,5 +1,5 @@
-from PyQt4.QtGui import QMessageBox
-from PyQt4.QtGui import QDialog
+from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import QDialog
 
 
 # When a window is opened

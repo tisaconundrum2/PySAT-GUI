@@ -1,5 +1,5 @@
 pandas
-PyQt4
+PyQt5
 numpy
 pickle
 inspect

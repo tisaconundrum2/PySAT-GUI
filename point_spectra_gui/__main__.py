@@ -1,6 +1,7 @@
 import os.path
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtCore import *
 import sys, time
 from point_spectra_gui.pysat_ui import *
 

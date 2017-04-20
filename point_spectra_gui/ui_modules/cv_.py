@@ -1,5 +1,5 @@
-from ui_modules.Error_ import error_print
-from PyQt4 import QtCore, QtGui
+from point_spectra_gui.ui_modules.Error_ import error_print
+from PyQt5 import QtGui, QtCore, QtWidgets
 
 
 try:
@@ -9,14 +9,14 @@ except AttributeError:
         return s
 
 try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
+    _encoding = QtWidgets.QApplication.UnicodeUTF8
 
 
     def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+        return QtWidgets.QApplication.translate(context, text, disambig, _encoding)
 except AttributeError:
     def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
+        return QtWidgets.QApplication.translate(context, text, disambig)
 
 
 class cv_:
@@ -78,68 +78,68 @@ class cv_:
             self.reg_widget.deleteLater()
         except:
             pass
-        self.reg_widget = QtGui.QWidget()
+        self.reg_widget = QtWidgets.QWidget()
         if alg == 'PLS':
-            self.reg_widget.pls_hlayout = QtGui.QHBoxLayout(self.reg_widget)
-            self.reg_widget.pls_nc_label = QtGui.QLabel(self.reg_widget)
+            self.reg_widget.pls_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
+            self.reg_widget.pls_nc_label = QtWidgets.QLabel(self.reg_widget)
             self.reg_widget.pls_nc_label.setText('# of components:')
             self.reg_widget.pls_hlayout.addWidget(self.reg_widget.pls_nc_label)
-            self.reg_widget.pls_nc_lineedit = QtGui.QLineEdit(self.reg_widget)
+            self.reg_widget.pls_nc_lineedit = QtWidgets.QLineEdit(self.reg_widget)
             self.reg_widget.pls_hlayout.addWidget(self.reg_widget.pls_nc_lineedit)
-            self.reg_widget.pls_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+            self.reg_widget.pls_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
             self.reg_widget.pls_hlayout.addItem(self.reg_widget.pls_spacer)
             self.reg_widget.pls_nc_lineedit.textChanged.connect(lambda: self.get_cv_parameters())
             
         elif alg == 'GP':
-            self.reg_widget = QtGui.QWidget()
-            self.reg_widget.gp_vlayout = QtGui.QVBoxLayout(self.reg_widget)
-            self.reg_widget.gp_dim_red_hlayout = QtGui.QHBoxLayout()
-            self.reg_widget.gp_dim_red_label = QtGui.QLabel(self.reg_widget)
+            self.reg_widget = QtWidgets.QWidget()
+            self.reg_widget.gp_vlayout = QtWidgets.QVBoxLayout(self.reg_widget)
+            self.reg_widget.gp_dim_red_hlayout = QtWidgets.QHBoxLayout()
+            self.reg_widget.gp_dim_red_label = QtWidgets.QLabel(self.reg_widget)
             self.reg_widget.gp_dim_red_label.setText('Choose dimensionality reduction method:')
             self.reg_widget.gp_dim_red_hlayout.addWidget(self.reg_widget.gp_dim_red_label)
-            self.reg_widget.gp_dim_red_lineedit = QtGui.QLineEdit(self.reg_widget)
+            self.reg_widget.gp_dim_red_lineedit = QtWidgets.QLineEdit(self.reg_widget)
             self.reg_widget.gp_dim_red_lineedit.setText('PCA')
             self.reg_widget.gp_dim_red_hlayout.addWidget(self.reg_widget.gp_dim_red_lineedit)
-            self.reg_widget.gp_dim_red_nc_label = QtGui.QLabel()
+            self.reg_widget.gp_dim_red_nc_label = QtWidgets.QLabel()
             self.reg_widget.gp_dim_red_nc_label.setText('# of components:')
             self.reg_widget.gp_dim_red_hlayout.addWidget(self.reg_widget.gp_dim_red_nc_label)
-            self.reg_widget.gp_dim_red_nc_lineedit = QtGui.QLineEdit(self.reg_widget)
+            self.reg_widget.gp_dim_red_nc_lineedit = QtWidgets.QLineEdit(self.reg_widget)
             self.reg_widget.gp_dim_red_nc_lineedit.setText('10')
             self.reg_widget.gp_dim_red_hlayout.addWidget(self.reg_widget.gp_dim_red_nc_lineedit)
             
             self.reg_widget.gp_vlayout.addLayout(self.reg_widget.gp_dim_red_hlayout)
-            self.reg_widget.gp_rand_starts_hlayout = QtGui.QHBoxLayout()
-            self.reg_widget.gp_rand_starts_label = QtGui.QLabel(self.reg_widget)
+            self.reg_widget.gp_rand_starts_hlayout = QtWidgets.QHBoxLayout()
+            self.reg_widget.gp_rand_starts_label = QtWidgets.QLabel(self.reg_widget)
             self.reg_widget.gp_rand_starts_label.setText('# of random starts:')
             self.reg_widget.gp_rand_starts_hlayout.addWidget(self.reg_widget.gp_rand_starts_label)
-            self.reg_widget.gp_rand_starts_lineedit = QtGui.QLineEdit(self.reg_widget)
+            self.reg_widget.gp_rand_starts_lineedit = QtWidgets.QLineEdit(self.reg_widget)
             self.reg_widget.gp_rand_starts_lineedit.setText('1')
             
             self.reg_widget.gp_rand_starts_hlayout.addWidget(self.reg_widget.gp_rand_starts_lineedit)
-            self.reg_widget.spacerItem4 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+            self.reg_widget.spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
             self.reg_widget.gp_rand_starts_hlayout.addItem(self.reg_widget.spacerItem4)
             self.reg_widget.gp_vlayout.addLayout(self.reg_widget.gp_rand_starts_hlayout)
-            self.reg_widget.gp_theta_vlayout = QtGui.QVBoxLayout()
-            self.reg_widget.gp_theta0_label = QtGui.QLabel(self.reg_widget)
+            self.reg_widget.gp_theta_vlayout = QtWidgets.QVBoxLayout()
+            self.reg_widget.gp_theta0_label = QtWidgets.QLabel(self.reg_widget)
             self.reg_widget.gp_theta0_label.setText('Starting Theta:')
             self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_theta0_label)
-            self.reg_widget.gp_theta0_lineedit = QtGui.QLineEdit(self.reg_widget)
+            self.reg_widget.gp_theta0_lineedit = QtWidgets.QLineEdit(self.reg_widget)
             self.reg_widget.gp_theta0_lineedit.setText('1.0')
             self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_theta0_lineedit)
-            self.reg_widget.gp_thetaL_label = QtGui.QLabel(self.reg_widget)
+            self.reg_widget.gp_thetaL_label = QtWidgets.QLabel(self.reg_widget)
             self.reg_widget.gp_thetaL_label.setText('Lower bound on Theta:')
             self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_thetaL_label)
-            self.reg_widget.gp_thetaL_lineedit = QtGui.QLineEdit(self.reg_widget)
+            self.reg_widget.gp_thetaL_lineedit = QtWidgets.QLineEdit(self.reg_widget)
             self.reg_widget.gp_thetaL_lineedit.setText('0.1')
             self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_thetaL_lineedit)
-            self.reg_widget.gp_thetaU_label = QtGui.QLabel(self.reg_widget)
+            self.reg_widget.gp_thetaU_label = QtWidgets.QLabel(self.reg_widget)
             self.reg_widget.gp_thetaU_label.setText('Upper bound on Theta:')
             self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_thetaU_label)
-            self.reg_widget.gp_thetaU_lineedit = QtGui.QLineEdit(self.reg_widget)
+            self.reg_widget.gp_thetaU_lineedit = QtWidgets.QLineEdit(self.reg_widget)
             self.reg_widget.gp_thetaU_lineedit.setText('100.0')
 
             self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_thetaU_lineedit)
-            self.reg_widget.spacerItem5 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+            self.reg_widget.spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
             self.reg_widget.gp_theta_vlayout.addItem(self.reg_widget.spacerItem5)
             self.reg_widget.gp_vlayout.addLayout(self.reg_widget.gp_theta_vlayout)
             
@@ -153,17 +153,17 @@ class cv_:
         self.cv_vlayout.addWidget(self.reg_widget)
 
     def cv_ui(self):
-        self.cv_train = QtGui.QGroupBox()
+        self.cv_train = QtWidgets.QGroupBox()
         font = QtGui.QFont()
         font.setPointSize(10)
         self.cv_train.setFont(font)
         self.cv_train.setObjectName(_fromUtf8("cv_train"))
-        self.cv_vlayout = QtGui.QVBoxLayout(self.cv_train)
+        self.cv_vlayout = QtWidgets.QVBoxLayout(self.cv_train)
         self.cv_vlayout.setObjectName(_fromUtf8("cv_vlayout"))
         # choose data
-        self.cv_choosedata_hlayout = QtGui.QHBoxLayout()
+        self.cv_choosedata_hlayout = QtWidgets.QHBoxLayout()
         self.cv_choosedata_hlayout.setObjectName(_fromUtf8("cv_choosedata_hlayout"))
-        self.cv_train_choosedata_label = QtGui.QLabel(self.cv_train)
+        self.cv_train_choosedata_label = QtWidgets.QLabel(self.cv_train)
         self.cv_train_choosedata_label.setObjectName(_fromUtf8("cv_train_choosedata_label"))
         self.cv_train_choosedata_label.setText(_translate("cv_train", "Choose data:", None))
         self.cv_choosedata_hlayout.addWidget(self.cv_train_choosedata_label)
@@ -175,19 +175,19 @@ class cv_:
         self.cv_choosedata.setIconSize(QtCore.QSize(50, 20))
         self.cv_choosedata.setObjectName(_fromUtf8("cv_choosedata"))
         self.cv_choosedata_hlayout.addWidget(self.cv_choosedata)
-        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.cv_choosedata_hlayout.addItem(spacerItem)
         self.cv_vlayout.addLayout(self.cv_choosedata_hlayout)
         # choose variables
-        self.cv_choosevars_hlayout = QtGui.QHBoxLayout()
+        self.cv_choosevars_hlayout = QtWidgets.QHBoxLayout()
         self.cv_choosevars_hlayout.setObjectName(_fromUtf8("cv_choosevars_hlayout"))
-        self.cv_choosexvars_vlayout = QtGui.QVBoxLayout()
-        self.cv_chooseyvars_vlayout = QtGui.QVBoxLayout()
+        self.cv_choosexvars_vlayout = QtWidgets.QVBoxLayout()
+        self.cv_chooseyvars_vlayout = QtWidgets.QVBoxLayout()
         self.cv_choosevars_hlayout.addLayout(self.cv_choosexvars_vlayout)
         self.cv_choosevars_hlayout.addLayout(self.cv_chooseyvars_vlayout)
 
         #choose x variables
-        self.cv_train_choosex_label = QtGui.QLabel(self.cv_train)
+        self.cv_train_choosex_label = QtWidgets.QLabel(self.cv_train)
         self.cv_train_choosex_label.setObjectName(_fromUtf8("cv_train_choosex_label"))
         self.cv_train_choosex_label.setText('X variable:')
         self.cv_choosexvars_vlayout.addWidget(self.cv_train_choosex_label)
@@ -198,7 +198,7 @@ class cv_:
         self.cv_choosexvars_vlayout.addWidget(self.cv_train_choosex)
 
         #choose y variables
-        self.cv_train_choosey_label = QtGui.QLabel(self.cv_train)
+        self.cv_train_choosey_label = QtWidgets.QLabel(self.cv_train)
         self.cv_train_choosey_label.setObjectName(_fromUtf8("cv_train_choosey_label"))
         self.cv_train_choosey_label.setText('Y variable:')
         self.cv_chooseyvars_vlayout.addWidget(self.cv_train_choosey_label)
@@ -208,20 +208,20 @@ class cv_:
         self.cv_chooseyvars_vlayout.addWidget(self.cv_train_choosey)
 
         #set limits
-        self.cv_yvarlimits_hlayout = QtGui.QHBoxLayout()
-        self.yvarmin_label = QtGui.QLabel(self.cv_train)
+        self.cv_yvarlimits_hlayout = QtWidgets.QHBoxLayout()
+        self.yvarmin_label = QtWidgets.QLabel(self.cv_train)
         self.yvarmin_label.setText('Min:')
         self.cv_yvarlimits_hlayout.addWidget(self.yvarmin_label)
-        self.yvarmin_spin = QtGui.QDoubleSpinBox()
+        self.yvarmin_spin = QtWidgets.QDoubleSpinBox()
         self.yvarmin_spin.setMaximum(99999)
         self.yvarmin_spin.setMinimum(0)
         self.cv_yvarlimits_hlayout.addWidget(self.yvarmin_label)
         self.cv_yvarlimits_hlayout.addWidget(self.yvarmin_spin)
 
-        self.yvarmax_label = QtGui.QLabel(self.cv_train)
+        self.yvarmax_label = QtWidgets.QLabel(self.cv_train)
         self.yvarmax_label.setText('Max:')
         self.cv_yvarlimits_hlayout.addWidget(self.yvarmax_label)
-        self.yvarmax_spin = QtGui.QDoubleSpinBox()
+        self.yvarmax_spin = QtWidgets.QDoubleSpinBox()
         self.yvarmax_spin.setMaximum(99999)
         self.yvarmax_spin.setMinimum(0)
         self.yvarmax_spin.setValue(100)
@@ -229,22 +229,22 @@ class cv_:
         self.cv_yvarlimits_hlayout.addWidget(self.yvarmax_spin)
         self.cv_chooseyvars_vlayout.addLayout(self.cv_yvarlimits_hlayout)
 
-        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.cv_choosevars_hlayout.addItem(spacerItem1)
         self.cv_vlayout.addLayout(self.cv_choosevars_hlayout)
 
         # ransac options
-        self.ransac_hlayout = QtGui.QHBoxLayout()
-        self.cv_ransac_checkbox = QtGui.QCheckBox(self.cv_train)
+        self.ransac_hlayout = QtWidgets.QHBoxLayout()
+        self.cv_ransac_checkbox = QtWidgets.QCheckBox(self.cv_train)
         self.cv_ransac_checkbox.setObjectName(_fromUtf8("cv_ransac_checkbox"))
         self.cv_ransac_checkbox.setText('RANSAC')
         self.ransac_hlayout.addWidget(self.cv_ransac_checkbox)
         self.cv_vlayout.addLayout(self.ransac_hlayout)
 
         # choose cv algorithm
-        self.cv_choosealg_hlayout = QtGui.QHBoxLayout()
+        self.cv_choosealg_hlayout = QtWidgets.QHBoxLayout()
         self.cv_choosealg_hlayout.setObjectName(_fromUtf8("cv_choosealg_hlayout"))
-        self.cv_choosealg_label = QtGui.QLabel(self.cv_train)
+        self.cv_choosealg_label = QtWidgets.QLabel(self.cv_train)
         self.cv_choosealg_label.setObjectName(_fromUtf8("cv_choosealg_label"))
         self.cv_choosealg_hlayout.addWidget(self.cv_choosealg_label)
         self.cv_alg_choices = ['Choose an algorithm', 'PLS', 'GP', 'More to come...']
@@ -253,8 +253,8 @@ class cv_:
         self.cv_choosealg.setObjectName(_fromUtf8("cv_choosealg"))
         self.cv_choosealg_hlayout.addWidget(self.cv_choosealg)
         # TODO add logic that knows when args and kwargs are added.
-        cv_choosealg_spacer = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding,
-                                                        QtGui.QSizePolicy.Minimum)
+        cv_choosealg_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
+                                                        QtWidgets.QSizePolicy.Minimum)
         self.cv_choosealg_hlayout.addItem(cv_choosealg_spacer)
         self.cv_vlayout.addLayout(self.cv_choosealg_hlayout)
 
@@ -279,7 +279,7 @@ class cv_:
 
 
 def make_combobox(choices):
-    combo = QtGui.QComboBox()
+    combo = QtWidgets.QComboBox()
 
     for i, choice in enumerate(choices):
         combo.addItem(_fromUtf8(""))
@@ -289,9 +289,9 @@ def make_combobox(choices):
 
 
 def make_listwidget(choices):
-    listwidget = QtGui.QListWidget()
+    listwidget = QtWidgets.QListWidget()
     listwidget.setItemDelegate
     for item in choices:
-        item = QtGui.QListWidgetItem(item)
+        item = QtWidgets.QListWidgetItem(item)
         listwidget.addItem(item)
     return listwidget

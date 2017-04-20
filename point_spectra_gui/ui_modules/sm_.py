@@ -1,6 +1,6 @@
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtGui, QtCore, QtWidgets
 from pysat.utils.gui_utils import make_combobox
-from ui_modules.Error_ import error_print
+from point_spectra_gui.ui_modules.Error_ import error_print
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -9,14 +9,14 @@ except AttributeError:
         return s
 
 try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
+    _encoding = QtWidgets.QApplication.UnicodeUTF8
 
 
     def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+        return QtWidgets.QApplication.translate(context, text, disambig, _encoding)
 except AttributeError:
     def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
+        return QtWidgets.QApplication.translate(context, text, disambig)
 
 
 class sm_:
@@ -82,22 +82,22 @@ class sm_:
 
     def sm_ui(self):
 
-        self.submodel_predict = QtGui.QGroupBox()
+        self.submodel_predict = QtWidgets.QGroupBox()
         font = QtGui.QFont()
         font.setPointSize(10)
         self.submodel_predict.setFont(font)
         self.submodel_predict.setObjectName(_fromUtf8("submodel_predict"))
-        self.verticalLayout = QtGui.QVBoxLayout(self.submodel_predict)
-        self.verticalLayout.setMargin(11)
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.submodel_predict)
+        self.verticalLayout.setContentsMargins(11, 11, 11, 11)
         self.verticalLayout.setSpacing(6)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
 
         # choose reference/full model
-        self.choosemodel_hlayout = QtGui.QHBoxLayout()
-        self.choosemodel_hlayout.setMargin(11)
+        self.choosemodel_hlayout = QtWidgets.QHBoxLayout()
+        self.choosemodel_hlayout.setContentsMargins(11, 11, 11, 11)
         self.choosemodel_hlayout.setSpacing(6)
         self.choosemodel_hlayout.setObjectName(_fromUtf8("choosemodel_hlayout"))
-        self.choosemodel_label = QtGui.QLabel(self.submodel_predict)
+        self.choosemodel_label = QtWidgets.QLabel(self.submodel_predict)
         self.choosemodel_label.setObjectName(_fromUtf8("choosemodel_label"))
         self.choosemodel_hlayout.addWidget(self.choosemodel_label)
         modelchoices = self.pysat_fun.modelkeys
@@ -107,61 +107,61 @@ class sm_:
         self.choosemodel = make_combobox(modelchoices)
 
         self.choosemodel_hlayout.addWidget(self.choosemodel)
-        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.choosemodel_hlayout.addItem(spacerItem)
         self.verticalLayout.addLayout(self.choosemodel_hlayout)
 
         # organize submodels vertically
-        self.submodels_vlayout = QtGui.QVBoxLayout()
-        self.submodels_vlayout.setMargin(11)
+        self.submodels_vlayout = QtWidgets.QVBoxLayout()
+        self.submodels_vlayout.setContentsMargins(11, 11, 11, 11)
         self.submodels_vlayout.setSpacing(6)
         self.submodels_vlayout.setObjectName(_fromUtf8("submodels_vlayout"))
 
         # always have a low submodel
-        self.low_model_hlayout = QtGui.QHBoxLayout()
-        self.low_model_hlayout.setMargin(11)
+        self.low_model_hlayout = QtWidgets.QHBoxLayout()
+        self.low_model_hlayout.setContentsMargins(11, 11, 11, 11)
         self.low_model_hlayout.setSpacing(6)
         self.low_model_hlayout.setObjectName(_fromUtf8("low_model_hlayout"))
-        self.low_model_label = QtGui.QLabel(self.submodel_predict)
+        self.low_model_label = QtWidgets.QLabel(self.submodel_predict)
         self.low_model_label.setText('Low Model:')
         self.low_model_hlayout.addWidget(self.low_model_label)
         self.choose_low_model = make_combobox(modelchoices)
         self.low_model_hlayout.addWidget(self.choose_low_model)
-        self.low_model_max_label = QtGui.QLabel(self.submodel_predict)
+        self.low_model_max_label = QtWidgets.QLabel(self.submodel_predict)
         self.low_model_max_label.setObjectName(_fromUtf8("low_model_max_label"))
         self.low_model_hlayout.addWidget(self.low_model_max_label)
-        self.low_model_max = QtGui.QDoubleSpinBox(self.submodel_predict)
+        self.low_model_max = QtWidgets.QDoubleSpinBox(self.submodel_predict)
         self.low_model_max.setObjectName(_fromUtf8("low_model_max"))
         self.low_model_max.setMaximum(1000)
         self.low_model_max.setMinimum(-1000)
         self.low_model_hlayout.addWidget(self.low_model_max)
-        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.low_model_hlayout.addItem(spacerItem1)
         self.submodels_vlayout.addLayout(self.low_model_hlayout)
 
         # middle submodels go here
-        self.midmodel_vlayout = QtGui.QVBoxLayout()
+        self.midmodel_vlayout = QtWidgets.QVBoxLayout()
         self.submodels_vlayout.addLayout(self.midmodel_vlayout)
 
         # always have a high submodel
-        self.high_model_hlayout = QtGui.QHBoxLayout()
-        self.high_model_hlayout.setMargin(11)
+        self.high_model_hlayout = QtWidgets.QHBoxLayout()
+        self.high_model_hlayout.setContentsMargins(11, 11, 11, 11)
         self.high_model_hlayout.setSpacing(6)
         self.high_model_hlayout.setObjectName(_fromUtf8("high_model_hlayout"))
-        self.high_model_label = QtGui.QLabel(self.submodel_predict)
+        self.high_model_label = QtWidgets.QLabel(self.submodel_predict)
         self.high_model_label.setText('High Model:')
         self.high_model_hlayout.addWidget(self.high_model_label)
         self.choose_high_model = make_combobox(modelchoices)
         self.high_model_hlayout.addWidget(self.choose_high_model)
-        self.high_model_min_label = QtGui.QLabel(self.submodel_predict)
+        self.high_model_min_label = QtWidgets.QLabel(self.submodel_predict)
         self.high_model_min_label.setObjectName(_fromUtf8("high_model_min_label"))
         self.high_model_hlayout.addWidget(self.high_model_min_label)
-        self.high_model_min = QtGui.QDoubleSpinBox(self.submodel_predict)
+        self.high_model_min = QtWidgets.QDoubleSpinBox(self.submodel_predict)
         self.high_model_min.setObjectName(_fromUtf8("high_model_min"))
         self.high_model_min.setMaximum(1000)
         self.high_model_min.setMinimum(-1000)
         self.high_model_hlayout.addWidget(self.high_model_min)
-        spacerItem3 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.high_model_hlayout.addItem(spacerItem3)
         self.submodels_vlayout.addLayout(self.high_model_hlayout)
         self.verticalLayout.addLayout(self.submodels_vlayout)
@@ -171,20 +171,20 @@ class sm_:
         self.set_ranges(self.choose_low_model.currentText(), maxspin=self.low_model_max)
 
         # add or delete submodel buttons
-        self.add_delete_hlayout = QtGui.QHBoxLayout()
-        self.add_delete_hlayout.setMargin(11)
+        self.add_delete_hlayout = QtWidgets.QHBoxLayout()
+        self.add_delete_hlayout.setContentsMargins(11, 11, 11, 11)
         self.add_delete_hlayout.setSpacing(6)
         self.add_delete_hlayout.setObjectName(_fromUtf8("add_delete_hlayout"))
-        self.add_submodel_button = QtGui.QPushButton(self.submodel_predict)
+        self.add_submodel_button = QtWidgets.QPushButton(self.submodel_predict)
         self.add_submodel_button.setObjectName(_fromUtf8("add_submodel_button"))
         self.add_delete_hlayout.addWidget(self.add_submodel_button)
-        self.delete_submodel_button = QtGui.QPushButton(self.submodel_predict)
+        self.delete_submodel_button = QtWidgets.QPushButton(self.submodel_predict)
         self.delete_submodel_button.setObjectName(_fromUtf8("delete_submodel_button"))
         self.add_delete_hlayout.addWidget(self.delete_submodel_button)
-        self.optimize_checkbox = QtGui.QCheckBox(self.submodel_predict)
+        self.optimize_checkbox = QtWidgets.QCheckBox(self.submodel_predict)
         self.optimize_checkbox.setObjectName(_fromUtf8("optimize_checkbox"))
         self.add_delete_hlayout.addWidget(self.optimize_checkbox)
-        spacerItem4 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.add_delete_hlayout.addItem(spacerItem4)
         self.verticalLayout.addLayout(self.add_delete_hlayout)
 
@@ -194,23 +194,23 @@ class sm_:
             datachoices = ['No data has been loaded!']
 
         # choose data to optimize blending
-        self.choosedata_hlayout = QtGui.QHBoxLayout()
-        self.choosedata_hlayout.setMargin(11)
+        self.choosedata_hlayout = QtWidgets.QHBoxLayout()
+        self.choosedata_hlayout.setContentsMargins(11, 11, 11, 11)
         self.choosedata_hlayout.setSpacing(6)
         self.choosedata_hlayout.setObjectName(_fromUtf8("choosedata_hlayout"))
         self.verticalLayout.addLayout(self.choosedata_hlayout)
 
         # choose data to predict
-        self.predictdata_vlayout = QtGui.QVBoxLayout()
-        self.predictdata_vlayout.setMargin(11)
+        self.predictdata_vlayout = QtWidgets.QVBoxLayout()
+        self.predictdata_vlayout.setContentsMargins(11, 11, 11, 11)
         self.predictdata_vlayout.setSpacing(6)
         self.predictdata_vlayout.setObjectName(_fromUtf8("predictdata_vlayout"))
-        self.choosedata_predict_label = QtGui.QLabel(self.submodel_predict)
+        self.choosedata_predict_label = QtWidgets.QLabel(self.submodel_predict)
         self.choosedata_predict_label.setObjectName(_fromUtf8("choosedata_predict_label"))
         self.predictdata_vlayout.addWidget(self.choosedata_predict_label)
         self.choosedata_predict = make_combobox(datachoices)
         self.predictdata_vlayout.addWidget(self.choosedata_predict)
-        spacerItem6 = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+        spacerItem6 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.predictdata_vlayout.addItem(spacerItem6)
         self.verticalLayout.addLayout(self.predictdata_vlayout)
 
@@ -253,11 +253,11 @@ class sm_:
 
     def add_submodel(self):
 
-        submodel_hlayout = QtGui.QHBoxLayout()
+        submodel_hlayout = QtWidgets.QHBoxLayout()
         font = QtGui.QFont()
         font.setPointSize(10)
 
-        submodel_hlayout.setMargin(11)
+        submodel_hlayout.setContentsMargins(11, 11, 11, 11)
         submodel_hlayout.setSpacing(6)
         submodel_hlayout.setObjectName(_fromUtf8("submodel_hlayout"))
         modelchoices = self.pysat_fun.modelkeys
@@ -266,27 +266,27 @@ class sm_:
             modelchoices = ['No model has been trained!']
         choose_submodel = make_combobox(modelchoices)
         submodel_hlayout.addWidget(choose_submodel)
-        submodel_min_label = QtGui.QLabel()
+        submodel_min_label = QtWidgets.QLabel()
         submodel_min_label.setObjectName(_fromUtf8("submodel_min_label"))
         submodel_min_label.setFont(font)
         submodel_hlayout.addWidget(submodel_min_label)
-        submodel_min = QtGui.QDoubleSpinBox()
+        submodel_min = QtWidgets.QDoubleSpinBox()
         submodel_min.setObjectName(_fromUtf8("submodel_min"))
         submodel_min.setFont(font)
         submodel_min.setMaximum(1000)
         submodel_min.setMinimum(-1000)
         submodel_hlayout.addWidget(submodel_min)
-        submodel_max_label = QtGui.QLabel()
+        submodel_max_label = QtWidgets.QLabel()
         submodel_max_label.setObjectName(_fromUtf8("submodel_max_label"))
         submodel_max_label.setFont(font)
         submodel_hlayout.addWidget(submodel_max_label)
-        submodel_max = QtGui.QDoubleSpinBox()
+        submodel_max = QtWidgets.QDoubleSpinBox()
         submodel_max.setObjectName(_fromUtf8("submodel_max"))
         submodel_max.setFont(font)
         submodel_max.setMaximum(1000)
         submodel_max.setMinimum(-1000)
         submodel_hlayout.addWidget(submodel_max)
-        spacerItem2 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         submodel_hlayout.addItem(spacerItem2)
 
         submodel_min_label.setText(_translate("MainWindow", "Min: ", None))
@@ -330,7 +330,7 @@ class sm_:
         else:
             font = QtGui.QFont()
             font.setPointSize(10)
-            self.choosedata_label = QtGui.QLabel(self.submodel_predict)
+            self.choosedata_label = QtWidgets.QLabel(self.submodel_predict)
             self.choosedata_label.setObjectName(_fromUtf8("choosedata_label"))
             self.choosedata_label.setText(
                 _translate("MainWindow", "Choose known data to optimize submodel ranges:", None))

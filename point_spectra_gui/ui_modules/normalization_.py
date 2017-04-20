@@ -1,7 +1,7 @@
-from PyQt4 import QtCore, QtGui
-from ui_modules import make_combobox
-from ui_modules.Error_ import error_print
-from ui_modules.del_layout_ import del_layout_
+from PyQt5 import QtGui, QtCore, QtWidgets
+from point_spectra_gui.ui_modules import make_combobox
+from point_spectra_gui.ui_modules.Error_ import error_print
+from point_spectra_gui.ui_modules.del_layout_ import del_layout_
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -10,14 +10,14 @@ except AttributeError:
         return s
 
 try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
+    _encoding = QtWidgets.QApplication.UnicodeUTF8
 
 
     def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+        return QtWidgets.QApplication.translate(context, text, disambig, _encoding)
 except AttributeError:
     def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
+        return QtWidgets.QApplication.translate(context, text, disambig)
 
 
 # Normalization creates a UI
@@ -72,42 +72,42 @@ class normalization_:
         if datachoices == []:
             error_print('No Data has been loaded')
             datachoices = ['No data has been loaded!']
-        self.normalization = QtGui.QGroupBox()
+        self.normalization = QtWidgets.QGroupBox()
         font = QtGui.QFont()
         font.setPointSize(10)
         self.normalization.setFont(font)
         self.normalization.setObjectName(_fromUtf8("normalization"))
-        self.verticalLayout = QtGui.QVBoxLayout(self.normalization)
-        self.verticalLayout.setMargin(11)
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.normalization)
+        self.verticalLayout.setContentsMargins(11, 11, 11, 11)
         self.verticalLayout.setSpacing(6)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
-        self.choosedata_layout = QtGui.QHBoxLayout()
-        self.choosedata_layout.setMargin(11)
+        self.choosedata_layout = QtWidgets.QHBoxLayout()
+        self.choosedata_layout.setContentsMargins(11, 11, 11, 11)
         self.choosedata_layout.setSpacing(6)
         self.choosedata_layout.setObjectName(_fromUtf8("choosedata_layout"))
-        self.normalization_choosedata_label = QtGui.QLabel(self.normalization)
+        self.normalization_choosedata_label = QtWidgets.QLabel(self.normalization)
         self.normalization_choosedata_label.setObjectName(_fromUtf8("normalization_choosedata_label"))
         self.choosedata_layout.addWidget(self.normalization_choosedata_label)
         self.normalization_choosedata = make_combobox(datachoices)
         self.normalization_choosedata.setIconSize(QtCore.QSize(50, 20))
         self.normalization_choosedata.setObjectName(_fromUtf8("normalization_choosedata"))
         self.choosedata_layout.addWidget(self.normalization_choosedata)
-        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.choosedata_layout.addItem(spacerItem)
         self.verticalLayout.addLayout(self.choosedata_layout)
-        self.all_ranges_layout = QtGui.QVBoxLayout()
-        self.all_ranges_layout.setMargin(11)
+        self.all_ranges_layout = QtWidgets.QVBoxLayout()
+        self.all_ranges_layout.setContentsMargins(11, 11, 11, 11)
         self.all_ranges_layout.setSpacing(6)
         self.all_ranges_layout.setObjectName(_fromUtf8("all_ranges_layout"))
         self.verticalLayout.addLayout(self.all_ranges_layout)
-        self.min_max_horizontalLayout = QtGui.QHBoxLayout()
-        self.min_max_horizontalLayout.setMargin(11)
+        self.min_max_horizontalLayout = QtWidgets.QHBoxLayout()
+        self.min_max_horizontalLayout.setContentsMargins(11, 11, 11, 11)
         self.min_max_horizontalLayout.setSpacing(6)
         self.min_max_horizontalLayout.setObjectName(_fromUtf8("min_max_horizontalLayout"))
-        self.add_ranges_button = QtGui.QPushButton(self.normalization)
+        self.add_ranges_button = QtWidgets.QPushButton(self.normalization)
         self.add_ranges_button.setObjectName(_fromUtf8("add_ranges_button"))
         self.min_max_horizontalLayout.addWidget(self.add_ranges_button)
-        self.del_button = QtGui.QPushButton(self.normalization)
+        self.del_button = QtWidgets.QPushButton(self.normalization)
         self.del_button.setObjectName(_fromUtf8("add_ranges_button_2"))
         self.min_max_horizontalLayout.addWidget(self.del_button)
         self.verticalLayout.addLayout(self.min_max_horizontalLayout)
@@ -120,15 +120,15 @@ class normalization_:
 
     def add_ranges(self):
 
-        self.ranges_layout = QtGui.QHBoxLayout()  # setup the ranges_layout, it will be a child of all_ranges_layout
+        self.ranges_layout = QtWidgets.QHBoxLayout()  # setup the ranges_layout, it will be a child of all_ranges_layout
         font = QtGui.QFont()
         font.setPointSize(10)
-        self.min_label = QtGui.QLabel()  # setup the min label
-        self.max_label = QtGui.QLabel()  # setup the max label
+        self.min_label = QtWidgets.QLabel()  # setup the min label
+        self.max_label = QtWidgets.QLabel()  # setup the max label
         self.min_label.setFont(font)
         self.max_label.setFont(font)
-        self.min_spinbox = QtGui.QSpinBox()  # setup the min lineEdit
-        self.max_spinbox = QtGui.QSpinBox()  # setup the max lineEdit
+        self.min_spinbox = QtWidgets.QSpinBox()  # setup the min lineEdit
+        self.max_spinbox = QtWidgets.QSpinBox()  # setup the max lineEdit
         self.max_spinbox.setMaximum(9999)
         self.min_spinbox.setMaximum(9999)
         self.min_spinbox.setFont(font)
