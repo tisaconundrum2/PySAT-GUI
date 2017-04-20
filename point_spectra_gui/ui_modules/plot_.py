@@ -318,7 +318,7 @@ class plot_:
         self.file_label.setText("Plot Filename:")
         self.alpha_label.setText("Alpha:")
 
-        self.plot.setTitle(("plot", "Plot"))
+        self.plot.setTitle("Plot")
         self.scatter_choosedata.activated[int].connect(lambda: self.plot_change_vars(self.xvar_choices))
         self.scatter_choosedata.activated[int].connect(
             lambda: self.get_minmax(self.xmin_spin, self.xmax_spin, self.xvar_choices.currentText()))

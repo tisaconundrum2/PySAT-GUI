@@ -63,7 +63,7 @@ class dim_red_plot_:
         # choose data set to apply dim reduction to
         self.dim_red_plot_choose_data_label = QtWidgets.QLabel(self.dim_red_plot)
         self.dim_red_plot_choose_data_label.setObjectName(("dim_red_plot_choose_data_label"))
-        self.dim_red_plot_choose_data_label.setText(("dim_red_plot", "Choose data:"))
+        self.dim_red_plot_choose_data_label.setText(("Choose data:"))
         self.dim_red_plot_vlayout.addWidget(self.dim_red_plot_choose_data_label)
         datachoices = self.pysat_fun.datakeys
         if datachoices == []:

@@ -61,7 +61,7 @@ class file_outpath_:
         pass
 
     def on_outPutLocationButton_clicked(self):
-        filename, _filter = QtWidgets.QFileDialog.getExistingDirectory(None, "Select Output Directory", '.')
+        filename = QtWidgets.QFileDialog.getExistingDirectory(None, "Select Output Directory", '.')
         self.file_out_path_line_edit.setText(filename)
         if self.file_out_path_line_edit.text() == "":
             self.file_out_path_line_edit.setText("*/")
