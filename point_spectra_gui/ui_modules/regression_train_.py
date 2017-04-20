@@ -403,7 +403,7 @@ class regression_train_:
         self.regression_choosedata_hlayout.setObjectName(("regression_choosedata_hlayout"))
         self.regression_train_choosedata_label = QtWidgets.QLabel(self.regression_train)
         self.regression_train_choosedata_label.setObjectName(("regression_train_choosedata_label"))
-        self.regression_train_choosedata_label.setText(("regression_train", "Choose data:", None))
+        self.regression_train_choosedata_label.setText(("regression_train", "Choose data:"))
         self.regression_choosedata_hlayout.addWidget(self.regression_train_choosedata_label)
         datachoices = self.pysat_fun.datakeys
         datachoices = [i for i in datachoices if i != 'CV Results']  # prevent CV results from showing up as an option
@@ -502,7 +502,7 @@ class regression_train_:
 
         self.module_layout.addWidget(self.regression_train)
         self.regression_train.raise_()
-        self.regression_train.setTitle(("regression_train", "Regression - Train", None))
+        self.regression_train.setTitle(("regression_train", "Regression - Train"))
 
         self.regression_choosedata.currentIndexChanged.connect(lambda: self.get_regression_parameters())
         self.regression_choosealg.currentIndexChanged.connect(lambda: self.get_regression_parameters())

@@ -97,10 +97,10 @@ class normalization_:
         self.verticalLayout.addLayout(self.min_max_horizontalLayout)
         self.module_layout.addWidget(self.normalization)
 
-        self.normalization.setTitle(("MainWindow", "Normalization", None))
-        self.normalization_choosedata_label.setText(("MainWindow", "Choose data to normalize: ", None))
-        self.add_ranges_button.setText(("MainWindow", "Add Range", None))
-        self.del_button.setText(("MainWindow", "Delete Range", None))
+        self.normalization.setTitle("Normalization")
+        self.normalization_choosedata_label.setText("Choose data to normalize: ")
+        self.add_ranges_button.setText("Add Range")
+        self.del_button.setText("Delete Range")
 
     def add_ranges(self):
 
@@ -127,8 +127,8 @@ class normalization_:
         self.ranges_layout.addWidget(self.min_spinbox)  # apply the min lineEdit to the widget
         self.ranges_layout.addWidget(self.max_label)  # apply the max label
         self.ranges_layout.addWidget(self.max_spinbox)  # apply the max lineEdit
-        self.min_label.setText(("MainWindow", "Minimum wavelength", None))  # set the text of the min label
-        self.max_label.setText(("MainWindow", "Maximum wavelength", None))  # set the text of the max label
+        self.min_label.setText("Minimum wavelength")  # set the text of the min label
+        self.max_label.setText("Maximum wavelength")  # set the text of the max label
         self.box_list.append(self.min_spinbox)  # set up an array of lineEdits
         self.box_list.append(self.max_spinbox)
         self.all_ranges_layout.addLayout(self.ranges_layout)

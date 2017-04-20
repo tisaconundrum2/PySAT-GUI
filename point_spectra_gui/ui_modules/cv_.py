@@ -150,7 +150,7 @@ class cv_:
         self.cv_choosedata_hlayout.setObjectName(("cv_choosedata_hlayout"))
         self.cv_train_choosedata_label = QtWidgets.QLabel(self.cv_train)
         self.cv_train_choosedata_label.setObjectName(("cv_train_choosedata_label"))
-        self.cv_train_choosedata_label.setText(("cv_train", "Choose data:", None))
+        self.cv_train_choosedata_label.setText(("cv_train", "Choose data:"))
         self.cv_choosedata_hlayout.addWidget(self.cv_train_choosedata_label)
         datachoices = self.pysat_fun.datakeys
         if datachoices == []:
@@ -245,7 +245,7 @@ class cv_:
 
         self.module_layout.addWidget(self.cv_train)
         self.cv_train.raise_()
-        self.cv_train.setTitle(("cv_train", "Cross Validation / Training", None))
+        self.cv_train.setTitle(("cv_train", "Cross Validation / Training"))
 
         self.cv_choosedata.currentIndexChanged.connect(lambda: self.get_cv_parameters())
         self.cv_choosealg.currentIndexChanged.connect(lambda: self.get_cv_parameters())
@@ -268,7 +268,7 @@ def make_combobox(choices):
 
     for i, choice in enumerate(choices):
         combo.addItem((""))
-        combo.setItemText(i, ('', choice, None))
+        combo.setItemText(i, ('', choice))
 
     return combo
 

@@ -204,14 +204,14 @@ class sm_:
                                   [self.choose_high_model, [self.high_model_min, 9999]],
                                   [self.choosemodel, [-9999, 9999]]]
 
-        self.submodel_predict.setTitle(("MainWindow", "Submodel - Predict", None))
-        self.choosemodel_label.setText(("MainWindow", "Choose reference model:", None))
-        self.low_model_max_label.setText(("MainWindow", "Max:", None))
-        self.high_model_min_label.setText(("MainWindow", "Min: ", None))
-        self.add_submodel_button.setText(("MainWindow", "Add Submodel", None))
-        self.delete_submodel_button.setText(("MainWindow", "Delete Submodel", None))
-        self.optimize_checkbox.setText(("MainWindow", "Optimize", None))
-        self.choosedata_predict_label.setText(("MainWindow", "Choose data to predict:", None))
+        self.submodel_predict.setTitle("Submodel - Predict")
+        self.choosemodel_label.setText("Choose reference model:")
+        self.low_model_max_label.setText("Max:")
+        self.high_model_min_label.setText("Min: ")
+        self.add_submodel_button.setText("Add Submodel")
+        self.delete_submodel_button.setText("Delete Submodel")
+        self.optimize_checkbox.setText("Optimize")
+        self.choosedata_predict_label.setText("Choose data to predict:")
 
         # connect the add and delete submodel buttons and opt checkbox
         self.add_submodel_button.clicked.connect(lambda: self.add_submodel())
@@ -272,8 +272,8 @@ class sm_:
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         submodel_hlayout.addItem(spacerItem2)
 
-        submodel_min_label.setText(("MainWindow", "Min: ", None))
-        submodel_max_label.setText(("MainWindow", "Max: ", None))
+        submodel_min_label.setText("Min: ")
+        submodel_max_label.setText("Max: ")
         self.midmodel_vlayout.addLayout(submodel_hlayout)
 
         # insert the new submodel objects into the list
@@ -316,7 +316,7 @@ class sm_:
             self.choosedata_label = QtWidgets.QLabel(self.submodel_predict)
             self.choosedata_label.setObjectName(("choosedata_label"))
             self.choosedata_label.setText(
-                ("MainWindow", "Choose known data to optimize submodel ranges:", None))
+                ("MainWindow", "Choose known data to optimize submodel ranges:"))
             self.choosedata_label.setFont(font)
             self.choosedata_hlayout.addWidget(self.choosedata_label)
 

@@ -134,8 +134,8 @@ class dim_reduction_:
 
         self.module_layout.addWidget(self.dim_reduction)
         self.dim_reduction.raise_()
-        self.dim_reduction.setTitle(("MainWindow", "Dimensionality Reduction", None))
-        self.dim_reduction_choose_data_label.setText(("dim_reduction", "Choose data:", None))
-        self.dim_red_choosealg_label.setText(("dim_reduction", "Choose method:", None))
+        self.dim_reduction.setTitle("Dimensionality Reduction")
+        self.dim_reduction_choose_data_label.setText(("dim_reduction", "Choose data:"))
+        self.dim_red_choosealg_label.setText(("dim_reduction", "Choose method:"))
         self.dim_reduction_choose_data.currentIndexChanged.connect(lambda: self.get_dim_red_params())
         self.dim_red_choosealg.currentIndexChanged.connect(lambda: self.get_dim_red_params())

@@ -118,7 +118,7 @@ class read_ccam_:
         self.ave_button.toggled.connect(lambda: self.get_read_ccam_params())
         self.singleshot_button.toggled.connect(lambda: self.get_read_ccam_params())
 
-        self.read_ccam.setTitle(("MainWindow", "Read ChemCam Data", None))
+        self.read_ccam.setTitle("Read ChemCam Data")
         self.module_layout.addWidget(self.read_ccam)
 
     def set_read_ccam_params(self):

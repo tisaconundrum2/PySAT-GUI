@@ -59,11 +59,11 @@ class get_mask_:
         self.horizontalLayout.addWidget(self.get_mask_button)
         self.module_layout.addWidget(self.get_mask)
 
-        self.get_mask.setTitle(("MainWindow", "Mask Data", None))
-        self.choosedata_label.setText(("MainWindow", "Choose data: ", None))
-        self.get_mask_label.setText(("MainWindow", "Mask file: ", None))
-        self.get_mask_line_edit.setText(("MainWindow", "*.csv", None))
-        self.get_mask_button.setText(("MainWindow", "...", None))
+        self.get_mask.setTitle("Mask Data")
+        self.choosedata_label.setText("Choose data: ")
+        self.get_mask_label.setText("Mask file: ")
+        self.get_mask_line_edit.setText("*.csv")
+        self.get_mask_button.setText("...")
         self.get_mask_line_edit.textChanged.connect(lambda: self.get_mask_params())
         self.mask_choosedata.currentIndexChanged.connect(lambda: self.get_mask_params())
         self.get_mask_button.clicked.connect(lambda: self.on_getDataButton_clicked(self.get_mask_line_edit))
@@ -71,7 +71,7 @@ class get_mask_:
 
     def set_mask_params(self):
         if self.arg_list is None:
-            self.get_mask_line_edit.setText(("MainWindow", "*.csv", None))
+            self.get_mask_line_edit.setText("*.csv")
         else:
             self.get_mask_line_edit.setText(self.arg_list[1])
             index = self.mask_choosedata.findText(str(self.arg_list[0]))  # findText 'unknown' or 'known'

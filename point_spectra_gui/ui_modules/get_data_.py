@@ -42,14 +42,14 @@ class get_data_u_:
         self.horizontalLayout.addWidget(self.get_data_button)
         self.module_layout.addWidget(self.get_data)
 
-        self.get_data.setTitle(("MainWindow", "Load Unknown Data", None))
-        self.get_data_label.setText(("MainWindow", "File Name", None))
-        self.get_data_button.setText(("MainWindow", "...", None))
+        self.get_data.setTitle("Load Unknown Data")
+        self.get_data_label.setText("File Name")
+        self.get_data_button.setText("...")
         self.set_data_parameters()
 
     def set_data_parameters(self):
         if self.arg_list is None:
-            self.get_data_line_edit.setText(("MainWindow", "*.csv", None))
+            self.get_data_line_edit.setText("*.csv")
         else:
             # the 0'th element has the name of the file that we want to work with.
             self.get_data_line_edit.setText(self.arg_list[0])
@@ -109,14 +109,14 @@ class get_data_k_:
         self.horizontalLayout.addWidget(self.get_data_button)
         self.module_layout.addWidget(self.get_data)
 
-        self.get_data.setTitle(("MainWindow", "Load Known Data", None))
-        self.get_data_label.setText(("MainWindow", "File Name", None))
-        self.get_data_button.setText(("MainWindow", "...", None))
+        self.get_data.setTitle("Load Known Data")
+        self.get_data_label.setText("File Name")
+        self.get_data_button.setText("...")
         self.set_data_parameters()
 
     def set_data_parameters(self):
         if self.arg_list is None:
-            self.get_data_line_edit.setText(("MainWindow", "*.csv", None))
+            self.get_data_line_edit.setText("*.csv")
         else:
             # the 0'th element has the name of the file that we want to work with.
             self.get_data_line_edit.setText(self.arg_list[0])

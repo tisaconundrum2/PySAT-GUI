@@ -106,11 +106,11 @@ class removenull_:
 
         self.module_layout.addWidget(self.removenull)
 
-        self.removenull.setTitle(("MainWindow", "Remove Null", None))
-        self.removenull_choosedata_label.setText(("MainWindow", "Choose data: ", None))
-        self.start_of_sentence.setText(("MainWindow", "Remove rows where ", None))
+        self.removenull.setTitle("Remove Null")
+        self.removenull_choosedata_label.setText("Choose data: ")
+        self.start_of_sentence.setText("Remove rows where ")
 
-        self.end_of_sentence.setText(("MainWindow", "is null.", None))
+        self.end_of_sentence.setText("is null.")
         self.get_removenull_parameters()
         self.colname_choices.currentIndexChanged.connect(lambda: self.get_removenull_parameters())
         self.removenull_choosedata.currentIndexChanged.connect(lambda: self.get_removenull_parameters())

@@ -63,7 +63,7 @@ class dim_red_plot_:
         # choose data set to apply dim reduction to
         self.dim_red_plot_choose_data_label = QtWidgets.QLabel(self.dim_red_plot)
         self.dim_red_plot_choose_data_label.setObjectName(("dim_red_plot_choose_data_label"))
-        self.dim_red_plot_choose_data_label.setText(("dim_red_plot", "Choose data:", None))
+        self.dim_red_plot_choose_data_label.setText(("dim_red_plot", "Choose data:"))
         self.dim_red_plot_vlayout.addWidget(self.dim_red_plot_choose_data_label)
         datachoices = self.pysat_fun.datakeys
         if datachoices == []:
@@ -74,7 +74,7 @@ class dim_red_plot_:
 
         # Choose the algorithm
         self.dim_red_choosealg_label = QtWidgets.QLabel(self.dim_red_plot)
-        self.dim_red_choosealg_label.setText(("dim_red_plot", "Choose method:", None))
+        self.dim_red_choosealg_label.setText(("dim_red_plot", "Choose method:"))
         self.dim_red_plot_vlayout.addWidget(self.dim_red_choosealg_label)
         alg_choices = ['Choose a method', 'PCA', 'ICA', 'ICA-JADE']
         self.dim_red_choosealg = make_combobox(alg_choices)
@@ -115,7 +115,7 @@ class dim_red_plot_:
 
         self.module_layout.addWidget(self.dim_red_plot)
         self.dim_red_plot.raise_()
-        self.dim_red_plot.setTitle(("MainWindow", "Dimensionality Reduction", None))
+        self.dim_red_plot.setTitle("Dimensionality Reduction")
 
         self.dim_red_plot_choose_data.currentIndexChanged.connect(lambda: self.get_dim_red_params())
         self.dim_red_choosealg.currentIndexChanged.connect(lambda: self.get_dim_red_params())

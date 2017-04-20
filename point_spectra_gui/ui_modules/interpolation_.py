@@ -64,9 +64,9 @@ class interpolation_:
         self.verticalLayout.addLayout(self.choosedata_layout_2)
         self.module_layout.addWidget(self.Interpolation)
 
-        self.Interpolation.setTitle(("MainWindow", "Interpolation", None))
-        self.interpolation_choosedata_label.setText(("MainWindow", "Choose data to interpolate: ", None))
-        self.interpolation_choosedata_label_2.setText(("MainWindow", "Choose data to use as reference: ", None))
+        self.Interpolation.setTitle("Interpolation")
+        self.interpolation_choosedata_label.setText("Choose data to interpolate: ")
+        self.interpolation_choosedata_label_2.setText("Choose data to use as reference: ")
         self.set_parameters()
 
     def set_parameters(self):

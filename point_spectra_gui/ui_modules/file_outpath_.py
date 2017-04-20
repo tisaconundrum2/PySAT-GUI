@@ -1,14 +1,5 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
 
-try:
-    def (context, text, disambig):
-        return QtWidgets.QApplication.translate(context, text, disambig, QtWidgets.QApplication.UnicodeUTF8)
-
-except AttributeError:
-    def (context, text, disambig):
-        return QtWidgets.QApplication.translate(context, text, disambig)
-
-
 class file_outpath_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list):
         self.ui_id = None
@@ -49,10 +40,10 @@ class file_outpath_:
         self.horizontalLayout.addWidget(self.file_out_path_button)
         self.module_layout.addWidget(self.file_out_path)
 
-        self.file_out_path.setTitle(("MainWindow", "Ouput Folder", None))
-        self.file_out_path_label.setText(("MainWindow", "Folder Name", None))
-        self.file_out_path_line_edit.setText(("MainWindow", "*/", None))
-        self.file_out_path_button.setText(("MainWindow", "...", None))
+        self.file_out_path.setTitle("Ouput Folder")
+        self.file_out_path_label.setText("Folder Name")
+        self.file_out_path_line_edit.setText("*/")
+        self.file_out_path_button.setText("...")
         self.set_parameters()
 
     def set_parameters(self):

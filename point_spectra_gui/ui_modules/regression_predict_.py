@@ -80,9 +80,9 @@ class regression_predict_:
 
         self.module_layout.addWidget(self.regression_predict)
         self.regression_predict.raise_()
-        self.regression_predict.setTitle(("regression_predict", "Regression - Predict", None))
-        self.regression_predict_choosedata_label.setText(("regression", "Choose data: ", None))
-        self.regression_predict_choosemodel_label.setText(("regression", "Choose Model: ", None))
+        self.regression_predict.setTitle(("regression_predict", "Regression - Predict"))
+        self.regression_predict_choosedata_label.setText(("regression", "Choose data: "))
+        self.regression_predict_choosemodel_label.setText(("regression", "Choose Model: "))
         self.get_predict_parameters()
 
 
@@ -91,7 +91,7 @@ def make_combobox(choices):
 
     for i, choice in enumerate(choices):
         combo.addItem((""))
-        combo.setItemText(i, ('', choice, None))
+        combo.setItemText(i, ('', choice))
 
     return combo
 
