@@ -1,5 +1,4 @@
 from PyQt5 import QtGui, QtCore, QtWidgets, QtGui
-
 from point_spectra_gui import ui_modules
 from point_spectra_gui.pysat_func import pysat_func
 import pickle

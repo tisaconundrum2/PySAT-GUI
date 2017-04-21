@@ -99,27 +99,31 @@ class regression_train_:
         fun_list = "do_regression_train"
 
         args = [datakey, xvars, yvars, yrange, method, params, ransacparams]
+        # TODO Stop the module when there are ill-formed parameters!
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
 
     def set_regression_parameters(self):
         if self.arg_list is not None:
-            datakey = self.arg_list[0]
-            xvars = self.arg_list[1]
-            yvars = self.arg_list[2]
-            yrange = self.arg_list[3]
-            method = self.arg_list[4]
-            params = self.arg_list[5]
-            ransacparams = self.arg_list[6]
-            self.regression_choosedata.setCurrentIndex(self.regression_choosedata.findText(str(datakey)))
-            # TODO: figure out how to handle multiple selections
-            self.regression_train_choosex.setCurrentItem(
-                self.regression_train_choosex.findItems(xvars[0], QtCore.Qt.MatchExactly)[0])
-            self.regression_train_choosey.setCurrentItem(
-                self.regression_train_choosey.findItems(yvars[0][1], QtCore.Qt.MatchExactly)[0])
-            self.yvarmin_spin.setValue(yrange[0])
-            self.yvarmax_spin.setValue(yrange[1])
-            self.regression_choosealg.setCurrentIndex(self.regression_choosealg.findText(str(method)))
-            self.make_regression_widget(self.regression_choosealg.currentText(), params=params)
+            try:
+                datakey = self.arg_list[0]
+                xvars = self.arg_list[1]
+                yvars = self.arg_list[2]
+                yrange = self.arg_list[3]
+                method = self.arg_list[4]
+                params = self.arg_list[5]
+                ransacparams = self.arg_list[6]
+                self.regression_choosedata.setCurrentIndex(self.regression_choosedata.findText(str(datakey)))
+                # TODO:
+                self.regression_train_choosex.setCurrentItem(
+                    self.regression_train_choosex.findItems(xvars[0], QtCore.Qt.MatchExactly)[0])
+                self.regression_train_choosey.setCurrentItem(
+                    self.regression_train_choosey.findItems(yvars[0][1], QtCore.Qt.MatchExactly)[0])
+                self.yvarmin_spin.setValue(yrange[0])
+                self.yvarmax_spin.setValue(yrange[1])
+                self.regression_choosealg.setCurrentIndex(self.regression_choosealg.findText(str(method)))
+                self.make_regression_widget(self.regression_choosealg.currentText(), params=params)
+            except Exception as e:
+                error_print(e)
 
     def make_ransac_widget(self, isChecked):
         if not isChecked:
@@ -403,7 +407,7 @@ class regression_train_:
         self.regression_choosedata_hlayout.setObjectName(("regression_choosedata_hlayout"))
         self.regression_train_choosedata_label = QtWidgets.QLabel(self.regression_train)
         self.regression_train_choosedata_label.setObjectName(("regression_train_choosedata_label"))
-        self.regression_train_choosedata_label.setText(("regression_train", "Choose data:"))
+        self.regression_train_choosedata_label.setText("Choose data:")
         self.regression_choosedata_hlayout.addWidget(self.regression_train_choosedata_label)
         datachoices = self.pysat_fun.datakeys
         datachoices = [i for i in datachoices if i != 'CV Results']  # prevent CV results from showing up as an option
@@ -502,7 +506,7 @@ class regression_train_:
 
         self.module_layout.addWidget(self.regression_train)
         self.regression_train.raise_()
-        self.regression_train.setTitle(("regression_train", "Regression - Train"))
+        self.regression_train.setTitle(("Regression - Train"))
 
         self.regression_choosedata.currentIndexChanged.connect(lambda: self.get_regression_parameters())
         self.regression_choosealg.currentIndexChanged.connect(lambda: self.get_regression_parameters())

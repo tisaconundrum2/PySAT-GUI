@@ -1,3 +1,4 @@
+from point_spectra_gui.ui_modules import make_combobox
 from point_spectra_gui.ui_modules.Error_ import error_print
 from PyQt5 import QtGui, QtCore, QtWidgets
 import numpy as np
@@ -388,22 +389,3 @@ class plot_:
         except:
             objmin.setValue(0)
             objmax.setValue(1)
-
-
-def make_combobox(choices):
-    combo = QtWidgets.QComboBox()
-
-    for i, choice in enumerate(choices):
-        combo.addItem((""))
-        combo.setItemText(i, str(choice))
-
-    return combo
-
-
-def make_listwidget(choices):
-    listwidget = QtWidgets.QListWidget()
-    listwidget.setItemDelegate
-    for item in choices:
-        item = QtWidgets.QListWidgetItem(item)
-        listwidget.addItem(item)
-    return listwidget

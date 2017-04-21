@@ -245,7 +245,7 @@ class cv_:
 
         self.module_layout.addWidget(self.cv_train)
         self.cv_train.raise_()
-        self.cv_train.setTitle(("cv_train", "Cross Validation / Training"))
+        self.cv_train.setTitle("Cross Validation / Training")
 
         self.cv_choosedata.currentIndexChanged.connect(lambda: self.get_cv_parameters())
         self.cv_choosealg.currentIndexChanged.connect(lambda: self.get_cv_parameters())
