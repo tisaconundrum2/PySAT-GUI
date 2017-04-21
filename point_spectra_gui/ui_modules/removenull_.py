@@ -1,31 +1,15 @@
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtGui, QtCore, QtWidgets
 from pysat.utils.gui_utils import make_combobox
-from ui_modules.Error_ import error_print
+from point_spectra_gui.ui_modules.Error_ import error_print
 import inspect
-
-try:
-    _fromUtf8 = QtCore.QString.fromUtf8
-except AttributeError:
-    def _fromUtf8(s):
-        return s
-
-try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
-
-
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
-except AttributeError:
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
 
 
 class removenull_:
-    def __init__(self, pysat_fun, module_layout,arg_list,kw_list):
+    def __init__(self, pysat_fun, module_layout, arg_list, kw_list):
         self.pysat_fun = pysat_fun
         self.arg_list = arg_list
         self.kw_list = kw_list
-        self.ui_id=None
+        self.ui_id = None
         self.module_layout = module_layout
         self.main()
 
@@ -44,8 +28,8 @@ class removenull_:
         fun_list = "do_removenull"
         args = [datakey, colname]
         kws = {}
-        ui_list='do_removenull'
-        fun_list='removenull'
+        ui_list = 'do_removenull'
+        fun_list = 'removenull'
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
 
     def set_removenull_parameters(self):
@@ -54,25 +38,25 @@ class removenull_:
             colname = self.arg_list[1]
 
     def removenull_ui(self):
-        self.removenull = QtGui.QGroupBox()
+        self.removenull = QtWidgets.QGroupBox()
         font = QtGui.QFont()
         font.setPointSize(10)
         self.removenull.setFont(font)
-        self.removenull.setObjectName(_fromUtf8("removenull"))
-        self.verticalLayout = QtGui.QVBoxLayout(self.removenull)
-        self.verticalLayout.setMargin(11)
+        self.removenull.setObjectName(("removenull"))
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.removenull)
+        self.verticalLayout.setContentsMargins(11, 11, 11, 11)
         self.verticalLayout.setSpacing(6)
-        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
-        self.removenull_vlayout = QtGui.QVBoxLayout()
-        self.removenull_vlayout.setMargin(11)
+        self.verticalLayout.setObjectName(("verticalLayout"))
+        self.removenull_vlayout = QtWidgets.QVBoxLayout()
+        self.removenull_vlayout.setContentsMargins(11, 11, 11, 11)
         self.removenull_vlayout.setSpacing(6)
-        self.removenull_vlayout.setObjectName(_fromUtf8("removenull_vlayout"))
-        self.removenull_choosedata_hlayout = QtGui.QHBoxLayout()
-        self.removenull_choosedata_hlayout.setMargin(11)
+        self.removenull_vlayout.setObjectName(("removenull_vlayout"))
+        self.removenull_choosedata_hlayout = QtWidgets.QHBoxLayout()
+        self.removenull_choosedata_hlayout.setContentsMargins(11, 11, 11, 11)
         self.removenull_choosedata_hlayout.setSpacing(6)
-        self.removenull_choosedata_hlayout.setObjectName(_fromUtf8("removenull_choosedata_hlayout"))
-        self.removenull_choosedata_label = QtGui.QLabel(self.removenull)
-        self.removenull_choosedata_label.setObjectName(_fromUtf8("removenull_choosedata_label"))
+        self.removenull_choosedata_hlayout.setObjectName(("removenull_choosedata_hlayout"))
+        self.removenull_choosedata_label = QtWidgets.QLabel(self.removenull)
+        self.removenull_choosedata_label.setObjectName(("removenull_choosedata_label"))
         self.removenull_choosedata_hlayout.addWidget(self.removenull_choosedata_label)
 
         datachoices = self.pysat_fun.datakeys
@@ -81,20 +65,19 @@ class removenull_:
             datachoices = ['No data has been loaded!']
         self.removenull_choosedata = make_combobox(datachoices)
         self.removenull_choosedata_hlayout.addWidget(self.removenull_choosedata)
-        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.removenull_choosedata_hlayout.addItem(spacerItem)
 
-
         self.removenull_vlayout.addLayout(self.removenull_choosedata_hlayout)
-        self.removenull_widget = QtGui.QWidget(self.removenull)
+        self.removenull_widget = QtWidgets.QWidget(self.removenull)
         self.removenull_widget.setMinimumSize(QtCore.QSize(0, 0))
-        self.removenull_widget.setObjectName(_fromUtf8("removenull_widget"))
-        self.horizontalLayout_2 = QtGui.QHBoxLayout(self.removenull_widget)
-        self.horizontalLayout_2.setMargin(11)
+        self.removenull_widget.setObjectName(("removenull_widget"))
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.removenull_widget)
+        self.horizontalLayout_2.setContentsMargins(11, 11, 11, 11)
         self.horizontalLayout_2.setSpacing(6)
-        self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
-        self.start_of_sentence = QtGui.QLabel(self.removenull_widget)
-        self.start_of_sentence.setObjectName(_fromUtf8("start_of_sentence"))
+        self.horizontalLayout_2.setObjectName(("horizontalLayout_2"))
+        self.start_of_sentence = QtWidgets.QLabel(self.removenull_widget)
+        self.start_of_sentence.setObjectName(("start_of_sentence"))
         self.horizontalLayout_2.addWidget(self.start_of_sentence)
 
         try:
@@ -113,21 +96,21 @@ class removenull_:
 
         self.colname_choices = make_combobox(colnamechoices)
         self.horizontalLayout_2.addWidget(self.colname_choices)
-        self.end_of_sentence = QtGui.QLabel(self.removenull_widget)
-        self.end_of_sentence.setObjectName(_fromUtf8("end_of_sentence"))
+        self.end_of_sentence = QtWidgets.QLabel(self.removenull_widget)
+        self.end_of_sentence.setObjectName(("end_of_sentence"))
         self.horizontalLayout_2.addWidget(self.end_of_sentence)
-        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem1)
         self.removenull_vlayout.addWidget(self.removenull_widget)
         self.verticalLayout.addLayout(self.removenull_vlayout)
 
         self.module_layout.addWidget(self.removenull)
 
-        self.removenull.setTitle(_translate("MainWindow", "Remove Null", None))
-        self.removenull_choosedata_label.setText(_translate("MainWindow", "Choose data: ", None))
-        self.start_of_sentence.setText(_translate("MainWindow", "Remove rows where ", None))
+        self.removenull.setTitle("Remove Null")
+        self.removenull_choosedata_label.setText("Choose data: ")
+        self.start_of_sentence.setText("Remove rows where ")
 
-        self.end_of_sentence.setText(_translate("MainWindow", "is null.", None))
+        self.end_of_sentence.setText("is null.")
         self.get_removenull_parameters()
         self.colname_choices.currentIndexChanged.connect(lambda: self.get_removenull_parameters())
         self.removenull_choosedata.currentIndexChanged.connect(lambda: self.get_removenull_parameters())

@@ -1,22 +1,7 @@
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtGui, QtCore, QtWidgets
 from pysat.utils.gui_utils import make_combobox
-from ui_modules import error_print
+from point_spectra_gui.ui_modules import error_print
 
-try:
-    _fromUtf8 = QtCore.QString.fromUtf8
-except AttributeError:
-    def _fromUtf8(s):
-        return s
-
-try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
-
-
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
-except AttributeError:
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
 
 class get_mask_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list):
@@ -42,18 +27,18 @@ class get_mask_:
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
 
     def get_mask_ui(self):
-        self.get_mask = QtGui.QGroupBox()
+        self.get_mask = QtWidgets.QGroupBox()
         font = QtGui.QFont()
         font.setPointSize(10)
         self.get_mask.setFont(font)
-        self.get_mask.setObjectName(_fromUtf8("get_mask"))
-        self.horizontalLayout = QtGui.QHBoxLayout(self.get_mask)
-        self.horizontalLayout.setMargin(11)
+        self.get_mask.setObjectName(("get_mask"))
+        self.horizontalLayout = QtWidgets.QHBoxLayout(self.get_mask)
+        self.horizontalLayout.setContentsMargins(11, 11, 11, 11)
         self.horizontalLayout.setSpacing(6)
-        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
+        self.horizontalLayout.setObjectName(("horizontalLayout"))
 
-        self.choosedata_label = QtGui.QLabel(self.get_mask)
-        self.choosedata_label.setObjectName(_fromUtf8("choosedata_label"))
+        self.choosedata_label = QtWidgets.QLabel(self.get_mask)
+        self.choosedata_label.setObjectName(("choosedata_label"))
         self.horizontalLayout.addWidget(self.choosedata_label)
         datachoices = self.pysat_fun.datakeys
         if datachoices == []:
@@ -62,23 +47,23 @@ class get_mask_:
         self.mask_choosedata = make_combobox(datachoices)
         self.horizontalLayout.addWidget(self.mask_choosedata)
 
-        self.get_mask_label = QtGui.QLabel(self.get_mask)
-        self.get_mask_label.setObjectName(_fromUtf8("get_mask_label"))
+        self.get_mask_label = QtWidgets.QLabel(self.get_mask)
+        self.get_mask_label.setObjectName(("get_mask_label"))
         self.horizontalLayout.addWidget(self.get_mask_label)
-        self.get_mask_line_edit = QtGui.QLineEdit(self.get_mask)
+        self.get_mask_line_edit = QtWidgets.QLineEdit(self.get_mask)
         self.get_mask_line_edit.setReadOnly(True)
-        self.get_mask_line_edit.setObjectName(_fromUtf8("get_mask_line_edit"))
+        self.get_mask_line_edit.setObjectName(("get_mask_line_edit"))
         self.horizontalLayout.addWidget(self.get_mask_line_edit)
-        self.get_mask_button = QtGui.QToolButton(self.get_mask)
-        self.get_mask_button.setObjectName(_fromUtf8("get_mask_button"))
+        self.get_mask_button = QtWidgets.QToolButton(self.get_mask)
+        self.get_mask_button.setObjectName(("get_mask_button"))
         self.horizontalLayout.addWidget(self.get_mask_button)
         self.module_layout.addWidget(self.get_mask)
 
-        self.get_mask.setTitle(_translate("MainWindow", "Mask Data", None))
-        self.choosedata_label.setText(_translate("MainWindow", "Choose data: ", None))
-        self.get_mask_label.setText(_translate("MainWindow", "Mask file: ", None))
-        self.get_mask_line_edit.setText(_translate("MainWindow", "*.csv", None))
-        self.get_mask_button.setText(_translate("MainWindow", "...", None))
+        self.get_mask.setTitle("Mask Data")
+        self.choosedata_label.setText("Choose data: ")
+        self.get_mask_label.setText("Mask file: ")
+        self.get_mask_line_edit.setText("*.csv")
+        self.get_mask_button.setText("...")
         self.get_mask_line_edit.textChanged.connect(lambda: self.get_mask_params())
         self.mask_choosedata.currentIndexChanged.connect(lambda: self.get_mask_params())
         self.get_mask_button.clicked.connect(lambda: self.on_getDataButton_clicked(self.get_mask_line_edit))
@@ -86,7 +71,7 @@ class get_mask_:
 
     def set_mask_params(self):
         if self.arg_list is None:
-            self.get_mask_line_edit.setText(_translate("MainWindow", "*.csv", None))
+            self.get_mask_line_edit.setText("*.csv")
         else:
             self.get_mask_line_edit.setText(self.arg_list[1])
             index = self.mask_choosedata.findText(str(self.arg_list[0]))  # findText 'unknown' or 'known'
@@ -94,7 +79,7 @@ class get_mask_:
                 self.mask_choosedata.setCurrentIndex(index)
 
     def on_getDataButton_clicked(self, lineEdit):
-        filename = QtGui.QFileDialog.getOpenFileName(None, "Open Mask Data File", '.', "(*.csv)")
+        filename, _filter = QtWidgets.QFileDialog.getOpenFileName(None, "Open Mask Data File", '.', "(*.csv)")
         lineEdit.setText(filename)
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")

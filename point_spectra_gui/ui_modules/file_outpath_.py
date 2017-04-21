@@ -1,13 +1,4 @@
-from PyQt4 import QtCore, QtGui
-
-try:
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, QtGui.QApplication.UnicodeUTF8)
-
-except AttributeError:
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
-
+from PyQt5 import QtGui, QtCore, QtWidgets
 
 class file_outpath_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list):
@@ -28,31 +19,31 @@ class file_outpath_:
             pass
 
     def file_outpath_ui(self):
-        self.file_out_path = QtGui.QGroupBox()
+        self.file_out_path = QtWidgets.QGroupBox()
         font = QtGui.QFont()
         font.setPointSize(10)
         self.file_out_path.setFont(font)
         self.file_out_path.setObjectName("file_out_path")
-        self.horizontalLayout = QtGui.QHBoxLayout(self.file_out_path)
-        self.horizontalLayout.setMargin(11)
+        self.horizontalLayout = QtWidgets.QHBoxLayout(self.file_out_path)
+        self.horizontalLayout.setContentsMargins(11, 11, 11, 11)
         self.horizontalLayout.setSpacing(6)
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.file_out_path_label = QtGui.QLabel(self.file_out_path)
+        self.file_out_path_label = QtWidgets.QLabel(self.file_out_path)
         self.file_out_path_label.setObjectName("file_out_path_label")
         self.horizontalLayout.addWidget(self.file_out_path_label)
-        self.file_out_path_line_edit = QtGui.QLineEdit(self.file_out_path)
+        self.file_out_path_line_edit = QtWidgets.QLineEdit(self.file_out_path)
         self.file_out_path_line_edit.setReadOnly(True)  # User can't edit this line
         self.file_out_path_line_edit.setObjectName("file_out_path_line_edit")
         self.horizontalLayout.addWidget(self.file_out_path_line_edit)
-        self.file_out_path_button = QtGui.QToolButton(self.file_out_path)
+        self.file_out_path_button = QtWidgets.QToolButton(self.file_out_path)
         self.file_out_path_button.setObjectName("file_out_path_button")
         self.horizontalLayout.addWidget(self.file_out_path_button)
         self.module_layout.addWidget(self.file_out_path)
 
-        self.file_out_path.setTitle(_translate("MainWindow", "Ouput Folder", None))
-        self.file_out_path_label.setText(_translate("MainWindow", "Folder Name", None))
-        self.file_out_path_line_edit.setText(_translate("MainWindow", "*/", None))
-        self.file_out_path_button.setText(_translate("MainWindow", "...", None))
+        self.file_out_path.setTitle("Ouput Folder")
+        self.file_out_path_label.setText("Folder Name")
+        self.file_out_path_line_edit.setText("*/")
+        self.file_out_path_button.setText("...")
         self.set_parameters()
 
     def set_parameters(self):
@@ -70,7 +61,7 @@ class file_outpath_:
         pass
 
     def on_outPutLocationButton_clicked(self):
-        filename = QtGui.QFileDialog.getExistingDirectory(None, "Select Output Directory", '.')
+        filename = QtWidgets.QFileDialog.getExistingDirectory(None, "Select Output Directory", '.')
         self.file_out_path_line_edit.setText(filename)
         if self.file_out_path_line_edit.text() == "":
             self.file_out_path_line_edit.setText("*/")
