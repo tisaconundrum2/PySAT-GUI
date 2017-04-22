@@ -76,9 +76,8 @@ target/
 *.dll
 *.xml
 *.iml
-point_spectra_gui/PYSAT_Gui_UI_Forms/FINISHED/*.*
-point_spectra_gui/PYSAT_Gui_UI_Forms/PythonUI/*.*
-point_spectra_gui/Python PYSAT_GUI/plot.png
+point_spectra_gui/ui/FINISHED/*.*
+point_spectra_gui/ui/PythonUI/*.*
 !"./images/Flowchart (Draw.io).xml"
 !"./images/Flowchart.png"
 !"./images/splash.png"
@@ -87,3 +86,4 @@ point_spectra_gui/Python PYSAT_GUI/plot.png
 
 # Pysat
 pysat/
+point_spectra_gui/ui/Finished/01_mainwindow_file_out.py

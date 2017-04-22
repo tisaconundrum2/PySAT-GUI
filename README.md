@@ -2,11 +2,11 @@
 [![Coverage Status](https://coveralls.io/repos/github/USGS-Astrogeology/PySAT/badge.svg?branch=master)](https://coveralls.io/github/USGS-Astrogeology/PySAT?branch=master)
 # Installation
 
-  - Click and download [Anaconda Python 4.1.1](https://repo.continuum.io/archive/Anaconda3-4.1.1-Windows-x86.exe).  The pysat package and UI has been designed with 4.1.1. 
-  - Newer versions of Anaconda breaks this package. This will be remedied in later releases.
+  - Click and download [Anaconda Python 4.3.X 64-Bit installer](https://repo.continuum.io/archive/Anaconda3-4.3.1-Windows-x86_64.exe).
   - If you're using a non-Windows machine go to Anaconda's [download page](https://www.continuum.io/downloads) and pick up the 4.1.1 package
   - Download or clone this repository
   - Download the PYSAT library from here [github.com/USGS-Astrogeology/PySAT](https://github.com/USGS-Astrogeology/PySAT)
+  - For more information on how to install go [here](https://github.com/USGS-Astrogeology/PySAT_Point_Spectra_GUI/wiki/How-To-Install).
 
 # PYSAT UI
 ![PYSAT splash](./images/splash.png)  
@@ -15,6 +15,7 @@
 - The UI is being built to work as close to the original libraries as physically possible
 
 Current Road Ahead
+- [x] Ported to version 5 of PyQt
 - [x] Working Modules on UI
 - [x] Selecting functions from Menubar adds functions dynamically
 - [x] Shortcuts such as Ctrl S to save
