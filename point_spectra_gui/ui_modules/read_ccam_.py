@@ -60,7 +60,7 @@ class read_ccam_:
         self.read_ccam_searchstring_label = QtWidgets.QLabel(self.read_ccam)
         self.read_ccam_searchstring_label.setText('Search String: ')
         self.searchstring_hlayout.addWidget(self.read_ccam_searchstring_label)
-        defaultstring = '*CCS*.SAV'
+        defaultstring = '*ccs*.csv'
         self.read_ccam_searchstring = QtWidgets.QLineEdit(self.read_ccam)
         self.read_ccam_searchstring.setText(defaultstring)
         self.searchstring_hlayout.addWidget(self.read_ccam_searchstring)
@@ -152,14 +152,14 @@ class read_ccam_:
     #     self.choose_test_fold.addItems(choices)
 
     def on_searchpathButton_clicked(self):
-        filename, _filter = QtWidgets.QFileDialog.getExistingDirectory(None, "Select Search Directory", '.')
-        self.search_path_line_edit.setText(filename)
+        dirname = QtWidgets.QFileDialog.getExistingDirectory(parent=None,caption="Select Search Directory", directory='.')
+        self.search_path_line_edit.setText(dirname)
         if self.search_path_line_edit.text() == "":
             self.search_path_line_edit.setText("*/")
         self.get_read_ccam_params()
 
     def on_metadataButton_clicked(self):
-        self.metadata_file = QtWidgets.QFileDialog.getOpenFileNames(None, "Select metadata file(s)", '.')
+        self.metadata_file,null = QtWidgets.QFileDialog.getOpenFileNames(parent=None,caption="Select metadata file(s)",directory='.')
         self.metadata_line_edit.setText(str(self.metadata_file))
         if self.metadata_line_edit.text() == "":
             self.metadata_line_edit.setText("*/")

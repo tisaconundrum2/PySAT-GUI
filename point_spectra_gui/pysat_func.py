@@ -3,13 +3,13 @@ from pysat.regression import regression
 from pysat.regression import cv
 from pysat.plotting.plots import make_plot, pca_ica_plot
 from pysat.regression import sm
-from pysat.fileio import io_ccs
-# from plio import io_ccs
+from pysat.fileio import io_ccam_pds
+# from plio import io_ccam_pds
 import pandas as pd
 from point_spectra_gui.ui_modules.Error_ import  error_print
 from point_spectra_gui.ui_modules.del_layout_ import *
 from PyQt5.QtCore import QThread
-from PyQt5 import QtGui, QtCore
+from PyQt5 import QtGui, QtCore,QtWidgets
 import numpy as np
 
 
@@ -212,8 +212,9 @@ class pysat_func(QThread):
                 self.data[datakey].df.to_csv(filename)
 
     def do_read_ccam(self,searchdir,searchstring,to_csv=None,lookupfile=None,ave=True):
-        io_ccs.ccs_batch(searchdir,searchstring=searchstring,to_csv=self.outpath+'\\'+to_csv,lookupfile=lookupfile,ave=ave)
-        self.get_data(self.outpath+'\\'+to_csv,'ChemCam')
+        #progressbar=QtWidgets.QProgressDialog()
+        io_ccam_pds.ccam_batch(searchdir,searchstring=searchstring,to_csv=self.outpath+'/'+to_csv,lookupfile=lookupfile,ave=ave)#,progressbar=progressbar)
+        self.get_data(self.outpath+'/'+to_csv,'ChemCam')
 
     def removenull(self,datakey,colname):
         try:
