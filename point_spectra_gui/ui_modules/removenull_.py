@@ -16,6 +16,8 @@ class removenull_:
     def main(self):
         self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
         self.removenull_ui()  # initiate the UI
+        self.set_removenull_parameters()
+        self.get_removenull_parameters()
         self.pysat_fun.set_greyed_modules(self.removenull)
 
     def get_removenull_parameters(self):
@@ -35,7 +37,10 @@ class removenull_:
     def set_removenull_parameters(self):
         if self.arg_list is not None:
             datakey = self.arg_list[0]
-            colname = self.arg_list[1]
+            colname = self.arg_list[1][1]
+            # [datakey, (var, colname)]
+            self.removenull_choosedata.setCurrentText(datakey)
+            self.colname_choices.setCurrentText(colname)
 
     def removenull_ui(self):
         self.removenull = QtWidgets.QGroupBox()
