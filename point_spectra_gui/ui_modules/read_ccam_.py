@@ -46,6 +46,24 @@ class read_ccam_:
         fun_list = "do_read_ccam"
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
 
+    def set_read_ccam_params(self):
+        if self.arg_list is not None:
+            searchdir = self.arg_list[0]
+            searchstring = self.arg_list[1]
+            to_csv = self.kw_list['to_csv']
+            self.metadata_file = self.kw_list['lookupfile']
+            average = self.kw_list['ave']
+
+            self.search_path_line_edit.setText(searchdir)
+            self.read_ccam_searchstring.setText(searchstring)
+            self.read_ccam_outfile.setText(to_csv)
+            self.metadata_line_edit.setText(str(self.metadata_file))
+            if average == True:
+                self.ave_button.setChecked(True)
+            else:
+                self.ave_button.setChecked(False)
+            self.get_read_ccam_params()
+
     def read_ccam_ui(self):
         self.read_ccam = QtWidgets.QGroupBox()
         font = QtGui.QFont()
@@ -120,24 +138,6 @@ class read_ccam_:
 
         self.read_ccam.setTitle("Read ChemCam Data")
         self.module_layout.addWidget(self.read_ccam)
-
-    def set_read_ccam_params(self):
-        if self.arg_list is not None:
-            searchdir = self.arg_list[0]
-            searchstring = self.arg_list[1]
-            to_csv = self.kw_list['to_csv']
-            self.metadata_file = self.kw_list['lookupfile']
-            average = self.kw_list['ave']
-
-            self.search_path_line_edit.setText(searchdir)
-            self.read_ccam_searchstring.setText(searchstring)
-            self.read_ccam_outfile.setText(to_csv)
-            self.metadata_line_edit.setText(str(self.metadata_file))
-            if average == True:
-                self.ave_button.setChecked(True)
-            else:
-                self.ave_button.setChecked(False)
-            self.get_read_ccam_params()
 
     # def read_ccam_change_vars(self):
     #     self.read_ccam_choose_var.clear()

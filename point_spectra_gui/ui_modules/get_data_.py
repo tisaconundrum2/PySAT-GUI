@@ -13,6 +13,7 @@ class get_data_u_:
     def main(self):
         self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
         self.get_data_ui()  # initiate the UI
+        self.set_data_parameters()
         self.pysat_fun.set_greyed_modules(self.get_data)
         try:
             self.get_data_button.clicked.connect(lambda: self.on_getDataButton_clicked(self.get_data_line_edit,
@@ -69,15 +70,9 @@ class get_data_u_:
         self.horizontalLayout.addWidget(self.radioButton)
         self.module_layout.addWidget(self.horizontalWidget)
 
-        self.get_data.setTitle("Load Known Data")
-        self.get_data_label.setText("File Name")
-        self.get_data_button.setText("...")
-        self.set_data_parameters()
-
         self.get_data.setTitle("Load Unknown Data")
         self.get_data_label.setText("File Name")
         self.get_data_button.setText("...")
-        self.set_data_parameters()
 
     def set_data_parameters(self):
         if self.arg_list is None:
@@ -112,6 +107,7 @@ class get_data_k_:
     def main(self):
         self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
         self.get_data_ui()  # initiate the UI
+        self.set_data_parameters()
         self.pysat_fun.set_greyed_modules(self.get_data)
         try:
             self.get_data_button.clicked.connect(lambda: self.on_getDataButton_clicked(self.get_data_line_edit,
@@ -171,7 +167,6 @@ class get_data_k_:
         self.get_data.setTitle("Load Known Data")
         self.get_data_label.setText("File Name")
         self.get_data_button.setText("...")
-        self.set_data_parameters()
 
     def radio_button_clicked(self):
         # TODO set the counting distance

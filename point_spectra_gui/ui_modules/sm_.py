@@ -15,6 +15,15 @@ class sm_:
 
         self.main()
 
+    def main(self):
+        # driver function, calls UI and set's up connections
+        # add function list calls here
+        self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
+        self.sm_ui()
+        self.set_sm_params()
+        self.get_sm_params()
+        self.pysat_fun.set_greyed_modules(self.submodel_predict)  # set the module grey after use.
+
     def get_sm_params(self):
         ui_list = "do_submodel_predict"
         fun_list = "do_submodel_predict"
@@ -55,13 +64,6 @@ class sm_:
         blendranges = self.arg_list[2]
         trueval_data = self.arg_list[3]
         self.choosedata_predict.currentIndex(self.choosedata_predict.findText(str(datakey)))
-
-    def main(self):
-        # driver function, calls UI and set's up connections
-        # add function list calls here
-        self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
-        self.sm_ui()
-        self.pysat_fun.set_greyed_modules(self.submodel_predict)  # set the module grey after use.
 
     def sm_ui(self):
 

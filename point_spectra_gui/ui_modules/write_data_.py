@@ -4,6 +4,9 @@ from point_spectra_gui.ui_modules.Error_ import error_print
 
 
 class write_data_:
+    """
+
+    """
     def __init__(self, pysat_fun, module_layout):
         self.pysat_fun = pysat_fun
         self.ui_id = None
@@ -13,7 +16,12 @@ class write_data_:
     def main(self):
         self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
         self.write_data_ui()
+        self.set_write_params()
+        self.get_write_params()
         self.pysat_fun.set_greyed_modules(self.write_data)
+
+    def set_write_params(self):
+        pass
 
     def get_write_params(self):
         datakey = self.write_data_choose_data.currentText()
@@ -33,7 +41,7 @@ class write_data_:
         self.write_data_vlayout = QtWidgets.QVBoxLayout(self.write_data)
 
         self.write_data_choose_data_label = QtWidgets.QLabel(self.write_data)
-        self.write_data_choose_data_label.setText(("write_data", "Choose data set to write to .csv:"))
+        self.write_data_choose_data_label.setText("Choose data set to write to .csv:")
         self.write_data_vlayout.addWidget(self.write_data_choose_data_label)
 
         datachoices = self.pysat_fun.datakeys
@@ -57,4 +65,3 @@ class write_data_:
 
         self.write_data_choose_data.currentIndexChanged.connect(lambda: self.get_write_params())
         self.write_data_file.textChanged.connect(lambda: self.get_write_params())
-        self.get_write_params()

@@ -12,6 +12,7 @@ class file_outpath_:
     def main(self):
         self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
         self.file_outpath_ui()
+        self.set_parameters()
         self.pysat_fun.set_greyed_modules(self.file_out_path)
         try:
             self.file_out_path_button.clicked.connect(self.on_outPutLocationButton_clicked)
@@ -44,7 +45,6 @@ class file_outpath_:
         self.file_out_path_label.setText("Folder Name")
         self.file_out_path_line_edit.setText("*/")
         self.file_out_path_button.setText("...")
-        self.set_parameters()
 
     def set_parameters(self):
         if self.arg_list is not None:

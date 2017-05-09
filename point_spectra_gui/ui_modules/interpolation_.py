@@ -15,6 +15,8 @@ class interpolation_:
     def main(self):
         self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
         self.interpolation_ui()
+        self.set_parameters()
+        self.get_parameters()
         self.pysat_fun.set_greyed_modules(self.Interpolation)
         self.interpoliation_choosedata.currentIndexChanged.connect(lambda: self.get_parameters())
         self.interpolation_choosedata_2.currentIndexChanged.connect(lambda: self.get_parameters())
@@ -67,7 +69,6 @@ class interpolation_:
         self.Interpolation.setTitle("Interpolation")
         self.interpolation_choosedata_label.setText("Choose data to interpolate: ")
         self.interpolation_choosedata_label_2.setText("Choose data to use as reference: ")
-        self.set_parameters()
 
     def set_parameters(self):
         if self.arg_list is not None:
@@ -76,17 +77,13 @@ class interpolation_:
             if index is not -1 and index2 is not -1:
                 self.interpoliation_choosedata.setCurrentIndex(index)
                 self.interpolation_choosedata_2.setCurrentIndex(index2)
-            self.get_parameters()
 
     def get_parameters(self):
+        ui_list = "do_interp"
+        fun_list = "do_interp"
         key1 = self.interpoliation_choosedata.currentText()
         key2 = self.interpolation_choosedata_2.currentText()
         # arg_list.append(['unknown data','known data'])
-        args = [key1, key2]
-        kws = {}
-        self.push_parameters(args, kws)
-
-    def push_parameters(self, arg_list, kw_list):
-        ui_list = "do_interp"
-        fun_list = "do_interp"
+        arg_list = [key1, key2]
+        kw_list = {}
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, arg_list, kw_list, self.ui_id)

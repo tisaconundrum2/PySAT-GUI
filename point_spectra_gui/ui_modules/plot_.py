@@ -15,6 +15,8 @@ class plot_:
     def main(self):
         self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
         self.plot_ui()
+        self.set_plot_parameters()
+        self.get_plot_parameters()
         self.pysat_fun.set_greyed_modules(self.plot)
 
     def get_plot_parameters(self):
