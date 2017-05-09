@@ -150,7 +150,7 @@ class cv_:
         self.cv_choosedata_hlayout.setObjectName(("cv_choosedata_hlayout"))
         self.cv_train_choosedata_label = QtWidgets.QLabel(self.cv_train)
         self.cv_train_choosedata_label.setObjectName(("cv_train_choosedata_label"))
-        self.cv_train_choosedata_label.setText(("cv_train", "Choose data:"))
+        self.cv_train_choosedata_label.setText(("Choose data:"))
         self.cv_choosedata_hlayout.addWidget(self.cv_train_choosedata_label)
         datachoices = self.pysat_fun.datakeys
         if datachoices == []:
