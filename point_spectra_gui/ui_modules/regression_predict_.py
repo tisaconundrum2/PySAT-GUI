@@ -1,10 +1,11 @@
-from point_spectra_gui.ui_modules import make_combobox
-from point_spectra_gui.ui_modules.Error_ import error_print
+from point_spectra_gui.ui_modules import make_combobox, error_print
 from PyQt5 import QtGui, QtCore, QtWidgets
 
 
 class regression_predict_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list):
+        self.arg_list = arg_list
+        self.kw_list = kw_list
         self.pysat_fun = pysat_fun
         self.ui_id = None
         self.module_layout = module_layout
@@ -13,6 +14,8 @@ class regression_predict_:
     def main(self):
         self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
         self.regression_ui()
+        self.set_predict_parameters()
+        self.get_predict_parameters()
         self.pysat_fun.set_greyed_modules(self.regression_predict)
 
         self.regression_predict_choosedata.currentIndexChanged.connect(lambda: self.get_predict_parameters())
@@ -31,7 +34,20 @@ class regression_predict_:
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
 
     def set_predict_parameters(self):
-        pass
+        temp = self.arg_list
+        if self.arg_list is not None:
+            try:
+                datakey = self.arg_list[0]
+                modelkey = self.arg_list[1]
+                # self.regression_predict_choosedata = make_combobox(datakey)
+                # self.regression_predict_choosemodel = make_combobox(modelkey)
+                self.regression_predict_choosedata.setItemText(0,datakey)
+                self.regression_predict_choosemodel.setItemText(0, modelkey)
+                pass
+
+
+            except Exception as e:
+                error_print(e)
 
     def regression_ui(self):
         self.regression_predict = QtWidgets.QGroupBox()
@@ -49,8 +65,8 @@ class regression_predict_:
         self.regression_predict_choosedata_hlayout.addWidget(self.regression_predict_choosedata_label)
         # create the combobox with data choices
         datachoices = self.pysat_fun.datakeys
+        # TODO add logic for dealing with restoring this module
         if datachoices == []:
-            error_print('No Data has been loaded')
             datachoices = ['No data has been loaded!']
         self.regression_predict_choosedata = make_combobox(datachoices)
         self.regression_predict_choosedata.setIconSize(QtCore.QSize(50, 20))
@@ -69,7 +85,6 @@ class regression_predict_:
 
         modelchoices = self.pysat_fun.modelkeys
         if modelchoices == []:
-            error_print('No model has been trained')
             modelchoices = ['No model has been trained!']
         self.regression_predict_choosemodel = make_combobox(modelchoices)
         self.regression_predict_choosemodel.setIconSize(QtCore.QSize(50, 20))
@@ -82,6 +97,5 @@ class regression_predict_:
         self.module_layout.addWidget(self.regression_predict)
         self.regression_predict.raise_()
         self.regression_predict.setTitle(("Regression - Predict"))
-        self.regression_predict_choosedata_label.setText(("regression", "Choose data: "))
-        self.regression_predict_choosemodel_label.setText(("regression", "Choose Model: "))
-        self.get_predict_parameters()
+        self.regression_predict_choosedata_label.setText(("Choose data: "))
+        self.regression_predict_choosemodel_label.setText(("Choose Model: "))
