@@ -113,7 +113,6 @@ class regression_train_:
                 params = self.arg_list[5]
                 ransacparams = self.arg_list[6]
                 self.regression_choosedata.setCurrentIndex(self.regression_choosedata.findText(str(datakey)))
-                # TODO:
                 self.regression_train_choosex.setCurrentItem(
                     self.regression_train_choosex.findItems(xvars[0], QtCore.Qt.MatchExactly)[0])
                 self.regression_train_choosey.setCurrentItem(
@@ -122,6 +121,7 @@ class regression_train_:
                 self.yvarmax_spin.setValue(yrange[1])
                 self.regression_choosealg.setCurrentIndex(self.regression_choosealg.findText(str(method)))
                 self.make_regression_widget(self.regression_choosealg.currentText(), params=params)
+
             except Exception as e:
                 error_print(e)
 
