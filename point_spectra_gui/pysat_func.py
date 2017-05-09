@@ -6,7 +6,7 @@ from pysat.regression import sm
 from pysat.fileio import io_ccs
 # from plio import io_ccs
 import pandas as pd
-from point_spectra_gui.ui_modules.Error_ import  error_print
+from point_spectra_gui.ui_modules.Error_ import error_print
 from point_spectra_gui.ui_modules.del_layout_ import *
 from PyQt5.QtCore import QThread
 from PyQt5 import QtGui, QtCore
@@ -24,6 +24,7 @@ class Module:
         self.next = None
         self.UI_ID = Module.nodeCount
         Module.nodeCount += 1
+
     def setData(self, ui_list, fun_list, arg_list, kw_list):
         self.ui_list = ui_list
         self.fun_list = fun_list
@@ -48,6 +49,7 @@ class Module:
     def getNext(self):
         return self.next
 
+
 class listOfModules:
     def __init__(self):
         self.head = None
@@ -62,20 +64,21 @@ class listOfModules:
         return count
 
     def push(self, ui_list, fun_list, arg_list, kw_list, UI_ID=None):
-        if not self.amend(ui_list, fun_list, arg_list, kw_list, UI_ID): # if the UI_ID that we are playing with exists, amend it, otherwise make something new
+        if not self.amend(ui_list, fun_list, arg_list, kw_list,
+                          UI_ID):  # if the UI_ID that we are playing with exists, amend it, otherwise make something new
             if len(self) == 0:
                 # Create a new head
-                temp = Module(ui_list, fun_list, arg_list, kw_list)     # self.head = None; temp = 0x085817F0
-                temp.setNext(self.head)                                 # temp = 0x085817F0; temp.next = None
-                self.head = temp                                        # self.head = 0x085817F0; self.head.next = None; temp = 0x085817F0; temp.next = None
+                temp = Module(ui_list, fun_list, arg_list, kw_list)  # self.head = None; temp = 0x085817F0
+                temp.setNext(self.head)  # temp = 0x085817F0; temp.next = None
+                self.head = temp  # self.head = 0x085817F0; self.head.next = None; temp = 0x085817F0; temp.next = None
                 return temp.getID()
             else:
                 # Append new data into .next
-                temp = Module(ui_list, fun_list, arg_list, kw_list)     # self.head = 0x085817F0; temp = 0x00568330
-                current = self.head                                     # current = 0x085817F0; current.next = None; self.head = 0x085817F0; temp = 0x00568330
-                while current.getNext() != None:                        #
-                    current = current.getNext()                         #
-                current.setNext(temp)                                   # current = 0x085817F0; current.next = 0x00568330;
+                temp = Module(ui_list, fun_list, arg_list, kw_list)  # self.head = 0x085817F0; temp = 0x00568330
+                current = self.head  # current = 0x085817F0; current.next = None; self.head = 0x085817F0; temp = 0x00568330
+                while current.getNext() != None:  #
+                    current = current.getNext()  #
+                current.setNext(temp)  # current = 0x085817F0; current.next = 0x00568330;
                 return temp.getID()
         return UI_ID
 
@@ -139,6 +142,7 @@ class listOfModules:
                 print(items)
             current = current.getNext()
 
+
 class pysat_func(QThread):
     taskFinished = QtCore.pyqtSignal()
 
@@ -150,12 +154,13 @@ class pysat_func(QThread):
         self.modelkeys = []
         self.model_xvars = {}
         self.model_yvars = {}
-        self.dim_reds={}
-        self.dim_red_keys=[]
+        self.dim_reds = {}
+        self.dim_red_keys = []
         self.figs = {}
         self._list = listOfModules()
         self.greyed_modules = []
-        self.outpath='./'
+        self.outpath = './'
+
     """
     Getter and setter functions below
     """
@@ -189,7 +194,7 @@ class pysat_func(QThread):
     def set_file_outpath(self, outpath):
         try:
             self.outpath = outpath
-            print("Output path folder has been set to "+outpath)
+            print("Output path folder has been set to " + outpath)
         except Exception as e:
             error_print(e)
 
@@ -202,20 +207,21 @@ class pysat_func(QThread):
         except Exception as e:
             error_print('Problem reading data: {}'.format(e))
 
-    def do_write_data(self, filename,datakey):
+    def do_write_data(self, filename, datakey):
         try:
             self.data[datakey].to_csv(filename)
         except:
             try:
-                self.data[datakey].df.to_csv(self.outpath+'/'+filename)
+                self.data[datakey].df.to_csv(self.outpath + '/' + filename)
             except:
                 self.data[datakey].df.to_csv(filename)
 
-    def do_read_ccam(self,searchdir,searchstring,to_csv=None,lookupfile=None,ave=True):
-        io_ccs.ccs_batch(searchdir,searchstring=searchstring,to_csv=self.outpath+'\\'+to_csv,lookupfile=lookupfile,ave=ave)
-        self.get_data(self.outpath+'\\'+to_csv,'ChemCam')
+    def do_read_ccam(self, searchdir, searchstring, to_csv=None, lookupfile=None, ave=True):
+        io_ccs.ccs_batch(searchdir, searchstring=searchstring, to_csv=self.outpath + '\\' + to_csv,
+                         lookupfile=lookupfile, ave=ave)
+        self.get_data(self.outpath + '\\' + to_csv, 'ChemCam')
 
-    def removenull(self,datakey,colname):
+    def removenull(self, datakey, colname):
         try:
             print(self.data[datakey].df.shape)
             self.data[datakey] = spectral_data(self.data[datakey].df.ix[-self.data[datakey].df[colname].isnull()])
@@ -238,9 +244,9 @@ class pysat_func(QThread):
         except Exception as e:
             error_print(e)
 
-    def do_dim_red(self,datakey,method,params,method_kws={},col='wvl',load_fit=None,dim_red_key=None):
+    def do_dim_red(self, datakey, method, params, method_kws={}, col='wvl', load_fit=None, dim_red_key=None):
         try:
-            self.dim_reds[dim_red_key]=self.data[datakey].dim_red(col, method, params, method_kws, load_fit=load_fit)
+            self.dim_reds[dim_red_key] = self.data[datakey].dim_red(col, method, params, method_kws, load_fit=load_fit)
             self.dim_red_keys.append(dim_red_key)
         except Exception as e:
             error_print(e)
@@ -285,34 +291,38 @@ class pysat_func(QThread):
         print(self.data[datakey + '-Test'].df.index.shape)
         print(self.data[datakey + '-Train'].df.index.shape)
 
-    def do_regression_train(self, datakey, xvars, yvars, yrange, method, params, ransacparams, modelkey=None):
+    def do_regression_train(self, datakey, xvars, yvars, yrange, method, params, ransacparams, modelkey=None,
+                            update=False, append=False):
         try:
             if modelkey is None:
                 modelkey = method + '-' + str(yvars) + ' (' + str(yrange[0]) + '-' + str(yrange([1]) + ') ')
-            self.models[modelkey] = regression.regression([method], [yrange], [params], i=0,
-                                                          ransacparams=[ransacparams])
-            self.modelkeys.append(modelkey)
 
-            x = self.data[datakey].df[xvars]
-            y = self.data[datakey].df[yvars]
-            x = np.array(x)
-            y = np.array(y)
-            ymask = np.squeeze((y > yrange[0]) & (y < yrange[1]))
-            y = y[ymask]
-            x = x[ymask, :]
-            self.models[modelkey].fit(x, y)
-            self.model_xvars[modelkey] = xvars
-            self.model_yvars[modelkey] = yvars
-            print('foo')
+            self.models[modelkey] = regression.regression([method], [yrange], [params], i=0, ransacparams=[ransacparams])
+            if not append:
+                self.modelkeys.append(modelkey)
+            else:
+                self.modelkeys[-1] = modelkey
+            if not update:
+                x = self.data[datakey].df[xvars]
+                y = self.data[datakey].df[yvars]
+                x = np.array(x)
+                y = np.array(y)
+                ymask = np.squeeze((y > yrange[0]) & (y < yrange[1]))
+                y = y[ymask]
+                x = x[ymask, :]
+                self.models[modelkey].fit(x, y)
+                self.model_xvars[modelkey] = xvars
+                self.model_yvars[modelkey] = yvars
         except Exception as e:
             error_print(e)
 
     def do_cv_train(self, datakey, xvars, yvars, yrange, method, params):
 
         try:
-            cv_obj=cv.cv(params)
-            self.data[datakey].df,self.cv_results=cv_obj.do_cv(self.data[datakey].df,xcols=xvars,ycol=yvars,yrange=yrange,method=method)
-            self.data['CV Results']=self.cv_results
+            cv_obj = cv.cv(params)
+            self.data[datakey].df, self.cv_results = cv_obj.do_cv(self.data[datakey].df, xcols=xvars, ycol=yvars,
+                                                                  yrange=yrange, method=method)
+            self.data['CV Results'] = self.cv_results
 
         except Exception as e:
             error_print(e)
@@ -389,10 +399,10 @@ class pysat_func(QThread):
             # Alpha is missing, fix this!
             outpath = self.outpath
             self.figs[figname] = make_plot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
-                                             ytitle=ytitle, title=title,
-                                             lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
-                                             annot_mask=annot_mask, cmap=cmap,
-                                             colortitle=colortitle, loadfig=loadfig,marker=marker,linestyle=linestyle)
+                                           ytitle=ytitle, title=title,
+                                           lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
+                                           annot_mask=annot_mask, cmap=cmap,
+                                           colortitle=colortitle, loadfig=loadfig, marker=marker, linestyle=linestyle)
         except Exception as e:
             error_print(e)
             # dealing with the a possibly missing outpath
@@ -401,7 +411,7 @@ class pysat_func(QThread):
                                            ytitle=ytitle, title=title,
                                            lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
                                            annot_mask=annot_mask, cmap=cmap,
-                                           colortitle=colortitle, loadfig=loadfig,marker=marker,linestyle=linestyle)
+                                           colortitle=colortitle, loadfig=loadfig, marker=marker, linestyle=linestyle)
 
     def do_plot_dim_red(self, datakey,
                         x_component,
