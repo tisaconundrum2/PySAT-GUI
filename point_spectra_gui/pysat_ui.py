@@ -101,10 +101,8 @@ class pysat_ui(object):
         # set up data actions
         self.actionRead_ccam = QtWidgets.QAction(MainWindow)
         self.actionRead_ccam.setObjectName(("actionRead_ccam"))
-        self.actionLoad_reference_Data = QtWidgets.QAction(MainWindow)
-        self.actionLoad_reference_Data.setObjectName(("actionLoad_reference_Data"))
-        self.actionLoad_Unknown_Data = QtWidgets.QAction(MainWindow)
-        self.actionLoad_Unknown_Data.setObjectName(("actionLoad_Unknown_Data"))
+        self.actionLoadData = QtWidgets.QAction(MainWindow)
+        self.actionLoadData.setObjectName(("actionLoadData"))
         self.actionSave_Current_Workflow = QtWidgets.QAction(MainWindow)
         self.actionSave_Current_Workflow.setObjectName(("actionSave_Current_Workflow"))
         self.actionSave_Current_Data = QtWidgets.QAction(MainWindow)
@@ -157,8 +155,7 @@ class pysat_ui(object):
 
         # add actions to file menu
         self.menuFile.addAction(self.actionRead_ccam)
-        self.menuFile.addAction(self.actionLoad_reference_Data)
-        self.menuFile.addAction(self.actionLoad_Unknown_Data)
+        self.menuFile.addAction(self.actionLoadData)
         self.menuFile.addAction(self.actionSet_output_location)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionSave_Current_Data)
@@ -209,8 +206,7 @@ class pysat_ui(object):
         self.menuHelp.setTitle("Help")
         self.menuVisualization.setTitle("Visualization")
         self.actionRead_ccam.setText("Read ChemCam Data")
-        self.actionLoad_reference_Data.setText("Load Reference Data")
-        self.actionLoad_Unknown_Data.setText("Load Unknown Data")
+        self.actionLoadData.setText("Load Data")
         self.actionSave_Current_Workflow.setText("Save Current Workflow")
         self.actionSave_Current_Data.setText("Save Current Data")
         self.actionCreate_New_Workflow.setText("Create New Workflow")
@@ -236,11 +232,8 @@ class pysat_ui(object):
         self.okButton.clicked.connect(lambda: self.on_okButton_clicked())
         self.delButton.clicked.connect(lambda: self.pysat_fun.del_layout())
 
-    def get_known_data(self, arg_list=None, kw_list=None):
-        self.flag = ui_modules.get_data_k_(self.pysat_fun, self.module_layout, arg_list, kw_list)
-
-    def get_unknown_data(self, arg_list=None, kw_list=None):
-        self.flag = ui_modules.get_data_u_(self.pysat_fun, self.module_layout, arg_list, kw_list)
+    def do_get_data(self, arg_list=None, kw_list=None):
+        self.flag = ui_modules.get_data_(self.pysat_fun, self.module_layout, arg_list, kw_list)
 
     def do_read_ccam(self, arg_list=None, kw_list=None):
         self.flag = ui_modules.read_ccam_(self.pysat_fun, self.module_layout, arg_list, kw_list)
@@ -302,8 +295,7 @@ class pysat_ui(object):
     def menu_item_functions(self, MainWindow):
         self.actionRead_ccam.triggered.connect(lambda: pysat_ui.do_read_ccam(self))
         self.actionSet_output_location.triggered.connect(lambda: pysat_ui.file_outpath(self))  # output location
-        self.actionLoad_Unknown_Data.triggered.connect(lambda: pysat_ui.get_unknown_data(self))  # unknown data
-        self.actionLoad_reference_Data.triggered.connect(lambda: pysat_ui.get_known_data(self))  # known data
+        self.actionLoadData.triggered.connect(lambda: pysat_ui.do_get_data(self))  # load data
         self.actionSave_Current_Data.triggered.connect(lambda: pysat_ui.do_write_data(self))
         self.actionNormalization.triggered.connect(lambda: pysat_ui.normalization(self))  # submodel
         self.actionApply_Mask.triggered.connect(lambda: pysat_ui.do_mask(self))  # get_mask
@@ -392,7 +384,8 @@ class pysat_ui(object):
             ui_modules.error_print("File was not loaded")
         self.restore_first()
 
-    def restore_first(self):
+    def restore_first(self):   #This function should no longer be necessary once we have error handling with restoration working smoothly
+
         # first run a single or double instance of getattr depending on what data is in the queue
         #   We'll need to remember 'i' so we don't accidentally run the instance too many times
         # then press ok
@@ -400,10 +393,11 @@ class pysat_ui(object):
 
         # TODO: Don't run the function until the UI has been loaded
         # TODO: allow set outpath to be run before loading data
+
+
         try:
             self.r_list = self.restore_list.pop()
-            while self.r_list[1] == "get_unknown_data" or self.r_list[1] == "get_known_data" or self.r_list[
-                1] == 'do_read_ccam':
+            while self.r_list[1] == "do_get_data" or self.r_list[1] == 'do_read_ccam':
                 getattr(pysat_ui, self.r_list[1])(self, self.r_list[3], self.r_list[4])
                 print(self.r_list)
                 self.r_list = self.restore_list.pop()

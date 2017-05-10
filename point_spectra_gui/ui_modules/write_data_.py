@@ -33,7 +33,7 @@ class write_data_:
         self.write_data_vlayout = QtWidgets.QVBoxLayout(self.write_data)
 
         self.write_data_choose_data_label = QtWidgets.QLabel(self.write_data)
-        self.write_data_choose_data_label.setText(("write_data", "Choose data set to write to .csv:"))
+        self.write_data_choose_data_label.setText("Choose data set to write to .csv:")
         self.write_data_vlayout.addWidget(self.write_data_choose_data_label)
 
         datachoices = self.pysat_fun.datakeys
