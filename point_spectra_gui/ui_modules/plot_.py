@@ -106,10 +106,10 @@ class plot_:
     def set_plot_parameters(self):
         if self.arg_list is not None:
             self.scatter_choosedata.setItemText(0, self.arg_list[0])
-            self.xvar_choices.setItemText(0, self.arg_list[1])
-            self.yvar_choices.setItemText(0, self.arg_list[2])
-
-
+            print(self.arg_list[1][1])
+            print(self.arg_list[2][1])
+            self.xvar_choices.setCurrentIndex(self.xvar_choices.findText(self.arg_list[1][1]))
+            self.yvar_choices.setCurrentIndex(self.yvar_choices.findText(self.arg_list[2][1]))
 
     def plot_ui(self):
         self.plot = QtWidgets.QGroupBox()
