@@ -197,7 +197,7 @@ class pysat_func(QThread):
         except Exception as e:
             error_print(e)
 
-    def get_data(self, filename, keyname):
+    def do_get_data(self, filename, keyname):
         try:
             print('Loading data file: ' + str(filename))
             self.data[keyname] = spectral_data(pd.read_csv(filename, header=[0, 1]))
