@@ -49,7 +49,6 @@ class Module:
     def getNext(self):
         return self.next
 
-
 class listOfModules:
     def __init__(self):
         self.head = None
@@ -291,6 +290,7 @@ class pysat_func(QThread):
         print(self.data[datakey + '-Test'].df.index.shape)
         print(self.data[datakey + '-Train'].df.index.shape)
 
+    # TODO: This module needs to be looked at. It's parameters are not correct
     def do_regression_train(self, datakey, xvars, yvars, yrange, method, params, ransacparams, modelkey=None,
                             update=False, append=False):
         try:
