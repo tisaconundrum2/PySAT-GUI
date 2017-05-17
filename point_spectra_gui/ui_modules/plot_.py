@@ -110,6 +110,37 @@ class plot_:
             print(self.arg_list[2][1])
             self.xvar_choices.setCurrentIndex(self.xvar_choices.findText(self.arg_list[1][1]))
             self.yvar_choices.setCurrentIndex(self.yvar_choices.findText(self.arg_list[2][1]))
+            print(self.kw_list['figname'])
+            print(self.kw_list['title'])
+            self.figname_text.setText(self.kw_list['figname'])
+            self.plot_title_text.setText(self.kw_list['title'])
+
+            self.xmin_spin.setValue(self.kw_list['xrange'][0]), self.xmax_spin.setValue(self.kw_list['xrange'][1])
+            self.ymin_spin.setValue(self.kw_list['yrange'][0]), self.ymax_spin.setValue(self.kw_list['yrange'][1])
+            self.xtitle_text.setText(self.kw_list['xtitle'])
+            self.ytitle_text.setText(self.kw_list['ytitle'])
+            self.legend_label_text.setText(self.kw_list['lbl'])
+            self.onetoone.setCheckState(self.kw_list['one_to_one'])
+            self.file_text.setText(self.kw_list['figfile'])
+            x,y,z = self.kw_list['color'][0],self.kw_list['color'][1],self.kw_list['color'][2]
+            if (x,y,z  == 1, 0, 0):
+                color = 'Red'
+            elif(x,y,z == 0, 1, 0):
+                color = 'Green'
+            elif (x,y,z == 0, 0, 1):
+                color = 'Blue'
+            elif (x,y,z == 0, 1, 1):
+                color = 'Cyan'
+            elif (x,y,z == 1, 1, 0):
+                color = 'Yellow'
+            elif (x,y,z == 1, 0, 1):
+                color = 'Magenta'
+            elif (x,y,z == 0, 0, 0):
+                color = 'Black'
+            else:
+                color = 'Black'
+            self.color_choices.setCurrentIndex(self.color_choices.findData(color))
+            self.alpha_spin.value()
 
     def plot_ui(self):
         self.plot = QtWidgets.QGroupBox()
