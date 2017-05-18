@@ -1,9 +1,11 @@
 from point_spectra_gui.ui_modules.Error_ import error_print
 from PyQt5 import QtGui, QtCore, QtWidgets
-
+from pysat.utils.gui_utils import make_combobox
 
 class cv_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list):
+        self.arg_list = arg_list
+        self.kw_list = kw_list
         self.pysat_fun = pysat_fun
         self.ui_id = None
         self.module_layout = module_layout
@@ -12,8 +14,10 @@ class cv_:
     def main(self):
         self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
         self.cv_ui()
+        self.set_cv_parameters()
         self.cv_choosealg.currentIndexChanged.connect(lambda: self.make_reg_widget(self.cv_choosealg.currentText()))
-
+        self.get_cv_parameters()
+        self.pysat_fun.set_greyed_modules(self.cv_train)
     def get_cv_parameters(self):
 
         method = self.cv_choosealg.currentText()
@@ -25,20 +29,20 @@ class cv_:
         kws = {}
         try:
             if method == 'PLS':
-                nc = self.reg_widget.pls_nc_lineedit.text().split(',')
+                nc = self.reg_widget.pls_nc.text().split(',')
                 nc = [int(i) for i in nc]
                 params = {'n_components': nc,
                           'scale': [False]}
                 # modelkey=[method+' (nc='+str(i)+')' for i in self.reg_widget.pls_nc_lineedit.text().split(',')]
 
             if method == 'GP':
-                nc = [int(i) for i in self.reg_widget.gp_dim_red_nc_lineedit.text().split(',')]
-                random_start = [int(i) for i in self.reg_widget.gp_rand_starts_lineedit.text().split(',')]
-                theta0 = [float(i) for i in self.reg_widget.gp_theta0_lineedit.text().split(',')]
-                thetaL = [float(i) for i in self.reg_widget.gp_thetaL_lineedit.text().split(',')]
-                thetaU = [float(i) for i in self.reg_widget.gp_thetaU_lineedit.text().split(',')]
+                nc = [int(i) for i in self.reg_widget.gp_dim_red_nc.text().split(',')]
+                random_start = [int(i) for i in self.reg_widget.gp_rand_starts.text().split(',')]
+                theta0 = [float(i) for i in self.reg_widget.gp_theta0.text().split(',')]
+                thetaL = [float(i) for i in self.reg_widget.gp_thetaL.text().split(',')]
+                thetaU = [float(i) for i in self.reg_widget.gp_thetaU.text().split(',')]
 
-                params = {'reduce_dim': self.reg_widget.gp_dim_red_lineedit.text().split(','),
+                params = {'reduce_dim': self.reg_widget.gp_dim_red.text().split(','),
                           'n_components': nc,
                           'random_start': random_start,
                           'theta0': theta0,
@@ -51,10 +55,38 @@ class cv_:
         args = [datakey, xvars, yvars, yrange, method, params]
 
         ui_list = 'do_cv'
-        fun_list = 'do_cv'
+        fun_list = 'do_cv_train'
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
 
-    def make_reg_widget(self, alg):
+    def set_cv_parameters(self):
+        if self.arg_list is not None:
+            try:
+                datakey = self.arg_list[0]
+                xvars = self.arg_list[1]
+                yvars = self.arg_list[2]
+                yrange = self.arg_list[3]
+                method = self.arg_list[4]
+                params = self.arg_list[5]
+                #ransacparams = self.arg_list[6]
+                self.cv_choosedata.setCurrentIndex(self.cv_choosedata.findText(str(datakey)))
+                try:
+                    self.cv_train_choosex.setCurrentItem(
+                    self.cv_train_choosex.findItems(xvars[0], QtCore.Qt.MatchExactly)[0])
+                except:
+                    pass
+                try:
+                    self.cv_train_choosey.setCurrentItem(
+                    self.cv_train_choosey.findItems(yvars[0][1], QtCore.Qt.MatchExactly)[0])
+                except:
+                    pass
+                self.yvarmin_spin.setValue(yrange[0])
+                self.yvarmax_spin.setValue(yrange[1])
+                self.cv_choosealg.setCurrentIndex(self.cv_choosealg.findText(str(method)))
+                self.make_reg_widget(self.cv_choosealg.currentText(), params=params)
+            except Exception as e:
+                error_print(e)
+
+    def make_reg_widget(self, alg, params=None):
         print(alg)
         try:
             self.reg_widget.deleteLater()
@@ -66,39 +98,38 @@ class cv_:
             self.reg_widget.pls_nc_label = QtWidgets.QLabel(self.reg_widget)
             self.reg_widget.pls_nc_label.setText('# of components:')
             self.reg_widget.pls_hlayout.addWidget(self.reg_widget.pls_nc_label)
-            self.reg_widget.pls_nc_lineedit = QtWidgets.QLineEdit(self.reg_widget)
-            self.reg_widget.pls_hlayout.addWidget(self.reg_widget.pls_nc_lineedit)
+            self.reg_widget.pls_nc = QtWidgets.QLineEdit(self.reg_widget)
+            self.reg_widget.pls_hlayout.addWidget(self.reg_widget.pls_nc)
             self.reg_widget.pls_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
                                                                QtWidgets.QSizePolicy.Minimum)
             self.reg_widget.pls_hlayout.addItem(self.reg_widget.pls_spacer)
-            self.reg_widget.pls_nc_lineedit.textChanged.connect(lambda: self.get_cv_parameters())
-
-        elif alg == 'GP':
+            self.reg_widget.pls_nc.textChanged.connect(lambda: self.get_cv_parameters())
+            if params is not None:
+                self.reg_widget.pls_nc.setText(','.join(str(e) for e in params['n_components']))
+        if alg == 'GP':
             self.reg_widget = QtWidgets.QWidget()
             self.reg_widget.gp_vlayout = QtWidgets.QVBoxLayout(self.reg_widget)
             self.reg_widget.gp_dim_red_hlayout = QtWidgets.QHBoxLayout()
             self.reg_widget.gp_dim_red_label = QtWidgets.QLabel(self.reg_widget)
             self.reg_widget.gp_dim_red_label.setText('Choose dimensionality reduction method:')
             self.reg_widget.gp_dim_red_hlayout.addWidget(self.reg_widget.gp_dim_red_label)
-            self.reg_widget.gp_dim_red_lineedit = QtWidgets.QLineEdit(self.reg_widget)
-            self.reg_widget.gp_dim_red_lineedit.setText('PCA')
-            self.reg_widget.gp_dim_red_hlayout.addWidget(self.reg_widget.gp_dim_red_lineedit)
+            self.reg_widget.gp_dim_red = QtWidgets.QLineEdit(self.reg_widget)
+            self.reg_widget.gp_dim_red.setText('PCA')
+            self.reg_widget.gp_dim_red_hlayout.addWidget(self.reg_widget.gp_dim_red)
             self.reg_widget.gp_dim_red_nc_label = QtWidgets.QLabel()
             self.reg_widget.gp_dim_red_nc_label.setText('# of components:')
             self.reg_widget.gp_dim_red_hlayout.addWidget(self.reg_widget.gp_dim_red_nc_label)
-            self.reg_widget.gp_dim_red_nc_lineedit = QtWidgets.QLineEdit(self.reg_widget)
-            self.reg_widget.gp_dim_red_nc_lineedit.setText('10')
-            self.reg_widget.gp_dim_red_hlayout.addWidget(self.reg_widget.gp_dim_red_nc_lineedit)
+            self.reg_widget.gp_dim_red_nc = QtWidgets.QLineEdit(self.reg_widget)
+            self.reg_widget.gp_dim_red_hlayout.addWidget(self.reg_widget.gp_dim_red_nc)
 
             self.reg_widget.gp_vlayout.addLayout(self.reg_widget.gp_dim_red_hlayout)
             self.reg_widget.gp_rand_starts_hlayout = QtWidgets.QHBoxLayout()
             self.reg_widget.gp_rand_starts_label = QtWidgets.QLabel(self.reg_widget)
             self.reg_widget.gp_rand_starts_label.setText('# of random starts:')
             self.reg_widget.gp_rand_starts_hlayout.addWidget(self.reg_widget.gp_rand_starts_label)
-            self.reg_widget.gp_rand_starts_lineedit = QtWidgets.QLineEdit(self.reg_widget)
-            self.reg_widget.gp_rand_starts_lineedit.setText('1')
-
-            self.reg_widget.gp_rand_starts_hlayout.addWidget(self.reg_widget.gp_rand_starts_lineedit)
+            self.reg_widget.gp_rand_starts = QtWidgets.QLineEdit(self.reg_widget)
+            self.reg_widget.gp_rand_starts.setText('1')
+            self.reg_widget.gp_rand_starts_hlayout.addWidget(self.reg_widget.gp_rand_starts)
             self.reg_widget.spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
                                                                 QtWidgets.QSizePolicy.Minimum)
             self.reg_widget.gp_rand_starts_hlayout.addItem(self.reg_widget.spacerItem4)
@@ -107,35 +138,65 @@ class cv_:
             self.reg_widget.gp_theta0_label = QtWidgets.QLabel(self.reg_widget)
             self.reg_widget.gp_theta0_label.setText('Starting Theta:')
             self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_theta0_label)
-            self.reg_widget.gp_theta0_lineedit = QtWidgets.QLineEdit(self.reg_widget)
-            self.reg_widget.gp_theta0_lineedit.setText('1.0')
-            self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_theta0_lineedit)
+            self.reg_widget.gp_theta0 = QtWidgets.QLineEdit(self.reg_widget)
+            self.reg_widget.gp_theta0.setText('1')
+            self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_theta0)
             self.reg_widget.gp_thetaL_label = QtWidgets.QLabel(self.reg_widget)
             self.reg_widget.gp_thetaL_label.setText('Lower bound on Theta:')
             self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_thetaL_label)
-            self.reg_widget.gp_thetaL_lineedit = QtWidgets.QLineEdit(self.reg_widget)
-            self.reg_widget.gp_thetaL_lineedit.setText('0.1')
-            self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_thetaL_lineedit)
+            self.reg_widget.gp_thetaL = QtWidgets.QLineEdit(self.reg_widget)
+            self.reg_widget.gp_thetaL.setText('0.1')
+            self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_thetaL)
             self.reg_widget.gp_thetaU_label = QtWidgets.QLabel(self.reg_widget)
             self.reg_widget.gp_thetaU_label.setText('Upper bound on Theta:')
             self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_thetaU_label)
-            self.reg_widget.gp_thetaU_lineedit = QtWidgets.QLineEdit(self.reg_widget)
-            self.reg_widget.gp_thetaU_lineedit.setText('100.0')
+            self.reg_widget.gp_thetaU = QtWidgets.QLineEdit(self.reg_widget)
+            self.reg_widget.gp_thetaU.setText('100.0')
 
-            self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_thetaU_lineedit)
+            self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_thetaU)
             self.reg_widget.spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
                                                                 QtWidgets.QSizePolicy.Minimum)
             self.reg_widget.gp_theta_vlayout.addItem(self.reg_widget.spacerItem5)
             self.reg_widget.gp_vlayout.addLayout(self.reg_widget.gp_theta_vlayout)
+            self.reg_widget.gp_dim_red.textChanged.connect(lambda: self.get_cv_parameters())
+            self.reg_widget.gp_dim_red_nc.textChanged.connect(lambda: self.get_cv_parameters())
+            self.reg_widget.gp_rand_starts.textChanged.connect(lambda: self.get_cv_parameters())
+            self.reg_widget.gp_theta0.textChanged.connect(lambda: self.get_cv_parameters())
+            self.reg_widget.gp_thetaL.textChanged.connect(lambda: self.get_cv_parameters())
+            self.reg_widget.gp_thetaU.textChanged.connect(lambda: self.get_cv_parameters())
+            if params is not None:
+                self.reg_widget.gp_dim_red.setText(','.join(str(e) for e in params['reduce_dim']))
+                self.reg_widget.gp_dim_red_nc.setText(','.join(str(e) for e in params['n_components']))
+                self.reg_widget.gp_rand_starts.setText(','.join(str(e) for e in params['random_start']))
+                self.reg_widget.gp_theta0.setText(','.join(str(e) for e in params['theta0']))
+                self.reg_widget.gp_thetaL.setText(','.join(str(e) for e in params['thetaL']))
+                self.reg_widget.gp_thetaU.setText(','.join(str(e) for e in params['thetaU']))
 
-            self.reg_widget.gp_dim_red_lineedit.textChanged.connect(lambda: self.get_cv_parameters())
-            self.reg_widget.gp_dim_red_nc_lineedit.textChanged.connect(lambda: self.get_cv_parameters())
-            self.reg_widget.gp_rand_starts_lineedit.textChanged.connect(lambda: self.get_cv_parameters())
-            self.reg_widget.gp_theta0_lineedit.textChanged.connect(lambda: self.get_cv_parameters())
-            self.reg_widget.gp_thetaL_lineedit.textChanged.connect(lambda: self.get_cv_parameters())
-            self.reg_widget.gp_thetaU_lineedit.textChanged.connect(lambda: self.get_cv_parameters())
+        if alg == 'OLS':
+            pass
+        if alg == 'OMP':
+            pass
+        if alg == 'Lasso':
+            pass
+        if alg == 'Elastic Net':
+            pass
+        if alg == 'Ridge':
+            pass
+        if alg == 'Bayesian Ridge':
+            pass
+        if alg == 'ARD':
+            pass
+        if alg == 'LARS':
+            pass
+        if alg == 'Lasso LARS':
+            pass
+        if alg == 'SVR':
+            pass
+        if alg == 'KRR':
+            pass
 
         self.cv_vlayout.addWidget(self.reg_widget)
+        self.get_cv_parameters()
 
     def cv_ui(self):
         self.cv_train = QtWidgets.QGroupBox()
@@ -150,7 +211,7 @@ class cv_:
         self.cv_choosedata_hlayout.setObjectName(("cv_choosedata_hlayout"))
         self.cv_train_choosedata_label = QtWidgets.QLabel(self.cv_train)
         self.cv_train_choosedata_label.setObjectName(("cv_train_choosedata_label"))
-        self.cv_train_choosedata_label.setText(("cv_train", "Choose data:"))
+        self.cv_train_choosedata_label.setText("Choose data:")
         self.cv_choosedata_hlayout.addWidget(self.cv_train_choosedata_label)
         datachoices = self.pysat_fun.datakeys
         if datachoices == []:
@@ -219,12 +280,12 @@ class cv_:
         self.cv_vlayout.addLayout(self.cv_choosevars_hlayout)
 
         # ransac options
-        self.ransac_hlayout = QtWidgets.QHBoxLayout()
-        self.cv_ransac_checkbox = QtWidgets.QCheckBox(self.cv_train)
-        self.cv_ransac_checkbox.setObjectName(("cv_ransac_checkbox"))
-        self.cv_ransac_checkbox.setText('RANSAC')
-        self.ransac_hlayout.addWidget(self.cv_ransac_checkbox)
-        self.cv_vlayout.addLayout(self.ransac_hlayout)
+        # self.ransac_hlayout = QtWidgets.QHBoxLayout()
+        # self.cv_ransac_checkbox = QtWidgets.QCheckBox(self.cv_train)
+        # self.cv_ransac_checkbox.setObjectName(("cv_ransac_checkbox"))
+        # self.cv_ransac_checkbox.setText('RANSAC')
+        # self.ransac_hlayout.addWidget(self.cv_ransac_checkbox)
+        # self.cv_vlayout.addLayout(self.ransac_hlayout)
 
         # choose cv algorithm
         self.cv_choosealg_hlayout = QtWidgets.QHBoxLayout()
@@ -247,6 +308,7 @@ class cv_:
         self.cv_train.raise_()
         self.cv_train.setTitle("Cross Validation / Training")
 
+        self.set_cv_parameters()
         self.cv_choosedata.currentIndexChanged.connect(lambda: self.get_cv_parameters())
         self.cv_choosealg.currentIndexChanged.connect(lambda: self.get_cv_parameters())
         self.cv_train_choosex.currentItemChanged.connect(lambda: self.get_cv_parameters())
@@ -262,15 +324,6 @@ class cv_:
         for i in choices:
             obj.addItem(i[1])
 
-
-def make_combobox(choices):
-    combo = QtWidgets.QComboBox()
-
-    for i, choice in enumerate(choices):
-        combo.addItem((""))
-        combo.setItemText(i, ('', choice))
-
-    return combo
 
 
 def make_listwidget(choices):

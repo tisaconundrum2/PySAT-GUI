@@ -36,7 +36,7 @@ class error_print(QDialog):
             print(self.message)
 
     def error_print(self, message):
-        print(message)
+        print('Error:'+message)
         try:
             """
             Warning Message Box

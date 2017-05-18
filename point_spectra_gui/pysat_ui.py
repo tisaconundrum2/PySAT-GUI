@@ -255,7 +255,6 @@ class pysat_ui(object):
 
     def do_strat_folds(self, arg_list=None, kw_list=None):
         ui_modules.strat_folds_(self.pysat_fun, self.module_layout, arg_list, kw_list)
-
     def do_dim_red(self, arg_list=None, kw_list=None):
         ui_modules.dim_reduction_(self.pysat_fun, self.module_layout, arg_list, kw_list)
 
@@ -312,6 +311,7 @@ class pysat_ui(object):
         self.actionOpen_Workflow.triggered.connect(lambda: self.on_load_clicked())
         self.actionSave_Current_Workflow.triggered.connect(lambda: self.on_save_clicked())
         self.set_greyed_out_items(True)
+        self.actionCross_Validation.setDisabled(True)
 
     #        self.set_visible_items()
 
@@ -335,7 +335,7 @@ class pysat_ui(object):
         self.actionInterpolate.setDisabled(bool)
         self.actionPlot.setDisabled(bool)
         self.actionRemoveNull.setDisabled(bool)
-        self.actionCross_Validation.setDisabled(bool)
+        #self.actionCross_Validation.setDisabled(bool)
         self.actionSubmodelPredict.setDisabled(bool)
         self.actionSave_Current_Data.setDisabled(bool)
         self.actionDimRed.setDisabled(bool)
@@ -421,6 +421,10 @@ class pysat_ui(object):
         self.progressBar.setRange(0, 0)  # make the bar pulse green
         self.pysat_fun.start()  # TaskThread.start()
         # This is multithreading thus run() == start()
+        if self.pysat_fun._list.pull()[1]=='do_strat_folds':
+            self.actionCross_Validation.setDisabled(False)
+
+
 
     def onFinished(self):  # onFinished function
         self.progressBar.setRange(0, 1)  # stop the bar pulsing green
