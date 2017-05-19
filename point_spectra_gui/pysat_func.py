@@ -319,11 +319,9 @@ class pysat_func(QThread):
     def do_cv_train(self, datakey, xvars, yvars, yrange, method, params):
 
         try:
-            cv_obj = cv.cv(params)
-            self.data[datakey].df, self.cv_results = cv_obj.do_cv(self.data[datakey].df, xcols=xvars, ycol=yvars,
-                                                                  yrange=yrange, method=method)
-            self.data['CV Results'] = self.cv_results
-
+            cv_obj=cv.cv(params)
+            self.data[datakey].df,self.cv_results=cv_obj.do_cv(self.data[datakey].df,xcols=xvars,ycol=yvars,yrange=yrange,method=method)
+            self.data['CV Results']=self.cv_results
         except Exception as e:
             error_print(e)
 
