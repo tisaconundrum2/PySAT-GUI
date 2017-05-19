@@ -110,8 +110,6 @@ class plot_:
             print(self.arg_list[2][1])
             self.xvar_choices.setCurrentIndex(self.xvar_choices.findText(self.arg_list[1][1]))
             self.yvar_choices.setCurrentIndex(self.yvar_choices.findText(self.arg_list[2][1]))
-            print(self.kw_list['figname'])
-            print(self.kw_list['title'])
             self.figname_text.setText(self.kw_list['figname'])
             self.plot_title_text.setText(self.kw_list['title'])
 
@@ -139,8 +137,8 @@ class plot_:
                 color = 'Black'
             else:
                 color = 'Black'
-            self.color_choices.setCurrentIndex(self.color_choices.findData(color))
-            self.alpha_spin.value()
+            self.color_choices.setCurrentIndex(self.color_choices.findText(color))
+            self.alpha_spin.setValue(self.kw_list['color'][3])
 
     def plot_ui(self):
         self.plot = QtWidgets.QGroupBox()
