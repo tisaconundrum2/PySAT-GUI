@@ -1,3 +1,5 @@
+import traceback
+
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtWidgets import QDialog
 
@@ -31,6 +33,8 @@ class error_print(QDialog):
         super().__init__()
         self.message = message
         try:
+            # stacktracing for original errors location
+            traceback.print_exc(self.message)
             self.error_print(self.message)
         except:
             print(self.message)
