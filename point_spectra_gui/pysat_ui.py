@@ -255,7 +255,6 @@ class pysat_ui(object):
 
     def do_strat_folds(self, arg_list=None, kw_list=None):
         ui_modules.strat_folds_(self.pysat_fun, self.module_layout, arg_list, kw_list)
-
     def do_dim_red(self, arg_list=None, kw_list=None):
         ui_modules.dim_reduction_(self.pysat_fun, self.module_layout, arg_list, kw_list)
 
