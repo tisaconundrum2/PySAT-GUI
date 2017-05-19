@@ -37,10 +37,10 @@ class removenull_:
     def set_removenull_parameters(self):
         if self.arg_list is not None:
             datakey = self.arg_list[0]
-            colname = self.arg_list[1][1]
-            # [datakey, (var, colname)]
-            self.removenull_choosedata.setCurrentText(datakey)
-            self.colname_choices.setCurrentText(colname)
+            colname = self.arg_list[1]
+            self.removenull_choosedata.setCurrentIndex(self.removenull_choosedata.findText(datakey))
+            self.colname_choices.setCurrentIndex(self.colname_choices.findText(colname[1]))
+        self.get_removenull_parameters()
 
     def removenull_ui(self):
         self.removenull = QtWidgets.QGroupBox()
@@ -116,6 +116,7 @@ class removenull_:
         self.start_of_sentence.setText("Remove rows where ")
 
         self.end_of_sentence.setText("is null.")
-        self.get_removenull_parameters()
+        self.set_removenull_parameters()
+
         self.colname_choices.currentIndexChanged.connect(lambda: self.get_removenull_parameters())
         self.removenull_choosedata.currentIndexChanged.connect(lambda: self.get_removenull_parameters())
