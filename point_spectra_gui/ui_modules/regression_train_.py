@@ -112,6 +112,7 @@ class regression_train_:
                 method = self.arg_list[4]
                 params = self.arg_list[5]
                 ransacparams = self.arg_list[6]
+
                 self.regression_choosedata.setCurrentIndex(self.regression_choosedata.findText(str(datakey)))
                 # TODO:
                 self.regression_train_choosex.setCurrentItem(
@@ -122,6 +123,7 @@ class regression_train_:
                 self.yvarmax_spin.setValue(yrange[1])
                 self.regression_choosealg.setCurrentIndex(self.regression_choosealg.findText(str(method)))
                 self.make_regression_widget(self.regression_choosealg.currentText(), params=params)
+                self.get_regression_parameters()
             except Exception as e:
                 error_print(e)
 

@@ -119,6 +119,8 @@ class pysat_ui(object):
         self.actionRemoveNull.setObjectName(("actionRemoveNull"))
         self.actionApply_Mask = QtWidgets.QAction(MainWindow)
         self.actionApply_Mask.setObjectName(("actionApply_Mask"))
+        self.actionMultiply_Vector = QtWidgets.QAction(MainWindow)
+        self.actionMultiply_Vector.setObjectName(("actionMultiply_Vector"))
         self.actionInterpolate = QtWidgets.QAction(MainWindow)
         self.actionInterpolate.setObjectName(("actionInterpolate"))
         self.actionStratified_Folds = QtWidgets.QAction(MainWindow)
@@ -170,6 +172,7 @@ class pysat_ui(object):
         self.menuPreprocessing.addAction(self.actionRemoveNull)
         self.menuPreprocessing.addAction(self.actionInterpolate)
         self.menuPreprocessing.addAction(self.actionApply_Mask)
+        self.menuPreprocessing.addAction(self.actionMultiply_Vector)
         self.menuPreprocessing.addAction(self.actionNormalization)
         self.menuPreprocessing.addAction(self.actionDimRed)
         self.menuPreprocessing.addAction(self.actionStratified_Folds)
@@ -212,6 +215,7 @@ class pysat_ui(object):
         self.actionCreate_New_Workflow.setText("Create New Workflow")
         self.actionOpen_Workflow.setText("Restore Workflow")
         self.actionApply_Mask.setText("Apply Mask")
+        self.actionMultiply_Vector.setText("Multiply by Vector")
         self.actionInterpolate.setText("Interpolate")
         self.actionRemoveNull.setText("Remove Null Data")
         self.actionDimRed.setText(("Dimensionality Reduction"))
@@ -240,6 +244,9 @@ class pysat_ui(object):
 
     def do_mask(self, arg_list=None, kw_list=None):
         ui_modules.get_mask_(self.pysat_fun, self.module_layout, arg_list, kw_list)
+
+    def do_multiply_vector(self, arg_list=None, kw_list=None):
+        ui_modules.multiply_vector_(self.pysat_fun, self.module_layout, arg_list, kw_list)
 
     def do_write_data(self):
         self.flag = ui_modules.write_data_(self.pysat_fun, self.module_layout)
@@ -298,8 +305,10 @@ class pysat_ui(object):
         self.actionSave_Current_Data.triggered.connect(lambda: pysat_ui.do_write_data(self))
         self.actionNormalization.triggered.connect(lambda: pysat_ui.normalization(self))  # submodel
         self.actionApply_Mask.triggered.connect(lambda: pysat_ui.do_mask(self))  # get_mask
+        self.actionMultiply_Vector.triggered.connect(lambda: pysat_ui.do_multiply_vector(self))  # multiply by vector
         self.actionRemoveNull.triggered.connect(lambda: pysat_ui.do_removenull(self))
         self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self))  # strat folds
+        self.actionStratified_Folds.triggered.connect(lambda: self.actionCross_Validation.setDisabled(False))
         self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))  # regression train
         self.actionPredict.triggered.connect(lambda: pysat_ui.do_regression_predict(self))  # regression predict
         self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
@@ -329,6 +338,7 @@ class pysat_ui(object):
         self.actionPredict.setDisabled(bool)
         self.actionNormalization.setDisabled(bool)
         self.actionApply_Mask.setDisabled(bool)
+        self.actionMultiply_Vector.setDisabled(bool)
         self.actionStratified_Folds.setDisabled(bool)
         self.actionTrain.setDisabled(bool)
         self.actionPredict.setDisabled(bool)
@@ -421,8 +431,7 @@ class pysat_ui(object):
         self.progressBar.setRange(0, 0)  # make the bar pulse green
         self.pysat_fun.start()  # TaskThread.start()
         # This is multithreading thus run() == start()
-        if self.pysat_fun._list.pull()[1]=='do_strat_folds':
-            self.actionCross_Validation.setDisabled(False)
+
 
 
 
