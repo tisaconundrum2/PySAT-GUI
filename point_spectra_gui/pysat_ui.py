@@ -300,6 +300,7 @@ class pysat_ui(object):
         self.actionApply_Mask.triggered.connect(lambda: pysat_ui.do_mask(self))  # get_mask
         self.actionRemoveNull.triggered.connect(lambda: pysat_ui.do_removenull(self))
         self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self))  # strat folds
+        self.actionStratified_Folds.triggered.connect(lambda: self.actionCross_Validation.setDisabled(False))
         self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))  # regression train
         self.actionPredict.triggered.connect(lambda: pysat_ui.do_regression_predict(self))  # regression predict
         self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
@@ -420,8 +421,6 @@ class pysat_ui(object):
         self.progressBar.setRange(0, 0)  # make the bar pulse green
         self.pysat_fun.start()  # TaskThread.start()
         # This is multithreading thus run() == start()
-        if self.pysat_fun._list.pull()[1]=='do_strat_folds':
-            self.actionCross_Validation.setDisabled(False)
 
 
 
