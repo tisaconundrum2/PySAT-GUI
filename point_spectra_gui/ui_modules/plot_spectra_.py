@@ -7,6 +7,8 @@ import inspect
 
 class plot_spectra_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list):
+        self.arg_list=arg_list
+        self.kw_list=kw_list
         self.pysat_fun = pysat_fun
         self.module_layout = module_layout
         self.ui_id = None
@@ -15,18 +17,32 @@ class plot_spectra_:
     def main(self):
         self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
         self.plot_spect_ui()
+        self.set_plot_spectra_parameters()
+        self.get_plot_spectra_parameters()
         self.pysat_fun.set_greyed_modules(self.plot_spect)
 
     def get_plot_spectra_parameters(self):
         datakey = self.choosedata.currentText()
 
         col = self.col_choices.currentText()
-        rows = [str(x.text()) for x in self.chooserows.selectedItems()]
+        row = [str(x.text()) for x in self.chooserows.selectedItems()]
+        try:
+            row=row[0]
+        except:
+            row=''
+        row_bool=[]
+        try:
+            row_count=self.chooserows.findItems(row,QtCore.Qt.MatchExactly)
+            for i in row_count:
+                row_bool.append(i.isSelected())
+        except:
+            pass
         figname = self.figname_text.text()
         title = self.plot_spect_title_text.text()
         figfile = self.file_text.text()
         color = self.color_choices.currentText()
         alpha = self.alpha_spin.value()
+        linewidth=self.width_spin.value()
 
         if color == 'Red':
             color = [1, 0, 0, alpha]
@@ -42,6 +58,8 @@ class plot_spectra_:
             color = [1, 0, 1, alpha]
         elif color == 'Black':
             color = [0, 0, 0, alpha]
+        else:
+            color = [0, 0, 0, alpha]
 
         line = self.line_choices.currentText()
         if line == 'No Line':
@@ -52,21 +70,77 @@ class plot_spectra_:
             linestyle = '--'
         elif line == 'Dotted Line':
             linestyle = ':'
+        else:
+            linestyle = '-'
 
-        args = [datakey, rows]
+        alpha=self.alpha_spin.value()
+        lbl=row
+        args = [datakey, row]
         kws = {'col':col,
                'figname': figname,
                'title': title,
                'figfile': figfile,
                'color': color,
-               'linestyle': linestyle}
+               'linestyle': linestyle,
+               'alpha':alpha,
+               'lbl':lbl,
+               'linewidth':linewidth,
+               'row_bool':row_bool}
 
         ui_list = "do_plot_spect"
         fun_list = "do_plot_spect"
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
 
-    def set_plot_parameters(self):
-        pass
+    def set_plot_spectra_parameters(self):
+        if self.arg_list is not None:
+            datakey=self.arg_list[0]
+            self.choosedata.setCurrentIndex(self.choosedata.findText(datakey))
+            figname=self.kw_list['figname']
+            self.figname_text.setText(figname)
+            title=self.kw_list['title']
+            self.plot_spect_title_text.setText(title)
+            col=self.kw_list['col']
+            self.col_choices.setCurrentIndex(self.col_choices.findText(col))
+            row=self.arg_list[1]
+            row_bool=self.kw_list['row_bool']
+            items=self.chooserows.findItems(row, QtCore.Qt.MatchExactly)
+            for i,item in enumerate(items):
+                if row_bool[i] is True:
+                    item.setSelected(True)
+            color=self.kw_list['color']
+            alpha=self.kw_list['alpha']
+            if color == [1, 0, 0, alpha]:
+                color = 'Red'
+            elif color == [0, 1, 0, alpha]:
+                color = 'Green'
+            elif color == [0, 0, 1, alpha]:
+                color = 'Blue'
+            elif color == [0, 1, 1, alpha]:
+                color = 'Cyan'
+            elif color == [1, 1, 0, alpha]:
+                color = 'Yellow'
+            elif color == [1, 0, 1, alpha]:
+                color = 'Magenta'
+            elif color == [0, 0, 0, alpha]:
+                color = 'Black'
+            self.color_choices.setCurrentIndex(self.color_choices.findText(color))
+
+            linestyle=self.kw_list['linestyle']
+            if linestyle == '-':
+                line = 'Line'
+            elif linestyle == '--':
+                line = 'Dashed Line'
+            elif linestyle == ':':
+                line = 'Dotted Line'
+            else:
+                line = 'Line'
+            self.line_choices.setCurrentIndex(self.line_choices.findText(line))
+
+            figfile=self.kw_list['figfile']
+            self.file_text.setText(figfile)
+
+            self.width_spin.setValue(self.kw_list['linewidth'])
+
 
     def plot_spect_ui(self):
         self.plot_spect = QtWidgets.QGroupBox()
@@ -129,7 +203,7 @@ class plot_spectra_:
         except:
             rowchoices = ['None']
         self.chooserows = make_listwidget(rowchoices)
-        self.chooserows.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
+        #self.chooserows.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
         self.choosecol_flayout.setWidget(1,QtWidgets.QFormLayout.FieldRole,self.chooserows)
         self.verticalLayout.addLayout(self.choosecol_flayout)
 
@@ -158,16 +232,29 @@ class plot_spectra_:
         self.file_text = QtWidgets.QLineEdit(self.plot_spect)
         self.file_text.setObjectName(("file_text"))
         self.scatter_chooseline_flayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.file_text)
+
         self.alpha_label = QtWidgets.QLabel(self.plot_spect)
         self.alpha_label.setObjectName(("alpha_label"))
         self.scatter_chooseline_flayout.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.alpha_label)
         self.alpha_spin = QtWidgets.QDoubleSpinBox(self.plot_spect)
         self.alpha_spin.setObjectName(("alpha_spin"))
         self.alpha_spin.setRange(0, 1)
-        self.alpha_spin.setValue(0.5)
+        self.alpha_spin.setValue(1.0)
         self.alpha_spin.setSingleStep(0.1)
         self.alpha_spin.setObjectName(("alpha_spin"))
         self.scatter_chooseline_flayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.alpha_spin)
+
+        self.width_label = QtWidgets.QLabel(self.plot_spect)
+        self.width_label.setObjectName(("width_label"))
+        self.scatter_chooseline_flayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.width_label)
+        self.width_spin = QtWidgets.QDoubleSpinBox(self.plot_spect)
+        self.width_spin.setObjectName(("width_spin"))
+        self.width_spin.setRange(0, 10)
+        self.width_spin.setValue(0.5)
+        self.width_spin.setSingleStep(0.05)
+        self.width_spin.setObjectName(("width_spin"))
+        self.scatter_chooseline_flayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.width_spin)
+
         self.verticalLayout.addLayout(self.scatter_chooseline_flayout)
         self.module_layout.addWidget(self.plot_spect)
 
@@ -191,11 +278,13 @@ class plot_spectra_:
         self.line_choices.addItem("Dotted Line")
         self.file_label.setText("Plot Filename:")
         self.alpha_label.setText("Alpha:")
+        self.width_label.setText("Line width:")
 
         self.plot_spect.setTitle("Plot Spectra")
         self.choosedata.activated[int].connect(lambda: self.plot_spect_change_vars(self.col_choices))
+        self.col_choices.activated[int].connect(lambda: self.plot_spect_update_list(self.chooserows))
         self.choosedata.currentTextChanged.connect(lambda: self.get_plot_spectra_parameters())
-        self.chooserows.currentItemChanged.connect(lambda: self.get_plot_spectra_parameters())
+        self.chooserows.itemSelectionChanged.connect(lambda: self.get_plot_spectra_parameters())
         self.col_choices.currentTextChanged.connect(lambda: self.get_plot_spectra_parameters())
         self.plot_spect_title_text.textChanged.connect(lambda: self.get_plot_spectra_parameters())
         self.figname_text.textChanged.connect(lambda: self.get_plot_spectra_parameters())
@@ -204,6 +293,14 @@ class plot_spectra_:
         self.file_text.textChanged.connect(lambda: self.get_plot_spectra_parameters())
         self.line_choices.currentTextChanged.connect(lambda: self.get_plot_spectra_parameters())
 
+
+    def plot_spect_update_list(self,obj):
+        obj.clear()
+        rowchoices = self.pysat_fun.data[self.choosedata.currentText()].df[('meta', self.col_choices.currentText())]
+        rowchoices = np.unique(rowchoices)
+        rowchoices=[str(x) for x in rowchoices]
+        for i in rowchoices:
+            obj.addItem(i)
 
     def plot_spect_change_vars(self, obj):
         obj.clear()

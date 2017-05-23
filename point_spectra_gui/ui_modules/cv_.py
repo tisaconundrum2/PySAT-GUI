@@ -326,10 +326,3 @@ class cv_:
 
 
 
-def make_listwidget(choices):
-    listwidget = QtWidgets.QListWidget()
-    listwidget.setItemDelegate
-    for item in choices:
-        item = QtWidgets.QListWidgetItem(item)
-        listwidget.addItem(item)
-    return listwidget

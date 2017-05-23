@@ -42,17 +42,17 @@ class plot_:
 
         if color == 'Red':
             color = [1, 0, 0, alpha]
-        if color == 'Green':
+        elif color == 'Green':
             color = [0, 1, 0, alpha]
-        if color == 'Blue':
+        elif color == 'Blue':
             color = [0, 0, 1, alpha]
-        if color == 'Cyan':
+        elif color == 'Cyan':
             color = [0, 1, 1, alpha]
-        if color == 'Yellow':
+        elif color == 'Yellow':
             color = [1, 1, 0, alpha]
-        if color == 'Magenta':
+        elif color == 'Magenta':
             color = [1, 0, 1, alpha]
-        if color == 'Black':
+        elif color == 'Black':
             color = [0, 0, 0, alpha]
 
         marker = self.marker_choices.currentText()

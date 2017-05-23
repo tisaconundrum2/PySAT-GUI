@@ -377,7 +377,7 @@ class pysat_func(QThread):
                 dpi=1000, color=None,
                 annot_mask=None,
                 cmap=None, colortitle='', figname=None, masklabel='',
-                marker='o', linestyle='None'
+                marker='o', linestyle='None',alpha=0.5
                 ):
 
         try:
@@ -392,7 +392,6 @@ class pysat_func(QThread):
             loadfig = None
             # outpath=self.outpath
         try:
-            # Alpha is missing, fix this!
             outpath = self.outpath
             self.figs[figname] = make_plot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
                                              ytitle=ytitle, title=title,
@@ -411,7 +410,7 @@ class pysat_func(QThread):
 
 
     def do_plot_spect(self, datakey,
-                rows,
+                row,
                 figfile=None, xrange=None,
                 yrange=None, xtitle='Wavelength (nm)',
                 ytitle=None, title=None,
@@ -419,11 +418,11 @@ class pysat_func(QThread):
                 dpi=1000, color=None,
                 annot_mask=None,
                 cmap=None, colortitle='', figname=None, masklabel='',
-                marker=None, linestyle='-',col=None
+                marker=None, linestyle='-',col=None,alpha=0.5,linewidth=1.0,row_bool=None
                 ):
 
         data=self.data[datakey].df
-        y=data.loc[data[('meta',col)].isin(rows)]['wvl']
+        y=data.loc[data[('meta',col)].isin([row])]['wvl'].loc[row_bool].T
         x=data['wvl'].columns.values
 
         try:
@@ -432,13 +431,13 @@ class pysat_func(QThread):
             loadfig = None
 
         try:
-            # Alpha is missing, fix this!
             outpath = self.outpath
             self.figs[figname] = make_plot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
                                              ytitle=ytitle, title=title,
                                              lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
                                              annot_mask=annot_mask, cmap=cmap,
-                                             colortitle=colortitle, loadfig=loadfig,marker=marker,linestyle=linestyle)
+                                             colortitle=colortitle, loadfig=loadfig,marker=marker,linestyle=linestyle,linewidth=linewidth)
+
         except Exception as e:
             error_print(e)
             # dealing with the a possibly missing outpath
