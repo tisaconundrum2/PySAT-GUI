@@ -18,3 +18,4 @@ from point_spectra_gui.ui_modules.sm_ import *
 from point_spectra_gui.ui_modules.strat_folds_ import *
 from point_spectra_gui.ui_modules.write_data_ import *
 from point_spectra_gui.ui_modules.multiply_vector_ import *
+from point_spectra_gui.ui_modules.plot_spectra_ import *

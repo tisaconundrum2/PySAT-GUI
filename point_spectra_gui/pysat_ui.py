@@ -147,6 +147,10 @@ class pysat_ui(object):
         # set up plotting actions
         self.actionPlot = QtWidgets.QAction(MainWindow)
         self.actionPlot.setObjectName(("actionPlot"))
+        self.actionPlotSpect = QtWidgets.QAction(MainWindow)
+        self.actionPlotSpect.setObjectName(("actionPlotSpect"))
+
+
         self.actionPlotDimRed = QtWidgets.QAction(MainWindow)
         self.actionPlotDimRed.setObjectName(("actionPlot"))
 
@@ -190,6 +194,7 @@ class pysat_ui(object):
 
         # add actions to plot menu
         self.menuVisualization.addAction(self.actionPlot)
+        self.menuVisualization.addAction(self.actionPlotSpect)
         self.menuVisualization.addAction(self.actionPlotDimRed)
 
         # add menu actions
@@ -228,6 +233,7 @@ class pysat_ui(object):
         self.actionSubmodelPredict.setText("Submodel Predict")
         self.actionPredict.setText("Predict")
         self.actionPlot.setText("Plot")
+        self.actionPlotSpect.setText("Plot Spectra")
         self.actionPlotDimRed.setText("Plot ICA/PCA")
 
         self.actionSet_output_location.setText("Set Output Path")
@@ -277,6 +283,9 @@ class pysat_ui(object):
     def do_plot(self, arg_list=None, kw_list=None):
         ui_modules.plot_(self.pysat_fun, self.module_layout, arg_list, kw_list)
 
+    def do_plot_spect(self, arg_list=None, kw_list=None):
+        ui_modules.plot_spectra_(self.pysat_fun, self.module_layout, arg_list, kw_list)
+
     def do_plot_dim_red(self, arg_list=None, kw_list=None):
         ui_modules.dim_red_plot_(self.pysat_fun, self.module_layout, arg_list, kw_list)
 
@@ -313,6 +322,7 @@ class pysat_ui(object):
         self.actionPredict.triggered.connect(lambda: pysat_ui.do_regression_predict(self))  # regression predict
         self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
         self.actionPlot.triggered.connect(lambda: pysat_ui.do_plot(self))
+        self.actionPlotSpect.triggered.connect(lambda: pysat_ui.do_plot_spect(self))
         self.actionPlotDimRed.triggered.connect(lambda: pysat_ui.do_plot_dim_red(self))
         self.actionCross_Validation.triggered.connect(lambda: pysat_ui.do_cv(self))
         self.actionSubmodelPredict.triggered.connect(lambda: pysat_ui.do_submodel_predict(self))
@@ -344,6 +354,7 @@ class pysat_ui(object):
         self.actionPredict.setDisabled(bool)
         self.actionInterpolate.setDisabled(bool)
         self.actionPlot.setDisabled(bool)
+        self.actionPlotSpect.setDisabled(bool)
         self.actionRemoveNull.setDisabled(bool)
         #self.actionCross_Validation.setDisabled(bool)
         self.actionSubmodelPredict.setDisabled(bool)

@@ -409,6 +409,46 @@ class pysat_func(QThread):
                                            annot_mask=annot_mask, cmap=cmap,
                                            colortitle=colortitle, loadfig=loadfig,marker=marker,linestyle=linestyle)
 
+
+    def do_plot_spect(self, datakey,
+                rows,
+                figfile=None, xrange=None,
+                yrange=None, xtitle='Wavelength (nm)',
+                ytitle=None, title=None,
+                lbl=None, one_to_one=False,
+                dpi=1000, color=None,
+                annot_mask=None,
+                cmap=None, colortitle='', figname=None, masklabel='',
+                marker=None, linestyle='-',col=None
+                ):
+
+        data=self.data[datakey].df
+        y=data.loc[data[('meta',col)].isin(rows)]['wvl']
+        x=data['wvl'].columns.values
+
+        try:
+            loadfig = self.figs[figname]
+        except:
+            loadfig = None
+
+        try:
+            # Alpha is missing, fix this!
+            outpath = self.outpath
+            self.figs[figname] = make_plot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
+                                             ytitle=ytitle, title=title,
+                                             lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
+                                             annot_mask=annot_mask, cmap=cmap,
+                                             colortitle=colortitle, loadfig=loadfig,marker=marker,linestyle=linestyle)
+        except Exception as e:
+            error_print(e)
+            # dealing with the a possibly missing outpath
+            outpath = './'
+            self.figs[figname] = make_plot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
+                                           ytitle=ytitle, title=title,
+                                           lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
+                                           annot_mask=annot_mask, cmap=cmap,
+                                           colortitle=colortitle, loadfig=loadfig,marker=marker,linestyle=linestyle)
+
     def do_plot_dim_red(self, datakey,
                         x_component,
                         y_component,
