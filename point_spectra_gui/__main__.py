@@ -35,7 +35,24 @@ class Main(QMainWindow):
         self.close()
 
 
+
+def my_exception_hook(exctype, value, traceback):
+    # Print the error and traceback
+    print(exctype, value, traceback)
+    # Call the normal Exception hook after
+    sys._excepthook(exctype, value, traceback)
+    sys.exit(1)
+
+
 def main():
+    #this code provides more informative errors when PyQt crashes. Based on the answer at:
+    #https://stackoverflow.com/questions/34363552/python-process-finished-with-exit-code-1-when-using-pycharm-and-pyqt5/37837374
+    # Back up the reference to the exceptionhook
+    sys._excepthook = sys.excepthook
+    # Set the exception hook to our wrapping function
+    sys.excepthook = my_exception_hook
+
+
     app = QApplication(sys.argv)
     splash_pix = QPixmap('splash.png')  # default
     if os.path.exists('point_spectra_gui/splash.png'):
@@ -50,7 +67,7 @@ def main():
     main_window = Main()
     main_window.show()
     splash.finish(main_window)
-    app.exec_()
+    sys.exit(app.exec_())
 
 
 if __name__ == '__main__':
