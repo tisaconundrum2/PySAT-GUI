@@ -74,7 +74,14 @@ class plot_spectra_:
             linestyle = '-'
 
         alpha=self.alpha_spin.value()
-        lbl=row
+        if row_bool.__len__()>1:
+            lbl=row+' - '+str(np.where(row_bool)[0][0]+1)
+        else:
+            lbl=row
+        xmin=self.xmin_spin.value()
+        xmax=self.xmax_spin.value()
+        xrange=[xmin,xmax]
+
         args = [datakey, row]
         kws = {'col':col,
                'figname': figname,
@@ -85,7 +92,8 @@ class plot_spectra_:
                'alpha':alpha,
                'lbl':lbl,
                'linewidth':linewidth,
-               'row_bool':row_bool}
+               'row_bool':row_bool,
+               'xrange':xrange}
 
         ui_list = "do_plot_spect"
         fun_list = "do_plot_spect"
@@ -140,7 +148,9 @@ class plot_spectra_:
             self.file_text.setText(figfile)
 
             self.width_spin.setValue(self.kw_list['linewidth'])
+            self.xmin_spin.setValue(self.kw_list['xrange'][0])
 
+            self.xmax_spin.setValue(self.kw_list['xrange'][1])
 
     def plot_spect_ui(self):
         self.plot_spect = QtWidgets.QGroupBox()
@@ -206,6 +216,30 @@ class plot_spectra_:
         #self.chooserows.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
         self.choosecol_flayout.setWidget(1,QtWidgets.QFormLayout.FieldRole,self.chooserows)
         self.verticalLayout.addLayout(self.choosecol_flayout)
+
+        self.xlimits_hlayout = QtWidgets.QHBoxLayout()
+        self.xmin_label = QtWidgets.QLabel(self.plot_spect)
+        self.xmin_label.setText('Min:')
+        self.xlimits_hlayout.addWidget(self.xmin_label)
+        self.xmin_spin = QtWidgets.QDoubleSpinBox()
+        # TODO: eventually we may want the ability to handle values outside 0-100 for regressions not dealing with wt.%
+        self.xmin_spin.setMaximum(99999)
+        self.xmin_spin.setMinimum(0)
+        self.xmin_spin.setValue(min(self.pysat_fun.data[self.choosedata.currentText()].df['wvl'].columns.values))
+        self.xlimits_hlayout.addWidget(self.xmin_label)
+        self.xlimits_hlayout.addWidget(self.xmin_spin)
+
+        self.xmax_label = QtWidgets.QLabel(self.plot_spect)
+        self.xmax_label.setText('Max:')
+        self.xlimits_hlayout.addWidget(self.xmax_label)
+        self.xmax_spin = QtWidgets.QDoubleSpinBox()
+        self.xmax_spin.setMaximum(99999)
+        self.xmax_spin.setMinimum(0)
+        self.xmax_spin.setValue(max(self.pysat_fun.data[self.choosedata.currentText()].df['wvl'].columns.values))
+        self.xlimits_hlayout.addWidget(self.xmax_label)
+        self.xlimits_hlayout.addWidget(self.xmax_spin)
+        self.verticalLayout.addLayout(self.xlimits_hlayout)
+
 
         self.scatter_chooseline_flayout = QtWidgets.QFormLayout()
         self.scatter_chooseline_flayout.setFieldGrowthPolicy(QtWidgets.QFormLayout.AllNonFixedFieldsGrow)
@@ -292,6 +326,8 @@ class plot_spectra_:
         self.color_choices.currentTextChanged.connect(lambda: self.get_plot_spectra_parameters())
         self.file_text.textChanged.connect(lambda: self.get_plot_spectra_parameters())
         self.line_choices.currentTextChanged.connect(lambda: self.get_plot_spectra_parameters())
+        self.xmin_spin.valueChanged.connect(lambda: self.get_plot_spectra_parameters())
+        self.xmax_spin.valueChanged.connect(lambda: self.get_plot_spectra_parameters())
 
 
     def plot_spect_update_list(self,obj):
