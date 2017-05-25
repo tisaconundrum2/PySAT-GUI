@@ -1,4 +1,4 @@
-from point_spectra_gui.ui_modules import make_combobox
+from pysat.utils.gui_utils import make_combobox
 from point_spectra_gui.ui_modules.Error_ import error_print
 from PyQt5 import QtGui, QtCore, QtWidgets
 
@@ -53,7 +53,7 @@ class regression_predict_:
             error_print('No Data has been loaded')
             datachoices = ['No data has been loaded!']
         self.regression_predict_choosedata = make_combobox(datachoices)
-        self.regression_predict_choosedata.setIconSize(QtCore.QSize(50, 20))
+        #self.regression_predict_choosedata.setIconSize(QtCore.QSize(50, 20))
         self.regression_predict_choosedata.setObjectName(("regression_predict_choosedata"))
         self.regression_predict_choosedata_hlayout.addWidget(self.regression_predict_choosedata)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -72,7 +72,7 @@ class regression_predict_:
             error_print('No model has been trained')
             modelchoices = ['No model has been trained!']
         self.regression_predict_choosemodel = make_combobox(modelchoices)
-        self.regression_predict_choosemodel.setIconSize(QtCore.QSize(50, 20))
+      #  self.regression_predict_choosemodel.setIconSize(QtCore.QSize(50, 20))
         self.regression_predict_choosemodel.setObjectName(("regression_predict_choosedata"))
         self.regression_predict_choosemodel_hlayout.addWidget(self.regression_predict_choosemodel)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -82,6 +82,6 @@ class regression_predict_:
         self.module_layout.addWidget(self.regression_predict)
         self.regression_predict.raise_()
         self.regression_predict.setTitle(("Regression - Predict"))
-        self.regression_predict_choosedata_label.setText(("regression", "Choose data: "))
-        self.regression_predict_choosemodel_label.setText(("regression", "Choose Model: "))
+        self.regression_predict_choosedata_label.setText("Choose data: ")
+        self.regression_predict_choosemodel_label.setText("Choose Model: ")
         self.get_predict_parameters()

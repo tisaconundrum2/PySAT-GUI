@@ -267,7 +267,11 @@ class pysat_ui(object):
         ui_modules.normalization_(self.pysat_fun, self.module_layout, arg_list, kw_list)
 
     def do_strat_folds(self, arg_list=None, kw_list=None):
+        if not self.actionCross_Validation.isEnabled():
+            self.actionCross_Validation.setDisabled(False)
         ui_modules.strat_folds_(self.pysat_fun, self.module_layout, arg_list, kw_list)
+
+
     def do_dim_red(self, arg_list=None, kw_list=None):
         ui_modules.dim_reduction_(self.pysat_fun, self.module_layout, arg_list, kw_list)
 
@@ -317,7 +321,7 @@ class pysat_ui(object):
         self.actionMultiply_Vector.triggered.connect(lambda: pysat_ui.do_multiply_vector(self))  # multiply by vector
         self.actionRemoveNull.triggered.connect(lambda: pysat_ui.do_removenull(self))
         self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self))  # strat folds
-        self.actionStratified_Folds.triggered.connect(lambda: self.actionCross_Validation.setDisabled(False))
+
         self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))  # regression train
         self.actionPredict.triggered.connect(lambda: pysat_ui.do_regression_predict(self))  # regression predict
         self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
