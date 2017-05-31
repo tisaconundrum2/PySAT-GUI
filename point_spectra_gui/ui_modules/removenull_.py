@@ -1,5 +1,5 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
-from point_spectra_gui.gui_utils import make_combobox
+from point_spectra_gui.gui_utils import make_combobox,change_combobox_vars
 from point_spectra_gui.ui_modules.Error_ import error_print
 import inspect
 
@@ -21,9 +21,11 @@ class removenull_:
     def get_removenull_parameters(self):
 
         datakey = self.removenull_choosedata.currentText()
-        colname = self.colname_choices.currentText()
-        colname = (self.vars_level0[self.vars_level1.index(colname)], colname)
-
+        try:
+            colname = self.colname_choices.currentText()
+            colname = (self.vars_level0[self.vars_level1.index(colname)], colname)
+        except:
+            pass
         ui_list = "do_removenull"
         fun_list = "do_removenull"
         args = [datakey, colname]
@@ -83,21 +85,7 @@ class removenull_:
         self.start_of_sentence.setObjectName(("start_of_sentence"))
         self.horizontalLayout_2.addWidget(self.start_of_sentence)
 
-        try:
-            self.vars_level0 = self.pysat_fun.data[
-                self.removenull_choosedata.currentText()].df.columns.get_level_values(0)
-            self.vars_level1 = self.pysat_fun.data[
-                self.removenull_choosedata.currentText()].df.columns.get_level_values(1)
-            self.vars_level1 = list(self.vars_level1[self.vars_level0 != 'wvl'])
-            self.vars_level0 = list(self.vars_level0[self.vars_level0 != 'wvl'])
-
-            colnamechoices = self.vars_level1
-
-        except:
-            colnamechoices = self.pysat_fun.data[self.removenull_choosedata.currentText()].columns.values
-        colnamechoices = [i for i in colnamechoices if not 'Unnamed' in i]  # remove unnamed columns from choices
-
-        self.colname_choices = make_combobox(colnamechoices)
+        self.colname_choices = make_combobox(self.get_colname_choices())
         self.horizontalLayout_2.addWidget(self.colname_choices)
         self.end_of_sentence = QtWidgets.QLabel(self.removenull_widget)
         self.end_of_sentence.setObjectName(("end_of_sentence"))
@@ -118,3 +106,23 @@ class removenull_:
 
         self.colname_choices.currentIndexChanged.connect(lambda: self.get_removenull_parameters())
         self.removenull_choosedata.currentIndexChanged.connect(lambda: self.get_removenull_parameters())
+        self.removenull_choosedata.currentIndexChanged.connect(lambda:
+                                                               change_combobox_vars(self.colname_choices,
+                                                                self.get_colname_choices()))
+
+
+    def get_colname_choices(self):
+        try:
+            self.vars_level0 = self.pysat_fun.data[
+                self.removenull_choosedata.currentText()].df.columns.get_level_values(0)
+            self.vars_level1 = self.pysat_fun.data[
+                self.removenull_choosedata.currentText()].df.columns.get_level_values(1)
+            self.vars_level1 = list(self.vars_level1[self.vars_level0 != 'wvl'])
+            self.vars_level0 = list(self.vars_level0[self.vars_level0 != 'wvl'])
+
+            colnamechoices = self.vars_level1
+
+        except:
+            colnamechoices = self.pysat_fun.data[self.removenull_choosedata.currentText()].columns.values
+        colnamechoices = [i for i in colnamechoices if not 'Unnamed' in i]  # remove unnamed columns from choices
+        return colnamechoices
