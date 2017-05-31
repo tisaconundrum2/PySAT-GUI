@@ -1,4 +1,4 @@
-from point_spectra_gui.gui_utils import make_combobox
+from point_spectra_gui.gui_utils import make_combobox,change_combo_list_vars
 from point_spectra_gui.ui_modules.Error_ import error_print
 from PyQt5 import QtGui, QtCore, QtWidgets
 import numpy as np
@@ -156,7 +156,7 @@ class plot_:
         self.scatter_choosex_flayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.scatter_choosex_label)
 
         self.xvar_choices = make_combobox([''])
-        self.plot_change_vars(self.xvar_choices)
+        change_combo_list_vars(self.xvar_choices,self.get_choices())
         self.xvar_choices.setObjectName(("xvar_choices"))
         self.scatter_choosex_flayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.xvar_choices)
 
@@ -188,7 +188,7 @@ class plot_:
         self.scatter_choosey_flayout.setSpacing(6)
         self.scatter_choosey_flayout.setObjectName(("scatter_choosey_flayout"))
         self.yvar_choices = make_combobox([''])
-        self.plot_change_vars(self.yvar_choices)
+        change_combo_list_vars(self.yvar_choices,self.get_choices())
         self.yvar_choices.setObjectName(("yvar_choices"))
         self.scatter_choosey_flayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.yvar_choices)
         self.ytitle_label = QtWidgets.QLabel(self.plot)
@@ -320,14 +320,14 @@ class plot_:
         self.alpha_label.setText("Alpha:")
 
         self.plot.setTitle("Plot")
-        self.scatter_choosedata.activated[int].connect(lambda: self.plot_change_vars(self.xvar_choices))
+        self.scatter_choosedata.activated[int].connect(lambda: change_combo_list_vars(self.xvar_choices,self.get_choices()))
         self.scatter_choosedata.activated[int].connect(
             lambda: self.get_minmax(self.xmin_spin, self.xmax_spin, self.xvar_choices.currentText()))
         self.scatter_choosedata.activated[int].connect(
             lambda: self.get_minmax(self.ymin_spin, self.ymax_spin, self.yvar_choices.currentText()))
         self.xvar_choices.activated[int].connect(
             lambda: self.get_minmax(self.xmin_spin, self.xmax_spin, self.xvar_choices.currentText()))
-        self.scatter_choosedata.activated[int].connect(lambda: self.plot_change_vars(self.yvar_choices))
+        self.scatter_choosedata.activated[int].connect(lambda: change_combo_list_vars(self.yvar_choices,self.get_choices()))
         self.yvar_choices.activated[int].connect(
             lambda: self.get_minmax(self.ymin_spin, self.ymax_spin, self.yvar_choices.currentText()))
         self.color_choices.activated.connect(lambda: self.get_plot_parameters())
@@ -342,8 +342,8 @@ class plot_:
             if isinstance(obj, QtWidgets.QCheckBox):
                 obj.toggled.connect(lambda: self.get_plot_parameters())
 
-    def plot_change_vars(self, obj):
-        obj.clear()
+
+    def get_choices(self):
         try:
             self.vars_level0 = self.pysat_fun.data[self.scatter_choosedata.currentText()].df.columns.get_level_values(0)
             self.vars_level1 = self.pysat_fun.data[self.scatter_choosedata.currentText()].df.columns.get_level_values(1)
@@ -368,8 +368,7 @@ class plot_:
                 choices = self.pysat_fun.data[self.scatter_choosedata.currentText()].columns.values
             except:
                 choices = ['No valid choices']
-        for i in choices:
-            obj.addItem(str(i))
+        return choices
 
     def get_minmax(self, objmin, objmax, var):
         try:

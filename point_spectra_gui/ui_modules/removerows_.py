@@ -1,5 +1,5 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
-from point_spectra_gui.gui_utils import make_combobox,change_combobox_vars
+from point_spectra_gui.gui_utils import make_combobox,change_combo_list_vars
 from point_spectra_gui.ui_modules.Error_ import error_print
 import inspect
 import numpy as np
@@ -41,9 +41,9 @@ class removerows_:
             colname = self.arg_list[1]
             value = self.arg_list[2]
             self.removerows_choosedata.setCurrentIndex(self.removerows_choosedata.findText(datakey))
-            change_combobox_vars(self.colname_choices,self.get_colname_choices())
+            change_combo_list_vars(self.colname_choices,self.get_colname_choices())
             self.colname_choices.setCurrentIndex(self.colname_choices.findText(colname[1]))
-            change_combobox_vars(self.rowval_choices,self.get_rowval_choices())
+            change_combo_list_vars(self.rowval_choices,self.get_rowval_choices())
             self.rowval_choices.setCurrentIndex((self.rowval_choices.findText(value)))
         self.get_removerows_parameters()
     def removerows_ui(self):
@@ -115,10 +115,10 @@ class removerows_:
 
         self.removerows_choosedata.currentIndexChanged.connect(lambda: self.get_removerows_parameters())
         self.removerows_choosedata.currentIndexChanged.connect(lambda:
-                                                               change_combobox_vars(self.colname_choices,
+                                                               change_combo_list_vars(self.colname_choices,
                                                                 self.get_colname_choices()))
         self.rowval_choices.currentIndexChanged.connect(lambda: self.get_removerows_parameters())
-        self.colname_choices.currentIndexChanged.connect(lambda: change_combobox_vars(self.rowval_choices,
+        self.colname_choices.currentIndexChanged.connect(lambda: change_combo_list_vars(self.rowval_choices,
                                                                 self.get_rowval_choices()))
 
     def get_colname_choices(self):

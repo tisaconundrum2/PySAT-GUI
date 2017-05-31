@@ -120,7 +120,10 @@ class strat_folds_:
 
     def strat_fold_change_vars(self):
         self.strat_folds_choose_var.clear()
-        choices = self.pysat_fun.data[self.strat_folds_choose_data.currentText()].df['comp'].columns.values
+        try:
+            choices = self.pysat_fun.data[self.strat_folds_choose_data.currentText()].df['comp'].columns.values
+        except:
+            choices = ['No composition columns!']
 
         self.strat_folds_choose_var.addItems(choices)
 

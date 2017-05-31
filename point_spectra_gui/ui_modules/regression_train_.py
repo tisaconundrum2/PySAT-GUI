@@ -1,4 +1,4 @@
-from point_spectra_gui.gui_utils import make_combobox, make_listwidget
+from point_spectra_gui.gui_utils import make_combobox, make_listwidget,change_combo_list_vars
 from point_spectra_gui.ui_modules.Error_ import error_print
 from PyQt5 import QtGui, QtCore, QtWidgets
 
@@ -435,12 +435,7 @@ class regression_train_:
         self.regression_train_choosex_label.setObjectName(("regression_train_choosex_label"))
         self.regression_train_choosex_label.setText('X variable:')
         self.regression_choosexvars_vlayout.addWidget(self.regression_train_choosex_label)
-        try:
-            xvarchoices = self.pysat_fun.data[self.regression_choosedata.currentText()].df.columns.levels[0].values
-            xvarchoices = [i for i in xvarchoices if not 'Unnamed' in i]  # remove unnamed columns from choices
-        except:
-            xvarchoices = ['None']
-        self.regression_train_choosex = make_listwidget(xvarchoices)
+        self.regression_train_choosex = make_listwidget(self.xvar_choices())
         self.regression_train_choosex.setObjectName(("regression_train_choosex"))
         self.regression_choosexvars_vlayout.addWidget(self.regression_train_choosex)
 
@@ -449,12 +444,7 @@ class regression_train_:
         self.regression_train_choosey_label.setObjectName(("regression_train_choosey_label"))
         self.regression_train_choosey_label.setText('Y variable:')
         self.regression_chooseyvars_vlayout.addWidget(self.regression_train_choosey_label)
-        try:
-            yvarchoices = self.pysat_fun.data[self.regression_choosedata.currentText()].df['comp'].columns.values
-            yvarchoices = [i for i in yvarchoices if not 'Unnamed' in i]  # remove unnamed columns from choices
-        except:
-            yvarchoices = ['None']
-        self.regression_train_choosey = make_listwidget(yvarchoices)
+        self.regression_train_choosey = make_listwidget(self.yvar_choices())
         self.regression_chooseyvars_vlayout.addWidget(self.regression_train_choosey)
         self.regression_yvarlimits_hlayout = QtWidgets.QHBoxLayout()
         self.yvarmin_label = QtWidgets.QLabel(self.regression_train)
@@ -517,13 +507,22 @@ class regression_train_:
         self.yvarmin_spin.valueChanged.connect(lambda: self.get_regression_parameters())
         self.yvarmax_spin.valueChanged.connect(lambda: self.get_regression_parameters())
         self.regression_choosedata.activated[int].connect(
-            lambda: self.regression_change_vars(self.regression_train_choosey))
+            lambda: change_combo_list_vars(self.regression_train_choosey,self.yvar_choices()))
+        self.regression_choosedata.activated[int].connect(
+            lambda: change_combo_list_vars(self.regression_train_choosex,self.xvar_choices()))
 
-    def regression_change_vars(self, obj):
-        obj.clear()
+    def yvar_choices(self):
         try:
-            choices = self.pysat_fun.data[self.regression_choosedata.currentText()].df[['comp']].columns.values
-            for i in choices:
-                obj.addItem(i[1])
+            yvarchoices = self.pysat_fun.data[self.regression_choosedata.currentText()].df['comp'].columns.values
+            yvarchoices = [i for i in yvarchoices if not 'Unnamed' in i]  # remove unnamed columns from choices
         except:
-            obj.addItem('None')
+            yvarchoices=['No composition columns!']
+        return yvarchoices
+
+    def xvar_choices(self):
+        try:
+            xvarchoices = self.pysat_fun.data[self.regression_choosedata.currentText()].df.columns.levels[0].values
+            xvarchoices = [i for i in xvarchoices if not 'Unnamed' in i]  # remove unnamed columns from choices
+        except:
+            xvarchoices = ['No valid choices!']
+        return xvarchoices

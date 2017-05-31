@@ -28,10 +28,11 @@ def make_listwidget(choices):
         listwidget.addItem(item)
     return listwidget
 
-def change_combobox_vars(obj,newchoices):
+def change_combo_list_vars(obj,newchoices):
     obj.clear()
     for i in newchoices:
         if isinstance(i,tuple):
             obj.addItem(i[1])
         elif isinstance(i,str):
             obj.addItem(i)
+
