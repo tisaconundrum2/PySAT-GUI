@@ -1,5 +1,5 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
-from pysat.utils.gui_utils import make_combobox
+from point_spectra_gui.gui_utils import make_combobox
 from point_spectra_gui.ui_modules import error_print
 
 

@@ -214,7 +214,7 @@ class pysat_func(QThread):
     def do_read_ccam(self,searchdir,searchstring,to_csv=None,lookupfile=None,ave=True):
         progressbar=QtWidgets.QProgressDialog()
         io_ccam_pds.ccam_batch(searchdir,searchstring=searchstring,to_csv=self.outpath+'/'+to_csv,lookupfile=lookupfile,ave=ave,progressbar=progressbar)
-        self.get_data(self.outpath+'/'+to_csv,'ChemCam')
+        self.do_get_data(self.outpath+'/'+to_csv,'ChemCam')
 
     def removenull(self,datakey,colname):
         try:
