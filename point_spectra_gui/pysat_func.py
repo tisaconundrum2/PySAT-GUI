@@ -232,6 +232,18 @@ class pysat_func(QThread):
         except Exception as e:
             error_print(e)
 
+    def do_split_data(self,datakey,colname):
+        try:
+            coldata = np.array([str(i) for i in self.data[datakey].df[colname]])
+            unique_values=np.unique(coldata)
+            for i in unique_values:
+                new_datakey=datakey+' - '+str(i)
+                self.datakeys.append(new_datakey)
+                self.data[new_datakey] = spectral_data(self.data[datakey].df.ix[coldata==i])
+        except Exception as e:
+            error_print(e)
+
+
     def do_mask(self, datakey, maskfile):
         try:
             self.data[datakey].mask(maskfile)

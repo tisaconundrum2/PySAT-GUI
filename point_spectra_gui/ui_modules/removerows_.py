@@ -27,8 +27,6 @@ class removerows_:
         except:
             pass
         value=self.rowval_choices.currentText()
-        ui_list = "do_removerows"
-        fun_list = "do_removerows"
         args = [datakey, colname, value]
         kws = {}
         ui_list = 'do_removerows'

@@ -117,6 +117,8 @@ class pysat_ui(object):
         # set up preprocessing actions
         self.actionRemoveRows = QtWidgets.QAction(MainWindow)
         self.actionRemoveRows.setObjectName(("actionRemoveRows"))
+        self.actionSplitData = QtWidgets.QAction(MainWindow)
+        self.actionSplitData.setObjectName(("actionSplitData"))
         self.actionApply_Mask = QtWidgets.QAction(MainWindow)
         self.actionApply_Mask.setObjectName(("actionApply_Mask"))
         self.actionMultiply_Vector = QtWidgets.QAction(MainWindow)
@@ -174,6 +176,7 @@ class pysat_ui(object):
 
         # add actions to preprocessing
         self.menuPreprocessing.addAction(self.actionRemoveRows)
+        self.menuPreprocessing.addAction(self.actionSplitData)
         self.menuPreprocessing.addAction(self.actionInterpolate)
         self.menuPreprocessing.addAction(self.actionApply_Mask)
         self.menuPreprocessing.addAction(self.actionMultiply_Vector)
@@ -223,6 +226,7 @@ class pysat_ui(object):
         self.actionMultiply_Vector.setText("Multiply by Vector")
         self.actionInterpolate.setText("Interpolate")
         self.actionRemoveRows.setText("Remove Rows")
+        self.actionSplitData.setText("Split Data")
         self.actionDimRed.setText(("Dimensionality Reduction"))
         self.actionAbout.setText("About...")
         self.actionAbout_QtCreator.setText("About Qt...")
@@ -262,6 +266,9 @@ class pysat_ui(object):
 
     def do_removerows(self, arg_list=None, kw_list=None):
         ui_modules.removerows_(self.pysat_fun, self.module_layout, arg_list, kw_list)
+
+    def do_split_data(self, arg_list=None, kw_list=None):
+        ui_modules.split_data_(self.pysat_fun,self.module_layout,arg_list,kw_list)
 
     def normalization(self, arg_list=None, kw_list=None):
         ui_modules.normalization_(self.pysat_fun, self.module_layout, arg_list, kw_list)
@@ -320,6 +327,8 @@ class pysat_ui(object):
         self.actionApply_Mask.triggered.connect(lambda: pysat_ui.do_mask(self))  # get_mask
         self.actionMultiply_Vector.triggered.connect(lambda: pysat_ui.do_multiply_vector(self))  # multiply by vector
         self.actionRemoveRows.triggered.connect(lambda: pysat_ui.do_removerows(self))
+        self.actionSplitData.triggered.connect(lambda: pysat_ui.do_split_data(self))
+
         self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self))  # strat folds
 
         self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))  # regression train
@@ -360,6 +369,8 @@ class pysat_ui(object):
         self.actionPlot.setDisabled(bool)
         self.actionPlotSpect.setDisabled(bool)
         self.actionRemoveRows.setDisabled(bool)
+        self.actionSplitData.setDisabled(bool)
+
         #self.actionCross_Validation.setDisabled(bool)
         self.actionSubmodelPredict.setDisabled(bool)
         self.actionSave_Current_Data.setDisabled(bool)
