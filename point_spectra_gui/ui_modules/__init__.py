@@ -13,7 +13,7 @@ from point_spectra_gui.ui_modules.progress_bar_status_ import *
 from point_spectra_gui.ui_modules.read_ccam_ import *
 from point_spectra_gui.ui_modules.regression_predict_ import *
 from point_spectra_gui.ui_modules.regression_train_ import *
-from point_spectra_gui.ui_modules.removenull_ import *
+from point_spectra_gui.ui_modules.removerows_ import *
 from point_spectra_gui.ui_modules.sm_ import *
 from point_spectra_gui.ui_modules.strat_folds_ import *
 from point_spectra_gui.ui_modules.write_data_ import *

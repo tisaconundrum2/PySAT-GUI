@@ -216,10 +216,17 @@ class pysat_func(QThread):
         io_ccam_pds.ccam_batch(searchdir,searchstring=searchstring,to_csv=self.outpath+'/'+to_csv,lookupfile=lookupfile,ave=ave,progressbar=progressbar)
         self.do_get_data(self.outpath+'/'+to_csv,'ChemCam')
 
-    def removenull(self,datakey,colname):
+    def removerows(self,datakey,colname,value):
         try:
             print(self.data[datakey].df.shape)
-            self.data[datakey] = spectral_data(self.data[datakey].df.ix[-self.data[datakey].df[colname].isnull()])
+            if value=='Null':
+                self.data[datakey] = spectral_data(self.data[datakey].df.ix[-self.data[datakey].df[colname].isnull()])
+            else:
+                #find where the values in the specified column match the value to be removed
+                coldata=np.array([str(i) for i in self.data[datakey].df[colname]])
+                match=coldata==value
+                #keep everything except where match is true
+                self.data[datakey] = spectral_data(self.data[datakey].df.ix[~match])
             print(self.data[datakey].df.shape)
 
         except Exception as e:

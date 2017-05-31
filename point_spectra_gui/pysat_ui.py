@@ -115,8 +115,8 @@ class pysat_ui(object):
         self.actionSet_output_location.setObjectName(("actionSet_output_location"))
 
         # set up preprocessing actions
-        self.actionRemoveNull = QtWidgets.QAction(MainWindow)
-        self.actionRemoveNull.setObjectName(("actionRemoveNull"))
+        self.actionRemoveRows = QtWidgets.QAction(MainWindow)
+        self.actionRemoveRows.setObjectName(("actionRemoveRows"))
         self.actionApply_Mask = QtWidgets.QAction(MainWindow)
         self.actionApply_Mask.setObjectName(("actionApply_Mask"))
         self.actionMultiply_Vector = QtWidgets.QAction(MainWindow)
@@ -173,7 +173,7 @@ class pysat_ui(object):
         self.menuFile.addAction(self.actionExit)
 
         # add actions to preprocessing
-        self.menuPreprocessing.addAction(self.actionRemoveNull)
+        self.menuPreprocessing.addAction(self.actionRemoveRows)
         self.menuPreprocessing.addAction(self.actionInterpolate)
         self.menuPreprocessing.addAction(self.actionApply_Mask)
         self.menuPreprocessing.addAction(self.actionMultiply_Vector)
@@ -222,7 +222,7 @@ class pysat_ui(object):
         self.actionApply_Mask.setText("Apply Mask")
         self.actionMultiply_Vector.setText("Multiply by Vector")
         self.actionInterpolate.setText("Interpolate")
-        self.actionRemoveNull.setText("Remove Null Data")
+        self.actionRemoveRows.setText("Remove Rows")
         self.actionDimRed.setText(("Dimensionality Reduction"))
         self.actionAbout.setText("About...")
         self.actionAbout_QtCreator.setText("About Qt...")
@@ -260,8 +260,8 @@ class pysat_ui(object):
     def file_outpath(self, arg_list=None, kw_list=None):
         self.flag = ui_modules.file_outpath_(self.pysat_fun, self.module_layout, arg_list, kw_list)
 
-    def do_removenull(self, arg_list=None, kw_list=None):
-        ui_modules.removenull_(self.pysat_fun, self.module_layout, arg_list, kw_list)
+    def do_removerows(self, arg_list=None, kw_list=None):
+        ui_modules.removerows_(self.pysat_fun, self.module_layout, arg_list, kw_list)
 
     def normalization(self, arg_list=None, kw_list=None):
         ui_modules.normalization_(self.pysat_fun, self.module_layout, arg_list, kw_list)
@@ -319,7 +319,7 @@ class pysat_ui(object):
         self.actionNormalization.triggered.connect(lambda: pysat_ui.normalization(self))  # submodel
         self.actionApply_Mask.triggered.connect(lambda: pysat_ui.do_mask(self))  # get_mask
         self.actionMultiply_Vector.triggered.connect(lambda: pysat_ui.do_multiply_vector(self))  # multiply by vector
-        self.actionRemoveNull.triggered.connect(lambda: pysat_ui.do_removenull(self))
+        self.actionRemoveRows.triggered.connect(lambda: pysat_ui.do_removerows(self))
         self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self))  # strat folds
 
         self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))  # regression train
@@ -342,7 +342,7 @@ class pysat_ui(object):
     # self.scrollArea.findChildren().triggered.connect(self.scrollArea.verticalScrollBar().setValue(self.scrollArea.verticalScrollBar().value()+10))
 
     # These are the Restore functions
-    # self.actionRemoveNull.triggered.connect(lambda: self.set_ui_list("do_removenull"))
+    # self.actionRemoveRows.triggered.connect(lambda: self.set_ui_list("do_RemoveRows"))
     # self.actionPredict.triggered.connect(lambda: self.set_ui_list("do_regression_predict"))  # regression predict
     # self.actionPlot.triggered.connect(lambda: self.set_ui_list("do_plot"))
     # self.actionCross_Validation.triggered.connect(lambda: self.set_ui_list("do_cv"))
@@ -359,7 +359,7 @@ class pysat_ui(object):
         self.actionInterpolate.setDisabled(bool)
         self.actionPlot.setDisabled(bool)
         self.actionPlotSpect.setDisabled(bool)
-        self.actionRemoveNull.setDisabled(bool)
+        self.actionRemoveRows.setDisabled(bool)
         #self.actionCross_Validation.setDisabled(bool)
         self.actionSubmodelPredict.setDisabled(bool)
         self.actionSave_Current_Data.setDisabled(bool)
