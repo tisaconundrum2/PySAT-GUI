@@ -153,7 +153,6 @@ class pysat_ui(object):
         self.actionPlotSpect = QtWidgets.QAction(MainWindow)
         self.actionPlotSpect.setObjectName(("actionPlotSpect"))
 
-
         self.actionPlotDimRed = QtWidgets.QAction(MainWindow)
         self.actionPlotDimRed.setObjectName(("actionPlot"))
 
@@ -269,7 +268,7 @@ class pysat_ui(object):
         ui_modules.removerows_(self.pysat_fun, self.module_layout, arg_list, kw_list)
 
     def do_split_data(self, arg_list=None, kw_list=None):
-        ui_modules.split_data_(self.pysat_fun,self.module_layout,arg_list,kw_list)
+        ui_modules.split_data_(self.pysat_fun, self.module_layout, arg_list, kw_list)
 
     def normalization(self, arg_list=None, kw_list=None):
         ui_modules.normalization_(self.pysat_fun, self.module_layout, arg_list, kw_list)
@@ -330,6 +329,7 @@ class pysat_ui(object):
         self.actionSplitData.triggered.connect(lambda: pysat_ui.do_split_data(self))
 
         self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self))  # strat folds
+
         self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))  # regression train
         self.actionPredict.triggered.connect(lambda: pysat_ui.do_regression_predict(self))  # regression predict
         self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
@@ -371,7 +371,7 @@ class pysat_ui(object):
         self.actionRemoveRows.setDisabled(bool)
         self.actionSplitData.setDisabled(bool)
 
-        #self.actionCross_Validation.setDisabled(bool)
+        # self.actionCross_Validation.setDisabled(bool)
         self.actionSubmodelPredict.setDisabled(bool)
         self.actionSave_Current_Data.setDisabled(bool)
         self.actionDimRed.setDisabled(bool)
@@ -405,8 +405,9 @@ class pysat_ui(object):
             filename, _filter = QtWidgets.QFileDialog.getSaveFileName(None, "Choose where you want save your file", '.',
                                                                       '(*.wrf)')
             print(filename)
-            with open(filename, 'wb') as fp:
-                pickle.dump(self.pysat_fun.get_list(), fp)
+            # TODO open a file and dump data to it.
+            # with open(filename, 'wb') as fp:
+            #     pickle.dump(self.pysat_fun.get_list(), fp)
         except:
             print("File not loaded")
 
@@ -414,13 +415,17 @@ class pysat_ui(object):
         filename, _filter = QtWidgets.QFileDialog.getOpenFileName(None, "Open Workflow File", '.', "(*.wrf)")
         print(filename)
         try:
-            with open(filename, 'rb') as fp:
-                self.restore_list = pickle.load(fp)
+            pass
+            # with open(filename, 'rb') as fp:
+            # TODO load the data from the file.
+            # This will probably be done automatically
+            # self.restore_list = pickle.load(fp)
         except:
             ui_modules.error_print("File was not loaded")
         self.restore_first()
 
-    def restore_first(self):  # This function should no longer be necessary once we have error handling with restoration working smoothly
+    # This function should no longer be necessary once we have error handling with restoration working smoothly
+    def restore_first(self):
         # first run a single or double instance of getattr depending on what data is in the queue
         #   We'll need to remember 'i' so we don't accidentally run the instance too many times
         # then press ok
