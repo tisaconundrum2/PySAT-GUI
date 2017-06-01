@@ -1,5 +1,6 @@
-from point_spectra_gui.ui_modules import make_combobox
+from point_spectra_gui.gui_utils import make_combobox,change_combo_list_vars
 from point_spectra_gui.ui_modules.Error_ import error_print
+from Qtickle import Qtickle
 from PyQt5 import QtGui, QtCore, QtWidgets
 import numpy as np
 import inspect
@@ -7,6 +8,7 @@ import inspect
 
 class plot_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list):
+        self.qtickle = Qtickle.Qtickle(self, QtCore.QSettings('saved.ini', QtCore.QSettings.IniFormat))
         self.pysat_fun = pysat_fun
         self.arg_list = arg_list
         self.kw_list = kw_list
@@ -46,17 +48,17 @@ class plot_:
 
         if color == 'Red':
             color = [1, 0, 0, alpha]
-        if color == 'Green':
+        elif color == 'Green':
             color = [0, 1, 0, alpha]
-        if color == 'Blue':
+        elif color == 'Blue':
             color = [0, 0, 1, alpha]
-        if color == 'Cyan':
+        elif color == 'Cyan':
             color = [0, 1, 1, alpha]
-        if color == 'Yellow':
+        elif color == 'Yellow':
             color = [1, 1, 0, alpha]
-        if color == 'Magenta':
+        elif color == 'Magenta':
             color = [1, 0, 1, alpha]
-        if color == 'Black':
+        elif color == 'Black':
             color = [0, 0, 0, alpha]
 
         marker = self.marker_choices.currentText()
@@ -75,14 +77,14 @@ class plot_:
         if marker == 'Triangle Left':
             marker = '<'
 
-        line = self.line_choices.currentText()
-        if line == 'No Line':
+        linestyle = self.line_choices.currentText()
+        if linestyle == 'No Line':
             linestyle = 'None'
-        if line == 'Line':
+        if linestyle == 'Line':
             linestyle = '-'
-        if line == 'Dashed Line':
+        if linestyle == 'Dashed Line':
             linestyle = '--'
-        if line == 'Dotted Line':
+        if linestyle == 'Dotted Line':
             linestyle = ':'
 
         args = [datakey, xvar, yvar]
@@ -102,43 +104,13 @@ class plot_:
         ui_list = "do_plot"
         fun_list = "do_plot"
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
+        # TODO save the state here every time
+        self.qtickle.guisave()
 
     def set_plot_parameters(self):
-        if self.arg_list is not None:
-            self.scatter_choosedata.setItemText(0, self.arg_list[0])
-            print(self.arg_list[1][1])
-            print(self.arg_list[2][1])
-            self.xvar_choices.setCurrentIndex(self.xvar_choices.findText(self.arg_list[1][1]))
-            self.yvar_choices.setCurrentIndex(self.yvar_choices.findText(self.arg_list[2][1]))
-            self.figname_text.setText(self.kw_list['figname'])
-            self.plot_title_text.setText(self.kw_list['title'])
+        # TODO replace this function with restore state.
+        self.qtickle.guirestore()
 
-            self.xmin_spin.setValue(self.kw_list['xrange'][0]), self.xmax_spin.setValue(self.kw_list['xrange'][1])
-            self.ymin_spin.setValue(self.kw_list['yrange'][0]), self.ymax_spin.setValue(self.kw_list['yrange'][1])
-            self.xtitle_text.setText(self.kw_list['xtitle'])
-            self.ytitle_text.setText(self.kw_list['ytitle'])
-            self.legend_label_text.setText(self.kw_list['lbl'])
-            self.onetoone.setCheckState(self.kw_list['one_to_one'])
-            self.file_text.setText(self.kw_list['figfile'])
-            x,y,z = self.kw_list['color'][0],self.kw_list['color'][1],self.kw_list['color'][2]
-            if (x,y,z  == 1, 0, 0):
-                color = 'Red'
-            elif(x,y,z == 0, 1, 0):
-                color = 'Green'
-            elif (x,y,z == 0, 0, 1):
-                color = 'Blue'
-            elif (x,y,z == 0, 1, 1):
-                color = 'Cyan'
-            elif (x,y,z == 1, 1, 0):
-                color = 'Yellow'
-            elif (x,y,z == 1, 0, 1):
-                color = 'Magenta'
-            elif (x,y,z == 0, 0, 0):
-                color = 'Black'
-            else:
-                color = 'Black'
-            self.color_choices.setCurrentIndex(self.color_choices.findText(color))
-            self.alpha_spin.setValue(self.kw_list['color'][3])
 
     def plot_ui(self):
         self.plot = QtWidgets.QGroupBox()
@@ -194,7 +166,7 @@ class plot_:
         self.scatter_choosex_flayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.scatter_choosex_label)
 
         self.xvar_choices = make_combobox([''])
-        self.plot_change_vars(self.xvar_choices)
+        change_combo_list_vars(self.xvar_choices,self.get_choices())
         self.xvar_choices.setObjectName(("xvar_choices"))
         self.scatter_choosex_flayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.xvar_choices)
 
@@ -226,7 +198,7 @@ class plot_:
         self.scatter_choosey_flayout.setSpacing(6)
         self.scatter_choosey_flayout.setObjectName(("scatter_choosey_flayout"))
         self.yvar_choices = make_combobox([''])
-        self.plot_change_vars(self.yvar_choices)
+        change_combo_list_vars(self.yvar_choices,self.get_choices())
         self.yvar_choices.setObjectName(("yvar_choices"))
         self.scatter_choosey_flayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.yvar_choices)
         self.ytitle_label = QtWidgets.QLabel(self.plot)
@@ -358,14 +330,14 @@ class plot_:
         self.alpha_label.setText("Alpha:")
 
         self.plot.setTitle("Plot")
-        self.scatter_choosedata.activated[int].connect(lambda: self.plot_change_vars(self.xvar_choices))
+        self.scatter_choosedata.activated[int].connect(lambda: change_combo_list_vars(self.xvar_choices,self.get_choices()))
         self.scatter_choosedata.activated[int].connect(
             lambda: self.get_minmax(self.xmin_spin, self.xmax_spin, self.xvar_choices.currentText()))
         self.scatter_choosedata.activated[int].connect(
             lambda: self.get_minmax(self.ymin_spin, self.ymax_spin, self.yvar_choices.currentText()))
         self.xvar_choices.activated[int].connect(
             lambda: self.get_minmax(self.xmin_spin, self.xmax_spin, self.xvar_choices.currentText()))
-        self.scatter_choosedata.activated[int].connect(lambda: self.plot_change_vars(self.yvar_choices))
+        self.scatter_choosedata.activated[int].connect(lambda: change_combo_list_vars(self.yvar_choices,self.get_choices()))
         self.yvar_choices.activated[int].connect(
             lambda: self.get_minmax(self.ymin_spin, self.ymax_spin, self.yvar_choices.currentText()))
         self.color_choices.activated.connect(lambda: self.get_plot_parameters())
@@ -380,8 +352,8 @@ class plot_:
             if isinstance(obj, QtWidgets.QCheckBox):
                 obj.toggled.connect(lambda: self.get_plot_parameters())
 
-    def plot_change_vars(self, obj):
-        obj.clear()
+
+    def get_choices(self):
         try:
             self.vars_level0 = self.pysat_fun.data[self.scatter_choosedata.currentText()].df.columns.get_level_values(0)
             self.vars_level1 = self.pysat_fun.data[self.scatter_choosedata.currentText()].df.columns.get_level_values(1)
@@ -406,8 +378,7 @@ class plot_:
                 choices = self.pysat_fun.data[self.scatter_choosedata.currentText()].columns.values
             except:
                 choices = ['No valid choices']
-        for i in choices:
-            obj.addItem(str(i))
+        return choices
 
     def get_minmax(self, objmin, objmax, var):
         try:
