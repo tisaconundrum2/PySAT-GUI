@@ -1,7 +1,7 @@
 from PyQt5 import QtGui, QtCore, QtWidgets, QtGui
 from point_spectra_gui import ui_modules
 from point_spectra_gui.pysat_func import pysat_func
-import pickle
+from Qtickle import Qtickle
 
 
 class pysat_ui(object):
@@ -20,6 +20,7 @@ class pysat_ui(object):
         MainWindow.setObjectName(("MainWindow"))
         MainWindow.resize(800, 1000)
         self.centralWidget = QtWidgets.QWidget(MainWindow)
+        self.qtickle = Qtickle.Qtickle(self.centralWidget, QtCore.QSettings('saved.ini', QtCore.QSettings.IniFormat))
         self.centralWidget.setObjectName(("centralWidget"))
         self.scrollarea_layout = QtWidgets.QVBoxLayout(self.centralWidget)
         self.scrollarea_layout.setContentsMargins(11, 11, 11, 11)
@@ -115,10 +116,14 @@ class pysat_ui(object):
         self.actionSet_output_location.setObjectName(("actionSet_output_location"))
 
         # set up preprocessing actions
-        self.actionRemoveNull = QtWidgets.QAction(MainWindow)
-        self.actionRemoveNull.setObjectName(("actionRemoveNull"))
+        self.actionRemoveRows = QtWidgets.QAction(MainWindow)
+        self.actionRemoveRows.setObjectName(("actionRemoveRows"))
+        self.actionSplitData = QtWidgets.QAction(MainWindow)
+        self.actionSplitData.setObjectName(("actionSplitData"))
         self.actionApply_Mask = QtWidgets.QAction(MainWindow)
         self.actionApply_Mask.setObjectName(("actionApply_Mask"))
+        self.actionMultiply_Vector = QtWidgets.QAction(MainWindow)
+        self.actionMultiply_Vector.setObjectName(("actionMultiply_Vector"))
         self.actionInterpolate = QtWidgets.QAction(MainWindow)
         self.actionInterpolate.setObjectName(("actionInterpolate"))
         self.actionStratified_Folds = QtWidgets.QAction(MainWindow)
@@ -145,6 +150,10 @@ class pysat_ui(object):
         # set up plotting actions
         self.actionPlot = QtWidgets.QAction(MainWindow)
         self.actionPlot.setObjectName(("actionPlot"))
+        self.actionPlotSpect = QtWidgets.QAction(MainWindow)
+        self.actionPlotSpect.setObjectName(("actionPlotSpect"))
+
+
         self.actionPlotDimRed = QtWidgets.QAction(MainWindow)
         self.actionPlotDimRed.setObjectName(("actionPlot"))
 
@@ -167,9 +176,11 @@ class pysat_ui(object):
         self.menuFile.addAction(self.actionExit)
 
         # add actions to preprocessing
-        self.menuPreprocessing.addAction(self.actionRemoveNull)
+        self.menuPreprocessing.addAction(self.actionRemoveRows)
+        self.menuPreprocessing.addAction(self.actionSplitData)
         self.menuPreprocessing.addAction(self.actionInterpolate)
         self.menuPreprocessing.addAction(self.actionApply_Mask)
+        self.menuPreprocessing.addAction(self.actionMultiply_Vector)
         self.menuPreprocessing.addAction(self.actionNormalization)
         self.menuPreprocessing.addAction(self.actionDimRed)
         self.menuPreprocessing.addAction(self.actionStratified_Folds)
@@ -187,6 +198,7 @@ class pysat_ui(object):
 
         # add actions to plot menu
         self.menuVisualization.addAction(self.actionPlot)
+        self.menuVisualization.addAction(self.actionPlotSpect)
         self.menuVisualization.addAction(self.actionPlotDimRed)
 
         # add menu actions
@@ -212,8 +224,10 @@ class pysat_ui(object):
         self.actionCreate_New_Workflow.setText("Create New Workflow")
         self.actionOpen_Workflow.setText("Restore Workflow")
         self.actionApply_Mask.setText("Apply Mask")
+        self.actionMultiply_Vector.setText("Multiply by Vector")
         self.actionInterpolate.setText("Interpolate")
-        self.actionRemoveNull.setText("Remove Null Data")
+        self.actionRemoveRows.setText("Remove Rows")
+        self.actionSplitData.setText("Split Data")
         self.actionDimRed.setText(("Dimensionality Reduction"))
         self.actionAbout.setText("About...")
         self.actionAbout_QtCreator.setText("About Qt...")
@@ -224,6 +238,7 @@ class pysat_ui(object):
         self.actionSubmodelPredict.setText("Submodel Predict")
         self.actionPredict.setText("Predict")
         self.actionPlot.setText("Plot")
+        self.actionPlotSpect.setText("Plot Spectra")
         self.actionPlotDimRed.setText("Plot ICA/PCA")
 
         self.actionSet_output_location.setText("Set Output Path")
@@ -241,20 +256,29 @@ class pysat_ui(object):
     def do_mask(self, arg_list=None, kw_list=None):
         ui_modules.get_mask_(self.pysat_fun, self.module_layout, arg_list, kw_list)
 
+    def do_multiply_vector(self, arg_list=None, kw_list=None):
+        ui_modules.multiply_vector_(self.pysat_fun, self.module_layout, arg_list, kw_list)
+
     def do_write_data(self):
         self.flag = ui_modules.write_data_(self.pysat_fun, self.module_layout)
 
     def file_outpath(self, arg_list=None, kw_list=None):
         self.flag = ui_modules.file_outpath_(self.pysat_fun, self.module_layout, arg_list, kw_list)
 
-    def do_removenull(self, arg_list=None, kw_list=None):
-        ui_modules.removenull_(self.pysat_fun, self.module_layout, arg_list, kw_list)
+    def do_removerows(self, arg_list=None, kw_list=None):
+        ui_modules.removerows_(self.pysat_fun, self.module_layout, arg_list, kw_list)
+
+    def do_split_data(self, arg_list=None, kw_list=None):
+        ui_modules.split_data_(self.pysat_fun,self.module_layout,arg_list,kw_list)
 
     def normalization(self, arg_list=None, kw_list=None):
         ui_modules.normalization_(self.pysat_fun, self.module_layout, arg_list, kw_list)
 
     def do_strat_folds(self, arg_list=None, kw_list=None):
+        if not self.actionCross_Validation.isEnabled():
+            self.actionCross_Validation.setDisabled(False)
         ui_modules.strat_folds_(self.pysat_fun, self.module_layout, arg_list, kw_list)
+
     def do_dim_red(self, arg_list=None, kw_list=None):
         ui_modules.dim_reduction_(self.pysat_fun, self.module_layout, arg_list, kw_list)
 
@@ -269,6 +293,9 @@ class pysat_ui(object):
 
     def do_plot(self, arg_list=None, kw_list=None):
         ui_modules.plot_(self.pysat_fun, self.module_layout, arg_list, kw_list)
+
+    def do_plot_spect(self, arg_list=None, kw_list=None):
+        ui_modules.plot_spectra_(self.pysat_fun, self.module_layout, arg_list, kw_list)
 
     def do_plot_dim_red(self, arg_list=None, kw_list=None):
         ui_modules.dim_red_plot_(self.pysat_fun, self.module_layout, arg_list, kw_list)
@@ -298,19 +325,23 @@ class pysat_ui(object):
         self.actionSave_Current_Data.triggered.connect(lambda: pysat_ui.do_write_data(self))
         self.actionNormalization.triggered.connect(lambda: pysat_ui.normalization(self))  # submodel
         self.actionApply_Mask.triggered.connect(lambda: pysat_ui.do_mask(self))  # get_mask
-        self.actionRemoveNull.triggered.connect(lambda: pysat_ui.do_removenull(self))
+        self.actionMultiply_Vector.triggered.connect(lambda: pysat_ui.do_multiply_vector(self))  # multiply by vector
+        self.actionRemoveRows.triggered.connect(lambda: pysat_ui.do_removerows(self))
+        self.actionSplitData.triggered.connect(lambda: pysat_ui.do_split_data(self))
+
         self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self))  # strat folds
-        self.actionStratified_Folds.triggered.connect(lambda: self.actionCross_Validation.setDisabled(False))
         self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))  # regression train
         self.actionPredict.triggered.connect(lambda: pysat_ui.do_regression_predict(self))  # regression predict
         self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
         self.actionPlot.triggered.connect(lambda: pysat_ui.do_plot(self))
+        self.actionPlotSpect.triggered.connect(lambda: pysat_ui.do_plot_spect(self))
         self.actionPlotDimRed.triggered.connect(lambda: pysat_ui.do_plot_dim_red(self))
         self.actionCross_Validation.triggered.connect(lambda: pysat_ui.do_cv(self))
         self.actionSubmodelPredict.triggered.connect(lambda: pysat_ui.do_submodel_predict(self))
         self.actionDimRed.triggered.connect(lambda: pysat_ui.do_dim_red(self))
         self.actionOpen_Workflow.triggered.connect(lambda: self.on_load_clicked())
-        self.actionSave_Current_Workflow.triggered.connect(lambda: self.on_save_clicked())
+        # self.actionSave_Current_Workflow.triggered.connect(lambda: self.on_save_clicked())
+        self.actionSave_Current_Workflow.triggered.connect(lambda: self.qtickle.guisave())
         self.set_greyed_out_items(True)
         self.actionCross_Validation.setDisabled(True)
 
@@ -320,7 +351,7 @@ class pysat_ui(object):
     # self.scrollArea.findChildren().triggered.connect(self.scrollArea.verticalScrollBar().setValue(self.scrollArea.verticalScrollBar().value()+10))
 
     # These are the Restore functions
-    # self.actionRemoveNull.triggered.connect(lambda: self.set_ui_list("do_removenull"))
+    # self.actionRemoveRows.triggered.connect(lambda: self.set_ui_list("do_RemoveRows"))
     # self.actionPredict.triggered.connect(lambda: self.set_ui_list("do_regression_predict"))  # regression predict
     # self.actionPlot.triggered.connect(lambda: self.set_ui_list("do_plot"))
     # self.actionCross_Validation.triggered.connect(lambda: self.set_ui_list("do_cv"))
@@ -330,12 +361,16 @@ class pysat_ui(object):
         self.actionPredict.setDisabled(bool)
         self.actionNormalization.setDisabled(bool)
         self.actionApply_Mask.setDisabled(bool)
+        self.actionMultiply_Vector.setDisabled(bool)
         self.actionStratified_Folds.setDisabled(bool)
         self.actionTrain.setDisabled(bool)
         self.actionPredict.setDisabled(bool)
         self.actionInterpolate.setDisabled(bool)
         self.actionPlot.setDisabled(bool)
-        self.actionRemoveNull.setDisabled(bool)
+        self.actionPlotSpect.setDisabled(bool)
+        self.actionRemoveRows.setDisabled(bool)
+        self.actionSplitData.setDisabled(bool)
+
         #self.actionCross_Validation.setDisabled(bool)
         self.actionSubmodelPredict.setDisabled(bool)
         self.actionSave_Current_Data.setDisabled(bool)
@@ -385,7 +420,7 @@ class pysat_ui(object):
             ui_modules.error_print("File was not loaded")
         self.restore_first()
 
-    def restore_first(self):   #This function should no longer be necessary once we have error handling with restoration working smoothly
+    def restore_first(self):  # This function should no longer be necessary once we have error handling with restoration working smoothly
         # first run a single or double instance of getattr depending on what data is in the queue
         #   We'll need to remember 'i' so we don't accidentally run the instance too many times
         # then press ok
@@ -421,8 +456,6 @@ class pysat_ui(object):
         self.progressBar.setRange(0, 0)  # make the bar pulse green
         self.pysat_fun.start()  # TaskThread.start()
         # This is multithreading thus run() == start()
-
-
 
     def onFinished(self):  # onFinished function
         self.progressBar.setRange(0, 1)  # stop the bar pulsing green

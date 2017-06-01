@@ -1,5 +1,5 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
-from pysat.utils.gui_utils import make_combobox
+from point_spectra_gui.gui_utils import make_combobox
 from point_spectra_gui.ui_modules.Error_ import error_print
 
 
@@ -120,7 +120,10 @@ class strat_folds_:
 
     def strat_fold_change_vars(self):
         self.strat_folds_choose_var.clear()
-        choices = self.pysat_fun.data[self.strat_folds_choose_data.currentText()].df['meta'].columns.values
+        try:
+            choices = self.pysat_fun.data[self.strat_folds_choose_data.currentText()].df['comp'].columns.values
+        except:
+            choices = ['No composition columns!']
 
         self.strat_folds_choose_var.addItems(choices)
 

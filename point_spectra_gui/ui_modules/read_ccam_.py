@@ -1,6 +1,4 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
-from pysat.utils.gui_utils import make_combobox
-from point_spectra_gui.ui_modules.Error_ import error_print
 
 
 class read_ccam_:

@@ -13,6 +13,7 @@ class file_outpath_:
         self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
         self.file_outpath_ui()
         self.set_parameters()
+        self.get_parameters()
         self.pysat_fun.set_greyed_modules(self.file_out_path)
         try:
             self.file_out_path_button.clicked.connect(self.on_outPutLocationButton_clicked)
@@ -49,9 +50,8 @@ class file_outpath_:
     def set_parameters(self):
         if self.arg_list is not None:
             self.file_out_path_line_edit.setText(self.arg_list[0])
-            self.push_parameters()
 
-    def push_parameters(self):
+    def get_parameters(self):
         filename = self.file_out_path_line_edit.text()
         ui_list = "file_outpath"
         fun_list = "set_file_outpath"
@@ -65,4 +65,4 @@ class file_outpath_:
         self.file_out_path_line_edit.setText(filename)
         if self.file_out_path_line_edit.text() == "":
             self.file_out_path_line_edit.setText("*/")
-        self.push_parameters()
+        self.get_parameters()

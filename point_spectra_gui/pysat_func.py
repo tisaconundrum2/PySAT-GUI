@@ -9,7 +9,7 @@ import pandas as pd
 from point_spectra_gui.ui_modules.Error_ import error_print
 from point_spectra_gui.ui_modules.del_layout_ import *
 from PyQt5.QtCore import QThread
-from PyQt5 import QtGui, QtCore, QtWidgets
+from PyQt5 import QtCore, QtWidgets
 import numpy as np
 
 
@@ -218,21 +218,46 @@ class pysat_func(QThread):
     def do_read_ccam(self,searchdir,searchstring,to_csv=None,lookupfile=None,ave=True):
         progressbar=QtWidgets.QProgressDialog()
         io_ccam_pds.ccam_batch(searchdir,searchstring=searchstring,to_csv=self.outpath+'/'+to_csv,lookupfile=lookupfile,ave=ave,progressbar=progressbar)
-        self.get_data(self.outpath+'/'+to_csv,'ChemCam')
+        self.do_get_data(self.outpath+'/'+to_csv,'ChemCam')
 
-    def removenull(self, datakey, colname):
+    def removerows(self,datakey,colname,value):
         try:
             print(self.data[datakey].df.shape)
-            self.data[datakey] = spectral_data(self.data[datakey].df.ix[-self.data[datakey].df[colname].isnull()])
+            if value=='Null':
+                self.data[datakey] = spectral_data(self.data[datakey].df.ix[-self.data[datakey].df[colname].isnull()])
+            else:
+                #find where the values in the specified column match the value to be removed
+                coldata=np.array([str(i) for i in self.data[datakey].df[colname]])
+                match=coldata==value
+                #keep everything except where match is true
+                self.data[datakey] = spectral_data(self.data[datakey].df.ix[~match])
             print(self.data[datakey].df.shape)
 
         except Exception as e:
             error_print(e)
 
+    def do_split_data(self,datakey,colname):
+        try:
+            coldata = np.array([str(i) for i in self.data[datakey].df[colname]])
+            unique_values=np.unique(coldata)
+            for i in unique_values:
+                new_datakey=datakey+' - '+str(i)
+                self.datakeys.append(new_datakey)
+                self.data[new_datakey] = spectral_data(self.data[datakey].df.ix[coldata==i])
+        except Exception as e:
+            error_print(e)
+
+
     def do_mask(self, datakey, maskfile):
         try:
             self.data[datakey].mask(maskfile)
             print("Mask applied")
+        except Exception as e:
+            error_print(e)
+
+    def do_multiply_vector(self, datakey, vectorfile):
+        try:
+            self.data[datakey].multiply_vector(vectorfile)
         except Exception as e:
             error_print(e)
 
@@ -379,7 +404,7 @@ class pysat_func(QThread):
                 dpi=1000, color=None,
                 annot_mask=None,
                 cmap=None, colortitle='', figname=None, masklabel='',
-                marker='o', linestyle='None'
+                marker='o', linestyle='None',alpha=0.5
                 ):
 
         try:
@@ -411,6 +436,46 @@ class pysat_func(QThread):
                                            annot_mask=annot_mask, cmap=cmap,
                                            colortitle=colortitle, loadfig=loadfig, marker=marker, linestyle=linestyle)
 
+
+    def do_plot_spect(self, datakey,
+                row,
+                figfile=None, xrange=None,
+                yrange=None, xtitle='Wavelength (nm)',
+                ytitle=None, title=None,
+                lbl=None, one_to_one=False,
+                dpi=1000, color=None,
+                annot_mask=None,
+                cmap=None, colortitle='', figname=None, masklabel='',
+                marker=None, linestyle='-',col=None,alpha=0.5,linewidth=1.0,row_bool=None
+                ):
+
+        data=self.data[datakey].df
+        y=data.loc[data[('meta',col)].isin([row])]['wvl'].loc[row_bool].T
+        x=data['wvl'].columns.values
+
+        try:
+            loadfig = self.figs[figname]
+        except:
+            loadfig = None
+
+        try:
+            outpath = self.outpath
+            self.figs[figname] = make_plot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
+                                             ytitle=ytitle, title=title,
+                                             lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
+                                             annot_mask=annot_mask, cmap=cmap,
+                                             colortitle=colortitle, loadfig=loadfig,marker=marker,linestyle=linestyle,linewidth=linewidth)
+
+        except Exception as e:
+            error_print(e)
+            # dealing with the a possibly missing outpath
+            outpath = './'
+            self.figs[figname] = make_plot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
+                                           ytitle=ytitle, title=title,
+                                           lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
+                                           annot_mask=annot_mask, cmap=cmap,
+                                           colortitle=colortitle, loadfig=loadfig,marker=marker,linestyle=linestyle)
+
     def do_plot_dim_red(self, datakey,
                         x_component,
                         y_component,
@@ -440,7 +505,7 @@ class pysat_func(QThread):
             for i in range(len(self.greyed_modules)):
                 r_list = self._list.pull()
                 print(r_list)
-                getattr(self, r_list[2])(*r_list[3], **r_list[4])
+                getattr(self, r_list[2])(*r_list[3], **r_list[4]) # TODO add comment about who is who
                 self.greyed_modules[0].setDisabled(True)
                 del self.greyed_modules[0]
             self.taskFinished.emit()

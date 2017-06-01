@@ -1,5 +1,5 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
-from pysat.utils.gui_utils import make_combobox
+from point_spectra_gui.gui_utils import make_combobox
 from point_spectra_gui.ui_modules.Error_ import error_print
 
 
@@ -318,7 +318,7 @@ class sm_:
             self.choosedata_label = QtWidgets.QLabel(self.submodel_predict)
             self.choosedata_label.setObjectName(("choosedata_label"))
             self.choosedata_label.setText(
-                ("MainWindow", "Choose known data to optimize submodel ranges:"))
+                "Choose known data to optimize submodel ranges:")
             self.choosedata_label.setFont(font)
             self.choosedata_hlayout.addWidget(self.choosedata_label)
 

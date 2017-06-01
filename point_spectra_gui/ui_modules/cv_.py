@@ -1,6 +1,6 @@
 from point_spectra_gui.ui_modules.Error_ import error_print
 from PyQt5 import QtGui, QtCore, QtWidgets
-from pysat.utils.gui_utils import make_combobox
+from point_spectra_gui.gui_utils import make_combobox,make_listwidget,change_combo_list_vars
 
 class cv_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list):
@@ -237,9 +237,7 @@ class cv_:
         self.cv_train_choosex_label.setObjectName(("cv_train_choosex_label"))
         self.cv_train_choosex_label.setText('X variable:')
         self.cv_choosexvars_vlayout.addWidget(self.cv_train_choosex_label)
-        xvarchoices = self.pysat_fun.data[self.cv_choosedata.currentText()].df.columns.levels[0].values
-        xvarchoices = [i for i in xvarchoices if not 'Unnamed' in i]  # remove unnamed columns from choices
-        self.cv_train_choosex = make_listwidget(xvarchoices)
+        self.cv_train_choosex = make_listwidget(self.cv_xvar_choices())
         self.cv_train_choosex.setObjectName(("cv_train_choosex"))
         self.cv_choosexvars_vlayout.addWidget(self.cv_train_choosex)
 
@@ -248,9 +246,7 @@ class cv_:
         self.cv_train_choosey_label.setObjectName(("cv_train_choosey_label"))
         self.cv_train_choosey_label.setText('Y variable:')
         self.cv_chooseyvars_vlayout.addWidget(self.cv_train_choosey_label)
-        yvarchoices = self.pysat_fun.data[self.cv_choosedata.currentText()].df['comp'].columns.values
-        yvarchoices = [i for i in yvarchoices if not 'Unnamed' in i]  # remove unnamed columns from choices
-        self.cv_train_choosey = make_listwidget(yvarchoices)
+        self.cv_train_choosey = make_listwidget(self.cv_yvar_choices())
         self.cv_chooseyvars_vlayout.addWidget(self.cv_train_choosey)
 
         # set limits
@@ -313,23 +309,25 @@ class cv_:
         self.cv_choosealg.currentIndexChanged.connect(lambda: self.get_cv_parameters())
         self.cv_train_choosex.currentItemChanged.connect(lambda: self.get_cv_parameters())
         self.cv_train_choosey.currentItemChanged.connect(lambda: self.get_cv_parameters())
-        self.cv_choosedata.activated[int].connect(lambda: self.cv_change_vars(self.cv_train_choosey))
+        self.cv_choosedata.activated[int].connect(lambda: change_combo_list_vars(self.cv_train_choosey,self.cv_yvar_choices()))
+        self.cv_choosedata.activated[int].connect(lambda: change_combo_list_vars(self.cv_train_choosex,self.cv_xvar_choices()))
 
-    def cv_change_vars(self, obj):
-        obj.clear()
+    def cv_yvar_choices(self):
         try:
-            choices = self.pysat_fun.data[self.cv_choosedata.currentText()].df[['comp']].columns.values
+            yvarchoices = self.pysat_fun.data[self.cv_choosedata.currentText()].df['comp'].columns.values
+            yvarchoices = [i for i in yvarchoices if not 'Unnamed' in i]  # remove unnamed columns from choices
         except:
-            choices = ['No valid options']
-        for i in choices:
-            obj.addItem(i[1])
+            yvarchoices = ['No composition columns!']
+        return yvarchoices
+
+    def cv_xvar_choices(self):
+        try:
+            xvarchoices = self.pysat_fun.data[self.cv_choosedata.currentText()].df.columns.levels[0].values
+            xvarchoices = [i for i in xvarchoices if not 'Unnamed' in i]  # remove unnamed columns from choices
+        except:
+            xvarchoices=['No valid choices!']
+        return xvarchoices
 
 
 
-def make_listwidget(choices):
-    listwidget = QtWidgets.QListWidget()
-    listwidget.setItemDelegate
-    for item in choices:
-        item = QtWidgets.QListWidgetItem(item)
-        listwidget.addItem(item)
-    return listwidget
+
