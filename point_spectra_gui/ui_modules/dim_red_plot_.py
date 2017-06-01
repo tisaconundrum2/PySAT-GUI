@@ -1,5 +1,5 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
-from point_spectra_gui.gui_utils import make_combobox
+from point_spectra_gui.gui_utils import make_combobox,change_combo_list_vars
 from point_spectra_gui.ui_modules.Error_ import error_print
 
 
@@ -42,7 +42,10 @@ class dim_red_plot_:
         method = self.dim_red_choosealg.currentText()
         xvar = self.xvar_choices.currentText()
         yvar = self.yvar_choices.currentText()
-        colorvar = ('comp', self.colorchoices.currentText())
+        if self.colorchoices.currentText() != 'None':
+            colorvar = ('comp', self.colorchoices.currentText())
+        else:
+            colorvar=None
         filename = self.file_text.text()
 
         args = [datakey, xvar, yvar, filename]
@@ -119,19 +122,20 @@ class dim_red_plot_:
 
         self.dim_red_plot_choose_data.currentIndexChanged.connect(lambda: self.get_dim_red_params())
         self.dim_red_choosealg.currentIndexChanged.connect(lambda: self.get_dim_red_params())
-        self.dim_red_choosealg.currentIndexChanged.connect(lambda: self.xychoices_change_vars(self.xvar_choices))
-        self.dim_red_choosealg.currentIndexChanged.connect(lambda: self.xychoices_change_vars(self.yvar_choices))
+        self.dim_red_choosealg.currentIndexChanged.connect(lambda: change_combo_list_vars(self.xvar_choices,self.xychoices()))
+        self.dim_red_choosealg.currentIndexChanged.connect(lambda: change_combo_list_vars(self.yvar_choices,self.xychoices()))
         self.xvar_choices.currentIndexChanged.connect(lambda: self.get_dim_red_params())
         self.yvar_choices.currentIndexChanged.connect(lambda: self.get_dim_red_params())
         self.colorchoices.currentIndexChanged.connect(lambda: self.get_dim_red_params())
         self.file_text.textChanged.connect(lambda: self.get_dim_red_params())
 
-    def xychoices_change_vars(self, obj):
-        obj.clear()
-        choices = self.pysat_fun.data[self.dim_red_plot_choose_data.currentText()].df[
+    def xychoices(self):
+        try:
+            choices = self.pysat_fun.data[self.dim_red_plot_choose_data.currentText()].df[
             self.dim_red_choosealg.currentText()].columns.values
-        for i in choices:
-            obj.addItem(str(i))
+        except:
+            choices=['-']
+        return choices
 
     def colorchoices_change_vars(self, obj):
         obj.clear()
