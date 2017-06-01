@@ -273,7 +273,7 @@ class plot_:
         self.alpha_spin = QtWidgets.QDoubleSpinBox(self.plot)
         self.alpha_spin.setObjectName(("alpha_spin"))
         self.alpha_spin.setRange(0, 1)
-        self.alpha_spin.setValue(0.5)
+        self.alpha_spin.setValue(0.1)
         self.alpha_spin.setSingleStep(0.1)
         self.alpha_spin.setObjectName(("alpha_spin"))
         self.scatter_chooseline_flayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.alpha_spin)
