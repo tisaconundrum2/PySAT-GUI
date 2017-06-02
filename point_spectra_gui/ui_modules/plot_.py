@@ -105,11 +105,12 @@ class plot_:
         fun_list = "do_plot"
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
         # TODO save the state here every time
-        self.qtickle.guisave()
+        self.qtickle.guisave(self.ui_id)
 
     def set_plot_parameters(self):
         # TODO replace this function with restore state.
-        self.qtickle.guirestore()
+        if self.arg_list is not None:
+            self.qtickle.guirestore(self.ui_id)
 
 
     def plot_ui(self):
