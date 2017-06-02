@@ -15,18 +15,19 @@ class get_data_:
     def main(self):
         self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
         self.get_data_ui()  # initiate the UI
+        self.get_data_button.clicked.connect(lambda: self.on_getDataButton_clicked())  # when a button is clicked call the on_getDataButton_clicked function
         self.pysat_fun.set_greyed_modules(self.get_data)
 
 
     def get_get_data_params(self):
         filename=self.get_data_line_edit.text()
         dataname=self.dataname.text()
-
         args=[filename,dataname]
         kws={}
         ui_list = "do_get_data"
         fun_list = "do_get_data"
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
+        self.qtickle.guisave(self.ui_id)
 
     def get_data_ui(self):
         self.get_data = QtWidgets.QGroupBox()
@@ -67,11 +68,13 @@ class get_data_:
         self.get_data_line_edit.textChanged.connect(lambda: self.get_get_data_params())
         self.dataname.textChanged.connect(lambda: self.get_get_data_params())
 
-        self.get_data_button.clicked.connect(lambda: self.on_getDataButton_clicked())  # when a button is clicked call the on_getDataButton_clicked function
 
     def set_data_parameters(self):
-        if self.arg_list is not None:
+        if self.arg_list is None:
+            self.get_data_line_edit.setText("*.csv")
+        else:
             self.qtickle.guirestore(self.ui_id)
+
 
     def on_getDataButton_clicked(self):
         filename, _filter = QtWidgets.QFileDialog.getOpenFileName(None, "Open Data File", '.', "(*.csv)")
