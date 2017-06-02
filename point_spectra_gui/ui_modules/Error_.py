@@ -32,15 +32,15 @@ class error_print(QDialog):
         """
         super().__init__()
         self.message = message
-        try:
-            # stacktracing for original errors location
-            traceback.print_exc(self.message)
-            self.error_print(self.message)
-        except:
-            print(self.message)
+        self.error_print(self.message)
+        # try:
+        #     # stacktracing for original errors location
+        #     traceback.print_exc(self.message)
+        # except Exception as e:
+        #     print(self.message + e)
 
     def error_print(self, message):
-        print('Error:'+message)
+        print('Error: ' + message)
         try:
             """
             Warning Message Box
@@ -52,4 +52,3 @@ class error_print(QDialog):
             msg.exec_()
         except:
             pass
-
