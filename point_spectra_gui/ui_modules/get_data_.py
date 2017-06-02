@@ -1,8 +1,10 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
+from Qtickle import Qtickle
 
 
 class get_data_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list):
+        self.qtickle = Qtickle.Qtickle(self, QtCore.QSettings('saved.ini', QtCore.QSettings.IniFormat))
         self.pysat_fun = pysat_fun
         self.module_layout = module_layout
         self.arg_list = arg_list
@@ -68,13 +70,8 @@ class get_data_:
         self.get_data_button.clicked.connect(lambda: self.on_getDataButton_clicked())  # when a button is clicked call the on_getDataButton_clicked function
 
     def set_data_parameters(self):
-        if self.arg_list is None:
-            self.get_data_line_edit.setText("*.csv")
-        else:
-            # the 0'th element has the name of the file that we want to work with.
-            self.get_data_line_edit.setText(self.arg_list[0])
-            self.dataname.setText(self.arg_list[1])
-            self.get_get_data_params()
+        if self.arg_list is not None:
+            self.qtickle.guirestore(self.ui_id)
 
     def on_getDataButton_clicked(self):
         filename, _filter = QtWidgets.QFileDialog.getOpenFileName(None, "Open Data File", '.', "(*.csv)")
