@@ -75,31 +75,31 @@ class Qtickle(object):
                 if isinstance(obj, QCheckBox):
                     name = obj.objectName()
                     value = self.settings.value(name + str(id))  # get stored value from registry
-                    if value != None:
+                    if value is not None:
                         obj.setChecked(strtobool(value))  # restore checkbox
 
                 if isinstance(obj, QRadioButton):
                     name = obj.objectName()
                     value = self.settings.value(name + str(id))  # get stored value from registry
-                    if value != None:
+                    if value is not None:
                         obj.setChecked(strtobool(value))
 
                 if isinstance(obj, QSlider):
                     name = obj.objectName()
                     value = self.settings.value(name + str(id))  # get stored value from registry
-                    if value != None:
+                    if value is not None:
                         obj.setValue(int(value))  # restore value from registry
 
                 if isinstance(obj, QSpinBox):
                     name = obj.objectName()
                     value = self.settings.value(name + str(id))  # get stored value from registry
-                    if value != None:
+                    if value is not None:
                         obj.setValue(int(value))  # restore value from registry
 
                 if isinstance(obj, QLabel):
                     name = obj.objectName()
                     value = self.settings.value(name + str(id))
-                    if value != None:
+                    if value is not None:
                         obj.setText(value)
 
                 if isinstance(obj, QComboBox):
@@ -108,7 +108,6 @@ class Qtickle(object):
                     # clear all the objects
                     # so that we don't run into issues
                     # with restoring the list of values
-                    # obj.clear()
                     if values is not None:
                         for i in range(len(values)):
                             value = values[i]
@@ -116,8 +115,8 @@ class Qtickle(object):
                                 # if there are some values in the list, we should add them to the Combobox
                                 obj.insertItem(i, value)
 
-                    index = self.settings.value(
-                        name + str(id) + "Index")  # next we want to select the item in question by getting it's index, pull the index from the .ini file
+                    index = self.settings.value(name + str(id) + "Index")  # next we want to select the item in question by getting it's index, pull the index from the .ini file
                     obj.setCurrentIndex(int(index))
+        
         except Exception as e:
             print(e)
