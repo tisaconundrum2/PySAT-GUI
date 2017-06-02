@@ -231,7 +231,7 @@ class sm_:
         self.low_model_max.valueChanged.connect(lambda: self.get_sm_params())
         self.choose_low_model.currentIndexChanged.connect(lambda: self.get_sm_params())
         self.choose_high_model.currentIndexChanged.connect(lambda: self.get_sm_params())
-
+        self.choosedata_predict.currentIndexChanged.connect(lambda: self.get_sm_params())
         self.get_sm_params()  # get initial parameters
 
     def add_submodel(self):
