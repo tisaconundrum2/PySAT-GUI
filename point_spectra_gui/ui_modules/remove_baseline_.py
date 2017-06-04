@@ -102,21 +102,11 @@ class remove_baseline_:
         if self.arg_list is not None:
             try:
                 datakey = self.arg_list[0]
-                xvars = self.arg_list[1]
-                yvars = self.arg_list[2]
-                yrange = self.arg_list[3]
-                method = self.arg_list[4]
-                params = self.arg_list[5]
-                ransacparams = self.arg_list[6]
+                method = self.arg_list[1]
+                params = self.arg_list[2]
 
                 self.baseline_choosedata.setCurrentIndex(self.baseline_choosedata.findText(str(datakey)))
                 # TODO:
-                self.remove_baseline_choosex.setCurrentItem(
-                    self.remove_baseline_choosex.findItems(xvars[0], QtCore.Qt.MatchExactly)[0])
-                self.remove_baseline_choosey.setCurrentItem(
-                    self.remove_baseline_choosey.findItems(yvars[0][1], QtCore.Qt.MatchExactly)[0])
-                self.yvarmin_spin.setValue(yrange[0])
-                self.yvarmax_spin.setValue(yrange[1])
                 self.baseline_choosealg.setCurrentIndex(self.baseline_choosealg.findText(str(method)))
                 self.make_baseline_widget(self.baseline_choosealg.currentText(), params=params)
                 self.get_baseline_parameters()
@@ -139,7 +129,7 @@ class remove_baseline_:
             self.br_widget.als_asym_label = QtWidgets.QLabel(self.br_widget)
             self.br_widget.als_asym_label.setText('Asymmetry:')
             self.br_widget.als_hlayout.addWidget(self.br_widget.als_asym_label)
-            self.br_widget.als_asym_spinbox = QtWidgets.QSpinBox(self.br_widget)
+            self.br_widget.als_asym_spinbox = QtWidgets.QDoubleSpinBox(self.br_widget)
             self.br_widget.als_hlayout.addWidget(self.br_widget.als_asym_spinbox)
             self.br_widget.als_asym_spinbox.setRange(0, 1)
             self.br_widget.als_asym_spinbox.setValue(0.05)
@@ -151,6 +141,7 @@ class remove_baseline_:
             self.br_widget.als_smooth_spinbox = QtWidgets.QDoubleSpinBox(self.br_widget)
             self.br_widget.als_hlayout.addWidget(self.br_widget.als_smooth_spinbox)
             self.br_widget.als_smooth_spinbox.setRange(0, 1e10)
+            self.br_widget.als_smooth_spinbox.setDecimals(2)
             self.br_widget.als_smooth_spinbox.setValue(1e6)
             self.br_widget.als_smooth_spinbox.setSingleStep(1e5)
 
@@ -169,6 +160,7 @@ class remove_baseline_:
             self.br_widget.als_conv_spinbox = QtWidgets.QDoubleSpinBox(self.br_widget)
             self.br_widget.als_hlayout.addWidget(self.br_widget.als_conv_spinbox)
             self.br_widget.als_conv_spinbox.setRange(0, 1)
+            self.br_widget.als_conv_spinbox.setDecimals(6)
             self.br_widget.als_conv_spinbox.setValue(1e-5)
             self.br_widget.als_conv_spinbox.setSingleStep(1e-6)
 
@@ -263,11 +255,12 @@ class remove_baseline_:
             self.br_widget.airpls_iter_spinbox.setSingleStep(1)
 
             self.br_widget.airpls_conv_label = QtWidgets.QLabel(self.br_widget)
-            self.br_widget.airpls_conv_label.setText('# of standard deviations:')
+            self.br_widget.airpls_conv_label.setText('Convergence threshold:')
             self.br_widget.airpls_hlayout.addWidget(self.br_widget.airpls_conv_label)
             self.br_widget.airpls_conv_spinbox = QtWidgets.QDoubleSpinBox(self.br_widget)
             self.br_widget.airpls_hlayout.addWidget(self.br_widget.airpls_conv_spinbox)
             self.br_widget.airpls_conv_spinbox.setRange(0, 100)
+            self.br_widget.airpls_conv_spinbox.setDecimals(4)
             self.br_widget.airpls_conv_spinbox.setValue(0.001)
 
             self.br_widget.airpls_conv_spinbox.setSingleStep(0.01)
@@ -287,7 +280,6 @@ class remove_baseline_:
             self.br_widget.fabc_hlayout.addWidget(self.br_widget.fabc_smoothness_spinbox)
             self.br_widget.fabc_smoothness_spinbox.setRange(1, 1e6)
             self.br_widget.fabc_smoothness_spinbox.setValue(1e3)
-
             self.br_widget.fabc_smoothness_spinbox.setSingleStep(1e2)
 
             self.br_widget.fabc_dilation_label = QtWidgets.QLabel(self.br_widget)
@@ -297,7 +289,6 @@ class remove_baseline_:
             self.br_widget.fabc_hlayout.addWidget(self.br_widget.fabc_dilation_spinbox)
             self.br_widget.fabc_dilation_spinbox.setRange(1, 1000)
             self.br_widget.fabc_dilation_spinbox.setValue(50)
-
             self.br_widget.fabc_dilation_spinbox.setSingleStep(1)
 
             if params is not None:
@@ -454,7 +445,6 @@ class remove_baseline_:
             self.br_widget.ccam_scale1_spinbox.setRange(1, 100)
             self.br_widget.ccam_scale1_spinbox.setSingleStep(1)
 
-            self.br_widget.ccam_hlayout = QtWidgets.QHBoxLayout(self.br_widget)
             self.br_widget.ccam_scale2_label = QtWidgets.QLabel(self.br_widget)
             self.br_widget.ccam_scale2_label.setText('Lowest wavelet scale:')
             self.br_widget.ccam_hlayout.addWidget(self.br_widget.ccam_scale2_label)

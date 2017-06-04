@@ -210,6 +210,7 @@ class plot_spectra_:
         self.choosecol_flayout.setWidget(1,QtWidgets.QFormLayout.LabelRole,self.chooserows_label)
         try:
             rowchoices = self.pysat_fun.data[self.choosedata.currentText()].df[('meta',self.col_choices.currentText())]
+            rowchoices=rowchoices.fillna('-')
         except:
             rowchoices = ['None']
         self.chooserows = make_listwidget(rowchoices)
@@ -333,7 +334,8 @@ class plot_spectra_:
     def plot_spect_update_list(self,obj):
         obj.clear()
         rowchoices = self.pysat_fun.data[self.choosedata.currentText()].df[('meta', self.col_choices.currentText())]
-        rowchoices = np.unique(rowchoices)
+        rowchoices = rowchoices.fillna('-')
+        #rowchoices = np.unique(rowchoices)
         rowchoices=[str(x) for x in rowchoices]
         for i in rowchoices:
             obj.addItem(i)
