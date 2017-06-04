@@ -263,6 +263,8 @@ class pysat_func(QThread):
             self.data[datakey_to_interp].interp(self.data[datakey_ref].df['wvl'].columns)
         except Exception as e:
             error_print(e)
+    def do_remove_baseline(self,datakey,method,params):
+        pass
 
     def do_dim_red(self,datakey,method,params,method_kws={},col='wvl',load_fit=None,dim_red_key=None):
         try:
