@@ -55,10 +55,10 @@ class get_data_:
         self.dataname_label.setText('Data set name:')
         self.hlayout_dataname.addWidget(self.dataname_label)
         self.dataname = QtWidgets.QLineEdit(self.get_data)
+        self.dataname.setObjectName("dataname")
         self.hlayout_dataname.addWidget(self.dataname)
         self.verticalLayout.addLayout(self.hlayout_dataname)
         self.module_layout.addWidget(self.get_data)
-
         self.get_data.setTitle("Load Data")
         self.get_data_label.setText("File Name")
         self.get_data_button.setText("...")
