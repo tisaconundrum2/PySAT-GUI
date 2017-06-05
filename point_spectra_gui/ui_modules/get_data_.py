@@ -15,15 +15,14 @@ class get_data_:
     def main(self):
         self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
         self.get_data_ui()  # initiate the UI
-        self.get_data_button.clicked.connect(lambda: self.on_getDataButton_clicked())  # when a button is clicked call the on_getDataButton_clicked function
+        self.get_data_button.clicked.connect(lambda: self.on_getDataButton_clicked())
         self.pysat_fun.set_greyed_modules(self.get_data)
 
-
     def get_get_data_params(self):
-        filename=self.get_data_line_edit.text()
-        dataname=self.dataname.text()
-        args=[filename,dataname]
-        kws={}
+        filename = self.get_data_line_edit.text()
+        dataname = self.dataname.text()
+        args = [filename, dataname]
+        kws = {}
         ui_list = "do_get_data"
         fun_list = "do_get_data"
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
@@ -34,32 +33,31 @@ class get_data_:
         font = QtGui.QFont()
         font.setPointSize(10)
         self.get_data.setFont(font)
-        self.get_data.setObjectName(("get_data"))
-        self.verticalLayout=QtWidgets.QVBoxLayout(self.get_data)
+        self.get_data.setObjectName("get_data")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.get_data)
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.get_data)
         self.horizontalLayout.setContentsMargins(11, 11, 11, 11)
         self.horizontalLayout.setSpacing(6)
-        self.horizontalLayout.setObjectName(("horizontalLayout"))
+        self.horizontalLayout.setObjectName("horizontalLayout")
         self.get_data_label = QtWidgets.QLabel(self.get_data)
-        self.get_data_label.setObjectName(("get_data_label"))
+        self.get_data_label.setObjectName("get_data_label")
         self.horizontalLayout.addWidget(self.get_data_label)
         self.get_data_line_edit = QtWidgets.QLineEdit(self.get_data)
         self.get_data_line_edit.setReadOnly(True)
-        self.get_data_line_edit.setObjectName(("get_data_line_edit"))
+        self.get_data_line_edit.setObjectName("get_data_line_edit")
         self.horizontalLayout.addWidget(self.get_data_line_edit)
         self.get_data_button = QtWidgets.QToolButton(self.get_data)
-        self.get_data_button.setObjectName(("get_data_button"))
+        self.get_data_button.setObjectName("get_data_button")
         self.horizontalLayout.addWidget(self.get_data_button)
         self.verticalLayout.addLayout(self.horizontalLayout)
-        self.hlayout_dataname=QtWidgets.QHBoxLayout(self.get_data)
-        self.dataname_label=QtWidgets.QLabel(self.get_data)
+        self.hlayout_dataname = QtWidgets.QHBoxLayout(self.get_data)
+        self.dataname_label = QtWidgets.QLabel(self.get_data)
         self.dataname_label.setText('Data set name:')
         self.hlayout_dataname.addWidget(self.dataname_label)
-        self.dataname=QtWidgets.QLineEdit(self.get_data)
+        self.dataname = QtWidgets.QLineEdit(self.get_data)
         self.hlayout_dataname.addWidget(self.dataname)
         self.verticalLayout.addLayout(self.hlayout_dataname)
         self.module_layout.addWidget(self.get_data)
-
 
         self.get_data.setTitle("Load Data")
         self.get_data_label.setText("File Name")
@@ -68,13 +66,11 @@ class get_data_:
         self.get_data_line_edit.textChanged.connect(lambda: self.get_get_data_params())
         self.dataname.textChanged.connect(lambda: self.get_get_data_params())
 
-
     def set_data_parameters(self):
         if self.arg_list is None:
             self.get_data_line_edit.setText("*.csv")
         else:
             self.qtickle.guirestore(self.ui_id)
-
 
     def on_getDataButton_clicked(self):
         filename, _filter = QtWidgets.QFileDialog.getOpenFileName(None, "Open Data File", '.', "(*.csv)")
@@ -82,4 +78,3 @@ class get_data_:
         if self.get_data_line_edit.text() == "":
             self.get_data_line_edit.setText("*.csv")
         self.get_get_data_params()
-
