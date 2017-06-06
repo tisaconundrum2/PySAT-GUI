@@ -1,10 +1,16 @@
 import os.path
+import multiprocessing as mp
+
+
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import *
 import sys, time
 from point_spectra_gui.pysat_ui import *
-
+try:
+    mp.set_start_method('spawn')
+except:
+    pass
 
 class Main(QMainWindow):
     def __init__(self, parent=None):
@@ -17,7 +23,7 @@ class Main(QMainWindow):
         pysat = pysat_ui()
         pysat.main_window(MainWindow)  # Set up the mainwindow. This is the backbone of the UI it IS REQUIRED
         pysat.menu_item_shortcuts()  # The shortcuts for making things happen in the UI
-        pysat.menu_item_functions(MainWindow)  # These are the various functions that make the UI work
+        pysat.menu_item_functions()  # These are the various functions that make the UI work
         self.ui = pysat.scrollAreaWidgetContents_2
 
         #### These are the triggers for exit and new
@@ -27,8 +33,8 @@ class Main(QMainWindow):
 
     def new(self):
         # TODO create a new window to work in. The old window does not disappear
-        window = Main(self)
-        window.show()
+        p = mp.Process(target=main, args=())
+        p.start()
 
     def exit(self):
         # TODO close the current window
@@ -71,4 +77,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    p = mp.Process(target=main, args=())
+    p.start()
