@@ -11,7 +11,7 @@ class Qtickle(object):
         self.ui = ui
         self.settings = settings
 
-    def guisave(self, id):
+    def guisave(self, id=0):
 
         # Save geometry
         # self.settings.setValue('size', self.ui.size())
@@ -21,7 +21,8 @@ class Qtickle(object):
                 if isinstance(obj, QLineEdit):
                     name = obj.objectName()
                     value = obj.text()
-                    self.settings.setValue(name + str(id), value)  # save self.ui values, so they can be restored next time
+                    self.settings.setValue(name + str(id),
+                                           value)  # save self.ui values, so they can be restored next time
 
                 if isinstance(obj, QCheckBox):
                     name = obj.objectName()
@@ -60,7 +61,7 @@ class Qtickle(object):
         except Exception as e:
             print(e)
 
-    def guirestore(self, id):
+    def guirestore(self, id=0):
 
         # Restore geometry
         # self.ui.resize(self.settings.value('size', QtCore.QSize(500, 500)))
@@ -115,8 +116,9 @@ class Qtickle(object):
                                 # if there are some values in the list, we should add them to the Combobox
                                 obj.insertItem(i, value)
 
-                    index = self.settings.value(name + str(id) + "Index")  # next we want to select the item in question by getting it's index, pull the index from the .ini file
+                    index = self.settings.value(name + str(
+                        id) + "Index")  # next we want to select the item in question by getting it's index, pull the index from the .ini file
                     obj.setCurrentIndex(int(index))
-        
+
         except Exception as e:
             print(e)
