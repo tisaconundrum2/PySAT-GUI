@@ -142,7 +142,7 @@ class listOfModules:
             current = current.getNext()
 
 
-class pysat_func(QThread):
+class backEndProc(QThread):
     taskFinished = QtCore.pyqtSignal()
 
     def __init__(self):

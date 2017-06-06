@@ -1,12 +1,14 @@
+import pickle
+
 from PyQt5 import QtGui, QtCore, QtWidgets, QtGui
 from point_spectra_gui import ui_modules
-from point_spectra_gui.pysat_func import pysat_func
+from point_spectra_gui.backEndProcessing import backEndProc
 from Qtickle import Qtickle
 
 
-class pysat_ui(object):
+class frontEndProc(object):
     def __init__(self):
-        self.pysat_fun = pysat_func()
+        self.backEndProc = backEndProc()
         self.ui_list = []
         self.restore_list = None
         self.flag = False
@@ -244,66 +246,66 @@ class pysat_ui(object):
 
         self.actionStratified_Folds.setText("Stratified Folds")
         self.okButton.clicked.connect(lambda: self.on_okButton_clicked())
-        self.delButton.clicked.connect(lambda: self.pysat_fun.del_layout())
+        self.delButton.clicked.connect(lambda: self.backEndProc.del_layout())
 
     def do_get_data(self, arg_list=None, kw_list=None):
-        self.flag = ui_modules.get_data_(self.pysat_fun, self.module_layout, arg_list, kw_list)
+        self.flag = ui_modules.get_data_(self.backEndProc, self.module_layout, arg_list, kw_list)
 
     def do_read_ccam(self, arg_list=None, kw_list=None):
-        self.flag = ui_modules.read_ccam_(self.pysat_fun, self.module_layout, arg_list, kw_list)
+        self.flag = ui_modules.read_ccam_(self.backEndProc, self.module_layout, arg_list, kw_list)
 
     def do_mask(self, arg_list=None, kw_list=None):
-        ui_modules.get_mask_(self.pysat_fun, self.module_layout, arg_list, kw_list)
+        ui_modules.get_mask_(self.backEndProc, self.module_layout, arg_list, kw_list)
 
     def do_multiply_vector(self, arg_list=None, kw_list=None):
-        ui_modules.multiply_vector_(self.pysat_fun, self.module_layout, arg_list, kw_list)
+        ui_modules.multiply_vector_(self.backEndProc, self.module_layout, arg_list, kw_list)
 
     def do_write_data(self):
-        self.flag = ui_modules.write_data_(self.pysat_fun, self.module_layout)
+        self.flag = ui_modules.write_data_(self.backEndProc, self.module_layout)
 
     def file_outpath(self, arg_list=None, kw_list=None):
-        self.flag = ui_modules.file_outpath_(self.pysat_fun, self.module_layout, arg_list, kw_list)
+        self.flag = ui_modules.file_outpath_(self.backEndProc, self.module_layout, arg_list, kw_list)
 
     def do_removerows(self, arg_list=None, kw_list=None):
-        ui_modules.removerows_(self.pysat_fun, self.module_layout, arg_list, kw_list)
+        ui_modules.removerows_(self.backEndProc, self.module_layout, arg_list, kw_list)
 
     def do_split_data(self, arg_list=None, kw_list=None):
-        ui_modules.split_data_(self.pysat_fun, self.module_layout, arg_list, kw_list)
+        ui_modules.split_data_(self.backEndProc, self.module_layout, arg_list, kw_list)
 
     def normalization(self, arg_list=None, kw_list=None):
-        ui_modules.normalization_(self.pysat_fun, self.module_layout, arg_list, kw_list)
+        ui_modules.normalization_(self.backEndProc, self.module_layout, arg_list, kw_list)
 
     def do_strat_folds(self, arg_list=None, kw_list=None):
         if not self.actionCross_Validation.isEnabled():
             self.actionCross_Validation.setDisabled(False)
-        ui_modules.strat_folds_(self.pysat_fun, self.module_layout, arg_list, kw_list)
+        ui_modules.strat_folds_(self.backEndProc, self.module_layout, arg_list, kw_list)
 
     def do_dim_red(self, arg_list=None, kw_list=None):
-        ui_modules.dim_reduction_(self.pysat_fun, self.module_layout, arg_list, kw_list)
+        ui_modules.dim_reduction_(self.backEndProc, self.module_layout, arg_list, kw_list)
 
     def do_regression_train(self, arg_list=None, kw_list=None):
-        ui_modules.regression_train_(self.pysat_fun, self.module_layout, arg_list, kw_list)
+        ui_modules.regression_train_(self.backEndProc, self.module_layout, arg_list, kw_list)
 
     def do_regression_predict(self, arg_list=None, kw_list=None):
-        ui_modules.regression_predict_(self.pysat_fun, self.module_layout, arg_list, kw_list)
+        ui_modules.regression_predict_(self.backEndProc, self.module_layout, arg_list, kw_list)
 
     def do_submodel_predict(self, arg_list=None, kw_list=None):
-        ui_modules.sm_(self.pysat_fun, self.module_layout, arg_list, kw_list)
+        ui_modules.sm_(self.backEndProc, self.module_layout, arg_list, kw_list)
 
     def do_plot(self, arg_list=None, kw_list=None):
-        ui_modules.plot_(self.pysat_fun, self.module_layout, arg_list, kw_list)
+        ui_modules.plot_(self.backEndProc, self.module_layout, arg_list, kw_list)
 
     def do_plot_spect(self, arg_list=None, kw_list=None):
-        ui_modules.plot_spectra_(self.pysat_fun, self.module_layout, arg_list, kw_list)
+        ui_modules.plot_spectra_(self.backEndProc, self.module_layout, arg_list, kw_list)
 
     def do_plot_dim_red(self, arg_list=None, kw_list=None):
-        ui_modules.dim_red_plot_(self.pysat_fun, self.module_layout, arg_list, kw_list)
+        ui_modules.dim_red_plot_(self.backEndProc, self.module_layout, arg_list, kw_list)
 
     def do_cv(self, arg_list=None, kw_list=None):
-        ui_modules.cv_(self.pysat_fun, self.module_layout, arg_list, kw_list)
+        ui_modules.cv_(self.backEndProc, self.module_layout, arg_list, kw_list)
 
     def do_interp(self, arg_list=None, kw_list=None):
-        ui_modules.interpolation_(self.pysat_fun, self.module_layout, arg_list, kw_list)
+        ui_modules.interpolation_(self.backEndProc, self.module_layout, arg_list, kw_list)
 
     """ =============================================
     Please do not delete the functions below this line!
@@ -317,44 +319,31 @@ class pysat_ui(object):
         self.actionOpen_Workflow.setShortcut("ctrl+O")
         self.actionSave_Current_Workflow.setShortcut("ctrl+S")
 
-    def menu_item_functions(self, MainWindow):
-        self.actionRead_ccam.triggered.connect(lambda: pysat_ui.do_read_ccam(self))
-        self.actionSet_output_location.triggered.connect(lambda: pysat_ui.file_outpath(self))  # output location
-        self.actionLoadData.triggered.connect(lambda: pysat_ui.do_get_data(self))  # load data
-        self.actionSave_Current_Data.triggered.connect(lambda: pysat_ui.do_write_data(self))
-        self.actionNormalization.triggered.connect(lambda: pysat_ui.normalization(self))  # submodel
-        self.actionApply_Mask.triggered.connect(lambda: pysat_ui.do_mask(self))  # get_mask
-        self.actionMultiply_Vector.triggered.connect(lambda: pysat_ui.do_multiply_vector(self))  # multiply by vector
-        self.actionRemoveRows.triggered.connect(lambda: pysat_ui.do_removerows(self))
-        self.actionSplitData.triggered.connect(lambda: pysat_ui.do_split_data(self))
-
-        self.actionStratified_Folds.triggered.connect(lambda: pysat_ui.do_strat_folds(self))  # strat folds
-
-        self.actionTrain.triggered.connect(lambda: pysat_ui.do_regression_train(self))  # regression train
-        self.actionPredict.triggered.connect(lambda: pysat_ui.do_regression_predict(self))  # regression predict
-        self.actionInterpolate.triggered.connect(lambda: pysat_ui.do_interp(self))
-        self.actionPlot.triggered.connect(lambda: pysat_ui.do_plot(self))
-        self.actionPlotSpect.triggered.connect(lambda: pysat_ui.do_plot_spect(self))
-        self.actionPlotDimRed.triggered.connect(lambda: pysat_ui.do_plot_dim_red(self))
-        self.actionCross_Validation.triggered.connect(lambda: pysat_ui.do_cv(self))
-        self.actionSubmodelPredict.triggered.connect(lambda: pysat_ui.do_submodel_predict(self))
-        self.actionDimRed.triggered.connect(lambda: pysat_ui.do_dim_red(self))
+    def menu_item_functions(self):
+        self.actionRead_ccam.triggered.connect(lambda: frontEndProc.do_read_ccam(self))
+        self.actionSet_output_location.triggered.connect(lambda: frontEndProc.file_outpath(self))  # output location
+        self.actionLoadData.triggered.connect(lambda: frontEndProc.do_get_data(self))  # load data
+        self.actionSave_Current_Data.triggered.connect(lambda: frontEndProc.do_write_data(self))
+        self.actionNormalization.triggered.connect(lambda: frontEndProc.normalization(self))  # submodel
+        self.actionApply_Mask.triggered.connect(lambda: frontEndProc.do_mask(self))  # get_mask
+        self.actionMultiply_Vector.triggered.connect(lambda: frontEndProc.do_multiply_vector(self))  # multiply by vector
+        self.actionRemoveRows.triggered.connect(lambda: frontEndProc.do_removerows(self))
+        self.actionSplitData.triggered.connect(lambda: frontEndProc.do_split_data(self))
+        self.actionStratified_Folds.triggered.connect(lambda: frontEndProc.do_strat_folds(self))  # strat folds
+        self.actionTrain.triggered.connect(lambda: frontEndProc.do_regression_train(self))  # regression train
+        self.actionPredict.triggered.connect(lambda: frontEndProc.do_regression_predict(self))  # regression predict
+        self.actionInterpolate.triggered.connect(lambda: frontEndProc.do_interp(self))
+        self.actionPlot.triggered.connect(lambda: frontEndProc.do_plot(self))
+        self.actionPlotSpect.triggered.connect(lambda: frontEndProc.do_plot_spect(self))
+        self.actionPlotDimRed.triggered.connect(lambda: frontEndProc.do_plot_dim_red(self))
+        self.actionCross_Validation.triggered.connect(lambda: frontEndProc.do_cv(self))
+        self.actionSubmodelPredict.triggered.connect(lambda: frontEndProc.do_submodel_predict(self))
+        self.actionDimRed.triggered.connect(lambda: frontEndProc.do_dim_red(self))
         self.actionOpen_Workflow.triggered.connect(lambda: self.on_load_clicked())
-        # self.actionSave_Current_Workflow.triggered.connect(lambda: self.on_save_clicked())
-        self.actionSave_Current_Workflow.triggered.connect(lambda: self.qtickle.guisave())
+        self.actionSave_Current_Workflow.triggered.connect(lambda: self.on_save_clicked())
+
         self.set_greyed_out_items(True)
         self.actionCross_Validation.setDisabled(True)
-
-    #        self.set_visible_items()
-
-    # TODO add auto scroll down feature
-    # self.scrollArea.findChildren().triggered.connect(self.scrollArea.verticalScrollBar().setValue(self.scrollArea.verticalScrollBar().value()+10))
-
-    # These are the Restore functions
-    # self.actionRemoveRows.triggered.connect(lambda: self.set_ui_list("do_RemoveRows"))
-    # self.actionPredict.triggered.connect(lambda: self.set_ui_list("do_regression_predict"))  # regression predict
-    # self.actionPlot.triggered.connect(lambda: self.set_ui_list("do_plot"))
-    # self.actionCross_Validation.triggered.connect(lambda: self.set_ui_list("do_cv"))
 
     def set_greyed_out_items(self, bool):
         self.actionTrain.setDisabled(bool)
@@ -377,18 +366,6 @@ class pysat_ui(object):
         self.actionDimRed.setDisabled(bool)
         self.actionPlotDimRed.setDisabled(bool)
 
-    #    def set_visible_items(self):
-    #    def set_visible_items(self):
-    # self.actionNoise_Reduction.setVisible(False)
-    # self.actionInstrument_Response.setVisible(False)
-    # self.menuBaseline_Removal.deleteLater()
-    # self.menuCalibration_Transfer.deleteLater()
-    # self.actionICA.setVisible(False)
-    # self.actionPCA.setVisible(False)
-    # self.actionICA_2.setVisible(False)
-    # self.actionPCA_2.setVisible(False)
-    # self.menuClassification.setTitle("")
-
     def handleMenuHovered(self, action):
         QtWidgets.QToolTip.showText(self, None, action, None)
 
@@ -396,7 +373,7 @@ class pysat_ui(object):
         if self.flag:
             self.set_greyed_out_items(False)
             self.onStart()
-            self.pysat_fun.taskFinished.connect(self.onFinished)
+            self.backEndProc.taskFinished.connect(self.onFinished)
 
     ################# Restoration toolset below
 
@@ -405,9 +382,8 @@ class pysat_ui(object):
             filename, _filter = QtWidgets.QFileDialog.getSaveFileName(None, "Choose where you want save your file", '.',
                                                                       '(*.wrf)')
             print(filename)
-            # TODO open a file and dump data to it.
-            # with open(filename, 'wb') as fp:
-            #     pickle.dump(self.pysat_fun.get_list(), fp)
+            with open(filename, 'wb') as fp:
+                pickle.dump(self.backEndProc.get_list(), fp)
         except:
             print("File not loaded")
 
@@ -415,51 +391,41 @@ class pysat_ui(object):
         filename, _filter = QtWidgets.QFileDialog.getOpenFileName(None, "Open Workflow File", '.', "(*.wrf)")
         print(filename)
         try:
-            pass
-            # with open(filename, 'rb') as fp:
+            with open(filename, 'rb') as fp:
             # TODO load the data from the file.
             # This will probably be done automatically
-            # self.restore_list = pickle.load(fp)
+                self.restore_list = pickle.load(fp)
         except:
             ui_modules.error_print("File was not loaded")
         self.restore_first()
 
     # This function should no longer be necessary once we have error handling with restoration working smoothly
     def restore_first(self):
-        # first run a single or double instance of getattr depending on what data is in the queue
-        #   We'll need to remember 'i' so we don't accidentally run the instance too many times
-        # then press ok
-        # then we'll have another loop continue on it's merry way adding everything in.
-
-        # TODO: Don't run the function until the UI has been loaded
-        # TODO: allow set outpath to be run before loading data
-
-
         try:
             self.r_list = self.restore_list.pop()
             while self.r_list[1] == "do_get_data" or self.r_list[1] == 'do_read_ccam':
-                getattr(pysat_ui, self.r_list[1])(self, self.r_list[3], self.r_list[4])
+                getattr(frontEndProc, self.r_list[1])(self, self.r_list[3], self.r_list[4])
                 print(self.r_list)
                 self.r_list = self.restore_list.pop()
             self.on_okButton_clicked()
-            self.pysat_fun.taskFinished.connect(self.restore_rest)
+            self.backEndProc.taskFinished.connect(self.restore_rest)
         except Exception as e:
             print(e)
 
     def restore_rest(self):
         if self.restore_flag is False:
-            getattr(pysat_ui, self.r_list[1])(self, self.r_list[3], self.r_list[4])
+            getattr(frontEndProc, self.r_list[1])(self, self.r_list[3], self.r_list[4])
             for i in range(len(self.restore_list)):
                 self.r_list = self.restore_list.pop()
                 print(self.r_list)
-                getattr(pysat_ui, self.r_list[1])(self, self.r_list[3], self.r_list[4])
+                getattr(frontEndProc, self.r_list[1])(self, self.r_list[3], self.r_list[4])
             self.restore_flag = True
 
     ################# Progress bar toolset below
 
     def onStart(self):  # onStart function
         self.progressBar.setRange(0, 0)  # make the bar pulse green
-        self.pysat_fun.start()  # TaskThread.start()
+        self.backEndProc.start()  # TaskThread.start()
         # This is multithreading thus run() == start()
 
     def onFinished(self):  # onFinished function
