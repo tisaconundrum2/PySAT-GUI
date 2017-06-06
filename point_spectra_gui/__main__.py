@@ -59,9 +59,13 @@ def main():
 
     app = QApplication(sys.argv)
     splash_pix = QPixmap('splash.png')  # default
+    app_icon = QtGui.QIcon('icon.png')
+
     if os.path.exists('point_spectra_gui/splash.png'):
         splash_pix = QPixmap('point_spectra_gui/splash.png')
+        app_icon = QtGui.QIcon('images/icon.png')
 
+    app.setWindowIcon(app_icon)
     splash = QSplashScreen(splash_pix, Qt.WindowStaysOnTopHint)
     splash.setMask(splash_pix.mask())
     splash.show()
@@ -76,5 +80,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    # p = mp.Process(target=main, args=())
-    # p.start()
