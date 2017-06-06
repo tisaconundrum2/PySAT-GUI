@@ -75,5 +75,6 @@ def main():
 
 
 if __name__ == '__main__':
-    p = mp.Process(target=main, args=())
-    p.start()
+    main()
+    # p = mp.Process(target=main, args=())
+    # p.start()
