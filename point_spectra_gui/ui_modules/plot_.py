@@ -106,10 +106,10 @@ class plot_:
                }
         ui_list = "do_plot"
         fun_list = "do_plot"
-        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
         # TODO save the state here every time
         r = self.qtickle.guisave()
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
+        pass
 
     def set_plot_parameters(self):
         # TODO replace this function with restore state.
@@ -137,9 +137,6 @@ class plot_:
         # self.scatter_choosedata = QtWidgets.QComboBox(self.plot) # we have to remove this as it can't be safely overwritten
 
         datachoices = self.pysat_fun.datakeys
-        if datachoices == []:
-            error_print('No Data has been loaded')
-            datachoices = ['No data has been loaded!']
         self.scatter_choosedata = make_combobox(datachoices)
 
         self.scatter_choosedata.setIconSize(QtCore.QSize(50, 20))
