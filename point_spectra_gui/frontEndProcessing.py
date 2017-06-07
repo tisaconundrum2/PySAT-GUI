@@ -22,7 +22,6 @@ class frontEndProc(object):
         MainWindow.setObjectName(("MainWindow"))
         MainWindow.resize(800, 1000)
         self.centralWidget = QtWidgets.QWidget(MainWindow)
-        self.qtickle = Qtickle.Qtickle(self.centralWidget, QtCore.QSettings('saved.ini', QtCore.QSettings.IniFormat))
         self.centralWidget.setObjectName(("centralWidget"))
         self.scrollarea_layout = QtWidgets.QVBoxLayout(self.centralWidget)
         self.scrollarea_layout.setContentsMargins(11, 11, 11, 11)
