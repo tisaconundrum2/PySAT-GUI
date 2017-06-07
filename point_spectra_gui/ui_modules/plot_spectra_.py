@@ -6,7 +6,7 @@ import inspect
 
 
 class plot_spectra_:
-    def __init__(self, pysat_fun, module_layout, arg_list, kw_list):
+    def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
         self.arg_list=arg_list
         self.kw_list=kw_list
         self.pysat_fun = pysat_fun
@@ -15,7 +15,7 @@ class plot_spectra_:
         self.main()
 
     def main(self):
-        self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
+        self.ui_id = self.pysat_fun.set_list(None, None, None, None, None, self.ui_id)
         self.plot_spect_ui()
         self.set_plot_spectra_parameters()
         self.get_plot_spectra_parameters()

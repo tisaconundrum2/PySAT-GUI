@@ -4,7 +4,7 @@ from PyQt5 import QtGui, QtCore, QtWidgets
 
 
 class regression_train_:
-    def __init__(self, pysat_fun, module_layout, arg_list, kw_list):
+    def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
         self.arg_list = arg_list
         self.kw_list = kw_list
         self.pysat_fun = pysat_fun
@@ -13,7 +13,7 @@ class regression_train_:
         self.main()
 
     def main(self):
-        self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
+        self.ui_id = self.pysat_fun.set_list(None, None, None, None, None, self.ui_id)
         self.regression_ui()  # start the regression UI. create our submodule
         self.set_regression_parameters()
         # self.regression_ransac_checkbox.toggled.connect(  #

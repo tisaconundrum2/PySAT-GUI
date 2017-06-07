@@ -2,7 +2,7 @@ from PyQt5 import QtGui, QtCore, QtWidgets
 
 
 class read_ccam_:
-    def __init__(self, pysat_fun, module_layout, arg_list, kw_list):
+    def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
         self.pysat_fun = pysat_fun
         self.arg_list = arg_list
         self.kw_list = kw_list
@@ -12,7 +12,7 @@ class read_ccam_:
 
     def main(self):
         # TODO add function param call here
-        self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
+        self.ui_id = self.pysat_fun.set_list(None, None, None, None, None, self.ui_id)
         self.read_ccam_ui()
         self.set_read_ccam_params()
         self.get_read_ccam_params()

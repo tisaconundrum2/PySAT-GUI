@@ -3,7 +3,7 @@ from Qtickle import Qtickle
 
 
 class get_data_:
-    def __init__(self, pysat_fun, module_layout, arg_list, kw_list):
+    def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
         self.qtickle = Qtickle.Qtickle(self, QtCore.QSettings('saved.ini', QtCore.QSettings.IniFormat))
         self.pysat_fun = pysat_fun
         self.module_layout = module_layout
@@ -13,20 +13,24 @@ class get_data_:
         self.main()
 
     def main(self):
-        self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
+        self.ui_id = self.pysat_fun.set_list(None, None, None, None, None, self.ui_id)
         self.get_data_ui()  # initiate the UI
+        self.set_data_params()
+        self.get_data_params()
         self.get_data_button.clicked.connect(lambda: self.on_getDataButton_clicked())
         self.pysat_fun.set_greyed_modules(self.get_data)
 
-    def get_get_data_params(self):
+    def get_data_params(self):
         filename = self.get_data_line_edit.text()
         dataname = self.dataname.text()
         args = [filename, dataname]
         kws = {}
         ui_list = "do_get_data"
         fun_list = "do_get_data"
-        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
-        self.qtickle.guisave(self.ui_id)
+        self.qtickle.guisave()
+        restr = open('saved.ini', 'r')
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, restr, self.ui_id)
+        open('saved.ini', 'w').close()
 
     def get_data_ui(self):
         self.get_data = QtWidgets.QGroupBox()
@@ -62,19 +66,18 @@ class get_data_:
         self.get_data.setTitle("Load Data")
         self.get_data_label.setText("File Name")
         self.get_data_button.setText("...")
-        self.set_data_parameters()
-        self.get_data_line_edit.textChanged.connect(lambda: self.get_get_data_params())
-        self.dataname.textChanged.connect(lambda: self.get_get_data_params())
+        self.get_data_line_edit.textChanged.connect(lambda: self.get_data_params())
+        self.dataname.textChanged.connect(lambda: self.get_data_params())
 
-    def set_data_parameters(self):
+    def set_data_params(self):
         if self.arg_list is None:
             self.get_data_line_edit.setText("*.csv")
         else:
-            self.qtickle.guirestore(self.ui_id)
+            self.qtickle.guirestore()
 
     def on_getDataButton_clicked(self):
         filename, _filter = QtWidgets.QFileDialog.getOpenFileName(None, "Open Data File", '.', "(*.csv)")
         self.get_data_line_edit.setText(filename)
         if self.get_data_line_edit.text() == "":
             self.get_data_line_edit.setText("*.csv")
-        self.get_get_data_params()
+        self.get_data_params()

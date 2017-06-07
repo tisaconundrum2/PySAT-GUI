@@ -32,7 +32,7 @@ from point_spectra_gui.ui_modules.del_layout_ import del_layout_
 # it's position is data[1], max_lineEdit, and it's value is 1000
 
 class normalization_:
-    def __init__(self, pysat_fun, module_layout, arg_list, kw_list):
+    def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
         self.box_list = []
         self.pysat_fun = pysat_fun
         self.module_layout = module_layout
@@ -44,7 +44,7 @@ class normalization_:
     def main(self):
         # driver function, calls UI and set's up connections
         # add function list calls here
-        self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
+        self.ui_id = self.pysat_fun.set_list(None, None, None, None, None, self.ui_id)
         self.normalization_ui()
         self.set_data_parameters()
         self.pysat_fun.set_greyed_modules(self.normalization)

@@ -1,7 +1,7 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
 
 class file_outpath_:
-    def __init__(self, pysat_fun, module_layout, arg_list, kw_list):
+    def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
         self.ui_id = None
         self.pysat_fun = pysat_fun
         self.arg_list = arg_list
@@ -10,7 +10,7 @@ class file_outpath_:
         self.main()
 
     def main(self):
-        self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
+        self.ui_id = self.pysat_fun.set_list(None, None, None, None, None, self.ui_id)
         self.file_outpath_ui()
         self.set_parameters()
         self.get_parameters()

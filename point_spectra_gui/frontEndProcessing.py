@@ -248,64 +248,64 @@ class frontEndProc(object):
         self.okButton.clicked.connect(lambda: self.on_okButton_clicked())
         self.delButton.clicked.connect(lambda: self.backEndProc.del_layout())
 
-    def do_get_data(self, arg_list=None, kw_list=None):
-        self.flag = ui_modules.get_data_(self.backEndProc, self.module_layout, arg_list, kw_list)
+    def do_get_data(self, arg_list=None, kw_list=None, restr_list=None):
+        self.flag = ui_modules.get_data_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
 
-    def do_read_ccam(self, arg_list=None, kw_list=None):
-        self.flag = ui_modules.read_ccam_(self.backEndProc, self.module_layout, arg_list, kw_list)
+    def do_read_ccam(self, arg_list=None, kw_list=None, restr_list=None):
+        self.flag = ui_modules.read_ccam_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
 
-    def do_mask(self, arg_list=None, kw_list=None):
-        ui_modules.get_mask_(self.backEndProc, self.module_layout, arg_list, kw_list)
+    def do_mask(self, arg_list=None, kw_list=None, restr_list=None):
+        ui_modules.get_mask_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
 
-    def do_multiply_vector(self, arg_list=None, kw_list=None):
-        ui_modules.multiply_vector_(self.backEndProc, self.module_layout, arg_list, kw_list)
+    def do_multiply_vector(self, arg_list=None, kw_list=None, restr_list=None):
+        ui_modules.multiply_vector_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
 
     def do_write_data(self):
         self.flag = ui_modules.write_data_(self.backEndProc, self.module_layout)
 
-    def file_outpath(self, arg_list=None, kw_list=None):
-        self.flag = ui_modules.file_outpath_(self.backEndProc, self.module_layout, arg_list, kw_list)
+    def file_outpath(self, arg_list=None, kw_list=None, restr_list=None):
+        self.flag = ui_modules.file_outpath_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
 
-    def do_removerows(self, arg_list=None, kw_list=None):
-        ui_modules.removerows_(self.backEndProc, self.module_layout, arg_list, kw_list)
+    def do_removerows(self, arg_list=None, kw_list=None, restr_list=None):
+        ui_modules.removerows_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
 
-    def do_split_data(self, arg_list=None, kw_list=None):
-        ui_modules.split_data_(self.backEndProc, self.module_layout, arg_list, kw_list)
+    def do_split_data(self, arg_list=None, kw_list=None, restr_list=None):
+        ui_modules.split_data_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
 
-    def normalization(self, arg_list=None, kw_list=None):
-        ui_modules.normalization_(self.backEndProc, self.module_layout, arg_list, kw_list)
+    def normalization(self, arg_list=None, kw_list=None, restr_list=None):
+        ui_modules.normalization_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
 
-    def do_strat_folds(self, arg_list=None, kw_list=None):
+    def do_strat_folds(self, arg_list=None, kw_list=None, restr_list=None):
         if not self.actionCross_Validation.isEnabled():
             self.actionCross_Validation.setDisabled(False)
-        ui_modules.strat_folds_(self.backEndProc, self.module_layout, arg_list, kw_list)
+        ui_modules.strat_folds_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
 
-    def do_dim_red(self, arg_list=None, kw_list=None):
-        ui_modules.dim_reduction_(self.backEndProc, self.module_layout, arg_list, kw_list)
+    def do_dim_red(self, arg_list=None, kw_list=None, restr_list=None):
+        ui_modules.dim_reduction_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
 
-    def do_regression_train(self, arg_list=None, kw_list=None):
-        ui_modules.regression_train_(self.backEndProc, self.module_layout, arg_list, kw_list)
+    def do_regression_train(self, arg_list=None, kw_list=None, restr_list=None):
+        ui_modules.regression_train_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
 
-    def do_regression_predict(self, arg_list=None, kw_list=None):
-        ui_modules.regression_predict_(self.backEndProc, self.module_layout, arg_list, kw_list)
+    def do_regression_predict(self, arg_list=None, kw_list=None, restr_list=None):
+        ui_modules.regression_predict_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
 
-    def do_submodel_predict(self, arg_list=None, kw_list=None):
-        ui_modules.sm_(self.backEndProc, self.module_layout, arg_list, kw_list)
+    def do_submodel_predict(self, arg_list=None, kw_list=None, restr_list=None):
+        ui_modules.sm_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
 
-    def do_plot(self, arg_list=None, kw_list=None):
-        ui_modules.plot_(self.backEndProc, self.module_layout, arg_list, kw_list)
+    def do_plot(self, arg_list=None, kw_list=None, restr_list=None):
+        ui_modules.plot_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
 
-    def do_plot_spect(self, arg_list=None, kw_list=None):
-        ui_modules.plot_spectra_(self.backEndProc, self.module_layout, arg_list, kw_list)
+    def do_plot_spect(self, arg_list=None, kw_list=None, restr_list=None):
+        ui_modules.plot_spectra_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
 
-    def do_plot_dim_red(self, arg_list=None, kw_list=None):
-        ui_modules.dim_red_plot_(self.backEndProc, self.module_layout, arg_list, kw_list)
+    def do_plot_dim_red(self, arg_list=None, kw_list=None, restr_list=None):
+        ui_modules.dim_red_plot_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
 
-    def do_cv(self, arg_list=None, kw_list=None):
-        ui_modules.cv_(self.backEndProc, self.module_layout, arg_list, kw_list)
+    def do_cv(self, arg_list=None, kw_list=None, restr_list=None):
+        ui_modules.cv_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
 
-    def do_interp(self, arg_list=None, kw_list=None):
-        ui_modules.interpolation_(self.backEndProc, self.module_layout, arg_list, kw_list)
+    def do_interp(self, arg_list=None, kw_list=None, restr_list=None):
+        ui_modules.interpolation_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
 
     """ =============================================
     Please do not delete the functions below this line!

@@ -16,20 +16,22 @@ import numpy as np
 class Module:
     nodeCount = 0
 
-    def __init__(self, ui_list, fun_list, arg_list, kw_list):
+    def __init__(self, ui_list, fun_list, arg_list, kw_list, ui_restore):
         self.ui_list = ui_list
         self.fun_list = fun_list
         self.arg_list = arg_list
         self.kw_list = kw_list
+        self.ui_restore = ui_restore
         self.next = None
         self.UI_ID = Module.nodeCount
         Module.nodeCount += 1
 
-    def setData(self, ui_list, fun_list, arg_list, kw_list):
+    def setData(self, ui_list, fun_list, arg_list, kw_list, ui_restore):
         self.ui_list = ui_list
         self.fun_list = fun_list
         self.arg_list = arg_list
         self.kw_list = kw_list
+        self.ui_restore = ui_restore
 
     def getID(self):
         return self.UI_ID
@@ -41,6 +43,7 @@ class Module:
         list.append(self.fun_list)
         list.append(self.arg_list)
         list.append(self.kw_list)
+        list.append(self.ui_restore)
         return list
 
     def setNext(self, next):
@@ -48,6 +51,7 @@ class Module:
 
     def getNext(self):
         return self.next
+
 
 class listOfModules:
     def __init__(self):
@@ -62,18 +66,19 @@ class listOfModules:
             current = current.getNext()
         return count
 
-    def push(self, ui_list, fun_list, arg_list, kw_list, UI_ID=None):
-        if not self.amend(ui_list, fun_list, arg_list, kw_list,
+    def push(self, ui_list, fun_list, arg_list, kw_list, ui_restore, UI_ID=None):
+        if not self.amend(ui_list, fun_list, arg_list, kw_list, ui_restore,
                           UI_ID):  # if the UI_ID that we are playing with exists, amend it, otherwise make something new
             if len(self) == 0:
                 # Create a new head
-                temp = Module(ui_list, fun_list, arg_list, kw_list)  # self.head = None; temp = 0x085817F0
+                temp = Module(ui_list, fun_list, arg_list, kw_list, ui_restore)  # self.head = None; temp = 0x085817F0
                 temp.setNext(self.head)  # temp = 0x085817F0; temp.next = None
                 self.head = temp  # self.head = 0x085817F0; self.head.next = None; temp = 0x085817F0; temp.next = None
                 return temp.getID()
             else:
                 # Append new data into .next
-                temp = Module(ui_list, fun_list, arg_list, kw_list)  # self.head = 0x085817F0; temp = 0x00568330
+                temp = Module(ui_list, fun_list, arg_list, kw_list,
+                              ui_restore)  # self.head = 0x085817F0; temp = 0x00568330
                 current = self.head  # current = 0x085817F0; current.next = None; self.head = 0x085817F0; temp = 0x00568330
                 while current.getNext() != None:  #
                     current = current.getNext()  #
@@ -81,13 +86,13 @@ class listOfModules:
                 return temp.getID()
         return UI_ID
 
-    def amend(self, ui_list, fun_list, arg_list, kw_list, UI_ID=None):
+    def amend(self, ui_list, fun_list, arg_list, kw_list, ui_restore, UI_ID=None):
         current = self.head
         found = False
         while current is not None and not found and UI_ID is not None:
             if current.getID() == UI_ID:
                 found = True
-                current.setData(ui_list, fun_list, arg_list, kw_list)
+                current.setData(ui_list, fun_list, arg_list, kw_list, ui_restore)
             else:
                 current = current.getNext()
         return found
@@ -164,7 +169,7 @@ class backEndProc(QThread):
     Getter and setter functions below
     """
 
-    def set_list(self, ui, fun, arg, kw, ui_id=None):
+    def set_list(self, ui, fun, arg, kw, restore, ui_id=None):
         """
         pushing new information as well as returning the UI_ID
         we'll need the UI_ID in order to maintain order and bookkeeping
@@ -175,7 +180,7 @@ class backEndProc(QThread):
         :param ui_id:
         :return:
         """
-        return self._list.push(ui, fun, arg, kw, ui_id)
+        return self._list.push(ui, fun, arg, kw, restore, ui_id)
 
     def get_list(self):
         return self._list
@@ -215,38 +220,38 @@ class backEndProc(QThread):
             except:
                 self.data[datakey].df.to_csv(filename)
 
-    def do_read_ccam(self,searchdir,searchstring,to_csv=None,lookupfile=None,ave=True):
-        progressbar=QtWidgets.QProgressDialog()
-        io_ccam_pds.ccam_batch(searchdir,searchstring=searchstring,to_csv=self.outpath+'/'+to_csv,lookupfile=lookupfile,ave=ave,progressbar=progressbar)
-        self.do_get_data(self.outpath+'/'+to_csv,'ChemCam')
+    def do_read_ccam(self, searchdir, searchstring, to_csv=None, lookupfile=None, ave=True):
+        progressbar = QtWidgets.QProgressDialog()
+        io_ccam_pds.ccam_batch(searchdir, searchstring=searchstring, to_csv=self.outpath + '/' + to_csv,
+                               lookupfile=lookupfile, ave=ave, progressbar=progressbar)
+        self.do_get_data(self.outpath + '/' + to_csv, 'ChemCam')
 
-    def removerows(self,datakey,colname,value):
+    def removerows(self, datakey, colname, value):
         try:
             print(self.data[datakey].df.shape)
-            if value=='Null':
+            if value == 'Null':
                 self.data[datakey] = spectral_data(self.data[datakey].df.ix[-self.data[datakey].df[colname].isnull()])
             else:
-                #find where the values in the specified column match the value to be removed
-                coldata=np.array([str(i) for i in self.data[datakey].df[colname]])
-                match=coldata==value
-                #keep everything except where match is true
+                # find where the values in the specified column match the value to be removed
+                coldata = np.array([str(i) for i in self.data[datakey].df[colname]])
+                match = coldata == value
+                # keep everything except where match is true
                 self.data[datakey] = spectral_data(self.data[datakey].df.ix[~match])
             print(self.data[datakey].df.shape)
 
         except Exception as e:
             error_print(e)
 
-    def do_split_data(self,datakey,colname):
+    def do_split_data(self, datakey, colname):
         try:
             coldata = np.array([str(i) for i in self.data[datakey].df[colname]])
-            unique_values=np.unique(coldata)
+            unique_values = np.unique(coldata)
             for i in unique_values:
-                new_datakey=datakey+' - '+str(i)
+                new_datakey = datakey + ' - ' + str(i)
                 self.datakeys.append(new_datakey)
-                self.data[new_datakey] = spectral_data(self.data[datakey].df.ix[coldata==i])
+                self.data[new_datakey] = spectral_data(self.data[datakey].df.ix[coldata == i])
         except Exception as e:
             error_print(e)
-
 
     def do_mask(self, datakey, maskfile):
         try:
@@ -322,7 +327,8 @@ class backEndProc(QThread):
             if modelkey is None:
                 modelkey = method + '-' + str(yvars) + ' (' + str(yrange[0]) + '-' + str(yrange([1]) + ') ')
 
-            self.models[modelkey] = regression.regression([method], [yrange], [params], i=0, ransacparams=[ransacparams])
+            self.models[modelkey] = regression.regression([method], [yrange], [params], i=0,
+                                                          ransacparams=[ransacparams])
             if not append:
                 self.modelkeys.append(modelkey)
             else:
@@ -344,9 +350,10 @@ class backEndProc(QThread):
     def do_cv_train(self, datakey, xvars, yvars, yrange, method, params):
 
         try:
-            cv_obj=cv.cv(params)
-            self.data[datakey].df,self.cv_results=cv_obj.do_cv(self.data[datakey].df,xcols=xvars,ycol=yvars,yrange=yrange,method=method)
-            self.data['CV Results']=self.cv_results
+            cv_obj = cv.cv(params)
+            self.data[datakey].df, self.cv_results = cv_obj.do_cv(self.data[datakey].df, xcols=xvars, ycol=yvars,
+                                                                  yrange=yrange, method=method)
+            self.data['CV Results'] = self.cv_results
         except Exception as e:
             error_print(e)
 
@@ -404,7 +411,7 @@ class backEndProc(QThread):
                 dpi=1000, color=None,
                 annot_mask=None,
                 cmap=None, colortitle='', figname=None, masklabel='',
-                marker='o', linestyle='None',alpha=0.5
+                marker='o', linestyle='None', alpha=0.5
                 ):
 
         try:
@@ -435,22 +442,21 @@ class backEndProc(QThread):
                                            annot_mask=annot_mask, cmap=cmap,
                                            colortitle=colortitle, loadfig=loadfig, marker=marker, linestyle=linestyle)
 
-
     def do_plot_spect(self, datakey,
-                row,
-                figfile=None, xrange=None,
-                yrange=None, xtitle='Wavelength (nm)',
-                ytitle=None, title=None,
-                lbl=None, one_to_one=False,
-                dpi=1000, color=None,
-                annot_mask=None,
-                cmap=None, colortitle='', figname=None, masklabel='',
-                marker=None, linestyle='-',col=None,alpha=0.5,linewidth=1.0,row_bool=None
-                ):
+                      row,
+                      figfile=None, xrange=None,
+                      yrange=None, xtitle='Wavelength (nm)',
+                      ytitle=None, title=None,
+                      lbl=None, one_to_one=False,
+                      dpi=1000, color=None,
+                      annot_mask=None,
+                      cmap=None, colortitle='', figname=None, masklabel='',
+                      marker=None, linestyle='-', col=None, alpha=0.5, linewidth=1.0, row_bool=None
+                      ):
 
-        data=self.data[datakey].df
-        y=data.loc[data[('meta',col)].isin([row])]['wvl'].loc[row_bool].T
-        x=data['wvl'].columns.values
+        data = self.data[datakey].df
+        y = data.loc[data[('meta', col)].isin([row])]['wvl'].loc[row_bool].T
+        x = data['wvl'].columns.values
 
         try:
             loadfig = self.figs[figname]
@@ -460,10 +466,11 @@ class backEndProc(QThread):
         try:
             outpath = self.outpath
             self.figs[figname] = make_plot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
-                                             ytitle=ytitle, title=title,
-                                             lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
-                                             annot_mask=annot_mask, cmap=cmap,
-                                             colortitle=colortitle, loadfig=loadfig,marker=marker,linestyle=linestyle,linewidth=linewidth)
+                                           ytitle=ytitle, title=title,
+                                           lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
+                                           annot_mask=annot_mask, cmap=cmap,
+                                           colortitle=colortitle, loadfig=loadfig, marker=marker, linestyle=linestyle,
+                                           linewidth=linewidth)
 
         except Exception as e:
             error_print(e)
@@ -473,24 +480,23 @@ class backEndProc(QThread):
                                            ytitle=ytitle, title=title,
                                            lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
                                            annot_mask=annot_mask, cmap=cmap,
-                                           colortitle=colortitle, loadfig=loadfig,marker=marker,linestyle=linestyle)
-
+                                           colortitle=colortitle, loadfig=loadfig, marker=marker, linestyle=linestyle)
 
     def do_plot_spect(self, datakey,
-                row,
-                figfile=None, xrange=None,
-                yrange=None, xtitle='Wavelength (nm)',
-                ytitle=None, title=None,
-                lbl=None, one_to_one=False,
-                dpi=1000, color=None,
-                annot_mask=None,
-                cmap=None, colortitle='', figname=None, masklabel='',
-                marker=None, linestyle='-',col=None,alpha=0.5,linewidth=1.0,row_bool=None
-                ):
+                      row,
+                      figfile=None, xrange=None,
+                      yrange=None, xtitle='Wavelength (nm)',
+                      ytitle=None, title=None,
+                      lbl=None, one_to_one=False,
+                      dpi=1000, color=None,
+                      annot_mask=None,
+                      cmap=None, colortitle='', figname=None, masklabel='',
+                      marker=None, linestyle='-', col=None, alpha=0.5, linewidth=1.0, row_bool=None
+                      ):
 
-        data=self.data[datakey].df
-        y=data.loc[data[('meta',col)].isin([row])]['wvl'].loc[row_bool].T
-        x=data['wvl'].columns.values
+        data = self.data[datakey].df
+        y = data.loc[data[('meta', col)].isin([row])]['wvl'].loc[row_bool].T
+        x = data['wvl'].columns.values
 
         try:
             loadfig = self.figs[figname]
@@ -500,10 +506,11 @@ class backEndProc(QThread):
         try:
             outpath = self.outpath
             self.figs[figname] = make_plot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
-                                             ytitle=ytitle, title=title,
-                                             lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
-                                             annot_mask=annot_mask, cmap=cmap,
-                                             colortitle=colortitle, loadfig=loadfig,marker=marker,linestyle=linestyle,linewidth=linewidth)
+                                           ytitle=ytitle, title=title,
+                                           lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
+                                           annot_mask=annot_mask, cmap=cmap,
+                                           colortitle=colortitle, loadfig=loadfig, marker=marker, linestyle=linestyle,
+                                           linewidth=linewidth)
 
         except Exception as e:
             error_print(e)
@@ -513,7 +520,7 @@ class backEndProc(QThread):
                                            ytitle=ytitle, title=title,
                                            lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
                                            annot_mask=annot_mask, cmap=cmap,
-                                           colortitle=colortitle, loadfig=loadfig,marker=marker,linestyle=linestyle)
+                                           colortitle=colortitle, loadfig=loadfig, marker=marker, linestyle=linestyle)
 
     def do_plot_dim_red(self, datakey,
                         x_component,
@@ -544,7 +551,7 @@ class backEndProc(QThread):
             for i in range(len(self.greyed_modules)):
                 r_list = self._list.pull()
                 print(r_list)
-                getattr(self, r_list[2])(*r_list[3], **r_list[4]) # TODO add comment about who is who
+                getattr(self, r_list[2])(*r_list[3], **r_list[4])  # TODO add comment about who is who
                 self.greyed_modules[0].setDisabled(True)
                 del self.greyed_modules[0]
             self.taskFinished.emit()

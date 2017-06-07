@@ -4,7 +4,7 @@ from point_spectra_gui.gui_utils import make_combobox
 
 
 class interpolation_:
-    def __init__(self, pysat_fun, module_layout, arg_list, kw_list):
+    def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
         self.pysat_fun = pysat_fun
         self.module_layout = module_layout
         self.arg_list = arg_list
@@ -13,7 +13,7 @@ class interpolation_:
         self.main()
 
     def main(self):
-        self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
+        self.ui_id = self.pysat_fun.set_list(None, None, None, None, None, self.ui_id)
         self.interpolation_ui()
         self.set_parameters()
         self.get_parameters()

@@ -14,7 +14,7 @@ class write_data_:
         self.main()
 
     def main(self):
-        self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
+        self.ui_id = self.pysat_fun.set_list(None, None, None, None, None, self.ui_id)
         self.write_data_ui()
         self.set_write_params()
         self.get_write_params()

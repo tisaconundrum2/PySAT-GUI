@@ -5,7 +5,7 @@ import inspect
 
 
 class split_data_:
-    def __init__(self, pysat_fun, module_layout, arg_list, kw_list):
+    def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
         self.pysat_fun = pysat_fun
         self.arg_list = arg_list
         self.kw_list = kw_list
@@ -14,7 +14,7 @@ class split_data_:
         self.main()
 
     def main(self):
-        self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
+        self.ui_id = self.pysat_fun.set_list(None, None, None, None, None, self.ui_id)
         self.split_data_ui()  # initiate the UI
         self.pysat_fun.set_greyed_modules(self.split_data)
 

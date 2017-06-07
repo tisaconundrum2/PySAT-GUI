@@ -1,4 +1,4 @@
-from point_spectra_gui.gui_utils import make_combobox,change_combo_list_vars
+from point_spectra_gui.gui_utils import make_combobox, change_combo_list_vars
 from point_spectra_gui.ui_modules.Error_ import error_print
 from Qtickle import Qtickle
 from PyQt5 import QtGui, QtCore, QtWidgets
@@ -7,7 +7,7 @@ import inspect
 
 
 class plot_:
-    def __init__(self, pysat_fun, module_layout, arg_list, kw_list):
+    def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
         self.qtickle = Qtickle.Qtickle(self, QtCore.QSettings('saved.ini', QtCore.QSettings.IniFormat))
         self.pysat_fun = pysat_fun
         self.arg_list = arg_list
@@ -17,7 +17,7 @@ class plot_:
         self.main()
 
     def main(self):
-        self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
+        self.ui_id = self.pysat_fun.set_list(None, None, None, None, None, self.ui_id)
         self.plot_ui()
         self.set_plot_parameters()
         self.get_plot_parameters()
@@ -112,7 +112,6 @@ class plot_:
         if self.arg_list is not None:
             self.qtickle.guirestore(self.ui_id)
 
-
     def plot_ui(self):
         self.plot = QtWidgets.QGroupBox()
         font = QtGui.QFont()
@@ -167,7 +166,7 @@ class plot_:
         self.scatter_choosex_flayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.scatter_choosex_label)
 
         self.xvar_choices = make_combobox([''])
-        change_combo_list_vars(self.xvar_choices,self.get_choices())
+        change_combo_list_vars(self.xvar_choices, self.get_choices())
         self.xvar_choices.setObjectName(("xvar_choices"))
         self.scatter_choosex_flayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.xvar_choices)
 
@@ -199,7 +198,7 @@ class plot_:
         self.scatter_choosey_flayout.setSpacing(6)
         self.scatter_choosey_flayout.setObjectName(("scatter_choosey_flayout"))
         self.yvar_choices = make_combobox([''])
-        change_combo_list_vars(self.yvar_choices,self.get_choices())
+        change_combo_list_vars(self.yvar_choices, self.get_choices())
         self.yvar_choices.setObjectName(("yvar_choices"))
         self.scatter_choosey_flayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.yvar_choices)
         self.ytitle_label = QtWidgets.QLabel(self.plot)
@@ -331,14 +330,16 @@ class plot_:
         self.alpha_label.setText("Alpha:")
 
         self.plot.setTitle("Plot")
-        self.scatter_choosedata.activated[int].connect(lambda: change_combo_list_vars(self.xvar_choices,self.get_choices()))
+        self.scatter_choosedata.activated[int].connect(
+            lambda: change_combo_list_vars(self.xvar_choices, self.get_choices()))
         self.scatter_choosedata.activated[int].connect(
             lambda: self.get_minmax(self.xmin_spin, self.xmax_spin, self.xvar_choices.currentText()))
         self.scatter_choosedata.activated[int].connect(
             lambda: self.get_minmax(self.ymin_spin, self.ymax_spin, self.yvar_choices.currentText()))
         self.xvar_choices.activated[int].connect(
             lambda: self.get_minmax(self.xmin_spin, self.xmax_spin, self.xvar_choices.currentText()))
-        self.scatter_choosedata.activated[int].connect(lambda: change_combo_list_vars(self.yvar_choices,self.get_choices()))
+        self.scatter_choosedata.activated[int].connect(
+            lambda: change_combo_list_vars(self.yvar_choices, self.get_choices()))
         self.yvar_choices.activated[int].connect(
             lambda: self.get_minmax(self.ymin_spin, self.ymax_spin, self.yvar_choices.currentText()))
         self.color_choices.activated.connect(lambda: self.get_plot_parameters())
@@ -352,7 +353,6 @@ class plot_:
                 obj.valueChanged.connect(lambda: self.get_plot_parameters())
             if isinstance(obj, QtWidgets.QCheckBox):
                 obj.toggled.connect(lambda: self.get_plot_parameters())
-
 
     def get_choices(self):
         try:
