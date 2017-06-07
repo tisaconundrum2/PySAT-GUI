@@ -1,3 +1,4 @@
+import os
 from point_spectra_gui.gui_utils import make_combobox, change_combo_list_vars
 from point_spectra_gui.ui_modules.Error_ import error_print
 from Qtickle import Qtickle
@@ -8,7 +9,7 @@ import inspect
 
 class plot_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
-        self.qtickle = Qtickle.Qtickle(self, QtCore.QSettings('saved.ini', QtCore.QSettings.IniFormat))
+        self.qtickle = Qtickle.Qtickle(self, QtCore.QSettings('settings_data/plot_saved.ini', QtCore.QSettings.IniFormat))
         self.pysat_fun = pysat_fun
         self.arg_list = arg_list
         self.kw_list = kw_list
@@ -106,11 +107,17 @@ class plot_:
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
         # TODO save the state here every time
         self.qtickle.guisave(self.ui_id)
+        try:
+            restr = open('settings_data/plot_saved.ini', 'r+')
+            r = restr.read()
+            self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
+        except:
+            pass
 
     def set_plot_parameters(self):
         # TODO replace this function with restore state.
         if self.arg_list is not None:
-            self.qtickle.guirestore(self.ui_id)
+            self.qtickle.guirestore()
 
     def plot_ui(self):
         self.plot = QtWidgets.QGroupBox()

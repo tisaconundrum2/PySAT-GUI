@@ -1,14 +1,17 @@
+import os
+
 from PyQt5 import QtGui, QtCore, QtWidgets
 from Qtickle import Qtickle
 
 
 class get_data_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
-        self.qtickle = Qtickle.Qtickle(self, QtCore.QSettings('saved.ini', QtCore.QSettings.IniFormat))
+        self.qtickle = Qtickle.Qtickle(self, QtCore.QSettings('settings_data/get_data_saved.ini', QtCore.QSettings.IniFormat))
         self.pysat_fun = pysat_fun
         self.module_layout = module_layout
         self.arg_list = arg_list
         self.kw_list = kw_list
+        self.restr_list = restr_list
         self.ui_id = None
         self.main()
 
@@ -28,9 +31,13 @@ class get_data_:
         ui_list = "do_get_data"
         fun_list = "do_get_data"
         self.qtickle.guisave()
-        restr = open('saved.ini', 'r')
-        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, restr, self.ui_id)
-        open('saved.ini', 'w').close()
+        try:
+            restr = open('settings_data/get_data_saved.ini', 'r')
+            r = restr.read()
+            self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
+        except:
+            pass
+
 
     def get_data_ui(self):
         self.get_data = QtWidgets.QGroupBox()
@@ -70,7 +77,7 @@ class get_data_:
         self.dataname.textChanged.connect(lambda: self.get_data_params())
 
     def set_data_params(self):
-        if self.arg_list is None:
+        if self.restr_list is None:
             self.get_data_line_edit.setText("*.csv")
         else:
             self.qtickle.guirestore()
