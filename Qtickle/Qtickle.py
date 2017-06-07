@@ -7,11 +7,11 @@ from PyQt5.QtWidgets import *
 
 
 class Qtickle(object):
-    def __init__(self, ui, settings):
+    def __init__(self, ui):
         self.ui = ui
-        self.settings = settings
+        self.dict = {}
 
-    def guisave(self, id=0):
+    def guisave(self):
 
         # Save geometry
         # self.settings.setValue('size', self.ui.size())
@@ -21,33 +21,32 @@ class Qtickle(object):
                 if isinstance(obj, QLineEdit):
                     name = obj.objectName()
                     value = obj.text()
-                    self.settings.setValue(name + str(id),
-                                           value)  # save self.ui values, so they can be restored next time
+                    self.dict[name] = value
 
                 if isinstance(obj, QCheckBox):
                     name = obj.objectName()
                     state = obj.isChecked()
-                    self.settings.setValue(name, state)
+                    self.dict[name] = state
 
                 if isinstance(obj, QRadioButton):
                     name = obj.objectName()
                     value = obj.isChecked()  # get stored value from registry
-                    self.settings.setValue(name + str(id), value)
+                    self.dict[name] = value
 
                 if isinstance(obj, QSpinBox):
                     name = obj.objectName()
                     value = obj.value()  # get stored value from registry
-                    self.settings.setValue(name + str(id), value)
+                    self.dict[name] = value
 
                 if isinstance(obj, QSlider):
                     name = obj.objectName()
                     value = obj.value()  # get stored value from registry
-                    self.settings.setValue(name + str(id), value)
+                    self.dict[name] = value
 
                 if isinstance(obj, QLabel):
                     name = obj.objectName()
                     value = obj.text()
-                    self.settings.setValue(name + str(id), value)
+                    self.dict[name] = value
 
                 if isinstance(obj, QComboBox):
                     values = []  # the list that will hold all values from QCombobox
@@ -56,13 +55,14 @@ class Qtickle(object):
                         itemData = obj.itemText(i)
                         values.append(itemData)  # put those items into a list for saving
                     index = obj.findText(obj.currentText())  # return the index of the item, assign to selected
-                    self.settings.setValue(name + str(id) + "Values", values)  # save all the values in settings
-                    self.settings.setValue(name + str(id) + "Index", index)  # save the indexed value in settings
+                    self.dict[name + "Values"] = values  # save all the values in settings
+                    self.dict[name + "Index"] = index  # save the indexed value in settings
+            return self.dict
         except Exception as e:
             print(e)
 
-    def guirestore(self, id=0):
-
+    def guirestore(self, dict):
+        self.dict = dict
         # Restore geometry
         # self.ui.resize(self.settings.value('size', QtCore.QSize(500, 500)))
         # self.ui.move(self.settings.value('pos', QtCore.QPoint(60, 60)))
@@ -70,42 +70,42 @@ class Qtickle(object):
             for name, obj in inspect.getmembers(self.ui):
                 if isinstance(obj, QLineEdit):
                     name = obj.objectName()
-                    value = (self.settings.value(name + str(id)))  # get stored value from registry
+                    value = self.dict[name]
                     obj.setText(value)  # restore lineEditFile
 
                 if isinstance(obj, QCheckBox):
                     name = obj.objectName()
-                    value = self.settings.value(name + str(id))  # get stored value from registry
+                    value = self.dict[name]
                     if value is not None:
                         obj.setChecked(strtobool(value))  # restore checkbox
 
                 if isinstance(obj, QRadioButton):
                     name = obj.objectName()
-                    value = self.settings.value(name + str(id))  # get stored value from registry
+                    value = self.dict[name]
                     if value is not None:
                         obj.setChecked(strtobool(value))
 
                 if isinstance(obj, QSlider):
                     name = obj.objectName()
-                    value = self.settings.value(name + str(id))  # get stored value from registry
+                    value = self.dict[name]
                     if value is not None:
                         obj.setValue(int(value))  # restore value from registry
 
                 if isinstance(obj, QSpinBox):
                     name = obj.objectName()
-                    value = self.settings.value(name + str(id))  # get stored value from registry
+                    value = self.dict[name]
                     if value is not None:
                         obj.setValue(int(value))  # restore value from registry
 
                 if isinstance(obj, QLabel):
                     name = obj.objectName()
-                    value = self.settings.value(name + str(id))
+                    value = self.dict[name]
                     if value is not None:
                         obj.setText(value)
 
                 if isinstance(obj, QComboBox):
                     name = obj.objectName()
-                    values = self.settings.value(name + str(id) + "Values")  # values will be a list.
+                    values = self.dict[name + "Values"]
                     # clear all the objects
                     # so that we don't run into issues
                     # with restoring the list of values
@@ -116,8 +116,7 @@ class Qtickle(object):
                                 # if there are some values in the list, we should add them to the Combobox
                                 obj.insertItem(i, value)
 
-                    index = self.settings.value(name + str(
-                        id) + "Index")  # next we want to select the item in question by getting it's index, pull the index from the .ini file
+                    index = self.dict[name + "Index"]  # next we want to select the item in question by getting it's index
                     obj.setCurrentIndex(int(index))
 
         except Exception as e:
