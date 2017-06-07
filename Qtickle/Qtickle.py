@@ -57,6 +57,7 @@ class Qtickle(object):
                     index = obj.findText(obj.currentText())  # return the index of the item, assign to selected
                     self.dict[name + "Values"] = values  # save all the values in settings
                     self.dict[name + "Index"] = index  # save the indexed value in settings
+            print(self.dict) # Debug purposes
             return self.dict
         except Exception as e:
             print(e)

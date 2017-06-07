@@ -9,10 +9,11 @@ import inspect
 
 class plot_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
-        self.qtickle = Qtickle.Qtickle(self, QtCore.QSettings('settings_data/plot_saved.ini', QtCore.QSettings.IniFormat))
+        self.qtickle = Qtickle.Qtickle(self)
         self.pysat_fun = pysat_fun
         self.arg_list = arg_list
         self.kw_list = kw_list
+        self.restr_list = restr_list
         self.module_layout = module_layout
         self.ui_id = None
         self.main()
@@ -22,6 +23,7 @@ class plot_:
         self.plot_ui()
         self.set_plot_parameters()
         self.get_plot_parameters()
+        self.connect_widgets()
         self.pysat_fun.set_greyed_modules(self.plot)
 
     def get_plot_parameters(self):
@@ -106,18 +108,14 @@ class plot_:
         fun_list = "do_plot"
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
         # TODO save the state here every time
-        self.qtickle.guisave(self.ui_id)
-        try:
-            restr = open('settings_data/plot_saved.ini', 'r+')
-            r = restr.read()
-            self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
-        except:
-            pass
+        r = self.qtickle.guisave()
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def set_plot_parameters(self):
         # TODO replace this function with restore state.
-        if self.arg_list is not None:
-            self.qtickle.guirestore()
+        if self.restr_list is not None:
+            self.qtickle.guirestore(self.restr_list)
+
 
     def plot_ui(self):
         self.plot = QtWidgets.QGroupBox()
@@ -337,6 +335,9 @@ class plot_:
         self.alpha_label.setText("Alpha:")
 
         self.plot.setTitle("Plot")
+
+
+    def connect_widgets(self):
         self.scatter_choosedata.activated[int].connect(
             lambda: change_combo_list_vars(self.xvar_choices, self.get_choices()))
         self.scatter_choosedata.activated[int].connect(

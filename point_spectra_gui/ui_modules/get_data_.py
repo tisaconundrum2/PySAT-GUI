@@ -6,7 +6,7 @@ from Qtickle import Qtickle
 
 class get_data_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
-        self.qtickle = Qtickle.Qtickle(self, QtCore.QSettings('settings_data/get_data_saved.ini', QtCore.QSettings.IniFormat))
+        self.qtickle = Qtickle.Qtickle(self)
         self.pysat_fun = pysat_fun
         self.module_layout = module_layout
         self.arg_list = arg_list
@@ -21,6 +21,8 @@ class get_data_:
         self.set_data_params()
         self.get_data_params()
         self.get_data_button.clicked.connect(lambda: self.on_getDataButton_clicked())
+        self.get_data_line_edit.textChanged.connect(lambda: self.get_data_params())
+        self.dataname.textChanged.connect(lambda: self.get_data_params())
         self.pysat_fun.set_greyed_modules(self.get_data)
 
     def get_data_params(self):
@@ -30,13 +32,8 @@ class get_data_:
         kws = {}
         ui_list = "do_get_data"
         fun_list = "do_get_data"
-        self.qtickle.guisave()
-        try:
-            restr = open('settings_data/get_data_saved.ini', 'r')
-            r = restr.read()
-            self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
-        except:
-            pass
+        r = self.qtickle.guisave()
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
 
     def get_data_ui(self):
@@ -73,14 +70,12 @@ class get_data_:
         self.get_data.setTitle("Load Data")
         self.get_data_label.setText("File Name")
         self.get_data_button.setText("...")
-        self.get_data_line_edit.textChanged.connect(lambda: self.get_data_params())
-        self.dataname.textChanged.connect(lambda: self.get_data_params())
 
     def set_data_params(self):
         if self.restr_list is None:
             self.get_data_line_edit.setText("*.csv")
         else:
-            self.qtickle.guirestore()
+            self.qtickle.guirestore(self.restr_list)
 
     def on_getDataButton_clicked(self):
         filename, _filter = QtWidgets.QFileDialog.getOpenFileName(None, "Open Data File", '.', "(*.csv)")
