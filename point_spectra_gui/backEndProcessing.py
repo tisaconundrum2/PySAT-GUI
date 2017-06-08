@@ -272,11 +272,24 @@ class backEndProc(QThread):
             self.data[datakey_to_interp].interp(self.data[datakey_ref].df['wvl'].columns)
         except Exception as e:
             error_print(e)
+    def do_remove_baseline(self,datakey,method,params):
+        datakey_new=datakey+'-Baseline Removed'
+        datakey_baseline=datakey+'-Baseline'
+        self.datakeys.append(datakey_new)
+        self.datakeys.append(datakey_baseline)
+        self.data[datakey_new]=spectral_data(self.data[datakey].df.copy())
+        self.data[datakey_new].remove_baseline(method,segment=True,params=params)
+        self.data[datakey_baseline]=spectral_data(self.data[datakey_new].df_baseline)
+
 
     def do_dim_red(self, datakey, method, params, method_kws={}, col='wvl', load_fit=None, dim_red_key=None):
         try:
-            self.dim_reds[dim_red_key] = self.data[datakey].dim_red(col, method, params, method_kws, load_fit=load_fit)
-            self.dim_red_keys.append(dim_red_key)
+            if method=='PCA' or method=='ICA':
+                self.dim_reds[dim_red_key]=self.data[datakey].dim_red(col, method, params, method_kws, load_fit=load_fit)
+                self.dim_red_keys.append(dim_red_key)
+            elif method=='ICA-JADE':
+                pass
+                self.dim_reds[dim_red_key]=self.data[datakey].ica_jade(col)
         except Exception as e:
             error_print(e)
 
@@ -399,8 +412,9 @@ class backEndProc(QThread):
 
         # save the individual and blended predictions
         for i, j in enumerate(predictions):
-            self.data[datakey].df[submodel_names[i] + '-Predict'] = j
-        self.data[datakey].df['Blended-Predict (' + str(sm_obj.blendranges) + ')'] = predictions_blended
+            self.data[datakey].df[('meta',submodel_names[i] + '-Predict')] = j
+        self.data[datakey].df[('meta','Blended-Predict (' + str(sm_obj.blendranges) + ')')] = predictions_blended
+        pass
 
     def do_plot(self, datakey,
                 xvar, yvar,

@@ -35,6 +35,8 @@ class plot_:
             yvar = (self.vars_level0[self.vars_level1.index(yvar)], yvar)
         except:
             print('Problem setting x and/or y variable!')
+            print('x='+str(xvar))
+            print('y='+str(yvar))
             pass
         figname = self.figname_text.text()
         title = self.plot_title_text.text()
@@ -285,7 +287,7 @@ class plot_:
         self.alpha_spin = QtWidgets.QDoubleSpinBox(self.plot)
         self.alpha_spin.setObjectName(("alpha_spin"))
         self.alpha_spin.setRange(0, 1)
-        self.alpha_spin.setValue(0.1)
+        self.alpha_spin.setValue(0.25)
         self.alpha_spin.setSingleStep(0.1)
         self.alpha_spin.setObjectName(("alpha_spin"))
         self.scatter_chooseline_flayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.alpha_spin)
