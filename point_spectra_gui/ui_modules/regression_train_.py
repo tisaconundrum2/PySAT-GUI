@@ -107,8 +107,28 @@ class regression_train_:
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def set_regression_parameters(self):
-        if self.restr_list is not None:
-            self.qtickle.guirestore(self.restr_list)
+        try:
+            datakey = self.arg_list[0]
+            xvars = self.arg_list[1]
+            yvars = self.arg_list[2]
+            yrange = self.arg_list[3]
+            method = self.arg_list[4]
+            params = self.arg_list[5]
+            ransacparams = self.arg_list[6]
+
+            self.regression_choosedata.setCurrentIndex(self.regression_choosedata.findText(str(datakey)))
+            self.regression_train_choosex.setCurrentItem(
+                self.regression_train_choosex.findItems(xvars[0], QtCore.Qt.MatchExactly)[0])
+            self.regression_train_choosey.setCurrentItem(
+                self.regression_train_choosey.findItems(yvars[0][1], QtCore.Qt.MatchExactly)[0])
+            self.yvarmin_spin.setValue(yrange[0])
+            self.yvarmax_spin.setValue(yrange[1])
+            self.regression_choosealg.setCurrentIndex(self.regression_choosealg.findText(str(method)))
+            self.make_regression_widget(self.regression_choosealg.currentText(), params=params)
+            if self.restr_list is not None:
+                self.qtickle.guirestore(self.restr_list)
+        except:
+            pass
 
     def make_ransac_widget(self, isChecked):
         if not isChecked:
