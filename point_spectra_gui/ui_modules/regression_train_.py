@@ -1,12 +1,15 @@
-from point_spectra_gui.gui_utils import make_combobox, make_listwidget,change_combo_list_vars
+from Qtickle import Qtickle
+from point_spectra_gui.gui_utils import make_combobox, make_listwidget, change_combo_list_vars
 from point_spectra_gui.ui_modules.Error_ import error_print
 from PyQt5 import QtGui, QtCore, QtWidgets
 
 
 class regression_train_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
+        self.qtickle = Qtickle.Qtickle(self)
         self.arg_list = arg_list
         self.kw_list = kw_list
+        self.restr_list = restr_list
         self.pysat_fun = pysat_fun
         self.ui_id = None
         self.module_layout = module_layout
@@ -100,31 +103,12 @@ class regression_train_:
 
         args = [datakey, xvars, yvars, yrange, method, params, ransacparams]
         # TODO Stop the module when there are ill-formed parameters!
-        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
+        r = self.qtickle.guisave()
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def set_regression_parameters(self):
-        if self.arg_list is not None:
-            try:
-                datakey = self.arg_list[0]
-                xvars = self.arg_list[1]
-                yvars = self.arg_list[2]
-                yrange = self.arg_list[3]
-                method = self.arg_list[4]
-                params = self.arg_list[5]
-                ransacparams = self.arg_list[6]
-
-                self.regression_choosedata.setCurrentIndex(self.regression_choosedata.findText(str(datakey)))
-                self.regression_train_choosex.setCurrentItem(
-                    self.regression_train_choosex.findItems(xvars[0], QtCore.Qt.MatchExactly)[0])
-                self.regression_train_choosey.setCurrentItem(
-                    self.regression_train_choosey.findItems(yvars[0][1], QtCore.Qt.MatchExactly)[0])
-                self.yvarmin_spin.setValue(yrange[0])
-                self.yvarmax_spin.setValue(yrange[1])
-                self.regression_choosealg.setCurrentIndex(self.regression_choosealg.findText(str(method)))
-                self.make_regression_widget(self.regression_choosealg.currentText(), params=params)
-                self.get_regression_parameters()
-            except Exception as e:
-                error_print(e)
+        if self.restr_list is not None:
+            self.qtickle.guirestore(self.restr_list)
 
     def make_ransac_widget(self, isChecked):
         if not isChecked:
@@ -412,9 +396,7 @@ class regression_train_:
         self.regression_choosedata_hlayout.addWidget(self.regression_train_choosedata_label)
         datachoices = self.pysat_fun.datakeys
         datachoices = [i for i in datachoices if i != 'CV Results']  # prevent CV results from showing up as an option
-        if datachoices == []:
-            error_print('No Data has been loaded')
-            datachoices = ['No data has been loaded!']
+        
         self.regression_choosedata = make_combobox(datachoices)
         self.regression_choosedata.setIconSize(QtCore.QSize(50, 20))
         self.regression_choosedata.setObjectName(("regression_choosedata"))
@@ -506,16 +488,16 @@ class regression_train_:
         self.yvarmin_spin.valueChanged.connect(lambda: self.get_regression_parameters())
         self.yvarmax_spin.valueChanged.connect(lambda: self.get_regression_parameters())
         self.regression_choosedata.activated[int].connect(
-            lambda: change_combo_list_vars(self.regression_train_choosey,self.yvar_choices()))
+            lambda: change_combo_list_vars(self.regression_train_choosey, self.yvar_choices()))
         self.regression_choosedata.activated[int].connect(
-            lambda: change_combo_list_vars(self.regression_train_choosex,self.xvar_choices()))
+            lambda: change_combo_list_vars(self.regression_train_choosex, self.xvar_choices()))
 
     def yvar_choices(self):
         try:
             yvarchoices = self.pysat_fun.data[self.regression_choosedata.currentText()].df['comp'].columns.values
             yvarchoices = [i for i in yvarchoices if not 'Unnamed' in i]  # remove unnamed columns from choices
         except:
-            yvarchoices=['No composition columns!']
+            yvarchoices = ['No composition columns!']
         return yvarchoices
 
     def xvar_choices(self):

@@ -1,13 +1,17 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
-from point_spectra_gui.gui_utils import make_combobox,change_combo_list_vars
+
+from Qtickle import Qtickle
+from point_spectra_gui.gui_utils import make_combobox, change_combo_list_vars
 from point_spectra_gui.ui_modules.Error_ import error_print
 
 
 class dim_red_plot_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
+        self.qtickle = Qtickle.Qtickle(self)
         self.pysat_fun = pysat_fun
         self.arg_list = arg_list
         self.kw_list = kw_list
+        self.restr_list = restr_list
         self.ui_id = None
         self.module_layout = module_layout
         self.main()
@@ -17,25 +21,12 @@ class dim_red_plot_:
         self.dim_red_plot_ui()
         self.set_dim_red_params()
         self.get_dim_red_params()
+        self.connectWidgets()
         self.pysat_fun.set_greyed_modules(self.dim_red_plot)
 
     def set_dim_red_params(self):
-        if self.arg_list is not None:
-            datakey = self.arg_list[0]
-            xvar = self.arg_list[1]
-            yvar = self.arg_list[2]
-            filename = self.arg_list[3]
-            colorvar = self.kw_list['colorvar'][1]
-            method = self.kw_list['method']
-
-            self.dim_red_plot_choose_data.setCurrentIndex(self.dim_red_plot_choose_data.findText(datakey))
-            self.dim_red_choosealg.setCurrentIndex(self.dim_red_choosealg.findText(method))
-            self.xychoices_change_vars(self.xvar_choices)
-            self.xychoices_change_vars(self.yvar_choices)
-            self.xvar_choices.setCurrentIndex(self.xvar_choices.findText(xvar))
-            self.yvar_choices.setCurrentIndex(self.yvar_choices.findText(yvar))
-            self.colorchoices.setCurrentIndex(self.colorchoices.findText(colorvar))
-            self.file_text.setText(filename)
+        if self.restr_list is not None:
+            self.qtickle.guirestore(self.restr_list)
 
     def get_dim_red_params(self):
         datakey = self.dim_red_plot_choose_data.currentText()
@@ -45,7 +36,7 @@ class dim_red_plot_:
         if self.colorchoices.currentText() != 'None':
             colorvar = ('comp', self.colorchoices.currentText())
         else:
-            colorvar=None
+            colorvar = None
         filename = self.file_text.text()
 
         args = [datakey, xvar, yvar, filename]
@@ -53,7 +44,8 @@ class dim_red_plot_:
 
         ui_list = "do_plot_dim_red"
         fun_list = "do_plot_dim_red"
-        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
+        r = self.qtickle.guisave()
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def dim_red_plot_ui(self):
         self.dim_red_plot = QtWidgets.QGroupBox()
@@ -69,9 +61,7 @@ class dim_red_plot_:
         self.dim_red_plot_choose_data_label.setText("Choose data:")
         self.dim_red_plot_vlayout.addWidget(self.dim_red_plot_choose_data_label)
         datachoices = self.pysat_fun.datakeys
-        if datachoices == []:
-            error_print('No data has been loaded!')
-            datachoices = ['No data has been loaded!']
+
         self.dim_red_plot_choose_data = make_combobox(datachoices)
         self.dim_red_plot_vlayout.addWidget(self.dim_red_plot_choose_data)
 
@@ -120,10 +110,13 @@ class dim_red_plot_:
         self.dim_red_plot.raise_()
         self.dim_red_plot.setTitle("Dimensionality Reduction")
 
+    def connectWidgets(self):
         self.dim_red_plot_choose_data.currentIndexChanged.connect(lambda: self.get_dim_red_params())
         self.dim_red_choosealg.currentIndexChanged.connect(lambda: self.get_dim_red_params())
-        self.dim_red_choosealg.currentIndexChanged.connect(lambda: change_combo_list_vars(self.xvar_choices,self.xychoices()))
-        self.dim_red_choosealg.currentIndexChanged.connect(lambda: change_combo_list_vars(self.yvar_choices,self.xychoices()))
+        self.dim_red_choosealg.currentIndexChanged.connect(
+            lambda: change_combo_list_vars(self.xvar_choices, self.xychoices()))
+        self.dim_red_choosealg.currentIndexChanged.connect(
+            lambda: change_combo_list_vars(self.yvar_choices, self.xychoices()))
         self.xvar_choices.currentIndexChanged.connect(lambda: self.get_dim_red_params())
         self.yvar_choices.currentIndexChanged.connect(lambda: self.get_dim_red_params())
         self.colorchoices.currentIndexChanged.connect(lambda: self.get_dim_red_params())
@@ -132,9 +125,9 @@ class dim_red_plot_:
     def xychoices(self):
         try:
             choices = self.pysat_fun.data[self.dim_red_plot_choose_data.currentText()].df[
-            self.dim_red_choosealg.currentText()].columns.values
+                self.dim_red_choosealg.currentText()].columns.values
         except:
-            choices=['-']
+            choices = ['-']
         return choices
 
     def colorchoices_change_vars(self, obj):

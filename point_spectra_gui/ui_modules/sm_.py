@@ -1,15 +1,19 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
+
+from Qtickle import Qtickle
 from point_spectra_gui.gui_utils import make_combobox
 from point_spectra_gui.ui_modules.Error_ import error_print
 
 
 class sm_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
+        self.qtickle = Qtickle.Qtickle(self)
         self.submodel_gui_info = []
         self.new_submodel_index = 1
         self.pysat_fun = pysat_fun
         self.arg_list = arg_list
         self.kw_list = kw_list
+        self.restr_list = restr_list
         self.ui_id = None
         self.module_layout = module_layout
 
@@ -56,14 +60,12 @@ class sm_:
             trueval_data = None
 
         args = [datakey, submodel_names, blendranges, trueval_data]
-        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
+        r = self.qtickle.guisave()
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def set_sm_params(self):
-        datakey = self.arg_list[0]
-        submodel_names = self.arg_list[1]
-        blendranges = self.arg_list[2]
-        trueval_data = self.arg_list[3]
-        self.choosedata_predict.currentIndex(self.choosedata_predict.findText(str(datakey)))
+        if self.restr_list is not None:
+            self.qtickle.guirestore(self.restr_list)
 
     def sm_ui(self):
 
@@ -174,10 +176,7 @@ class sm_:
         self.verticalLayout.addLayout(self.add_delete_hlayout)
 
         datachoices = self.pysat_fun.datakeys
-        if datachoices == []:
-            error_print('No Data has been loaded')
-            datachoices = ['No data has been loaded!']
-
+        
         # choose data to optimize blending
         self.choosedata_hlayout = QtWidgets.QHBoxLayout()
         self.choosedata_hlayout.setContentsMargins(11, 11, 11, 11)

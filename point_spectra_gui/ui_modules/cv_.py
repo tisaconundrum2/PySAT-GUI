@@ -1,11 +1,15 @@
+from Qtickle import Qtickle
 from point_spectra_gui.ui_modules.Error_ import error_print
 from PyQt5 import QtGui, QtCore, QtWidgets
-from point_spectra_gui.gui_utils import make_combobox,make_listwidget,change_combo_list_vars
+from point_spectra_gui.gui_utils import make_combobox, make_listwidget, change_combo_list_vars
+
 
 class cv_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
+        self.qtickle = Qtickle.Qtickle(self)
         self.arg_list = arg_list
         self.kw_list = kw_list
+        self.restr_list = restr_list
         self.pysat_fun = pysat_fun
         self.ui_id = None
         self.module_layout = module_layout
@@ -18,6 +22,7 @@ class cv_:
         self.cv_choosealg.currentIndexChanged.connect(lambda: self.make_reg_widget(self.cv_choosealg.currentText()))
         self.get_cv_parameters()
         self.pysat_fun.set_greyed_modules(self.cv_train)
+
     def get_cv_parameters(self):
 
         method = self.cv_choosealg.currentText()
@@ -56,35 +61,12 @@ class cv_:
 
         ui_list = 'do_cv'
         fun_list = 'do_cv_train'
-        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
+        r = self.qtickle.guisave()
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def set_cv_parameters(self):
-        if self.arg_list is not None:
-            try:
-                datakey = self.arg_list[0]
-                xvars = self.arg_list[1]
-                yvars = self.arg_list[2]
-                yrange = self.arg_list[3]
-                method = self.arg_list[4]
-                params = self.arg_list[5]
-                #ransacparams = self.arg_list[6]
-                self.cv_choosedata.setCurrentIndex(self.cv_choosedata.findText(str(datakey)))
-                try:
-                    self.cv_train_choosex.setCurrentItem(
-                    self.cv_train_choosex.findItems(xvars[0], QtCore.Qt.MatchExactly)[0])
-                except:
-                    pass
-                try:
-                    self.cv_train_choosey.setCurrentItem(
-                    self.cv_train_choosey.findItems(yvars[0][1], QtCore.Qt.MatchExactly)[0])
-                except:
-                    pass
-                self.yvarmin_spin.setValue(yrange[0])
-                self.yvarmax_spin.setValue(yrange[1])
-                self.cv_choosealg.setCurrentIndex(self.cv_choosealg.findText(str(method)))
-                self.make_reg_widget(self.cv_choosealg.currentText(), params=params)
-            except Exception as e:
-                error_print(e)
+        if self.restr_list is not None:
+            self.qtickle.guirestore(self.restr_list)
 
     def make_reg_widget(self, alg, params=None):
         print(alg)
@@ -214,9 +196,7 @@ class cv_:
         self.cv_train_choosedata_label.setText("Choose data:")
         self.cv_choosedata_hlayout.addWidget(self.cv_train_choosedata_label)
         datachoices = self.pysat_fun.datakeys
-        if datachoices == []:
-            error_print('No Data has been loaded')
-            datachoices = ['No data has been loaded!']
+        
         self.cv_choosedata = make_combobox(datachoices)
         self.cv_choosedata.setIconSize(QtCore.QSize(50, 20))
         self.cv_choosedata.setObjectName(("cv_choosedata"))
@@ -309,8 +289,10 @@ class cv_:
         self.cv_choosealg.currentIndexChanged.connect(lambda: self.get_cv_parameters())
         self.cv_train_choosex.currentItemChanged.connect(lambda: self.get_cv_parameters())
         self.cv_train_choosey.currentItemChanged.connect(lambda: self.get_cv_parameters())
-        self.cv_choosedata.activated[int].connect(lambda: change_combo_list_vars(self.cv_train_choosey,self.cv_yvar_choices()))
-        self.cv_choosedata.activated[int].connect(lambda: change_combo_list_vars(self.cv_train_choosex,self.cv_xvar_choices()))
+        self.cv_choosedata.activated[int].connect(
+            lambda: change_combo_list_vars(self.cv_train_choosey, self.cv_yvar_choices()))
+        self.cv_choosedata.activated[int].connect(
+            lambda: change_combo_list_vars(self.cv_train_choosex, self.cv_xvar_choices()))
 
     def cv_yvar_choices(self):
         try:
@@ -325,9 +307,5 @@ class cv_:
             xvarchoices = self.pysat_fun.data[self.cv_choosedata.currentText()].df.columns.levels[0].values
             xvarchoices = [i for i in xvarchoices if not 'Unnamed' in i]  # remove unnamed columns from choices
         except:
-            xvarchoices=['No valid choices!']
+            xvarchoices = ['No valid choices!']
         return xvarchoices
-
-
-
-

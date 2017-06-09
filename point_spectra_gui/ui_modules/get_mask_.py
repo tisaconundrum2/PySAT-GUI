@@ -1,13 +1,15 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
 from point_spectra_gui.gui_utils import make_combobox
-from point_spectra_gui.ui_modules import error_print
+from point_spectra_gui.ui_modules import error_print, Qtickle
 
 
 class get_mask_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
+        self.qtickle = Qtickle.Qtickle(self)
         self.pysat_fun = pysat_fun
         self.arg_list = arg_list
         self.kw_list = kw_list
+        self.restr_list = restr_list
         self.module_layout = module_layout
         self.ui_id = None
         self.main()
@@ -15,6 +17,9 @@ class get_mask_:
     def main(self):
         self.ui_id = self.pysat_fun.set_list(None, None, None, None, None, self.ui_id)
         self.get_mask_ui()
+        self.set_mask_params()
+        self.get_mask_params()
+        self.connectWidgets()
         self.pysat_fun.set_greyed_modules(self.get_mask)
 
     def get_mask_params(self):
@@ -24,7 +29,8 @@ class get_mask_:
         fun_list = "do_mask"
         args = [datakey, maskfile]
         kws = {}
-        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
+        r = self.qtickle.guisave()
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def get_mask_ui(self):
         self.get_mask = QtWidgets.QGroupBox()
@@ -41,9 +47,9 @@ class get_mask_:
         self.choosedata_label.setObjectName(("choosedata_label"))
         self.horizontalLayout.addWidget(self.choosedata_label)
         datachoices = self.pysat_fun.datakeys
-        if datachoices == []:
-            error_print('No data has been loaded!')
-            datachoices = ['No data has been loaded!']
+        
+            
+            
         self.mask_choosedata = make_combobox(datachoices)
         self.horizontalLayout.addWidget(self.mask_choosedata)
 
@@ -64,19 +70,17 @@ class get_mask_:
         self.get_mask_label.setText("Mask file: ")
         self.get_mask_line_edit.setText("*.csv")
         self.get_mask_button.setText("...")
+
+    def connectWidgets(self):
         self.get_mask_line_edit.textChanged.connect(lambda: self.get_mask_params())
         self.mask_choosedata.currentIndexChanged.connect(lambda: self.get_mask_params())
         self.get_mask_button.clicked.connect(lambda: self.on_getDataButton_clicked(self.get_mask_line_edit))
-        self.set_mask_params()
 
     def set_mask_params(self):
         if self.arg_list is None:
             self.get_mask_line_edit.setText("*.csv")
         else:
-            self.get_mask_line_edit.setText(self.arg_list[1])
-            index = self.mask_choosedata.findText(str(self.arg_list[0]))  # findText 'unknown' or 'known'
-            if index is not -1:  # if it's there choose it based on the returned index
-                self.mask_choosedata.setCurrentIndex(index)
+            self.qtickle.guirestore(self.restr_list)
 
     def on_getDataButton_clicked(self, lineEdit):
         filename, _filter = QtWidgets.QFileDialog.getOpenFileName(None, "Open Mask Data File", '.', "(*.csv)")

@@ -1,11 +1,15 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
+from Qtickle import Qtickle
+
 
 class file_outpath_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
+        self.qtickle = Qtickle.Qtickle(self)
         self.ui_id = None
         self.pysat_fun = pysat_fun
         self.arg_list = arg_list
         self.kw_list = kw_list
+        self.restr_list = restr_list
         self.module_layout = module_layout
         self.main()
 
@@ -48,8 +52,8 @@ class file_outpath_:
         self.file_out_path_button.setText("...")
 
     def set_parameters(self):
-        if self.arg_list is not None:
-            self.file_out_path_line_edit.setText(self.arg_list[0])
+        if self.restr_list is not None:
+            self.qtickle.guirestore(self.restr_list)
 
     def get_parameters(self):
         filename = self.file_out_path_line_edit.text()
@@ -57,7 +61,8 @@ class file_outpath_:
         fun_list = "set_file_outpath"
         kw_list = {}
         arg_list = [filename]
-        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, arg_list, kw_list, self.ui_id)
+        r = self.qtickle.guisave()
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, arg_list, kw_list, r, self.ui_id)
         pass
 
     def on_outPutLocationButton_clicked(self):

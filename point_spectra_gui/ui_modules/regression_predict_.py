@@ -1,3 +1,4 @@
+from Qtickle import Qtickle
 from point_spectra_gui.gui_utils import make_combobox
 from point_spectra_gui.ui_modules.Error_ import error_print
 from PyQt5 import QtGui, QtCore, QtWidgets
@@ -5,8 +6,10 @@ from PyQt5 import QtGui, QtCore, QtWidgets
 
 class regression_predict_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
+        self.qtickle = Qtickle.Qtickle(self)
         self.arg_list = arg_list
         self.kw_list = kw_list
+        self.restr_list = restr_list
         self.pysat_fun = pysat_fun
         self.ui_id = None
         self.module_layout = module_layout
@@ -32,23 +35,12 @@ class regression_predict_:
         kws = {}
         ui_list = 'do_regression_predict'
         fun_list = 'do_regression_predict'
-        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
+        r = self.qtickle.guisave()
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def set_predict_parameters(self):
-        temp = self.arg_list
-        if self.arg_list is not None:
-            try:
-                datakey = self.arg_list[0]
-                modelkey = self.arg_list[1]
-                # self.regression_predict_choosedata = make_combobox(datakey)
-                # self.regression_predict_choosemodel = make_combobox(modelkey)
-                self.regression_predict_choosedata.setItemText(0,datakey)
-                self.regression_predict_choosemodel.setItemText(0, modelkey)
-                pass
-
-
-            except Exception as e:
-                error_print(e)
+        if self.restr_list is not None:
+            self.qtickle.guirestore(self.restr_list)
 
     def regression_ui(self):
         self.regression_predict = QtWidgets.QGroupBox()
@@ -67,10 +59,10 @@ class regression_predict_:
         # create the combobox with data choices
         datachoices = self.pysat_fun.datakeys
         # TODO add logic for dealing with restoring this module
-        if datachoices == []:
-            datachoices = ['No data has been loaded!']
+
+
         self.regression_predict_choosedata = make_combobox(datachoices)
-        #self.regression_predict_choosedata.setIconSize(QtCore.QSize(50, 20))
+        # self.regression_predict_choosedata.setIconSize(QtCore.QSize(50, 20))
         self.regression_predict_choosedata.setObjectName(("regression_predict_choosedata"))
         self.regression_predict_choosedata_hlayout.addWidget(self.regression_predict_choosedata)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -88,7 +80,7 @@ class regression_predict_:
         if modelchoices == []:
             modelchoices = ['No model has been trained!']
         self.regression_predict_choosemodel = make_combobox(modelchoices)
-      #  self.regression_predict_choosemodel.setIconSize(QtCore.QSize(50, 20))
+        #  self.regression_predict_choosemodel.setIconSize(QtCore.QSize(50, 20))
         self.regression_predict_choosemodel.setObjectName(("regression_predict_choosedata"))
         self.regression_predict_choosemodel_hlayout.addWidget(self.regression_predict_choosemodel)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)

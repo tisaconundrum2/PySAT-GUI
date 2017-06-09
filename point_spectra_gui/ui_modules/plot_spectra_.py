@@ -1,4 +1,5 @@
-from point_spectra_gui.gui_utils import make_combobox,make_listwidget
+from Qtickle import Qtickle
+from point_spectra_gui.gui_utils import make_combobox, make_listwidget
 from point_spectra_gui.ui_modules.Error_ import error_print
 from PyQt5 import QtGui, QtCore, QtWidgets
 import numpy as np
@@ -7,8 +8,10 @@ import inspect
 
 class plot_spectra_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
-        self.arg_list=arg_list
-        self.kw_list=kw_list
+        self.qtickle = Qtickle.Qtickle(self)
+        self.arg_list = arg_list
+        self.kw_list = kw_list
+        self.restr_list = restr_list
         self.pysat_fun = pysat_fun
         self.module_layout = module_layout
         self.ui_id = None
@@ -27,12 +30,12 @@ class plot_spectra_:
         col = self.col_choices.currentText()
         row = [str(x.text()) for x in self.chooserows.selectedItems()]
         try:
-            row=row[0]
+            row = row[0]
         except:
-            row=''
-        row_bool=[]
+            row = ''
+        row_bool = []
         try:
-            row_count=self.chooserows.findItems(row,QtCore.Qt.MatchExactly)
+            row_count = self.chooserows.findItems(row, QtCore.Qt.MatchExactly)
             for i in row_count:
                 row_bool.append(i.isSelected())
         except:
@@ -42,7 +45,7 @@ class plot_spectra_:
         figfile = self.file_text.text()
         color = self.color_choices.currentText()
         alpha = self.alpha_spin.value()
-        linewidth=self.width_spin.value()
+        linewidth = self.width_spin.value()
 
         if color == 'Red':
             color = [1, 0, 0, alpha]
@@ -73,84 +76,36 @@ class plot_spectra_:
         else:
             linestyle = '-'
 
-        alpha=self.alpha_spin.value()
-        if row_bool.__len__()>1:
-            lbl=row+' - '+str(np.where(row_bool)[0][0]+1)
+        alpha = self.alpha_spin.value()
+        if row_bool.__len__() > 1:
+            lbl = row + ' - ' + str(np.where(row_bool)[0][0] + 1)
         else:
-            lbl=row
-        xmin=self.xmin_spin.value()
-        xmax=self.xmax_spin.value()
-        xrange=[xmin,xmax]
+            lbl = row
+        xmin = self.xmin_spin.value()
+        xmax = self.xmax_spin.value()
+        xrange = [xmin, xmax]
 
         args = [datakey, row]
-        kws = {'col':col,
+        kws = {'col': col,
                'figname': figname,
                'title': title,
                'figfile': figfile,
                'color': color,
                'linestyle': linestyle,
-               'alpha':alpha,
-               'lbl':lbl,
-               'linewidth':linewidth,
-               'row_bool':row_bool,
-               'xrange':xrange}
+               'alpha': alpha,
+               'lbl': lbl,
+               'linewidth': linewidth,
+               'row_bool': row_bool,
+               'xrange': xrange}
 
         ui_list = "do_plot_spect"
         fun_list = "do_plot_spect"
-        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
+        r = self.qtickle.guisave()
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def set_plot_spectra_parameters(self):
-        if self.arg_list is not None:
-            datakey=self.arg_list[0]
-            self.choosedata.setCurrentIndex(self.choosedata.findText(datakey))
-            figname=self.kw_list['figname']
-            self.figname_text.setText(figname)
-            title=self.kw_list['title']
-            self.plot_spect_title_text.setText(title)
-            col=self.kw_list['col']
-            self.col_choices.setCurrentIndex(self.col_choices.findText(col))
-            row=self.arg_list[1]
-            row_bool=self.kw_list['row_bool']
-            items=self.chooserows.findItems(row, QtCore.Qt.MatchExactly)
-            for i,item in enumerate(items):
-                if row_bool[i] is True:
-                    item.setSelected(True)
-            color=self.kw_list['color']
-            alpha=self.kw_list['alpha']
-            if color == [1, 0, 0, alpha]:
-                color = 'Red'
-            elif color == [0, 1, 0, alpha]:
-                color = 'Green'
-            elif color == [0, 0, 1, alpha]:
-                color = 'Blue'
-            elif color == [0, 1, 1, alpha]:
-                color = 'Cyan'
-            elif color == [1, 1, 0, alpha]:
-                color = 'Yellow'
-            elif color == [1, 0, 1, alpha]:
-                color = 'Magenta'
-            elif color == [0, 0, 0, alpha]:
-                color = 'Black'
-            self.color_choices.setCurrentIndex(self.color_choices.findText(color))
-
-            linestyle=self.kw_list['linestyle']
-            if linestyle == '-':
-                line = 'Line'
-            elif linestyle == '--':
-                line = 'Dashed Line'
-            elif linestyle == ':':
-                line = 'Dotted Line'
-            else:
-                line = 'Line'
-            self.line_choices.setCurrentIndex(self.line_choices.findText(line))
-
-            figfile=self.kw_list['figfile']
-            self.file_text.setText(figfile)
-
-            self.width_spin.setValue(self.kw_list['linewidth'])
-            self.xmin_spin.setValue(self.kw_list['xrange'][0])
-
-            self.xmax_spin.setValue(self.kw_list['xrange'][1])
+        if self.restr_list is not None:
+            self.qtickle.guirestore(self.restr_list)
 
     def plot_spect_ui(self):
         self.plot_spect = QtWidgets.QGroupBox()
@@ -171,9 +126,7 @@ class plot_spectra_:
         self.choosedata_flayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.choosedata_label)
 
         datachoices = self.pysat_fun.datakeys
-        if datachoices == []:
-            error_print('No Data has been loaded')
-            datachoices = ['No data has been loaded!']
+        
         self.choosedata = make_combobox(datachoices)
 
         self.choosedata.setIconSize(QtCore.QSize(50, 20))
@@ -206,16 +159,16 @@ class plot_spectra_:
         self.plot_spect_change_vars(self.col_choices)
         self.col_choices.setObjectName(("col_choices"))
         self.choosecol_flayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.col_choices)
-        self.chooserows_label=QtWidgets.QLabel(self.plot_spect)
-        self.choosecol_flayout.setWidget(1,QtWidgets.QFormLayout.LabelRole,self.chooserows_label)
+        self.chooserows_label = QtWidgets.QLabel(self.plot_spect)
+        self.choosecol_flayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.chooserows_label)
         try:
-            rowchoices = self.pysat_fun.data[self.choosedata.currentText()].df[('meta',self.col_choices.currentText())]
-            rowchoices=rowchoices.fillna('-')
+            rowchoices = self.pysat_fun.data[self.choosedata.currentText()].df[('meta', self.col_choices.currentText())]
+            rowchoices = rowchoices.fillna('-')
         except:
             rowchoices = ['None']
         self.chooserows = make_listwidget(rowchoices)
-        #self.chooserows.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
-        self.choosecol_flayout.setWidget(1,QtWidgets.QFormLayout.FieldRole,self.chooserows)
+        # self.chooserows.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
+        self.choosecol_flayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.chooserows)
         self.verticalLayout.addLayout(self.choosecol_flayout)
 
         self.xlimits_hlayout = QtWidgets.QHBoxLayout()
@@ -240,7 +193,6 @@ class plot_spectra_:
         self.xlimits_hlayout.addWidget(self.xmax_label)
         self.xlimits_hlayout.addWidget(self.xmax_spin)
         self.verticalLayout.addLayout(self.xlimits_hlayout)
-
 
         self.scatter_chooseline_flayout = QtWidgets.QFormLayout()
         self.scatter_chooseline_flayout.setFieldGrowthPolicy(QtWidgets.QFormLayout.AllNonFixedFieldsGrow)
@@ -330,13 +282,12 @@ class plot_spectra_:
         self.xmin_spin.valueChanged.connect(lambda: self.get_plot_spectra_parameters())
         self.xmax_spin.valueChanged.connect(lambda: self.get_plot_spectra_parameters())
 
-
-    def plot_spect_update_list(self,obj):
+    def plot_spect_update_list(self, obj):
         obj.clear()
         rowchoices = self.pysat_fun.data[self.choosedata.currentText()].df[('meta', self.col_choices.currentText())]
         rowchoices = rowchoices.fillna('-')
-        #rowchoices = np.unique(rowchoices)
-        rowchoices=[str(x) for x in rowchoices]
+        # rowchoices = np.unique(rowchoices)
+        rowchoices = [str(x) for x in rowchoices]
         for i in rowchoices:
             obj.addItem(i)
 

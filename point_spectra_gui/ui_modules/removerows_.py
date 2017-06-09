@@ -1,14 +1,19 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
-from point_spectra_gui.gui_utils import make_combobox,change_combo_list_vars
+
+from Qtickle import Qtickle
+from point_spectra_gui.gui_utils import make_combobox, change_combo_list_vars
 from point_spectra_gui.ui_modules.Error_ import error_print
 import inspect
 import numpy as np
 
+
 class removerows_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
+        self.qtickle = Qtickle.Qtickle(self)
         self.pysat_fun = pysat_fun
         self.arg_list = arg_list
         self.kw_list = kw_list
+        self.restr_list = restr_list
         self.ui_id = None
         self.module_layout = module_layout
         self.main()
@@ -16,34 +21,30 @@ class removerows_:
     def main(self):
         self.ui_id = self.pysat_fun.set_list(None, None, None, None, None, self.ui_id)
         self.removerows_ui()  # initiate the UI
+        self.set_removerows_parameters()
+        self.get_removerows_parameters()
+        self.connectWidgets()
         self.pysat_fun.set_greyed_modules(self.removerows)
 
     def get_removerows_parameters(self):
-
         datakey = self.removerows_choosedata.currentText()
         try:
             colname = self.colname_choices.currentText()
             colname = (self.vars_level0[self.vars_level1.index(colname)], colname)
         except:
             pass
-        value=self.rowval_choices.currentText()
+        value = self.rowval_choices.currentText()
         args = [datakey, colname, value]
         kws = {}
         ui_list = 'do_removerows'
         fun_list = 'removerows'
-        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
+        r = self.qtickle.guisave()
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def set_removerows_parameters(self):
-        if self.arg_list is not None:
-            datakey = self.arg_list[0]
-            colname = self.arg_list[1]
-            value = self.arg_list[2]
-            self.removerows_choosedata.setCurrentIndex(self.removerows_choosedata.findText(datakey))
-            change_combo_list_vars(self.colname_choices,self.get_colname_choices())
-            self.colname_choices.setCurrentIndex(self.colname_choices.findText(colname[1]))
-            change_combo_list_vars(self.rowval_choices,self.get_rowval_choices())
-            self.rowval_choices.setCurrentIndex((self.rowval_choices.findText(value)))
-        self.get_removerows_parameters()
+        if self.restr_list is not None:
+            self.qtickle.guirestore(self.restr_list)
+
     def removerows_ui(self):
         self.removerows = QtWidgets.QGroupBox()
         font = QtGui.QFont()
@@ -67,9 +68,9 @@ class removerows_:
         self.removerows_choosedata_hlayout.addWidget(self.removerows_choosedata_label)
 
         datachoices = self.pysat_fun.datakeys
-        if datachoices == []:
-            error_print('No data has been loaded!')
-            datachoices = ['No data has been loaded!']
+        
+            
+            
         self.removerows_choosedata = make_combobox(datachoices)
         self.removerows_choosedata_hlayout.addWidget(self.removerows_choosedata)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -109,15 +110,16 @@ class removerows_:
         self.end_of_sentence.setText("is ")
         self.set_removerows_parameters()
 
+    def connectWidgets(self):
         self.colname_choices.currentIndexChanged.connect(lambda: self.get_removerows_parameters())
 
         self.removerows_choosedata.currentIndexChanged.connect(lambda: self.get_removerows_parameters())
         self.removerows_choosedata.currentIndexChanged.connect(lambda:
                                                                change_combo_list_vars(self.colname_choices,
-                                                                self.get_colname_choices()))
+                                                                                      self.get_colname_choices()))
         self.rowval_choices.currentIndexChanged.connect(lambda: self.get_removerows_parameters())
         self.colname_choices.currentIndexChanged.connect(lambda: change_combo_list_vars(self.rowval_choices,
-                                                                self.get_rowval_choices()))
+                                                                                        self.get_rowval_choices()))
 
     def get_colname_choices(self):
         try:
@@ -139,9 +141,9 @@ class removerows_:
         try:
             colname = self.colname_choices.currentText()
             colname = (self.vars_level0[self.vars_level1.index(colname)], colname)
-            choices=np.unique(self.pysat_fun.data[self.removerows_choosedata.currentText()].df[colname])
-            choices=[str(i) for i in choices]
+            choices = np.unique(self.pysat_fun.data[self.removerows_choosedata.currentText()].df[colname])
+            choices = [str(i) for i in choices]
             choices.append('Null')
         except:
-            choices=['-']
+            choices = ['-']
         return choices

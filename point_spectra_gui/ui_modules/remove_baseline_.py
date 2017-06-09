@@ -1,12 +1,16 @@
-from point_spectra_gui.gui_utils import make_combobox, make_listwidget,change_combo_list_vars
+from Qtickle import Qtickle
+from point_spectra_gui.gui_utils import make_combobox, make_listwidget, change_combo_list_vars
 from point_spectra_gui.ui_modules.Error_ import error_print
 from PyQt5 import QtGui, QtCore, QtWidgets
 import inspect
 
+
 class remove_baseline_:
-    def __init__(self, pysat_fun, module_layout, arg_list, kw_list):
+    def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
+        self.qtickle = Qtickle.Qtickle(self)
         self.arg_list = arg_list
         self.kw_list = kw_list
+        self.restr_list = restr_list
         self.pysat_fun = pysat_fun
         self.ui_id = None
         self.module_layout = module_layout
@@ -51,42 +55,42 @@ class remove_baseline_:
 
             if method == 'AirPLS':
                 params = {'smoothness_param': self.br_widget.airpls_smoothness_spinbox.value(),
-                        'conv_thresh': self.br_widget.airpls_conv_spinbox.value(),
-                        'max_iters': self.br_widget.airpls_iter_spinbox.value()}
+                          'conv_thresh': self.br_widget.airpls_conv_spinbox.value(),
+                          'max_iters': self.br_widget.airpls_iter_spinbox.value()}
 
             if method == 'FABC':
                 params = {'smoothness_param': self.br_widget.fabc_smoothness_spinbox.value(),
-                        'dilation_param': self.br_widget.fabc_dilation_spinbox.value()}
+                          'dilation_param': self.br_widget.fabc_dilation_spinbox.value()}
 
             if method == 'KK':
                 params = {'top_width': self.br_widget.kk_top_width_spinbox.value(),
-                            'bottom_width': self.br_widget.kk_bottom_width_spinbox.value(),
-                            'tangent': self.br_widget.kk_tan_checkbox.isChecked(),
-                            'exponent': self.br_widget.kk_exp_spinbox.value()}
+                          'bottom_width': self.br_widget.kk_bottom_width_spinbox.value(),
+                          'tangent': self.br_widget.kk_tan_checkbox.isChecked(),
+                          'exponent': self.br_widget.kk_exp_spinbox.value()}
 
             if method == 'Mario':
                 params = {'poly_order': self.br_widget.mario_order_spinbox.value(),
-                'max_iters': self.br_widget.mario_iters_spinbox.value(),
-                'tol': self.br_widget.mario_tol_spinbox.value()}
+                          'max_iters': self.br_widget.mario_iters_spinbox.value(),
+                          'tol': self.br_widget.mario_tol_spinbox.value()}
 
             if method == 'Median':
                 params = {'window_size': self.br_widget.median_window_spinbox.value()}
 
             if method == 'Rubberband':
                 params = {'num_iters': self.br_widget.rubberband_iters_spinbox.value(),
-                'num_ranges': self.br_widget.rubberband_ranges_spinbox.value()}
+                          'num_ranges': self.br_widget.rubberband_ranges_spinbox.value()}
 
             if method == 'CCAM':
                 params = {'scale1': self.br_widget.ccam_scale1_spinbox.value(),
-                'scale2': self.br_widget.ccam_scale2_spinbox.value()}
+                          'scale2': self.br_widget.ccam_scale2_spinbox.value()}
 
-                int_flag=self.br_widget.ccam_interp_combobox.currentText()
-                if int_flag=='Linear':
-                    params['int_flag']=0
-                elif int_flag=='Quadratic':
-                    params['int_flag']=1
-                elif int_flag=='Spline':
-                    params['int_flag']=2
+                int_flag = self.br_widget.ccam_interp_combobox.currentText()
+                if int_flag == 'Linear':
+                    params['int_flag'] = 0
+                elif int_flag == 'Quadratic':
+                    params['int_flag'] = 1
+                elif int_flag == 'Spline':
+                    params['int_flag'] = 2
 
 
         except:
@@ -96,28 +100,15 @@ class remove_baseline_:
         fun_list = "do_remove_baseline"
 
         args = [datakey, method, params]
-        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
+        r = self.qtickle.guisave()
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def set_baseline_parameters(self):
-        if self.arg_list is not None:
-            try:
-                datakey = self.arg_list[0]
-                method = self.arg_list[1]
-                params = self.arg_list[2]
-
-                self.baseline_choosedata.setCurrentIndex(self.baseline_choosedata.findText(str(datakey)))
-                # TODO:
-                self.baseline_choosealg.setCurrentIndex(self.baseline_choosealg.findText(str(method)))
-                self.make_baseline_widget(self.baseline_choosealg.currentText(), params=params)
-                self.get_baseline_parameters()
-            except Exception as e:
-                error_print(e)
-
-
+        if self.restr_list is not None:
+            self.qtickle.guirestore(self.restr_list)
 
     def make_baseline_widget(self, alg, params=None):
         print(alg)
-
 
         try:
             self.br_widget.deleteLater()
@@ -358,7 +349,8 @@ class remove_baseline_:
             self.br_widget.mario_hlayout.addWidget(self.br_widget.mario_iters_spinbox)
             self.br_widget.mario_iters_spinbox.setRange(1, 1e10)
             try:
-                nfeatures_default = 10 * self.pysat_fun.data[self.baseline_choosedata.currentText()].df['wvl'].columns.levels[1].size
+                nfeatures_default = 10 * self.pysat_fun.data[self.baseline_choosedata.currentText()].df[
+                    'wvl'].columns.levels[1].size
                 self.br_widget.mario_iters_spinbox.setValue(nfeatures_default)
             except:
                 self.br_widget.mario_iters_spinbox.setValue(1e5)
@@ -373,7 +365,6 @@ class remove_baseline_:
             self.br_widget.mario_tol_spinbox.setValue(1e-2)
             self.br_widget.mario_tol_spinbox.setRange(0, 100)
             self.br_widget.mario_tol_spinbox.setSingleStep(1e-3)
-
 
             if params is not None:
                 self.br_widget.mario_order_spinbox.setValue(params['poly_order'])
@@ -466,17 +457,15 @@ class remove_baseline_:
             if params is not None:
                 self.br_widget.ccam_scale1_spinbox.setValue(params['scale1'])
                 self.br_widget.ccam_scale2_spinbox.setValue(params['scale2'])
-                if params['int_flag']==0:
+                if params['int_flag'] == 0:
                     self.br_widget.ccam_interp_combobox.setCurrentIndex(
-                    self.br_widget.ccam_interp_combobox.findText('Linear'))
-                elif params['int_flag']==1:
+                        self.br_widget.ccam_interp_combobox.findText('Linear'))
+                elif params['int_flag'] == 1:
                     self.br_widget.ccam_interp_combobox.setCurrentIndex(
                         self.br_widget.ccam_interp_combobox.findText('Quadratic'))
-                elif params['int_flag']==2:
+                elif params['int_flag'] == 2:
                     self.br_widget.ccam_interp_combobox.setCurrentIndex(
                         self.br_widget.ccam_interp_combobox.findText('Spline'))
-
-
 
         self.baseline_vlayout.addWidget(self.br_widget)
         for name, obj in inspect.getmembers(self.br_widget):
@@ -509,9 +498,7 @@ class remove_baseline_:
         self.baseline_choosedata_hlayout.addWidget(self.remove_baseline_choosedata_label)
         datachoices = self.pysat_fun.datakeys
         datachoices = [i for i in datachoices if i != 'CV Results']  # prevent CV results from showing up as an option
-        if datachoices == []:
-            error_print('No Data has been loaded')
-            datachoices = ['No data has been loaded!']
+        
         self.baseline_choosedata = make_combobox(datachoices)
         self.baseline_choosedata.setIconSize(QtCore.QSize(50, 20))
         self.baseline_choosedata.setObjectName(("baseline_choosedata"))
@@ -526,13 +513,14 @@ class remove_baseline_:
         self.baseline_choosealg_label = QtWidgets.QLabel(self.remove_baseline)
         self.baseline_choosealg_label.setObjectName(("baseline_choosealg_label"))
         self.baseline_choosealg_hlayout.addWidget(self.baseline_choosealg_label)
-        self.baseline_alg_choices = ['Choose an algorithm', 'ALS', 'Dietrich', 'Polyfit', 'AirPLS', 'FABC', 'KK','Mario','Median','Rubberband','CCAM']
+        self.baseline_alg_choices = ['Choose an algorithm', 'ALS', 'Dietrich', 'Polyfit', 'AirPLS', 'FABC', 'KK',
+                                     'Mario', 'Median', 'Rubberband', 'CCAM']
         self.baseline_choosealg = make_combobox(self.baseline_alg_choices)
         self.baseline_choosealg.setIconSize(QtCore.QSize(50, 20))
         self.baseline_choosealg.setObjectName(("baseline_choosealg"))
         self.baseline_choosealg_hlayout.addWidget(self.baseline_choosealg)
         baseline_choosealg_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
-                                                            QtWidgets.QSizePolicy.Minimum)
+                                                          QtWidgets.QSizePolicy.Minimum)
         self.baseline_choosealg_hlayout.addItem(baseline_choosealg_spacer)
         self.baseline_vlayout.addLayout(self.baseline_choosealg_hlayout)
 
@@ -542,4 +530,3 @@ class remove_baseline_:
 
         self.baseline_choosedata.currentIndexChanged.connect(lambda: self.get_baseline_parameters())
         self.baseline_choosealg.currentIndexChanged.connect(lambda: self.get_baseline_parameters())
-        

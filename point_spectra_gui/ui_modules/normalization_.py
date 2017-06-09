@@ -1,5 +1,5 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
-from point_spectra_gui.ui_modules import make_combobox
+from point_spectra_gui.ui_modules import make_combobox, Qtickle
 from point_spectra_gui.ui_modules.Error_ import error_print
 from point_spectra_gui.ui_modules.del_layout_ import del_layout_
 
@@ -33,11 +33,13 @@ from point_spectra_gui.ui_modules.del_layout_ import del_layout_
 
 class normalization_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
+        self.qtickle = Qtickle.Qtickle(self)
         self.box_list = []
         self.pysat_fun = pysat_fun
         self.module_layout = module_layout
         self.arg_list = arg_list
         self.kw_list = kw_list
+        self.restr_list = restr_list
         self.ui_id = None
         self.main()
 
@@ -53,9 +55,6 @@ class normalization_:
 
     def normalization_ui(self):
         datachoices = self.pysat_fun.datakeys
-        if datachoices == []:
-            error_print('No Data has been loaded')
-            datachoices = ['No data has been loaded!']
         self.normalization = QtWidgets.QGroupBox()
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -143,6 +142,9 @@ class normalization_:
 
     def set_data_parameters(self):
         # TODO finish
+        if self.restr_list is not None:
+            self.qtickle.guirestore(self.restr_list)
+
         if self.arg_list is not None:
             self.normalization_choosedata.setCurrentIndex(self.normalization_choosedata.findText(self.arg_list[0]))
 
@@ -156,7 +158,8 @@ class normalization_:
     def push_parameters(self, arg_list, kw_list):
         ui_list = "normalization"
         fun_list = "do_norm"
-        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, arg_list, kw_list, self.ui_id)
+        r = self.qtickle.guisave()
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, arg_list, kw_list, r, self.ui_id)
         pass
 
     def finished(self, box_list):

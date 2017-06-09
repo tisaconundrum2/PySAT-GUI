@@ -1,14 +1,18 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
 from pysat.utils.gui_utils import make_combobox
+
+from Qtickle import Qtickle
 from point_spectra_gui.ui_modules.Error_ import error_print
 import inspect
 
 
 class removenull_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
+        self.qtickle = Qtickle.Qtickle(self)
         self.pysat_fun = pysat_fun
         self.arg_list = arg_list
         self.kw_list = kw_list
+        self.restr_list = restr_list
         self.ui_id = None
         self.module_layout = module_layout
         self.main()
@@ -32,15 +36,12 @@ class removenull_:
         kws = {}
         ui_list = 'do_removenull'
         fun_list = 'removenull'
-        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
+        r = self.qtickle.guisave()
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def set_removenull_parameters(self):
-        if self.arg_list is not None:
-            datakey = self.arg_list[0]
-            colname = self.arg_list[1]
-            self.removenull_choosedata.setCurrentIndex(self.removenull_choosedata.findText(datakey))
-            self.colname_choices.setCurrentIndex(self.colname_choices.findText(colname[1]))
-        self.get_removenull_parameters()
+        if self.restr_list is not None:
+            self.qtickle.guirestore(self.restr_list)
 
     def removenull_ui(self):
         self.removenull = QtWidgets.QGroupBox()
@@ -65,9 +66,9 @@ class removenull_:
         self.removenull_choosedata_hlayout.addWidget(self.removenull_choosedata_label)
 
         datachoices = self.pysat_fun.datakeys
-        if datachoices == []:
-            error_print('No data has been loaded!')
-            datachoices = ['No data has been loaded!']
+        
+            
+            
         self.removenull_choosedata = make_combobox(datachoices)
         self.removenull_choosedata_hlayout.addWidget(self.removenull_choosedata)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)

@@ -12,6 +12,7 @@ class get_data_:
         self.arg_list = arg_list
         self.kw_list = kw_list
         self.restr_list = restr_list
+        self.restr_list = restr_list
         self.ui_id = None
         self.main()
 
@@ -20,10 +21,13 @@ class get_data_:
         self.get_data_ui()  # initiate the UI
         self.set_data_params()
         self.get_data_params()
+        self.connectWidgets()
+        self.pysat_fun.set_greyed_modules(self.get_data)
+
+    def connectWidgets(self):
         self.get_data_button.clicked.connect(lambda: self.on_getDataButton_clicked())
         self.get_data_line_edit.textChanged.connect(lambda: self.get_data_params())
         self.dataname.textChanged.connect(lambda: self.get_data_params())
-        self.pysat_fun.set_greyed_modules(self.get_data)
 
     def get_data_params(self):
         filename = self.get_data_line_edit.text()

@@ -1,13 +1,17 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
+
+from Qtickle import Qtickle
 from point_spectra_gui.gui_utils import make_combobox
 from point_spectra_gui.ui_modules.Error_ import error_print
 
 
 class strat_folds_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
+        self.qtickle = Qtickle.Qtickle(self)
         self.pysat_fun = pysat_fun
         self.arg_list = arg_list
         self.kw_list = kw_list
+        self.restr_list = restr_list
         self.module_layout = module_layout
         self.ui_id = None
         self.main()
@@ -41,7 +45,8 @@ class strat_folds_:
         kws = {}
         ui_list = "do_strat_folds"
         fun_list = "do_strat_folds"
-        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
+        r = self.qtickle.guisave()
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def stratified_folds_ui(self):
         self.strat_folds = QtWidgets.QGroupBox()
@@ -55,9 +60,9 @@ class strat_folds_:
         self.strat_folds_choose_data_label.setObjectName(("strat_folds_choose_data_label"))
         self.strat_folds_vlayout.addWidget(self.strat_folds_choose_data_label)
         datachoices = self.pysat_fun.datakeys
-        if datachoices == []:
-            error_print('No data has been loaded!')
-            datachoices = ['No data has been loaded!']
+        
+            
+            
         self.strat_folds_choose_data = make_combobox(datachoices)
         self.strat_folds_vlayout.addWidget(self.strat_folds_choose_data)
         self.strat_folds_choose_var_label = QtWidgets.QLabel(self.strat_folds)
@@ -107,16 +112,8 @@ class strat_folds_:
         self.strat_folds_choose_data.currentIndexChanged.connect(lambda: self.get_strat_fold_params())
 
     def set_strat_fold_params(self):
-        # self.strat_folds_choose_data.setItemText()
-        if self.arg_list is not None:
-            datakey = self.arg_list[0]
-            nfolds = self.arg_list[1]
-            testfold = self.arg_list[2]
-            colname = self.arg_list[3][1]
-            self.strat_folds_choose_data.setCurrentIndex(self.strat_folds_choose_data.findText(datakey))
-            self.strat_folds_choose_var.setCurrentIndex(self.strat_folds_choose_var.findText(colname))
-            self.nfolds_spin.setValue(nfolds)
-            self.choose_test_fold.setCurrentIndex(self.choose_test_fold.findText(str(testfold)))
+        if self.restr_list is not None:
+            self.qtickle.guirestore(self.restr_list)
 
     def strat_fold_change_vars(self):
         self.strat_folds_choose_var.clear()

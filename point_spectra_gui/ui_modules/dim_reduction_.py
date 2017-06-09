@@ -1,13 +1,17 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
+
+from Qtickle import Qtickle
 from point_spectra_gui.gui_utils import make_combobox
 from point_spectra_gui.ui_modules.Error_ import error_print
 
 
 class dim_reduction_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
+        self.qtickle = Qtickle.Qtickle(self)
         self.pysat_fun = pysat_fun
         self.arg_list = arg_list
         self.kw_list = kw_list
+        self.restr_list = restr_list
         self.ui_id = None
         self.module_layout = module_layout
         self.main()
@@ -16,27 +20,13 @@ class dim_reduction_:
         self.ui_id = self.pysat_fun.set_list(None, None, None, None, None, self.ui_id)
         self.dim_reduction_ui()
         self.set_dim_red_params()
-        self.dim_red_choosealg.currentIndexChanged.connect(  #
-            lambda: self.make_dim_red_widget(self.dim_red_choosealg.currentText()))  #
+        self.dim_red_choosealg.currentIndexChanged.connect(lambda: self.make_dim_red_widget(self.dim_red_choosealg.currentText()))
         self.get_dim_red_params()
         self.pysat_fun.set_greyed_modules(self.dim_reduction)
 
     def set_dim_red_params(self):
-        if self.arg_list is not None:
-            datakey = self.arg_list[0]
-            method = self.arg_list[1]
-            self.dim_reduction_choose_data.setCurrentIndex(self.dim_reduction_choose_data.findText(datakey))
-            self.dim_red_choosealg.setCurrentIndex(self.dim_red_choosealg.findText(method))
-            self.make_dim_red_widget(method)
-            if method == 'PCA':
-                nc = self.kw_list['method_kws']['n_components']
-                self.dim_red_widget.pca_nc_spinbox.setValue(nc)
-            if method == 'ICA':
-                nc = self.kw_list['method_kws']['n_components']
-                self.dim_red_widget.ica_nc_spinbox.setValue(nc)
-            if method == 'ICA-JADE':
-                nc = self.kw_list['method_kws']['n_components']
-                self.dim_red_widget.ica_jade_nc_spinbox.setValue(nc)
+        if self.restr_list is not None:
+            self.qtickle.guirestore(self.restr_list)
 
     def get_dim_red_params(self):
         datakey = self.dim_reduction_choose_data.currentText()
@@ -59,7 +49,8 @@ class dim_reduction_:
         kws = {'method_kws': method_kws}
         ui_list = "do_dim_red"
         fun_list = "do_dim_red"
-        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
+        r = self.qtickle.guisave()
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def make_dim_red_widget(self, method):
         print(method)
@@ -119,9 +110,9 @@ class dim_reduction_:
         self.dim_reduction_choose_data_label.setObjectName(("dim_reduction_choose_data_label"))
         self.dim_reduction_vlayout.addWidget(self.dim_reduction_choose_data_label)
         datachoices = self.pysat_fun.datakeys
-        if datachoices == []:
-            error_print('No data has been loaded!')
-            datachoices = ['No data has been loaded!']
+        
+            
+            
         self.dim_reduction_choose_data = make_combobox(datachoices)
         self.dim_reduction_vlayout.addWidget(self.dim_reduction_choose_data)
 

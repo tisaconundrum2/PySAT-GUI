@@ -1,14 +1,18 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
+
+from Qtickle import Qtickle
 from point_spectra_gui.ui_modules.Error_ import error_print
 from point_spectra_gui.gui_utils import make_combobox
 
 
 class interpolation_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
+        self.qtickle = Qtickle.Qtickle(self)
         self.pysat_fun = pysat_fun
         self.module_layout = module_layout
         self.arg_list = arg_list
         self.kw_list = kw_list
+        self.restr_list = restr_list
         self.ui_id = None
         self.main()
 
@@ -24,9 +28,7 @@ class interpolation_:
     def interpolation_ui(self):
         # TODO have the comboboxes called
         datachoices = self.pysat_fun.datakeys
-        if datachoices == []:
-            error_print('No Data has been loaded')
-            datachoices = ['No data has been loaded!']
+        
         self.Interpolation = QtWidgets.QGroupBox()
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -71,12 +73,8 @@ class interpolation_:
         self.interpolation_choosedata_label_2.setText("Choose data to use as reference: ")
 
     def set_parameters(self):
-        if self.arg_list is not None:
-            index = self.interpoliation_choosedata.findText(str(self.arg_list[0]))
-            index2 = self.interpolation_choosedata_2.findText(str(self.arg_list[1]))
-            if index is not -1 and index2 is not -1:
-                self.interpoliation_choosedata.setCurrentIndex(index)
-                self.interpolation_choosedata_2.setCurrentIndex(index2)
+        if self.restr_list is not None:
+            self.qtickle.guirestore(self.restr_list)
 
     def get_parameters(self):
         ui_list = "do_interp"
@@ -86,4 +84,5 @@ class interpolation_:
         # arg_list.append(['unknown data','known data'])
         arg_list = [key1, key2]
         kw_list = {}
-        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, arg_list, kw_list, self.ui_id)
+        r = self.qtickle.guisave()
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, arg_list, kw_list, r, self.ui_id)

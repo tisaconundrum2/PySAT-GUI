@@ -1,14 +1,18 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
-from point_spectra_gui.gui_utils import make_combobox,change_combo_list_vars
+
+from Qtickle import Qtickle
+from point_spectra_gui.gui_utils import make_combobox, change_combo_list_vars
 from point_spectra_gui.ui_modules.Error_ import error_print
 import inspect
 
 
 class split_data_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
+        self.qtickle = Qtickle.Qtickle(self)
         self.pysat_fun = pysat_fun
         self.arg_list = arg_list
         self.kw_list = kw_list
+        self.restr_list = restr_list
         self.ui_id = None
         self.module_layout = module_layout
         self.main()
@@ -16,6 +20,8 @@ class split_data_:
     def main(self):
         self.ui_id = self.pysat_fun.set_list(None, None, None, None, None, self.ui_id)
         self.split_data_ui()  # initiate the UI
+        self.set_split_data_parameters()
+        self.get_split_data_parameters()
         self.pysat_fun.set_greyed_modules(self.split_data)
 
     def get_split_data_parameters(self):
@@ -30,17 +36,13 @@ class split_data_:
         kws = {}
         ui_list = 'do_split_data'
         fun_list = 'do_split_data'
-        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
+        r = self.qtickle.guisave()
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def set_split_data_parameters(self):
-        if self.arg_list is not None:
-            datakey = self.arg_list[0]
-            colname = self.arg_list[1]
-            self.split_data_choosedata.setCurrentIndex(self.split_data_choosedata.findText(datakey))
-            change_combo_list_vars(self.colname_choices,self.get_choices())
-            self.colname_choices.setCurrentIndex(self.colname_choices.findText(colname[1]))
+        if self.restr_list is not None:
+            self.qtickle.guirestore(self.restr_list)
 
-        self.get_split_data_parameters()
     def split_data_ui(self):
         self.split_data = QtWidgets.QGroupBox()
         font = QtGui.QFont()
@@ -64,9 +66,9 @@ class split_data_:
         self.split_data_choosedata_hlayout.addWidget(self.split_data_choosedata_label)
 
         datachoices = self.pysat_fun.datakeys
-        if datachoices == []:
-            error_print('No data has been loaded!')
-            datachoices = ['No data has been loaded!']
+        
+            
+            
         self.split_data_choosedata = make_combobox(datachoices)
         self.split_data_choosedata_hlayout.addWidget(self.split_data_choosedata)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -83,7 +85,6 @@ class split_data_:
         self.start_of_sentence = QtWidgets.QLabel(self.split_data_widget)
         self.start_of_sentence.setObjectName(("start_of_sentence"))
         self.horizontalLayout_2.addWidget(self.start_of_sentence)
-
 
         self.colname_choices = make_combobox(self.get_choices())
         self.horizontalLayout_2.addWidget(self.colname_choices)
@@ -108,7 +109,7 @@ class split_data_:
         self.split_data_choosedata.currentIndexChanged.connect(lambda: self.get_split_data_parameters())
         self.split_data_choosedata.currentIndexChanged.connect(lambda:
                                                                change_combo_list_vars(self.colname_choices,
-                                                                self.get_choices()))
+                                                                                      self.get_choices()))
 
     def get_choices(self):
         try:
