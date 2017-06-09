@@ -55,6 +55,11 @@ class Qtickle(object):
                     index = obj.findText(obj.currentText())  # return the index of the item, assign to selected
                     dict[name + "_values"] = values  # save all the values in settings
                     dict[name + "_index"] = index  # save the indexed value in settings
+
+                if isinstance(obj, QListWidget):
+                    # TODO add QtWidgets.QListWidget
+                    pass
+
             print(dict)  # Debug purposes
             return dict
         except Exception as e:
