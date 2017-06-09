@@ -333,7 +333,8 @@ class frontEndProc(object):
         self.actionSave_Current_Data.triggered.connect(lambda: frontEndProc.do_write_data(self))
         self.actionNormalization.triggered.connect(lambda: frontEndProc.normalization(self))  # submodel
         self.actionApply_Mask.triggered.connect(lambda: frontEndProc.do_mask(self))  # get_mask
-        self.actionMultiply_Vector.triggered.connect(lambda: frontEndProc.do_multiply_vector(self))  # multiply by vector
+        self.actionMultiply_Vector.triggered.connect(
+            lambda: frontEndProc.do_multiply_vector(self))  # multiply by vector
         self.actionRemoveRows.triggered.connect(lambda: frontEndProc.do_removerows(self))
         self.actionSplitData.triggered.connect(lambda: frontEndProc.do_split_data(self))
         self.actionStratified_Folds.triggered.connect(lambda: frontEndProc.do_strat_folds(self))  # strat folds
@@ -401,33 +402,25 @@ class frontEndProc(object):
         print(filename)
         try:
             with open(filename, 'rb') as fp:
-            # TODO load the data from the file.
-            # This will probably be done automatically
+                # TODO load the data from the file.
+                # This will probably be done automatically
                 self.restore_list = pickle.load(fp)
         except:
             ui_modules.error_print("File was not loaded")
         self.restore_first()
 
     # This function should no longer be necessary once we have error handling with restoration working smoothly
+
     def restore_first(self):
         try:
             self.r_list = self.restore_list.pop()
-            while self.r_list[1] == "do_get_data" or self.r_list[1] == 'do_read_ccam':
-                getattr(frontEndProc, self.r_list[1])(self, self.r_list[3], self.r_list[4], self.r_list[5])
-                print(self.r_list)
+            getattr(frontEndProc, self.r_list[1])(self, self.r_list[3], self.r_list[4], self.r_list[5])
+            while not self.restore_list.isEmpty():
                 self.r_list = self.restore_list.pop()
-            self.restore_rest()
+                print(self.r_list)
+                getattr(frontEndProc, self.r_list[1])(self, self.r_list[3], self.r_list[4], self.r_list[5])
         except Exception as e:
             print(e)
-
-    def restore_rest(self):
-        if self.restore_flag is False:
-            getattr(frontEndProc, self.r_list[1])(self, self.r_list[3], self.r_list[4], self.r_list[5])
-            for i in range(len(self.restore_list)):
-                self.r_list = self.restore_list.pop()
-                print(self.r_list)
-                getattr(frontEndProc, self.r_list[1])(self, self.r_list[3], self.r_list[4], self.r_list[5])
-            self.restore_flag = True
 
     ################# Progress bar toolset below
 
