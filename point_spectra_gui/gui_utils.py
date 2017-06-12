@@ -22,10 +22,9 @@ def make_combobox(choices):
     
 def make_listwidget(choices):
     listwidget=QtWidgets.QListWidget()
-    listwidget.setItemDelegate
     for item in choices:
-        item = QtWidgets.QListWidgetItem(item)
-        listwidget.addItem(item)
+        list_item = QtWidgets.QListWidgetItem(item)
+        listwidget.addItem(list_item)
     return listwidget
 
 def change_combo_list_vars(obj,newchoices):
