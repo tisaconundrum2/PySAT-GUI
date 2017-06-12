@@ -67,6 +67,32 @@ class cv_:
     def set_cv_parameters(self):
         if self.restr_list is not None:
             self.qtickle.guirestore(self.restr_list)
+        if self.arg_list is not None:
+            try:
+                datakey = self.arg_list[0]
+                xvars = self.arg_list[1]
+                yvars = self.arg_list[2]
+                yrange = self.arg_list[3]
+                method = self.arg_list[4]
+                params = self.arg_list[5]
+                #ransacparams = self.arg_list[6]
+                self.cv_choosedata.setCurrentIndex(self.cv_choosedata.findText(str(datakey)))
+                try:
+                    self.cv_train_choosex.setCurrentItem(
+                    self.cv_train_choosex.findItems(xvars[0], QtCore.Qt.MatchExactly)[0])
+                except:
+                    pass
+                try:
+                    self.cv_train_choosey.setCurrentItem(
+                    self.cv_train_choosey.findItems(yvars[0][1], QtCore.Qt.MatchExactly)[0])
+                except:
+                    pass
+                self.yvarmin_spin.setValue(yrange[0])
+                self.yvarmax_spin.setValue(yrange[1])
+                self.cv_choosealg.setCurrentIndex(self.cv_choosealg.findText(str(method)))
+                self.make_reg_widget(self.cv_choosealg.currentText(), params=params)
+            except Exception as e:
+                error_print(e)
 
     def make_reg_widget(self, alg, params=None):
         print(alg)

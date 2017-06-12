@@ -106,6 +106,57 @@ class plot_spectra_:
     def set_plot_spectra_parameters(self):
         if self.restr_list is not None:
             self.qtickle.guirestore(self.restr_list)
+        if self.arg_list is not None:
+            datakey=self.arg_list[0]
+            self.choosedata.setCurrentIndex(self.choosedata.findText(datakey))
+            figname=self.kw_list['figname']
+            self.figname_text.setText(figname)
+            title=self.kw_list['title']
+            self.plot_spect_title_text.setText(title)
+            col=self.kw_list['col']
+            self.col_choices.setCurrentIndex(self.col_choices.findText(col))
+            row=self.arg_list[1]
+            row_bool=self.kw_list['row_bool']
+            items=self.chooserows.findItems(row, QtCore.Qt.MatchExactly)
+            for i,item in enumerate(items):
+                if row_bool[i] is True:
+                    item.setSelected(True)
+            color=self.kw_list['color']
+            alpha=self.kw_list['alpha']
+            if color == [1, 0, 0, alpha]:
+                color = 'Red'
+            elif color == [0, 1, 0, alpha]:
+                color = 'Green'
+            elif color == [0, 0, 1, alpha]:
+                color = 'Blue'
+            elif color == [0, 1, 1, alpha]:
+                color = 'Cyan'
+            elif color == [1, 1, 0, alpha]:
+                color = 'Yellow'
+            elif color == [1, 0, 1, alpha]:
+                color = 'Magenta'
+            elif color == [0, 0, 0, alpha]:
+                color = 'Black'
+            self.color_choices.setCurrentIndex(self.color_choices.findText(color))
+
+            linestyle=self.kw_list['linestyle']
+            if linestyle == '-':
+                line = 'Line'
+            elif linestyle == '--':
+                line = 'Dashed Line'
+            elif linestyle == ':':
+                line = 'Dotted Line'
+            else:
+                line = 'Line'
+            self.line_choices.setCurrentIndex(self.line_choices.findText(line))
+
+            figfile=self.kw_list['figfile']
+            self.file_text.setText(figfile)
+
+            self.width_spin.setValue(self.kw_list['linewidth'])
+            self.xmin_spin.setValue(self.kw_list['xrange'][0])
+
+            self.xmax_spin.setValue(self.kw_list['xrange'][1])
 
     def plot_spect_ui(self):
         self.plot_spect = QtWidgets.QGroupBox()

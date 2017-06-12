@@ -81,6 +81,10 @@ class get_mask_:
             self.get_mask_line_edit.setText("*.csv")
         else:
             self.qtickle.guirestore(self.restr_list)
+            self.get_mask_line_edit.setText(self.arg_list[1])
+            index = self.mask_choosedata.findText(str(self.arg_list[0]))  # findText 'unknown' or 'known'
+            if index is not -1:  # if it's there choose it based on the returned index
+                self.mask_choosedata.setCurrentIndex(index)
 
     def on_getDataButton_clicked(self, lineEdit):
         filename, _filter = QtWidgets.QFileDialog.getOpenFileName(None, "Open Mask Data File", '.', "(*.csv)")

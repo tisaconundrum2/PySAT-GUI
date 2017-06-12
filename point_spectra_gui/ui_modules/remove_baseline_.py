@@ -106,6 +106,21 @@ class remove_baseline_:
     def set_baseline_parameters(self):
         if self.restr_list is not None:
             self.qtickle.guirestore(self.restr_list)
+        if self.arg_list is not None:
+            try:
+                datakey = self.arg_list[0]
+                method = self.arg_list[1]
+                params = self.arg_list[2]
+
+                self.baseline_choosedata.setCurrentIndex(self.baseline_choosedata.findText(str(datakey)))
+                # TODO:
+                self.baseline_choosealg.setCurrentIndex(self.baseline_choosealg.findText(str(method)))
+                self.make_baseline_widget(self.baseline_choosealg.currentText(), params=params)
+                self.get_baseline_parameters()
+            except Exception as e:
+                error_print(e)
+
+
 
     def make_baseline_widget(self, alg, params=None):
         print(alg)

@@ -66,6 +66,11 @@ class sm_:
     def set_sm_params(self):
         if self.restr_list is not None:
             self.qtickle.guirestore(self.restr_list)
+        datakey = self.arg_list[0]
+        submodel_names = self.arg_list[1]
+        blendranges = self.arg_list[2]
+        trueval_data = self.arg_list[3]
+        self.choosedata_predict.currentIndex(self.choosedata_predict.findText(str(datakey)))
 
     def sm_ui(self):
 

@@ -27,6 +27,21 @@ class dim_reduction_:
     def set_dim_red_params(self):
         if self.restr_list is not None:
             self.qtickle.guirestore(self.restr_list)
+        if self.arg_list is not None:
+            datakey = self.arg_list[0]
+            method = self.arg_list[1]
+            self.dim_reduction_choose_data.setCurrentIndex(self.dim_reduction_choose_data.findText(datakey))
+            self.dim_red_choosealg.setCurrentIndex(self.dim_red_choosealg.findText(method))
+            self.make_dim_red_widget(method)
+            if method == 'PCA':
+                nc = self.kw_list['method_kws']['n_components']
+                self.dim_red_widget.pca_nc_spinbox.setValue(nc)
+            if method == 'ICA':
+                nc = self.kw_list['method_kws']['n_components']
+                self.dim_red_widget.ica_nc_spinbox.setValue(nc)
+            if method == 'ICA-JADE':
+                nc = self.kw_list['method_kws']['n_components']
+                self.dim_red_widget.ica_jade_nc_spinbox.setValue(nc)
 
     def get_dim_red_params(self):
         datakey = self.dim_reduction_choose_data.currentText()

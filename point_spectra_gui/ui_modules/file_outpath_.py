@@ -54,6 +54,8 @@ class file_outpath_:
     def set_parameters(self):
         if self.restr_list is not None:
             self.qtickle.guirestore(self.restr_list)
+        if self.arg_list is not None:
+            self.file_out_path_line_edit.setText(self.arg_list[0])
 
     def get_parameters(self):
         filename = self.file_out_path_line_edit.text()

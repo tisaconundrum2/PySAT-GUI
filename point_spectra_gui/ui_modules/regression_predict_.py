@@ -41,6 +41,19 @@ class regression_predict_:
     def set_predict_parameters(self):
         if self.restr_list is not None:
             self.qtickle.guirestore(self.restr_list)
+        if self.arg_list is not None:
+            try:
+                datakey = self.arg_list[0]
+                modelkey = self.arg_list[1]
+                # self.regression_predict_choosedata = make_combobox(datakey)
+                # self.regression_predict_choosemodel = make_combobox(modelkey)
+                self.regression_predict_choosedata.setItemText(0,datakey)
+                self.regression_predict_choosemodel.setItemText(0, modelkey)
+                pass
+
+
+            except Exception as e:
+                error_print(e)
 
     def regression_ui(self):
         self.regression_predict = QtWidgets.QGroupBox()

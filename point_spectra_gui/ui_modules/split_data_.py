@@ -42,6 +42,12 @@ class split_data_:
     def set_split_data_parameters(self):
         if self.restr_list is not None:
             self.qtickle.guirestore(self.restr_list)
+        if self.arg_list is not None:
+            datakey = self.arg_list[0]
+            colname = self.arg_list[1]
+            self.split_data_choosedata.setCurrentIndex(self.split_data_choosedata.findText(datakey))
+            change_combo_list_vars(self.colname_choices,self.get_choices())
+            self.colname_choices.setCurrentIndex(self.colname_choices.findText(colname[1]))
 
     def split_data_ui(self):
         self.split_data = QtWidgets.QGroupBox()

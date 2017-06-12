@@ -75,6 +75,12 @@ class interpolation_:
     def set_parameters(self):
         if self.restr_list is not None:
             self.qtickle.guirestore(self.restr_list)
+        if self.arg_list is not None:
+            index = self.interpoliation_choosedata.findText(str(self.arg_list[0]))
+            index2 = self.interpolation_choosedata_2.findText(str(self.arg_list[1]))
+            if index is not -1 and index2 is not -1:
+                self.interpoliation_choosedata.setCurrentIndex(index)
+                self.interpolation_choosedata_2.setCurrentIndex(index2)
 
     def get_parameters(self):
         ui_list = "do_interp"
