@@ -57,6 +57,12 @@ class Qtickle(object):
                     dict[name + "_index"] = index  # save the indexed value in settings
 
                 if isinstance(obj, QListWidget):
+                    values = []
+                    name = obj.objectName()
+                    for i in range(obj.count()):
+                        itemData = obj.currentItem()
+                        values.append(itemData)
+                    index = obj.indexAt()
                     # TODO add QtWidgets.QListWidget
                     pass
 
