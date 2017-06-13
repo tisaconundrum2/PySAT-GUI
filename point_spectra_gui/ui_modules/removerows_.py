@@ -142,7 +142,10 @@ class removerows_:
             colnamechoices = self.vars_level1
 
         except:
-            colnamechoices = self.pysat_fun.data[self.removerows_choosedata.currentText()].columns.values
+            try:
+                colnamechoices = self.pysat_fun.data[self.removerows_choosedata.currentText()].columns.values
+            except:
+                colnamechoices = []
         colnamechoices = [i for i in colnamechoices if not 'Unnamed' in i]  # remove unnamed columns from choices
         return colnamechoices
 
