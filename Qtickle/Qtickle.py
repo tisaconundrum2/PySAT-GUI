@@ -1,5 +1,6 @@
 import inspect
 import os
+from PyQt5 import QtCore
 from distutils.util import strtobool
 import sys
 from PyQt5.QtWidgets import *
@@ -60,7 +61,7 @@ class Qtickle(object):
                     values = []
                     name = obj.objectName()
                     for i in range(obj.count()):
-                        itemData = obj.item(i).text()  # Get all the string data
+                        itemData = str(obj.item(i).text())  # Get all the string data
                         values.append(itemData)  # add it to a list
                     dict[name + "_values"] = values
                     # since there is a possibility of multiple items,
@@ -124,8 +125,7 @@ class Qtickle(object):
                     # with restoring the list of values
                     obj.clear()
                     if values is not None:
-                        for i in range(len(values)):
-                            value = values[i]
+                        for value in values:
                             if not (value == '' or value == "") and len(value) > 0:
                                 # if there are some values in the list, we should add them to the Combobox
                                 obj.addItem(value)
@@ -138,8 +138,12 @@ class Qtickle(object):
                     values = dict[name + "_values"]
                     obj.clear()
                     if values is not None:
-                        for i in range(len(values)):
-                            pass
+                        for value in values:
+                            list_item = QListWidgetItem(value)
+                            obj.addItem(list_item)
+                    index = dict[name + "_index"]
+                    obj.setCurrentItem(obj.findItems(index, QtCore.Qt.MatchExactly)[0])
+
 
         except Exception as e:
             print(e)
