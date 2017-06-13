@@ -1,20 +1,23 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
 from point_spectra_gui.gui_utils import make_combobox
-from point_spectra_gui.ui_modules import error_print
+from point_spectra_gui.ui_modules import error_print, Qtickle
 
 
 class multiply_vector_:
-    def __init__(self, pysat_fun, module_layout, arg_list, kw_list):
+    def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
+        self.qtickle = Qtickle.Qtickle(self)
         self.pysat_fun = pysat_fun
         self.arg_list = arg_list
         self.kw_list = kw_list
+        self.restr_list = restr_list
         self.module_layout = module_layout
         self.ui_id = None
         self.main()
 
     def main(self):
-        self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
+        self.ui_id = self.pysat_fun.set_list(None, None, None, None, None, self.ui_id)
         self.multiply_vector_ui()
+        self.set_multiply_vector_params()
         self.pysat_fun.set_greyed_modules(self.multiply_vector)
 
     def multiply_vector_params(self):
@@ -24,39 +27,40 @@ class multiply_vector_:
         fun_list = "do_multiply_vector"
         args = [datakey, vectorfile]
         kws = {}
-        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
+        r = self.qtickle.guisave()
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def multiply_vector_ui(self):
         self.multiply_vector = QtWidgets.QGroupBox()
         font = QtGui.QFont()
         font.setPointSize(10)
         self.multiply_vector.setFont(font)
-        self.multiply_vector.setObjectName(("multiply_vector"))
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.multiply_vector)
         self.horizontalLayout.setContentsMargins(11, 11, 11, 11)
         self.horizontalLayout.setSpacing(6)
-        self.horizontalLayout.setObjectName(("horizontalLayout"))
 
         self.choosedata_label = QtWidgets.QLabel(self.multiply_vector)
-        self.choosedata_label.setObjectName(("choosedata_label"))
+        self.choosedata_label.setObjectName("choosedata_label")
         self.horizontalLayout.addWidget(self.choosedata_label)
         datachoices = self.pysat_fun.datakeys
-        if datachoices == []:
-            error_print('No data has been loaded!')
-            datachoices = ['No data has been loaded!']
+        
+            
+            
         self.vector_choosedata = make_combobox(datachoices)
+        self.vector_choosedata.setObjectName("vector_choosedata")
         self.horizontalLayout.addWidget(self.vector_choosedata)
 
         self.multiply_vector_label = QtWidgets.QLabel(self.multiply_vector)
-        self.multiply_vector_label.setObjectName(("multiply_vector_label"))
+        self.multiply_vector_label.setObjectName("multiply_vector_label")
         self.horizontalLayout.addWidget(self.multiply_vector_label)
         self.multiply_vector_line_edit = QtWidgets.QLineEdit(self.multiply_vector)
         self.multiply_vector_line_edit.setReadOnly(True)
-        self.multiply_vector_line_edit.setObjectName(("multiply_vector_line_edit"))
+        self.multiply_vector_line_edit.setObjectName("multiply_vector_line_edit")
         self.horizontalLayout.addWidget(self.multiply_vector_line_edit)
         self.multiply_vector_button = QtWidgets.QToolButton(self.multiply_vector)
-        self.multiply_vector_button.setObjectName(("multiply_vector_button"))
+        self.multiply_vector_button.setObjectName("multiply_vector_button")
         self.horizontalLayout.addWidget(self.multiply_vector_button)
+        self.multiply_vector.setObjectName("multiply_vector")
         self.module_layout.addWidget(self.multiply_vector)
 
         self.multiply_vector.setTitle("Multiply Data by a Vector")
@@ -66,13 +70,14 @@ class multiply_vector_:
         self.multiply_vector_button.setText("...")
         self.multiply_vector_line_edit.textChanged.connect(lambda: self.multiply_vector_params())
         self.vector_choosedata.currentIndexChanged.connect(lambda: self.multiply_vector_params())
-        self.multiply_vector_button.clicked.connect(lambda: self.on_getDataButton_clicked(self.multiply_vector_line_edit))
-        self.set_multiply_vector_params()
+        self.multiply_vector_button.clicked.connect(
+            lambda: self.on_getDataButton_clicked(self.multiply_vector_line_edit))
 
     def set_multiply_vector_params(self):
         if self.arg_list is None:
             self.multiply_vector_line_edit.setText("*.csv")
         else:
+            self.qtickle.guirestore(self.restr_list)
             self.multiply_vector_line_edit.setText(self.arg_list[1])
             index = self.vector_choosedata.findText(str(self.arg_list[0]))  # findText 'unknown' or 'known'
             if index is not -1:  # if it's there choose it based on the returned index

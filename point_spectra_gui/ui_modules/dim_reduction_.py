@@ -1,27 +1,32 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
+
+from Qtickle import Qtickle
 from point_spectra_gui.gui_utils import make_combobox
 from point_spectra_gui.ui_modules.Error_ import error_print
 
 
 class dim_reduction_:
-    def __init__(self, pysat_fun, module_layout, arg_list, kw_list):
+    def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
+        self.qtickle = Qtickle.Qtickle(self)
         self.pysat_fun = pysat_fun
         self.arg_list = arg_list
         self.kw_list = kw_list
+        self.restr_list = restr_list
         self.ui_id = None
         self.module_layout = module_layout
         self.main()
 
     def main(self):
-        self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
+        self.ui_id = self.pysat_fun.set_list(None, None, None, None, None, self.ui_id)
         self.dim_reduction_ui()
         self.set_dim_red_params()
-        self.dim_red_choosealg.currentIndexChanged.connect(  #
-            lambda: self.make_dim_red_widget(self.dim_red_choosealg.currentText()))  #
+        self.dim_red_choosealg.currentIndexChanged.connect(lambda: self.make_dim_red_widget(self.dim_red_choosealg.currentText()))
         self.get_dim_red_params()
         self.pysat_fun.set_greyed_modules(self.dim_reduction)
 
     def set_dim_red_params(self):
+        if self.restr_list is not None:
+            self.qtickle.guirestore(self.restr_list)
         if self.arg_list is not None:
             datakey = self.arg_list[0]
             method = self.arg_list[1]
@@ -59,7 +64,8 @@ class dim_reduction_:
         kws = {'method_kws': method_kws}
         ui_list = "do_dim_red"
         fun_list = "do_dim_red"
-        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
+        r = self.qtickle.guisave()
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def make_dim_red_widget(self, method):
         print(method)
@@ -72,9 +78,11 @@ class dim_reduction_:
             self.dim_red_widget.pca_hlayout = QtWidgets.QHBoxLayout(self.dim_red_widget)
             self.dim_red_widget.pca_nc_label = QtWidgets.QLabel(self.dim_red_widget)
             self.dim_red_widget.pca_nc_label.setText('# of components:')
+            self.dim_red_widget.pca_nc_label.setObjectName("self.pca_nc_label")
             self.dim_red_widget.pca_hlayout.addWidget(self.dim_red_widget.pca_nc_label)
             self.dim_red_widget.pca_nc_spinbox = QtWidgets.QSpinBox(self.dim_red_widget)
 
+            self.dim_red_widget.pca_nc_spinbox.setObjectName("self.pca_nc_spinbox")
             self.dim_red_widget.pca_hlayout.addWidget(self.dim_red_widget.pca_nc_spinbox)
             self.dim_red_widget.pca_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
                                                                    QtWidgets.QSizePolicy.Minimum)
@@ -84,8 +92,10 @@ class dim_reduction_:
             self.dim_red_widget.ica_hlayout = QtWidgets.QHBoxLayout(self.dim_red_widget)
             self.dim_red_widget.ica_nc_label = QtWidgets.QLabel(self.dim_red_widget)
             self.dim_red_widget.ica_nc_label.setText('# of components:')
+            self.dim_red_widget.ica_nc_label.setObjectName("self.ica_nc_label")
             self.dim_red_widget.ica_hlayout.addWidget(self.dim_red_widget.ica_nc_label)
             self.dim_red_widget.ica_nc_spinbox = QtWidgets.QSpinBox(self.dim_red_widget)
+            self.dim_red_widget.ica_nc_spinbox.setObjectName("self.ica_nc_spinbox")
             self.dim_red_widget.ica_hlayout.addWidget(self.dim_red_widget.ica_nc_spinbox)
             self.dim_red_widget.ica_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
                                                                    QtWidgets.QSizePolicy.Minimum)
@@ -95,14 +105,17 @@ class dim_reduction_:
             self.dim_red_widget.ica_jade_hlayout = QtWidgets.QHBoxLayout(self.dim_red_widget)
             self.dim_red_widget.ica_jade_nc_label = QtWidgets.QLabel(self.dim_red_widget)
             self.dim_red_widget.ica_jade_nc_label.setText('# of components:')
+            self.dim_red_widget.ica_jade_nc_label.setObjectName("self.ica_jade_nc_label")
             self.dim_red_widget.ica_jade_hlayout.addWidget(self.dim_red_widget.ica_jade_nc_label)
             self.dim_red_widget.ica_jade_nc_spinbox = QtWidgets.QSpinBox(self.dim_red_widget)
+            self.dim_red_widget.ica_jade_nc_spinbox.setObjectName("self.ica_jade_nc_spinbox")
             self.dim_red_widget.ica_jade_hlayout.addWidget(self.dim_red_widget.ica_jade_nc_spinbox)
             self.dim_red_widget.ica_jade_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
                                                                         QtWidgets.QSizePolicy.Minimum)
             self.dim_red_widget.ica_jade_hlayout.addItem(self.dim_red_widget.ica_jade_spacer)
             self.dim_red_widget.ica_jade_nc_spinbox.valueChanged.connect(lambda: self.get_dim_red_params())
 
+            self.dim_red_widget.setObjectName("dim_red_widget")
         self.dim_reduction_vlayout.addWidget(self.dim_red_widget)
         self.get_dim_red_params()
 
@@ -111,27 +124,29 @@ class dim_reduction_:
         font = QtGui.QFont()
         font.setPointSize(10)
         self.dim_reduction.setFont(font)
-        self.dim_reduction.setObjectName(("Dimensionality Reduction"))
         self.dim_reduction_vlayout = QtWidgets.QVBoxLayout(self.dim_reduction)
-        self.dim_reduction_vlayout.setObjectName(("dim_reduction_vlayout"))
         # choose data set to apply dim reduction to
         self.dim_reduction_choose_data_label = QtWidgets.QLabel(self.dim_reduction)
-        self.dim_reduction_choose_data_label.setObjectName(("dim_reduction_choose_data_label"))
+        self.dim_reduction_choose_data_label.setObjectName("dim_reduction_choose_data_label")
         self.dim_reduction_vlayout.addWidget(self.dim_reduction_choose_data_label)
         datachoices = self.pysat_fun.datakeys
-        if datachoices == []:
-            error_print('No data has been loaded!')
-            datachoices = ['No data has been loaded!']
+        
+            
+            
         self.dim_reduction_choose_data = make_combobox(datachoices)
+        self.dim_reduction_choose_data.setObjectName("dim_reduction_choose_data")
         self.dim_reduction_vlayout.addWidget(self.dim_reduction_choose_data)
 
         # Choose the algorithm to apply
         self.dim_red_choosealg_label = QtWidgets.QLabel(self.dim_reduction)
+        self.dim_red_choosealg_label.setObjectName("dim_red_choosealg_label")
         self.dim_reduction_vlayout.addWidget(self.dim_red_choosealg_label)
         alg_choices = ['Choose a method', 'PCA', 'ICA', 'ICA-JADE']
         self.dim_red_choosealg = make_combobox(alg_choices)
+        self.dim_red_choosealg.setObjectName("dim_red_choosealg")
         self.dim_reduction_vlayout.addWidget(self.dim_red_choosealg)
 
+        self.dim_reduction.setObjectName("dim_reduction")
         self.module_layout.addWidget(self.dim_reduction)
         self.dim_reduction.raise_()
         self.dim_reduction.setTitle("Dimensionality Reduction")

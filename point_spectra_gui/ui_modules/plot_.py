@@ -1,20 +1,29 @@
-from point_spectra_gui.gui_utils import make_combobox,change_combo_list_vars
+import os
+from point_spectra_gui.gui_utils import make_combobox, change_combo_list_vars
 from point_spectra_gui.ui_modules.Error_ import error_print
+from Qtickle import Qtickle
 from PyQt5 import QtGui, QtCore, QtWidgets
 import numpy as np
 import inspect
 
 
 class plot_:
-    def __init__(self, pysat_fun, module_layout, arg_list, kw_list):
+    def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
+        self.qtickle = Qtickle.Qtickle(self)
         self.pysat_fun = pysat_fun
+        self.arg_list = arg_list
+        self.kw_list = kw_list
+        self.restr_list = restr_list
         self.module_layout = module_layout
         self.ui_id = None
         self.main()
 
     def main(self):
-        self.ui_id = self.pysat_fun.set_list(None, None, None, None, self.ui_id)
+        self.ui_id = self.pysat_fun.set_list(None, None, None, None, None, self.ui_id)
         self.plot_ui()
+        self.set_plot_parameters()
+        self.get_plot_parameters()
+        self.connect_widgets()
         self.pysat_fun.set_greyed_modules(self.plot)
 
     def get_plot_parameters(self):
@@ -73,14 +82,14 @@ class plot_:
         if marker == 'Triangle Left':
             marker = '<'
 
-        line = self.line_choices.currentText()
-        if line == 'No Line':
+        linestyle = self.line_choices.currentText()
+        if linestyle == 'No Line':
             linestyle = 'None'
-        if line == 'Line':
+        if linestyle == 'Line':
             linestyle = '-'
-        if line == 'Dashed Line':
+        if linestyle == 'Dashed Line':
             linestyle = '--'
-        if line == 'Dotted Line':
+        if linestyle == 'Dotted Line':
             linestyle = ':'
 
         args = [datakey, xvar, yvar]
@@ -99,51 +108,45 @@ class plot_:
                }
         ui_list = "do_plot"
         fun_list = "do_plot"
-        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.ui_id)
+        # TODO save the state here every time
+        r = self.qtickle.guisave()
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
+        pass
 
     def set_plot_parameters(self):
-        pass
+        # TODO replace this function with restore state.
+        if self.restr_list is not None:
+            self.qtickle.guirestore(self.restr_list)
+
 
     def plot_ui(self):
         self.plot = QtWidgets.QGroupBox()
         font = QtGui.QFont()
         font.setPointSize(10)
         self.plot.setFont(font)
-        self.plot.setObjectName(("plot"))
         self.verticalLayout = QtWidgets.QVBoxLayout(self.plot)
         self.verticalLayout.setContentsMargins(11, 11, 11, 11)
         self.verticalLayout.setSpacing(6)
-        self.verticalLayout.setObjectName(("verticalLayout"))
         self.scatter_choosedata_flayout = QtWidgets.QFormLayout()
         self.scatter_choosedata_flayout.setContentsMargins(11, 11, 11, 11)
         self.scatter_choosedata_flayout.setSpacing(6)
-        self.scatter_choosedata_flayout.setObjectName(("scatter_choosedata_flayout"))
         self.scatter_choosedata_label = QtWidgets.QLabel(self.plot)
-        self.scatter_choosedata_label.setObjectName(("scatter_choosedata_label"))
         self.scatter_choosedata_flayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.scatter_choosedata_label)
         # self.scatter_choosedata = QtWidgets.QComboBox(self.plot) # we have to remove this as it can't be safely overwritten
 
         datachoices = self.pysat_fun.datakeys
-        if datachoices == []:
-            error_print('No Data has been loaded')
-            datachoices = ['No data has been loaded!']
         self.scatter_choosedata = make_combobox(datachoices)
 
         self.scatter_choosedata.setIconSize(QtCore.QSize(50, 20))
-        self.scatter_choosedata.setObjectName(("scatter_choosedata"))
         self.scatter_choosedata_flayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.scatter_choosedata)
         self.figname_label = QtWidgets.QLabel(self.plot)
-        self.figname_label.setObjectName(("figname_label"))
         self.scatter_choosedata_flayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.figname_label)
         self.figname_text = QtWidgets.QLineEdit(self.plot)
-        self.figname_text.setObjectName(("figname_text"))
         self.scatter_choosedata_flayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.figname_text)
         self.plot_title_label = QtWidgets.QLabel(self.plot)
-        self.plot_title_label.setObjectName(("plot_title_label"))
         self.scatter_choosedata_flayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.plot_title_label)
         self.plot_title_text = QtWidgets.QLineEdit(self.plot)
         self.plot_title_text.setEnabled(True)
-        self.plot_title_text.setObjectName(("plot_title_text"))
         self.scatter_choosedata_flayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.plot_title_text)
         self.verticalLayout.addLayout(self.scatter_choosedata_flayout)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -152,34 +155,25 @@ class plot_:
         self.scatter_choosex_flayout.setFieldGrowthPolicy(QtWidgets.QFormLayout.AllNonFixedFieldsGrow)
         self.scatter_choosex_flayout.setContentsMargins(11, 11, 11, 11)
         self.scatter_choosex_flayout.setSpacing(6)
-        self.scatter_choosex_flayout.setObjectName(("scatter_choosex_flayout"))
         self.scatter_choosex_label = QtWidgets.QLabel(self.plot)
-        self.scatter_choosex_label.setObjectName(("scatter_choosex_label"))
         self.scatter_choosex_flayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.scatter_choosex_label)
 
         self.xvar_choices = make_combobox([''])
-        change_combo_list_vars(self.xvar_choices,self.get_choices())
-        self.xvar_choices.setObjectName(("xvar_choices"))
+        change_combo_list_vars(self.xvar_choices, self.get_choices())
         self.scatter_choosex_flayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.xvar_choices)
 
         self.xtitle_label = QtWidgets.QLabel(self.plot)
-        self.xtitle_label.setObjectName(("xtitle_label"))
         self.scatter_choosex_flayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.xtitle_label)
         self.xtitle_text = QtWidgets.QLineEdit(self.plot)
-        self.xtitle_text.setObjectName(("xtitle_text"))
         self.scatter_choosex_flayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.xtitle_text)
         self.xmin_labe = QtWidgets.QLabel(self.plot)
-        self.xmin_labe.setObjectName(("xmin_labe"))
         self.scatter_choosex_flayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.xmin_labe)
         self.xmin_spin = QtWidgets.QDoubleSpinBox(self.plot)
-        self.xmin_spin.setObjectName(("xmin_spin"))
         self.xmin_spin.setRange(-10000000, 10000000)
         self.scatter_choosex_flayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.xmin_spin)
         self.xmax_label = QtWidgets.QLabel(self.plot)
-        self.xmax_label.setObjectName(("xmax_label"))
         self.scatter_choosex_flayout.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.xmax_label)
         self.xmax_spin = QtWidgets.QDoubleSpinBox(self.plot)
-        self.xmax_spin.setObjectName(("xmax_spin"))
         self.xmax_spin.setRange(-10000000, 10000000)
         self.scatter_choosex_flayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.xmax_spin)
         self.verticalLayout.addLayout(self.scatter_choosex_flayout)
@@ -188,33 +182,24 @@ class plot_:
         self.scatter_choosey_flayout = QtWidgets.QFormLayout()
         self.scatter_choosey_flayout.setContentsMargins(11, 11, 11, 11)
         self.scatter_choosey_flayout.setSpacing(6)
-        self.scatter_choosey_flayout.setObjectName(("scatter_choosey_flayout"))
         self.yvar_choices = make_combobox([''])
-        change_combo_list_vars(self.yvar_choices,self.get_choices())
-        self.yvar_choices.setObjectName(("yvar_choices"))
+        change_combo_list_vars(self.yvar_choices, self.get_choices())
         self.scatter_choosey_flayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.yvar_choices)
         self.ytitle_label = QtWidgets.QLabel(self.plot)
-        self.ytitle_label.setObjectName(("ytitle_label"))
         self.scatter_choosey_flayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.ytitle_label)
         self.ytitle_text = QtWidgets.QLineEdit(self.plot)
-        self.ytitle_text.setObjectName(("ytitle_text"))
         self.scatter_choosey_flayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.ytitle_text)
         self.ymin_label = QtWidgets.QLabel(self.plot)
-        self.ymin_label.setObjectName(("ymin_label"))
         self.scatter_choosey_flayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.ymin_label)
         self.ymin_spin = QtWidgets.QDoubleSpinBox(self.plot)
-        self.ymin_spin.setObjectName(("ymin_spin"))
         self.ymin_spin.setRange(-10000000, 10000000)
         self.scatter_choosey_flayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.ymin_spin)
         self.ymax_label = QtWidgets.QLabel(self.plot)
-        self.ymax_label.setObjectName(("ymax_label"))
         self.scatter_choosey_flayout.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.ymax_label)
         self.ymax_spin = QtWidgets.QDoubleSpinBox(self.plot)
-        self.ymax_spin.setObjectName(("ymax_spin"))
         self.ymax_spin.setRange(-10000000, 10000000)
         self.scatter_choosey_flayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.ymax_spin)
         self.scatter_choosey_label = QtWidgets.QLabel(self.plot)
-        self.scatter_choosey_label.setObjectName(("scatter_choosey_label"))
         self.scatter_choosey_flayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.scatter_choosey_label)
         self.verticalLayout.addLayout(self.scatter_choosey_flayout)
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -222,17 +207,16 @@ class plot_:
         self.legend_hlayout = QtWidgets.QHBoxLayout()
         self.legend_hlayout.setContentsMargins(11, 11, 11, 11)
         self.legend_hlayout.setSpacing(6)
-        self.legend_hlayout.setObjectName(("legend_hlayout"))
         self.legend_label = QtWidgets.QLabel(self.plot)
-        self.legend_label.setObjectName(("legend_label"))
         self.legend_label.setText('Legend label: ')
+        self.legend_label.setObjectName("legend_label")
         self.legend_hlayout.addWidget(self.legend_label)
         self.legend_label_text = QtWidgets.QLineEdit(self.plot)
-        self.legend_label_text.setObjectName(("legend_label_text"))
+        self.legend_label_text.setObjectName("legend_label_text")
         self.legend_hlayout.addWidget(self.legend_label_text)
         self.onetoone = QtWidgets.QCheckBox(self.plot)
-        self.onetoone.setObjectName(("onetoone"))
         self.onetoone.setText('One to One')
+        self.onetoone.setObjectName("onetoone")
         self.legend_hlayout.addWidget(self.onetoone)
         self.verticalLayout.addLayout(self.legend_hlayout)
         spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -241,45 +225,34 @@ class plot_:
         self.scatter_chooseline_flayout.setFieldGrowthPolicy(QtWidgets.QFormLayout.AllNonFixedFieldsGrow)
         self.scatter_chooseline_flayout.setContentsMargins(11, 11, 11, 11)
         self.scatter_chooseline_flayout.setSpacing(6)
-        self.scatter_chooseline_flayout.setObjectName(("scatter_chooseline_flayout"))
         self.color_label = QtWidgets.QLabel(self.plot)
-        self.color_label.setObjectName(("color_label"))
         self.scatter_chooseline_flayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.color_label)
         self.color_choices = QtWidgets.QComboBox(self.plot)
         self.color_choices.setIconSize(QtCore.QSize(50, 20))
-        self.color_choices.setObjectName(("color_choices"))
         self.scatter_chooseline_flayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.color_choices)
         self.line_label = QtWidgets.QLabel(self.plot)
-        self.line_label.setObjectName(("line_label"))
         self.scatter_chooseline_flayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.line_label)
         self.line_choices = QtWidgets.QComboBox(self.plot)
         self.line_choices.setIconSize(QtCore.QSize(50, 20))
-        self.line_choices.setObjectName(("line_choices"))
         self.scatter_chooseline_flayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.line_choices)
         self.marker_label = QtWidgets.QLabel(self.plot)
-        self.marker_label.setObjectName(("marker_label"))
         self.scatter_chooseline_flayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.marker_label)
         self.marker_choices = QtWidgets.QComboBox(self.plot)
         self.marker_choices.setIconSize(QtCore.QSize(50, 20))
-        self.marker_choices.setObjectName(("marker_choices"))
         self.scatter_chooseline_flayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.marker_choices)
         self.file_label = QtWidgets.QLabel(self.plot)
-        self.file_label.setObjectName(("file_label"))
         self.scatter_chooseline_flayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.file_label)
         self.file_text = QtWidgets.QLineEdit(self.plot)
-        self.file_text.setObjectName(("file_text"))
         self.scatter_chooseline_flayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.file_text)
         self.alpha_label = QtWidgets.QLabel(self.plot)
-        self.alpha_label.setObjectName(("alpha_label"))
         self.scatter_chooseline_flayout.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.alpha_label)
         self.alpha_spin = QtWidgets.QDoubleSpinBox(self.plot)
-        self.alpha_spin.setObjectName(("alpha_spin"))
         self.alpha_spin.setRange(0, 1)
         self.alpha_spin.setValue(0.25)
         self.alpha_spin.setSingleStep(0.1)
-        self.alpha_spin.setObjectName(("alpha_spin"))
         self.scatter_chooseline_flayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.alpha_spin)
         self.verticalLayout.addLayout(self.scatter_chooseline_flayout)
+        self.plot.setObjectName("plot")
         self.module_layout.addWidget(self.plot)
 
         self.plot.setTitle("Scatter Plot")
@@ -322,14 +295,19 @@ class plot_:
         self.alpha_label.setText("Alpha:")
 
         self.plot.setTitle("Plot")
-        self.scatter_choosedata.activated[int].connect(lambda: change_combo_list_vars(self.xvar_choices,self.get_choices()))
+
+
+    def connect_widgets(self):
+        self.scatter_choosedata.activated[int].connect(
+            lambda: change_combo_list_vars(self.xvar_choices, self.get_choices()))
         self.scatter_choosedata.activated[int].connect(
             lambda: self.get_minmax(self.xmin_spin, self.xmax_spin, self.xvar_choices.currentText()))
         self.scatter_choosedata.activated[int].connect(
             lambda: self.get_minmax(self.ymin_spin, self.ymax_spin, self.yvar_choices.currentText()))
         self.xvar_choices.activated[int].connect(
             lambda: self.get_minmax(self.xmin_spin, self.xmax_spin, self.xvar_choices.currentText()))
-        self.scatter_choosedata.activated[int].connect(lambda: change_combo_list_vars(self.yvar_choices,self.get_choices()))
+        self.scatter_choosedata.activated[int].connect(
+            lambda: change_combo_list_vars(self.yvar_choices, self.get_choices()))
         self.yvar_choices.activated[int].connect(
             lambda: self.get_minmax(self.ymin_spin, self.ymax_spin, self.yvar_choices.currentText()))
         self.color_choices.activated.connect(lambda: self.get_plot_parameters())
@@ -343,7 +321,6 @@ class plot_:
                 obj.valueChanged.connect(lambda: self.get_plot_parameters())
             if isinstance(obj, QtWidgets.QCheckBox):
                 obj.toggled.connect(lambda: self.get_plot_parameters())
-
 
     def get_choices(self):
         try:
