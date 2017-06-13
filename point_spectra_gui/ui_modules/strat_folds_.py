@@ -68,7 +68,11 @@ class strat_folds_:
         self.strat_folds_choose_var_label = QtWidgets.QLabel(self.strat_folds)
         self.strat_folds_choose_var_label.setObjectName("strat_folds_choose_var_label")
         self.strat_folds_vlayout.addWidget(self.strat_folds_choose_var_label)
-        varchoices = self.pysat_fun.data[self.strat_folds_choose_data.currentText()].df['comp'].columns.values
+        varchoices = []
+        try:
+            varchoices = self.pysat_fun.data[self.strat_folds_choose_data.currentText()].df['comp'].columns.values
+        except:
+            pass
         self.strat_folds_choose_var = make_combobox(varchoices)
         self.strat_folds_choose_var.setObjectName("strat_folds_choose_var")
         self.strat_folds_vlayout.addWidget(self.strat_folds_choose_var)
