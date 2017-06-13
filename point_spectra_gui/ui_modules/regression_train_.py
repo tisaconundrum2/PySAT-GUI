@@ -18,11 +18,12 @@ class regression_train_:
     def main(self):
         self.ui_id = self.pysat_fun.set_list(None, None, None, None, None, self.ui_id)
         self.regression_ui()  # start the regression UI. create our submodule
-        self.set_regression_parameters()
+        self.set_regression_parameters()  # Do it the first time to get data
         # self.regression_ransac_checkbox.toggled.connect(  #
         #     lambda: self.make_ransac_widget(self.regression_ransac_checkbox.isChecked()))  #
         self.regression_choosealg.currentIndexChanged.connect(  #
             lambda: self.make_regression_widget(self.regression_choosealg.currentText()))  #
+        self.set_regression_parameters()  # Do it again to input the missing information
         self.get_regression_parameters()
         self.pysat_fun.set_greyed_modules(self.regression_train)
 
@@ -118,10 +119,8 @@ class regression_train_:
                 ransacparams = self.arg_list[6]
 
                 self.regression_choosedata.setCurrentIndex(self.regression_choosedata.findText(str(datakey)))
-                self.regression_train_choosex.setCurrentItem(
-                    self.regression_train_choosex.findItems(xvars[0], QtCore.Qt.MatchExactly)[0])
-                self.regression_train_choosey.setCurrentItem(
-                    self.regression_train_choosey.findItems(yvars[0][1], QtCore.Qt.MatchExactly)[0])
+                self.regression_train_choosex.setCurrentItem(self.regression_train_choosex.findItems(xvars[0], QtCore.Qt.MatchExactly)[0])
+                self.regression_train_choosey.setCurrentItem(self.regression_train_choosey.findItems(yvars[0][1], QtCore.Qt.MatchExactly)[0])
                 self.yvarmin_spin.setValue(yrange[0])
                 self.yvarmax_spin.setValue(yrange[1])
                 self.regression_choosealg.setCurrentIndex(self.regression_choosealg.findText(str(method)))

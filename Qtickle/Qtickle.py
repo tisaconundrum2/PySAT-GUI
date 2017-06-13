@@ -60,11 +60,12 @@ class Qtickle(object):
                     values = []
                     name = obj.objectName()
                     for i in range(obj.count()):
-                        itemData = obj.currentItem()
-                        values.append(itemData)
-                    index = obj.indexAt()
-                    # TODO add QtWidgets.QListWidget
-                    pass
+                        itemData = obj.item(i).text()  # Get all the string data
+                        values.append(itemData)  # add it to a list
+                    dict[name + "_values"] = values
+                    # since there is a possibility of multiple items,
+                    # we'll just save the string representation of those items to be restored
+                    dict[name + "_index"] = [str(x.text()) for x in obj.selectedItems()]
 
             print(dict)  # Debug purposes
             return dict
@@ -131,7 +132,14 @@ class Qtickle(object):
 
                     index = dict[name + "_index"]  # next we want to select the item in question by getting it's index
                     obj.setCurrentIndex(int(index))
+
+                if isinstance(obj, QListWidget):
+                    name = obj.objectName()
+                    values = dict[name + "_values"]
+                    obj.clear()
+                    if values is not None:
+                        for i in range(len(values)):
+                            pass
+
         except Exception as e:
             print(e)
-
-
