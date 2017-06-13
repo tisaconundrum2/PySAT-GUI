@@ -7,6 +7,7 @@ from point_spectra_gui.ui_modules.Error_ import error_print
 
 class sm_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
+        self.isRestore = False
         self.qtickle = Qtickle.Qtickle(self)
         self.submodel_gui_info = []
         self.new_submodel_index = 1
@@ -60,17 +61,21 @@ class sm_:
             trueval_data = None
 
         args = [datakey, submodel_names, blendranges, trueval_data]
-        r = self.qtickle.guisave()
-        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
+        self.r = self.qtickle.guisave()
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.r, self.ui_id)
 
     def set_sm_params(self):
         if self.restr_list is not None:
             self.qtickle.guirestore(self.restr_list)
-        datakey = self.arg_list[0]
-        submodel_names = self.arg_list[1]
-        blendranges = self.arg_list[2]
-        trueval_data = self.arg_list[3]
-        self.choosedata_predict.currentIndex(self.choosedata_predict.findText(str(datakey)))
+            self.isRestore = True
+            datakey = self.arg_list[0]
+            self.submodel_names = self.arg_list[1]
+            blendranges = self.arg_list[2]
+            trueval_data = self.arg_list[3]
+            try:
+                self.choosedata_predict.currentIndex(self.choosedata_predict.findText(str(datakey)))
+            except:
+                pass
 
     def sm_ui(self):
 
@@ -89,10 +94,11 @@ class sm_:
         self.choosemodel_label = QtWidgets.QLabel(self.submodel_predict)
         self.choosemodel_hlayout.addWidget(self.choosemodel_label)
         self.choosemodel_label.setObjectName("self.choosemodel_label")
-        modelchoices = self.pysat_fun.modelkeys
-        if modelchoices == []:
-            error_print('No model has been trained')
-            modelchoices = ['No model has been trained!']
+        if self.isRestore == False:
+            modelchoices = self.pysat_fun.modelkeys
+        else:
+            modelchoices = self.submodel_names
+
         self.choosemodel = make_combobox(modelchoices)
 
         self.choosemodel_hlayout.addWidget(self.choosemodel)
@@ -179,7 +185,7 @@ class sm_:
         self.verticalLayout.addLayout(self.add_delete_hlayout)
 
         datachoices = self.pysat_fun.datakeys
-        
+
         # choose data to optimize blending
         self.choosedata_hlayout = QtWidgets.QHBoxLayout()
         self.choosedata_hlayout.setContentsMargins(11, 11, 11, 11)
@@ -246,10 +252,11 @@ class sm_:
 
         submodel_hlayout.setContentsMargins(11, 11, 11, 11)
         submodel_hlayout.setSpacing(6)
-        modelchoices = self.pysat_fun.modelkeys
-        if modelchoices == []:
-            error_print('No model has been trained')
-            modelchoices = ['No model has been trained!']
+        modelchoices = []
+        if self.isRestore == False:
+            modelchoices = self.pysat_fun.modelkeys
+        else:
+            modelchoices = self.r['self.choose_high_model_values']
         choose_submodel = make_combobox(modelchoices)
         submodel_hlayout.addWidget(choose_submodel)
         choose_submodel.setObjectName("choose_submodel")

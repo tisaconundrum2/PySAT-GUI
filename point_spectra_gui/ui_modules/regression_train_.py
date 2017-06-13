@@ -6,6 +6,7 @@ from PyQt5 import QtGui, QtCore, QtWidgets
 
 class regression_train_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
+        self.isRestore = False
         self.qtickle = Qtickle.Qtickle(self)
         self.arg_list = arg_list
         self.kw_list = kw_list
@@ -17,6 +18,8 @@ class regression_train_:
 
     def main(self):
         self.ui_id = self.pysat_fun.set_list(None, None, None, None, None, self.ui_id)
+        if self.arg_list is not None:
+            self.isRestore = True
         self.regression_ui()  # start the regression UI. create our submodule
         self.set_regression_parameters()  # Do it the first time to get data
         # self.regression_ransac_checkbox.toggled.connect(  #
@@ -25,6 +28,7 @@ class regression_train_:
             lambda: self.make_regression_widget(self.regression_choosealg.currentText()))  #
         self.set_regression_parameters()  # Do it again to input the missing information
         self.get_regression_parameters()
+        self.connectWidgets()
         self.pysat_fun.set_greyed_modules(self.regression_train)
 
     def get_regression_parameters(self):
@@ -104,8 +108,8 @@ class regression_train_:
 
         args = [datakey, xvars, yvars, yrange, method, params, ransacparams]
         # TODO Stop the module when there are ill-formed parameters!
-        r = self.qtickle.guisave()
-        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
+        self.r = self.qtickle.guisave()
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.r, self.ui_id)
 
     def set_regression_parameters(self):
         if self.restr_list is not None:
@@ -120,6 +124,7 @@ class regression_train_:
                 params = self.arg_list[5]
                 ransacparams = self.arg_list[6]
 
+                change_combo_list_vars(self.regression_train_choosey, self.restr_list['regression_train_choosey_values'])
                 self.regression_choosedata.setCurrentIndex(self.regression_choosedata.findText(str(datakey)))
                 self.regression_train_choosex.setCurrentItem(self.regression_train_choosex.findItems(xvars[0], QtCore.Qt.MatchExactly)[0])
                 self.regression_train_choosey.setCurrentItem(self.regression_train_choosey.findItems(yvars[0][1], QtCore.Qt.MatchExactly)[0])
@@ -476,7 +481,10 @@ class regression_train_:
         self.regression_train_choosey_label.setText('Y variable:')
         self.regression_train_choosey_label.setObjectName("regression_train_choosey_label")
         self.regression_chooseyvars_vlayout.addWidget(self.regression_train_choosey_label)
-        self.regression_train_choosey = make_listwidget(self.yvar_choices())
+        if self.isRestore == True:
+            self.regression_train_choosey = make_listwidget([])
+        else:
+            self.regression_train_choosey = make_listwidget(self.yvar_choices())
         # TODO add ability to select multiple items
         # self.regression_train_choosey.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
         self.regression_train_choosey.setObjectName("regression_train_choosey")
@@ -539,6 +547,7 @@ class regression_train_:
         self.regression_train.raise_()
         self.regression_train.setTitle(("Regression - Train"))
 
+    def connectWidgets(self):
         self.regression_choosedata.currentIndexChanged.connect(lambda: self.get_regression_parameters())
         self.regression_choosealg.currentIndexChanged.connect(lambda: self.get_regression_parameters())
         self.regression_train_choosex.currentItemChanged.connect(lambda: self.get_regression_parameters())
