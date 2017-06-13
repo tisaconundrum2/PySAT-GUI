@@ -43,7 +43,7 @@ class dim_red_plot_:
         xvar = self.xvar_choices.currentText()
         yvar = self.yvar_choices.currentText()
         if self.colorchoices.currentText() != 'None':
-            colorvar = ('comp', self.colorchoices.currentText())
+            colorvar = self.colorchoices.currentText()
         else:
             colorvar=None
         filename = self.file_text.text()
