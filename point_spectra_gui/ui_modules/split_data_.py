@@ -22,6 +22,7 @@ class split_data_:
         self.split_data_ui()  # initiate the UI
         self.set_split_data_parameters()
         self.get_split_data_parameters()
+        self.connectWidgets()
         self.pysat_fun.set_greyed_modules(self.split_data)
 
     def get_split_data_parameters(self):
@@ -42,12 +43,6 @@ class split_data_:
     def set_split_data_parameters(self):
         if self.restr_list is not None:
             self.qtickle.guirestore(self.restr_list)
-        if self.arg_list is not None:
-            datakey = self.arg_list[0]
-            colname = self.arg_list[1]
-            self.split_data_choosedata.setCurrentIndex(self.split_data_choosedata.findText(datakey))
-            change_combo_list_vars(self.colname_choices,self.get_choices())
-            self.colname_choices.setCurrentIndex(self.colname_choices.findText(colname[1]))
 
     def split_data_ui(self):
         self.split_data = QtWidgets.QGroupBox()
@@ -68,9 +63,7 @@ class split_data_:
         self.split_data_choosedata_hlayout.addWidget(self.split_data_choosedata_label)
 
         datachoices = self.pysat_fun.datakeys
-        
-            
-            
+
         self.split_data_choosedata = make_combobox(datachoices)
         self.split_data_choosedata.setObjectName("split_data_choosedata")
         self.split_data_choosedata_hlayout.addWidget(self.split_data_choosedata)
@@ -86,8 +79,11 @@ class split_data_:
         self.start_of_sentence = QtWidgets.QLabel(self.split_data_widget)
         self.start_of_sentence.setObjectName("start_of_sentence")
         self.horizontalLayout_2.addWidget(self.start_of_sentence)
-
-        self.colname_choices = make_combobox(self.get_choices())
+        self.colname_choices = make_combobox([])
+        try:
+            self.colname_choices = make_combobox(self.get_choices())
+        except:
+            pass
         self.colname_choices.setObjectName("colname_choices")
         self.horizontalLayout_2.addWidget(self.colname_choices)
         self.end_of_sentence = QtWidgets.QLabel(self.split_data_widget)
@@ -107,13 +103,12 @@ class split_data_:
         self.start_of_sentence.setText("Split on unique values of ")
 
         self.end_of_sentence.setText("")
-        self.set_split_data_parameters()
 
+    def connectWidgets(self):
         self.colname_choices.currentIndexChanged.connect(lambda: self.get_split_data_parameters())
         self.split_data_choosedata.currentIndexChanged.connect(lambda: self.get_split_data_parameters())
-        self.split_data_choosedata.currentIndexChanged.connect(lambda:
-                                                               change_combo_list_vars(self.colname_choices,
-                                                                                      self.get_choices()))
+        self.split_data_choosedata.currentIndexChanged.connect(
+            lambda: change_combo_list_vars(self.colname_choices, self.get_choices()))
 
     def get_choices(self):
         try:
