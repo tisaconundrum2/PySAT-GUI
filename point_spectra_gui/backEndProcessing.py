@@ -275,12 +275,13 @@ class backEndProc(QThread):
             self.data[datakey_to_interp].interp(self.data[datakey_ref].df['wvl'].columns)
         except Exception as e:
             error_print(e)
+
     def do_remove_baseline(self,datakey,method,params):
-        datakey_new=datakey+'-Baseline Removed'
-        datakey_baseline=datakey+'-Baseline'
+        datakey_new=datakey+'-Baseline Removed-'+method+str(params)
+        datakey_baseline=datakey+'-Baseline-'+method+str(params)
         self.datakeys.append(datakey_new)
         self.datakeys.append(datakey_baseline)
-        self.data[datakey_new]=spectral_data(self.data[datakey].df.copy())
+        self.data[datakey_new]=spectral_data(self.data[datakey].df.copy(deep=True))
         self.data[datakey_new].remove_baseline(method,segment=True,params=params)
         self.data[datakey_baseline]=spectral_data(self.data[datakey_new].df_baseline)
 

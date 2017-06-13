@@ -98,7 +98,7 @@ class split_data_:
         self.split_data.setObjectName("split_data")
         self.module_layout.addWidget(self.split_data)
 
-        self.split_data.setTitle("Remove Null")
+        self.split_data.setTitle("Split Dataset")
         self.split_data_choosedata_label.setText("Choose data: ")
         self.start_of_sentence.setText("Split on unique values of ")
 

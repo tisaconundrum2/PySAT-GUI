@@ -113,7 +113,7 @@ class strat_folds_:
         self.choose_test_fold.currentIndexChanged.connect(lambda: self.get_strat_fold_params())
         self.nfolds_spin.valueChanged.connect(lambda: self.get_strat_fold_params())
         self.strat_folds_choose_data.currentIndexChanged.connect(lambda: self.get_strat_fold_params())
-
+        self.strat_folds_choose_var.currentIndexChanged.connect(lambda: self.get_strat_fold_params())
     def set_strat_fold_params(self):
         # self.strat_folds_choose_data.setItemText()
         if self.arg_list is not None:
