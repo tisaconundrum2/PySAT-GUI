@@ -311,8 +311,8 @@ class frontEndProc(object):
     def do_interp(self, arg_list=None, kw_list=None, restr_list=None):
         ui_modules.interpolation_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
 
-    def do_remove_baseline(self, arg_list=None, kw_list=None):
-        ui_modules.remove_baseline_(self.pysat_fun, self.module_layout, arg_list, kw_list)
+    def do_remove_baseline(self, arg_list=None, kw_list=None, restr_list=None):
+        ui_modules.remove_baseline_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
 
     """ =============================================
     Please do not delete the functions below this line!
@@ -412,15 +412,12 @@ class frontEndProc(object):
     # This function should no longer be necessary once we have error handling with restoration working smoothly
 
     def restore_first(self):
-        try:
+        self.r_list = self.restore_list.pop()
+        getattr(frontEndProc, self.r_list[1])(self, self.r_list[3], self.r_list[4], self.r_list[5])
+        while not self.restore_list.isEmpty():
             self.r_list = self.restore_list.pop()
+            print(self.r_list)
             getattr(frontEndProc, self.r_list[1])(self, self.r_list[3], self.r_list[4], self.r_list[5])
-            while not self.restore_list.isEmpty():
-                self.r_list = self.restore_list.pop()
-                print(self.r_list)
-                getattr(frontEndProc, self.r_list[1])(self, self.r_list[3], self.r_list[4], self.r_list[5])
-        except Exception as e:
-            print(e)
 
     ################# Progress bar toolset below
 
