@@ -60,14 +60,11 @@ class regression_predict_:
         font = QtGui.QFont()
         font.setPointSize(10)
         self.regression_predict.setFont(font)
-        self.regression_predict.setObjectName(("regression_predict"))
         self.regression_predict_vlayout = QtWidgets.QVBoxLayout(self.regression_predict)
-        self.regression_predict_vlayout.setObjectName(("regression_vlayout"))
         # create a layout for choosing data to predict on
         self.regression_predict_choosedata_hlayout = QtWidgets.QHBoxLayout()
-        self.regression_predict_choosedata_hlayout.setObjectName(("regression_predict_choosedata_hlayout"))
         self.regression_predict_choosedata_label = QtWidgets.QLabel(self.regression_predict)
-        self.regression_predict_choosedata_label.setObjectName(("regression_predict_choosedata_label"))
+        self.regression_predict_choosedata_label.setObjectName("regression_predict_choosedata_label")
         self.regression_predict_choosedata_hlayout.addWidget(self.regression_predict_choosedata_label)
         # create the combobox with data choices
         datachoices = self.pysat_fun.datakeys
@@ -76,16 +73,15 @@ class regression_predict_:
 
         self.regression_predict_choosedata = make_combobox(datachoices)
         # self.regression_predict_choosedata.setIconSize(QtCore.QSize(50, 20))
-        self.regression_predict_choosedata.setObjectName(("regression_predict_choosedata"))
+        self.regression_predict_choosedata.setObjectName("regression_predict_choosedata")
         self.regression_predict_choosedata_hlayout.addWidget(self.regression_predict_choosedata)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.regression_predict_choosedata_hlayout.addItem(spacerItem)
         self.regression_predict_vlayout.addLayout(self.regression_predict_choosedata_hlayout)
         # create a layout for choosing which model to use
         self.regression_predict_choosemodel_hlayout = QtWidgets.QHBoxLayout()
-        self.regression_predict_choosemodel_hlayout.setObjectName(("regression_predict_choosemodel_hlayout"))
         self.regression_predict_choosemodel_label = QtWidgets.QLabel(self.regression_predict)
-        self.regression_predict_choosemodel_label.setObjectName(("regression_predict_choosemodel_label"))
+        self.regression_predict_choosemodel_label.setObjectName("regression_predict_choosemodel_label")
         self.regression_predict_choosemodel_hlayout.addWidget(self.regression_predict_choosemodel_label)
         # create the combobox with model choices
 
@@ -94,12 +90,13 @@ class regression_predict_:
             modelchoices = ['No model has been trained!']
         self.regression_predict_choosemodel = make_combobox(modelchoices)
         #  self.regression_predict_choosemodel.setIconSize(QtCore.QSize(50, 20))
-        self.regression_predict_choosemodel.setObjectName(("regression_predict_choosedata"))
+        self.regression_predict_choosemodel.setObjectName("regression_predict_choosemodel")
         self.regression_predict_choosemodel_hlayout.addWidget(self.regression_predict_choosemodel)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.regression_predict_choosemodel_hlayout.addItem(spacerItem1)
         self.regression_predict_vlayout.addLayout(self.regression_predict_choosemodel_hlayout)
 
+        self.regression_predict.setObjectName("regression_predict")
         self.module_layout.addWidget(self.regression_predict)
         self.regression_predict.raise_()
         self.regression_predict.setTitle(("Regression - Predict"))

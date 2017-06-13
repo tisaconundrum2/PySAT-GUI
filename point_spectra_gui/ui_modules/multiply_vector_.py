@@ -35,32 +35,32 @@ class multiply_vector_:
         font = QtGui.QFont()
         font.setPointSize(10)
         self.multiply_vector.setFont(font)
-        self.multiply_vector.setObjectName(("multiply_vector"))
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.multiply_vector)
         self.horizontalLayout.setContentsMargins(11, 11, 11, 11)
         self.horizontalLayout.setSpacing(6)
-        self.horizontalLayout.setObjectName(("horizontalLayout"))
 
         self.choosedata_label = QtWidgets.QLabel(self.multiply_vector)
-        self.choosedata_label.setObjectName(("choosedata_label"))
+        self.choosedata_label.setObjectName("choosedata_label")
         self.horizontalLayout.addWidget(self.choosedata_label)
         datachoices = self.pysat_fun.datakeys
         
             
             
         self.vector_choosedata = make_combobox(datachoices)
+        self.vector_choosedata.setObjectName("vector_choosedata")
         self.horizontalLayout.addWidget(self.vector_choosedata)
 
         self.multiply_vector_label = QtWidgets.QLabel(self.multiply_vector)
-        self.multiply_vector_label.setObjectName(("multiply_vector_label"))
+        self.multiply_vector_label.setObjectName("multiply_vector_label")
         self.horizontalLayout.addWidget(self.multiply_vector_label)
         self.multiply_vector_line_edit = QtWidgets.QLineEdit(self.multiply_vector)
         self.multiply_vector_line_edit.setReadOnly(True)
-        self.multiply_vector_line_edit.setObjectName(("multiply_vector_line_edit"))
+        self.multiply_vector_line_edit.setObjectName("multiply_vector_line_edit")
         self.horizontalLayout.addWidget(self.multiply_vector_line_edit)
         self.multiply_vector_button = QtWidgets.QToolButton(self.multiply_vector)
-        self.multiply_vector_button.setObjectName(("multiply_vector_button"))
+        self.multiply_vector_button.setObjectName("multiply_vector_button")
         self.horizontalLayout.addWidget(self.multiply_vector_button)
+        self.multiply_vector.setObjectName("multiply_vector")
         self.module_layout.addWidget(self.multiply_vector)
 
         self.multiply_vector.setTitle("Multiply Data by a Vector")

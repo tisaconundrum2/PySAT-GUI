@@ -48,6 +48,7 @@ class write_data_:
 
         self.write_data_choose_data_label = QtWidgets.QLabel(self.write_data)
         self.write_data_choose_data_label.setText("Choose data set to write to .csv:")
+        self.write_data_choose_data_label.setObjectName("write_data_choose_data_label")
         self.write_data_vlayout.addWidget(self.write_data_choose_data_label)
 
         datachoices = self.pysat_fun.datakeys
@@ -55,16 +56,20 @@ class write_data_:
             
             
         self.write_data_choose_data = make_combobox(datachoices)
+        self.write_data_choose_data.setObjectName("write_data_choose_data")
         self.write_data_vlayout.addWidget(self.write_data_choose_data)
 
         self.write_data_linedit_label = QtWidgets.QLabel(self.write_data)
         self.write_data_linedit_label.setText('Specify a filename:')
+        self.write_data_linedit_label.setObjectName("write_data_linedit_label")
         self.write_data_vlayout.addWidget(self.write_data_linedit_label)
 
         self.write_data_file = QtWidgets.QLineEdit(self.write_data)
         self.write_data_file.setText('output.csv')
+        self.write_data_file.setObjectName("write_data_file")
         self.write_data_vlayout.addWidget(self.write_data_file)
 
+        self.write_data.setObjectName("write_data")
         self.module_layout.addWidget(self.write_data)
         self.write_data.raise_()
         self.write_data.setTitle("Write to CSV")

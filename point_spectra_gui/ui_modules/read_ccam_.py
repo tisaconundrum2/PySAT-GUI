@@ -75,9 +75,7 @@ class read_ccam_:
         font = QtGui.QFont()
         font.setPointSize(10)
         self.read_ccam.setFont(font)
-        self.read_ccam.setObjectName(("Read ChemCam Data"))
         self.read_ccam_vlayout = QtWidgets.QVBoxLayout(self.read_ccam)
-        self.read_ccam_vlayout.setObjectName(("read_ccam_vlayout"))
 
         # label and linedit for specifying search string
         self.searchstring_hlayout = QtWidgets.QHBoxLayout()

@@ -37,32 +37,32 @@ class get_mask_:
         font = QtGui.QFont()
         font.setPointSize(10)
         self.get_mask.setFont(font)
-        self.get_mask.setObjectName(("get_mask"))
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.get_mask)
         self.horizontalLayout.setContentsMargins(11, 11, 11, 11)
         self.horizontalLayout.setSpacing(6)
-        self.horizontalLayout.setObjectName(("horizontalLayout"))
 
         self.choosedata_label = QtWidgets.QLabel(self.get_mask)
-        self.choosedata_label.setObjectName(("choosedata_label"))
+        self.choosedata_label.setObjectName("choosedata_label")
         self.horizontalLayout.addWidget(self.choosedata_label)
         datachoices = self.pysat_fun.datakeys
         
             
             
         self.mask_choosedata = make_combobox(datachoices)
+        self.mask_choosedata.setObjectName("mask_choosedata")
         self.horizontalLayout.addWidget(self.mask_choosedata)
 
         self.get_mask_label = QtWidgets.QLabel(self.get_mask)
-        self.get_mask_label.setObjectName(("get_mask_label"))
+        self.get_mask_label.setObjectName("get_mask_label")
         self.horizontalLayout.addWidget(self.get_mask_label)
         self.get_mask_line_edit = QtWidgets.QLineEdit(self.get_mask)
         self.get_mask_line_edit.setReadOnly(True)
-        self.get_mask_line_edit.setObjectName(("get_mask_line_edit"))
+        self.get_mask_line_edit.setObjectName("get_mask_line_edit")
         self.horizontalLayout.addWidget(self.get_mask_line_edit)
         self.get_mask_button = QtWidgets.QToolButton(self.get_mask)
-        self.get_mask_button.setObjectName(("get_mask_button"))
+        self.get_mask_button.setObjectName("get_mask_button")
         self.horizontalLayout.addWidget(self.get_mask_button)
+        self.get_mask.setObjectName("get_mask")
         self.module_layout.addWidget(self.get_mask)
 
         self.get_mask.setTitle("Mask Data")
