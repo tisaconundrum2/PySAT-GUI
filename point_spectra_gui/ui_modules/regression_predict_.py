@@ -47,11 +47,9 @@ class regression_predict_:
                 modelkey = self.arg_list[1]
                 # self.regression_predict_choosedata = make_combobox(datakey)
                 # self.regression_predict_choosemodel = make_combobox(modelkey)
-                self.regression_predict_choosedata.setItemText(0,datakey)
+                self.regression_predict_choosedata.setItemText(0, datakey)
                 self.regression_predict_choosemodel.setItemText(0, modelkey)
                 pass
-
-
             except Exception as e:
                 error_print(e)
 
@@ -69,7 +67,6 @@ class regression_predict_:
         # create the combobox with data choices
         datachoices = self.pysat_fun.datakeys
         # TODO add logic for dealing with restoring this module
-
 
         self.regression_predict_choosedata = make_combobox(datachoices)
         # self.regression_predict_choosedata.setIconSize(QtCore.QSize(50, 20))
@@ -89,7 +86,6 @@ class regression_predict_:
         if modelchoices == []:
             modelchoices = ['No model has been trained!']
         self.regression_predict_choosemodel = make_combobox(modelchoices)
-        #  self.regression_predict_choosemodel.setIconSize(QtCore.QSize(50, 20))
         self.regression_predict_choosemodel.setObjectName("regression_predict_choosemodel")
         self.regression_predict_choosemodel_hlayout.addWidget(self.regression_predict_choosemodel)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
