@@ -98,9 +98,12 @@ class listOfModules:
         return found
 
     def pop(self):
-        current = self.head
-        self.head = self.head.getNext()
-        return current.getData()
+        try:
+            current = self.head
+            self.head = self.head.getNext()
+            return current.getData()
+        except:
+            pass
 
     def del_module(self):
         current = self.head
