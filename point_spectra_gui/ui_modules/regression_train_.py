@@ -108,6 +108,8 @@ class regression_train_:
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def set_regression_parameters(self):
+        if self.restr_list is not None:
+            self.qtickle.guirestore(self.restr_list)
         if self.arg_list is not None:
             try:
                 datakey = self.arg_list[0]
@@ -127,8 +129,7 @@ class regression_train_:
                 self.make_regression_widget(self.regression_choosealg.currentText(), params=params)
             except:
                 pass
-        if self.restr_list is not None:
-            self.qtickle.guirestore(self.restr_list)
+
 
     def make_ransac_widget(self, isChecked):
         if not isChecked:
@@ -139,12 +140,12 @@ class regression_train_:
             self.ransac_widget.ransac_lossfunc_hlayout = QtWidgets.QHBoxLayout()
             self.ransac_widget.ransac_lossfunc_label = QtWidgets.QLabel(self.ransac_widget)
             self.ransac_widget.ransac_lossfunc_label.setText('Loss function:')
-            self.ransac_widget.ransac_lossfunc_label.setObjectName("self.ransac_widget.ransac_lossfunc_label")
+            self.ransac_widget.ransac_lossfunc_label.setObjectName("ransac_widget.ransac_lossfunc_label")
             self.ransac_widget.ransac_lossfunc_hlayout.addWidget(self.ransac_widget.ransac_lossfunc_label)
             self.ransac_widget.ransac_lossfunc_combobox = QtWidgets.QComboBox(self.ransac_widget)
             self.ransac_widget.ransac_lossfunc_combobox.addItem(("Squared Error"))
             self.ransac_widget.ransac_lossfunc_combobox.addItem(("Absolute Error"))
-            self.ransac_widget.ransac_lossfunc_combobox.setObjectName("self.ransac_widget.ransac_lossfunc_combobox")
+            self.ransac_widget.ransac_lossfunc_combobox.setObjectName("ransac_widget.ransac_lossfunc_combobox")
             self.ransac_widget.ransac_lossfunc_hlayout.addWidget(self.ransac_widget.ransac_lossfunc_combobox)
             self.ransac_widget.ransac_lossfunc_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
                                                                               QtWidgets.QSizePolicy.Minimum)
@@ -153,10 +154,10 @@ class regression_train_:
             self.ransac_widget.ransac_thresh_hlayout = QtWidgets.QHBoxLayout()
             self.ransac_widget.ransac_thresh_label = QtWidgets.QLabel(self.ransac_widget)
             self.ransac_widget.ransac_thresh_label.setText('Threshold:')
-            self.ransac_widget.ransac_thresh_label.setObjectName("self.ransac_widget.ransac_thresh_label")
+            self.ransac_widget.ransac_thresh_label.setObjectName("ransac_widget.ransac_thresh_label")
             self.ransac_widget.ransac_thresh_hlayout.addWidget(self.ransac_widget.ransac_thresh_label)
             self.ransac_widget.ransac_thresh_spin = QtWidgets.QDoubleSpinBox(self.ransac_widget)
-            self.ransac_widget.ransac_thresh_spin.setObjectName("self.ransac_widget.ransac_thresh_spin")
+            self.ransac_widget.ransac_thresh_spin.setObjectName("ransac_widget.ransac_thresh_spin")
             self.ransac_widget.ransac_thresh_hlayout.addWidget(self.ransac_widget.ransac_thresh_spin)
             self.ransac_widget.ransac_thresh_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
                                                                             QtWidgets.QSizePolicy.Minimum)
@@ -179,10 +180,10 @@ class regression_train_:
             self.reg_widget.pls_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
             self.reg_widget.pls_nc_label = QtWidgets.QLabel(self.reg_widget)
             self.reg_widget.pls_nc_label.setText('# of components:')
-            self.reg_widget.pls_nc_label.setObjectName("self.reg_widget.pls_nc_label")
+            self.reg_widget.pls_nc_label.setObjectName("reg_widget.pls_nc_label")
             self.reg_widget.pls_hlayout.addWidget(self.reg_widget.pls_nc_label)
             self.reg_widget.pls_nc_spinbox = QtWidgets.QSpinBox(self.reg_widget)
-            self.reg_widget.pls_nc_spinbox.setObjectName("self.reg_widget.pls_nc_spinbox")
+            self.reg_widget.pls_nc_spinbox.setObjectName("reg_widget.pls_nc_spinbox")
             self.reg_widget.pls_hlayout.addWidget(self.reg_widget.pls_nc_spinbox)
             self.reg_widget.pls_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
                                                                QtWidgets.QSizePolicy.Minimum)
@@ -196,30 +197,30 @@ class regression_train_:
             self.reg_widget.gp_dim_red_hlayout = QtWidgets.QHBoxLayout()
             self.reg_widget.gp_dim_red_label = QtWidgets.QLabel(self.reg_widget)
             self.reg_widget.gp_dim_red_label.setText('Choose dimensionality reduction method:')
-            self.reg_widget.gp_dim_red_label.setObjectName("self.reg_widget.gp_dim_red_label")
+            self.reg_widget.gp_dim_red_label.setObjectName("reg_widget.gp_dim_red_label")
             self.reg_widget.gp_dim_red_hlayout.addWidget(self.reg_widget.gp_dim_red_label)
             self.reg_widget.gp_dim_red_combobox = QtWidgets.QComboBox(self.reg_widget)
             self.reg_widget.gp_dim_red_combobox.addItem(("PCA"))
             self.reg_widget.gp_dim_red_combobox.addItem(("ICA"))
-            self.reg_widget.gp_dim_red_combobox.setObjectName("self.reg_widget.gp_dim_red_combobox")
+            self.reg_widget.gp_dim_red_combobox.setObjectName("reg_widget.gp_dim_red_combobox")
             self.reg_widget.gp_dim_red_hlayout.addWidget(self.reg_widget.gp_dim_red_combobox)
             self.reg_widget.gp_dim_red_nc_label = QtWidgets.QLabel()
             self.reg_widget.gp_dim_red_nc_label.setText('# of components:')
-            self.reg_widget.gp_dim_red_nc_label.setObjectName("self.reg_widget.gp_dim_red_nc_label")
+            self.reg_widget.gp_dim_red_nc_label.setObjectName("reg_widget.gp_dim_red_nc_label")
             self.reg_widget.gp_dim_red_hlayout.addWidget(self.reg_widget.gp_dim_red_nc_label)
             self.reg_widget.gp_dim_red_nc_spinbox = QtWidgets.QSpinBox(self.reg_widget)
-            self.reg_widget.gp_dim_red_nc_spinbox.setObjectName("self.reg_widget.gp_dim_red_nc_spinbox")
+            self.reg_widget.gp_dim_red_nc_spinbox.setObjectName("reg_widget.gp_dim_red_nc_spinbox")
             self.reg_widget.gp_dim_red_hlayout.addWidget(self.reg_widget.gp_dim_red_nc_spinbox)
 
             self.reg_widget.gp_vlayout.addLayout(self.reg_widget.gp_dim_red_hlayout)
             self.reg_widget.gp_rand_starts_hlayout = QtWidgets.QHBoxLayout()
             self.reg_widget.gp_rand_starts_label = QtWidgets.QLabel(self.reg_widget)
             self.reg_widget.gp_rand_starts_label.setText('# of random starts:')
-            self.reg_widget.gp_rand_starts_label.setObjectName("self.reg_widget.gp_rand_starts_label")
+            self.reg_widget.gp_rand_starts_label.setObjectName("reg_widget.gp_rand_starts_label")
             self.reg_widget.gp_rand_starts_hlayout.addWidget(self.reg_widget.gp_rand_starts_label)
             self.reg_widget.gp_rand_starts_spin = QtWidgets.QSpinBox(self.reg_widget)
             self.reg_widget.gp_rand_starts_spin.setValue(1)
-            self.reg_widget.gp_rand_starts_spin.setObjectName("self.reg_widget.gp_rand_starts_spin")
+            self.reg_widget.gp_rand_starts_spin.setObjectName("reg_widget.gp_rand_starts_spin")
             self.reg_widget.gp_rand_starts_hlayout.addWidget(self.reg_widget.gp_rand_starts_spin)
             self.reg_widget.spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
                                                                 QtWidgets.QSizePolicy.Minimum)
@@ -228,29 +229,29 @@ class regression_train_:
             self.reg_widget.gp_theta_vlayout = QtWidgets.QVBoxLayout()
             self.reg_widget.gp_theta0_label = QtWidgets.QLabel(self.reg_widget)
             self.reg_widget.gp_theta0_label.setText('Starting Theta:')
-            self.reg_widget.gp_theta0_label.setObjectName("self.reg_widget.gp_theta0_label")
+            self.reg_widget.gp_theta0_label.setObjectName("reg_widget.gp_theta0_label")
             self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_theta0_label)
             self.reg_widget.gp_theta0_spin = QtWidgets.QDoubleSpinBox(self.reg_widget)
             self.reg_widget.gp_theta0_spin.setValue(1.0)
-            self.reg_widget.gp_theta0_spin.setObjectName("self.reg_widget.gp_theta0_spin")
+            self.reg_widget.gp_theta0_spin.setObjectName("reg_widget.gp_theta0_spin")
             self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_theta0_spin)
             self.reg_widget.gp_thetaL_label = QtWidgets.QLabel(self.reg_widget)
             self.reg_widget.gp_thetaL_label.setText('Lower bound on Theta:')
-            self.reg_widget.gp_thetaL_label.setObjectName("self.reg_widget.gp_thetaL_label")
+            self.reg_widget.gp_thetaL_label.setObjectName("reg_widget.gp_thetaL_label")
             self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_thetaL_label)
             self.reg_widget.gp_thetaL_spin = QtWidgets.QDoubleSpinBox(self.reg_widget)
             self.reg_widget.gp_thetaL_spin.setValue(0.1)
-            self.reg_widget.gp_thetaL_spin.setObjectName("self.reg_widget.gp_thetaL_spin")
+            self.reg_widget.gp_thetaL_spin.setObjectName("reg_widget.gp_thetaL_spin")
             self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_thetaL_spin)
             self.reg_widget.gp_thetaU_label = QtWidgets.QLabel(self.reg_widget)
             self.reg_widget.gp_thetaU_label.setText('Upper bound on Theta:')
-            self.reg_widget.gp_thetaU_label.setObjectName("self.reg_widget.gp_thetaU_label")
+            self.reg_widget.gp_thetaU_label.setObjectName("reg_widget.gp_thetaU_label")
             self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_thetaU_label)
             self.reg_widget.gp_thetaU_spin = QtWidgets.QDoubleSpinBox(self.reg_widget)
             self.reg_widget.gp_thetaU_spin.setMaximum(10000)
             self.reg_widget.gp_thetaU_spin.setValue(100.0)
 
-            self.reg_widget.gp_thetaU_spin.setObjectName("self.reg_widget.gp_thetaU_spin")
+            self.reg_widget.gp_thetaU_spin.setObjectName("reg_widget.gp_thetaU_spin")
             self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_thetaU_spin)
             self.reg_widget.spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
                                                                 QtWidgets.QSizePolicy.Minimum)
@@ -276,7 +277,7 @@ class regression_train_:
             self.reg_widget.ols_intercept_checkbox = QtWidgets.QCheckBox(self.reg_widget)
             self.reg_widget.ols_intercept_checkbox.setText('Fit Intercept')
             self.reg_widget.ols_intercept_checkbox.setChecked(True)
-            self.reg_widget.ols_intercept_checkbox.setObjectName("self.reg_widget.ols_intercept_checkbox")
+            self.reg_widget.ols_intercept_checkbox.setObjectName("reg_widget.ols_intercept_checkbox")
             self.reg_widget.ols_hlayout.addWidget(self.reg_widget.ols_intercept_checkbox)
             self.reg_widget.ols_intercept_checkbox.stateChanged.connect(lambda: self.get_regression_parameters())
             if params is not None:
@@ -286,7 +287,7 @@ class regression_train_:
             self.reg_widget.omp_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
             self.reg_widget.omp_label = QtWidgets.QLabel(self.reg_widget)
             self.reg_widget.omp_label.setText('# of nonzero coefficients:')
-            self.reg_widget.omp_label.setObjectName("self.reg_widget.omp_label")
+            self.reg_widget.omp_label.setObjectName("reg_widget.omp_label")
             self.reg_widget.omp_hlayout.addWidget(self.reg_widget.omp_label)
             self.reg_widget.omp_nfeatures = QtWidgets.QSpinBox(self.reg_widget)
             self.reg_widget.omp_nfeatures.setMaximum(9999)
@@ -297,18 +298,18 @@ class regression_train_:
                 self.reg_widget.omp_nfeatures.setValue(nfeatures_default)
             except:
                 self.reg_widget.omp_nfeatures.setValue(10)
-            self.reg_widget.omp_nfeatures.setObjectName("self.reg_widget.omp_nfeatures")
+            self.reg_widget.omp_nfeatures.setObjectName("reg_widget.omp_nfeatures")
             self.reg_widget.omp_hlayout.addWidget(self.reg_widget.omp_nfeatures)
             self.reg_widget.omp_intercept_checkbox = QtWidgets.QCheckBox(self.reg_widget)
             self.reg_widget.omp_intercept_checkbox.setText('Fit Intercept')
             self.reg_widget.omp_intercept_checkbox.setChecked(True)
-            self.reg_widget.omp_intercept_checkbox.setObjectName("self.reg_widget.omp_intercept_checkbox")
+            self.reg_widget.omp_intercept_checkbox.setObjectName("reg_widget.omp_intercept_checkbox")
             self.reg_widget.omp_hlayout.addWidget(self.reg_widget.omp_intercept_checkbox)
 
             self.reg_widget.omp_cv_checkbox = QtWidgets.QCheckBox(self.reg_widget)
             self.reg_widget.omp_cv_checkbox.setText('Optimize with Cross Validation? (Ignores # of coeffs)')
             self.reg_widget.omp_cv_checkbox.setChecked(True)
-            self.reg_widget.omp_cv_checkbox.setObjectName("self.reg_widget.omp_cv_checkbox")
+            self.reg_widget.omp_cv_checkbox.setObjectName("reg_widget.omp_cv_checkbox")
             self.reg_widget.omp_hlayout.addWidget(self.reg_widget.omp_cv_checkbox)
 
             self.reg_widget.omp_intercept_checkbox.stateChanged.connect(lambda: self.get_regression_parameters())
@@ -328,14 +329,14 @@ class regression_train_:
 
             self.reg_widget.lasso_alphalabel = QtWidgets.QLabel(self.reg_widget)
             self.reg_widget.lasso_alphalabel.setText('Alpha:')
-            self.reg_widget.lasso_alphalabel.setObjectName("self.reg_widget.lasso_alphalabel")
+            self.reg_widget.lasso_alphalabel.setObjectName("reg_widget.lasso_alphalabel")
             self.reg_widget.lasso_alpha_hlayout.addWidget(self.reg_widget.lasso_alphalabel)
 
             self.reg_widget.lasso_alpha = QtWidgets.QDoubleSpinBox(self.reg_widget)
             self.reg_widget.lasso_alpha.setMaximum(1000)
             self.reg_widget.lasso_alpha.setMinimum(0.0001)
             self.reg_widget.lasso_alpha.setValue(1.0)
-            self.reg_widget.lasso_alpha.setObjectName("self.reg_widget.lasso_alpha")
+            self.reg_widget.lasso_alpha.setObjectName("reg_widget.lasso_alpha")
             self.reg_widget.lasso_alpha_hlayout.addWidget(self.reg_widget.lasso_alpha)
 
             self.reg_widget.lasso_alpha_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
@@ -345,19 +346,19 @@ class regression_train_:
 
             self.reg_widget.lasso_maxlabel = QtWidgets.QLabel(self.reg_widget)
             self.reg_widget.lasso_maxlabel.setText('Max # of iterations:')
-            self.reg_widget.lasso_maxlabel.setObjectName("self.reg_widget.lasso_maxlabel")
+            self.reg_widget.lasso_maxlabel.setObjectName("reg_widget.lasso_maxlabel")
             self.reg_widget.lasso_iter_hlayout.addWidget(self.reg_widget.lasso_maxlabel)
 
             self.reg_widget.lasso_max = QtWidgets.QSpinBox(self.reg_widget)
             self.reg_widget.lasso_max.setMaximum(100000)
             self.reg_widget.lasso_max.setMinimum(1)
             self.reg_widget.lasso_max.setValue(1000)
-            self.reg_widget.lasso_max.setObjectName("self.reg_widget.lasso_max")
+            self.reg_widget.lasso_max.setObjectName("reg_widget.lasso_max")
             self.reg_widget.lasso_iter_hlayout.addWidget(self.reg_widget.lasso_max)
 
             self.reg_widget.lasso_tollabel = QtWidgets.QLabel(self.reg_widget)
             self.reg_widget.lasso_tollabel.setText('Tolerance:')
-            self.reg_widget.lasso_tollabel.setObjectName("self.reg_widget.lasso_tollabel")
+            self.reg_widget.lasso_tollabel.setObjectName("reg_widget.lasso_tollabel")
             self.reg_widget.lasso_iter_hlayout.addWidget(self.reg_widget.lasso_tollabel)
 
             self.reg_widget.lasso_tol = QtWidgets.QDoubleSpinBox(self.reg_widget)
@@ -365,7 +366,7 @@ class regression_train_:
             self.reg_widget.lasso_tol.setMinimum(0.0000001)
             self.reg_widget.lasso_tol.setDecimals(5)
             self.reg_widget.lasso_tol.setValue(0.0001)
-            self.reg_widget.lasso_tol.setObjectName("self.reg_widget.lasso_tol")
+            self.reg_widget.lasso_tol.setObjectName("reg_widget.lasso_tol")
             self.reg_widget.lasso_iter_hlayout.addWidget(self.reg_widget.lasso_tol)
 
             self.reg_widget.lasso_iter_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
@@ -376,19 +377,19 @@ class regression_train_:
             self.reg_widget.lasso_intercept_checkbox = QtWidgets.QCheckBox(self.reg_widget)
             self.reg_widget.lasso_intercept_checkbox.setText('Fit Intercept')
             self.reg_widget.lasso_intercept_checkbox.setChecked(True)
-            self.reg_widget.lasso_intercept_checkbox.setObjectName("self.reg_widget.lasso_intercept_checkbox")
+            self.reg_widget.lasso_intercept_checkbox.setObjectName("reg_widget.lasso_intercept_checkbox")
             self.reg_widget.lasso_checkboxes_hlayout.addWidget(self.reg_widget.lasso_intercept_checkbox)
 
             self.reg_widget.lasso_positive_checkbox = QtWidgets.QCheckBox(self.reg_widget)
             self.reg_widget.lasso_positive_checkbox.setText('Force positive coefficients')
             self.reg_widget.lasso_positive_checkbox.setChecked(False)
-            self.reg_widget.lasso_positive_checkbox.setObjectName("self.reg_widget.lasso_positive_checkbox")
+            self.reg_widget.lasso_positive_checkbox.setObjectName("reg_widget.lasso_positive_checkbox")
             self.reg_widget.lasso_checkboxes_hlayout.addWidget(self.reg_widget.lasso_positive_checkbox)
 
             self.reg_widget.lasso_cv_checkbox = QtWidgets.QCheckBox(self.reg_widget)
             self.reg_widget.lasso_cv_checkbox.setText('Optimize with Cross Validation? (Ignores alpha)')
             self.reg_widget.lasso_cv_checkbox.setChecked(True)
-            self.reg_widget.lasso_cv_checkbox.setObjectName("self.reg_widget.lasso_cv_checkbox")
+            self.reg_widget.lasso_cv_checkbox.setObjectName("reg_widget.lasso_cv_checkbox")
             self.reg_widget.lasso_checkboxes_hlayout.addWidget(self.reg_widget.lasso_cv_checkbox)
 
             self.reg_widget.lasso_checkbox_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
@@ -428,7 +429,7 @@ class regression_train_:
         if alg == 'KRR':
             pass
 
-        self.reg_widget.setObjectName("self.reg_widget")
+        self.reg_widget.setObjectName("reg_widget")
         self.regression_vlayout.addWidget(self.reg_widget)
         self.get_regression_parameters()
 
@@ -479,14 +480,14 @@ class regression_train_:
         self.regression_train_choosey_label.setText('Y variable:')
         self.regression_chooseyvars_vlayout.addWidget(self.regression_train_choosey_label)
         self.regression_train_choosey = make_listwidget(self.yvar_choices())
-        self.regression_train_choosey.setObjectName("self.regression_train_choosey")
+        self.regression_train_choosey.setObjectName("regression_train_choosey")
         # TODO add ability to select multiple items
         # self.regression_train_choosey.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
         self.regression_chooseyvars_vlayout.addWidget(self.regression_train_choosey)
         self.regression_yvarlimits_hlayout = QtWidgets.QHBoxLayout()
         self.yvarmin_label = QtWidgets.QLabel(self.regression_train)
         self.yvarmin_label.setText('Min:')
-        self.yvarmin_label.setObjectName("self.yvarmin_label")
+        self.yvarmin_label.setObjectName("yvarmin_label")
         self.regression_yvarlimits_hlayout.addWidget(self.yvarmin_label)
         self.yvarmin_spin = QtWidgets.QDoubleSpinBox()
         # TODO: eventually we may want the ability to handle values outside 0-100 for regressions not dealing with wt.%
@@ -497,13 +498,13 @@ class regression_train_:
 
         self.yvarmax_label = QtWidgets.QLabel(self.regression_train)
         self.yvarmax_label.setText('Max:')
-        self.yvarmax_label.setObjectName("self.yvarmax_label")
+        self.yvarmax_label.setObjectName("yvarmax_label")
         self.regression_yvarlimits_hlayout.addWidget(self.yvarmax_label)
         self.yvarmax_spin = QtWidgets.QDoubleSpinBox()
         self.yvarmax_spin.setMaximum(99999)
         self.yvarmax_spin.setMinimum(0)
         self.yvarmax_spin.setValue(100)
-        self.yvarmax_spin.setObjectName("self.yvarmax_spin")
+        self.yvarmax_spin.setObjectName("yvarmax_spin")
         self.regression_yvarlimits_hlayout.addWidget(self.yvarmax_label)
         self.regression_yvarlimits_hlayout.addWidget(self.yvarmax_spin)
         self.regression_chooseyvars_vlayout.addLayout(self.regression_yvarlimits_hlayout)
@@ -535,7 +536,7 @@ class regression_train_:
                                                             QtWidgets.QSizePolicy.Minimum)
         self.regression_choosealg_hlayout.addItem(regression_choosealg_spacer)
         self.regression_vlayout.addLayout(self.regression_choosealg_hlayout)
-        self.regression_train.setObjectName("self.regression_train")
+        self.regression_train.setObjectName("regression_train")
         self.module_layout.addWidget(self.regression_train)
         self.regression_train.raise_()
         self.regression_train.setTitle(("Regression - Train"))
