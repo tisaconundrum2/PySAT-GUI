@@ -22,6 +22,7 @@ class strat_folds_:
         self.stratified_folds_ui()
         self.set_strat_fold_params()
         self.get_strat_fold_params()
+        self.connectWidgets()
         self.pysat_fun.set_greyed_modules(self.strat_folds)
 
         # TODO add try and except here
@@ -71,7 +72,6 @@ class strat_folds_:
         varchoices = self.pysat_fun.data[self.strat_folds_choose_data.currentText()].df['comp'].columns.values
         self.strat_folds_choose_var = make_combobox(varchoices)
         self.strat_folds_vlayout.addWidget(self.strat_folds_choose_var)
-        self.strat_folds_choose_data.activated[int].connect(self.strat_fold_change_vars)
         self.strat_folds_hlayout = QtWidgets.QHBoxLayout()
         self.strat_folds_hlayout.setObjectName(("strat_folds_hlayout"))
         self.nfolds_label = QtWidgets.QLabel(self.strat_folds)
@@ -90,7 +90,6 @@ class strat_folds_:
         foldchoices = ['1']
         self.choose_test_fold = make_combobox(foldchoices)
         self.choose_test_fold.setObjectName(("choose_test_fold"))
-        self.nfolds_spin.valueChanged.connect(self.strat_fold_change_testfolds)
         self.strat_folds_hlayout.addWidget(self.choose_test_fold)
         self.spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.strat_folds_hlayout.addItem(self.spacerItem)
@@ -107,13 +106,15 @@ class strat_folds_:
         #        self.create_folds.setText(("strat_folds", "Create Folds")
         self.strat_folds_choose_data_label.setText("Choose data to stratify:")
         self.strat_folds_choose_var_label.setText("Choose variable on which to sort:")
+
+    def connectWidgets(self):
+        self.strat_folds_choose_data.activated[int].connect(self.strat_fold_change_vars)
+        self.nfolds_spin.valueChanged.connect(self.strat_fold_change_testfolds)
         self.choose_test_fold.currentIndexChanged.connect(lambda: self.get_strat_fold_params())
         self.nfolds_spin.valueChanged.connect(lambda: self.get_strat_fold_params())
         self.strat_folds_choose_data.currentIndexChanged.connect(lambda: self.get_strat_fold_params())
 
     def set_strat_fold_params(self):
-        if self.restr_list is not None:
-            self.qtickle.guirestore(self.restr_list)
         # self.strat_folds_choose_data.setItemText()
         if self.arg_list is not None:
             datakey = self.arg_list[0]
@@ -124,6 +125,9 @@ class strat_folds_:
             self.strat_folds_choose_var.setCurrentIndex(self.strat_folds_choose_var.findText(colname))
             self.nfolds_spin.setValue(nfolds)
             self.choose_test_fold.setCurrentIndex(self.choose_test_fold.findText(str(testfold)))
+        if self.restr_list is not None:
+            self.qtickle.guirestore(self.restr_list)
+
 
     def strat_fold_change_vars(self):
         self.strat_folds_choose_var.clear()
