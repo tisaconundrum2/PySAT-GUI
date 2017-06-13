@@ -233,8 +233,11 @@ class cv_:
         self.cv_train_choosedata_label.setText("Choose data:")
         self.cv_train_choosedata_label.setObjectName("self.cv_train_choosedata_label")
         self.cv_choosedata_hlayout.addWidget(self.cv_train_choosedata_label)
-        datachoices = self.pysat_fun.datakeys
-        
+        datachoices = []
+        try:
+            datachoices = self.pysat_fun.datakeys
+        except:
+            pass
         self.cv_choosedata = make_combobox(datachoices)
         self.cv_choosedata.setIconSize(QtCore.QSize(50, 20))
         self.cv_choosedata.setObjectName("self.cv_choosedata")
@@ -303,7 +306,6 @@ class cv_:
         # self.ransac_hlayout = QtWidgets.QHBoxLayout()
         # self.cv_ransac_checkbox = QtWidgets.QCheckBox(self.cv_train)
         # self.cv_ransac_checkbox.setText('RANSAC')
-        self.cv_ransac_checkbox.setObjectName("self.cv_ransac_checkbox")
         # self.ransac_hlayout.addWidget(self.cv_ransac_checkbox)
         # self.cv_vlayout.addLayout(self.ransac_hlayout)
 
