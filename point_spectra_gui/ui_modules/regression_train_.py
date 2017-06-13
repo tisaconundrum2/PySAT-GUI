@@ -192,7 +192,7 @@ class regression_train_:
             self.reg_widget.pls_nc_spinbox.valueChanged.connect(lambda: self.get_regression_parameters())
             if params is not None:
                 self.reg_widget.pls_nc_spinbox.setValue(params['n_components'])
-        elif alg == 'GP':
+        if alg == 'GP':
             self.reg_widget = QtWidgets.QWidget()
             self.reg_widget.gp_vlayout = QtWidgets.QVBoxLayout(self.reg_widget)
             self.reg_widget.gp_dim_red_hlayout = QtWidgets.QHBoxLayout()
@@ -273,7 +273,7 @@ class regression_train_:
                 self.reg_widget.gp_thetaL_spin.setValue(params['thetaL'])
                 self.reg_widget.gp_thetaU_spin.setValue(params['thetaU'])
 
-        elif alg == 'OLS':
+        if alg == 'OLS':
             self.reg_widget.ols_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
             self.reg_widget.ols_intercept_checkbox = QtWidgets.QCheckBox(self.reg_widget)
             self.reg_widget.ols_intercept_checkbox.setText('Fit Intercept')
@@ -284,7 +284,7 @@ class regression_train_:
             if params is not None:
                 self.reg_widget.ols_intercept_checkbox.setChecked(params['fit_intercept'])
 
-        elif alg == 'OMP':
+        if alg == 'OMP':
             self.reg_widget.omp_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
             self.reg_widget.omp_label = QtWidgets.QLabel(self.reg_widget)
             self.reg_widget.omp_label.setText('# of nonzero coefficients:')
@@ -322,7 +322,7 @@ class regression_train_:
                 self.reg_widget.omp_cv_checkbox.setChecked(params['CV'])
                 self.reg_widget.omp_nfeatures.setValue(params['n_nonzero_coefs'])
 
-        elif alg == 'Lasso':
+        if alg == 'Lasso':
             self.reg_widget.lasso_vlayout = QtWidgets.QVBoxLayout(self.reg_widget)
             self.reg_widget.lasso_alpha_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
             self.reg_widget.lasso_iter_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
@@ -517,7 +517,6 @@ class regression_train_:
         # self.ransac_hlayout = QtWidgets.QHBoxLayout()
         # self.regression_ransac_checkbox = QtWidgets.QCheckBox(self.regression_train)
         # self.regression_ransac_checkbox.setText('RANSAC')
-        self.regression_ransac_checkbox.setObjectName("regression_ransac_checkbox")
         # self.ransac_hlayout.addWidget(self.regression_ransac_checkbox)
         # self.regression_vlayout.addLayout(self.ransac_hlayout)
 
