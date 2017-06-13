@@ -27,22 +27,7 @@ class dim_red_plot_:
     def set_dim_red_params(self):
         if self.restr_list is not None:
             self.qtickle.guirestore(self.restr_list)
-        if self.arg_list is not None:
-            datakey = self.arg_list[0]
-            xvar = self.arg_list[1]
-            yvar = self.arg_list[2]
-            filename = self.arg_list[3]
-            colorvar = self.kw_list['colorvar'][1]
-            method = self.kw_list['method']
 
-            self.dim_red_plot_choose_data.setCurrentIndex(self.dim_red_plot_choose_data.findText(datakey))
-            self.dim_red_choosealg.setCurrentIndex(self.dim_red_choosealg.findText(method))
-            self.xychoices_change_vars(self.xvar_choices)
-            self.xychoices_change_vars(self.yvar_choices)
-            self.xvar_choices.setCurrentIndex(self.xvar_choices.findText(xvar))
-            self.yvar_choices.setCurrentIndex(self.yvar_choices.findText(yvar))
-            self.colorchoices.setCurrentIndex(self.colorchoices.findText(colorvar))
-            self.file_text.setText(filename)
 
     def get_dim_red_params(self):
         datakey = self.dim_red_plot_choose_data.currentText()
