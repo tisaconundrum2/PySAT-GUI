@@ -3,7 +3,7 @@
 # Installation
 
   - Click and download [Anaconda Python 4.3.X 64-Bit installer](https://repo.continuum.io/archive/Anaconda3-4.3.1-Windows-x86_64.exe).
-  - For all other Operating Systems go to Anaconda's [download page](https://www.continuum.io/downloads)
+  - You can also go here to Anaconda's [download page](https://www.continuum.io/downloads)
   - Download or clone this repository
   - Download the PYSAT library from here [github.com/USGS-Astrogeology/PySAT](https://github.com/USGS-Astrogeology/PySAT)
   - For more on how to install go [here](https://github.com/USGS-Astrogeology/PySAT_Point_Spectra_GUI/wiki/How-To-Install).
@@ -12,7 +12,7 @@
 ![PYSAT splash](./images/splash.png)  
 
 - The UI's backend is designed and created in Python with the QT framework
-- The UI is being built to work as close to the original libraries as physically possible
+- The UI is being built to work closely with the original libraries
 
 Current Road Ahead
 - [x] Ported to version 5 of PyQt
