@@ -1,7 +1,7 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
 
 from Qtickle import Qtickle
-from point_spectra_gui.gui_utils import make_combobox
+from point_spectra_gui.gui_utils import make_combobox,change_combo_list_vars
 from point_spectra_gui.ui_modules.Error_ import error_print
 
 
@@ -67,15 +67,17 @@ class sm_:
     def set_sm_params(self):
         if self.restr_list is not None:
             self.qtickle.guirestore(self.restr_list)
-            self.isRestore = True
+        if self.arg_list is not None:
             datakey = self.arg_list[0]
-            self.submodel_names = self.arg_list[1]
+            submodel_names = self.arg_list[1]
             blendranges = self.arg_list[2]
             trueval_data = self.arg_list[3]
-            try:
-                self.choosedata_predict.currentIndex(self.choosedata_predict.findText(str(datakey)))
-            except:
-                pass
+            change_combo_list_vars(self.choosedata_predict,self.restr_list['self.choosedata_predict_values'])
+            if self.optimize_checkbox.isChecked():
+                change_combo_list_vars(self.choosedata,self.restr_list['self.choosedata_values'])
+                self.choosedata.setCurrentIndex(self.choosedata.findText(str(trueval_data)))
+            pass
+            self.choosedata_predict.setCurrentIndex(self.choosedata_predict.findText(str(datakey)))
 
     def sm_ui(self):
 
@@ -94,11 +96,9 @@ class sm_:
         self.choosemodel_label = QtWidgets.QLabel(self.submodel_predict)
         self.choosemodel_hlayout.addWidget(self.choosemodel_label)
         self.choosemodel_label.setObjectName("self.choosemodel_label")
-        if self.isRestore == False:
-            modelchoices = self.pysat_fun.modelkeys
-        else:
-            modelchoices = self.submodel_names
-
+        modelchoices = self.pysat_fun.modelkeys
+        if modelchoices == []:
+            modelchoices = ['No model has been trained!']
         self.choosemodel = make_combobox(modelchoices)
 
         self.choosemodel_hlayout.addWidget(self.choosemodel)

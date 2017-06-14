@@ -264,8 +264,8 @@ class frontEndProc(object):
     def do_multiply_vector(self, arg_list=None, kw_list=None, restr_list=None):
         ui_modules.multiply_vector_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
 
-    def do_write_data(self):
-        self.flag = ui_modules.write_data_(self.backEndProc, self.module_layout)
+    def do_write_data(self, arg_list=None, kw_list=None, restr_list=None):
+        self.flag = ui_modules.write_data_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
 
     def file_outpath(self, arg_list=None, kw_list=None, restr_list=None):
         self.flag = ui_modules.file_outpath_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
