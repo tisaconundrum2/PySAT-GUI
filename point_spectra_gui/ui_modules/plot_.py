@@ -30,14 +30,7 @@ class plot_:
         datakey = self.scatter_choosedata.currentText()
         xvar = self.xvar_choices.currentText()
         yvar = self.yvar_choices.currentText()
-        try:
-            xvar = (self.vars_level0[self.vars_level1.index(xvar)], xvar)
-            yvar = (self.vars_level0[self.vars_level1.index(yvar)], yvar)
-        except:
-            print('Problem setting x and/or y variable!')
-            print('x='+str(xvar))
-            print('y='+str(yvar))
-            pass
+
         figname = self.figname_text.text()
         title = self.plot_title_text.text()
         xrange = self.xmin_spin.value(), self.xmax_spin.value()
@@ -340,15 +333,18 @@ class plot_:
         self.scatter_choosedata.activated[int].connect(
             lambda: change_combo_list_vars(self.xvar_choices, self.get_choices()))
         self.scatter_choosedata.activated[int].connect(
+            lambda: change_combo_list_vars(self.yvar_choices, self.get_choices()))
+
+        self.scatter_choosedata.activated[int].connect(
             lambda: self.get_minmax(self.xmin_spin, self.xmax_spin, self.xvar_choices.currentText()))
         self.scatter_choosedata.activated[int].connect(
             lambda: self.get_minmax(self.ymin_spin, self.ymax_spin, self.yvar_choices.currentText()))
+
         self.xvar_choices.activated[int].connect(
             lambda: self.get_minmax(self.xmin_spin, self.xmax_spin, self.xvar_choices.currentText()))
-        self.scatter_choosedata.activated[int].connect(
-            lambda: change_combo_list_vars(self.yvar_choices, self.get_choices()))
         self.yvar_choices.activated[int].connect(
             lambda: self.get_minmax(self.ymin_spin, self.ymax_spin, self.yvar_choices.currentText()))
+
         self.color_choices.activated.connect(lambda: self.get_plot_parameters())
 
         for name, obj in inspect.getmembers(self):
