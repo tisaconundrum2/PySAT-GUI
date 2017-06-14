@@ -37,6 +37,11 @@ class Qtickle(object):
                     value = obj.value()  # get stored value from registry
                     dict[name] = value
 
+                if isinstance(obj, QDoubleSpinBox):
+                    name = obj.objectName()
+                    value = obj.value()
+                    dict[name] = value
+
                 if isinstance(obj, QSlider):
                     name = obj.objectName()
                     value = obj.value()  # get stored value from registry
@@ -110,6 +115,12 @@ class Qtickle(object):
                     value = dict[name]
                     if value is not None:
                         obj.setValue(int(value))  # restore value from registry
+
+                if isinstance(obj, QDoubleSpinBox):
+                    name = obj.objectName()
+                    value = dict[name]
+                    if value is not None:
+                        obj.setValue(int(value))
 
                 if isinstance(obj, QLabel):
                     name = obj.objectName()
