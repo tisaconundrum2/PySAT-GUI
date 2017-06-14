@@ -2,7 +2,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/USGS-Astrogeology/PySAT/badge.svg?branch=master)](https://coveralls.io/github/USGS-Astrogeology/PySAT?branch=master)
 # Installation
 
-  - Click and download [Anaconda Python 4.3.X 64-Bit installer](https://repo.continuum.io/archive/Anaconda3-4.3.1-Windows-x86_64.exe).
+  - Click and download for Windows [Anaconda Python 4.3.X 64-Bit installer](https://repo.continuum.io/archive/Anaconda3-4.3.1-Windows-x86_64.exe).
   - You can also go here to Anaconda's [download page](https://www.continuum.io/downloads)
   - Download or clone this repository
   - Download the PYSAT library from here [github.com/USGS-Astrogeology/PySAT](https://github.com/USGS-Astrogeology/PySAT)
