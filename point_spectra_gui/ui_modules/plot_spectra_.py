@@ -22,6 +22,7 @@ class plot_spectra_:
         self.plot_spect_ui()
         self.set_plot_spectra_parameters()
         self.get_plot_spectra_parameters()
+        self.connectWidgets()
         self.pysat_fun.set_greyed_modules(self.plot_spect)
 
     def get_plot_spectra_parameters(self):
@@ -107,22 +108,22 @@ class plot_spectra_:
         if self.restr_list is not None:
             self.qtickle.guirestore(self.restr_list)
         if self.arg_list is not None:
-            datakey=self.arg_list[0]
+            datakey = self.arg_list[0]
             self.choosedata.setCurrentIndex(self.choosedata.findText(datakey))
-            figname=self.kw_list['figname']
+            figname = self.kw_list['figname']
             self.figname_text.setText(figname)
-            title=self.kw_list['title']
+            title = self.kw_list['title']
             self.plot_spect_title_text.setText(title)
-            col=self.kw_list['col']
+            col = self.kw_list['col']
             self.col_choices.setCurrentIndex(self.col_choices.findText(col))
-            row=self.arg_list[1]
-            row_bool=self.kw_list['row_bool']
-            items=self.chooserows.findItems(row, QtCore.Qt.MatchExactly)
-            for i,item in enumerate(items):
+            row = self.arg_list[1]
+            row_bool = self.kw_list['row_bool']
+            items = self.chooserows.findItems(row, QtCore.Qt.MatchExactly)
+            for i, item in enumerate(items):
                 if row_bool[i] is True:
                     item.setSelected(True)
-            color=self.kw_list['color']
-            alpha=self.kw_list['alpha']
+            color = self.kw_list['color']
+            alpha = self.kw_list['alpha']
             if color == [1, 0, 0, alpha]:
                 color = 'Red'
             elif color == [0, 1, 0, alpha]:
@@ -139,7 +140,7 @@ class plot_spectra_:
                 color = 'Black'
             self.color_choices.setCurrentIndex(self.color_choices.findText(color))
 
-            linestyle=self.kw_list['linestyle']
+            linestyle = self.kw_list['linestyle']
             if linestyle == '-':
                 line = 'Line'
             elif linestyle == '--':
@@ -150,7 +151,7 @@ class plot_spectra_:
                 line = 'Line'
             self.line_choices.setCurrentIndex(self.line_choices.findText(line))
 
-            figfile=self.kw_list['figfile']
+            figfile = self.kw_list['figfile']
             self.file_text.setText(figfile)
 
             self.width_spin.setValue(self.kw_list['linewidth'])
@@ -160,45 +161,58 @@ class plot_spectra_:
 
     def plot_spect_ui(self):
         self.plot_spect = QtWidgets.QGroupBox()
+        self.plot_spect.setObjectName("self.plot_spect")
         font = QtGui.QFont()
         font.setPointSize(10)
         self.plot_spect.setFont(font)
         self.verticalLayout = QtWidgets.QVBoxLayout(self.plot_spect)
+        self.verticalLayout.setObjectName("self.verticalLayout")
         self.verticalLayout.setContentsMargins(11, 11, 11, 11)
         self.verticalLayout.setSpacing(6)
         self.choosedata_flayout = QtWidgets.QFormLayout()
+        self.choosedata_flayout.setObjectName("self.choosedata_flayout")
         self.choosedata_flayout.setContentsMargins(11, 11, 11, 11)
         self.choosedata_flayout.setSpacing(6)
         self.choosedata_label = QtWidgets.QLabel(self.plot_spect)
+        self.choosedata_label.setObjectName("self.choosedata_label")
         self.choosedata_flayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.choosedata_label)
 
         datachoices = self.pysat_fun.datakeys
-        
+
         self.choosedata = make_combobox(datachoices)
+        self.choosedata.setObjectName("self.choosedata")
 
         self.choosedata.setIconSize(QtCore.QSize(50, 20))
         self.choosedata_flayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.choosedata)
         self.figname_label = QtWidgets.QLabel(self.plot_spect)
+        self.figname_label.setObjectName("self.figname_label")
         self.choosedata_flayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.figname_label)
         self.figname_text = QtWidgets.QLineEdit(self.plot_spect)
+        self.figname_text.setObjectName("self.figname_text")
         self.choosedata_flayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.figname_text)
         self.plot_spect_title_label = QtWidgets.QLabel(self.plot_spect)
+        self.plot_spect_title_label.setObjectName("self.plot_spect_title_label")
         self.choosedata_flayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.plot_spect_title_label)
         self.plot_spect_title_text = QtWidgets.QLineEdit(self.plot_spect)
+        self.plot_spect_title_text.setObjectName("self.plot_spect_title_text")
         self.plot_spect_title_text.setEnabled(True)
         self.choosedata_flayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.plot_spect_title_text)
         self.verticalLayout.addLayout(self.choosedata_flayout)
 
         self.choosecol_flayout = QtWidgets.QFormLayout()
+        self.choosecol_flayout.setObjectName("self.choosecol_flayout")
         self.choosecol_flayout.setFieldGrowthPolicy(QtWidgets.QFormLayout.AllNonFixedFieldsGrow)
         self.choosecol_flayout.setContentsMargins(11, 11, 11, 11)
         self.choosecol_flayout.setSpacing(6)
         self.choosecol_label = QtWidgets.QLabel(self.plot_spect)
+        self.choosecol_label.setObjectName("self.choosecol_label")
         self.choosecol_flayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.choosecol_label)
-        self.col_choices = make_combobox([''])
+        self.col_choices = make_combobox([])
+        self.col_choices.setObjectName("self.col_choices")
         self.plot_spect_change_vars(self.col_choices)
         self.choosecol_flayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.col_choices)
         self.chooserows_label = QtWidgets.QLabel(self.plot_spect)
+        self.chooserows_label.setObjectName("self.chooserows_label")
         self.choosecol_flayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.chooserows_label)
         try:
             rowchoices = self.pysat_fun.data[self.choosedata.currentText()].df[('meta', self.col_choices.currentText())]
@@ -206,33 +220,45 @@ class plot_spectra_:
         except:
             rowchoices = ['None']
         self.chooserows = make_listwidget(rowchoices)
+        self.chooserows.setObjectName("self.chooserows")
         # self.chooserows.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
         self.choosecol_flayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.chooserows)
         self.verticalLayout.addLayout(self.choosecol_flayout)
 
         self.xlimits_hlayout = QtWidgets.QHBoxLayout()
+        self.xlimits_hlayout.setObjectName("self.xlimits_hlayout")
         self.xmin_label = QtWidgets.QLabel(self.plot_spect)
+        self.xmin_label.setObjectName("self.xmin_label")
         self.xmin_label.setText('Min:')
         self.xmin_label.setObjectName("xmin_label")
         self.xlimits_hlayout.addWidget(self.xmin_label)
         self.xmin_spin = QtWidgets.QDoubleSpinBox()
+        self.xmin_spin.setObjectName("self.xmin_spin")
         # TODO: eventually we may want the ability to handle values outside 0-100 for regressions not dealing with wt.%
         self.xmin_spin.setMaximum(99999)
         self.xmin_spin.setMinimum(0)
-        self.xmin_spin.setValue(min(self.pysat_fun.data[self.choosedata.currentText()].df['wvl'].columns.values))
+        try:
+            self.xmin_spin.setValue(min(self.pysat_fun.data[self.choosedata.currentText()].df['wvl'].columns.values))
+        except:
+            pass
         self.xmin_label.setObjectName("xmin_label")
         self.xlimits_hlayout.addWidget(self.xmin_label)
         self.xmin_spin.setObjectName("xmin_spin")
         self.xlimits_hlayout.addWidget(self.xmin_spin)
 
         self.xmax_label = QtWidgets.QLabel(self.plot_spect)
+        self.xmax_label.setObjectName("self.xmax_label")
         self.xmax_label.setText('Max:')
         self.xmax_label.setObjectName("xmax_label")
         self.xlimits_hlayout.addWidget(self.xmax_label)
         self.xmax_spin = QtWidgets.QDoubleSpinBox()
+        self.xmax_spin.setObjectName("self.xmax_spin")
         self.xmax_spin.setMaximum(99999)
         self.xmax_spin.setMinimum(0)
-        self.xmax_spin.setValue(max(self.pysat_fun.data[self.choosedata.currentText()].df['wvl'].columns.values))
+        try:
+            self.xmax_spin.setValue(max(self.pysat_fun.data[self.choosedata.currentText()].df['wvl'].columns.values))
+        except:
+            pass
         self.xmax_label.setObjectName("xmax_label")
         self.xlimits_hlayout.addWidget(self.xmax_label)
         self.xmax_spin.setObjectName("xmax_spin")
@@ -240,35 +266,46 @@ class plot_spectra_:
         self.verticalLayout.addLayout(self.xlimits_hlayout)
 
         self.scatter_chooseline_flayout = QtWidgets.QFormLayout()
+        self.scatter_chooseline_flayout.setObjectName("self.scatter_chooseline_flayout")
         self.scatter_chooseline_flayout.setFieldGrowthPolicy(QtWidgets.QFormLayout.AllNonFixedFieldsGrow)
         self.scatter_chooseline_flayout.setContentsMargins(11, 11, 11, 11)
         self.scatter_chooseline_flayout.setSpacing(6)
         self.color_label = QtWidgets.QLabel(self.plot_spect)
+        self.color_label.setObjectName("self.color_label")
         self.scatter_chooseline_flayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.color_label)
         self.color_choices = QtWidgets.QComboBox(self.plot_spect)
+        self.color_choices.setObjectName("self.color_choices")
         self.color_choices.setIconSize(QtCore.QSize(50, 20))
         self.scatter_chooseline_flayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.color_choices)
         self.line_label = QtWidgets.QLabel(self.plot_spect)
+        self.line_label.setObjectName("self.line_label")
         self.scatter_chooseline_flayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.line_label)
         self.line_choices = QtWidgets.QComboBox(self.plot_spect)
+        self.line_choices.setObjectName("self.line_choices")
         self.line_choices.setIconSize(QtCore.QSize(50, 20))
         self.scatter_chooseline_flayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.line_choices)
         self.file_label = QtWidgets.QLabel(self.plot_spect)
+        self.file_label.setObjectName("self.file_label")
         self.scatter_chooseline_flayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.file_label)
         self.file_text = QtWidgets.QLineEdit(self.plot_spect)
+        self.file_text.setObjectName("self.file_text")
         self.scatter_chooseline_flayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.file_text)
 
         self.alpha_label = QtWidgets.QLabel(self.plot_spect)
+        self.alpha_label.setObjectName("self.alpha_label")
         self.scatter_chooseline_flayout.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.alpha_label)
         self.alpha_spin = QtWidgets.QDoubleSpinBox(self.plot_spect)
+        self.alpha_spin.setObjectName("self.alpha_spin")
         self.alpha_spin.setRange(0, 1)
         self.alpha_spin.setValue(1.0)
         self.alpha_spin.setSingleStep(0.1)
         self.scatter_chooseline_flayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.alpha_spin)
 
         self.width_label = QtWidgets.QLabel(self.plot_spect)
+        self.width_label.setObjectName("self.width_label")
         self.scatter_chooseline_flayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.width_label)
         self.width_spin = QtWidgets.QDoubleSpinBox(self.plot_spect)
+        self.width_spin.setObjectName("self.width_spin")
         self.width_spin.setRange(0, 10)
         self.width_spin.setValue(0.5)
         self.width_spin.setSingleStep(0.05)
@@ -300,6 +337,7 @@ class plot_spectra_:
         self.alpha_label.setText("Alpha:")
         self.width_label.setText("Line width:")
 
+    def connectWidgets(self):
         self.plot_spect.setTitle("Plot Spectra")
         self.choosedata.activated[int].connect(lambda: self.plot_spect_change_vars(self.col_choices))
         self.col_choices.activated[int].connect(lambda: self.plot_spect_update_list(self.chooserows))
