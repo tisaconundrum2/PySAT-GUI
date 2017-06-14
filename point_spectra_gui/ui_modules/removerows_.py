@@ -28,11 +28,7 @@ class removerows_:
 
     def get_removerows_parameters(self):
         datakey = self.removerows_choosedata.currentText()
-        try:
-            colname = self.colname_choices.currentText()
-            colname = (self.vars_level0[self.vars_level1.index(colname)], colname)
-        except:
-            pass
+        colname = self.colname_choices.currentText()
         value = self.rowval_choices.currentText()
         args = [datakey, colname, value]
         kws = {}
@@ -44,16 +40,6 @@ class removerows_:
     def set_removerows_parameters(self):
         if self.restr_list is not None:
             self.qtickle.guirestore(self.restr_list)
-
-        if self.arg_list is not None:
-            datakey = self.arg_list[0]
-            colname = self.arg_list[1]
-            value = self.arg_list[2]
-            self.removerows_choosedata.setCurrentIndex(self.removerows_choosedata.findText(datakey))
-            change_combo_list_vars(self.colname_choices,self.get_colname_choices())
-            self.colname_choices.setCurrentIndex(self.colname_choices.findText(colname[1]))
-            change_combo_list_vars(self.rowval_choices,self.get_rowval_choices())
-            self.rowval_choices.setCurrentIndex((self.rowval_choices.findText(value)))
         self.get_removerows_parameters()
     def removerows_ui(self):
         self.removerows = QtWidgets.QGroupBox()

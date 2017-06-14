@@ -66,8 +66,10 @@ class read_ccam_:
             self.metadata_line_edit.setText(str(self.metadata_file))
             if average == True:
                 self.ave_button.setChecked(True)
+                self.singleshot_button.setChecked(False)
             else:
                 self.ave_button.setChecked(False)
+                self.singleshot_button.setChecked(True)
             self.get_read_ccam_params()
 
     def read_ccam_ui(self):
