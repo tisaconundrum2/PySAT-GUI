@@ -67,12 +67,16 @@ class sm_:
     def set_sm_params(self):
         if self.restr_list is not None:
             self.qtickle.guirestore(self.restr_list)
+            self.isRestore=True
+            for n in self.submodel_gui_info[2:]:
+                self.add_submodel(selected_choice=n[0].currentText())
         if self.arg_list is not None:
             datakey = self.arg_list[0]
             submodel_names = self.arg_list[1]
             blendranges = self.arg_list[2]
             trueval_data = self.arg_list[3]
             change_combo_list_vars(self.choosedata_predict,self.restr_list['self.choosedata_predict_values'])
+
             if self.optimize_checkbox.isChecked():
                 change_combo_list_vars(self.choosedata,self.restr_list['self.choosedata_values'])
                 self.choosedata.setCurrentIndex(self.choosedata.findText(str(trueval_data)))
@@ -244,7 +248,7 @@ class sm_:
         self.choosedata_predict.currentIndexChanged.connect(lambda: self.get_sm_params())
         self.get_sm_params()  # get initial parameters
 
-    def add_submodel(self):
+    def add_submodel(self,selected_choice=None):
 
         submodel_hlayout = QtWidgets.QHBoxLayout()
         font = QtGui.QFont()
@@ -258,6 +262,7 @@ class sm_:
         else:
             modelchoices = self.r['self.choose_high_model_values']
         choose_submodel = make_combobox(modelchoices)
+        choose_submodel.setCurrentText(selected_choice)
         submodel_hlayout.addWidget(choose_submodel)
         choose_submodel.setObjectName("choose_submodel")
         submodel_min_label = QtWidgets.QLabel()
