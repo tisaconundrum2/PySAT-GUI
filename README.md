@@ -3,10 +3,10 @@
 # Installation
 
   - Click and download [Anaconda Python 4.3.X 64-Bit installer](https://repo.continuum.io/archive/Anaconda3-4.3.1-Windows-x86_64.exe).
-  - If you're using a non-Windows machine go to Anaconda's [download page](https://www.continuum.io/downloads) and pick up the 4.1.1 package
+  - For all other Operating Systems go to Anaconda's [download page](https://www.continuum.io/downloads)
   - Download or clone this repository
   - Download the PYSAT library from here [github.com/USGS-Astrogeology/PySAT](https://github.com/USGS-Astrogeology/PySAT)
-  - For more information on how to install go [here](https://github.com/USGS-Astrogeology/PySAT_Point_Spectra_GUI/wiki/How-To-Install).
+  - For more on how to install go [here](https://github.com/USGS-Astrogeology/PySAT_Point_Spectra_GUI/wiki/How-To-Install).
 
 # PYSAT UI
 ![PYSAT splash](./images/splash.png)  
