@@ -110,6 +110,7 @@ class plot_:
         # TODO replace this function with restore state.
         if self.restr_list is not None:
             self.qtickle.guirestore(self.restr_list)
+            self.alpha_spin.setValue(self.restr_list['alpha_spin'])
 
     def plot_ui(self):
         self.plot = QtWidgets.QGroupBox()
