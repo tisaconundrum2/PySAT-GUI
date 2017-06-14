@@ -219,7 +219,10 @@ class plot_spectra_:
         # TODO: eventually we may want the ability to handle values outside 0-100 for regressions not dealing with wt.%
         self.xmin_spin.setMaximum(99999)
         self.xmin_spin.setMinimum(0)
-        self.xmin_spin.setValue(min(self.pysat_fun.data[self.choosedata.currentText()].df['wvl'].columns.values))
+        try:
+            self.xmin_spin.setValue(min(self.pysat_fun.data[self.choosedata.currentText()].df['wvl'].columns.values))
+        except:
+            pass
         self.xmin_label.setObjectName("xmin_label")
         self.xlimits_hlayout.addWidget(self.xmin_label)
         self.xmin_spin.setObjectName("xmin_spin")
@@ -232,7 +235,10 @@ class plot_spectra_:
         self.xmax_spin = QtWidgets.QDoubleSpinBox()
         self.xmax_spin.setMaximum(99999)
         self.xmax_spin.setMinimum(0)
-        self.xmax_spin.setValue(max(self.pysat_fun.data[self.choosedata.currentText()].df['wvl'].columns.values))
+        try:
+            self.xmax_spin.setValue(max(self.pysat_fun.data[self.choosedata.currentText()].df['wvl'].columns.values))
+        except:
+            pass
         self.xmax_label.setObjectName("xmax_label")
         self.xlimits_hlayout.addWidget(self.xmax_label)
         self.xmax_spin.setObjectName("xmax_spin")

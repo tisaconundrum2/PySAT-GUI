@@ -9,8 +9,11 @@ class write_data_:
     """
 
     """
-    def __init__(self, pysat_fun, module_layout):
+    def __init__(self, pysat_fun, module_layout, arg_list,kw_list, restr_list):
         self.qtickle = Qtickle.Qtickle(self)
+        self.arg_list = arg_list
+        self.kw_list = kw_list
+        self.restr_list = restr_list
         self.pysat_fun = pysat_fun
         self.ui_id = None
         self.module_layout = module_layout
@@ -23,10 +26,9 @@ class write_data_:
         self.get_write_params()
         self.pysat_fun.set_greyed_modules(self.write_data)
 
-    # def set_write_params(self): TODO this function should be rewritten to accomodate for restoration
-    #     if self.restr_list is not None:
-    #         self.qtickle.guirestore(self.restr_list)
-
+    def set_write_params(self): #TODO this function should be rewritten to accomodate for restoration
+        if self.restr_list is not None:
+             self.qtickle.guirestore(self.restr_list)
 
     def get_write_params(self):
         datakey = self.write_data_choose_data.currentText()

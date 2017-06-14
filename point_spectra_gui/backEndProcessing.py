@@ -247,7 +247,11 @@ class backEndProc(QThread):
 
     def do_split_data(self, datakey, colname):
         try:
-            coldata = np.array([str(i) for i in self.data[datakey].df[colname]])
+            # TODO: add a more elegant way to handle top-level column names in the coldata tuple
+            try:
+                coldata = np.array([str(i) for i in self.data[datakey].df[('meta',colname)]])
+            except:
+                coldata = np.array([str(i) for i in self.data[datakey].df[('meta',colname)]])
             unique_values = np.unique(coldata)
             for i in unique_values:
                 new_datakey = datakey + ' - ' + str(i)
