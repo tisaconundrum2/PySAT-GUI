@@ -76,6 +76,8 @@ class cv_:
                 method = self.arg_list[4]
                 params = self.arg_list[5]
                 #ransacparams = self.arg_list[6]
+                change_combo_list_vars(self.cv_train_choosey,self.restr_list['self.cv_train_choosey_values'])
+                change_combo_list_vars(self.cv_train_choosex,self.restr_list['self.cv_train_choosex_values'])
                 self.cv_choosedata.setCurrentIndex(self.cv_choosedata.findText(str(datakey)))
                 try:
                     self.cv_train_choosex.setCurrentItem(

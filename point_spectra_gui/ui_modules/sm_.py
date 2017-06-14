@@ -1,12 +1,13 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
 
 from Qtickle import Qtickle
-from point_spectra_gui.gui_utils import make_combobox
+from point_spectra_gui.gui_utils import make_combobox,change_combo_list_vars
 from point_spectra_gui.ui_modules.Error_ import error_print
 
 
 class sm_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
+        self.isRestore = False
         self.qtickle = Qtickle.Qtickle(self)
         self.submodel_gui_info = []
         self.new_submodel_index = 1
@@ -60,17 +61,23 @@ class sm_:
             trueval_data = None
 
         args = [datakey, submodel_names, blendranges, trueval_data]
-        r = self.qtickle.guisave()
-        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
+        self.r = self.qtickle.guisave()
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.r, self.ui_id)
 
     def set_sm_params(self):
         if self.restr_list is not None:
             self.qtickle.guirestore(self.restr_list)
-        datakey = self.arg_list[0]
-        submodel_names = self.arg_list[1]
-        blendranges = self.arg_list[2]
-        trueval_data = self.arg_list[3]
-        self.choosedata_predict.currentIndex(self.choosedata_predict.findText(str(datakey)))
+        if self.arg_list is not None:
+            datakey = self.arg_list[0]
+            submodel_names = self.arg_list[1]
+            blendranges = self.arg_list[2]
+            trueval_data = self.arg_list[3]
+            change_combo_list_vars(self.choosedata_predict,self.restr_list['self.choosedata_predict_values'])
+            if self.optimize_checkbox.isChecked():
+                change_combo_list_vars(self.choosedata,self.restr_list['self.choosedata_values'])
+                self.choosedata.setCurrentIndex(self.choosedata.findText(str(trueval_data)))
+            pass
+            self.choosedata_predict.setCurrentIndex(self.choosedata_predict.findText(str(datakey)))
 
     def sm_ui(self):
 
@@ -91,7 +98,6 @@ class sm_:
         self.choosemodel_label.setObjectName("self.choosemodel_label")
         modelchoices = self.pysat_fun.modelkeys
         if modelchoices == []:
-            error_print('No model has been trained')
             modelchoices = ['No model has been trained!']
         self.choosemodel = make_combobox(modelchoices)
 
@@ -179,7 +185,7 @@ class sm_:
         self.verticalLayout.addLayout(self.add_delete_hlayout)
 
         datachoices = self.pysat_fun.datakeys
-        
+
         # choose data to optimize blending
         self.choosedata_hlayout = QtWidgets.QHBoxLayout()
         self.choosedata_hlayout.setContentsMargins(11, 11, 11, 11)
@@ -246,10 +252,11 @@ class sm_:
 
         submodel_hlayout.setContentsMargins(11, 11, 11, 11)
         submodel_hlayout.setSpacing(6)
-        modelchoices = self.pysat_fun.modelkeys
-        if modelchoices == []:
-            error_print('No model has been trained')
-            modelchoices = ['No model has been trained!']
+        modelchoices = []
+        if self.isRestore == False:
+            modelchoices = self.pysat_fun.modelkeys
+        else:
+            modelchoices = self.r['self.choose_high_model_values']
         choose_submodel = make_combobox(modelchoices)
         submodel_hlayout.addWidget(choose_submodel)
         choose_submodel.setObjectName("choose_submodel")

@@ -77,8 +77,8 @@ class Qtickle(object):
         # Restore geometry
         # self.ui.resize(self.settings.value('size', QtCore.QSize(500, 500)))
         # self.ui.move(self.settings.value('pos', QtCore.QPoint(60, 60)))
-        try:
-            for name, obj in inspect.getmembers(self.ui):
+        for name, obj in inspect.getmembers(self.ui):
+            try:
                 if isinstance(obj, QLineEdit):
                     name = obj.objectName()
                     value = dict[name]
@@ -142,8 +142,11 @@ class Qtickle(object):
                             list_item = QListWidgetItem(value)
                             obj.addItem(list_item)
                     index = dict[name + "_index"]
-                    obj.setCurrentItem(obj.findItems(index, QtCore.Qt.MatchExactly)[0])
+                    try:
+                        obj.setCurrentItem(obj.findItems(index, QtCore.Qt.MatchExactly)[0])
+                    except:
+                        pass
 
+            except Exception as e:
+                print(e)
 
-        except Exception as e:
-            print(e)

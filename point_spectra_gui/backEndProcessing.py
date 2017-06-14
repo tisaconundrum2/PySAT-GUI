@@ -215,8 +215,12 @@ class backEndProc(QThread):
             error_print('Problem reading data: {}'.format(e))
 
     def do_write_data(self, filename, datakey):
+
         try:
-            self.data[datakey].to_csv(filename)
+            try:
+                self.data[datakey].to_csv(self.outpath + '/' + filename)
+            except:
+                self.data[datakey].to_csv(filename)
         except:
             try:
                 self.data[datakey].df.to_csv(self.outpath + '/' + filename)
@@ -232,6 +236,12 @@ class backEndProc(QThread):
     def removerows(self, datakey, colname, value):
         try:
             print(self.data[datakey].df.shape)
+            vars_level0 = self.data[datakey].df.columns.get_level_values(0)
+            vars_level1 = self.data[datakey].df.columns.get_level_values(1)
+            vars_level1 = list(vars_level1[vars_level0 != 'wvl'])
+            vars_level0 = list(vars_level0[vars_level0 != 'wvl'])
+            colname = (vars_level0[vars_level1.index(colname)], colname)
+
             if value == 'Null':
                 self.data[datakey] = spectral_data(self.data[datakey].df.ix[-self.data[datakey].df[colname].isnull()])
             else:
@@ -247,6 +257,12 @@ class backEndProc(QThread):
 
     def do_split_data(self, datakey, colname):
         try:
+            vars_level0 = self.data[datakey].df.columns.get_level_values(0)
+            vars_level1 = self.data[datakey].df.columns.get_level_values(1)
+            vars_level1 = list(vars_level1[vars_level0 != 'wvl'])
+            vars_level0 = list(vars_level0[vars_level0 != 'wvl'])
+            colname = (vars_level0[vars_level1.index(colname)], colname)
+
             coldata = np.array([str(i) for i in self.data[datakey].df[colname]])
             unique_values = np.unique(coldata)
             for i in unique_values:
@@ -431,6 +447,13 @@ class backEndProc(QThread):
                 cmap=None, colortitle='', figname=None, masklabel='',
                 marker='o', linestyle='None', alpha=0.5
                 ):
+
+        vars_level0 = self.data[datakey].df.columns.get_level_values(0)
+        vars_level1 = self.data[datakey].df.columns.get_level_values(1)
+        vars_level1 = list(vars_level1[vars_level0 != 'wvl'])
+        vars_level0 = list(vars_level0[vars_level0 != 'wvl'])
+        xvar = (vars_level0[vars_level1.index(xvar)], xvar)
+        yvar = (vars_level0[vars_level1.index(yvar)], yvar)
 
         try:
             x = self.data[datakey].df[xvar]

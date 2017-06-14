@@ -28,11 +28,7 @@ class split_data_:
     def get_split_data_parameters(self):
 
         datakey = self.split_data_choosedata.currentText()
-        try:
-            colname = self.colname_choices.currentText()
-            colname = (self.vars_level0[self.vars_level1.index(colname)], colname)
-        except:
-            pass
+        colname = self.colname_choices.currentText()
         args = [datakey, colname]
         kws = {}
         ui_list = 'do_split_data'
