@@ -9,7 +9,7 @@ from PyQt5 import QtGui,QtWidgets
 
 def make_combobox(choices):
     combo=QtWidgets.QComboBox()
-    #combo.setMaximumWidth(200)
+    combo.setMinimumWidth(150) #TODO: make comboboxes update their width when new data is added.
     font = QtGui.QFont()
     font.setPointSize(10)
     combo.setFont(font)
