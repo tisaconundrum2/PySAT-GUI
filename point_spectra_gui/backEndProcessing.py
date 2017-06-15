@@ -433,7 +433,7 @@ class backEndProc(QThread):
         # save the individual and blended predictions
         for i, j in enumerate(predictions):
             self.data[datakey].df[('meta',submodel_names[i] + '-Predict')] = j
-        self.data[datakey].df[('meta','Blended-Predict (' + str(sm_obj.blendranges) + ')')] = predictions_blended
+        self.data[datakey].df[('meta','Blended-Predict')] = predictions_blended
         pass
 
     def do_plot(self, datakey,
@@ -588,14 +588,14 @@ class backEndProc(QThread):
 
     def run(self):
         # TODO this function will take all the enumerated functions and parameters and run them
-        try:
-            for i in range(len(self.greyed_modules)):
-                r_list = self._list.pull()
-                print(r_list)
-                getattr(self, r_list[2])(*r_list[3], **r_list[4])  # TODO add comment about who is who
-                self.greyed_modules[0].setDisabled(True)
-                del self.greyed_modules[0]
-            self.taskFinished.emit()
-        except Exception as e:
-            error_print(e)
-            self.taskFinished.emit()
+        #try:
+        for i in range(len(self.greyed_modules)):
+            r_list = self._list.pull()
+            print(r_list)
+            getattr(self, r_list[2])(*r_list[3], **r_list[4])  # TODO add comment about who is who
+            self.greyed_modules[0].setDisabled(True)
+            del self.greyed_modules[0]
+        self.taskFinished.emit()
+        # except Exception as e:
+        #     error_print(e)
+        #     self.taskFinished.emit()
