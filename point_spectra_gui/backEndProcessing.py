@@ -214,18 +214,18 @@ class backEndProc(QThread):
         except Exception as e:
             error_print('Problem reading data: {}'.format(e))
 
-    def do_write_data(self, filename, datakey):
+    def do_write_data(self, filename, datakey,cols):
 
         try:
-            try:
-                self.data[datakey].to_csv(self.outpath + '/' + filename)
-            except:
-                self.data[datakey].to_csv(filename)
+            datatemp=self.data[datakey].df[cols]
         except:
-            try:
-                self.data[datakey].df.to_csv(self.outpath + '/' + filename)
-            except:
-                self.data[datakey].df.to_csv(filename)
+            datatemp=self.data[datakey][cols]
+
+        try:
+            datatemp.to_csv(self.outpath + '/' + filename)
+        except:
+            datatemp.to_csv(filename)
+
 
     def do_read_ccam(self, searchdir, searchstring, to_csv=None, lookupfile=None, ave=True):
         progressbar = QtWidgets.QProgressDialog()
@@ -432,8 +432,8 @@ class backEndProc(QThread):
 
         # save the individual and blended predictions
         for i, j in enumerate(predictions):
-            self.data[datakey].df[('meta',submodel_names[i] + '-Predict')] = j
-        self.data[datakey].df[('meta','Blended-Predict')] = predictions_blended
+            self.data[datakey].df[('predict',submodel_names[i] + '-Predict')] = j
+        self.data[datakey].df[('predict','Blended-Predict')] = predictions_blended
         pass
 
     def do_plot(self, datakey,
