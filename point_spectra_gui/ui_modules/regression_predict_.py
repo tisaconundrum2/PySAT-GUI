@@ -29,7 +29,7 @@ class regression_predict_:
 
         datakey = self.regression_predict_choosedata.currentText()
         modelkey = self.regression_predict_choosemodel.currentText()
-        predictname = ('meta', modelkey + ' - ' + datakey + ' - Predict')
+        predictname = ('predict', modelkey + ' - ' + datakey + ' - Predict')
 
         args = [datakey, modelkey, predictname]
         kws = {}

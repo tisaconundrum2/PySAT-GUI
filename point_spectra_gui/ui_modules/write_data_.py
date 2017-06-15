@@ -1,7 +1,7 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
 
 from Qtickle import Qtickle
-from point_spectra_gui.gui_utils import make_combobox
+from point_spectra_gui.gui_utils import make_combobox, make_listwidget
 from point_spectra_gui.ui_modules.Error_ import error_print
 
 
@@ -33,8 +33,11 @@ class write_data_:
     def get_write_params(self):
         datakey = self.write_data_choose_data.currentText()
         filename = self.write_data_file.text()
-
-        args = [filename, datakey]
+        selected_cols=self.write_data_choosecols.selectedItems()
+        cols=[]
+        for selection in selected_cols:
+            cols.append(selection.text())
+        args = [filename, datakey,cols]
         kws = {}
         ui_list = 'do_write_data'
         fun_list = 'do_write_data'
@@ -54,12 +57,19 @@ class write_data_:
         self.write_data_vlayout.addWidget(self.write_data_choose_data_label)
 
         datachoices = self.pysat_fun.datakeys
-        
-            
-            
         self.write_data_choose_data = make_combobox(datachoices)
         self.write_data_choose_data.setObjectName("write_data_choose_data")
         self.write_data_vlayout.addWidget(self.write_data_choose_data)
+
+        self.write_data_choosecols_label = QtWidgets.QLabel(self.write_data)
+        self.write_data_choosecols_label.setText('X variable:')
+        self.write_data_choosecols_label.setObjectName("write_data_choosecols_label")
+        self.write_data_vlayout.addWidget(self.write_data_choosecols_label)
+        self.write_data_choosecols = make_listwidget(self.xvar_choices())
+        self.write_data_choosecols.setObjectName("write_data_choosecols")
+        self.write_data_choosecols.setSelectionMode(QtWidgets.QAbstractItemView.MultiSelection)
+        self.write_data_vlayout.addWidget(self.write_data_choosecols)
+
 
         self.write_data_linedit_label = QtWidgets.QLabel(self.write_data)
         self.write_data_linedit_label.setText('Specify a filename:')
@@ -78,3 +88,12 @@ class write_data_:
 
         self.write_data_choose_data.currentIndexChanged.connect(lambda: self.get_write_params())
         self.write_data_file.textChanged.connect(lambda: self.get_write_params())
+        self.write_data_choosecols.itemSelectionChanged.connect(lambda: self.get_write_params())
+
+    def xvar_choices(self):
+        try:
+            xvarchoices = self.pysat_fun.data[self.write_data_choose_data.currentText()].df.columns.levels[0].values
+            xvarchoices = [i for i in xvarchoices if not 'Unnamed' in i]  # remove unnamed columns from choices
+        except:
+            xvarchoices = ['No valid choices!']
+        return xvarchoices
