@@ -33,8 +33,14 @@ class Main(QMainWindow):
 
     def new(self):
         # TODO create a new window to work in. The old window does not disappear
-        p = mp.Process(target=main, args=())
-        p.start()
+        try:
+            # If opening a seperate process fails. Open it up
+            window = Main(self)
+            window.show()
+        except:
+            p = mp.Process(target=main, args=())
+            p.start()
+
 
     def exit(self):
         # TODO close the current window
