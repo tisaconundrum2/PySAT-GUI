@@ -390,6 +390,7 @@ class backEndProc(QThread):
                         self.data['Model Coefficients']=spectral_data(coef)
                         self.datakeys.append('Model Coefficients')
                 except:
+                    pass
 
         except Exception as e:
             error_print(e)
