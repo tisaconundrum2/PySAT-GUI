@@ -29,10 +29,18 @@ class plot_spectra_:
         datakey = self.choosedata.currentText()
 
         col = self.col_choices.currentText()
+        row = [str(x.text()) for x in self.chooserows.selectedItems()]
         try:
-            row = self.chooserows.selectedItems()[0].text()
+            row = row[0]
         except:
-            row='None Selected'
+            row = ''
+        row_bool = []
+        try:
+            row_count = self.chooserows.findItems(row, QtCore.Qt.MatchExactly)
+            for i in row_count:
+                row_bool.append(i.isSelected())
+        except:
+            pass
         figname = self.figname_text.text()
         title = self.plot_spect_title_text.text()
         figfile = self.file_text.text()
@@ -70,7 +78,10 @@ class plot_spectra_:
             linestyle = '-'
 
         alpha = self.alpha_spin.value()
-
+        if row_bool.__len__() > 1:
+            lbl = row + ' - ' + str(np.where(row_bool)[0][0] + 1)
+        else:
+            lbl = row
         xmin = self.xmin_spin.value()
         xmax = self.xmax_spin.value()
         xrange = [xmin, xmax]
@@ -83,8 +94,9 @@ class plot_spectra_:
                'color': color,
                'linestyle': linestyle,
                'alpha': alpha,
-               'lbl': row,
+               'lbl': lbl,
                'linewidth': linewidth,
+               'row_bool': row_bool,
                'xrange': xrange}
 
         ui_list = "do_plot_spect"
@@ -95,7 +107,6 @@ class plot_spectra_:
     def set_plot_spectra_parameters(self):
         if self.restr_list is not None:
             self.qtickle.guirestore(self.restr_list)
-
         if self.arg_list is not None:
             datakey = self.arg_list[0]
             self.choosedata.setCurrentIndex(self.choosedata.findText(datakey))
@@ -106,9 +117,11 @@ class plot_spectra_:
             col = self.kw_list['col']
             self.col_choices.setCurrentIndex(self.col_choices.findText(col))
             row = self.arg_list[1]
+            row_bool = self.kw_list['row_bool']
             items = self.chooserows.findItems(row, QtCore.Qt.MatchExactly)
-            for item in items:
-                item.setSelected(True)
+            for i, item in enumerate(items):
+                if row_bool[i] is True:
+                    item.setSelected(True)
             color = self.kw_list['color']
             alpha = self.kw_list['alpha']
             if color == [1, 0, 0, alpha]:
@@ -201,10 +214,12 @@ class plot_spectra_:
         self.chooserows_label = QtWidgets.QLabel(self.plot_spect)
         self.chooserows_label.setObjectName("self.chooserows_label")
         self.choosecol_flayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.chooserows_label)
-        rowchoices = []
+        try:
+            rowchoices = self.pysat_fun.data[self.choosedata.currentText()].df[('meta', self.col_choices.currentText())]
+            rowchoices = rowchoices.fillna('-')
+        except:
+            rowchoices = ['None']
         self.chooserows = make_listwidget(rowchoices)
-        self.plot_spect_update_list(self.chooserows)
-
         self.chooserows.setObjectName("self.chooserows")
         # self.chooserows.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
         self.choosecol_flayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.chooserows)
@@ -326,7 +341,6 @@ class plot_spectra_:
         self.plot_spect.setTitle("Plot Spectra")
         self.choosedata.activated[int].connect(lambda: self.plot_spect_change_vars(self.col_choices))
         self.col_choices.activated[int].connect(lambda: self.plot_spect_update_list(self.chooserows))
-        self.choosedata.activated[int].connect(lambda: self.plot_spect_update_list(self.chooserows))
         self.choosedata.currentTextChanged.connect(lambda: self.get_plot_spectra_parameters())
         self.chooserows.itemSelectionChanged.connect(lambda: self.get_plot_spectra_parameters())
         self.col_choices.currentTextChanged.connect(lambda: self.get_plot_spectra_parameters())
@@ -343,18 +357,8 @@ class plot_spectra_:
         obj.clear()
         rowchoices = self.pysat_fun.data[self.choosedata.currentText()].df[('meta', self.col_choices.currentText())]
         rowchoices = rowchoices.fillna('-')
-
+        # rowchoices = np.unique(rowchoices)
         rowchoices = [str(x) for x in rowchoices]
-        rowchoices=np.array(rowchoices)
-        unique_choices = np.unique(rowchoices)
-        for i in unique_choices:
-            if i is not '-':
-                matchindex=np.where(rowchoices==i)[0]
-                if len(matchindex) > 1:
-                    for n,ind in enumerate(rowchoices[matchindex]):
-                        rowchoices[matchindex[n]]=str(rowchoices[matchindex[n]])+'-'+str(n+1)
-
-        self.pysat_fun.data[self.choosedata.currentText()].df[('meta',self.col_choices.currentText())]=rowchoices
         for i in rowchoices:
             obj.addItem(i)
 
