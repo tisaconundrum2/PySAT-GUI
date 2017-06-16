@@ -547,12 +547,11 @@ class backEndProc(QThread):
                       dpi=1000, color=None,
                       annot_mask=None,
                       cmap=None, colortitle='', figname=None, masklabel='',
-                      marker=None, linestyle='-', col=None, alpha=0.5, linewidth=1.0, row_bool=None
-                      ):
+                      marker=None, linestyle='-', col=None, alpha=0.5, linewidth=1.0):
 
         data = self.data[datakey].df
-        y = data.loc[data[('meta', col)].isin([row])]['wvl'].loc[row_bool].T
-        x = data['wvl'].columns.values
+        y = np.squeeze(np.array(data.loc[data[('meta', col)].isin([row])]['wvl'].T))
+        x = np.array(data['wvl'].columns.values)
 
         try:
             loadfig = self.figs[figname]
