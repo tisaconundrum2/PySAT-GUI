@@ -65,6 +65,9 @@ class Qtickle(object):
                 if isinstance(obj, QListWidget):
                     values = []
                     name = obj.objectName()
+                    for i in range(obj.count()):
+                        itemData = obj.item(i).text()
+                        values.append(itemData)
                     dict[name + "_values"] = values
                     # since there is a possibility of multiple items,
                     # we'll just save the string representation of those items to be restored

@@ -377,6 +377,21 @@ class backEndProc(QThread):
                 self.models[modelkey].fit(x, y)
                 self.model_xvars[modelkey] = xvars
                 self.model_yvars[modelkey] = yvars
+                try:
+                    coef=np.squeeze(self.models[modelkey].model.coef_)
+                    coef=pd.DataFrame(coef)
+                    coef.index=pd.MultiIndex.from_tuples(self.data[datakey].df[xvars].columns.values)
+                    coef=coef.T
+                    coef[('meta','Model')] = modelkey
+
+                    try:
+                        self.data['Model Coefficients']=spectral_data(pd.concat([self.data['Model Coefficients'].df,coef]))
+                    except:
+                        self.data['Model Coefficients']=spectral_data(coef)
+                        self.datakeys.append('Model Coefficients')
+                except:
+                    pass
+
         except Exception as e:
             error_print(e)
 
@@ -532,12 +547,13 @@ class backEndProc(QThread):
                       dpi=1000, color=None,
                       annot_mask=None,
                       cmap=None, colortitle='', figname=None, masklabel='',
-                      marker=None, linestyle='-', col=None, alpha=0.5, linewidth=1.0, row_bool=None
-                      ):
+                      marker=None, linestyle='-', col=None, alpha=0.5, linewidth=1.0):
 
+        self.data[datakey].enumerate_duplicates(col)
         data = self.data[datakey].df
-        y = data.loc[data[('meta', col)].isin([row])]['wvl'].loc[row_bool].T
-        x = data['wvl'].columns.values
+
+        y = np.squeeze(np.array(data.loc[data[('meta', col)].isin([row])]['wvl'].T))
+        x = np.array(data['wvl'].columns.values)
 
         try:
             loadfig = self.figs[figname]
