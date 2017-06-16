@@ -377,6 +377,20 @@ class backEndProc(QThread):
                 self.models[modelkey].fit(x, y)
                 self.model_xvars[modelkey] = xvars
                 self.model_yvars[modelkey] = yvars
+                try:
+                    coef=np.squeeze(self.models[modelkey].model.coef_)
+                    coef=pd.DataFrame(coef)
+                    coef.index=pd.MultiIndex.from_tuples(self.data[datakey].df[xvars].columns.values)
+                    coef=coef.T
+                    coef[('meta','Model')] = modelkey
+
+                    try:
+                        self.data['Model Coefficients']=spectral_data(pd.concat([self.data['Model Coefficients'].df,coef]))
+                    except:
+                        self.data['Model Coefficients']=spectral_data(coef)
+                        self.datakeys.append('Model Coefficients')
+                except:
+
         except Exception as e:
             error_print(e)
 
