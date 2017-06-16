@@ -129,8 +129,11 @@ class regression_train_:
                 change_combo_list_vars(self.regression_train_choosex,
                                        self.restr_list['regression_train_choosex_values'])
 
-                self.regression_train_choosex.setCurrentItem(self.regression_train_choosex.findItems(xvars[0], QtCore.Qt.MatchExactly)[0])
-                self.regression_train_choosey.setCurrentItem(self.regression_train_choosey.findItems(yvars[0][1], QtCore.Qt.MatchExactly)[0])
+                try:
+                    self.regression_train_choosex.setCurrentItem(self.regression_train_choosex.findItems(xvars[0], QtCore.Qt.MatchExactly)[0])
+                    self.regression_train_choosey.setCurrentItem(self.regression_train_choosey.findItems(yvars[0][1], QtCore.Qt.MatchExactly)[0])
+                except:
+                    pass
                 self.yvarmin_spin.setValue(yrange[0])
                 self.yvarmax_spin.setValue(yrange[1])
                 self.regression_choosealg.setCurrentIndex(self.regression_choosealg.findText(str(method)))

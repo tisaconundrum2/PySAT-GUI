@@ -203,8 +203,10 @@ class plot_spectra_:
         self.choosecol_flayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.chooserows_label)
         rowchoices = []
         self.chooserows = make_listwidget(rowchoices)
-        self.plot_spect_update_list(self.chooserows)
-
+        try:
+            self.plot_spect_update_list(self.chooserows)
+        except:
+            pass
         self.chooserows.setObjectName("self.chooserows")
         # self.chooserows.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
         self.choosecol_flayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.chooserows)
@@ -341,20 +343,8 @@ class plot_spectra_:
 
     def plot_spect_update_list(self, obj):
         obj.clear()
+        self.pysat_fun.data[self.choosedata.currentText()].enumerate_duplicates(self.col_choices.currentText())
         rowchoices = self.pysat_fun.data[self.choosedata.currentText()].df[('meta', self.col_choices.currentText())]
-        rowchoices = rowchoices.fillna('-')
-
-        rowchoices = [str(x) for x in rowchoices]
-        rowchoices=np.array(rowchoices)
-        unique_choices = np.unique(rowchoices)
-        for i in unique_choices:
-            if i is not '-':
-                matchindex=np.where(rowchoices==i)[0]
-                if len(matchindex) > 1:
-                    for n,ind in enumerate(rowchoices[matchindex]):
-                        rowchoices[matchindex[n]]=str(rowchoices[matchindex[n]])+'-'+str(n+1)
-
-        self.pysat_fun.data[self.choosedata.currentText()].df[('meta',self.col_choices.currentText())]=rowchoices
         for i in rowchoices:
             obj.addItem(i)
 

@@ -549,7 +549,9 @@ class backEndProc(QThread):
                       cmap=None, colortitle='', figname=None, masklabel='',
                       marker=None, linestyle='-', col=None, alpha=0.5, linewidth=1.0):
 
+        self.data[datakey].enumerate_duplicates(col)
         data = self.data[datakey].df
+
         y = np.squeeze(np.array(data.loc[data[('meta', col)].isin([row])]['wvl'].T))
         x = np.array(data['wvl'].columns.values)
 
