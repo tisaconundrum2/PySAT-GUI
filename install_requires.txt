@@ -1,7 +1,7 @@
-'inspect',
-'numpy',
-'pandas',
-'pickle',
-'point_spectra_gui',
-'PyQt4',
-'pysat'
+inspect
+numpy
+pandas
+pickle
+point_spectra_gui
+PyQt5
+pysat
