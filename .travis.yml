@@ -1,12 +1,11 @@
 language: python
 sudo: false
 
-branches:
-only:
-  - master
-
 python:
   - "3.5"
+  - "3.4"
+  - "3.3"
+  - "2.7"
 
 before_install:
 
@@ -18,5 +17,6 @@ install:
     else
       wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
     fi
+  - pip install -r install_requires.txt
   - python setup.py install
-  - pip install .
+  
