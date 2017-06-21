@@ -37,7 +37,6 @@ install:
     else
       pip install pyqt5;
     fi
-  - get_mission_data
   - conda list
 
   - python setup.py install
