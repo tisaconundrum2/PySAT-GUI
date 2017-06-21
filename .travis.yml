@@ -12,7 +12,7 @@ before_install:
   - cd PySAT
   - python setup.py install
   - cd ..
-  - conda install -c anaconda pyqt=5.6.0
+  - conda install anaconda
   
 install:
   # We do this conditionally because it saves us some downloading if the
