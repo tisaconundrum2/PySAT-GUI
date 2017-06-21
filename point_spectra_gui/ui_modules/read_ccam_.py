@@ -1,4 +1,4 @@
-from PyQt5 import QtGui, QtCore, QtWidgets
+from PyQt5 import QtGui, QtWidgets
 
 from Qtickle import Qtickle
 
@@ -158,7 +158,6 @@ class read_ccam_:
         self.metadata_button.clicked.connect(lambda: self.on_metadataButton_clicked())
         self.ave_button.toggled.connect(lambda: self.get_read_ccam_params())
         self.singleshot_button.toggled.connect(lambda: self.get_read_ccam_params())
-
 
     # def read_ccam_change_vars(self):
     #     self.read_ccam_choose_var.clear()

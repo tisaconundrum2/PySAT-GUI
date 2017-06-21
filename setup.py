@@ -1,5 +1,6 @@
-from setuptools import setup, find_packages
 from os import path
+from setuptools import setup, find_packages
+
 import point_spectra_gui
 
 VERSION = point_spectra_gui.__version__

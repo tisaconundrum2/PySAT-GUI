@@ -1,6 +1,7 @@
-from PyQt5 import QtGui, QtCore, QtWidgets
+from PyQt5 import QtGui, QtWidgets
+
 from point_spectra_gui.gui_utils import make_combobox
-from point_spectra_gui.ui_modules import error_print, Qtickle
+from point_spectra_gui.ui_modules import Qtickle
 
 
 class get_mask_:
@@ -45,9 +46,7 @@ class get_mask_:
         self.choosedata_label.setObjectName("choosedata_label")
         self.horizontalLayout.addWidget(self.choosedata_label)
         datachoices = self.pysat_fun.datakeys
-        
-            
-            
+
         self.mask_choosedata = make_combobox(datachoices)
         self.mask_choosedata.setObjectName("mask_choosedata")
         self.horizontalLayout.addWidget(self.mask_choosedata)

@@ -1,16 +1,18 @@
-from pysat.spectral.spectral_data import spectral_data
-from pysat.regression import regression
-from pysat.regression import cv
-from pysat.plotting.plots import make_plot, pca_ica_plot
-from pysat.regression import sm
-from pysat.fileio import io_ccam_pds
+from PyQt5 import QtCore, QtWidgets
+
+import numpy as np
 # from plio import io_ccam_pds
 import pandas as pd
+from PyQt5.QtCore import QThread
+from pysat.fileio import io_ccam_pds
+from pysat.plotting.plots import make_plot, pca_ica_plot
+from pysat.regression import cv
+from pysat.regression import regression
+from pysat.regression import sm
+from pysat.spectral.spectral_data import spectral_data
+
 from point_spectra_gui.ui_modules.Error_ import error_print
 from point_spectra_gui.ui_modules.del_layout_ import *
-from PyQt5.QtCore import QThread
-from PyQt5 import QtCore, QtWidgets
-import numpy as np
 
 
 class Module:
@@ -214,18 +216,17 @@ class backEndProc(QThread):
         except Exception as e:
             error_print('Problem reading data: {}'.format(e))
 
-    def do_write_data(self, filename, datakey,cols):
+    def do_write_data(self, filename, datakey, cols):
 
         try:
-            datatemp=self.data[datakey].df[cols]
+            datatemp = self.data[datakey].df[cols]
         except:
-            datatemp=self.data[datakey][cols]
+            datatemp = self.data[datakey][cols]
 
         try:
             datatemp.to_csv(self.outpath + '/' + filename)
         except:
             datatemp.to_csv(filename)
-
 
     def do_read_ccam(self, searchdir, searchstring, to_csv=None, lookupfile=None, ave=True):
         progressbar = QtWidgets.QProgressDialog()
@@ -292,24 +293,24 @@ class backEndProc(QThread):
         except Exception as e:
             error_print(e)
 
-    def do_remove_baseline(self,datakey,method,params):
-        datakey_new=datakey+'-Baseline Removed-'+method+str(params)
-        datakey_baseline=datakey+'-Baseline-'+method+str(params)
+    def do_remove_baseline(self, datakey, method, params):
+        datakey_new = datakey + '-Baseline Removed-' + method + str(params)
+        datakey_baseline = datakey + '-Baseline-' + method + str(params)
         self.datakeys.append(datakey_new)
         self.datakeys.append(datakey_baseline)
-        self.data[datakey_new]=spectral_data(self.data[datakey].df.copy(deep=True))
-        self.data[datakey_new].remove_baseline(method,segment=True,params=params)
-        self.data[datakey_baseline]=spectral_data(self.data[datakey_new].df_baseline)
-
+        self.data[datakey_new] = spectral_data(self.data[datakey].df.copy(deep=True))
+        self.data[datakey_new].remove_baseline(method, segment=True, params=params)
+        self.data[datakey_baseline] = spectral_data(self.data[datakey_new].df_baseline)
 
     def do_dim_red(self, datakey, method, params, method_kws={}, col='wvl', load_fit=None, dim_red_key=None):
         try:
-            if method=='PCA' or method=='ICA':
-                self.dim_reds[dim_red_key]=self.data[datakey].dim_red(col, method, params, method_kws, load_fit=load_fit)
+            if method == 'PCA' or method == 'ICA':
+                self.dim_reds[dim_red_key] = self.data[datakey].dim_red(col, method, params, method_kws,
+                                                                        load_fit=load_fit)
                 self.dim_red_keys.append(dim_red_key)
-            elif method=='ICA-JADE':
+            elif method == 'ICA-JADE':
                 pass
-                self.dim_reds[dim_red_key]=self.data[datakey].ica_jade(col)
+                self.dim_reds[dim_red_key] = self.data[datakey].ica_jade(col)
         except Exception as e:
             error_print(e)
 
@@ -378,16 +379,17 @@ class backEndProc(QThread):
                 self.model_xvars[modelkey] = xvars
                 self.model_yvars[modelkey] = yvars
                 try:
-                    coef=np.squeeze(self.models[modelkey].model.coef_)
-                    coef=pd.DataFrame(coef)
-                    coef.index=pd.MultiIndex.from_tuples(self.data[datakey].df[xvars].columns.values)
-                    coef=coef.T
-                    coef[('meta','Model')] = modelkey
+                    coef = np.squeeze(self.models[modelkey].model.coef_)
+                    coef = pd.DataFrame(coef)
+                    coef.index = pd.MultiIndex.from_tuples(self.data[datakey].df[xvars].columns.values)
+                    coef = coef.T
+                    coef[('meta', 'Model')] = modelkey
 
                     try:
-                        self.data['Model Coefficients']=spectral_data(pd.concat([self.data['Model Coefficients'].df,coef]))
+                        self.data['Model Coefficients'] = spectral_data(
+                            pd.concat([self.data['Model Coefficients'].df, coef]))
                     except:
-                        self.data['Model Coefficients']=spectral_data(coef)
+                        self.data['Model Coefficients'] = spectral_data(coef)
                         self.datakeys.append('Model Coefficients')
                 except:
                     pass
@@ -447,8 +449,8 @@ class backEndProc(QThread):
 
         # save the individual and blended predictions
         for i, j in enumerate(predictions):
-            self.data[datakey].df[('predict',submodel_names[i] + '-Predict')] = j
-        self.data[datakey].df[('predict','Blended-Predict')] = predictions_blended
+            self.data[datakey].df[('predict', submodel_names[i] + '-Predict')] = j
+        self.data[datakey].df[('predict', 'Blended-Predict')] = predictions_blended
         pass
 
     def do_plot(self, datakey,
@@ -604,7 +606,7 @@ class backEndProc(QThread):
 
     def run(self):
         # TODO this function will take all the enumerated functions and parameters and run them
-        #try:
+        # try:
         for i in range(len(self.greyed_modules)):
             r_list = self._list.pull()
             print(r_list)

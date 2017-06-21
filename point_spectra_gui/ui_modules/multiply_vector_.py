@@ -1,6 +1,7 @@
-from PyQt5 import QtGui, QtCore, QtWidgets
+from PyQt5 import QtGui, QtWidgets
+
 from point_spectra_gui.gui_utils import make_combobox
-from point_spectra_gui.ui_modules import error_print, Qtickle
+from point_spectra_gui.ui_modules import Qtickle
 
 
 class multiply_vector_:
@@ -43,9 +44,7 @@ class multiply_vector_:
         self.choosedata_label.setObjectName("choosedata_label")
         self.horizontalLayout.addWidget(self.choosedata_label)
         datachoices = self.pysat_fun.datakeys
-        
-            
-            
+
         self.vector_choosedata = make_combobox(datachoices)
         self.vector_choosedata.setObjectName("vector_choosedata")
         self.horizontalLayout.addWidget(self.vector_choosedata)

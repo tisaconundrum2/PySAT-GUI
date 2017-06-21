@@ -2,8 +2,6 @@ from PyQt5 import QtGui, QtCore, QtWidgets
 
 from Qtickle import Qtickle
 from point_spectra_gui.gui_utils import make_combobox, change_combo_list_vars
-from point_spectra_gui.ui_modules.Error_ import error_print
-import inspect
 
 
 class split_data_:

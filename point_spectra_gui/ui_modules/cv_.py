@@ -1,7 +1,8 @@
-from Qtickle import Qtickle
-from point_spectra_gui.ui_modules.Error_ import error_print
 from PyQt5 import QtGui, QtCore, QtWidgets
+
+from Qtickle import Qtickle
 from point_spectra_gui.gui_utils import make_combobox, make_listwidget, change_combo_list_vars
+from point_spectra_gui.ui_modules.Error_ import error_print
 
 
 class cv_:
@@ -75,18 +76,18 @@ class cv_:
                 yrange = self.arg_list[3]
                 method = self.arg_list[4]
                 params = self.arg_list[5]
-                #ransacparams = self.arg_list[6]
-                change_combo_list_vars(self.cv_train_choosey,self.restr_list['self.cv_train_choosey_values'])
-                change_combo_list_vars(self.cv_train_choosex,self.restr_list['self.cv_train_choosex_values'])
+                # ransacparams = self.arg_list[6]
+                change_combo_list_vars(self.cv_train_choosey, self.restr_list['self.cv_train_choosey_values'])
+                change_combo_list_vars(self.cv_train_choosex, self.restr_list['self.cv_train_choosex_values'])
                 self.cv_choosedata.setCurrentIndex(self.cv_choosedata.findText(str(datakey)))
                 try:
                     self.cv_train_choosex.setCurrentItem(
-                    self.cv_train_choosex.findItems(xvars[0], QtCore.Qt.MatchExactly)[0])
+                        self.cv_train_choosex.findItems(xvars[0], QtCore.Qt.MatchExactly)[0])
                 except:
                     pass
                 try:
                     self.cv_train_choosey.setCurrentItem(
-                    self.cv_train_choosey.findItems(yvars[0][1], QtCore.Qt.MatchExactly)[0])
+                        self.cv_train_choosey.findItems(yvars[0][1], QtCore.Qt.MatchExactly)[0])
                 except:
                     pass
                 self.yvarmin_spin.setValue(yrange[0])

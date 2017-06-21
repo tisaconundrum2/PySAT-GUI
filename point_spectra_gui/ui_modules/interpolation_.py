@@ -1,7 +1,6 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
 
 from Qtickle import Qtickle
-from point_spectra_gui.ui_modules.Error_ import error_print
 from point_spectra_gui.gui_utils import make_combobox
 
 
@@ -28,7 +27,7 @@ class interpolation_:
     def interpolation_ui(self):
         # TODO have the comboboxes called
         datachoices = self.pysat_fun.datakeys
-        
+
         self.Interpolation = QtWidgets.QGroupBox()
         font = QtGui.QFont()
         font.setPointSize(10)

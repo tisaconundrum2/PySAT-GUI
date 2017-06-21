@@ -1,8 +1,10 @@
-from Qtickle import Qtickle
-from point_spectra_gui.gui_utils import make_combobox, make_listwidget, change_combo_list_vars
-from point_spectra_gui.ui_modules.Error_ import error_print
 from PyQt5 import QtGui, QtCore, QtWidgets
+
 import inspect
+
+from Qtickle import Qtickle
+from point_spectra_gui.gui_utils import make_combobox
+from point_spectra_gui.ui_modules.Error_ import error_print
 
 
 class remove_baseline_:
@@ -119,8 +121,6 @@ class remove_baseline_:
                 self.get_baseline_parameters()
             except Exception as e:
                 error_print(e)
-
-
 
     def make_baseline_widget(self, alg, params=None):
         print(alg)
@@ -564,7 +564,7 @@ class remove_baseline_:
         self.baseline_choosedata_hlayout.addWidget(self.remove_baseline_choosedata_label)
         datachoices = self.pysat_fun.datakeys
         datachoices = [i for i in datachoices if i != 'CV Results']  # prevent CV results from showing up as an option
-        
+
         self.baseline_choosedata = make_combobox(datachoices)
         self.baseline_choosedata.setIconSize(QtCore.QSize(50, 20))
         self.baseline_choosedata.setObjectName("self.baseline_choosedata")

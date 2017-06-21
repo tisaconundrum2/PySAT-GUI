@@ -1,10 +1,9 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
 
+import numpy as np
+
 from Qtickle import Qtickle
 from point_spectra_gui.gui_utils import make_combobox, change_combo_list_vars
-from point_spectra_gui.ui_modules.Error_ import error_print
-import inspect
-import numpy as np
 
 
 class removerows_:
@@ -41,6 +40,7 @@ class removerows_:
         if self.restr_list is not None:
             self.qtickle.guirestore(self.restr_list)
         self.get_removerows_parameters()
+
     def removerows_ui(self):
         self.removerows = QtWidgets.QGroupBox()
         font = QtGui.QFont()
@@ -60,9 +60,7 @@ class removerows_:
         self.removerows_choosedata_hlayout.addWidget(self.removerows_choosedata_label)
 
         datachoices = self.pysat_fun.datakeys
-        
-            
-            
+
         self.removerows_choosedata = make_combobox(datachoices)
         self.removerows_choosedata.setObjectName("removerows_choosedata")
         self.removerows_choosedata_hlayout.addWidget(self.removerows_choosedata)

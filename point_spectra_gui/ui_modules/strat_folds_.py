@@ -1,8 +1,7 @@
-from PyQt5 import QtGui, QtCore, QtWidgets
+from PyQt5 import QtGui, QtWidgets
 
 from Qtickle import Qtickle
 from point_spectra_gui.gui_utils import make_combobox
-from point_spectra_gui.ui_modules.Error_ import error_print
 
 
 class strat_folds_:
@@ -59,9 +58,7 @@ class strat_folds_:
         self.strat_folds_choose_data_label.setObjectName("strat_folds_choose_data_label")
         self.strat_folds_vlayout.addWidget(self.strat_folds_choose_data_label)
         datachoices = self.pysat_fun.datakeys
-        
-            
-            
+
         self.strat_folds_choose_data = make_combobox(datachoices)
         self.strat_folds_choose_data.setObjectName("strat_folds_choose_data")
         self.strat_folds_vlayout.addWidget(self.strat_folds_choose_data)
@@ -114,6 +111,7 @@ class strat_folds_:
         self.nfolds_spin.valueChanged.connect(lambda: self.get_strat_fold_params())
         self.strat_folds_choose_data.currentIndexChanged.connect(lambda: self.get_strat_fold_params())
         self.strat_folds_choose_var.currentIndexChanged.connect(lambda: self.get_strat_fold_params())
+
     def set_strat_fold_params(self):
         # self.strat_folds_choose_data.setItemText()
         if self.arg_list is not None:
@@ -127,7 +125,6 @@ class strat_folds_:
             self.choose_test_fold.setCurrentIndex(self.choose_test_fold.findText(str(testfold)))
         if self.restr_list is not None:
             self.qtickle.guirestore(self.restr_list)
-
 
     def strat_fold_change_vars(self):
         self.strat_folds_choose_var.clear()

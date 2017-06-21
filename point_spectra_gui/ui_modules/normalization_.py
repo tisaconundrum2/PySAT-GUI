@@ -1,4 +1,5 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
+
 from point_spectra_gui.ui_modules import make_combobox, Qtickle
 from point_spectra_gui.ui_modules.Error_ import error_print
 from point_spectra_gui.ui_modules.del_layout_ import del_layout_

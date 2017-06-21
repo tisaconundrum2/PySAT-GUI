@@ -1,6 +1,5 @@
-import os
+from PyQt5 import QtGui, QtWidgets
 
-from PyQt5 import QtGui, QtCore, QtWidgets
 from Qtickle import Qtickle
 
 
@@ -38,7 +37,6 @@ class get_data_:
         fun_list = "do_get_data"
         r = self.qtickle.guisave()
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
-
 
     def get_data_ui(self):
         self.get_data = QtWidgets.QGroupBox()

@@ -83,6 +83,7 @@ point_spectra_gui/ui/PythonUI/*.*
 !"./images/splash.png"
 *.png
 *.wrf
+*.dat
 
 # Pysat
 pysat/

@@ -1,7 +1,7 @@
+from PyQt5 import QtGui, QtCore, QtWidgets
+
 from Qtickle import Qtickle
 from point_spectra_gui.gui_utils import make_combobox, make_listwidget, change_combo_list_vars
-from point_spectra_gui.ui_modules.Error_ import error_print
-from PyQt5 import QtGui, QtCore, QtWidgets
 
 
 class regression_train_:
@@ -123,15 +123,19 @@ class regression_train_:
                 params = self.arg_list[5]
                 ransacparams = self.arg_list[6]
 
-                change_combo_list_vars(self.regression_train_choosey, self.restr_list['regression_train_choosey_values'])
+                change_combo_list_vars(self.regression_train_choosey,
+                                       self.restr_list['regression_train_choosey_values'])
                 self.regression_choosedata.setCurrentIndex(self.regression_choosedata.findText(str(datakey)))
-                change_combo_list_vars(self.regression_train_choosey,self.restr_list['regression_train_choosey_values'])
+                change_combo_list_vars(self.regression_train_choosey,
+                                       self.restr_list['regression_train_choosey_values'])
                 change_combo_list_vars(self.regression_train_choosex,
                                        self.restr_list['regression_train_choosex_values'])
 
                 try:
-                    self.regression_train_choosex.setCurrentItem(self.regression_train_choosex.findItems(xvars[0], QtCore.Qt.MatchExactly)[0])
-                    self.regression_train_choosey.setCurrentItem(self.regression_train_choosey.findItems(yvars[0][1], QtCore.Qt.MatchExactly)[0])
+                    self.regression_train_choosex.setCurrentItem(
+                        self.regression_train_choosex.findItems(xvars[0], QtCore.Qt.MatchExactly)[0])
+                    self.regression_train_choosey.setCurrentItem(
+                        self.regression_train_choosey.findItems(yvars[0][1], QtCore.Qt.MatchExactly)[0])
                 except:
                     pass
                 self.yvarmin_spin.setValue(yrange[0])
@@ -140,7 +144,6 @@ class regression_train_:
                 self.make_regression_widget(self.regression_choosealg.currentText(), params=params)
             except:
                 pass
-
 
     def make_ransac_widget(self, isChecked):
         if not isChecked:

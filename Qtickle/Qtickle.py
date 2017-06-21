@@ -1,9 +1,8 @@
-import inspect
-import os
 from PyQt5 import QtCore
-from distutils.util import strtobool
-import sys
+
+import inspect
 from PyQt5.QtWidgets import *
+from distutils.util import strtobool
 
 
 class Qtickle(object):
@@ -160,4 +159,3 @@ class Qtickle(object):
 
             except Exception as e:
                 print(e)
-

@@ -1,10 +1,10 @@
-import os
-from point_spectra_gui.gui_utils import make_combobox, change_combo_list_vars
-from point_spectra_gui.ui_modules.Error_ import error_print
-from Qtickle import Qtickle
 from PyQt5 import QtGui, QtCore, QtWidgets
-import numpy as np
+
 import inspect
+import numpy as np
+
+from Qtickle import Qtickle
+from point_spectra_gui.gui_utils import make_combobox, change_combo_list_vars
 
 
 class plot_:

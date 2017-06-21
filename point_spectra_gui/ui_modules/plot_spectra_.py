@@ -1,9 +1,9 @@
+from PyQt5 import QtGui, QtCore, QtWidgets
+
+import numpy as np
+
 from Qtickle import Qtickle
 from point_spectra_gui.gui_utils import make_combobox, make_listwidget
-from point_spectra_gui.ui_modules.Error_ import error_print
-from PyQt5 import QtGui, QtCore, QtWidgets
-import numpy as np
-import inspect
 
 
 class plot_spectra_:
@@ -32,7 +32,7 @@ class plot_spectra_:
         try:
             row = self.chooserows.selectedItems()[0].text()
         except:
-            row='None Selected'
+            row = 'None Selected'
         figname = self.figname_text.text()
         title = self.plot_spect_title_text.text()
         figfile = self.file_text.text()

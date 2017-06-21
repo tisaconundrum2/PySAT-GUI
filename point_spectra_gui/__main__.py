@@ -1,9 +1,12 @@
-import os.path
+import sys
+import time
+
 import multiprocessing as mp
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import QPixmap
+import os.path
 from PyQt5.QtCore import *
-import sys, time
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtWidgets import *
+
 from point_spectra_gui.frontEndProcessing import *
 
 try:
@@ -40,7 +43,6 @@ class Main(QMainWindow):
         except:
             p = mp.Process(target=main, args=())
             p.start()
-
 
     def exit(self):
         # TODO close the current window
