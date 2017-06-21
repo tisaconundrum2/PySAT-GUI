@@ -5,8 +5,7 @@ python:
   - "3.6"
   - "3.5"
   - "3.4"
-  - "2.7"
-
+  
 before_install:
   - git clone https://github.com/USGS-Astrogeology/PySAT.git
   - cd PySAT
