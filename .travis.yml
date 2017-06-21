@@ -8,11 +8,11 @@ python:
   - "2.7"
 
 before_install:
+  - conda install anaconda
   - git clone https://github.com/USGS-Astrogeology/PySAT.git
   - cd PySAT
   - python setup.py install
   - cd ..
-  - conda install anaconda
   
 install:
   # We do this conditionally because it saves us some downloading if the
