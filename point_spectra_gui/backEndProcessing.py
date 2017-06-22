@@ -463,12 +463,16 @@ class backEndProc(QThread):
                 marker='o', linestyle='None', alpha=0.5
                 ):
 
-        vars_level0 = self.data[datakey].df.columns.get_level_values(0)
-        vars_level1 = self.data[datakey].df.columns.get_level_values(1)
-        vars_level1 = list(vars_level1[vars_level0 != 'wvl'])
-        vars_level0 = list(vars_level0[vars_level0 != 'wvl'])
-        xvar = (vars_level0[vars_level1.index(xvar)], xvar)
-        yvar = (vars_level0[vars_level1.index(yvar)], yvar)
+        try:
+            if self.data[datakey].df.columns.nlevels==2:
+                vars_level0 = self.data[datakey].df.columns.get_level_values(0)
+                vars_level1 = self.data[datakey].df.columns.get_level_values(1)
+                vars_level1 = list(vars_level1[vars_level0 != 'wvl'])
+                vars_level0 = list(vars_level0[vars_level0 != 'wvl'])
+                xvar = (vars_level0[vars_level1.index(xvar)], xvar)
+                yvar = (vars_level0[vars_level1.index(yvar)], yvar)
+        except:
+            pass
 
         try:
             x = self.data[datakey].df[xvar]
