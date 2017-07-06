@@ -1,7 +1,7 @@
 from PyQt5 import QtGui, QtWidgets
 
 from Qtickle import Qtickle
-from point_spectra_gui.gui_utils import make_combobox, make_listwidget
+from point_spectra_gui.gui_utils import make_combobox, make_listwidget, change_combo_list_vars
 
 
 class write_data_:
@@ -62,7 +62,7 @@ class write_data_:
         self.write_data_vlayout.addWidget(self.write_data_choose_data)
 
         self.write_data_choosecols_label = QtWidgets.QLabel(self.write_data)
-        self.write_data_choosecols_label.setText('X variable:')
+        self.write_data_choosecols_label.setText('Variables to write:')
         self.write_data_choosecols_label.setObjectName("write_data_choosecols_label")
         self.write_data_vlayout.addWidget(self.write_data_choosecols_label)
         self.write_data_choosecols = make_listwidget(self.xvar_choices())
@@ -85,13 +85,18 @@ class write_data_:
         self.write_data.raise_()
         self.write_data.setTitle("Write to CSV")
 
+        self.write_data_choose_data.activated[int].connect(
+            lambda: change_combo_list_vars(self.write_data_choosecols, self.xvar_choices()))
         self.write_data_choose_data.currentIndexChanged.connect(lambda: self.get_write_params())
         self.write_data_file.textChanged.connect(lambda: self.get_write_params())
         self.write_data_choosecols.itemSelectionChanged.connect(lambda: self.get_write_params())
 
     def xvar_choices(self):
         try:
-            xvarchoices = self.pysat_fun.data[self.write_data_choose_data.currentText()].df.columns.levels[0].values
+            try:
+                xvarchoices = self.pysat_fun.data[self.write_data_choose_data.currentText()].df.columns.levels[0].values
+            except:
+                xvarchoices = self.pysat_fun.data[self.write_data_choose_data.currentText()].columns.values
             xvarchoices = [i for i in xvarchoices if not 'Unnamed' in i]  # remove unnamed columns from choices
         except:
             xvarchoices = ['No valid choices!']
