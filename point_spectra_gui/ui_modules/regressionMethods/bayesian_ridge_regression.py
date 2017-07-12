@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets
 
 
-class BayesianRidgeRegrssion:
+class BayesianRidgeRegression:
     def BRR(self):
         self.line = QtWidgets.QFrame(self.regression)
         self.line.setFrameShape(QtWidgets.QFrame.VLine)

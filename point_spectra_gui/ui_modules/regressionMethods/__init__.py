@@ -1,0 +1,5 @@
+from point_spectra_gui.ui_modules.regressionMethods import bayesian_ARD_regression
+from point_spectra_gui.ui_modules.regressionMethods import support_vector_regression
+from point_spectra_gui.ui_modules.regressionMethods import least_angle_regression
+from point_spectra_gui.ui_modules.regressionMethods import bayesian_ridge_regression
+from point_spectra_gui.ui_modules.regressionMethods import kernel_ridge_regression

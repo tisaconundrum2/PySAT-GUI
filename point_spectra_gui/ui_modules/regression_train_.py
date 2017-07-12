@@ -6,6 +6,21 @@ from point_spectra_gui.gui_utils import make_combobox, make_listwidget, change_c
 
 class regression_train_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
+        self.algorithm_list = ['Choose an algorithm',  # 0
+                               'PLS',                  # 1
+                               'GP',                   # 2
+                               'OLS',                  # 3
+                               'OMP',                  # 4
+                               'Lasso',                # 5
+                               'Elastic Net',          # 6
+                               'Ridge',                # 7
+                               'Bayesian Ridge',       # 8
+                               'ARD',                  # 9
+                               'LARS',                 # 10
+                               'Lasso LARS',           # 11
+                               'SVR',                  # 12
+                               'KRR',                  # 13
+                               'More to come...']
         self.isRestore = False
         self.qtickle = Qtickle.Qtickle(self)
         self.arg_list = arg_list
@@ -62,12 +77,12 @@ class regression_train_:
             if method == 'Elastic Net':
                 params = {'alpha': self.reg_widget.elnet_alpha.value(),
                           'l1_ratio': self.reg_widget.elnet_l1.value(),
-                          'fit_intercept':self.reg_widget.elnet_intercept_checkbox.isChecked(),
-                          'max_iter':self.reg_widget.elnet_max.value(),
-                          'tol':self.reg_widget.elnet_tol.value(),
-                          'positive':self.reg_widget.elnet_positive_checkbox.isChecked(),
-                          'selection':'random',
-                          'CV':self.reg_widget.elnet_cv_checkbox.isChecked()}
+                          'fit_intercept': self.reg_widget.elnet_intercept_checkbox.isChecked(),
+                          'max_iter': self.reg_widget.elnet_max.value(),
+                          'tol': self.reg_widget.elnet_tol.value(),
+                          'positive': self.reg_widget.elnet_positive_checkbox.isChecked(),
+                          'selection': 'random',
+                          'CV': self.reg_widget.elnet_cv_checkbox.isChecked()}
             if method == 'Ridge':
                 params = {'alpha': self.reg_widget.ridge_alpha.value(),
                           'fit_intercept': self.reg_widget.ridge_intercept_checkbox.isChecked(),
@@ -207,7 +222,7 @@ class regression_train_:
         except:
             pass
         self.reg_widget = QtWidgets.QWidget()
-        if alg == 'PLS':
+        if alg == self.algorithm_list[1]:
             self.reg_widget.pls_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
             self.reg_widget.pls_nc_label = QtWidgets.QLabel(self.reg_widget)
             self.reg_widget.pls_nc_label.setText('# of components:')
@@ -222,7 +237,8 @@ class regression_train_:
             self.reg_widget.pls_nc_spinbox.valueChanged.connect(lambda: self.get_regression_parameters())
             if params is not None:
                 self.reg_widget.pls_nc_spinbox.setValue(params['n_components'])
-        if alg == 'GP':
+
+        if alg == self.algorithm_list[2]:
             self.reg_widget = QtWidgets.QWidget()
             self.reg_widget.gp_vlayout = QtWidgets.QVBoxLayout(self.reg_widget)
             self.reg_widget.gp_dim_red_hlayout = QtWidgets.QHBoxLayout()
@@ -303,7 +319,7 @@ class regression_train_:
                 self.reg_widget.gp_thetaL_spin.setValue(params['thetaL'])
                 self.reg_widget.gp_thetaU_spin.setValue(params['thetaU'])
 
-        if alg == 'OLS':
+        if alg == self.algorithm_list[3]:
             self.reg_widget.ols_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
             self.reg_widget.ols_intercept_checkbox = QtWidgets.QCheckBox(self.reg_widget)
             self.reg_widget.ols_intercept_checkbox.setText('Fit Intercept')
@@ -314,7 +330,7 @@ class regression_train_:
             if params is not None:
                 self.reg_widget.ols_intercept_checkbox.setChecked(params['fit_intercept'])
 
-        if alg == 'OMP':
+        if alg == self.algorithm_list[4]:
             self.reg_widget.omp_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
             self.reg_widget.omp_label = QtWidgets.QLabel(self.reg_widget)
             self.reg_widget.omp_label.setText('# of nonzero coefficients:')
@@ -352,7 +368,7 @@ class regression_train_:
                 self.reg_widget.omp_cv_checkbox.setChecked(params['CV'])
                 self.reg_widget.omp_nfeatures.setValue(params['n_nonzero_coefs'])
 
-        if alg == 'Lasso':
+        if alg == self.algorithm_list[5]:
             self.reg_widget.lasso_vlayout = QtWidgets.QVBoxLayout(self.reg_widget)
             self.reg_widget.lasso_alpha_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
             self.reg_widget.lasso_iter_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
@@ -443,7 +459,7 @@ class regression_train_:
                 self.reg_widget.lasso_positive_checkbox.setChecked(params['positive'])
                 self.reg_widget.lasso_cv_checkbox.setChecked(params['CV'])
 
-        if alg == 'Elastic Net':
+        if alg == self.algorithm_list[6]:
             self.reg_widget.elnet_vlayout = QtWidgets.QVBoxLayout(self.reg_widget)
             self.reg_widget.elnet_alpha_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
             self.reg_widget.elnet_l1_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
@@ -482,10 +498,9 @@ class regression_train_:
             self.reg_widget.elnet_l1_hlayout.addWidget(self.reg_widget.elnet_l1)
 
             self.reg_widget.elnet_l1_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
-                                                                       QtWidgets.QSizePolicy.Minimum)
+                                                                    QtWidgets.QSizePolicy.Minimum)
             self.reg_widget.elnet_l1_hlayout.addItem(self.reg_widget.elnet_l1_spacer)
             self.reg_widget.elnet_vlayout.addItem(self.reg_widget.elnet_l1_hlayout)
-
 
             self.reg_widget.elnet_maxlabel = QtWidgets.QLabel(self.reg_widget)
             self.reg_widget.elnet_maxlabel.setText('Max # of iterations:')
@@ -557,7 +572,7 @@ class regression_train_:
                 self.reg_widget.elnet_positive_checkbox.setChecked(params['positive'])
                 self.reg_widget.elnet_cv_checkbox.setChecked(params['CV'])
 
-        if alg == 'Ridge':
+        if alg == self.algorithm_list[7]:
             self.reg_widget.ridge_vlayout = QtWidgets.QVBoxLayout(self.reg_widget)
             self.reg_widget.ridge_alpha_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
 
@@ -580,7 +595,6 @@ class regression_train_:
                                                                        QtWidgets.QSizePolicy.Minimum)
             self.reg_widget.ridge_alpha_hlayout.addItem(self.reg_widget.ridge_alpha_spacer)
             self.reg_widget.ridge_vlayout.addItem(self.reg_widget.ridge_alpha_hlayout)
-
 
             self.reg_widget.ridge_maxlabel = QtWidgets.QLabel(self.reg_widget)
             self.reg_widget.ridge_maxlabel.setText('Max # of iterations:')
@@ -618,7 +632,6 @@ class regression_train_:
             self.reg_widget.ridge_intercept_checkbox.setObjectName("self.ridge_intercept_checkbox")
             self.reg_widget.ridge_checkboxes_hlayout.addWidget(self.reg_widget.ridge_intercept_checkbox)
 
-
             self.reg_widget.ridge_cv_checkbox = QtWidgets.QCheckBox(self.reg_widget)
             self.reg_widget.ridge_cv_checkbox.setText('Optimize with Cross Validation? (Ignores alpha)')
             self.reg_widget.ridge_cv_checkbox.setChecked(True)
@@ -643,13 +656,145 @@ class regression_train_:
                 self.reg_widget.ridge_max.setValue(params['max_iter'])
                 self.reg_widget.ridge_cv_checkbox.setChecked(params['CV'])
 
-        if alg == 'Bayesian Ridge':
+        if alg == self.algorithm_list[8]:
+            self.line = QtWidgets.QFrame(self.regression_train)
+            self.line.setFrameShape(QtWidgets.QFrame.VLine)
+            self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
+            self.line.setObjectName("line")
+            self.min_max_layout = QtWidgets.QHBoxLayout()
+            self.min_max_layout.setContentsMargins(11, 11, 11, 11)
+            self.min_max_layout.setSpacing(6)
+            self.min_max_layout.setObjectName("min_max_layout")
+            self.min_max_layout.addWidget(self.line)
+            self.groupbox = QtWidgets.QGroupBox(self.regression_train)
+            self.groupbox.setObjectName("groupbox")
+            self.bayesian_ridge_regression_form = QtWidgets.QFormLayout(self.groupbox)
+            self.bayesian_ridge_regression_form.setFieldGrowthPolicy(QtWidgets.QFormLayout.AllNonFixedFieldsGrow)
+            self.bayesian_ridge_regression_form.setContentsMargins(11, 11, 11, 11)
+            self.bayesian_ridge_regression_form.setSpacing(6)
+            self.bayesian_ridge_regression_form.setObjectName("bayesian_ridge_regression_form")
+            self.n_inter_label = QtWidgets.QLabel(self.groupbox)
+            self.n_inter_label.setObjectName("n_inter_label")
+            self.bayesian_ridge_regression_form.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.n_inter_label)
+            self.n_inter_spinBox = QtWidgets.QSpinBox(self.groupbox)
+            self.n_inter_spinBox.setMaximum(999999)
+            self.n_inter_spinBox.setProperty("value", 300)
+            self.n_inter_spinBox.setObjectName("n_inter_spinBox")
+            self.bayesian_ridge_regression_form.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.n_inter_spinBox)
+            self.tol_label = QtWidgets.QLabel(self.groupbox)
+            self.tol_label.setObjectName("tol_label")
+            self.bayesian_ridge_regression_form.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.tol_label)
+            self.tol_doubleSpinBox = QtWidgets.QDoubleSpinBox(self.groupbox)
+            self.tol_doubleSpinBox.setDecimals(5)
+            self.tol_doubleSpinBox.setMinimum(-99.0)
+            self.tol_doubleSpinBox.setSingleStep(0.001)
+            self.tol_doubleSpinBox.setProperty("value", 0.001)
+            self.tol_doubleSpinBox.setObjectName("tol_doubleSpinBox")
+            self.bayesian_ridge_regression_form.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.tol_doubleSpinBox)
+            self.alpha_1_label = QtWidgets.QLabel(self.groupbox)
+            self.alpha_1_label.setObjectName("alpha_1_label")
+            self.bayesian_ridge_regression_form.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.alpha_1_label)
+            self.alpha_1_doubleSpinBox = QtWidgets.QDoubleSpinBox(self.groupbox)
+            self.alpha_1_doubleSpinBox.setDecimals(5)
+            self.alpha_1_doubleSpinBox.setMinimum(-99.0)
+            self.alpha_1_doubleSpinBox.setSingleStep(0.001)
+            self.alpha_1_doubleSpinBox.setProperty("value", 0.001)
+            self.alpha_1_doubleSpinBox.setObjectName("alpha_1_doubleSpinBox")
+            self.bayesian_ridge_regression_form.setWidget(3, QtWidgets.QFormLayout.FieldRole,
+                                                          self.alpha_1_doubleSpinBox)
+            self.alpha_2_label = QtWidgets.QLabel(self.groupbox)
+            self.alpha_2_label.setObjectName("alpha_2_label")
+            self.bayesian_ridge_regression_form.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.alpha_2_label)
+            self.alpha_2_doubleSpinBox = QtWidgets.QDoubleSpinBox(self.groupbox)
+            self.alpha_2_doubleSpinBox.setDecimals(8)
+            self.alpha_2_doubleSpinBox.setMinimum(-99.0)
+            self.alpha_2_doubleSpinBox.setSingleStep(1e-06)
+            self.alpha_2_doubleSpinBox.setProperty("value", 1e-06)
+            self.alpha_2_doubleSpinBox.setObjectName("alpha_2_doubleSpinBox")
+            self.bayesian_ridge_regression_form.setWidget(4, QtWidgets.QFormLayout.FieldRole,
+                                                          self.alpha_2_doubleSpinBox)
+            self.lambda_2_label = QtWidgets.QLabel(self.groupbox)
+            self.lambda_2_label.setObjectName("lambda_2_label")
+            self.bayesian_ridge_regression_form.setWidget(5, QtWidgets.QFormLayout.LabelRole, self.lambda_2_label)
+            self.lambda_2_doubleSpinBox = QtWidgets.QDoubleSpinBox(self.groupbox)
+            self.lambda_2_doubleSpinBox.setDecimals(8)
+            self.lambda_2_doubleSpinBox.setMinimum(-99.0)
+            self.lambda_2_doubleSpinBox.setSingleStep(1e-06)
+            self.lambda_2_doubleSpinBox.setProperty("value", 1e-06)
+            self.lambda_2_doubleSpinBox.setObjectName("lambda_2_doubleSpinBox")
+            self.bayesian_ridge_regression_form.setWidget(5, QtWidgets.QFormLayout.FieldRole,
+                                                          self.lambda_2_doubleSpinBox)
+            self.compute_score_label = QtWidgets.QLabel(self.groupbox)
+            self.compute_score_label.setObjectName("compute_score_label")
+            self.bayesian_ridge_regression_form.setWidget(6, QtWidgets.QFormLayout.LabelRole, self.compute_score_label)
+            self.compute_score_checkBox = QtWidgets.QCheckBox(self.groupbox)
+            self.compute_score_checkBox.setCheckable(True)
+            self.compute_score_checkBox.setChecked(False)
+            self.compute_score_checkBox.setObjectName("compute_score_checkBox")
+            self.bayesian_ridge_regression_form.setWidget(6, QtWidgets.QFormLayout.FieldRole,
+                                                          self.compute_score_checkBox)
+            self.fit_intercept_label = QtWidgets.QLabel(self.groupbox)
+            self.fit_intercept_label.setObjectName("fit_intercept_label")
+            self.bayesian_ridge_regression_form.setWidget(7, QtWidgets.QFormLayout.LabelRole, self.fit_intercept_label)
+            self.fit_intercept_checkBox = QtWidgets.QCheckBox(self.groupbox)
+            self.fit_intercept_checkBox.setCheckable(True)
+            self.fit_intercept_checkBox.setChecked(True)
+            self.fit_intercept_checkBox.setObjectName("fit_intercept_checkBox")
+            self.bayesian_ridge_regression_form.setWidget(7, QtWidgets.QFormLayout.FieldRole,
+                                                          self.fit_intercept_checkBox)
+            self.normalize_label = QtWidgets.QLabel(self.groupbox)
+            self.normalize_label.setObjectName("normalize_label")
+            self.bayesian_ridge_regression_form.setWidget(8, QtWidgets.QFormLayout.LabelRole, self.normalize_label)
+            self.normalize_checkBox = QtWidgets.QCheckBox(self.groupbox)
+            self.normalize_checkBox.setCheckable(True)
+            self.normalize_checkBox.setChecked(False)
+            self.normalize_checkBox.setObjectName("normalize_checkBox")
+            self.bayesian_ridge_regression_form.setWidget(8, QtWidgets.QFormLayout.FieldRole, self.normalize_checkBox)
+            self.copy_X_label = QtWidgets.QLabel(self.groupbox)
+            self.copy_X_label.setObjectName("copy_X_label")
+            self.bayesian_ridge_regression_form.setWidget(9, QtWidgets.QFormLayout.LabelRole, self.copy_X_label)
+            self.copy_X_checkBox = QtWidgets.QCheckBox(self.groupbox)
+            self.copy_X_checkBox.setCheckable(True)
+            self.copy_X_checkBox.setChecked(True)
+            self.copy_X_checkBox.setObjectName("copy_X_checkBox")
+            self.bayesian_ridge_regression_form.setWidget(9, QtWidgets.QFormLayout.FieldRole, self.copy_X_checkBox)
+            self.verbose_label = QtWidgets.QLabel(self.groupbox)
+            self.verbose_label.setObjectName("verbose_label")
+            self.bayesian_ridge_regression_form.setWidget(10, QtWidgets.QFormLayout.LabelRole, self.verbose_label)
+            self.verbose_checkBox = QtWidgets.QCheckBox(self.groupbox)
+            self.verbose_checkBox.setCheckable(True)
+            self.verbose_checkBox.setChecked(False)
+            self.verbose_checkBox.setObjectName("verbose_checkBox")
+            self.bayesian_ridge_regression_form.setWidget(10, QtWidgets.QFormLayout.FieldRole, self.verbose_checkBox)
+            self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.regression_train)
+            self.verticalLayout_2.setContentsMargins(11, 11, 11, 11)
+            self.verticalLayout_2.setSpacing(6)
+            self.verticalLayout_2.setObjectName("verticalLayout_2")
+            self.verticalLayout_2.addWidget(self.groupbox)
+
+            self.n_inter_label.setText("Number of iterations")
+            self.tol_label.setText("Tol")
+            self.alpha_1_label.setText("alpha_1")
+            self.alpha_2_label.setText("alpha_2")
+            self.lambda_2_label.setText("lambda_2")
+            self.compute_score_label.setText("compute_score")
+            self.compute_score_checkBox.setText("compute the objective function at each step of the model")
+            self.fit_intercept_label.setText("fit_intercept")
+            self.fit_intercept_checkBox.setText("calculate the intercept for this model")
+            self.normalize_label.setText("normalize")
+            self.normalize_checkBox.setText("regressors X will be normalized before regression")
+            self.copy_X_label.setText("copy_X")
+            self.copy_X_checkBox.setText("X will be copied; else, it may be overwritten")
+            self.verbose_label.setText("verbose")
+            self.verbose_checkBox.setText("Verbose mode when fitting the model")
+
+        if alg == self.algorithm_list[9]:
+            self.reg_widget.pl
+
+        if alg == self.algorithm_list[10]:
             pass
-        if alg == 'ARD':
-            pass
-        if alg == 'LARS':
-            pass
-        if alg == 'Lasso LARS':
+
+        if alg == self.algorithm_list[11]:
             self.reg_widget.lassoLARS_vlayout = QtWidgets.QVBoxLayout(self.reg_widget)
             self.reg_widget.lassoLARS_alpha_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
             self.reg_widget.lassoLARS_iter_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
@@ -666,7 +811,7 @@ class regression_train_:
             self.reg_widget.lassoLARS_alpha.setObjectName("self.lassoLARS_alpha")
             self.reg_widget.lassoLARS_alpha_hlayout.addWidget(self.reg_widget.lassoLARS_alpha)
             self.reg_widget.lassoLARS_alpha_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
-                                                                       QtWidgets.QSizePolicy.Minimum)
+                                                                           QtWidgets.QSizePolicy.Minimum)
             self.reg_widget.lassoLARS_alpha_hlayout.addItem(self.reg_widget.lassoLARS_alpha_spacer)
             self.reg_widget.lassoLARS_vlayout.addItem(self.reg_widget.lassoLARS_alpha_hlayout)
 
@@ -681,9 +826,8 @@ class regression_train_:
             self.reg_widget.lassoLARS_max.setObjectName("self.lassoLARS_max")
             self.reg_widget.lassoLARS_iter_hlayout.addWidget(self.reg_widget.lassoLARS_max)
 
-
             self.reg_widget.lassoLARS_iter_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
-                                                                      QtWidgets.QSizePolicy.Minimum)
+                                                                          QtWidgets.QSizePolicy.Minimum)
             self.reg_widget.lassoLARS_iter_hlayout.addItem(self.reg_widget.lassoLARS_iter_spacer)
             self.reg_widget.lassoLARS_vlayout.addItem(self.reg_widget.lassoLARS_iter_hlayout)
 
@@ -706,7 +850,7 @@ class regression_train_:
             self.reg_widget.lassoLARS_checkboxes_hlayout.addWidget(self.reg_widget.lassoLARS_cv_checkbox)
 
             self.reg_widget.lassoLARS_checkbox_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
-                                                                          QtWidgets.QSizePolicy.Minimum)
+                                                                              QtWidgets.QSizePolicy.Minimum)
             self.reg_widget.lassoLARS_checkboxes_hlayout.addItem(self.reg_widget.lassoLARS_checkbox_spacer)
             self.reg_widget.lassoLARS_vlayout.addItem(self.reg_widget.lassoLARS_checkboxes_hlayout)
 
@@ -723,9 +867,10 @@ class regression_train_:
                 self.reg_widget.lassoLARS_positive_checkbox.setChecked(params['positive'])
                 self.reg_widget.lassoLARS_cv_checkbox.setChecked(params['CV'])
 
-        if alg == 'SVR':
+        if alg == self.algorithm_list[12]:
             pass
-        if alg == 'KRR':
+
+        if alg == self.algorithm_list[13]:
             pass
 
         self.reg_widget.setObjectName("reg_widget")
@@ -826,7 +971,7 @@ class regression_train_:
         self.regression_choosealg_label = QtWidgets.QLabel(self.regression_train)
         self.regression_choosealg_label.setObjectName("regression_choosealg_label")
         self.regression_choosealg_hlayout.addWidget(self.regression_choosealg_label)
-        self.regression_alg_choices = ['Choose an algorithm', 'PLS', 'GP', 'OLS', 'OMP', 'Lasso', 'Lasso LARS', 'Elastic Net', 'Ridge', 'More to come...']
+        self.regression_alg_choices = self.algorithm_list
         self.regression_choosealg = make_combobox(self.regression_alg_choices)
         self.regression_choosealg.setIconSize(QtCore.QSize(50, 20))
         self.regression_choosealg.setObjectName("regression_choosealg")
