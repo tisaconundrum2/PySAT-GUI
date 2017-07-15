@@ -62,12 +62,12 @@ class cv_:
 
         ui_list = 'do_cv'
         fun_list = 'do_cv_train'
-        r = self.qtickle.guisave()
+        r = self.qtickle.guiSave()
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def set_cv_parameters(self):
         if self.restr_list is not None:
-            self.qtickle.guirestore(self.restr_list)
+            self.qtickle.guiRestore(self.restr_list)
         if self.arg_list is not None:
             try:
                 datakey = self.arg_list[0]

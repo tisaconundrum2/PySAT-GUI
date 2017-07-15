@@ -53,7 +53,7 @@ class file_outpath_:
 
     def set_parameters(self):
         if self.restr_list is not None:
-            self.qtickle.guirestore(self.restr_list)
+            self.qtickle.guiRestore(self.restr_list)
         if self.arg_list is not None:
             self.file_out_path_line_edit.setText(self.arg_list[0])
 
@@ -63,7 +63,7 @@ class file_outpath_:
         fun_list = "set_file_outpath"
         kw_list = {}
         arg_list = [filename]
-        r = self.qtickle.guisave()
+        r = self.qtickle.guiSave()
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, arg_list, kw_list, r, self.ui_id)
         pass
 

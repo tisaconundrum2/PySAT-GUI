@@ -26,7 +26,7 @@ class dim_reduction_:
 
     def set_dim_red_params(self):
         if self.restr_list is not None:
-            self.qtickle.guirestore(self.restr_list)
+            self.qtickle.guiRestore(self.restr_list)
         if self.arg_list is not None:
             datakey = self.arg_list[0]
             method = self.arg_list[1]
@@ -64,7 +64,7 @@ class dim_reduction_:
         kws = {'method_kws': method_kws}
         ui_list = "do_dim_red"
         fun_list = "do_dim_red"
-        r = self.qtickle.guisave()
+        r = self.qtickle.guiSave()
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def make_dim_red_widget(self, method):

@@ -30,7 +30,7 @@ class get_mask_:
         fun_list = "do_mask"
         args = [datakey, maskfile]
         kws = {}
-        r = self.qtickle.guisave()
+        r = self.qtickle.guiSave()
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def get_mask_ui(self):
@@ -79,7 +79,7 @@ class get_mask_:
         if self.arg_list is None:
             self.get_mask_line_edit.setText("*.csv")
         else:
-            self.qtickle.guirestore(self.restr_list)
+            self.qtickle.guiRestore(self.restr_list)
             self.get_mask_line_edit.setText(self.arg_list[1])
             index = self.mask_choosedata.findText(str(self.arg_list[0]))  # findText 'unknown' or 'known'
             if index is not -1:  # if it's there choose it based on the returned index

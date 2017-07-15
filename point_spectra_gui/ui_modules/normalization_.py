@@ -144,7 +144,7 @@ class normalization_:
     def set_data_parameters(self):
         # TODO finish
         if self.restr_list is not None:
-            self.qtickle.guirestore(self.restr_list)
+            self.qtickle.guiRestore(self.restr_list)
 
         if self.arg_list is not None:
             self.normalization_choosedata.setCurrentIndex(self.normalization_choosedata.findText(self.arg_list[0]))
@@ -159,7 +159,7 @@ class normalization_:
     def push_parameters(self, arg_list, kw_list):
         ui_list = "normalization"
         fun_list = "do_norm"
-        r = self.qtickle.guisave()
+        r = self.qtickle.guiSave()
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, arg_list, kw_list, r, self.ui_id)
         pass
 

@@ -70,7 +70,7 @@ class interpolation_:
 
     def set_parameters(self):
         if self.restr_list is not None:
-            self.qtickle.guirestore(self.restr_list)
+            self.qtickle.guiRestore(self.restr_list)
         if self.arg_list is not None:
             index = self.interpoliation_choosedata.findText(str(self.arg_list[0]))
             index2 = self.interpolation_choosedata_2.findText(str(self.arg_list[1]))
@@ -86,5 +86,5 @@ class interpolation_:
         # arg_list.append(['unknown data','known data'])
         arg_list = [key1, key2]
         kw_list = {}
-        r = self.qtickle.guisave()
+        r = self.qtickle.guiSave()
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, arg_list, kw_list, r, self.ui_id)

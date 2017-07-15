@@ -28,7 +28,7 @@ class multiply_vector_:
         fun_list = "do_multiply_vector"
         args = [datakey, vectorfile]
         kws = {}
-        r = self.qtickle.guisave()
+        r = self.qtickle.guiSave()
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def multiply_vector_ui(self):
@@ -76,7 +76,7 @@ class multiply_vector_:
         if self.arg_list is None:
             self.multiply_vector_line_edit.setText("*.csv")
         else:
-            self.qtickle.guirestore(self.restr_list)
+            self.qtickle.guiRestore(self.restr_list)
             self.multiply_vector_line_edit.setText(self.arg_list[1])
             index = self.vector_choosedata.findText(str(self.arg_list[0]))  # findText 'unknown' or 'known'
             if index is not -1:  # if it's there choose it based on the returned index
