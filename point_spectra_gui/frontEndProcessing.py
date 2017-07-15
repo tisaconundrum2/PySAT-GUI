@@ -1,6 +1,6 @@
-from PyQt5 import QtCore, QtWidgets, QtGui
-
 import pickle
+
+from PyQt5 import QtCore, QtWidgets, QtGui
 
 from point_spectra_gui import ui_modules
 from point_spectra_gui.backEndProcessing import backEndProc

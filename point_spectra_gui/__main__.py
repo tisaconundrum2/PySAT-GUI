@@ -1,8 +1,8 @@
+import multiprocessing as mp
+import os.path
 import sys
 import time
 
-import multiprocessing as mp
-import os.path
 from PyQt5.QtCore import *
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import *

@@ -1,8 +1,7 @@
-from PyQt5 import QtCore, QtWidgets
-
 import numpy as np
 # from plio import io_ccam_pds
 import pandas as pd
+from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtCore import QThread
 from pysat.fileio import io_ccam_pds
 from pysat.plotting.plots import make_plot, pca_ica_plot
@@ -466,7 +465,7 @@ class backEndProc(QThread):
                 ):
 
         try:
-            if self.data[datakey].df.columns.nlevels==2:
+            if self.data[datakey].df.columns.nlevels == 2:
                 vars_level0 = self.data[datakey].df.columns.get_level_values(0)
                 vars_level1 = self.data[datakey].df.columns.get_level_values(1)
                 vars_level1 = list(vars_level1[vars_level0 != 'wvl'])
