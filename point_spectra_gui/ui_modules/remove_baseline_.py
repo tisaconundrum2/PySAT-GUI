@@ -1,6 +1,6 @@
-from PyQt5 import QtGui, QtCore, QtWidgets
-
 import inspect
+
+from PyQt5 import QtGui, QtCore, QtWidgets
 
 from Qtickle import Qtickle
 from point_spectra_gui.gui_utils import make_combobox
@@ -102,12 +102,12 @@ class remove_baseline_:
         fun_list = "do_remove_baseline"
 
         args = [datakey, method, params]
-        r = self.qtickle.guisave()
+        r = self.qtickle.guiSave()
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def set_baseline_parameters(self):
         if self.restr_list is not None:
-            self.qtickle.guirestore(self.restr_list)
+            self.qtickle.guiRestore(self.restr_list)
         if self.arg_list is not None:
             try:
                 datakey = self.arg_list[0]

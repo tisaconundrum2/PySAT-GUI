@@ -47,98 +47,24 @@ class regression_train_:
         self.pysat_fun.set_greyed_modules(self.regression_train)
 
     def get_regression_parameters(self):
-        method = self.regression_choosealg.currentText()
-        datakey = self.regression_choosedata.currentText()
-        xvars = [str(x.text()) for x in self.regression_train_choosex.selectedItems()]
-        yvars = [('comp', str(y.text())) for y in self.regression_train_choosey.selectedItems()]
-        yrange = [self.yvarmin_spin.value(), self.yvarmax_spin.value()]
-        params = {}
-        ransacparams = {}
-        kws = {}
+        self.method = self.regression_choosealg.currentText()
+        self.datakey = self.regression_choosedata.currentText()
+        self.xvars = [str(x.text()) for x in self.regression_train_choosex.selectedItems()]
+        self.yvars = [('comp', str(y.text())) for y in self.regression_train_choosey.selectedItems()]
+        self.yrange = [self.yvarmin_spin.value(), self.yvarmax_spin.value()]
+        self.params = {}
+        self.ransacparams = {}
+        self.kws = {}
         try:
-            modelkey = method + ' - ' + str(yvars[0][-1]) + ' (' + str(yrange[0]) + '-' + str(yrange[1]) + ') '
+            self.modelkey = self.method + ' - ' + str(self.yvars[0][-1]) + ' (' + str(self.yrange[0]) + '-' + str(
+                self.yrange[1]) + ') '
         except:
-            modelkey = method
+            self.modelkey = self.method
         try:
-            if method ==
-
-            if method == 'OLS':
-                params = {'fit_intercept': self.reg_widget.ols_intercept_checkbox.isChecked()}
-                modelkey = modelkey + str(params)
-
-            if method == 'OMP':
-                params = {'fit_intercept': self.reg_widget.omp_intercept_checkbox.isChecked(),
-                          'n_nonzero_coefs': self.reg_widget.omp_nfeatures.value(),
-                          'CV': self.reg_widget.omp_cv_checkbox.isChecked()}
-                modelkey = modelkey + str(params)
-
-            if method == 'Lasso':
-                params = {'alpha': self.reg_widget.lasso_alpha.value(),
-                          'fit_intercept': self.reg_widget.lasso_intercept_checkbox.isChecked(),
-                          'max_iter': self.reg_widget.lasso_max.value(), 'tol': self.reg_widget.lasso_tol.value(),
-                          'positive': self.reg_widget.lasso_positive_checkbox.isChecked(), 'selection': 'random',
-                          'CV': self.reg_widget.lasso_cv_checkbox.isChecked()}
-                print(params)
-
-            if method == 'Elastic Net':
-                params = {'alpha': self.reg_widget.elnet_alpha.value(),
-                          'l1_ratio': self.reg_widget.elnet_l1.value(),
-                          'fit_intercept': self.reg_widget.elnet_intercept_checkbox.isChecked(),
-                          'max_iter': self.reg_widget.elnet_max.value(),
-                          'tol': self.reg_widget.elnet_tol.value(),
-                          'positive': self.reg_widget.elnet_positive_checkbox.isChecked(),
-                          'selection': 'random',
-                          'CV': self.reg_widget.elnet_cv_checkbox.isChecked()}
-
-            if method == 'Ridge':
-                params = {'alpha': self.reg_widget.ridge_alpha.value(),
-                          'fit_intercept': self.reg_widget.ridge_intercept_checkbox.isChecked(),
-                          'max_iter': self.reg_widget.ridge_max.value(),
-                          'tol': self.reg_widget.ridge_tol.value(),
-                          'CV': self.reg_widget.ridge_cv_checkbox.isChecked()}
-
-            if method == 'Bayesian Ridge':
-                pass
-
-            if method == 'ARD':
-                pass
-
-            if method == 'LARS':
-                pass
-
-            if method == 'Lasso LARS':
-                params = {'alpha': self.reg_widget.lasso_alpha.value(),
-                          'fit_intercept': self.reg_widget.lasso_intercept_checkbox.isChecked(),
-                          'max_iter': self.reg_widget.lasso_max.value(), 'tol': self.reg_widget.lasso_tol.value(),
-                          'positive': self.reg_widget.lasso_positive_checkbox.isChecked(), 'selection': 'random',
-                          'CV': self.reg_widget.lasso_cv_checkbox.isChecked()}
-
-
-            if method == 'SVR':
-                pass
-
-            if method == 'KRR':
-                pass
-
-            if method == 'PLS':
-                params = {'n_components': self.reg_widget.pls_nc_spinbox.value(),
-                          'scale': False}
-                modelkey = modelkey + '(nc=' + str(params['n_components']) + ')'
-                kws = {'modelkey': modelkey}
-
-            if method == 'GP':
-                params = {'reduce_dim': self.reg_widget.gp_dim_red_combobox.currentText(),
-                          'n_components': self.reg_widget.gp_dim_red_nc_spinbox.value(),
-                          'random_start': self.reg_widget.gp_rand_starts_spin.value(),
-                          'theta0': self.reg_widget.gp_theta0_spin.value(),
-                          'thetaL': self.reg_widget.gp_thetaL_spin.value(),
-                          'thetaU': self.reg_widget.gp_thetaU_spin.value()}
-
-                modelkey = modelkey + str(params)
 
         except:
             pass
-        kws = {'modelkey': modelkey}
+        self.kws = {'self.modelkey': self.modelkey}
         # if self.regression_ransac_checkbox.isChecked():
         #     lossval = self.ransac_widget.ransac_lossfunc_combobox.currentText()
         #     if lossval == 'Squared Error':
@@ -150,19 +76,19 @@ class regression_train_:
         ui_list = "do_regression_train"
         fun_list = "do_regression_train"
 
-        args = [datakey, xvars, yvars, yrange, method, params, ransacparams]
+        args = [self.datakey, self.xvars, self.yvars, self.yrange, self.method, self.params, self.ransacparams]
         # TODO Stop the module when there are ill-formed parameters!
         self.r = self.qtickle.guiSave()
-        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.r, self.ui_id)
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, self.kws, self.r, self.ui_id)
 
     def set_regression_parameters(self):
         if self.restr_list is not None:
             self.qtickle.guiRestore(self.restr_list)
         if self.arg_list is not None:
             try:
-                datakey = self.arg_list[0]
-                xvars = self.arg_list[1]
-                yvars = self.arg_list[2]
+                self.datakey = self.arg_list[0]
+                self.xvars = self.arg_list[1]
+                self.yvars = self.arg_list[2]
                 yrange = self.arg_list[3]
                 method = self.arg_list[4]
                 params = self.arg_list[5]
@@ -170,7 +96,7 @@ class regression_train_:
 
                 change_combo_list_vars(self.regression_train_choosey,
                                        self.restr_list['regression_train_choosey_values'])
-                self.regression_choosedata.setCurrentIndex(self.regression_choosedata.findText(str(datakey)))
+                self.regression_choosedata.setCurrentIndex(self.regression_choosedata.findText(str(self.datakey)))
                 change_combo_list_vars(self.regression_train_choosey,
                                        self.restr_list['regression_train_choosey_values'])
                 change_combo_list_vars(self.regression_train_choosex,
@@ -178,9 +104,9 @@ class regression_train_:
 
                 try:
                     self.regression_train_choosex.setCurrentItem(
-                        self.regression_train_choosex.findItems(xvars[0], QtCore.Qt.MatchExactly)[0])
+                        self.regression_train_choosex.findItems(self.xvars[0], QtCore.Qt.MatchExactly)[0])
                     self.regression_train_choosey.setCurrentItem(
-                        self.regression_train_choosey.findItems(yvars[0][1], QtCore.Qt.MatchExactly)[0])
+                        self.regression_train_choosey.findItems(self.yvars[0][1], QtCore.Qt.MatchExactly)[0])
                 except:
                     pass
                 self.yvarmin_spin.setValue(yrange[0])
@@ -240,12 +166,11 @@ class regression_train_:
         if alg == self.algorithm_list[1]:
             self.pls = PLS.Ui_Form()
             self.pls.setupUi(self.reg_widget)
-            self.pls.numOfComponentsSpinBox.valueChanged.connect(lambda: self.get_regression_parameters())
+            # detect a change in the UI
 
         if alg == self.algorithm_list[2]:
             self.gp = GP.Ui_Form()
             self.gp.setupUi(self.reg_widget)
-            self.gp.numOfComponentsSpinBox.valueChanged.connect(lambda: self.get_regression_parameters())
 
         if alg == self.algorithm_list[3]:
             self.ols = OLS.Ui_Form()

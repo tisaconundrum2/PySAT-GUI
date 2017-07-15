@@ -31,12 +31,12 @@ class split_data_:
         kws = {}
         ui_list = 'do_split_data'
         fun_list = 'do_split_data'
-        r = self.qtickle.guisave()
+        r = self.qtickle.guiSave()
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def set_split_data_parameters(self):
         if self.restr_list is not None:
-            self.qtickle.guirestore(self.restr_list)
+            self.qtickle.guiRestore(self.restr_list)
 
     def split_data_ui(self):
         self.split_data = QtWidgets.QGroupBox()

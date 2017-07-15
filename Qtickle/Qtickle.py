@@ -9,7 +9,7 @@ class Qtickle(object):
     def __init__(self, ui):
         self.ui = ui
 
-    def guisave(self):
+    def guiSave(self):
         dict = {}
         # Save geometry
         # self.settings.setValue('size', self.ui.size())
@@ -77,7 +77,7 @@ class Qtickle(object):
         except Exception as e:
             print(e)
 
-    def guirestore(self, dict):
+    def guiRestore(self, dict):
         # Restore geometry
         # self.ui.resize(self.settings.value('size', QtCore.QSize(500, 500)))
         # self.ui.move(self.settings.value('pos', QtCore.QPoint(60, 60)))
@@ -159,3 +159,34 @@ class Qtickle(object):
 
             except Exception as e:
                 print(e)
+
+def isGuiChanged(ui, functionCall):
+    try:
+        for name, obj in inspect.getmembers(ui):
+            if isinstance(obj, QLineEdit):
+                obj.textChanged.connect(functionCall)
+
+            if isinstance(obj, QCheckBox):
+                obj.stateChanged.connect(functionCall)
+
+            if isinstance(obj, QRadioButton):
+                obj.hitButton.connect(functionCall)
+
+            if isinstance(obj, QSpinBox):
+                obj.valueChanged.connect(functionCall)
+
+            if isinstance(obj, QDoubleSpinBox):
+                obj.valueChanged.connect(functionCall)
+
+            if isinstance(obj, QSlider):
+                obj.event.connect(functionCall)
+
+            if isinstance(obj, QComboBox):
+                obj.currentIndexChanged.connect(functionCall)
+
+            # if isinstance(obj, QListWidget): This needs to be added at somepoint
+            #     obj.
+
+    except Exception as e:
+        print(e)
+

@@ -28,7 +28,7 @@ class write_data_:
 
     def set_write_params(self):  # TODO this function should be rewritten to accomodate for restoration
         if self.restr_list is not None:
-            self.qtickle.guirestore(self.restr_list)
+            self.qtickle.guiRestore(self.restr_list)
 
     def get_write_params(self):
         datakey = self.write_data_choose_data.currentText()
@@ -41,7 +41,7 @@ class write_data_:
         kws = {}
         ui_list = 'do_write_data'
         fun_list = 'do_write_data'
-        r = self.qtickle.guisave()
+        r = self.qtickle.guiSave()
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def write_data_ui(self):

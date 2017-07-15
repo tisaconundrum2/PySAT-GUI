@@ -45,7 +45,7 @@ class strat_folds_:
         kws = {}
         ui_list = "do_strat_folds"
         fun_list = "do_strat_folds"
-        r = self.qtickle.guisave()
+        r = self.qtickle.guiSave()
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def stratified_folds_ui(self):
@@ -124,7 +124,7 @@ class strat_folds_:
             self.nfolds_spin.setValue(nfolds)
             self.choose_test_fold.setCurrentIndex(self.choose_test_fold.findText(str(testfold)))
         if self.restr_list is not None:
-            self.qtickle.guirestore(self.restr_list)
+            self.qtickle.guiRestore(self.restr_list)
 
     def strat_fold_change_vars(self):
         self.strat_folds_choose_var.clear()

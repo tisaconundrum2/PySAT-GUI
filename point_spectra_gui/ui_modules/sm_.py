@@ -60,12 +60,12 @@ class sm_:
             trueval_data = None
 
         args = [datakey, submodel_names, blendranges, trueval_data]
-        self.r = self.qtickle.guisave()
+        self.r = self.qtickle.guiSave()
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.r, self.ui_id)
 
     def set_sm_params(self):
         if self.restr_list is not None:
-            self.qtickle.guirestore(self.restr_list)
+            self.qtickle.guiRestore(self.restr_list)
             self.isRestore = True
 
         if self.arg_list is not None:
