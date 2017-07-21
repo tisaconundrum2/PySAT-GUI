@@ -160,33 +160,33 @@ class Qtickle(object):
             except Exception as e:
                 print(e)
 
-def isGuiChanged(ui, functionCall):
-    try:
-        for name, obj in inspect.getmembers(ui):
-            if isinstance(obj, QLineEdit):
-                obj.textChanged.connect(functionCall)
+    def isGuiChanged(self, ui, functionCall):
+        try:
+            for name, obj in inspect.getmembers(ui):
+                if isinstance(obj, QLineEdit):
+                    obj.textChanged.connect(lambda: functionCall())
 
-            if isinstance(obj, QCheckBox):
-                obj.stateChanged.connect(functionCall)
+                if isinstance(obj, QCheckBox):
+                    obj.stateChanged.connect(lambda: functionCall())
 
-            if isinstance(obj, QRadioButton):
-                obj.hitButton.connect(functionCall)
+                if isinstance(obj, QRadioButton):
+                    obj.hitButton.connect(lambda: functionCall())
 
-            if isinstance(obj, QSpinBox):
-                obj.valueChanged.connect(functionCall)
+                if isinstance(obj, QSpinBox):
+                    obj.valueChanged.connect(lambda: functionCall())
 
-            if isinstance(obj, QDoubleSpinBox):
-                obj.valueChanged.connect(functionCall)
+                if isinstance(obj, QDoubleSpinBox):
+                    obj.valueChanged.connect(lambda: functionCall())
 
-            if isinstance(obj, QSlider):
-                obj.event.connect(functionCall)
+                if isinstance(obj, QSlider):
+                    obj.event.connect(lambda: functionCall())
 
-            if isinstance(obj, QComboBox):
-                obj.currentIndexChanged.connect(functionCall)
+                if isinstance(obj, QComboBox):
+                    obj.currentIndexChanged.connect(lambda: functionCall())
 
-            # if isinstance(obj, QListWidget): This needs to be added at somepoint
-            #     obj.
+                # if isinstance(obj, QListWidget): This needs to be added at somepoint
+                #     obj.
 
-    except Exception as e:
-        print(e)
+        except Exception as e:
+            print(e)
 
