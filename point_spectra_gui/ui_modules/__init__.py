@@ -21,3 +21,4 @@ from point_spectra_gui.ui_modules.multiply_vector_ import *
 from point_spectra_gui.ui_modules.plot_spectra_ import *
 from point_spectra_gui.ui_modules.split_data_ import *
 from point_spectra_gui.ui_modules.remove_baseline_ import *
+from point_spectra_gui.ui_modules.peak_area_ import *
