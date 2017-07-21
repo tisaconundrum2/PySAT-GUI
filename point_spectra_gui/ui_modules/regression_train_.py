@@ -47,39 +47,178 @@ class regression_train_:
         self.pysat_fun.set_greyed_modules(self.regression_train)
 
     def get_regression_parameters(self):
-        self.method = self.regression_choosealg.currentText()
-        self.datakey = self.regression_choosedata.currentText()
-        self.xvars = [str(x.text()) for x in self.regression_train_choosex.selectedItems()]
-        self.yvars = [('comp', str(y.text())) for y in self.regression_train_choosey.selectedItems()]
-        self.yrange = [self.yvarmin_spin.value(), self.yvarmax_spin.value()]
-        self.params = {}
-        self.ransacparams = {}
-        self.kws = {}
+        method = self.regression_choosealg.currentText()
+        datakey = self.regression_choosedata.currentText()
+        xvars = [str(x.text()) for x in self.regression_train_choosex.selectedItems()]
+        yvars = [('comp', str(y.text())) for y in self.regression_train_choosey.selectedItems()]
+        yrange = [self.yvarmin_spin.value(), self.yvarmax_spin.value()]
+        params = {}
+        ransacparams = {}
+        kws = {}
         try:
-            self.modelkey = self.method + ' - ' + str(self.yvars[0][-1]) + ' (' + str(self.yrange[0]) + '-' + str(
-                self.yrange[1]) + ') '
+            modelkey = method + ' - ' + str(yvars[0][-1]) + ' (' + str(yrange[0]) + '-' + str(yrange[1]) + ') '
         except:
-            self.modelkey = self.method
+            modelkey = method
         try:
+            if method == 'OLS':
+                params = {'fit_intercept': self.ols.fitInterceptCheckBox.isChecked()}
+                modelkey = modelkey + str(params)
+                print(params)
 
-        except:
-            pass
-        self.kws = {'self.modelkey': self.modelkey}
-        # if self.regression_ransac_checkbox.isChecked():
-        #     lossval = self.ransac_widget.ransac_lossfunc_combobox.currentText()
-        #     if lossval == 'Squared Error':
-        #         loss = 'squared_loss'
-        #     if lossval == 'Absolute Error':
-        #         loss = 'absolute_loss'
-        #     ransacparams = {'residual_threshold': self.ransac_widget.ransac_thresh_spin.value(),
-        #                     'loss': loss}
+            if method == 'OMP':
+                params = {'fit_intercept': self.omp.fitInterceptCheckBox.isChecked(),
+                          'n_nonzero_coefs': self.omp.numOfNonZeroCoeffsSpinBox.value(),
+                          'CV': self.omp.optimizeWCrossValidationCheckBox.isChecked()}
+                modelkey = modelkey + str(params)
+                print(params)
+
+            if method == 'Lasso':
+                params = {'alpha': self.lasso.alphaDoubleSpinBox.value(),
+                          'fit_intercept': self.lasso.fitInterceptCheckBox.isChecked(),
+                          'max_iter': self.lasso.maxNumOfIterationsSpinBox.value(),
+                          'tol': self.lasso.toleranceDoubleSpinBox.value(),
+                          'positive': self.lasso.forcePositiveCoefficientsCheckBox.isChecked(),
+                          'selection': 'random',
+                          'CV': self.lasso.optimizeWCrossValidaitonCheckBox.isChecked()}
+                print(params)
+
+            if method == 'Elastic Net':
+                index = self.elastic_net.precomputeComboBox.currentIndex()
+                params = {'alpha': self.elastic_net.alphaDoubleSpinBox.value(),
+                          'l1_ratio': self.elastic_net.l1RatioDoubleSpinBox.value(),
+                          'fit_intercept': self.elastic_net.fitInterceptCheckBox.isChecked(),
+                          'normalize': self.elastic_net.normalizeCheckBox.isChecked(),
+                          'precompute': self.elastic_net.precomputeComboBox.itemText(index),
+                          'max_iter': self.elastic_net.maxNumOfIterationsSpinBox.value(),
+                          'copy_X': self.elastic_net.copyXCheckBox.isChecked(),
+                          'tol': self.elastic_net.toleranceDoubleSpinBox.value(),
+                          'warm_start': self.elastic_net.warmStartCheckBox.isChecked(),
+                          'positive': self.elastic_net.positiveCheckBox.isChecked(),
+                          'selection': self.elastic_net.selectionLineEdit.text(),
+                          'random_state': self.elastic_net.randomStateLineEdit.text()}
+                print(params)
+
+            if method == 'Ridge':
+                index = self.ridge.solverComboBox.currentIndex()
+                params = {'alpha': self.ridge.alphaDoubleSpinBox.value(),
+                          'copy_X': self.ridge.copyXCheckBox.isChecked(),
+                          'fit_intercept': self.ridge.fitInterceptCheckBox.isChecked(),
+                          'max_iter': self.ridge.maxNumOfIterationslineEdit.text(),
+                          'normalize': self.ridge.normalizeCheckBox.isChecked(),
+                          'solver': self.ridge.solverComboBox.itemText(index),
+                          'tol': self.ridge.toleranceDoubleSpinBox.value(),
+                          'random_state': self.ridge.randomStateLineEdit.text()}
+                print(params)
+
+            if method == 'Bayesian Ridge':
+                params = {'n_iter': self.br.numOfIterationsSpinBox.value(),
+                          'tol': self.br.toleranceDoubleSpinBox.value(),
+                          'alpha_1': self.br.alpha1DoubleSpinBox.value(),
+                          'alpha_2': self.br.alpha2DoubleSpinBox.value(),
+                          'lambda_1': self.br.lambdaDoubleSpinBox.value(),
+                          'lambda_2': self.br.lambdaDoubleSpinBox.value(),
+                          'compute_score': self.br.computerScoreCheckBox.isChecked(),
+                          'fit_intercept': self.br.fitInterceptCheckBox.isChecked(),
+                          'normalize': self.br.normalizeCheckBox.isChecked(),
+                          'copy_X': self.br.copyXCheckBox.isChecked(),
+                          'verbose': self.br.verboseCheckBox.isChecked()}
+                print(params)
+
+            if method == 'ARD':
+                params = {'n_iter': self.ard.numOfIterationsSpinBox.value(),
+                          'tol': self.ard.toleranceDoubleSpinBox.value(),
+                          'alpha_1': self.ard.alpha1DoubleSpinBox.value(),
+                          'alpha_2': self.ard.alpha2DoubleSpinBox.value(),
+                          'lambda_1': self.ard.lambdaDoubleSpinBox.value(),
+                          'lambda_2': self.ard.lambdaDoubleSpinBox.value(),
+                          'compute_score': self.ard.computerScoreCheckBox.isChecked(),
+                          'threshold_lambda': self.ard.thresholdLambdaSpinBox.value(),
+                          'fit_intercept': self.ard.fitInterceptCheckBox.isChecked(),
+                          'normalize': self.ard.normalizeCheckBox.isChecked(),
+                          'copy_X': self.ard.copyXCheckBox.isChecked(),
+                          'verbose': self.ard.verboseCheckBox.isChecked()}
+                print(params)
+
+            if method == 'LARS':
+                params = {'n_nonzero_coefs': self.lars.numOfNonzeroCoeffsSpinBox.value(),
+                          'fit_intercept': self.lars.fitInterceptCheckBox.isChecked(),
+                          'positive': self.lars.positiveCheckBox.isChecked(),
+                          'verbose': self.lars.verboseCheckBox.isChecked(),
+                          'normalize': self.lars.normalizeCheckBox.isChecked(),
+                          'precompute': self.lars.precomputeCheckBox.isChecked(),
+                          'copy_X': self.lars.copyXCheckBox.isChecked(),
+                          'eps': self.lars.epsDoubleSpinBox.value(),
+                          'fit_path': self.lars.fitPathCheckBox.isChecked()}
+                print(params)
+
+            if method == 'Lasso LARS':
+                index = self.lassoLARS.precomputeComboBox.currentIndex()
+                params = {'alpha': self.lassoLARS.alphaDoubleSpinBox.value(),
+                          'fit_intercept': self.lassoLARS.fitInterceptCheckBox.isChecked(),
+                          'positive': self.lassoLARS.positiveCheckBox.isChecked(),
+                          'verbose': self.lassoLARS.verboseCheckBox.isChecked(),
+                          'normalize': self.lassoLARS.normalizeCheckBox.isChecked(),
+                          'copy_X': self.lassoLARS.copyXCheckBox.isChecked(),
+                          'precompute': self.lassoLARS.precomputeComboBox.itemText(index),
+                          'max_iter': self.lassoLARS.maxIterationsSpinBox.value(),
+                          'eps': self.lassoLARS.epsDoubleSpinBox.value(),
+                          'fit_path': self.lassoLARS.fitInterceptCheckBox.isChecked()}
+                print(params)
+
+            if method == 'SVR':
+                gamma_index = self.svr.gammaComboBox.currentIndex()
+                kernel_index = self.svr.kernelComboBox.currentIndex()
+                params = {'C': self.svr.cDoubleSpinBox.value(),
+                          'epsilon': self.svr.epsilonDoubleSpinBox.value(),
+                          'kernel': self.svr.kernelComboBox.itemText(kernel_index),
+                          'degree': self.svr.degreeSpinBox.value(),
+                          'gamma': self.svr.gammaComboBox.itemText(gamma_index),
+                          'coef0': self.svr.coeff0DoubleSpinBox.value(),
+                          'shrinking': self.svr.shrinkingCheckBox.isChecked(),
+                          'tol': self.svr.toleranceDoubleSpinBox.value(),
+                          'cache_size': self.svr.cacheSizeSpinBox,
+                          'verbose': self.svr.verboseCheckBox.isChecked(),
+                          'max_iter': self.svr.maxIterationsSpinBox.value()}
+                print(params)
+
+            if method == 'KRR':
+                params = {'alpha': self.krr.alphaSpinBox.value(),
+                          'kernel': self.krr.kernelLineEdit.text(),
+                          'gamma': self.krr.gammaLineEdit.text(),
+                          'degree': self.krr.degreeDoubleSpinBox.value(),
+                          'coef0': self.krr.coeff0DoubleSpinBox.value(),
+                          'kernel_params': self.krr.kernelParametersLineEdit.text()}
+                print(params)
+
+            if method == 'PLS':
+                params = {'n_components': self.pls.numOfComponentsSpinBox.value(),
+                          'scale': False}
+                modelkey = modelkey + '(nc=' + str(params['n_components']) + ')'
+                print(params)
+
+            if method == 'GP':
+                index = self.gp.chooseDimensionalityReductionMethodComboBox.currentIndex()
+                params = {'reduce_dim': self.gp.chooseDimensionalityReductionMethodComboBox.itemText(index),
+                          'n_components': self.gp.numOfComponentsSpinBox.value(),
+                          'random_start': self.gp.numOfRandomStartsSpinBox.value(),
+                          'theta0': self.gp.startingThetaDoubleSpinBox.value(),
+                          'thetaL': self.gp.lowerBoundOnThetaDoubleSpinBox.value(),
+                          'thetaU': self.gp.upperBoundOnThetaDoubleSpinBox.value()}
+
+                modelkey = modelkey + str(params)
+                print(params)
+
+        except Exception as e:
+            print(e)
+
+        kws = {'modelkey': modelkey}
         ui_list = "do_regression_train"
         fun_list = "do_regression_train"
 
-        args = [self.datakey, self.xvars, self.yvars, self.yrange, self.method, self.params, self.ransacparams]
+        args = [datakey, xvars, yvars, yrange, method, params, ransacparams]
         # TODO Stop the module when there are ill-formed parameters!
         self.r = self.qtickle.guiSave()
-        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, self.kws, self.r, self.ui_id)
+        self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.r, self.ui_id)
 
     def set_regression_parameters(self):
         if self.restr_list is not None:
@@ -166,27 +305,25 @@ class regression_train_:
         if alg == self.algorithm_list[1]:
             self.pls = PLS.Ui_Form()
             self.pls.setupUi(self.reg_widget)
-            # detect a change in the UI
+            self.qtickle.isGuiChanged(self.pls, self.get_regression_parameters)
 
         if alg == self.algorithm_list[2]:
             self.gp = GP.Ui_Form()
             self.gp.setupUi(self.reg_widget)
+            self.qtickle.isGuiChanged(self.gp, self.get_regression_parameters)
 
         if alg == self.algorithm_list[3]:
             self.ols = OLS.Ui_Form()
             self.ols.setupUi(self.reg_widget)
+            self.qtickle.isGuiChanged(self.ols, self.get_regression_parameters)
 
-            self.ols.fitInterceptCheckBox.stateChanged.connect(lambda: self.get_regression_parameters())
             if params is not None:
-                self.reg_widget.ols_intercept_checkbox.setChecked(params['fit_intercept'])
+                self.ols.fitInterceptCheckBox.setChecked(params['fit_intercept'])
 
         if alg == self.algorithm_list[4]:
             self.omp = OMP.Ui_Form()
             self.omp.setupUi(self.reg_widget)
-
-            self.omp.fitInterceptCheckBox.stateChanged.connect(lambda: self.get_regression_parameters())
-            self.omp.optimizeWCrossValidationCheckBox.stateChanged.connect(lambda: self.get_regression_parameters())
-            self.omp.numOfNonZeroCoeffsSpinBox.valueChanged.connect(lambda: self.get_regression_parameters())
+            self.qtickle.isGuiChanged(self.omp, self.get_regression_parameters)
 
             if params is not None:
                 self.omp.fitInterceptCheckBox.setChecked(params['fit_intercept'])
@@ -196,93 +333,80 @@ class regression_train_:
         if alg == self.algorithm_list[5]:
             self.lasso = Lasso.Ui_Form()
             self.lasso.setupUi(self.reg_widget)
+            self.qtickle.isGuiChanged(self.lasso, self.get_regression_parameters)
 
-            self.lasso.alphaDoubleSpinBox.valueChanged.connect(lambda: self.get_regression_parameters())
-            self.lasso.maxNumOfIterationsSpinBox.valueChanged.connect(lambda: self.get_regression_parameters())
-            self.lasso.toleranceDoubleSpinBox.valueChanged.connect(lambda: self.get_regression_parameters())
-            self.lasso.fitInterceptCheckBox.stateChanged.connect(lambda: self.get_regression_parameters())
-            self.lasso.forcePositiveCoefficientsCheckBox.stateChanged.connect(lambda: self.get_regression_parameters())
-            self.lasso.optimizeWCrossValidaitonCheckBox.stateChanged.connect(lambda: self.get_regression_parameters())
-
-            if params is not None:
-                self.reg_widget.lasso_alpha.setValue(params['alpha'])
-                self.reg_widget.lasso_intercept_checkbox.setChecked(params['fit_intercept'])
-                self.reg_widget.lasso_tol.setValue(params['tol'])
-                self.reg_widget.lasso_max.setValue(params['max_iter'])
-                self.reg_widget.lasso_positive_checkbox.setChecked(params['positive'])
-                self.reg_widget.lasso_cv_checkbox.setChecked(params['CV'])
+            # if params is not None:
+            # self..lasso_alpha.setValue(params['alpha'])
+            # self..lasso_intercept_checkbox.setChecked(params['fit_intercept'])
+            # self..lasso_tol.setValue(params['tol'])
+            # self..lasso_max.setValue(params['max_iter'])
+            # self..lasso_positive_checkbox.setChecked(params['positive'])
+            # self..lasso_cv_checkbox.setChecked(params['CV'])
 
         if alg == self.algorithm_list[6]:
             self.elastic_net = ElasticNet.Ui_Form()
             self.elastic_net.setupUi(self.reg_widget)
+            self.qtickle.isGuiChanged(self.elastic_net, self.get_regression_parameters)
 
-            self.elastic_net.alphaDoubleSpinBox.valueChanged.connect(lambda: self.get_regression_parameters())
-            self.elastic_net.l1RatioDoubleSpinBox.valueChanged.connect(lambda: self.get_regression_parameters())
-            self.elastic_net.maxNumOfIterationsSpinBox.valueChanged.connect(lambda: self.get_regression_parameters())
-            self.elastic_net.toleranceDoubleSpinBox.valueChanged.connect(lambda: self.get_regression_parameters())
-            self.elastic_net.fitInterceptCheckBox.stateChanged.connect(lambda: self.get_regression_parameters())
-            self.elastic_net.forcePositiveCoefficientsCheckBox.stateChanged.connect(
-                lambda: self.get_regression_parameters())
-            self.elastic_net.optimizeWCrossValidationCheckBox.stateChanged.connect(
-                lambda: self.get_regression_parameters())
-
-            if params is not None:
-                self.reg_widget.elnet_alpha.setValue(params['alpha'])
-                self.reg_widget.elnet_l1.setValue(params['l1_ratio'])
-                self.reg_widget.elnet_intercept_checkbox.setChecked(params['fit_intercept'])
-                self.reg_widget.elnet_tol.setValue(params['tol'])
-                self.reg_widget.elnet_max.setValue(params['max_iter'])
-                self.reg_widget.elnet_positive_checkbox.setChecked(params['positive'])
-                self.reg_widget.elnet_cv_checkbox.setChecked(params['CV'])
+            # if params is not None:
+            # self..elnet_alpha.setValue(params['alpha'])
+            # self..elnet_l1.setValue(params['l1_ratio'])
+            # self..elnet_intercept_checkbox.setChecked(params['fit_intercept'])
+            # self..elnet_tol.setValue(params['tol'])
+            # self..elnet_max.setValue(params['max_iter'])
+            # self..elnet_positive_checkbox.setChecked(params['positive'])
+            # self..elnet_cv_checkbox.setChecked(params['CV'])
 
         if alg == self.algorithm_list[7]:
             self.ridge = Ridge.Ui_Form()
             self.ridge.setupUi(self.reg_widget)
+            self.qtickle.isGuiChanged(self.ridge, self.get_regression_parameters)
 
         if alg == self.algorithm_list[8]:
             self.br = bayesian_ridge.Ui_Form()
             self.br.setupUi(self.reg_widget)
+            self.qtickle.isGuiChanged(self.br, self.get_regression_parameters)
 
-            self.br.alpha1DoubleSpinBox.valueChanged.connect(lambda: self.get_regression_parameters())
-
-            if params is not None:
-                self.reg_widget.ridge_alpha.setValue(params['alpha'])
-                self.reg_widget.ridge_intercept_checkbox.setChecked(params['fit_intercept'])
-                self.reg_widget.ridge_tol.setValue(params['tol'])
-                self.reg_widget.ridge_max.setValue(params['max_iter'])
-                self.reg_widget.ridge_cv_checkbox.setChecked(params['CV'])
+            # if params is not None:
+            # self..ridge_alpha.setValue(params['alpha'])
+            # self..ridge_intercept_checkbox.setChecked(params['fit_intercept'])
+            # self..ridge_tol.setValue(params['tol'])
+            # self..ridge_max.setValue(params['max_iter'])
+            # self..ridge_cv_checkbox.setChecked(params['CV'])
 
         if alg == self.algorithm_list[9]:
             self.ard = ARD.Ui_Form()
             self.ard.setupUi(self.reg_widget)
-            Qtickle.isGuiChanged(self.ard, self.get_regression_parameters())
+            self.qtickle.isGuiChanged(self.ard, self.get_regression_parameters)
 
         if alg == self.algorithm_list[10]:
             self.lars = LARS.Ui_Form()
             self.lars.setupUi(self.reg_widget)
+            self.qtickle.isGuiChanged(self.lars, self.get_regression_parameters)
 
         if alg == self.algorithm_list[11]:
             self.lassoLARS = LassoLARS.Ui_Form()
             self.lassoLARS.setupUi(self.reg_widget)
+            self.qtickle.isGuiChanged(self.lassoLARS, self.get_regression_parameters)
 
-            # self.reg_widget.lassoLARS_cv_checkbox.stateChanged.connect(lambda: self.get_regression_parameters())
-
-            if params is not None:
-                self.reg_widget.lassoLARS_alpha.setValue(params['alpha'])
-                self.reg_widget.lassoLARS_intercept_checkbox.setChecked(params['fit_intercept'])
-                self.reg_widget.lassoLARS_max.setValue(params['max_iter'])
-                self.reg_widget.lassoLARS_positive_checkbox.setChecked(params['positive'])
-                self.reg_widget.lassoLARS_cv_checkbox.setChecked(params['CV'])
+            # if params is not None:
+            # self..lassoLARS_alpha.setValue(params['alpha'])
+            # self..lassoLARS_intercept_checkbox.setChecked(params['fit_intercept'])
+            # self..lassoLARS_max.setValue(params['max_iter'])
+            # self..lassoLARS_positive_checkbox.setChecked(params['positive'])
+            # self..lassoLARS_cv_checkbox.setChecked(params['CV'])
 
         if alg == self.algorithm_list[12]:
             self.svr = SVR.Ui_Form()
             self.svr.setupUi(self.reg_widget)
+            self.qtickle.isGuiChanged(self.svr, self.get_regression_parameters)
 
         if alg == self.algorithm_list[13]:
             self.krr = KRR.Ui_Form()
             self.krr.setupUi(self.reg_widget)
+            self.qtickle.isGuiChanged(self.krr, self.get_regression_parameters)
 
-        self.reg_widget.setObjectName("reg_widget")
+        self.reg_widget.setObjectName("")
         self.regression_vlayout.addWidget(self.reg_widget)
         self.get_regression_parameters()
 
