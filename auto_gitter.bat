@@ -8,7 +8,7 @@ FOR /f "delims=" %%I in ('dir %USERPROFILE% /b/o/w/s ^| find /i "cmd\git.exe"') 
 %%I config remote.origin.url git@github.com:tisaconundrum2/PySAT_Point_Spectra_GUI.git
 %%I  pull origin master
 %%I  add -A
-%%I  commit -m "squash %mydate%_%mytime%"
+%%I  commit -m "Update %mydate%_%mytime%"
 timeout /t 60
 )
 goto :top
