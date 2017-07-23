@@ -108,7 +108,7 @@ class Ui_Form(object):
         self.precomputeComboBox.setItemText(0, _translate("Form", "Auto"))
         self.precomputeComboBox.setItemText(1, _translate("Form", "True"))
         self.precomputeComboBox.setItemText(2, _translate("Form", "False"))
-        self.precomputeComboBox.setItemText(3, _translate("Form", "array-like"))
+        self.precomputeComboBox.setItemText(3, _translate("Form", "Array-like"))
         self.maxIterationsLabel.setText(_translate("Form", "Max Iterations"))
         self.epsLabel.setText(_translate("Form", "Eps"))
         self.fitPathLabel.setText(_translate("Form", "Fit Path"))

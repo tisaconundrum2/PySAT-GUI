@@ -84,11 +84,15 @@ class regression_train_:
 
             if method == 'Elastic Net':
                 index = self.elastic_net.precomputeComboBox.currentIndex()
+                precomputeComboBox = self.elastic_net.precomputeComboBox.itemText(index)
+                if precomputeComboBox is not 'Array-like':
+                    precomputeComboBox = precomputeComboBox.lower() in ('true')
+
                 params = {'alpha': self.elastic_net.alphaDoubleSpinBox.value(),
                           'l1_ratio': self.elastic_net.l1RatioDoubleSpinBox.value(),
                           'fit_intercept': self.elastic_net.fitInterceptCheckBox.isChecked(),
                           'normalize': self.elastic_net.normalizeCheckBox.isChecked(),
-                          'precompute': self.elastic_net.precomputeComboBox.itemText(index),
+                          'precompute': precomputeComboBox,
                           'max_iter': self.elastic_net.maxNumOfIterationsSpinBox.value(),
                           'copy_X': self.elastic_net.copyXCheckBox.isChecked(),
                           'tol': self.elastic_net.toleranceDoubleSpinBox.value(),
@@ -153,13 +157,16 @@ class regression_train_:
 
             if method == 'Lasso LARS':
                 index = self.lassoLARS.precomputeComboBox.currentIndex()
+                precomputeComboBox = self.lassoLARS.precomputeComboBox.itemText(index)
+                if precomputeComboBox is not 'Array-like':
+                    precomputeComboBox = precomputeComboBox.lower() in ('true')
                 params = {'alpha': self.lassoLARS.alphaDoubleSpinBox.value(),
                           'fit_intercept': self.lassoLARS.fitInterceptCheckBox.isChecked(),
                           'positive': self.lassoLARS.positiveCheckBox.isChecked(),
                           'verbose': self.lassoLARS.verboseCheckBox.isChecked(),
                           'normalize': self.lassoLARS.normalizeCheckBox.isChecked(),
                           'copy_X': self.lassoLARS.copyXCheckBox.isChecked(),
-                          'precompute': self.lassoLARS.precomputeComboBox.itemText(index),
+                          'precompute': precomputeComboBox,
                           'max_iter': self.lassoLARS.maxIterationsSpinBox.value(),
                           'eps': self.lassoLARS.epsDoubleSpinBox.value(),
                           'fit_path': self.lassoLARS.fitInterceptCheckBox.isChecked()}
