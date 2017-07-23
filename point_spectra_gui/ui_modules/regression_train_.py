@@ -176,7 +176,7 @@ class regression_train_:
                           'coef0': self.svr.coeff0DoubleSpinBox.value(),
                           'shrinking': self.svr.shrinkingCheckBox.isChecked(),
                           'tol': self.svr.toleranceDoubleSpinBox.value(),
-                          'cache_size': self.svr.cacheSizeSpinBox,
+                          'cache_size': self.svr.cacheSizeSpinBox.value(),
                           'verbose': self.svr.verboseCheckBox.isChecked(),
                           'max_iter': self.svr.maxIterationsSpinBox.value()}
                 print(params)
