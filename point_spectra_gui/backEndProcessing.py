@@ -543,47 +543,6 @@ class backEndProc(QThread):
                                            annot_mask=annot_mask, cmap=cmap,
                                            colortitle=colortitle, loadfig=loadfig, marker=marker, linestyle=linestyle)
 
-    def do_plot_spect(self, datakey,
-                      row,
-                      figfile=None, xrange=None,
-                      yrange=None, xtitle='Wavelength (nm)',
-                      ytitle=None, title=None,
-                      lbl=None, one_to_one=False,
-                      dpi=1000, color=None,
-                      annot_mask=None,
-                      cmap=None, colortitle='', figname=None, masklabel='',
-                      marker=None, linestyle='-', col=None, alpha=0.5, linewidth=1.0):
-
-        self.data[datakey].enumerate_duplicates(col)
-        data = self.data[datakey].df
-
-        y = np.squeeze(np.array(data.loc[data[('meta', col)].isin([row])]['wvl'].T))
-        x = np.array(data['wvl'].columns.values)
-
-        try:
-            loadfig = self.figs[figname]
-        except:
-            loadfig = None
-
-        try:
-            outpath = self.outpath
-            self.figs[figname] = make_plot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
-                                           ytitle=ytitle, title=title,
-                                           lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
-                                           annot_mask=annot_mask, cmap=cmap,
-                                           colortitle=colortitle, loadfig=loadfig, marker=marker, linestyle=linestyle,
-                                           linewidth=linewidth)
-
-        except Exception as e:
-            error_print(e)
-            # dealing with the a possibly missing outpath
-            outpath = './'
-            self.figs[figname] = make_plot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
-                                           ytitle=ytitle, title=title,
-                                           lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
-                                           annot_mask=annot_mask, cmap=cmap,
-                                           colortitle=colortitle, loadfig=loadfig, marker=marker, linestyle=linestyle)
-
     def do_plot_dim_red(self, datakey,
                         x_component,
                         y_component,
