@@ -90,6 +90,15 @@ class Ui_Form(object):
         self.fitPathCheckBox.setChecked(True)
         self.fitPathCheckBox.setObjectName("fitPathCheckBox")
         self.formLayout.setWidget(9, QtWidgets.QFormLayout.FieldRole, self.fitPathCheckBox)
+        self.modelLabel = QtWidgets.QLabel(self.formGroupBox)
+        self.modelLabel.setObjectName("modelLabel")
+        self.formLayout.setWidget(10, QtWidgets.QFormLayout.LabelRole, self.modelLabel)
+        self.modelComboBox = QtWidgets.QComboBox(self.formGroupBox)
+        self.modelComboBox.setObjectName("modelComboBox")
+        self.modelComboBox.addItem("")
+        self.modelComboBox.addItem("")
+        self.modelComboBox.addItem("")
+        self.formLayout.setWidget(10, QtWidgets.QFormLayout.FieldRole, self.modelComboBox)
         self.verticalLayout.addWidget(self.formGroupBox)
 
         self.retranslateUi(Form)
@@ -108,10 +117,14 @@ class Ui_Form(object):
         self.precomputeComboBox.setItemText(0, _translate("Form", "Auto"))
         self.precomputeComboBox.setItemText(1, _translate("Form", "True"))
         self.precomputeComboBox.setItemText(2, _translate("Form", "False"))
-        self.precomputeComboBox.setItemText(3, _translate("Form", "Array-like"))
+        self.precomputeComboBox.setItemText(3, _translate("Form", "array-like"))
         self.maxIterationsLabel.setText(_translate("Form", "Max Iterations"))
         self.epsLabel.setText(_translate("Form", "Eps"))
         self.fitPathLabel.setText(_translate("Form", "Fit Path"))
+        self.modelLabel.setText(_translate("Form", "Model"))
+        self.modelComboBox.setItemText(0, _translate("Form", "Lasso Lars"))
+        self.modelComboBox.setItemText(1, _translate("Form", "Cross Validated Lasso Lars"))
+        self.modelComboBox.setItemText(2, _translate("Form", "Information Criterion Lasso Lars"))
 
 
 if __name__ == "__main__":

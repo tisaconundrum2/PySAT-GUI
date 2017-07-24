@@ -168,6 +168,32 @@
         </property>
        </widget>
       </item>
+      <item row="10" column="0">
+       <widget class="QLabel" name="modelLabel">
+        <property name="text">
+         <string>Model</string>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="1">
+       <widget class="QComboBox" name="modelComboBox">
+        <item>
+         <property name="text">
+          <string>Lasso Lars</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Cross Validated Lasso Lars</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Information Criterion Lasso Lars</string>
+         </property>
+        </item>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
