@@ -80,6 +80,7 @@ class Ui_Form(object):
         self.crossValidateLabel.setObjectName("crossValidateLabel")
         self.formLayout.setWidget(8, QtWidgets.QFormLayout.LabelRole, self.crossValidateLabel)
         self.crossValidateCheckBox = QtWidgets.QCheckBox(self.formGroupBox)
+        self.crossValidateCheckBox.setChecked(True)
         self.crossValidateCheckBox.setObjectName("crossValidateCheckBox")
         self.formLayout.setWidget(8, QtWidgets.QFormLayout.FieldRole, self.crossValidateCheckBox)
         self.verticalLayout.addWidget(self.formGroupBox)
