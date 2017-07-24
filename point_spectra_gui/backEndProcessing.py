@@ -279,6 +279,14 @@ class backEndProc(QThread):
         except Exception as e:
             error_print(e)
 
+    def do_peak_area(self, datakey, peaks_mins_file):
+        try:
+            self.data[datakey].peak_area(peaks_mins_file=peaks_mins_file)
+            print("Peak Areas Calculated")
+        except Exception as e:
+            error_print(e)
+
+
     def do_multiply_vector(self, datakey, vectorfile):
         try:
             self.data[datakey].multiply_vector(vectorfile)
