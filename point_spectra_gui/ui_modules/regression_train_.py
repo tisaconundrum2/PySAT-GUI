@@ -104,7 +104,8 @@ class regression_train_:
                           'warm_start': self.elastic_net.warmStartCheckBox.isChecked(),
                           'positive': self.elastic_net.positiveCheckBox.isChecked(),
                           'selection': self.elastic_net.selectionLineEdit.text(),
-                          'random_state': r_state}
+                          'random_state': r_state,
+                          'CV': self.elastic_net.crossValidateCheckBox.isChecked()}
                 print(params)
 
             if method == 'Ridge':
@@ -127,7 +128,8 @@ class regression_train_:
                           'normalize': self.ridge.normalizeCheckBox.isChecked(),
                           'solver': self.ridge.solverComboBox.itemText(index),
                           'tol': self.ridge.toleranceDoubleSpinBox.value(),
-                          'random_state': r_state}
+                          'random_state': r_state,
+                          'CV': self.ridge.crossValidateCheckBox.isChecked()}
                 print(params)
 
             if method == 'Bayesian Ridge':
@@ -168,7 +170,8 @@ class regression_train_:
                           'precompute': self.lars.precomputeCheckBox.isChecked(),
                           'copy_X': self.lars.copyXCheckBox.isChecked(),
                           'eps': self.lars.epsDoubleSpinBox.value(),
-                          'fit_path': self.lars.fitPathCheckBox.isChecked()}
+                          'fit_path': self.lars.fitPathCheckBox.isChecked(),
+                          'CV': self.lars.crossValidateCheckBox.isChecked()}
                 print(params)
 
             if method == 'Lasso LARS':
