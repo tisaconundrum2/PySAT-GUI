@@ -75,7 +75,7 @@ class regression_train_:
             if method == 'Lasso':
                 params = {'alpha': self.lasso.alphaDoubleSpinBox.value(),
                           'fit_intercept': self.lasso.fitInterceptCheckBox.isChecked(),
-                          'max_iter': self.lasso.maxNumOfIterationsSpinBox.value(),
+                          'max_iter': int(self.lasso.maxNumOfIterationsSpinBox.value()),
                           'tol': self.lasso.toleranceDoubleSpinBox.value(),
                           'positive': self.lasso.forcePositiveCoefficientsCheckBox.isChecked(),
                           'selection': 'random',
@@ -83,35 +83,51 @@ class regression_train_:
                 print(params)
 
             if method == 'Elastic Net':
+                p_attrib = {'False': False, 'True': True, 'Array-like': 'array-like'}
+                r_attrib = {'None': None}
+                try:
+                    r_state = int(self.elastic_net.randomStateLineEdit.text())
+                except:
+                    r_state = r_attrib[self.elastic_net.randomStateLineEdit.text()]
+
                 index = self.elastic_net.precomputeComboBox.currentIndex()
                 precomputeComboBox = self.elastic_net.precomputeComboBox.itemText(index)
-                if precomputeComboBox is not 'Array-like':
-                    precomputeComboBox = precomputeComboBox.lower() in ('true')
 
                 params = {'alpha': self.elastic_net.alphaDoubleSpinBox.value(),
                           'l1_ratio': self.elastic_net.l1RatioDoubleSpinBox.value(),
                           'fit_intercept': self.elastic_net.fitInterceptCheckBox.isChecked(),
                           'normalize': self.elastic_net.normalizeCheckBox.isChecked(),
-                          'precompute': precomputeComboBox,
-                          'max_iter': self.elastic_net.maxNumOfIterationsSpinBox.value(),
+                          'precompute': p_attrib[precomputeComboBox],
+                          'max_iter': int(self.elastic_net.maxNumOfIterationsSpinBox.value()),
                           'copy_X': self.elastic_net.copyXCheckBox.isChecked(),
                           'tol': self.elastic_net.toleranceDoubleSpinBox.value(),
                           'warm_start': self.elastic_net.warmStartCheckBox.isChecked(),
                           'positive': self.elastic_net.positiveCheckBox.isChecked(),
                           'selection': self.elastic_net.selectionLineEdit.text(),
-                          'random_state': self.elastic_net.randomStateLineEdit.text()}
+                          'random_state': r_state}
                 print(params)
 
             if method == 'Ridge':
+                m_attrib = {'None': None}
+                r_attrib = {'None': None}
+                try:
+                    m_state = int(self.ridge.maxNumOfIterationslineEdit.text())
+                except:
+                    m_state = m_attrib[self.ridge.maxNumOfIterationslineEdit.text()]
+                try:
+                    r_state = int(self.ridge.randomStateLineEdit.text())
+                except:
+                    r_state = r_attrib[self.elastic_net.randomStateLineEdit.text()]
+
                 index = self.ridge.solverComboBox.currentIndex()
                 params = {'alpha': self.ridge.alphaDoubleSpinBox.value(),
                           'copy_X': self.ridge.copyXCheckBox.isChecked(),
                           'fit_intercept': self.ridge.fitInterceptCheckBox.isChecked(),
-                          'max_iter': self.ridge.maxNumOfIterationslineEdit.text(),
+                          'max_iter': m_state,
                           'normalize': self.ridge.normalizeCheckBox.isChecked(),
                           'solver': self.ridge.solverComboBox.itemText(index),
                           'tol': self.ridge.toleranceDoubleSpinBox.value(),
-                          'random_state': self.ridge.randomStateLineEdit.text()}
+                          'random_state': r_state}
                 print(params)
 
             if method == 'Bayesian Ridge':
@@ -156,18 +172,18 @@ class regression_train_:
                 print(params)
 
             if method == 'Lasso LARS':
+                p_attrib = {'Auto': 'auto', 'True': True, 'False': False, 'Array-like': 'array-like'}
                 index = self.lassoLARS.precomputeComboBox.currentIndex()
                 precomputeComboBox = self.lassoLARS.precomputeComboBox.itemText(index)
-                if precomputeComboBox is not 'Array-like':
-                    precomputeComboBox = precomputeComboBox.lower() in ('true')
+
                 params = {'alpha': self.lassoLARS.alphaDoubleSpinBox.value(),
                           'fit_intercept': self.lassoLARS.fitInterceptCheckBox.isChecked(),
                           'positive': self.lassoLARS.positiveCheckBox.isChecked(),
                           'verbose': self.lassoLARS.verboseCheckBox.isChecked(),
                           'normalize': self.lassoLARS.normalizeCheckBox.isChecked(),
                           'copy_X': self.lassoLARS.copyXCheckBox.isChecked(),
-                          'precompute': precomputeComboBox,
-                          'max_iter': self.lassoLARS.maxIterationsSpinBox.value(),
+                          'precompute': p_attrib[precomputeComboBox],
+                          'max_iter': int(self.lassoLARS.maxIterationsSpinBox.value()),
                           'eps': self.lassoLARS.epsDoubleSpinBox.value(),
                           'fit_path': self.lassoLARS.fitInterceptCheckBox.isChecked()}
                 print(params)
@@ -185,16 +201,17 @@ class regression_train_:
                           'tol': self.svr.toleranceDoubleSpinBox.value(),
                           'cache_size': self.svr.cacheSizeSpinBox.value(),
                           'verbose': self.svr.verboseCheckBox.isChecked(),
-                          'max_iter': self.svr.maxIterationsSpinBox.value()}
+                          'max_iter': int(self.svr.maxIterationsSpinBox.value())}
                 print(params)
 
             if method == 'KRR':
+                k_attrib = {'None': None}
                 params = {'alpha': self.krr.alphaSpinBox.value(),
                           'kernel': self.krr.kernelLineEdit.text(),
                           'gamma': self.krr.gammaLineEdit.text(),
                           'degree': self.krr.degreeDoubleSpinBox.value(),
                           'coef0': self.krr.coeff0DoubleSpinBox.value(),
-                          'kernel_params': self.krr.kernelParametersLineEdit.text()}
+                          'kernel_params': k_attrib[self.krr.kernelParametersLineEdit.text()]}
                 print(params)
 
             if method == 'PLS':
