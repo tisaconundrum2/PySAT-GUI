@@ -188,7 +188,8 @@ class regression_train_:
                           'precompute': p_attrib[precomputeComboBox],
                           'max_iter': int(self.lassoLARS.maxIterationsSpinBox.value()),
                           'eps': self.lassoLARS.epsDoubleSpinBox.value(),
-                          'fit_path': self.lassoLARS.fitInterceptCheckBox.isChecked()}
+                          'fit_path': self.lassoLARS.fitInterceptCheckBox.isChecked(),
+                          'model': self.lassoLARS.modelComboBox.currentIndex()}
                 print(params)
 
             if method == 'SVR':
