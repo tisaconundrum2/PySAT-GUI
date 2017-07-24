@@ -81,6 +81,14 @@ class Ui_Form(object):
         self.normalizeCheckBox = QtWidgets.QCheckBox(self.formGroupBox)
         self.normalizeCheckBox.setObjectName("normalizeCheckBox")
         self.formLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.normalizeCheckBox)
+        self.crossValidatePathLabel = QtWidgets.QLabel(self.formGroupBox)
+        self.crossValidatePathLabel.setObjectName("crossValidatePathLabel")
+        self.formLayout.setWidget(9, QtWidgets.QFormLayout.LabelRole, self.crossValidatePathLabel)
+        self.crossValidateCheckBox = QtWidgets.QCheckBox(self.formGroupBox)
+        self.crossValidateCheckBox.setText("")
+        self.crossValidateCheckBox.setChecked(True)
+        self.crossValidateCheckBox.setObjectName("crossValidateCheckBox")
+        self.formLayout.setWidget(9, QtWidgets.QFormLayout.FieldRole, self.crossValidateCheckBox)
         self.verticalLayout.addWidget(self.formGroupBox)
 
         self.retranslateUi(Form)
@@ -105,6 +113,7 @@ class Ui_Form(object):
         self.fitPathCheckBox.setText(_translate("Form", "Store the full path in the coef_path_attribute"))
         self.normalizeLabel.setText(_translate("Form", "Normalize"))
         self.normalizeCheckBox.setText(_translate("Form", "If True, the regressors X will be normalized before regression. ignored when fit_intercept is set to False."))
+        self.crossValidatePathLabel.setText(_translate("Form", "Cross Validate"))
 
 
 if __name__ == "__main__":

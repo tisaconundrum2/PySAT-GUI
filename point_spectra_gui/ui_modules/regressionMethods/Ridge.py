@@ -76,6 +76,12 @@ class Ui_Form(object):
         self.solverComboBox.addItem("")
         self.solverComboBox.addItem("")
         self.formLayout.setWidget(5, QtWidgets.QFormLayout.FieldRole, self.solverComboBox)
+        self.crossValidateLabel = QtWidgets.QLabel(self.formGroupBox)
+        self.crossValidateLabel.setObjectName("crossValidateLabel")
+        self.formLayout.setWidget(8, QtWidgets.QFormLayout.LabelRole, self.crossValidateLabel)
+        self.crossValidateCheckBox = QtWidgets.QCheckBox(self.formGroupBox)
+        self.crossValidateCheckBox.setObjectName("crossValidateCheckBox")
+        self.formLayout.setWidget(8, QtWidgets.QFormLayout.FieldRole, self.crossValidateCheckBox)
         self.verticalLayout.addWidget(self.formGroupBox)
 
         self.retranslateUi(Form)
@@ -100,6 +106,7 @@ class Ui_Form(object):
         self.solverComboBox.setItemText(3, _translate("Form", "lsqr"))
         self.solverComboBox.setItemText(4, _translate("Form", "sparse_cg"))
         self.solverComboBox.setItemText(5, _translate("Form", "sag"))
+        self.crossValidateLabel.setText(_translate("Form", "Cross Validate"))
 
 
 if __name__ == "__main__":
