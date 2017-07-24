@@ -93,6 +93,7 @@ class Ui_Form(object):
         self.solverLabel.setText(_translate("Form", "Solver"))
         self.toleranceLabel.setText(_translate("Form", "Tolerance"))
         self.randomStateLabel.setText(_translate("Form", "Random State"))
+        self.randomStateLineEdit.setText(_translate("Form", "None"))
         self.solverComboBox.setItemText(0, _translate("Form", "auto"))
         self.solverComboBox.setItemText(1, _translate("Form", "svd"))
         self.solverComboBox.setItemText(2, _translate("Form", "cholesky"))
