@@ -1,7 +1,6 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
 
 from point_spectra_gui.ui_modules import make_combobox, Qtickle
-from point_spectra_gui.ui_modules.Error_ import error_print
 from point_spectra_gui.ui_modules.del_layout_ import del_layout_
 
 
@@ -172,6 +171,7 @@ class normalization_:
             for i in range(len_box_list - 1):
                 self.box_list[i].valueChanged.connect(self.box_list[i + 1].setMinimum)
         except Exception as e:
-            error_print(e)
+            import traceback
+            traceback.print_exc(e)
         datakey = self.normalization_choosedata.currentText()
         self.push_parameters([datakey, arg_list], {})

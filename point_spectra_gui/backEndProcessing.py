@@ -1,3 +1,5 @@
+import traceback
+
 import numpy as np
 # from plio import io_ccam_pds
 import pandas as pd
@@ -204,7 +206,7 @@ class backEndProc(QThread):
             self.outpath = outpath
             print("Output path folder has been set to " + outpath)
         except Exception as e:
-            error_print(e)
+            traceback.print_exc(e)
 
     def do_get_data(self, filename, keyname):
         try:
@@ -253,7 +255,7 @@ class backEndProc(QThread):
             print(self.data[datakey].df.shape)
 
         except Exception as e:
-            error_print(e)
+            traceback.print_exc(e)
 
     def do_split_data(self, datakey, colname):
         try:
@@ -270,35 +272,34 @@ class backEndProc(QThread):
                 self.datakeys.append(new_datakey)
                 self.data[new_datakey] = spectral_data(self.data[datakey].df.ix[coldata == i])
         except Exception as e:
-            error_print(e)
+            traceback.print_exc(e)
 
     def do_mask(self, datakey, maskfile):
         try:
             self.data[datakey].mask(maskfile)
             print("Mask applied")
         except Exception as e:
-            error_print(e)
+            traceback.print_exc(e)
 
     def do_peak_area(self, datakey, peaks_mins_file):
         try:
             self.data[datakey].peak_area(peaks_mins_file=peaks_mins_file)
             print("Peak Areas Calculated")
         except Exception as e:
-            error_print(e)
-
+            traceback.print_exc(e)
 
     def do_multiply_vector(self, datakey, vectorfile):
         try:
             self.data[datakey].multiply_vector(vectorfile)
         except Exception as e:
-            error_print(e)
+            traceback.print_exc(e)
 
     def do_interp(self, datakey_to_interp, datakey_ref):
         print(self.data[datakey_ref].df.columns.levels[0])
         try:
             self.data[datakey_to_interp].interp(self.data[datakey_ref].df['wvl'].columns)
         except Exception as e:
-            error_print(e)
+            traceback.print_exc(e)
 
     def do_remove_baseline(self, datakey, method, params):
         datakey_new = datakey + '-Baseline Removed-' + method + str(params)
@@ -319,26 +320,26 @@ class backEndProc(QThread):
                 pass
                 self.dim_reds[dim_red_key] = self.data[datakey].ica_jade(col)
         except Exception as e:
-            error_print(e)
+            traceback.print_exc(e)
 
     def do_pca(self, datakey, nc, col, load_fit=None):
         print(self.data[datakey].df.columns.levels[0])
         try:
             self.data[datakey].pca(col, nc=nc, load_fit=load_fit)
         except Exception as e:
-            error_print(e)
+            traceback.print_exc(e)
 
     def do_ica(self, datakey, nc, col, load_fit=None):
         try:
             self.data[datakey].ica(col, nc=nc, load_fit=load_fit)
         except Exception as e:
-            error_print(e)
+            traceback.print_exc(e)
 
     def do_ica_jade(self, datakey, nc, col, load_fit=None, corrcols=None):
         try:
             self.data[datakey].ica_jade(col, nc=nc, load_fit=load_fit, corrcols=corrcols)
         except Exception as e:
-            error_print(e)
+            traceback.print_exc(e)
 
     def do_norm(self, datakey, ranges):
         print("{}".format(ranges))
@@ -348,7 +349,7 @@ class backEndProc(QThread):
             print(self.data[datakey].df.columns.levels[0])
             print("Normalization has been applied to the ranges: " + str(ranges))
         except Exception as e:
-            error_print(e)
+            traceback.print_exc(e)
 
     def do_strat_folds(self, datakey, nfolds, testfold, colname):
         self.data[datakey].stratified_folds(nfolds=nfolds, sortby=colname)
@@ -402,7 +403,7 @@ class backEndProc(QThread):
                     pass
 
         except Exception as e:
-            error_print(e)
+            traceback.print_exc(e)
 
     def do_cv_train(self, datakey, xvars, yvars, yrange, method, params):
 
@@ -412,7 +413,7 @@ class backEndProc(QThread):
                                                                   yrange=yrange, method=method)
             self.data['CV Results'] = self.cv_results
         except Exception as e:
-            error_print(e)
+            traceback.print_exc(e)
 
     def do_regression_predict(self, datakey, modelkey, predictname):
         try:
@@ -420,7 +421,7 @@ class backEndProc(QThread):
             self.data[datakey].df[predictname] = prediction
             pass
         except Exception as e:
-            error_print(e)
+            traceback.print_exc(e)
 
     def do_submodel_predict(self, datakey, submodel_names, modelranges, trueval_data):
         # Check if reference data name has been provided
@@ -502,7 +503,7 @@ class backEndProc(QThread):
                                            annot_mask=annot_mask, cmap=cmap,
                                            colortitle=colortitle, loadfig=loadfig, marker=marker, linestyle=linestyle)
         except Exception as e:
-            error_print(e)
+            traceback.print_exc(e)
             # dealing with the a possibly missing outpath
             outpath = './'
             self.figs[figname] = make_plot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
@@ -542,7 +543,7 @@ class backEndProc(QThread):
                                            linewidth=linewidth)
 
         except Exception as e:
-            error_print(e)
+            traceback.print_exc(e)
             # dealing with the a possibly missing outpath
             outpath = './'
             self.figs[figname] = make_plot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
@@ -576,14 +577,14 @@ class backEndProc(QThread):
 
     def run(self):
         # TODO this function will take all the enumerated functions and parameters and run them
-        # try:
-        for i in range(len(self.greyed_modules)):
-            r_list = self._list.pull()
-            print(r_list)
-            getattr(self, r_list[2])(*r_list[3], **r_list[4])  # TODO add comment about who is who
-            self.greyed_modules[0].setDisabled(True)
-            del self.greyed_modules[0]
-        self.taskFinished.emit()
-        # except Exception as e:
-        #     error_print(e)
-        #     self.taskFinished.emit()
+        try:
+            for i in range(len(self.greyed_modules)):
+                r_list = self._list.pull()
+                print(r_list)
+                getattr(self, r_list[2])(*r_list[3], **r_list[4])  # TODO add comment about who is who
+                self.greyed_modules[0].setDisabled(True)
+                del self.greyed_modules[0]
+            self.taskFinished.emit()
+        except Exception as e:
+            traceback.print_exc(e)
+            self.taskFinished.emit()

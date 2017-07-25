@@ -1,3 +1,4 @@
+import traceback
 from PyQt5 import QtGui, QtCore, QtWidgets
 
 from Qtickle import Qtickle
@@ -237,7 +238,7 @@ class regression_train_:
                 print(params)
 
         except Exception as e:
-            print(e)
+            traceback.print_exc(e)
 
         kws = {'modelkey': modelkey}
         ui_list = "do_regression_train"
