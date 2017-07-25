@@ -6,6 +6,7 @@ Once the thread terminates we will receive our result.
 *Yet to be tested
 """
 
+
 def onStart(self):
     self.progressBar.setRange(0, 0)
     self.myLongTask.start()

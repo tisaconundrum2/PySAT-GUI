@@ -1,8 +1,7 @@
-from PyQt5 import QtGui, QtCore, QtWidgets
+from PyQt5 import QtGui, QtWidgets
 
 from Qtickle import Qtickle
 from point_spectra_gui.gui_utils import make_combobox
-from point_spectra_gui.ui_modules.Error_ import error_print
 
 
 class dim_reduction_:
@@ -20,13 +19,14 @@ class dim_reduction_:
         self.ui_id = self.pysat_fun.set_list(None, None, None, None, None, self.ui_id)
         self.dim_reduction_ui()
         self.set_dim_red_params()
-        self.dim_red_choosealg.currentIndexChanged.connect(lambda: self.make_dim_red_widget(self.dim_red_choosealg.currentText()))
+        self.dim_red_choosealg.currentIndexChanged.connect(
+            lambda: self.make_dim_red_widget(self.dim_red_choosealg.currentText()))
         self.get_dim_red_params()
         self.pysat_fun.set_greyed_modules(self.dim_reduction)
 
     def set_dim_red_params(self):
         if self.restr_list is not None:
-            self.qtickle.guirestore(self.restr_list)
+            self.qtickle.guiRestore(self.restr_list)
         if self.arg_list is not None:
             datakey = self.arg_list[0]
             method = self.arg_list[1]
@@ -64,7 +64,7 @@ class dim_reduction_:
         kws = {'method_kws': method_kws}
         ui_list = "do_dim_red"
         fun_list = "do_dim_red"
-        r = self.qtickle.guisave()
+        r = self.qtickle.guiSave()
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def make_dim_red_widget(self, method):
@@ -130,9 +130,7 @@ class dim_reduction_:
         self.dim_reduction_choose_data_label.setObjectName("dim_reduction_choose_data_label")
         self.dim_reduction_vlayout.addWidget(self.dim_reduction_choose_data_label)
         datachoices = self.pysat_fun.datakeys
-        
-            
-            
+
         self.dim_reduction_choose_data = make_combobox(datachoices)
         self.dim_reduction_choose_data.setObjectName("dim_reduction_choose_data")
         self.dim_reduction_vlayout.addWidget(self.dim_reduction_choose_data)

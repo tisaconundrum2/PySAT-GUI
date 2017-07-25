@@ -1,4 +1,5 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
+
 from point_spectra_gui.ui_modules import make_combobox, Qtickle
 from point_spectra_gui.ui_modules.Error_ import error_print
 from point_spectra_gui.ui_modules.del_layout_ import del_layout_
@@ -152,7 +153,7 @@ class normalization_:
     def set_norm_parameters(self):
         # TODO finish
         if self.restr_list is not None:
-            self.qtickle.guirestore(self.restr_list)
+            self.qtickle.guiRestore(self.restr_list)
 
         if self.arg_list is not None:
             self.normalization_choosedata.setCurrentIndex(self.normalization_choosedata.findText(self.arg_list[0]))
@@ -167,6 +168,7 @@ class normalization_:
                 self.add_ranges()
                 self.min_spinbox.setValue(box_list[0])
                 self.max_spinbox.setValue(box_list[1])
+
 
     def get_norm_parameters(self):
         ranges = []

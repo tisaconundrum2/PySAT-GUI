@@ -1,7 +1,5 @@
-import traceback
-
-from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtWidgets import QDialog
+from PyQt5.QtWidgets import QMessageBox
 
 
 # When a window is opened
