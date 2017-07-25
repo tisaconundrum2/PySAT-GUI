@@ -1,8 +1,7 @@
-from PyQt5 import QtGui, QtCore, QtWidgets
+from PyQt5 import QtGui, QtWidgets
 
 from Qtickle import Qtickle
-from point_spectra_gui.gui_utils import make_combobox,change_combo_list_vars
-from point_spectra_gui.ui_modules.Error_ import error_print
+from point_spectra_gui.gui_utils import make_combobox, change_combo_list_vars
 
 
 class sm_:
@@ -61,26 +60,26 @@ class sm_:
             trueval_data = None
 
         args = [datakey, submodel_names, blendranges, trueval_data]
-        self.r = self.qtickle.guisave()
+        self.r = self.qtickle.guiSave()
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.r, self.ui_id)
 
     def set_sm_params(self):
         if self.restr_list is not None:
-            self.qtickle.guirestore(self.restr_list)
-            self.isRestore=True
+            self.qtickle.guiRestore(self.restr_list)
+            self.isRestore = True
 
         if self.arg_list is not None:
             datakey = self.arg_list[0]
             submodel_names = self.arg_list[1]
             blendranges = self.arg_list[2]
-            for n,name in enumerate(submodel_names[1:-2]):
-                self.add_submodel(selected_choice=name,minmax=blendranges[n+1])
+            for n, name in enumerate(submodel_names[1:-2]):
+                self.add_submodel(selected_choice=name, minmax=blendranges[n + 1])
 
             trueval_data = self.arg_list[3]
-            change_combo_list_vars(self.choosedata_predict,self.restr_list['self.choosedata_predict_values'])
+            change_combo_list_vars(self.choosedata_predict, self.restr_list['self.choosedata_predict_values'])
 
             if self.optimize_checkbox.isChecked():
-                change_combo_list_vars(self.choosedata,self.restr_list['self.choosedata_values'])
+                change_combo_list_vars(self.choosedata, self.restr_list['self.choosedata_values'])
                 self.choosedata.setCurrentIndex(self.choosedata.findText(str(trueval_data)))
             pass
             self.choosedata_predict.setCurrentIndex(self.choosedata_predict.findText(str(datakey)))
@@ -250,7 +249,7 @@ class sm_:
         self.choosedata_predict.currentIndexChanged.connect(lambda: self.get_sm_params())
         self.get_sm_params()  # get initial parameters
 
-    def add_submodel(self,selected_choice=None,minmax=None):
+    def add_submodel(self, selected_choice=None, minmax=None):
 
         submodel_hlayout = QtWidgets.QHBoxLayout()
         font = QtGui.QFont()

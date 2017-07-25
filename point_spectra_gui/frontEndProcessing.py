@@ -1,9 +1,9 @@
 import pickle
 
-from PyQt5 import QtGui, QtCore, QtWidgets, QtGui
+from PyQt5 import QtCore, QtWidgets, QtGui
+
 from point_spectra_gui import ui_modules
 from point_spectra_gui.backEndProcessing import backEndProc
-from Qtickle import Qtickle
 
 
 class frontEndProc(object):
@@ -123,6 +123,8 @@ class frontEndProc(object):
         self.actionSplitData.setObjectName(("actionSplitData"))
         self.actionApply_Mask = QtWidgets.QAction(MainWindow)
         self.actionApply_Mask.setObjectName(("actionApply_Mask"))
+        self.actionPeak_Area = QtWidgets.QAction(MainWindow)
+        self.actionPeak_Area.setObjectName(("actionPeak_Area"))
         self.actionMultiply_Vector = QtWidgets.QAction(MainWindow)
         self.actionMultiply_Vector.setObjectName(("actionMultiply_Vector"))
         self.actionInterpolate = QtWidgets.QAction(MainWindow)
@@ -184,6 +186,7 @@ class frontEndProc(object):
         self.menuPreprocessing.addAction(self.actionInterpolate)
         self.menuPreprocessing.addAction(self.actionRemoveBaseline)
         self.menuPreprocessing.addAction(self.actionApply_Mask)
+        self.menuPreprocessing.addAction(self.actionPeak_Area)
         self.menuPreprocessing.addAction(self.actionMultiply_Vector)
         self.menuPreprocessing.addAction(self.actionNormalization)
         self.menuPreprocessing.addAction(self.actionDimRed)
@@ -228,6 +231,7 @@ class frontEndProc(object):
         self.actionCreate_New_Workflow.setText("Create New Workflow")
         self.actionOpen_Workflow.setText("Restore Workflow")
         self.actionApply_Mask.setText("Apply Mask")
+        self.actionPeak_Area.setText("Peak Areas")
         self.actionMultiply_Vector.setText("Multiply by Vector")
         self.actionInterpolate.setText("Interpolate")
         self.actionRemoveBaseline.setText("Remove Baseline")
@@ -260,6 +264,9 @@ class frontEndProc(object):
 
     def do_mask(self, arg_list=None, kw_list=None, restr_list=None):
         ui_modules.get_mask_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
+
+    def do_peak_area(self, arg_list=None, kw_list=None, restr_list=None):
+        ui_modules.peak_area_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
 
     def do_multiply_vector(self, arg_list=None, kw_list=None, restr_list=None):
         ui_modules.multiply_vector_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
@@ -333,6 +340,7 @@ class frontEndProc(object):
         self.actionSave_Current_Data.triggered.connect(lambda: frontEndProc.do_write_data(self))
         self.actionNormalization.triggered.connect(lambda: frontEndProc.normalization(self))  # submodel
         self.actionApply_Mask.triggered.connect(lambda: frontEndProc.do_mask(self))  # get_mask
+        self.actionPeak_Area.triggered.connect(lambda: frontEndProc.do_peak_area(self))  # get_mask
         self.actionMultiply_Vector.triggered.connect(
             lambda: frontEndProc.do_multiply_vector(self))  # multiply by vector
         self.actionRemoveRows.triggered.connect(lambda: frontEndProc.do_removerows(self))
@@ -359,6 +367,7 @@ class frontEndProc(object):
         self.actionPredict.setDisabled(bool)
         self.actionNormalization.setDisabled(bool)
         self.actionApply_Mask.setDisabled(bool)
+        self.actionPeak_Area.setDisabled(bool)
         self.actionMultiply_Vector.setDisabled(bool)
         self.actionStratified_Folds.setDisabled(bool)
         self.actionTrain.setDisabled(bool)

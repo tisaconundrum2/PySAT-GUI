@@ -1,11 +1,27 @@
+from PyQt5 import QtGui, QtCore, QtWidgets
+
 from Qtickle import Qtickle
 from point_spectra_gui.gui_utils import make_combobox, make_listwidget, change_combo_list_vars
-from point_spectra_gui.ui_modules.Error_ import error_print
-from PyQt5 import QtGui, QtCore, QtWidgets
+from point_spectra_gui.ui_modules.regressionMethods import *
 
 
 class regression_train_:
     def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
+        self.algorithm_list = ['Choose an algorithm',  # 0
+                               'PLS',  # 1
+                               'GP',  # 2
+                               'OLS',  # 3
+                               'OMP',  # 4
+                               'Lasso',  # 5
+                               'Elastic Net',  # 6
+                               'Ridge',  # 7
+                               'Bayesian Ridge',  # 8
+                               'ARD',  # 9
+                               'LARS',  # 10
+                               'Lasso LARS',  # 11
+                               'SVR',  # 12
+                               'KRR',  # 13
+                               'More to come...']
         self.isRestore = False
         self.qtickle = Qtickle.Qtickle(self)
         self.arg_list = arg_list
@@ -45,93 +61,219 @@ class regression_train_:
             modelkey = method
         try:
             if method == 'OLS':
-                params = {'fit_intercept': self.reg_widget.ols_intercept_checkbox.isChecked()}
+                params = {'fit_intercept': self.ols.fitInterceptCheckBox.isChecked()}
                 modelkey = modelkey + str(params)
-            if method == 'OMP':
-                params = {'fit_intercept': self.reg_widget.omp_intercept_checkbox.isChecked(),
-                          'n_nonzero_coefs': self.reg_widget.omp_nfeatures.value(),
-                          'CV': self.reg_widget.omp_cv_checkbox.isChecked()}
-                modelkey = modelkey + str(params)
-            if method == 'Lasso':
-                params = {'alpha': self.reg_widget.lasso_alpha.value(),
-                          'fit_intercept': self.reg_widget.lasso_intercept_checkbox.isChecked(),
-                          'max_iter': self.reg_widget.lasso_max.value(), 'tol': self.reg_widget.lasso_tol.value(),
-                          'positive': self.reg_widget.lasso_positive_checkbox.isChecked(), 'selection': 'random',
-                          'CV': self.reg_widget.lasso_cv_checkbox.isChecked()}
                 print(params)
+
+            if method == 'OMP':
+                params = {'fit_intercept': self.omp.fitInterceptCheckBox.isChecked(),
+                          'n_nonzero_coefs': self.omp.numOfNonZeroCoeffsSpinBox.value(),
+                          'CV': self.omp.optimizeWCrossValidationCheckBox.isChecked()}
+                modelkey = modelkey + str(params)
+                print(params)
+
+            if method == 'Lasso':
+                params = {'alpha': self.lasso.alphaDoubleSpinBox.value(),
+                          'fit_intercept': self.lasso.fitInterceptCheckBox.isChecked(),
+                          'max_iter': int(self.lasso.maxNumOfIterationsSpinBox.value()),
+                          'tol': self.lasso.toleranceDoubleSpinBox.value(),
+                          'positive': self.lasso.forcePositiveCoefficientsCheckBox.isChecked(),
+                          'selection': 'random',
+                          'CV': self.lasso.optimizeWCrossValidaitonCheckBox.isChecked()}
+                print(params)
+
             if method == 'Elastic Net':
-                pass
+                p_attrib = {'False': False, 'True': True, 'Array-like': 'array-like'}
+                r_attrib = {'None': None}
+                try:
+                    r_state = int(self.elastic_net.randomStateLineEdit.text())
+                except:
+                    r_state = r_attrib[self.elastic_net.randomStateLineEdit.text()]
+
+                index = self.elastic_net.precomputeComboBox.currentIndex()
+                precomputeComboBox = self.elastic_net.precomputeComboBox.itemText(index)
+
+                params = {'alpha': self.elastic_net.alphaDoubleSpinBox.value(),
+                          'l1_ratio': self.elastic_net.l1RatioDoubleSpinBox.value(),
+                          'fit_intercept': self.elastic_net.fitInterceptCheckBox.isChecked(),
+                          'normalize': self.elastic_net.normalizeCheckBox.isChecked(),
+                          'precompute': p_attrib[precomputeComboBox],
+                          'max_iter': int(self.elastic_net.maxNumOfIterationsSpinBox.value()),
+                          'copy_X': self.elastic_net.copyXCheckBox.isChecked(),
+                          'tol': self.elastic_net.toleranceDoubleSpinBox.value(),
+                          'warm_start': self.elastic_net.warmStartCheckBox.isChecked(),
+                          'positive': self.elastic_net.positiveCheckBox.isChecked(),
+                          'selection': self.elastic_net.selectionLineEdit.text(),
+                          'random_state': r_state,
+                          'CV': self.elastic_net.crossValidateCheckBox.isChecked()}
+                print(params)
+
             if method == 'Ridge':
-                pass
+                m_attrib = {'None': None}
+                r_attrib = {'None': None}
+                try:
+                    m_state = int(self.ridge.maxNumOfIterationslineEdit.text())
+                except:
+                    m_state = m_attrib[self.ridge.maxNumOfIterationslineEdit.text()]
+                try:
+                    r_state = int(self.ridge.randomStateLineEdit.text())
+                except:
+                    r_state = r_attrib[self.elastic_net.randomStateLineEdit.text()]
+
+                index = self.ridge.solverComboBox.currentIndex()
+                params = {'alpha': self.ridge.alphaDoubleSpinBox.value(),
+                          'copy_X': self.ridge.copyXCheckBox.isChecked(),
+                          'fit_intercept': self.ridge.fitInterceptCheckBox.isChecked(),
+                          'max_iter': m_state,
+                          'normalize': self.ridge.normalizeCheckBox.isChecked(),
+                          'solver': self.ridge.solverComboBox.itemText(index),
+                          'tol': self.ridge.toleranceDoubleSpinBox.value(),
+                          'random_state': r_state,
+                          'CV': self.ridge.crossValidateCheckBox.isChecked()}
+                print(params)
+
             if method == 'Bayesian Ridge':
-                pass
+                params = {'n_iter': self.br.numOfIterationsSpinBox.value(),
+                          'tol': self.br.toleranceDoubleSpinBox.value(),
+                          'alpha_1': self.br.alpha1DoubleSpinBox.value(),
+                          'alpha_2': self.br.alpha2DoubleSpinBox.value(),
+                          'lambda_1': self.br.lambdaDoubleSpinBox.value(),
+                          'lambda_2': self.br.lambdaDoubleSpinBox.value(),
+                          'compute_score': self.br.computerScoreCheckBox.isChecked(),
+                          'fit_intercept': self.br.fitInterceptCheckBox.isChecked(),
+                          'normalize': self.br.normalizeCheckBox.isChecked(),
+                          'copy_X': self.br.copyXCheckBox.isChecked(),
+                          'verbose': self.br.verboseCheckBox.isChecked()}
+                print(params)
+
             if method == 'ARD':
-                pass
+                params = {'n_iter': self.ard.numOfIterationsSpinBox.value(),
+                          'tol': self.ard.toleranceDoubleSpinBox.value(),
+                          'alpha_1': self.ard.alpha1DoubleSpinBox.value(),
+                          'alpha_2': self.ard.alpha2DoubleSpinBox.value(),
+                          'lambda_1': self.ard.lambdaDoubleSpinBox.value(),
+                          'lambda_2': self.ard.lambdaDoubleSpinBox.value(),
+                          'compute_score': self.ard.computerScoreCheckBox.isChecked(),
+                          'threshold_lambda': self.ard.thresholdLambdaSpinBox.value(),
+                          'fit_intercept': self.ard.fitInterceptCheckBox.isChecked(),
+                          'normalize': self.ard.normalizeCheckBox.isChecked(),
+                          'copy_X': self.ard.copyXCheckBox.isChecked(),
+                          'verbose': self.ard.verboseCheckBox.isChecked()}
+                print(params)
+
             if method == 'LARS':
-                pass
+                params = {'n_nonzero_coefs': self.lars.numOfNonzeroCoeffsSpinBox.value(),
+                          'fit_intercept': self.lars.fitInterceptCheckBox.isChecked(),
+                          'positive': self.lars.positiveCheckBox.isChecked(),
+                          'verbose': self.lars.verboseCheckBox.isChecked(),
+                          'normalize': self.lars.normalizeCheckBox.isChecked(),
+                          'precompute': self.lars.precomputeCheckBox.isChecked(),
+                          'copy_X': self.lars.copyXCheckBox.isChecked(),
+                          'eps': self.lars.epsDoubleSpinBox.value(),
+                          'fit_path': self.lars.fitPathCheckBox.isChecked(),
+                          'CV': self.lars.crossValidateCheckBox.isChecked()}
+                print(params)
+
             if method == 'Lasso LARS':
-                pass
+                p_attrib = {'Auto': 'auto', 'True': True, 'False': False, 'Array-like': 'array-like'}
+                index = self.lassoLARS.precomputeComboBox.currentIndex()
+                precomputeComboBox = self.lassoLARS.precomputeComboBox.itemText(index)
+
+                params = {'alpha': self.lassoLARS.alphaDoubleSpinBox.value(),
+                          'fit_intercept': self.lassoLARS.fitInterceptCheckBox.isChecked(),
+                          'positive': self.lassoLARS.positiveCheckBox.isChecked(),
+                          'verbose': self.lassoLARS.verboseCheckBox.isChecked(),
+                          'normalize': self.lassoLARS.normalizeCheckBox.isChecked(),
+                          'copy_X': self.lassoLARS.copyXCheckBox.isChecked(),
+                          'precompute': p_attrib[precomputeComboBox],
+                          'max_iter': int(self.lassoLARS.maxIterationsSpinBox.value()),
+                          'eps': self.lassoLARS.epsDoubleSpinBox.value(),
+                          'fit_path': self.lassoLARS.fitInterceptCheckBox.isChecked(),
+                          'model': self.lassoLARS.modelComboBox.currentIndex()}
+                print(params)
+
             if method == 'SVR':
-                pass
+                gamma_index = self.svr.gammaComboBox.currentIndex()
+                kernel_index = self.svr.kernelComboBox.currentIndex()
+                params = {'C': self.svr.cDoubleSpinBox.value(),
+                          'epsilon': self.svr.epsilonDoubleSpinBox.value(),
+                          'kernel': self.svr.kernelComboBox.itemText(kernel_index),
+                          'degree': self.svr.degreeSpinBox.value(),
+                          'gamma': self.svr.gammaComboBox.itemText(gamma_index),
+                          'coef0': self.svr.coeff0DoubleSpinBox.value(),
+                          'shrinking': self.svr.shrinkingCheckBox.isChecked(),
+                          'tol': self.svr.toleranceDoubleSpinBox.value(),
+                          'cache_size': self.svr.cacheSizeSpinBox.value(),
+                          'verbose': self.svr.verboseCheckBox.isChecked(),
+                          'max_iter': int(self.svr.maxIterationsSpinBox.value())}
+                print(params)
+
             if method == 'KRR':
-                pass
+                k_attrib = {'None': None}
+                params = {'alpha': self.krr.alphaSpinBox.value(),
+                          'kernel': self.krr.kernelLineEdit.text(),
+                          'gamma': self.krr.gammaLineEdit.text(),
+                          'degree': self.krr.degreeDoubleSpinBox.value(),
+                          'coef0': self.krr.coeff0DoubleSpinBox.value(),
+                          'kernel_params': k_attrib[self.krr.kernelParametersLineEdit.text()]}
+                print(params)
 
             if method == 'PLS':
-                params = {'n_components': self.reg_widget.pls_nc_spinbox.value(),
+                params = {'n_components': self.pls.numOfComponentsSpinBox.value(),
                           'scale': False}
                 modelkey = modelkey + '(nc=' + str(params['n_components']) + ')'
-                kws = {'modelkey': modelkey}
+                print(params)
+
             if method == 'GP':
-                params = {'reduce_dim': self.reg_widget.gp_dim_red_combobox.currentText(),
-                          'n_components': self.reg_widget.gp_dim_red_nc_spinbox.value(),
-                          'random_start': self.reg_widget.gp_rand_starts_spin.value(),
-                          'theta0': self.reg_widget.gp_theta0_spin.value(),
-                          'thetaL': self.reg_widget.gp_thetaL_spin.value(),
-                          'thetaU': self.reg_widget.gp_thetaU_spin.value()}
+                index = self.gp.chooseDimensionalityReductionMethodComboBox.currentIndex()
+                params = {'reduce_dim': self.gp.chooseDimensionalityReductionMethodComboBox.itemText(index),
+                          'n_components': self.gp.numOfComponentsSpinBox.value(),
+                          'random_start': self.gp.numOfRandomStartsSpinBox.value(),
+                          'theta0': self.gp.startingThetaDoubleSpinBox.value(),
+                          'thetaL': self.gp.lowerBoundOnThetaDoubleSpinBox.value(),
+                          'thetaU': self.gp.upperBoundOnThetaDoubleSpinBox.value()}
 
                 modelkey = modelkey + str(params)
+                print(params)
 
-        except:
-            pass
+        except Exception as e:
+            print(e)
+
         kws = {'modelkey': modelkey}
-        # if self.regression_ransac_checkbox.isChecked():
-        #     lossval = self.ransac_widget.ransac_lossfunc_combobox.currentText()
-        #     if lossval == 'Squared Error':
-        #         loss = 'squared_loss'
-        #     if lossval == 'Absolute Error':
-        #         loss = 'absolute_loss'
-        #     ransacparams = {'residual_threshold': self.ransac_widget.ransac_thresh_spin.value(),
-        #                     'loss': loss}
         ui_list = "do_regression_train"
         fun_list = "do_regression_train"
 
         args = [datakey, xvars, yvars, yrange, method, params, ransacparams]
         # TODO Stop the module when there are ill-formed parameters!
-        self.r = self.qtickle.guisave()
+        self.r = self.qtickle.guiSave()
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, self.r, self.ui_id)
 
     def set_regression_parameters(self):
         if self.restr_list is not None:
-            self.qtickle.guirestore(self.restr_list)
+            self.qtickle.guiRestore(self.restr_list)
         if self.arg_list is not None:
             try:
-                datakey = self.arg_list[0]
-                xvars = self.arg_list[1]
-                yvars = self.arg_list[2]
+                self.datakey = self.arg_list[0]
+                self.xvars = self.arg_list[1]
+                self.yvars = self.arg_list[2]
                 yrange = self.arg_list[3]
                 method = self.arg_list[4]
                 params = self.arg_list[5]
                 ransacparams = self.arg_list[6]
 
-                change_combo_list_vars(self.regression_train_choosey, self.restr_list['regression_train_choosey_values'])
-                self.regression_choosedata.setCurrentIndex(self.regression_choosedata.findText(str(datakey)))
-                change_combo_list_vars(self.regression_train_choosey,self.restr_list['regression_train_choosey_values'])
+                change_combo_list_vars(self.regression_train_choosey,
+                                       self.restr_list['regression_train_choosey_values'])
+                self.regression_choosedata.setCurrentIndex(self.regression_choosedata.findText(str(self.datakey)))
+                change_combo_list_vars(self.regression_train_choosey,
+                                       self.restr_list['regression_train_choosey_values'])
                 change_combo_list_vars(self.regression_train_choosex,
                                        self.restr_list['regression_train_choosex_values'])
 
                 try:
-                    self.regression_train_choosex.setCurrentItem(self.regression_train_choosex.findItems(xvars[0], QtCore.Qt.MatchExactly)[0])
-                    self.regression_train_choosey.setCurrentItem(self.regression_train_choosey.findItems(yvars[0][1], QtCore.Qt.MatchExactly)[0])
+                    self.regression_train_choosex.setCurrentItem(
+                        self.regression_train_choosex.findItems(self.xvars[0], QtCore.Qt.MatchExactly)[0])
+                    self.regression_train_choosey.setCurrentItem(
+                        self.regression_train_choosey.findItems(self.yvars[0][1], QtCore.Qt.MatchExactly)[0])
                 except:
                     pass
                 self.yvarmin_spin.setValue(yrange[0])
@@ -140,7 +282,6 @@ class regression_train_:
                 self.make_regression_widget(self.regression_choosealg.currentText(), params=params)
             except:
                 pass
-
 
     def make_ransac_widget(self, isChecked):
         if not isChecked:
@@ -188,260 +329,112 @@ class regression_train_:
         except:
             pass
         self.reg_widget = QtWidgets.QWidget()
-        if alg == 'PLS':
-            self.reg_widget.pls_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
-            self.reg_widget.pls_nc_label = QtWidgets.QLabel(self.reg_widget)
-            self.reg_widget.pls_nc_label.setText('# of components:')
-            self.reg_widget.pls_nc_label.setObjectName("self.pls_nc_label")
-            self.reg_widget.pls_hlayout.addWidget(self.reg_widget.pls_nc_label)
-            self.reg_widget.pls_nc_spinbox = QtWidgets.QSpinBox(self.reg_widget)
-            self.reg_widget.pls_nc_spinbox.setObjectName("self.pls_nc_spinbox")
-            self.reg_widget.pls_hlayout.addWidget(self.reg_widget.pls_nc_spinbox)
-            self.reg_widget.pls_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
-                                                               QtWidgets.QSizePolicy.Minimum)
-            self.reg_widget.pls_hlayout.addItem(self.reg_widget.pls_spacer)
-            self.reg_widget.pls_nc_spinbox.valueChanged.connect(lambda: self.get_regression_parameters())
-            if params is not None:
-                self.reg_widget.pls_nc_spinbox.setValue(params['n_components'])
-        if alg == 'GP':
-            self.reg_widget = QtWidgets.QWidget()
-            self.reg_widget.gp_vlayout = QtWidgets.QVBoxLayout(self.reg_widget)
-            self.reg_widget.gp_dim_red_hlayout = QtWidgets.QHBoxLayout()
-            self.reg_widget.gp_dim_red_label = QtWidgets.QLabel(self.reg_widget)
-            self.reg_widget.gp_dim_red_label.setText('Choose dimensionality reduction method:')
-            self.reg_widget.gp_dim_red_label.setObjectName("self.gp_dim_red_label")
-            self.reg_widget.gp_dim_red_hlayout.addWidget(self.reg_widget.gp_dim_red_label)
-            self.reg_widget.gp_dim_red_combobox = QtWidgets.QComboBox(self.reg_widget)
-            self.reg_widget.gp_dim_red_combobox.addItem(("PCA"))
-            self.reg_widget.gp_dim_red_combobox.addItem(("ICA"))
-            self.reg_widget.gp_dim_red_combobox.setObjectName("self.gp_dim_red_combobox")
-            self.reg_widget.gp_dim_red_hlayout.addWidget(self.reg_widget.gp_dim_red_combobox)
-            self.reg_widget.gp_dim_red_nc_label = QtWidgets.QLabel()
-            self.reg_widget.gp_dim_red_nc_label.setText('# of components:')
-            self.reg_widget.gp_dim_red_nc_label.setObjectName("self.gp_dim_red_nc_label")
-            self.reg_widget.gp_dim_red_hlayout.addWidget(self.reg_widget.gp_dim_red_nc_label)
-            self.reg_widget.gp_dim_red_nc_spinbox = QtWidgets.QSpinBox(self.reg_widget)
-            self.reg_widget.gp_dim_red_nc_spinbox.setObjectName("self.gp_dim_red_nc_spinbox")
-            self.reg_widget.gp_dim_red_hlayout.addWidget(self.reg_widget.gp_dim_red_nc_spinbox)
 
-            self.reg_widget.gp_vlayout.addLayout(self.reg_widget.gp_dim_red_hlayout)
-            self.reg_widget.gp_rand_starts_hlayout = QtWidgets.QHBoxLayout()
-            self.reg_widget.gp_rand_starts_label = QtWidgets.QLabel(self.reg_widget)
-            self.reg_widget.gp_rand_starts_label.setText('# of random starts:')
-            self.reg_widget.gp_rand_starts_label.setObjectName("self.gp_rand_starts_label")
-            self.reg_widget.gp_rand_starts_hlayout.addWidget(self.reg_widget.gp_rand_starts_label)
-            self.reg_widget.gp_rand_starts_spin = QtWidgets.QSpinBox(self.reg_widget)
-            self.reg_widget.gp_rand_starts_spin.setValue(1)
-            self.reg_widget.gp_rand_starts_spin.setObjectName("self.gp_rand_starts_spin")
-            self.reg_widget.gp_rand_starts_hlayout.addWidget(self.reg_widget.gp_rand_starts_spin)
-            self.reg_widget.spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
-                                                                QtWidgets.QSizePolicy.Minimum)
-            self.reg_widget.gp_rand_starts_hlayout.addItem(self.reg_widget.spacerItem4)
-            self.reg_widget.gp_vlayout.addLayout(self.reg_widget.gp_rand_starts_hlayout)
-            self.reg_widget.gp_theta_vlayout = QtWidgets.QVBoxLayout()
-            self.reg_widget.gp_theta0_label = QtWidgets.QLabel(self.reg_widget)
-            self.reg_widget.gp_theta0_label.setText('Starting Theta:')
-            self.reg_widget.gp_theta0_label.setObjectName("self.gp_theta0_label")
-            self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_theta0_label)
-            self.reg_widget.gp_theta0_spin = QtWidgets.QDoubleSpinBox(self.reg_widget)
-            self.reg_widget.gp_theta0_spin.setValue(1.0)
-            self.reg_widget.gp_theta0_spin.setObjectName("self.gp_theta0_spin")
-            self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_theta0_spin)
-            self.reg_widget.gp_thetaL_label = QtWidgets.QLabel(self.reg_widget)
-            self.reg_widget.gp_thetaL_label.setText('Lower bound on Theta:')
-            self.reg_widget.gp_thetaL_label.setObjectName("self.gp_thetaL_label")
-            self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_thetaL_label)
-            self.reg_widget.gp_thetaL_spin = QtWidgets.QDoubleSpinBox(self.reg_widget)
-            self.reg_widget.gp_thetaL_spin.setValue(0.1)
-            self.reg_widget.gp_thetaL_spin.setObjectName("self.gp_thetaL_spin")
-            self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_thetaL_spin)
-            self.reg_widget.gp_thetaU_label = QtWidgets.QLabel(self.reg_widget)
-            self.reg_widget.gp_thetaU_label.setText('Upper bound on Theta:')
-            self.reg_widget.gp_thetaU_label.setObjectName("self.gp_thetaU_label")
-            self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_thetaU_label)
-            self.reg_widget.gp_thetaU_spin = QtWidgets.QDoubleSpinBox(self.reg_widget)
-            self.reg_widget.gp_thetaU_spin.setMaximum(10000)
-            self.reg_widget.gp_thetaU_spin.setValue(100.0)
+        if alg == self.algorithm_list[1]:
+            self.pls = PLS.Ui_Form()
+            self.pls.setupUi(self.reg_widget)
+            self.qtickle.isGuiChanged(self.pls, self.get_regression_parameters)
 
-            self.reg_widget.gp_thetaU_spin.setObjectName("self.gp_thetaU_spin")
-            self.reg_widget.gp_theta_vlayout.addWidget(self.reg_widget.gp_thetaU_spin)
-            self.reg_widget.spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
-                                                                QtWidgets.QSizePolicy.Minimum)
-            self.reg_widget.gp_theta_vlayout.addItem(self.reg_widget.spacerItem5)
-            self.reg_widget.gp_vlayout.addLayout(self.reg_widget.gp_theta_vlayout)
-            self.reg_widget.gp_dim_red_combobox.currentIndexChanged.connect(lambda: self.get_regression_parameters())
-            self.reg_widget.gp_dim_red_nc_spinbox.valueChanged.connect(lambda: self.get_regression_parameters())
-            self.reg_widget.gp_rand_starts_spin.valueChanged.connect(lambda: self.get_regression_parameters())
-            self.reg_widget.gp_theta0_spin.valueChanged.connect(lambda: self.get_regression_parameters())
-            self.reg_widget.gp_thetaL_spin.valueChanged.connect(lambda: self.get_regression_parameters())
-            self.reg_widget.gp_thetaU_spin.valueChanged.connect(lambda: self.get_regression_parameters())
-            if params is not None:
-                self.reg_widget.gp_dim_red_combobox.setCurrentIndex(
-                    self.reg_widget.gp_dim_red_combobox.findText(params['reduce_dim']))
-                self.reg_widget.gp_dim_red_nc_spinbox.setValue(params['n_components'])
-                self.reg_widget.gp_rand_starts_spin.setValue(params['random_start'])
-                self.reg_widget.gp_theta0_spin.setValue(params['theta0'])
-                self.reg_widget.gp_thetaL_spin.setValue(params['thetaL'])
-                self.reg_widget.gp_thetaU_spin.setValue(params['thetaU'])
+        if alg == self.algorithm_list[2]:
+            self.gp = GP.Ui_Form()
+            self.gp.setupUi(self.reg_widget)
+            self.qtickle.isGuiChanged(self.gp, self.get_regression_parameters)
 
-        if alg == 'OLS':
-            self.reg_widget.ols_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
-            self.reg_widget.ols_intercept_checkbox = QtWidgets.QCheckBox(self.reg_widget)
-            self.reg_widget.ols_intercept_checkbox.setText('Fit Intercept')
-            self.reg_widget.ols_intercept_checkbox.setChecked(True)
-            self.reg_widget.ols_intercept_checkbox.setObjectName("self.ols_intercept_checkbox")
-            self.reg_widget.ols_hlayout.addWidget(self.reg_widget.ols_intercept_checkbox)
-            self.reg_widget.ols_intercept_checkbox.stateChanged.connect(lambda: self.get_regression_parameters())
-            if params is not None:
-                self.reg_widget.ols_intercept_checkbox.setChecked(params['fit_intercept'])
-
-        if alg == 'OMP':
-            self.reg_widget.omp_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
-            self.reg_widget.omp_label = QtWidgets.QLabel(self.reg_widget)
-            self.reg_widget.omp_label.setText('# of nonzero coefficients:')
-            self.reg_widget.omp_label.setObjectName("self.omp_label")
-            self.reg_widget.omp_hlayout.addWidget(self.reg_widget.omp_label)
-            self.reg_widget.omp_nfeatures = QtWidgets.QSpinBox(self.reg_widget)
-            self.reg_widget.omp_nfeatures.setMaximum(9999)
-            try:
-                xvars = [str(x.text()) for x in self.regression_train_choosex.selectedItems()]
-                nfeatures_default = 0.1 * self.pysat_fun.data[self.regression_choosedata.currentText()].df[
-                    xvars].columns.levels[1].size
-                self.reg_widget.omp_nfeatures.setValue(nfeatures_default)
-            except:
-                self.reg_widget.omp_nfeatures.setValue(10)
-                self.reg_widget.omp_nfeatures.setObjectName("self.omp_nfeatures")
-            self.reg_widget.omp_hlayout.addWidget(self.reg_widget.omp_nfeatures)
-            self.reg_widget.omp_intercept_checkbox = QtWidgets.QCheckBox(self.reg_widget)
-            self.reg_widget.omp_intercept_checkbox.setText('Fit Intercept')
-            self.reg_widget.omp_intercept_checkbox.setChecked(True)
-            self.reg_widget.omp_intercept_checkbox.setObjectName("self.omp_intercept_checkbox")
-            self.reg_widget.omp_hlayout.addWidget(self.reg_widget.omp_intercept_checkbox)
-
-            self.reg_widget.omp_cv_checkbox = QtWidgets.QCheckBox(self.reg_widget)
-            self.reg_widget.omp_cv_checkbox.setText('Optimize with Cross Validation? (Ignores # of coeffs)')
-            self.reg_widget.omp_cv_checkbox.setChecked(True)
-            self.reg_widget.omp_cv_checkbox.setObjectName("self.omp_cv_checkbox")
-            self.reg_widget.omp_hlayout.addWidget(self.reg_widget.omp_cv_checkbox)
-
-            self.reg_widget.omp_intercept_checkbox.stateChanged.connect(lambda: self.get_regression_parameters())
-            self.reg_widget.omp_cv_checkbox.stateChanged.connect(lambda: self.get_regression_parameters())
-            self.reg_widget.omp_nfeatures.valueChanged.connect(lambda: self.get_regression_parameters())
+        if alg == self.algorithm_list[3]:
+            self.ols = OLS.Ui_Form()
+            self.ols.setupUi(self.reg_widget)
+            self.qtickle.isGuiChanged(self.ols, self.get_regression_parameters)
 
             if params is not None:
-                self.reg_widget.omp_intercept_checkbox.setChecked(params['fit_intercept'])
-                self.reg_widget.omp_cv_checkbox.setChecked(params['CV'])
-                self.reg_widget.omp_nfeatures.setValue(params['n_nonzero_coefs'])
+                self.ols.fitInterceptCheckBox.setChecked(params['fit_intercept'])
 
-        if alg == 'Lasso':
-            self.reg_widget.lasso_vlayout = QtWidgets.QVBoxLayout(self.reg_widget)
-            self.reg_widget.lasso_alpha_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
-            self.reg_widget.lasso_iter_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
-            self.reg_widget.lasso_checkboxes_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
-
-            self.reg_widget.lasso_alphalabel = QtWidgets.QLabel(self.reg_widget)
-            self.reg_widget.lasso_alphalabel.setText('Alpha:')
-            self.reg_widget.lasso_alphalabel.setObjectName("self.lasso_alphalabel")
-            self.reg_widget.lasso_alpha_hlayout.addWidget(self.reg_widget.lasso_alphalabel)
-
-            self.reg_widget.lasso_alpha = QtWidgets.QDoubleSpinBox(self.reg_widget)
-            self.reg_widget.lasso_alpha.setMaximum(1000)
-            self.reg_widget.lasso_alpha.setMinimum(0.0001)
-            self.reg_widget.lasso_alpha.setValue(1.0)
-            self.reg_widget.lasso_alpha.setObjectName("self.lasso_alpha")
-            self.reg_widget.lasso_alpha_hlayout.addWidget(self.reg_widget.lasso_alpha)
-
-            self.reg_widget.lasso_alpha_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
-                                                                       QtWidgets.QSizePolicy.Minimum)
-            self.reg_widget.lasso_alpha_hlayout.addItem(self.reg_widget.lasso_alpha_spacer)
-            self.reg_widget.lasso_vlayout.addItem(self.reg_widget.lasso_alpha_hlayout)
-
-            self.reg_widget.lasso_maxlabel = QtWidgets.QLabel(self.reg_widget)
-            self.reg_widget.lasso_maxlabel.setText('Max # of iterations:')
-            self.reg_widget.lasso_maxlabel.setObjectName("self.lasso_maxlabel")
-            self.reg_widget.lasso_iter_hlayout.addWidget(self.reg_widget.lasso_maxlabel)
-
-            self.reg_widget.lasso_max = QtWidgets.QSpinBox(self.reg_widget)
-            self.reg_widget.lasso_max.setMaximum(100000)
-            self.reg_widget.lasso_max.setMinimum(1)
-            self.reg_widget.lasso_max.setValue(1000)
-            self.reg_widget.lasso_max.setObjectName("self.lasso_max")
-            self.reg_widget.lasso_iter_hlayout.addWidget(self.reg_widget.lasso_max)
-
-            self.reg_widget.lasso_tollabel = QtWidgets.QLabel(self.reg_widget)
-            self.reg_widget.lasso_tollabel.setText('Tolerance:')
-            self.reg_widget.lasso_tollabel.setObjectName("self.lasso_tollabel")
-            self.reg_widget.lasso_iter_hlayout.addWidget(self.reg_widget.lasso_tollabel)
-
-            self.reg_widget.lasso_tol = QtWidgets.QDoubleSpinBox(self.reg_widget)
-            self.reg_widget.lasso_tol.setMaximum(1000)
-            self.reg_widget.lasso_tol.setMinimum(0.0000001)
-            self.reg_widget.lasso_tol.setDecimals(5)
-            self.reg_widget.lasso_tol.setValue(0.0001)
-            self.reg_widget.lasso_tol.setObjectName("self.lasso_tol")
-            self.reg_widget.lasso_iter_hlayout.addWidget(self.reg_widget.lasso_tol)
-
-            self.reg_widget.lasso_iter_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
-                                                                      QtWidgets.QSizePolicy.Minimum)
-            self.reg_widget.lasso_iter_hlayout.addItem(self.reg_widget.lasso_iter_spacer)
-            self.reg_widget.lasso_vlayout.addItem(self.reg_widget.lasso_iter_hlayout)
-
-            self.reg_widget.lasso_intercept_checkbox = QtWidgets.QCheckBox(self.reg_widget)
-            self.reg_widget.lasso_intercept_checkbox.setText('Fit Intercept')
-            self.reg_widget.lasso_intercept_checkbox.setChecked(True)
-            self.reg_widget.lasso_intercept_checkbox.setObjectName("self.lasso_intercept_checkbox")
-            self.reg_widget.lasso_checkboxes_hlayout.addWidget(self.reg_widget.lasso_intercept_checkbox)
-
-            self.reg_widget.lasso_positive_checkbox = QtWidgets.QCheckBox(self.reg_widget)
-            self.reg_widget.lasso_positive_checkbox.setText('Force positive coefficients')
-            self.reg_widget.lasso_positive_checkbox.setChecked(False)
-            self.reg_widget.lasso_positive_checkbox.setObjectName("self.lasso_positive_checkbox")
-            self.reg_widget.lasso_checkboxes_hlayout.addWidget(self.reg_widget.lasso_positive_checkbox)
-
-            self.reg_widget.lasso_cv_checkbox = QtWidgets.QCheckBox(self.reg_widget)
-            self.reg_widget.lasso_cv_checkbox.setText('Optimize with Cross Validation? (Ignores alpha)')
-            self.reg_widget.lasso_cv_checkbox.setChecked(True)
-            self.reg_widget.lasso_cv_checkbox.setObjectName("self.lasso_cv_checkbox")
-            self.reg_widget.lasso_checkboxes_hlayout.addWidget(self.reg_widget.lasso_cv_checkbox)
-
-            self.reg_widget.lasso_checkbox_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
-                                                                          QtWidgets.QSizePolicy.Minimum)
-            self.reg_widget.lasso_checkboxes_hlayout.addItem(self.reg_widget.lasso_checkbox_spacer)
-            self.reg_widget.lasso_vlayout.addItem(self.reg_widget.lasso_checkboxes_hlayout)
-
-            self.reg_widget.lasso_alpha.valueChanged.connect(lambda: self.get_regression_parameters())
-            self.reg_widget.lasso_max.valueChanged.connect(lambda: self.get_regression_parameters())
-            self.reg_widget.lasso_tol.valueChanged.connect(lambda: self.get_regression_parameters())
-            self.reg_widget.lasso_intercept_checkbox.stateChanged.connect(lambda: self.get_regression_parameters())
-            self.reg_widget.lasso_positive_checkbox.stateChanged.connect(lambda: self.get_regression_parameters())
-            self.reg_widget.lasso_cv_checkbox.stateChanged.connect(lambda: self.get_regression_parameters())
+        if alg == self.algorithm_list[4]:
+            self.omp = OMP.Ui_Form()
+            self.omp.setupUi(self.reg_widget)
+            self.qtickle.isGuiChanged(self.omp, self.get_regression_parameters)
 
             if params is not None:
-                self.reg_widget.lasso_alpha.setValue(params['alpha'])
-                self.reg_widget.lasso_intercept_checkbox.setChecked(params['fit_intercept'])
-                self.reg_widget.lasso_tol.setValue(params['tol'])
-                self.reg_widget.lasso_max.setValue(params['max_iter'])
-                self.reg_widget.lasso_positive_checkbox.setChecked(params['positive'])
-                self.reg_widget.lasso_cv_checkbox.setChecked(params['CV'])
+                self.omp.fitInterceptCheckBox.setChecked(params['fit_intercept'])
+                self.omp.optimizeWCrossValidationCheckBox.setChecked(params['CV'])
+                self.omp.numOfNonZeroCoeffsSpinBox.setValue(params['n_nonzero_coefs'])
 
-        if alg == 'Elastic Net':
-            pass
-        if alg == 'Ridge':
-            pass
-        if alg == 'Bayesian Ridge':
-            pass
-        if alg == 'ARD':
-            pass
-        if alg == 'LARS':
-            pass
-        if alg == 'Lasso LARS':
-            pass
-        if alg == 'SVR':
-            pass
-        if alg == 'KRR':
-            pass
+        if alg == self.algorithm_list[5]:
+            self.lasso = Lasso.Ui_Form()
+            self.lasso.setupUi(self.reg_widget)
+            self.qtickle.isGuiChanged(self.lasso, self.get_regression_parameters)
 
-        self.reg_widget.setObjectName("reg_widget")
+            # if params is not None:
+            # self..lasso_alpha.setValue(params['alpha'])
+            # self..lasso_intercept_checkbox.setChecked(params['fit_intercept'])
+            # self..lasso_tol.setValue(params['tol'])
+            # self..lasso_max.setValue(params['max_iter'])
+            # self..lasso_positive_checkbox.setChecked(params['positive'])
+            # self..lasso_cv_checkbox.setChecked(params['CV'])
+
+        if alg == self.algorithm_list[6]:
+            self.elastic_net = ElasticNet.Ui_Form()
+            self.elastic_net.setupUi(self.reg_widget)
+            self.qtickle.isGuiChanged(self.elastic_net, self.get_regression_parameters)
+
+            # if params is not None:
+            # self..elnet_alpha.setValue(params['alpha'])
+            # self..elnet_l1.setValue(params['l1_ratio'])
+            # self..elnet_intercept_checkbox.setChecked(params['fit_intercept'])
+            # self..elnet_tol.setValue(params['tol'])
+            # self..elnet_max.setValue(params['max_iter'])
+            # self..elnet_positive_checkbox.setChecked(params['positive'])
+            # self..elnet_cv_checkbox.setChecked(params['CV'])
+
+        if alg == self.algorithm_list[7]:
+            self.ridge = Ridge.Ui_Form()
+            self.ridge.setupUi(self.reg_widget)
+            self.qtickle.isGuiChanged(self.ridge, self.get_regression_parameters)
+
+        if alg == self.algorithm_list[8]:
+            self.br = bayesian_ridge.Ui_Form()
+            self.br.setupUi(self.reg_widget)
+            self.qtickle.isGuiChanged(self.br, self.get_regression_parameters)
+
+            # if params is not None:
+            # self..ridge_alpha.setValue(params['alpha'])
+            # self..ridge_intercept_checkbox.setChecked(params['fit_intercept'])
+            # self..ridge_tol.setValue(params['tol'])
+            # self..ridge_max.setValue(params['max_iter'])
+            # self..ridge_cv_checkbox.setChecked(params['CV'])
+
+        if alg == self.algorithm_list[9]:
+            self.ard = ARD.Ui_Form()
+            self.ard.setupUi(self.reg_widget)
+            self.qtickle.isGuiChanged(self.ard, self.get_regression_parameters)
+
+        if alg == self.algorithm_list[10]:
+            self.lars = LARS.Ui_Form()
+            self.lars.setupUi(self.reg_widget)
+            self.qtickle.isGuiChanged(self.lars, self.get_regression_parameters)
+
+        if alg == self.algorithm_list[11]:
+            self.lassoLARS = LassoLARS.Ui_Form()
+            self.lassoLARS.setupUi(self.reg_widget)
+            self.qtickle.isGuiChanged(self.lassoLARS, self.get_regression_parameters)
+
+            # if params is not None:
+            # self..lassoLARS_alpha.setValue(params['alpha'])
+            # self..lassoLARS_intercept_checkbox.setChecked(params['fit_intercept'])
+            # self..lassoLARS_max.setValue(params['max_iter'])
+            # self..lassoLARS_positive_checkbox.setChecked(params['positive'])
+            # self..lassoLARS_cv_checkbox.setChecked(params['CV'])
+
+        if alg == self.algorithm_list[12]:
+            self.svr = SVR.Ui_Form()
+            self.svr.setupUi(self.reg_widget)
+            self.qtickle.isGuiChanged(self.svr, self.get_regression_parameters)
+
+        if alg == self.algorithm_list[13]:
+            self.krr = KRR.Ui_Form()
+            self.krr.setupUi(self.reg_widget)
+            self.qtickle.isGuiChanged(self.krr, self.get_regression_parameters)
+
+        self.reg_widget.setObjectName("")
         self.regression_vlayout.addWidget(self.reg_widget)
         self.get_regression_parameters()
 
@@ -539,7 +532,7 @@ class regression_train_:
         self.regression_choosealg_label = QtWidgets.QLabel(self.regression_train)
         self.regression_choosealg_label.setObjectName("regression_choosealg_label")
         self.regression_choosealg_hlayout.addWidget(self.regression_choosealg_label)
-        self.regression_alg_choices = ['Choose an algorithm', 'PLS', 'GP', 'OLS', 'OMP', 'Lasso', 'More to come...']
+        self.regression_alg_choices = self.algorithm_list
         self.regression_choosealg = make_combobox(self.regression_alg_choices)
         self.regression_choosealg.setIconSize(QtCore.QSize(50, 20))
         self.regression_choosealg.setObjectName("regression_choosealg")

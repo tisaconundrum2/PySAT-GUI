@@ -1,16 +1,15 @@
-import inspect
-import os
 from PyQt5 import QtCore
-from distutils.util import strtobool
-import sys
+
+import inspect
 from PyQt5.QtWidgets import *
+from distutils.util import strtobool
 
 
 class Qtickle(object):
     def __init__(self, ui):
         self.ui = ui
 
-    def guisave(self):
+    def guiSave(self):
         dict = {}
         # Save geometry
         # self.settings.setValue('size', self.ui.size())
@@ -78,7 +77,7 @@ class Qtickle(object):
         except Exception as e:
             print(e)
 
-    def guirestore(self, dict):
+    def guiRestore(self, dict):
         # Restore geometry
         # self.ui.resize(self.settings.value('size', QtCore.QSize(500, 500)))
         # self.ui.move(self.settings.value('pos', QtCore.QPoint(60, 60)))
@@ -160,4 +159,34 @@ class Qtickle(object):
 
             except Exception as e:
                 print(e)
+
+    def isGuiChanged(self, ui, functionCall):
+        try:
+            for name, obj in inspect.getmembers(ui):
+                if isinstance(obj, QLineEdit):
+                    obj.textChanged.connect(lambda: functionCall())
+
+                if isinstance(obj, QCheckBox):
+                    obj.stateChanged.connect(lambda: functionCall())
+
+                if isinstance(obj, QRadioButton):
+                    obj.hitButton.connect(lambda: functionCall())
+
+                if isinstance(obj, QSpinBox):
+                    obj.valueChanged.connect(lambda: functionCall())
+
+                if isinstance(obj, QDoubleSpinBox):
+                    obj.valueChanged.connect(lambda: functionCall())
+
+                if isinstance(obj, QSlider):
+                    obj.event.connect(lambda: functionCall())
+
+                if isinstance(obj, QComboBox):
+                    obj.currentIndexChanged.connect(lambda: functionCall())
+
+                # if isinstance(obj, QListWidget): This needs to be added at somepoint
+                #     obj.
+
+        except Exception as e:
+            print(e)
 

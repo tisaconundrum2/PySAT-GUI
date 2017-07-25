@@ -1,4 +1,4 @@
-from PyQt5 import QtGui, QtCore, QtWidgets
+from PyQt5 import QtGui, QtWidgets
 
 from Qtickle import Qtickle
 
@@ -47,12 +47,12 @@ class read_ccam_:
         kws = {'to_csv': to_csv, 'lookupfile': lookupfile, 'ave': average}
         ui_list = "do_read_ccam"
         fun_list = "do_read_ccam"
-        r = self.qtickle.guisave()
+        r = self.qtickle.guiSave()
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def set_read_ccam_params(self):
         if self.restr_list is not None:
-            self.qtickle.guirestore(self.restr_list)
+            self.qtickle.guiRestore(self.restr_list)
         if self.arg_list is not None:
             searchdir = self.arg_list[0]
             searchstring = self.arg_list[1]
@@ -158,7 +158,6 @@ class read_ccam_:
         self.metadata_button.clicked.connect(lambda: self.on_metadataButton_clicked())
         self.ave_button.toggled.connect(lambda: self.get_read_ccam_params())
         self.singleshot_button.toggled.connect(lambda: self.get_read_ccam_params())
-
 
     # def read_ccam_change_vars(self):
     #     self.read_ccam_choose_var.clear()
