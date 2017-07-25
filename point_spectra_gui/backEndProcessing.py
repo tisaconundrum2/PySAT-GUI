@@ -272,9 +272,9 @@ class backEndProc(QThread):
         except Exception as e:
             error_print(e)
 
-    def do_mask(self, datakey, maskfile):
+    def do_mask(self, datakey, maskfile, maskvar='wvl'):
         try:
-            self.data[datakey].mask(maskfile)
+            self.data[datakey].mask(maskfile,maskvar=maskvar)
             print("Mask applied")
         except Exception as e:
             error_print(e)
@@ -340,11 +340,11 @@ class backEndProc(QThread):
         except Exception as e:
             error_print(e)
 
-    def do_norm(self, datakey, ranges):
+    def do_norm(self, datakey, ranges, col_var='wvl'):
         print("{}".format(ranges))
         try:
             print(self.data[datakey].df.columns.levels[0])
-            self.data[datakey].norm(ranges)
+            self.data[datakey].norm(ranges,col_var=col_var)
             print(self.data[datakey].df.columns.levels[0])
             print("Normalization has been applied to the ranges: " + str(ranges))
         except Exception as e:
@@ -513,6 +513,7 @@ class backEndProc(QThread):
 
     def do_plot_spect(self, datakey,
                       row,
+                      xcol='wvl',
                       figfile=None, xrange=None,
                       yrange=None, xtitle='Wavelength (nm)',
                       ytitle=None, title=None,
@@ -520,12 +521,13 @@ class backEndProc(QThread):
                       dpi=1000, color=None,
                       annot_mask=None,
                       cmap=None, colortitle='', figname=None, masklabel='',
-                      marker=None, linestyle='-', col=None, alpha=0.5, linewidth=1.0, row_bool=None
-                      ):
+                      marker=None, linestyle='-', col=None, alpha=0.5, linewidth=1.0):
 
+        self.data[datakey].enumerate_duplicates(col)
         data = self.data[datakey].df
-        y = data.loc[data[('meta', col)].isin([row])]['wvl'].loc[row_bool].T
-        x = data['wvl'].columns.values
+
+        y = np.squeeze(np.array(data.loc[data[('meta', col)].isin([row])][xcol].T))
+        x = np.array(data[xcol].columns.values)
 
         try:
             loadfig = self.figs[figname]
@@ -550,6 +552,7 @@ class backEndProc(QThread):
                                            lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
                                            annot_mask=annot_mask, cmap=cmap,
                                            colortitle=colortitle, loadfig=loadfig, marker=marker, linestyle=linestyle)
+
 
     def do_plot_dim_red(self, datakey,
                         x_component,
