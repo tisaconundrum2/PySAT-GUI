@@ -1,8 +1,7 @@
-from PyQt5 import QtGui, QtCore, QtWidgets
+from PyQt5 import QtGui, QtWidgets
 
 from Qtickle import Qtickle
 from point_spectra_gui.gui_utils import make_combobox, change_combo_list_vars
-from point_spectra_gui.ui_modules.Error_ import error_print
 
 
 class dim_red_plot_:
@@ -26,7 +25,7 @@ class dim_red_plot_:
 
     def set_dim_red_params(self):
         if self.restr_list is not None:
-            self.qtickle.guirestore(self.restr_list)
+            self.qtickle.guiRestore(self.restr_list)
         if self.arg_list is not None:
             datakey = self.arg_list[0]
             xvar = self.arg_list[1]
@@ -57,7 +56,7 @@ class dim_red_plot_:
 
         ui_list = "do_plot_dim_red"
         fun_list = "do_plot_dim_red"
-        r = self.qtickle.guisave()
+        r = self.qtickle.guiSave()
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def dim_red_plot_ui(self):

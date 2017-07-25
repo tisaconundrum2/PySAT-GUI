@@ -1,10 +1,5 @@
-name: pysat
+name: pysat_point_spectra_gui
 dependencies:
   - python=3
-  - inspect
   - numpy
   - pandas
-  - pickle
-  - point_spectra_gui
-  - PyQt4
-  - pysat

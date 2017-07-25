@@ -1,5 +1,4 @@
-[![Build Status](https://travis-ci.org/USGS-Astrogeology/PySAT.svg?branch=master)](https://travis-ci.org/USGS-Astrogeology/PySAT)
-[![Coverage Status](https://coveralls.io/repos/github/USGS-Astrogeology/PySAT/badge.svg?branch=master)](https://coveralls.io/github/USGS-Astrogeology/PySAT?branch=master)
+[![Build Status](https://travis-ci.org/USGS-Astrogeology/PySAT_Point_Spectra_GUI.svg?branch=master)](https://travis-ci.org/USGS-Astrogeology/PySAT_Point_Spectra_GUI)
 # Installation
 
   - Click and download for Windows [Anaconda Python 4.3.X 64-Bit installer](https://repo.continuum.io/archive/Anaconda3-4.3.1-Windows-x86_64.exe).
