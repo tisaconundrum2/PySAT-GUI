@@ -190,7 +190,7 @@ class normalization_:
         ui_list = "normalization"
         fun_list = "do_norm"
 
-        r = self.qtickle.guisave()
+        r = self.qtickle.guiSave()
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, arg_list, kw_list, r, self.ui_id)
 
     def connectWidgets(self):

@@ -31,7 +31,7 @@ class peak_area_:
         fun_list = "do_peak_area"
         args = [datakey, peaks_mins_file]
         kws = {}
-        r = self.qtickle.guisave()
+        r = self.qtickle.guiSave()
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def peak_area_ui(self):
@@ -82,7 +82,7 @@ class peak_area_:
         if self.arg_list is None:
             self.peak_area_line_edit.setText("None (calculate from average spectrum)")
         else:
-            self.qtickle.guirestore(self.restr_list)
+            self.qtickle.guiRestore(self.restr_list)
             peaks_mins_file=self.arg_list[1]
             if peaks_mins_file == None:
                 peaks_mins_file = "None (calculate from average spectrum)"
