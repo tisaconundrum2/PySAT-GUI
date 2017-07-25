@@ -76,7 +76,7 @@ class Qtickle(object):
             print(dict)  # Debug purposes
             return dict
         except Exception as e:
-            traceback.print_exc(e)
+            print(e)
 
     def guiRestore(self, dict):
         # Restore geometry
@@ -159,7 +159,7 @@ class Qtickle(object):
                         pass
 
             except Exception as e:
-                traceback.print_exc(e)
+                print(e)
 
     def isGuiChanged(self, ui, functionCall):
         try:
@@ -189,4 +189,4 @@ class Qtickle(object):
                     #     obj.
 
         except Exception as e:
-            traceback.print_exc(e)
+            print(e)

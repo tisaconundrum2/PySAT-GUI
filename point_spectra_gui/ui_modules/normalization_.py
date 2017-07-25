@@ -172,6 +172,6 @@ class normalization_:
                 self.box_list[i].valueChanged.connect(self.box_list[i + 1].setMinimum)
         except Exception as e:
             import traceback
-            traceback.print_exc(e)
+            print(e)
         datakey = self.normalization_choosedata.currentText()
         self.push_parameters([datakey, arg_list], {})

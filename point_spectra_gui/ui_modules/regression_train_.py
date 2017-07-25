@@ -238,7 +238,7 @@ class regression_train_:
                 print(params)
 
         except Exception as e:
-            traceback.print_exc(e)
+            print(e)
 
         kws = {'modelkey': modelkey}
         ui_list = "do_regression_train"

@@ -121,7 +121,7 @@ class remove_baseline_:
                 self.make_baseline_widget(self.baseline_choosealg.currentText(), params=params)
                 self.get_baseline_parameters()
             except Exception as e:
-                traceback.print_exc(e)
+                print(e)
 
     def make_baseline_widget(self, alg, params=None):
         print(alg)

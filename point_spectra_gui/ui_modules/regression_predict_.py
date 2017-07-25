@@ -54,7 +54,7 @@ class regression_predict_:
                 self.regression_predict_choosemodel.setItemText(0, modelkey)
                 pass
             except Exception as e:
-                traceback.print_exc(e)
+                print(e)
 
     def regression_ui(self):
         self.regression_predict = QtWidgets.QGroupBox()
