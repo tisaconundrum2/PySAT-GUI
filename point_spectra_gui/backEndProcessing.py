@@ -281,8 +281,12 @@ class backEndProc(QThread):
 
     def do_peak_area(self, datakey, peaks_mins_file):
         try:
-            self.data[datakey].peak_area(peaks_mins_file=peaks_mins_file)
+            peaks,mins = self.data[datakey].peak_area(peaks_mins_file=peaks_mins_file)
             print("Peak Areas Calculated")
+            
+            np.savetxt(self.outpath + '/peaks.csv',peaks,delimiter=',')
+            np.savetxt(self.outpath + '/mins.csv', mins, delimiter=',')
+
         except Exception as e:
             error_print(e)
 
@@ -528,7 +532,8 @@ class backEndProc(QThread):
 
         y = np.squeeze(np.array(data.loc[data[('meta', col)].isin([row])][xcol].T))
         x = np.array(data[xcol].columns.values)
-
+        if linestyle == 'None':
+            marker='o'
         try:
             loadfig = self.figs[figname]
         except:
