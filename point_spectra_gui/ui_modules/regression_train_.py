@@ -60,9 +60,20 @@ class regression_train_:
                           'CV': self.reg_widget.lasso_cv_checkbox.isChecked()}
                 print(params)
             if method == 'Elastic Net':
-                pass
+                params = {'alpha': self.reg_widget.elnet_alpha.value(),
+                          'l1_ratio': self.reg_widget.elnet_l1.value(),
+                          'fit_intercept':self.reg_widget.elnet_intercept_checkbox.isChecked(),
+                          'max_iter':self.reg_widget.elnet_max.value(),
+                          'tol':self.reg_widget.elnet_tol.value(),
+                          'positive':self.reg_widget.elnet_positive_checkbox.isChecked(),
+                          'selection':'random',
+                          'CV':self.reg_widget.elnet_cv_checkbox.isChecked()}
             if method == 'Ridge':
-                pass
+                params = {'alpha': self.reg_widget.ridge_alpha.value(),
+                          'fit_intercept': self.reg_widget.ridge_intercept_checkbox.isChecked(),
+                          'max_iter': self.reg_widget.ridge_max.value(),
+                          'tol': self.reg_widget.ridge_tol.value(),
+                          'CV': self.reg_widget.ridge_cv_checkbox.isChecked()}
             if method == 'Bayesian Ridge':
                 pass
             if method == 'ARD':
@@ -70,7 +81,12 @@ class regression_train_:
             if method == 'LARS':
                 pass
             if method == 'Lasso LARS':
-                pass
+                params = {'alpha': self.reg_widget.lasso_alpha.value(),
+                          'fit_intercept': self.reg_widget.lasso_intercept_checkbox.isChecked(),
+                          'max_iter': self.reg_widget.lasso_max.value(), 'tol': self.reg_widget.lasso_tol.value(),
+                          'positive': self.reg_widget.lasso_positive_checkbox.isChecked(), 'selection': 'random',
+                          'CV': self.reg_widget.lasso_cv_checkbox.isChecked()}
+
             if method == 'SVR':
                 pass
             if method == 'KRR':
@@ -129,8 +145,11 @@ class regression_train_:
                 change_combo_list_vars(self.regression_train_choosex,
                                        self.restr_list['regression_train_choosex_values'])
 
-                self.regression_train_choosex.setCurrentItem(self.regression_train_choosex.findItems(xvars[0], QtCore.Qt.MatchExactly)[0])
-                self.regression_train_choosey.setCurrentItem(self.regression_train_choosey.findItems(yvars[0][1], QtCore.Qt.MatchExactly)[0])
+                try:
+                    self.regression_train_choosex.setCurrentItem(self.regression_train_choosex.findItems(xvars[0], QtCore.Qt.MatchExactly)[0])
+                    self.regression_train_choosey.setCurrentItem(self.regression_train_choosey.findItems(yvars[0][1], QtCore.Qt.MatchExactly)[0])
+                except:
+                    pass
                 self.yvarmin_spin.setValue(yrange[0])
                 self.yvarmax_spin.setValue(yrange[1])
                 self.regression_choosealg.setCurrentIndex(self.regression_choosealg.findText(str(method)))
@@ -422,9 +441,205 @@ class regression_train_:
                 self.reg_widget.lasso_cv_checkbox.setChecked(params['CV'])
 
         if alg == 'Elastic Net':
-            pass
+            self.reg_widget.elnet_vlayout = QtWidgets.QVBoxLayout(self.reg_widget)
+            self.reg_widget.elnet_alpha_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
+            self.reg_widget.elnet_l1_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
+
+            self.reg_widget.elnet_iter_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
+            self.reg_widget.elnet_checkboxes_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
+
+            self.reg_widget.elnet_alphalabel = QtWidgets.QLabel(self.reg_widget)
+            self.reg_widget.elnet_alphalabel.setText('Alpha:')
+            self.reg_widget.elnet_alphalabel.setObjectName("self.elnet_alphalabel")
+            self.reg_widget.elnet_alpha_hlayout.addWidget(self.reg_widget.elnet_alphalabel)
+
+            self.reg_widget.elnet_alpha = QtWidgets.QDoubleSpinBox(self.reg_widget)
+            self.reg_widget.elnet_alpha.setMaximum(1000)
+            self.reg_widget.elnet_alpha.setMinimum(0.0001)
+            self.reg_widget.elnet_alpha.setValue(1.0)
+            self.reg_widget.elnet_alpha.setObjectName("self.elnet_alpha")
+            self.reg_widget.elnet_alpha_hlayout.addWidget(self.reg_widget.elnet_alpha)
+
+            self.reg_widget.elnet_alpha_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
+                                                                       QtWidgets.QSizePolicy.Minimum)
+            self.reg_widget.elnet_alpha_hlayout.addItem(self.reg_widget.elnet_alpha_spacer)
+            self.reg_widget.elnet_vlayout.addItem(self.reg_widget.elnet_alpha_hlayout)
+
+            self.reg_widget.elnet_l1label = QtWidgets.QLabel(self.reg_widget)
+            self.reg_widget.elnet_l1label.setText('L1 ratio:')
+            self.reg_widget.elnet_l1label.setObjectName("self.elnet_l1label")
+            self.reg_widget.elnet_l1_hlayout.addWidget(self.reg_widget.elnet_l1label)
+
+            self.reg_widget.elnet_l1 = QtWidgets.QDoubleSpinBox(self.reg_widget)
+            self.reg_widget.elnet_l1.setMaximum(1)
+            self.reg_widget.elnet_l1.setMinimum(0)
+            self.reg_widget.elnet_l1.setValue(0.5)
+
+            self.reg_widget.elnet_l1.setObjectName("self.elnet_l1")
+            self.reg_widget.elnet_l1_hlayout.addWidget(self.reg_widget.elnet_l1)
+
+            self.reg_widget.elnet_l1_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
+                                                                       QtWidgets.QSizePolicy.Minimum)
+            self.reg_widget.elnet_l1_hlayout.addItem(self.reg_widget.elnet_l1_spacer)
+            self.reg_widget.elnet_vlayout.addItem(self.reg_widget.elnet_l1_hlayout)
+
+
+            self.reg_widget.elnet_maxlabel = QtWidgets.QLabel(self.reg_widget)
+            self.reg_widget.elnet_maxlabel.setText('Max # of iterations:')
+            self.reg_widget.elnet_maxlabel.setObjectName("self.elnet_maxlabel")
+            self.reg_widget.elnet_iter_hlayout.addWidget(self.reg_widget.elnet_maxlabel)
+
+            self.reg_widget.elnet_max = QtWidgets.QSpinBox(self.reg_widget)
+            self.reg_widget.elnet_max.setMaximum(100000)
+            self.reg_widget.elnet_max.setMinimum(1)
+            self.reg_widget.elnet_max.setValue(1000)
+            self.reg_widget.elnet_max.setObjectName("self.elnet_max")
+            self.reg_widget.elnet_iter_hlayout.addWidget(self.reg_widget.elnet_max)
+
+            self.reg_widget.elnet_tollabel = QtWidgets.QLabel(self.reg_widget)
+            self.reg_widget.elnet_tollabel.setText('Tolerance:')
+            self.reg_widget.elnet_tollabel.setObjectName("self.elnet_tollabel")
+            self.reg_widget.elnet_iter_hlayout.addWidget(self.reg_widget.elnet_tollabel)
+
+            self.reg_widget.elnet_tol = QtWidgets.QDoubleSpinBox(self.reg_widget)
+            self.reg_widget.elnet_tol.setMaximum(1000)
+            self.reg_widget.elnet_tol.setMinimum(0.0000001)
+            self.reg_widget.elnet_tol.setDecimals(5)
+            self.reg_widget.elnet_tol.setValue(0.0001)
+            self.reg_widget.elnet_tol.setObjectName("self.elnet_tol")
+            self.reg_widget.elnet_iter_hlayout.addWidget(self.reg_widget.elnet_tol)
+
+            self.reg_widget.elnet_iter_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
+                                                                      QtWidgets.QSizePolicy.Minimum)
+            self.reg_widget.elnet_iter_hlayout.addItem(self.reg_widget.elnet_iter_spacer)
+            self.reg_widget.elnet_vlayout.addItem(self.reg_widget.elnet_iter_hlayout)
+
+            self.reg_widget.elnet_intercept_checkbox = QtWidgets.QCheckBox(self.reg_widget)
+            self.reg_widget.elnet_intercept_checkbox.setText('Fit Intercept')
+            self.reg_widget.elnet_intercept_checkbox.setChecked(True)
+            self.reg_widget.elnet_intercept_checkbox.setObjectName("self.elnet_intercept_checkbox")
+            self.reg_widget.elnet_checkboxes_hlayout.addWidget(self.reg_widget.elnet_intercept_checkbox)
+
+            self.reg_widget.elnet_positive_checkbox = QtWidgets.QCheckBox(self.reg_widget)
+            self.reg_widget.elnet_positive_checkbox.setText('Force positive coefficients')
+            self.reg_widget.elnet_positive_checkbox.setChecked(False)
+            self.reg_widget.elnet_positive_checkbox.setObjectName("self.elnet_positive_checkbox")
+            self.reg_widget.elnet_checkboxes_hlayout.addWidget(self.reg_widget.elnet_positive_checkbox)
+
+            self.reg_widget.elnet_cv_checkbox = QtWidgets.QCheckBox(self.reg_widget)
+            self.reg_widget.elnet_cv_checkbox.setText('Optimize with Cross Validation? (Ignores alpha)')
+            self.reg_widget.elnet_cv_checkbox.setChecked(True)
+            self.reg_widget.elnet_cv_checkbox.setObjectName("self.elnet_cv_checkbox")
+            self.reg_widget.elnet_checkboxes_hlayout.addWidget(self.reg_widget.elnet_cv_checkbox)
+
+            self.reg_widget.elnet_checkbox_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
+                                                                          QtWidgets.QSizePolicy.Minimum)
+            self.reg_widget.elnet_checkboxes_hlayout.addItem(self.reg_widget.elnet_checkbox_spacer)
+            self.reg_widget.elnet_vlayout.addItem(self.reg_widget.elnet_checkboxes_hlayout)
+
+            self.reg_widget.elnet_alpha.valueChanged.connect(lambda: self.get_regression_parameters())
+            self.reg_widget.elnet_l1.valueChanged.connect(lambda: self.get_regression_parameters())
+            self.reg_widget.elnet_max.valueChanged.connect(lambda: self.get_regression_parameters())
+            self.reg_widget.elnet_tol.valueChanged.connect(lambda: self.get_regression_parameters())
+            self.reg_widget.elnet_intercept_checkbox.stateChanged.connect(lambda: self.get_regression_parameters())
+            self.reg_widget.elnet_positive_checkbox.stateChanged.connect(lambda: self.get_regression_parameters())
+            self.reg_widget.elnet_cv_checkbox.stateChanged.connect(lambda: self.get_regression_parameters())
+
+            if params is not None:
+                self.reg_widget.elnet_alpha.setValue(params['alpha'])
+                self.reg_widget.elnet_l1.setValue(params['l1_ratio'])
+                self.reg_widget.elnet_intercept_checkbox.setChecked(params['fit_intercept'])
+                self.reg_widget.elnet_tol.setValue(params['tol'])
+                self.reg_widget.elnet_max.setValue(params['max_iter'])
+                self.reg_widget.elnet_positive_checkbox.setChecked(params['positive'])
+                self.reg_widget.elnet_cv_checkbox.setChecked(params['CV'])
+
         if alg == 'Ridge':
-            pass
+            self.reg_widget.ridge_vlayout = QtWidgets.QVBoxLayout(self.reg_widget)
+            self.reg_widget.ridge_alpha_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
+
+            self.reg_widget.ridge_iter_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
+            self.reg_widget.ridge_checkboxes_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
+
+            self.reg_widget.ridge_alphalabel = QtWidgets.QLabel(self.reg_widget)
+            self.reg_widget.ridge_alphalabel.setText('Alpha:')
+            self.reg_widget.ridge_alphalabel.setObjectName("self.ridge_alphalabel")
+            self.reg_widget.ridge_alpha_hlayout.addWidget(self.reg_widget.ridge_alphalabel)
+
+            self.reg_widget.ridge_alpha = QtWidgets.QDoubleSpinBox(self.reg_widget)
+            self.reg_widget.ridge_alpha.setMaximum(1000)
+            self.reg_widget.ridge_alpha.setMinimum(0.0001)
+            self.reg_widget.ridge_alpha.setValue(1.0)
+            self.reg_widget.ridge_alpha.setObjectName("self.ridge_alpha")
+            self.reg_widget.ridge_alpha_hlayout.addWidget(self.reg_widget.ridge_alpha)
+
+            self.reg_widget.ridge_alpha_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
+                                                                       QtWidgets.QSizePolicy.Minimum)
+            self.reg_widget.ridge_alpha_hlayout.addItem(self.reg_widget.ridge_alpha_spacer)
+            self.reg_widget.ridge_vlayout.addItem(self.reg_widget.ridge_alpha_hlayout)
+
+
+            self.reg_widget.ridge_maxlabel = QtWidgets.QLabel(self.reg_widget)
+            self.reg_widget.ridge_maxlabel.setText('Max # of iterations:')
+            self.reg_widget.ridge_maxlabel.setObjectName("self.ridge_maxlabel")
+            self.reg_widget.ridge_iter_hlayout.addWidget(self.reg_widget.ridge_maxlabel)
+
+            self.reg_widget.ridge_max = QtWidgets.QSpinBox(self.reg_widget)
+            self.reg_widget.ridge_max.setMaximum(100000)
+            self.reg_widget.ridge_max.setMinimum(1)
+            self.reg_widget.ridge_max.setValue(1000)
+            self.reg_widget.ridge_max.setObjectName("self.ridge_max")
+            self.reg_widget.ridge_iter_hlayout.addWidget(self.reg_widget.ridge_max)
+
+            self.reg_widget.ridge_tollabel = QtWidgets.QLabel(self.reg_widget)
+            self.reg_widget.ridge_tollabel.setText('Tolerance:')
+            self.reg_widget.ridge_tollabel.setObjectName("self.ridge_tollabel")
+            self.reg_widget.ridge_iter_hlayout.addWidget(self.reg_widget.ridge_tollabel)
+
+            self.reg_widget.ridge_tol = QtWidgets.QDoubleSpinBox(self.reg_widget)
+            self.reg_widget.ridge_tol.setMaximum(1000)
+            self.reg_widget.ridge_tol.setMinimum(0.0000001)
+            self.reg_widget.ridge_tol.setDecimals(5)
+            self.reg_widget.ridge_tol.setValue(0.0001)
+            self.reg_widget.ridge_tol.setObjectName("self.ridge_tol")
+            self.reg_widget.ridge_iter_hlayout.addWidget(self.reg_widget.ridge_tol)
+
+            self.reg_widget.ridge_iter_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
+                                                                      QtWidgets.QSizePolicy.Minimum)
+            self.reg_widget.ridge_iter_hlayout.addItem(self.reg_widget.ridge_iter_spacer)
+            self.reg_widget.ridge_vlayout.addItem(self.reg_widget.ridge_iter_hlayout)
+
+            self.reg_widget.ridge_intercept_checkbox = QtWidgets.QCheckBox(self.reg_widget)
+            self.reg_widget.ridge_intercept_checkbox.setText('Fit Intercept')
+            self.reg_widget.ridge_intercept_checkbox.setChecked(True)
+            self.reg_widget.ridge_intercept_checkbox.setObjectName("self.ridge_intercept_checkbox")
+            self.reg_widget.ridge_checkboxes_hlayout.addWidget(self.reg_widget.ridge_intercept_checkbox)
+
+
+            self.reg_widget.ridge_cv_checkbox = QtWidgets.QCheckBox(self.reg_widget)
+            self.reg_widget.ridge_cv_checkbox.setText('Optimize with Cross Validation? (Ignores alpha)')
+            self.reg_widget.ridge_cv_checkbox.setChecked(True)
+            self.reg_widget.ridge_cv_checkbox.setObjectName("self.ridge_cv_checkbox")
+            self.reg_widget.ridge_checkboxes_hlayout.addWidget(self.reg_widget.ridge_cv_checkbox)
+
+            self.reg_widget.ridge_checkbox_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
+                                                                          QtWidgets.QSizePolicy.Minimum)
+            self.reg_widget.ridge_checkboxes_hlayout.addItem(self.reg_widget.ridge_checkbox_spacer)
+            self.reg_widget.ridge_vlayout.addItem(self.reg_widget.ridge_checkboxes_hlayout)
+
+            self.reg_widget.ridge_alpha.valueChanged.connect(lambda: self.get_regression_parameters())
+            self.reg_widget.ridge_max.valueChanged.connect(lambda: self.get_regression_parameters())
+            self.reg_widget.ridge_tol.valueChanged.connect(lambda: self.get_regression_parameters())
+            self.reg_widget.ridge_intercept_checkbox.stateChanged.connect(lambda: self.get_regression_parameters())
+            self.reg_widget.ridge_cv_checkbox.stateChanged.connect(lambda: self.get_regression_parameters())
+
+            if params is not None:
+                self.reg_widget.ridge_alpha.setValue(params['alpha'])
+                self.reg_widget.ridge_intercept_checkbox.setChecked(params['fit_intercept'])
+                self.reg_widget.ridge_tol.setValue(params['tol'])
+                self.reg_widget.ridge_max.setValue(params['max_iter'])
+                self.reg_widget.ridge_cv_checkbox.setChecked(params['CV'])
+
         if alg == 'Bayesian Ridge':
             pass
         if alg == 'ARD':
@@ -432,7 +647,79 @@ class regression_train_:
         if alg == 'LARS':
             pass
         if alg == 'Lasso LARS':
-            pass
+            self.reg_widget.lassoLARS_vlayout = QtWidgets.QVBoxLayout(self.reg_widget)
+            self.reg_widget.lassoLARS_alpha_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
+            self.reg_widget.lassoLARS_iter_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
+            self.reg_widget.lassoLARS_checkboxes_hlayout = QtWidgets.QHBoxLayout(self.reg_widget)
+
+            self.reg_widget.lassoLARS_alphalabel = QtWidgets.QLabel(self.reg_widget)
+            self.reg_widget.lassoLARS_alphalabel.setText('Alpha:')
+            self.reg_widget.lassoLARS_alphalabel.setObjectName("self.lassoLARS_alphalabel")
+            self.reg_widget.lassoLARS_alpha_hlayout.addWidget(self.reg_widget.lassoLARS_alphalabel)
+            self.reg_widget.lassoLARS_alpha = QtWidgets.QDoubleSpinBox(self.reg_widget)
+            self.reg_widget.lassoLARS_alpha.setMaximum(1000)
+            self.reg_widget.lassoLARS_alpha.setMinimum(0.0001)
+            self.reg_widget.lassoLARS_alpha.setValue(1.0)
+            self.reg_widget.lassoLARS_alpha.setObjectName("self.lassoLARS_alpha")
+            self.reg_widget.lassoLARS_alpha_hlayout.addWidget(self.reg_widget.lassoLARS_alpha)
+            self.reg_widget.lassoLARS_alpha_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
+                                                                       QtWidgets.QSizePolicy.Minimum)
+            self.reg_widget.lassoLARS_alpha_hlayout.addItem(self.reg_widget.lassoLARS_alpha_spacer)
+            self.reg_widget.lassoLARS_vlayout.addItem(self.reg_widget.lassoLARS_alpha_hlayout)
+
+            self.reg_widget.lassoLARS_maxlabel = QtWidgets.QLabel(self.reg_widget)
+            self.reg_widget.lassoLARS_maxlabel.setText('Max # of iterations:')
+            self.reg_widget.lassoLARS_maxlabel.setObjectName("self.lassoLARS_maxlabel")
+            self.reg_widget.lassoLARS_iter_hlayout.addWidget(self.reg_widget.lassoLARS_maxlabel)
+            self.reg_widget.lassoLARS_max = QtWidgets.QSpinBox(self.reg_widget)
+            self.reg_widget.lassoLARS_max.setMaximum(100000)
+            self.reg_widget.lassoLARS_max.setMinimum(1)
+            self.reg_widget.lassoLARS_max.setValue(1000)
+            self.reg_widget.lassoLARS_max.setObjectName("self.lassoLARS_max")
+            self.reg_widget.lassoLARS_iter_hlayout.addWidget(self.reg_widget.lassoLARS_max)
+
+
+            self.reg_widget.lassoLARS_iter_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
+                                                                      QtWidgets.QSizePolicy.Minimum)
+            self.reg_widget.lassoLARS_iter_hlayout.addItem(self.reg_widget.lassoLARS_iter_spacer)
+            self.reg_widget.lassoLARS_vlayout.addItem(self.reg_widget.lassoLARS_iter_hlayout)
+
+            self.reg_widget.lassoLARS_intercept_checkbox = QtWidgets.QCheckBox(self.reg_widget)
+            self.reg_widget.lassoLARS_intercept_checkbox.setText('Fit Intercept')
+            self.reg_widget.lassoLARS_intercept_checkbox.setChecked(True)
+            self.reg_widget.lassoLARS_intercept_checkbox.setObjectName("self.lassoLARS_intercept_checkbox")
+            self.reg_widget.lassoLARS_checkboxes_hlayout.addWidget(self.reg_widget.lassoLARS_intercept_checkbox)
+
+            self.reg_widget.lassoLARS_positive_checkbox = QtWidgets.QCheckBox(self.reg_widget)
+            self.reg_widget.lassoLARS_positive_checkbox.setText('Force positive coefficients')
+            self.reg_widget.lassoLARS_positive_checkbox.setChecked(False)
+            self.reg_widget.lassoLARS_positive_checkbox.setObjectName("self.lassoLARS_positive_checkbox")
+            self.reg_widget.lassoLARS_checkboxes_hlayout.addWidget(self.reg_widget.lassoLARS_positive_checkbox)
+
+            self.reg_widget.lassoLARS_cv_checkbox = QtWidgets.QCheckBox(self.reg_widget)
+            self.reg_widget.lassoLARS_cv_checkbox.setText('Optimize with Cross Validation? (Ignores alpha)')
+            self.reg_widget.lassoLARS_cv_checkbox.setChecked(True)
+            self.reg_widget.lassoLARS_cv_checkbox.setObjectName("self.lassoLARS_cv_checkbox")
+            self.reg_widget.lassoLARS_checkboxes_hlayout.addWidget(self.reg_widget.lassoLARS_cv_checkbox)
+
+            self.reg_widget.lassoLARS_checkbox_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
+                                                                          QtWidgets.QSizePolicy.Minimum)
+            self.reg_widget.lassoLARS_checkboxes_hlayout.addItem(self.reg_widget.lassoLARS_checkbox_spacer)
+            self.reg_widget.lassoLARS_vlayout.addItem(self.reg_widget.lassoLARS_checkboxes_hlayout)
+
+            self.reg_widget.lassoLARS_alpha.valueChanged.connect(lambda: self.get_regression_parameters())
+            self.reg_widget.lassoLARS_max.valueChanged.connect(lambda: self.get_regression_parameters())
+            self.reg_widget.lassoLARS_intercept_checkbox.stateChanged.connect(lambda: self.get_regression_parameters())
+            self.reg_widget.lassoLARS_positive_checkbox.stateChanged.connect(lambda: self.get_regression_parameters())
+            self.reg_widget.lassoLARS_cv_checkbox.stateChanged.connect(lambda: self.get_regression_parameters())
+
+            if params is not None:
+                self.reg_widget.lassoLARS_alpha.setValue(params['alpha'])
+                self.reg_widget.lassoLARS_intercept_checkbox.setChecked(params['fit_intercept'])
+                self.reg_widget.lassoLARS_max.setValue(params['max_iter'])
+                self.reg_widget.lassoLARS_positive_checkbox.setChecked(params['positive'])
+                self.reg_widget.lassoLARS_cv_checkbox.setChecked(params['CV'])
+
         if alg == 'SVR':
             pass
         if alg == 'KRR':
@@ -536,7 +823,7 @@ class regression_train_:
         self.regression_choosealg_label = QtWidgets.QLabel(self.regression_train)
         self.regression_choosealg_label.setObjectName("regression_choosealg_label")
         self.regression_choosealg_hlayout.addWidget(self.regression_choosealg_label)
-        self.regression_alg_choices = ['Choose an algorithm', 'PLS', 'GP', 'OLS', 'OMP', 'Lasso', 'More to come...']
+        self.regression_alg_choices = ['Choose an algorithm', 'PLS', 'GP', 'OLS', 'OMP', 'Lasso', 'Lasso LARS', 'Elastic Net', 'Ridge', 'More to come...']
         self.regression_choosealg = make_combobox(self.regression_alg_choices)
         self.regression_choosealg.setIconSize(QtCore.QSize(50, 20))
         self.regression_choosealg.setObjectName("regression_choosealg")

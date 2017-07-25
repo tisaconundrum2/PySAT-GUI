@@ -68,12 +68,14 @@ class sm_:
         if self.restr_list is not None:
             self.qtickle.guirestore(self.restr_list)
             self.isRestore=True
-            for n in self.submodel_gui_info[2:]:
-                self.add_submodel(selected_choice=n[0].currentText())
+
         if self.arg_list is not None:
             datakey = self.arg_list[0]
             submodel_names = self.arg_list[1]
             blendranges = self.arg_list[2]
+            for n,name in enumerate(submodel_names[1:-2]):
+                self.add_submodel(selected_choice=name,minmax=blendranges[n+1])
+
             trueval_data = self.arg_list[3]
             change_combo_list_vars(self.choosedata_predict,self.restr_list['self.choosedata_predict_values'])
 
@@ -248,7 +250,7 @@ class sm_:
         self.choosedata_predict.currentIndexChanged.connect(lambda: self.get_sm_params())
         self.get_sm_params()  # get initial parameters
 
-    def add_submodel(self,selected_choice=None):
+    def add_submodel(self,selected_choice=None,minmax=None):
 
         submodel_hlayout = QtWidgets.QHBoxLayout()
         font = QtGui.QFont()
@@ -262,7 +264,7 @@ class sm_:
         else:
             modelchoices = self.r['self.choose_high_model_values']
         choose_submodel = make_combobox(modelchoices)
-        choose_submodel.setCurrentText(selected_choice)
+
         submodel_hlayout.addWidget(choose_submodel)
         choose_submodel.setObjectName("choose_submodel")
         submodel_min_label = QtWidgets.QLabel()
@@ -285,6 +287,12 @@ class sm_:
         submodel_max.setMinimum(-1000)
         submodel_hlayout.addWidget(submodel_max)
         submodel_max.setObjectName("submodel_max")
+
+        if selected_choice is not None:
+            choose_submodel.setCurrentText(selected_choice)
+        if minmax is not None:
+            submodel_min.setValue(minmax[0])
+            submodel_max.setValue(minmax[1])
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         submodel_hlayout.addItem(spacerItem2)
 
@@ -293,7 +301,7 @@ class sm_:
         self.midmodel_vlayout.addLayout(submodel_hlayout)
 
         # insert the new submodel objects into the list
-        self.submodel_gui_info.insert(-1, [choose_submodel, [submodel_min, submodel_max]])
+        self.submodel_gui_info.insert(-2, [choose_submodel, [submodel_min, submodel_max]])
 
         # connect dropdown so spinbox ranges are updated
         choose_submodel.currentIndexChanged.connect(

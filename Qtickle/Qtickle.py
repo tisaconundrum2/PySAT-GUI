@@ -66,8 +66,8 @@ class Qtickle(object):
                     values = []
                     name = obj.objectName()
                     for i in range(obj.count()):
-                        itemData = str(obj.item(i).text())  # Get all the string data
-                        values.append(itemData)  # add it to a list
+                        itemData = obj.item(i).text()
+                        values.append(itemData)
                     dict[name + "_values"] = values
                     # since there is a possibility of multiple items,
                     # we'll just save the string representation of those items to be restored

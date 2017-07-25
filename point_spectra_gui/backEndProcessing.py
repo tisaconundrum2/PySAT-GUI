@@ -214,18 +214,18 @@ class backEndProc(QThread):
         except Exception as e:
             error_print('Problem reading data: {}'.format(e))
 
-    def do_write_data(self, filename, datakey):
+    def do_write_data(self, filename, datakey,cols):
 
         try:
-            try:
-                self.data[datakey].to_csv(self.outpath + '/' + filename)
-            except:
-                self.data[datakey].to_csv(filename)
+            datatemp=self.data[datakey].df[cols]
         except:
-            try:
-                self.data[datakey].df.to_csv(self.outpath + '/' + filename)
-            except:
-                self.data[datakey].df.to_csv(filename)
+            datatemp=self.data[datakey][cols]
+
+        try:
+            datatemp.to_csv(self.outpath + '/' + filename)
+        except:
+            datatemp.to_csv(filename)
+
 
     def do_read_ccam(self, searchdir, searchstring, to_csv=None, lookupfile=None, ave=True):
         progressbar = QtWidgets.QProgressDialog()
@@ -377,6 +377,21 @@ class backEndProc(QThread):
                 self.models[modelkey].fit(x, y)
                 self.model_xvars[modelkey] = xvars
                 self.model_yvars[modelkey] = yvars
+                try:
+                    coef=np.squeeze(self.models[modelkey].model.coef_)
+                    coef=pd.DataFrame(coef)
+                    coef.index=pd.MultiIndex.from_tuples(self.data[datakey].df[xvars].columns.values)
+                    coef=coef.T
+                    coef[('meta','Model')] = modelkey
+
+                    try:
+                        self.data['Model Coefficients']=spectral_data(pd.concat([self.data['Model Coefficients'].df,coef]))
+                    except:
+                        self.data['Model Coefficients']=spectral_data(coef)
+                        self.datakeys.append('Model Coefficients')
+                except:
+                    pass
+
         except Exception as e:
             error_print(e)
 
@@ -432,8 +447,8 @@ class backEndProc(QThread):
 
         # save the individual and blended predictions
         for i, j in enumerate(predictions):
-            self.data[datakey].df[('meta',submodel_names[i] + '-Predict')] = j
-        self.data[datakey].df[('meta','Blended-Predict (' + str(sm_obj.blendranges) + ')')] = predictions_blended
+            self.data[datakey].df[('predict',submodel_names[i] + '-Predict')] = j
+        self.data[datakey].df[('predict','Blended-Predict')] = predictions_blended
         pass
 
     def do_plot(self, datakey,
@@ -448,12 +463,16 @@ class backEndProc(QThread):
                 marker='o', linestyle='None', alpha=0.5
                 ):
 
-        vars_level0 = self.data[datakey].df.columns.get_level_values(0)
-        vars_level1 = self.data[datakey].df.columns.get_level_values(1)
-        vars_level1 = list(vars_level1[vars_level0 != 'wvl'])
-        vars_level0 = list(vars_level0[vars_level0 != 'wvl'])
-        xvar = (vars_level0[vars_level1.index(xvar)], xvar)
-        yvar = (vars_level0[vars_level1.index(yvar)], yvar)
+        try:
+            if self.data[datakey].df.columns.nlevels==2:
+                vars_level0 = self.data[datakey].df.columns.get_level_values(0)
+                vars_level1 = self.data[datakey].df.columns.get_level_values(1)
+                vars_level1 = list(vars_level1[vars_level0 != 'wvl'])
+                vars_level0 = list(vars_level0[vars_level0 != 'wvl'])
+                xvar = (vars_level0[vars_level1.index(xvar)], xvar)
+                yvar = (vars_level0[vars_level1.index(yvar)], yvar)
+        except:
+            pass
 
         try:
             x = self.data[datakey].df[xvar]
@@ -532,12 +551,13 @@ class backEndProc(QThread):
                       dpi=1000, color=None,
                       annot_mask=None,
                       cmap=None, colortitle='', figname=None, masklabel='',
-                      marker=None, linestyle='-', col=None, alpha=0.5, linewidth=1.0, row_bool=None
-                      ):
+                      marker=None, linestyle='-', col=None, alpha=0.5, linewidth=1.0):
 
+        self.data[datakey].enumerate_duplicates(col)
         data = self.data[datakey].df
-        y = data.loc[data[('meta', col)].isin([row])]['wvl'].loc[row_bool].T
-        x = data['wvl'].columns.values
+
+        y = np.squeeze(np.array(data.loc[data[('meta', col)].isin([row])]['wvl'].T))
+        x = np.array(data['wvl'].columns.values)
 
         try:
             loadfig = self.figs[figname]
@@ -588,14 +608,14 @@ class backEndProc(QThread):
 
     def run(self):
         # TODO this function will take all the enumerated functions and parameters and run them
-        try:
-            for i in range(len(self.greyed_modules)):
-                r_list = self._list.pull()
-                print(r_list)
-                getattr(self, r_list[2])(*r_list[3], **r_list[4])  # TODO add comment about who is who
-                self.greyed_modules[0].setDisabled(True)
-                del self.greyed_modules[0]
-            self.taskFinished.emit()
-        except Exception as e:
-            error_print(e)
-            self.taskFinished.emit()
+        #try:
+        for i in range(len(self.greyed_modules)):
+            r_list = self._list.pull()
+            print(r_list)
+            getattr(self, r_list[2])(*r_list[3], **r_list[4])  # TODO add comment about who is who
+            self.greyed_modules[0].setDisabled(True)
+            del self.greyed_modules[0]
+        self.taskFinished.emit()
+        # except Exception as e:
+        #     error_print(e)
+        #     self.taskFinished.emit()
