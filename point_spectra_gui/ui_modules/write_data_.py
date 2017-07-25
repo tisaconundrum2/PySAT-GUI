@@ -1,4 +1,4 @@
-from PyQt5 import QtGui, QtWidgets
+from PyQt5 import QtGui, QtCore, QtWidgets
 
 from Qtickle import Qtickle
 from point_spectra_gui.gui_utils import make_combobox, make_listwidget, change_combo_list_vars
@@ -29,6 +29,11 @@ class write_data_:
     def set_write_params(self):  # TODO this function should be rewritten to accomodate for restoration
         if self.restr_list is not None:
             self.qtickle.guiRestore(self.restr_list)
+            items = self.restr_list['write_data_choosecols_index']
+            for item in items:
+                temp = self.write_data_choosecols.findItems(item,QtCore.Qt.MatchExactly)
+                for i in temp:
+                    i.setSelected(True)
 
     def get_write_params(self):
         datakey = self.write_data_choose_data.currentText()
