@@ -40,6 +40,4 @@ install:
   - conda list
 
   - python setup.py install
-  
-script:
-  - py.test tests
+ 
