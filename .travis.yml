@@ -15,16 +15,10 @@ env:
     - PYQT="$PIP_INSTALL pyqt5==5.9"
     - PYQT="$PIP_INSATLL pyqt5==5.8"
 before_install:
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update -qq && sudo apt-get install -qq transifex-client libdiscid0 libdiscid0-dev qt5-default; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then bash scripts/setup-osx.sh; fi  
   - $PYQT
-  - git clone https://github.com/USGS-Astrogeology/PySAT.git
-  - cd PySAT
-  - python setup.py install
-  - cd ..
-  - ls
-install: 
-  - git clone https://github.com/USGS-Astrogeology/PySAT_Point_Spectra_GUI.git $TRAVIS_REPO_SLUG
-  - cd $TRAVIS_REPO_SLUG
-  - git checkout -qf $TRAVIS_COMMIT
+install:
   - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
   - bash miniconda.sh -b -p $HOME/miniconda
   - export PATH="$HOME/miniconda/bin:$PATH"
@@ -39,8 +33,10 @@ install:
   - source activate test-environment
   - pip install -r install_requires.txt
   - conda list
-
   - python setup.py install
-  
+  - git clone https://github.com/USGS-Astrogeology/PySAT.git
+  - cd PySAT
+  - python setup.py install
+  - cd ..
 script:
   - py.test tests
