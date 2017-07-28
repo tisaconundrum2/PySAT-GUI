@@ -33,6 +33,7 @@ install:
   # Replace dep1 dep2 ... with your dependencies
   - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION
   - source activate test-environment
+  - conda install pytest pytest-cov coverage sh anaconda-client
   - pip install -r install_requires.txt
   - conda list
 
