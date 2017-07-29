@@ -1,5 +1,5 @@
 language: python
-sudo: false
+sudo: required
 python:
   - "3.6"
   - "3.5"
@@ -33,4 +33,4 @@ script:
   - python setup.py clean
   - python setup.py build
   - python setup.py install
-# - py.test tests
+  - python tests/test_main_.py
