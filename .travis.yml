@@ -25,6 +25,7 @@ install:
   - conda install pytest pytest-cov coverage sh anaconda-client
   - pip install -r requirements.txt
   - conda list
+  - python setup.py install
   - git clone https://github.com/USGS-Astrogeology/PySAT.git
   - cd PySAT
   - python setup.py install
