@@ -1,16 +1,18 @@
 import sys
 from PyQt5 import QtWidgets
-
-from point_spectra_gui.future_ import regression_train, mainwindow
+from point_spectra_gui.future_ import *
 
 app = QtWidgets.QApplication(sys.argv)
-MainWindow = QtWidgets.QMainWindow()
-mainW = mainwindow.Ui_MainWindow()
-mainW.setupUi(MainWindow)
+mw = QtWidgets.QMainWindow()
+mainW = MainWindow.Ui_MainWindow()
+mainW.setupUi(mw)
 
-widgetW = regression_train.Ui_Form()
-widgetW.setupUi(mainW.centralwidget)
-widgetW.yvarmax_spin.valueChanged.connect(lambda: print(widgetW.yvarmax_spin.value()))
+widget1 = RegressionTrain.Ui_Form()
+widget1.setupUi(mainW.scrollArea)
+# widget2 = RegressionPredict.Ui_Form()
+# widget2.setupUi(mainW.scrollArea)
 
-MainWindow.show()
+
+
+mw.show()
 sys.exit(app.exec_())
