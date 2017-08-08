@@ -23,6 +23,7 @@ class Ui_Form(object):
         self.alphaLabel.setObjectName("alphaLabel")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.alphaLabel)
         self.alphaDoubleSpinBox = QtWidgets.QDoubleSpinBox(self.groupBox)
+        self.alphaDoubleSpinBox.setEnabled(False)
         self.alphaDoubleSpinBox.setMaximum(999999999.0)
         self.alphaDoubleSpinBox.setProperty("value", 1.0)
         self.alphaDoubleSpinBox.setObjectName("alphaDoubleSpinBox")
@@ -67,6 +68,7 @@ class Ui_Form(object):
         self.verticalLayout.addWidget(self.groupBox)
 
         self.retranslateUi(Form)
+        self.optimizeWCrossValidaitonCheckBox.toggled['bool'].connect(self.alphaDoubleSpinBox.setDisabled)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
