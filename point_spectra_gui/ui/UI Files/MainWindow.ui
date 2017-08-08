@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>628</width>
-    <height>534</height>
+    <height>861</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,9 +26,56 @@
          <x>0</x>
          <y>0</y>
          <width>608</width>
-         <height>442</height>
+         <height>769</height>
         </rect>
        </property>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <layout class="QVBoxLayout" name="widgetLayout_1"/>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="widgetLayout_2"/>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="widgetLayout_3"/>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="widgetLayout_4"/>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="widgetLayout_5"/>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="widgetLayout_6"/>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="widgetLayout_7"/>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="widgetLayout_8"/>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="widgetLayout_9"/>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="widgetLayout_10"/>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="widgetLayout_11"/>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="widgetLayout_12"/>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="widgetLayout_13"/>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="widgetLayout_14"/>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="widgetLayout_15"/>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
