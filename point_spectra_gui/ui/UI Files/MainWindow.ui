@@ -31,49 +31,7 @@
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
-         <layout class="QVBoxLayout" name="widgetLayout_1"/>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="widgetLayout_2"/>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="widgetLayout_3"/>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="widgetLayout_4"/>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="widgetLayout_5"/>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="widgetLayout_6"/>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="widgetLayout_7"/>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="widgetLayout_8"/>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="widgetLayout_9"/>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="widgetLayout_10"/>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="widgetLayout_11"/>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="widgetLayout_12"/>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="widgetLayout_13"/>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="widgetLayout_14"/>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="widgetLayout_15"/>
+         <layout class="QVBoxLayout" name="widgetLayout"/>
         </item>
        </layout>
       </widget>
