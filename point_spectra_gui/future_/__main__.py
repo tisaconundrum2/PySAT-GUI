@@ -2,16 +2,20 @@ import sys
 
 from PyQt5 import QtWidgets
 
-from point_spectra_gui.future_.ui import MainWindow, UI_RegressionTrain, RegressionTrain
+from point_spectra_gui.future_.ui import *
 
 app = QtWidgets.QApplication(sys.argv)
 mw = QtWidgets.QMainWindow()
 mainW = MainWindow.Ui_MainWindow()
 mainW.setupUi(mw)
 
-widget1 = RegressionTrain.RegressionTrain()
-widget1.setupUi(mainW.centralwidget)
-mainW.widgetLayout.addWidget(widget1.get_widget())
+regression_train = RegressionTrain.RegressionTrain()
+regression_train.setupUi(mainW.centralwidget)
+mainW.widgetLayout.addWidget(regression_train.get_widget())
+
+dim_red = DimenstionalityReduction.DimenstionalityReduction()
+dim_red.setupUi(mainW.centralwidget)
+mainW.widgetLayout.addWidget(dim_red.get_widget())
 
 
 
