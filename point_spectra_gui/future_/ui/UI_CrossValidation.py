@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\point_spectra_gui\ui\\UI Files\CrossValidation.ui'
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\point_spectra_gui\ui\\UI Files\UI_CrossValidation.ui'
 #
 # Created by: PyQt5 UI code generator 5.6
 #
@@ -113,6 +113,9 @@ class Ui_Form(object):
         self.regression_alg_choices.addItem("")
         self.regression_alg_choices.addItem("")
         self.verticalLayout_2.addWidget(self.regression_alg_choices)
+        self.algorithmLayout = QtWidgets.QVBoxLayout()
+        self.algorithmLayout.setObjectName("algorithmLayout")
+        self.verticalLayout_2.addLayout(self.algorithmLayout)
         self.verticalLayout.addWidget(self.regression)
 
         self.retranslateUi(Form)

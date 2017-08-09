@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\point_spectra_gui\ui\\UI Files\LARS.ui'
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\point_spectra_gui\ui\\UI Files\UI_LARS.ui'
 #
 # Created by: PyQt5 UI code generator 5.6
 #
@@ -23,6 +23,7 @@ class Ui_Form(object):
         self.numOfNonzeroCoeffsLabel.setObjectName("numOfNonzeroCoeffsLabel")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.numOfNonzeroCoeffsLabel)
         self.numOfNonzeroCoeffsSpinBox = QtWidgets.QSpinBox(self.formGroupBox)
+        self.numOfNonzeroCoeffsSpinBox.setEnabled(False)
         self.numOfNonzeroCoeffsSpinBox.setMaximum(999999)
         self.numOfNonzeroCoeffsSpinBox.setProperty("value", 500)
         self.numOfNonzeroCoeffsSpinBox.setObjectName("numOfNonzeroCoeffsSpinBox")
@@ -49,10 +50,6 @@ class Ui_Form(object):
         self.precomputeLabel = QtWidgets.QLabel(self.formGroupBox)
         self.precomputeLabel.setObjectName("precomputeLabel")
         self.formLayout.setWidget(5, QtWidgets.QFormLayout.LabelRole, self.precomputeLabel)
-        self.precomputeCheckBox = QtWidgets.QCheckBox(self.formGroupBox)
-        self.precomputeCheckBox.setChecked(True)
-        self.precomputeCheckBox.setObjectName("precomputeCheckBox")
-        self.formLayout.setWidget(5, QtWidgets.QFormLayout.FieldRole, self.precomputeCheckBox)
         self.copyXLabel = QtWidgets.QLabel(self.formGroupBox)
         self.copyXLabel.setObjectName("copyXLabel")
         self.formLayout.setWidget(6, QtWidgets.QFormLayout.LabelRole, self.copyXLabel)
@@ -89,9 +86,16 @@ class Ui_Form(object):
         self.crossValidateCheckBox.setChecked(True)
         self.crossValidateCheckBox.setObjectName("crossValidateCheckBox")
         self.formLayout.setWidget(9, QtWidgets.QFormLayout.FieldRole, self.crossValidateCheckBox)
+        self.comboBox = QtWidgets.QComboBox(self.formGroupBox)
+        self.comboBox.setObjectName("comboBox")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.formLayout.setWidget(5, QtWidgets.QFormLayout.FieldRole, self.comboBox)
         self.verticalLayout.addWidget(self.formGroupBox)
 
         self.retranslateUi(Form)
+        self.crossValidateCheckBox.toggled['bool'].connect(self.numOfNonzeroCoeffsSpinBox.setDisabled)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
@@ -105,7 +109,6 @@ class Ui_Form(object):
         self.verboseLabel.setText(_translate("Form", "Verbose"))
         self.verboseCheckBox.setText(_translate("Form", "Verbose mode when fitting the model"))
         self.precomputeLabel.setText(_translate("Form", "Precompute"))
-        self.precomputeCheckBox.setText(_translate("Form", "True | False| \'auto\'"))
         self.copyXLabel.setText(_translate("Form", "Copy X"))
         self.copyXCheckBox.setText(_translate("Form", "Computer the objective function at each step of the model"))
         self.epsLabel.setText(_translate("Form", "Eps"))
@@ -114,6 +117,9 @@ class Ui_Form(object):
         self.normalizeLabel.setText(_translate("Form", "Normalize"))
         self.normalizeCheckBox.setText(_translate("Form", "If True, the regressors X will be normalized before regression. ignored when fit_intercept is set to False."))
         self.crossValidatePathLabel.setText(_translate("Form", "Cross Validate"))
+        self.comboBox.setItemText(0, _translate("Form", "True"))
+        self.comboBox.setItemText(1, _translate("Form", "False"))
+        self.comboBox.setItemText(2, _translate("Form", "auto"))
 
 
 if __name__ == "__main__":

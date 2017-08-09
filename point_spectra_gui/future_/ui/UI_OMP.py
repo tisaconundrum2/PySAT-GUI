@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\point_spectra_gui\ui\\UI Files\OMP.ui'
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\point_spectra_gui\ui\\UI Files\UI_OMP.ui'
 #
 # Created by: PyQt5 UI code generator 5.6
 #
@@ -23,6 +23,7 @@ class Ui_Form(object):
         self.numOfNonZeroCoeffsLabel.setObjectName("numOfNonZeroCoeffsLabel")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.numOfNonZeroCoeffsLabel)
         self.numOfNonZeroCoeffsSpinBox = QtWidgets.QSpinBox(self.groupBox)
+        self.numOfNonZeroCoeffsSpinBox.setEnabled(False)
         self.numOfNonZeroCoeffsSpinBox.setMaximum(999999999)
         self.numOfNonZeroCoeffsSpinBox.setProperty("value", 615)
         self.numOfNonZeroCoeffsSpinBox.setObjectName("numOfNonZeroCoeffsSpinBox")
@@ -44,6 +45,7 @@ class Ui_Form(object):
         self.verticalLayout.addWidget(self.groupBox)
 
         self.retranslateUi(Form)
+        self.optimizeWCrossValidationCheckBox.toggled['bool'].connect(self.numOfNonZeroCoeffsSpinBox.setDisabled)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):

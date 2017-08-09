@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\point_spectra_gui\ui\\UI Files\ReadChemCamData.ui'
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\point_spectra_gui\ui\\UI Files\UI_ReadChemCamData.ui'
 #
 # Created by: PyQt5 UI code generator 5.6
 #
@@ -55,6 +55,7 @@ class Ui_Form(object):
         self.gridLayout.addWidget(self.averagesLabel, 4, 0, 1, 1)
         self.averagesradioButton = QtWidgets.QRadioButton(self.groupBox)
         self.averagesradioButton.setText("")
+        self.averagesradioButton.setChecked(True)
         self.averagesradioButton.setObjectName("averagesradioButton")
         self.gridLayout.addWidget(self.averagesradioButton, 4, 1, 1, 1)
         self.singleShotsLabel = QtWidgets.QLabel(self.groupBox)

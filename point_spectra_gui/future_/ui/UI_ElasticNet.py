@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\point_spectra_gui\ui\\UI Files\ElasticNet.ui'
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\point_spectra_gui\ui\\UI Files\UI_ElasticNet.ui'
 #
 # Created by: PyQt5 UI code generator 5.6
 #
@@ -23,6 +23,7 @@ class Ui_Form(object):
         self.alphaLabel.setObjectName("alphaLabel")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.alphaLabel)
         self.alphaDoubleSpinBox = QtWidgets.QDoubleSpinBox(self.groupBox)
+        self.alphaDoubleSpinBox.setEnabled(False)
         self.alphaDoubleSpinBox.setMaximum(9999999.0)
         self.alphaDoubleSpinBox.setSingleStep(1.0)
         self.alphaDoubleSpinBox.setProperty("value", 1.0)
@@ -32,6 +33,7 @@ class Ui_Form(object):
         self.l1RatioLabel.setObjectName("l1RatioLabel")
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.l1RatioLabel)
         self.l1RatioDoubleSpinBox = QtWidgets.QDoubleSpinBox(self.groupBox)
+        self.l1RatioDoubleSpinBox.setEnabled(False)
         self.l1RatioDoubleSpinBox.setMaximum(9999999.0)
         self.l1RatioDoubleSpinBox.setSingleStep(0.5)
         self.l1RatioDoubleSpinBox.setProperty("value", 0.5)
@@ -117,6 +119,8 @@ class Ui_Form(object):
         self.verticalLayout.addWidget(self.groupBox)
 
         self.retranslateUi(Form)
+        self.crossValidateCheckBox.toggled['bool'].connect(self.alphaDoubleSpinBox.setDisabled)
+        self.crossValidateCheckBox.toggled['bool'].connect(self.l1RatioDoubleSpinBox.setDisabled)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
