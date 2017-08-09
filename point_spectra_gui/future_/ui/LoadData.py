@@ -6,4 +6,4 @@ class Ui_Form(Ui_loadData):
         super().setupUi(Form)
 
     def get_widget(self):
-        return self.formGroupBox
+        return self.groupBox
