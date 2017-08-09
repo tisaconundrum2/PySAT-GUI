@@ -277,6 +277,9 @@
         </item>
        </widget>
       </item>
+      <item>
+       <layout class="QVBoxLayout" name="algorithmLayout"/>
+      </item>
      </layout>
     </widget>
    </item>
