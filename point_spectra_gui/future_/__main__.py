@@ -14,7 +14,7 @@ mainW.setupUi(mw)
 
 def addWidget(object):
     widget = object.Ui_Form()
-    widget.setupUi(mainW.centralwidget)
+    widget.setupUi(mainW.scrollArea)
     mainW.widgetLayout.addWidget(widget.get_widget())
 
 
