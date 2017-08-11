@@ -2,7 +2,7 @@ import sys
 
 from PyQt5 import QtWidgets
 
-from point_spectra_gui.future_.ui import *
+from point_spectra_gui.future_.util import *
 
 app = QtWidgets.QApplication(sys.argv)
 mw = QtWidgets.QMainWindow()
