@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading util file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\util\MainWindow.util'
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\MainWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.6
 #
@@ -25,9 +25,6 @@ class Ui_MainWindow(object):
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
-        self.widgetLayout = QtWidgets.QVBoxLayout()
-        self.widgetLayout.setObjectName("widgetLayout")
-        self.verticalLayout_3.addLayout(self.widgetLayout)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.verticalLayout.addWidget(self.scrollArea)
         self.progress_OK = QtWidgets.QHBoxLayout()
