@@ -10,6 +10,7 @@ mainW = MainWindow.Ui_MainWindow()
 mainW.setupUi(mw)
 
 
+
 def addWidget(object):
     widget = object.Ui_Form()
     widget.setupUi(mainW.centralwidget)
@@ -23,7 +24,7 @@ addWidget(CrossValidation)
 addWidget(DimenstionalityReduction)
 addWidget(ElasticNet)
 addWidget(GP)
-addWidget(interpolation)
+addWidget(Interpolation)
 addWidget(KRR)
 addWidget(LARS)
 addWidget(Lasso)
