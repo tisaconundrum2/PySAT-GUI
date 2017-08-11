@@ -11,7 +11,6 @@ from point_spectra_gui.future_.util import LARS
 from point_spectra_gui.future_.util import Lasso
 from point_spectra_gui.future_.util import LassoLARS
 from point_spectra_gui.future_.util import LoadData
-from point_spectra_gui.future_.util import MainWindow
 from point_spectra_gui.future_.util import MaskData
 from point_spectra_gui.future_.util import MultiplyByVector
 from point_spectra_gui.future_.util import Normalization
