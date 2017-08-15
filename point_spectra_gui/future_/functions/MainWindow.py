@@ -7,6 +7,7 @@ from point_spectra_gui.ui import MainWindow
 
 class Ui_MainWindow(MainWindow.Ui_MainWindow):
     def setupUi(self, MainWindow):
+        self.MainWindow = MainWindow
         super().setupUi(MainWindow)  # Run the basic window UI
         self.menu_item_shortcuts()  # set up the shortcuts
         self.menuItemFunctions()
@@ -14,7 +15,8 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow):
     def addWidget(self, object):
         widget = object.Ui_Form()
         widget.setupUi(self.scrollArea)
-        self.widgetLayout = QtWidgets.QVBoxLayout()
+        self.w = QtWidgets.QWidget(self.MainWindow)
+        self.widgetLayout = QtWidgets.QVBoxLayout(self.w)
         self.widgetLayout.setObjectName("widgetLayout")
         self.verticalLayout_3.addLayout(self.widgetLayout)
         self.widgetLayout.addWidget(widget.get_widget())
@@ -45,4 +47,4 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow):
         self.actionSplit_Data.triggered.connect(lambda: self.addWidget(SplitDataset))
         self.actionStratified_Folds.triggered.connect(lambda: self.addWidget(StratifiedFolds))
         self.actionSubmodel_Predict.triggered.connect(lambda: self.addWidget(SubmodelPredict))
-        self.deleteModulePushButton.clicked.connect(lambda: del_layout(self.widgetLayout))
+        self.deleteModulePushButton.clicked.connect(lambda: del_layout(self.w))
