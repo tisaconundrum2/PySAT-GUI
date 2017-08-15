@@ -1,4 +1,4 @@
-def del_layout_(QLayout):
+def del_layout(QLayout):
     to_delete = QLayout.takeAt(QLayout.count() - 1)  # remove the layout item at n-1 index
     if to_delete is not None:  # We run this method as long as there are objects
         while to_delete.count():  # while the count is not 0
@@ -10,6 +10,6 @@ def del_layout_(QLayout):
                 pass
 
 
-def del_qwidget_(QWidget):
+def del_qwidget(QWidget):
     QWidget.close()
     QWidget.deleteLater()

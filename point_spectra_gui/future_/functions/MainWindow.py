@@ -1,6 +1,7 @@
 from PyQt5 import QtWidgets
 
 from point_spectra_gui.future_.functions import *
+from point_spectra_gui.future_.util.del_widget import del_layout
 from point_spectra_gui.ui import MainWindow
 
 
@@ -44,4 +45,4 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow):
         self.actionSplit_Data.triggered.connect(lambda: self.addWidget(SplitDataset))
         self.actionStratified_Folds.triggered.connect(lambda: self.addWidget(StratifiedFolds))
         self.actionSubmodel_Predict.triggered.connect(lambda: self.addWidget(SubmodelPredict))
-        self.deleteModulePushButton.clicked.connect(lambda: self.del_layout_(self.widgetLayout))
+        self.deleteModulePushButton.clicked.connect(lambda: del_layout(self.widgetLayout))

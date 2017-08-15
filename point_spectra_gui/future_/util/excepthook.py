@@ -5,5 +5,3 @@ def my_exception_hook(exctype, value, traceback):
     sys._excepthook(exctype, value, traceback)
     sys.exit(1)
 
-sys._excepthook = sys.excepthook
-sys.excepthook = my_exception_hook
