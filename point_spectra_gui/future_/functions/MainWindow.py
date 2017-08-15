@@ -48,6 +48,5 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow):
         self.actionSplit_Data.triggered.connect(lambda: self.addWidget(SplitDataset))
         self.actionStratified_Folds.triggered.connect(lambda: self.addWidget(StratifiedFolds))
         self.actionSubmodel_Predict.triggered.connect(lambda: self.addWidget(SubmodelPredict))
-        self.actionCreate_New_Workflow.triggered.connect(lambda: new())
         # self.deleteModulePushButton.clicked.connect(lambda: del_qwidget(self.w))
 

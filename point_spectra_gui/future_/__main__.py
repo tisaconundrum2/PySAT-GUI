@@ -39,6 +39,7 @@ def main():
     mainWindow = QtWidgets.QMainWindow()
     ui = MainWindow.Ui_MainWindow()
     ui.setupUi(mainWindow)
+    ui.actionCreate_New_Workflow.triggered.connect(lambda: new())
     mainWindow.show()
     sys.exit(app.exec_())
 
