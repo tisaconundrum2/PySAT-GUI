@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading util file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\point_spectra_gui\util\util\UI_Plot_ICA_PCA.util'
+# Form implementation generated from reading functions file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\point_spectra_gui\functions\functions\UI_Plot_ICA_PCA.functions'
 #
 # Created by: PyQt5 UI code generator 5.6
 #

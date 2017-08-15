@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\DimenstionalityReduction.ui'
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\DimensionalityReduction.ui'
 #
 # Created by: PyQt5 UI code generator 5.6
 #
@@ -39,7 +39,7 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.formGroupBox.setTitle(_translate("Form", "Dimenstionality Reduction"))
+        self.formGroupBox.setTitle(_translate("Form", "Dimensionality Reduction"))
         self.chooseDataLabel.setText(_translate("Form", "Choose data:"))
         self.chooseMethodLabel.setText(_translate("Form", "Choose method:"))
 

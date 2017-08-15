@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading util file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\point_spectra_gui\util\\UI Files\SVR.util'
+# Form implementation generated from reading functions file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\point_spectra_gui\functions\\UI Files\SVR.functions'
 #
 # Created by: PyQt5 UI code generator 5.6
 #

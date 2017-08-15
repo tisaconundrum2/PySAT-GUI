@@ -29,7 +29,11 @@
          <height>764</height>
         </rect>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout_3"/>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <layout class="QVBoxLayout" name="widgetLayout"/>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
@@ -46,7 +50,14 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="deleteModulePushButton">
+        <property name="text">
+         <string>Delete Module</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="okPushButton">
         <property name="text">
          <string>OK</string>
         </property>
@@ -76,6 +87,7 @@
     <addaction name="actionSave_Current_Data"/>
     <addaction name="separator"/>
     <addaction name="actionCreate_New_Workflow"/>
+    <addaction name="actionOpen_Workflow"/>
     <addaction name="actionRestore_Workflow"/>
     <addaction name="actionSave_Current_Workflow"/>
     <addaction name="separator"/>
@@ -260,6 +272,11 @@
   <action name="actionAbout_Qt">
    <property name="text">
     <string>About Qt...</string>
+   </property>
+  </action>
+  <action name="actionOpen_Workflow">
+   <property name="text">
+    <string>Open Workflow</string>
    </property>
   </action>
  </widget>

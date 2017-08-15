@@ -2,7 +2,7 @@ from point_spectra_gui.ui import ARD
 from point_spectra_gui.ui import BaselineRemoval
 from point_spectra_gui.ui import BayesianRidge
 from point_spectra_gui.ui import CrossValidation
-from point_spectra_gui.ui import DimenstionalityReduction
+from point_spectra_gui.ui import DimensionalityReduction
 from point_spectra_gui.ui import ElasticNet
 from point_spectra_gui.ui import GP
 from point_spectra_gui.ui import interpolation

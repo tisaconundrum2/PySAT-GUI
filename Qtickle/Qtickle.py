@@ -13,8 +13,8 @@ class Qtickle(object):
     def guiSave(self):
         dict = {}
         # Save geometry
-        # self.settings.setValue('size', self.util.size())
-        # self.settings.setValue('pos', self.util.pos())
+        # self.settings.setValue('size', self.functions.size())
+        # self.settings.setValue('pos', self.functions.pos())
         try:
             for name, obj in inspect.getmembers(self.ui):
                 if isinstance(obj, QLineEdit):
@@ -80,8 +80,8 @@ class Qtickle(object):
 
     def guiRestore(self, dict):
         # Restore geometry
-        # self.util.resize(self.settings.value('size', QtCore.QSize(500, 500)))
-        # self.util.move(self.settings.value('pos', QtCore.QPoint(60, 60)))
+        # self.functions.resize(self.settings.value('size', QtCore.QSize(500, 500)))
+        # self.functions.move(self.settings.value('pos', QtCore.QPoint(60, 60)))
         for name, obj in inspect.getmembers(self.ui):
             try:
                 if isinstance(obj, QLineEdit):
