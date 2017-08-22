@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\LoadData.ui'
+# Form implementation generated from reading ui file 'C:\Users\tisaconundrum\Documents\GitHub\PySAT_Point_Spectra_GUI\ui\LoadData.ui'
 #
 # Created by: PyQt5 UI code generator 5.6
 #
@@ -44,6 +44,7 @@ class Ui_loadData(object):
         loadData.setWindowTitle(_translate("loadData", "Form"))
         self.groupBox.setTitle(_translate("loadData", "Load Data"))
         self.fileNameLabel.setText(_translate("loadData", "File Name"))
+        self.fileNameLineEdit.setText(_translate("loadData", "*.csv"))
         self.newFilePushButton.setText(_translate("loadData", "..."))
         self.dataSetNameLabel.setText(_translate("loadData", "Data Set Name"))
 
