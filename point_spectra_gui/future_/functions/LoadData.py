@@ -1,5 +1,6 @@
 from PyQt5 import QtWidgets
 
+from point_spectra_gui.future_.functions import MainWindow
 from point_spectra_gui.ui.LoadData import Ui_loadData
 
 
@@ -7,7 +8,8 @@ class Ui_Form(Ui_loadData):
     def setupUi(self, Form):
         super().setupUi(Form)
         self.connectWidgets()
-        Form.resize(698, 1)
+        mw = MainWindow.Ui_MainWindow()
+        Form.resize(mw.getScrollAreaWidgetSize())
 
     def get_widget(self):
         return self.groupBox
