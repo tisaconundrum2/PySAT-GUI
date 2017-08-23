@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\tisaconundrum\Documents\GitHub\PySAT_Point_Spectra_GUI\ui\LoadData.ui'
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\LoadData.ui'
 #
 # Created by: PyQt5 UI code generator 5.6
 #
@@ -11,7 +11,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_loadData(object):
     def setupUi(self, loadData):
         loadData.setObjectName("loadData")
-        loadData.resize(399, 300)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Ignored)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(loadData.sizePolicy().hasHeightForWidth())
+        loadData.setSizePolicy(sizePolicy)
         self.verticalLayout = QtWidgets.QVBoxLayout(loadData)
         self.verticalLayout.setObjectName("verticalLayout")
         self.groupBox = QtWidgets.QGroupBox(loadData)

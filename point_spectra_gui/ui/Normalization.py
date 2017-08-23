@@ -11,7 +11,12 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(400, 567)
+        Form.resize(400, 596)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Ignored)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(Form.sizePolicy().hasHeightForWidth())
+        Form.setSizePolicy(sizePolicy)
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(Form)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.groupBox = QtWidgets.QGroupBox(Form)

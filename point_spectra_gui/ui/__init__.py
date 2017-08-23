@@ -21,7 +21,7 @@ from point_spectra_gui.ui import OutputFolder
 from point_spectra_gui.ui import PeakAreas
 from point_spectra_gui.ui import Plot
 from point_spectra_gui.ui import Plot_ICA_PCA
-from point_spectra_gui.ui import PlotICAPCA
+from point_spectra_gui.ui import Plot_ICA_PCA
 from point_spectra_gui.ui import PlotSpectra
 from point_spectra_gui.ui import PLS
 from point_spectra_gui.ui import ReadChemCamData
