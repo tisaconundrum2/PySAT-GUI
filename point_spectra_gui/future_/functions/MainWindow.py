@@ -8,9 +8,6 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow):
         super().setupUi(MainWindow)  # Run the basic window UI
         self.menu_item_shortcuts()  # set up the shortcuts
 
-    def getScrollAreaWidgetSize(self):
-        return self.scrollAreaWidgetContents.size()
-
     def addWidget(self, object):
         widget = object()
         widget.setupUi(self.scrollArea)

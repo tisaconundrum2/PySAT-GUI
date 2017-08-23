@@ -9,7 +9,6 @@ class Ui_Form(Ui_loadData):
         super().setupUi(Form)
         self.connectWidgets()
         mw = MainWindow.Ui_MainWindow()
-        Form.resize(mw.getScrollAreaWidgetSize())
 
     def get_widget(self):
         return self.groupBox
