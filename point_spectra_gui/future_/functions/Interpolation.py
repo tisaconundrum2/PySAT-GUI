@@ -1,4 +1,4 @@
-from point_spectra_gui.ui.interpolation import Ui_Form
+from point_spectra_gui.ui.Interpolation import Ui_Form
 
 
 class Ui_Form(Ui_Form):

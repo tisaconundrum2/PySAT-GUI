@@ -5,7 +5,7 @@ from point_spectra_gui.ui import CrossValidation
 from point_spectra_gui.ui import DimensionalityReduction
 from point_spectra_gui.ui import ElasticNet
 from point_spectra_gui.ui import GP
-from point_spectra_gui.ui import interpolation
+from point_spectra_gui.ui import Interpolation
 from point_spectra_gui.ui import KRR
 from point_spectra_gui.ui import LARS
 from point_spectra_gui.ui import Lasso
@@ -20,7 +20,6 @@ from point_spectra_gui.ui import OMP
 from point_spectra_gui.ui import OutputFolder
 from point_spectra_gui.ui import PeakAreas
 from point_spectra_gui.ui import Plot
-from point_spectra_gui.ui import Plot_ICA_PCA
 from point_spectra_gui.ui import Plot_ICA_PCA
 from point_spectra_gui.ui import PlotSpectra
 from point_spectra_gui.ui import PLS
