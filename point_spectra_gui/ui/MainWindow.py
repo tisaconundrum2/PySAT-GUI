@@ -159,7 +159,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "PYSAT Point Spectra GUI"))
         self.progressBar.setFormat(_translate("MainWindow", "%p%"))
         self.deleteModulePushButton.setText(_translate("MainWindow", "Delete Module"))
         self.okPushButton.setText(_translate("MainWindow", "OK"))
