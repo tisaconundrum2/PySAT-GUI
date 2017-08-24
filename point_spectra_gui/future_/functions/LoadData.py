@@ -1,5 +1,6 @@
 from PyQt5 import QtWidgets
 
+from Qtickle import Qtickle
 from point_spectra_gui.future_.functions import MainWindow
 from point_spectra_gui.ui.LoadData import Ui_loadData
 
@@ -16,9 +17,10 @@ class Ui_Form(Ui_loadData):
         return self.groupBox
 
     def connectWidgets(self):
+        self.qt = Qtickle.Qtickle(self)
+        self.qt.isGuiChanged(self.qt.guiSave)
+        print(Ui_Form.uiID)
         self.newFilePushButton.clicked.connect(lambda: self.on_getDataButton_clicked())
-        # self.get_data_line_edit.textChanged.connect(lambda: self.get_data_params())
-        # self.dataname.textChanged.connect(lambda: self.get_data_params())
 
     def on_getDataButton_clicked(self):
         filename, _filter = QtWidgets.QFileDialog.getOpenFileName(None, "Open Data File", '.', "(*.csv)")
