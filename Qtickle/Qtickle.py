@@ -161,9 +161,9 @@ class Qtickle(object):
             except Exception as e:
                 print(e)
 
-    def isGuiChanged(self, ui, functionCall):
+    def isGuiChanged(self, functionCall):
         try:
-            for name, obj in inspect.getmembers(ui):
+            for name, obj in inspect.getmembers(self.ui):
                 if isinstance(obj, QLineEdit):
                     obj.textChanged.connect(lambda: functionCall())
 
