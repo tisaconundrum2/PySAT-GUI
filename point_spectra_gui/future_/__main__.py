@@ -43,11 +43,11 @@ def connectWidgets(ui):
     ui.actionCreate_New_Workflow.triggered.connect(lambda: new())
 
 
-
 def get_splash(app):
-    if os.path.exists('splash.png'):
-        splash_pix = QPixmap('splash.png')  # default
-        app_icon = QtGui.QIcon('icon.png')
+    dir = '../../images/'
+    if os.path.exists(dir + 'splash.png'):
+        splash_pix = QPixmap(dir + 'splash.png')  # default
+        app_icon = QtGui.QIcon(dir + 'icon.png')
         app.setWindowIcon(app_icon)
         splash = QSplashScreen(splash_pix, Qt.WindowStaysOnTopHint)
         splash.setMask(splash_pix.mask())
