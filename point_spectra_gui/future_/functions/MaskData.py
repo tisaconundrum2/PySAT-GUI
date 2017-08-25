@@ -1,5 +1,6 @@
 from PyQt5 import QtWidgets
 
+from Qtickle import Qtickle
 from point_spectra_gui.ui.MaskData import Ui_Form
 
 
@@ -12,8 +13,9 @@ class Ui_Form(Ui_Form):
         return self.groupBox
 
     def connectWidgets(self):
-        # self.maskFileLineEdit.textChanged.connect(lambda: self.get_mask_params())
-        # self.chooseDataComboBox.currentIndexChanged.connect(lambda: self.get_mask_params())
+        self.qt = Qtickle.Qtickle(self)
+        self.qt.isGuiChanged(self.qt.guiSave)
+        print(Ui_Form.uiID)
         self.pushButton.clicked.connect(lambda: self.on_getDataButton_clicked(self.maskFileLineEdit))
 
     def on_getDataButton_clicked(self, lineEdit):

@@ -1,5 +1,6 @@
 from PyQt5 import QtWidgets
 
+from Qtickle import Qtickle
 from point_spectra_gui.ui.CrossValidation import Ui_Form
 
 
@@ -47,3 +48,8 @@ class Ui_Form(Ui_Form):
         self.reg_widget.setObjectName("self.reg_widget")
         self.cv_vlayout.addWidget(self.reg_widget)
         self.get_cv_parameters()
+
+    def connectWidgets(self):
+        self.qt = Qtickle.Qtickle(self)
+        self.qt.isGuiChanged(self.qt.guiSave)
+        print(Ui_Form.uiID)

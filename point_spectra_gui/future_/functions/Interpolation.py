@@ -12,4 +12,5 @@ class Ui_Form(Ui_Form):
 
     def connectWidgets(self):
         self.qt = Qtickle.Qtickle(self)
-        self.qt.isGuiChanged(self.qt.guiSave())
+        self.qt.isGuiChanged(self.qt.guiSave)
+        print(Ui_Form.uiID)
