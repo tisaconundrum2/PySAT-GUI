@@ -171,7 +171,7 @@ class Qtickle(object):
                     obj.stateChanged.connect(lambda: functionCall())
 
                 if isinstance(obj, QRadioButton):
-                    obj.hitButton.connect(lambda: functionCall())
+                    obj.toggled.connect(lambda: functionCall())
 
                 if isinstance(obj, QSpinBox):
                     obj.valueChanged.connect(lambda: functionCall())
