@@ -41,6 +41,7 @@ def connectWidgets(ui):
     ui.actionSubmodel_Predict.triggered.connect(lambda: ui.addWidget(SubmodelPredict.Ui_Form))
     ui.deleteModulePushButton.clicked.connect(lambda: delete.del_layout(ui.verticalLayout_3))
     ui.actionCreate_New_Workflow.triggered.connect(lambda: new())
+    ui.actionExit.triggered.connect(lambda: sys.exit())
 
 
 def get_splash(app):
