@@ -1,5 +1,4 @@
 import inspect
-import traceback
 from distutils.util import strtobool
 
 from PyQt5 import QtCore
