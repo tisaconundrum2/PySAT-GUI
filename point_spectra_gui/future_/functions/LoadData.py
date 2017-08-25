@@ -7,6 +7,7 @@ from point_spectra_gui.ui.LoadData import Ui_loadData
 
 class Ui_Form(Ui_loadData):
     uiID = 0
+
     def setupUi(self, Form):
         super().setupUi(Form)
         self.connectWidgets()
