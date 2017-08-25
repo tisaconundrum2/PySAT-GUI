@@ -10,7 +10,6 @@ class Ui_Form(Ui_Form):
     def setupUi(self, Form):
         super().setupUi(Form)
         self.connectWidgets()
-        self.connectWidgets()
         Ui_Form.uiID += 1
 
     def get_widget(self):

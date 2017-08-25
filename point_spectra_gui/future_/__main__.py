@@ -20,6 +20,12 @@ def new():
 
 
 def connectWidgets(ui):
+    """
+    Connect all the widgets associated with the MainWindow UI
+    :param ui:
+    :return:
+    """
+    # TODO figure out how to get this code into `MainWindow.py`
     ui.actionRead_ChemCam_Data.triggered.connect(lambda: ui.addWidget(ReadChemCamData.Ui_Form))
     ui.actionRemove_Baseline.triggered.connect(lambda: ui.addWidget(BaselineRemoval.Ui_Form))
     ui.actionCross_Validation.triggered.connect(lambda: ui.addWidget(CrossValidation.Ui_Form))
@@ -42,9 +48,16 @@ def connectWidgets(ui):
     ui.deleteModulePushButton.clicked.connect(lambda: delete.del_layout(ui.verticalLayout_3))
     ui.actionCreate_New_Workflow.triggered.connect(lambda: new())
     ui.actionExit.triggered.connect(lambda: sys.exit())
+    ui.actionSave_Current_Workflow.triggered.connect(lambda: ui.on_save_clicked())
 
 
 def get_splash(app):
+    """
+    Get the splash screen for the application
+    But check to see if the image even exists
+    :param app:
+    :return:
+    """
     dir = '../../images/'
     if os.path.exists(dir + 'splash.png'):
         splash_pix = QPixmap(dir + 'splash.png')  # default
