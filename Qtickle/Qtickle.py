@@ -73,7 +73,6 @@ class Qtickle(object):
                     # we'll just save the string representation of those items to be restored
                     dict[name + "_index"] = [str(x.text()) for x in obj.selectedItems()]
 
-            print(dict)  # Debug purposes
             return dict
         except Exception as e:
             print(e)
