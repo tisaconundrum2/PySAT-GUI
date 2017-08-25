@@ -52,7 +52,7 @@ def get_splash(app):
         splash = QSplashScreen(splash_pix, Qt.WindowStaysOnTopHint)
         splash.setMask(splash_pix.mask())
         splash.show()
-        time.sleep(1)
+        time.sleep(0.5)
         app.processEvents()
 
 
