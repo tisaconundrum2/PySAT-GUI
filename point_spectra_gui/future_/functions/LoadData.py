@@ -19,10 +19,10 @@ class Ui_Form(Ui_loadData):
         self.qt = Qtickle.Qtickle(self)
         self.qt.isGuiChanged(self.qt.guiSave)
         print(Ui_Form.uiID)
-        self.newFilePushButton.clicked.connect(lambda: self.on_getDataButton_clicked())
+        self.newFilePushButton.clicked.connect(lambda: self.on_getDataButton_clicked(self.fileNameLineEdit))
 
-    def on_getDataButton_clicked(self):
+    def on_getDataButton_clicked(self, lineEdit):
         filename, _filter = QtWidgets.QFileDialog.getOpenFileName(None, "Open Data File", '.', "(*.csv)")
-        self.fileNameLineEdit.setText(filename)
-        if self.fileNameLineEdit.text() == "":
-            self.fileNameLineEdit.setText("*.csv")
+        lineEdit.setText(filename)
+        if lineEdit.text() == "":
+            lineEdit.setText("*.csv")
