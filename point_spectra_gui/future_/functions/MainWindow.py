@@ -19,7 +19,7 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow):
         :param obj:
         :return:
         """
-        self.widget = obj
+        self.widget = obj()
         self.widget.setupUi(self.scrollArea)
         self.widgetLayout = QtWidgets.QVBoxLayout()
         self.widgetLayout.setObjectName("widgetLayout")
