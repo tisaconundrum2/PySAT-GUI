@@ -16,3 +16,9 @@ class Ui_Form(Ui_Form):
     def connectWidgets(self):
         self.qt = Qtickle.Qtickle(self)
         self.qt.isGuiChanged(self.qt.guiSave)
+
+    def getGuiParams(self):
+        # TODO put the parameters inside of a list/dictionary
+        # TODO create a function that loads in the necessary module
+        print(self.qt.guiSave())
+        return self.qt.guiSave()

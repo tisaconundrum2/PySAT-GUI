@@ -26,3 +26,9 @@ class Ui_Form(Ui_Form):
         self.folderNameLineEdit.setText(filename)
         if self.folderNameLineEdit.text() == "":
             self.folderNameLineEdit.setText("*/")
+
+    def getGuiParams(self):
+        # TODO put the parameters inside of a list/dictionary
+        # TODO create a function that loads in the necessary module
+        print(self.qt.guiSave())
+        return self.qt.guiSave()

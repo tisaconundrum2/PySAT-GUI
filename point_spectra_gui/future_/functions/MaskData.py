@@ -26,3 +26,9 @@ class Ui_Form(Ui_Form):
         lineEdit.setText(filename)
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")
+
+    def getGuiParams(self):
+        # TODO put the parameters inside of a list/dictionary
+        # TODO create a function that loads in the necessary module
+        print(self.qt.guiSave())
+        return self.qt.guiSave()
