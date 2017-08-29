@@ -31,3 +31,4 @@ class Ui_Form(Ui_loadData):
         # TODO put the parameters inside of a list/dictionary
         # TODO create a function that loads in the necessary module
         print(self.qt.guiSave())
+        return self.qt.guiSave()
