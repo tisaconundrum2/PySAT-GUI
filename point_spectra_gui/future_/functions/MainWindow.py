@@ -2,7 +2,7 @@ import pickle
 
 from PyQt5 import QtWidgets
 
-from point_spectra_gui.future_.functions import *
+from point_spectra_gui.future_ import functions
 from point_spectra_gui.ui import MainWindow
 
 
@@ -43,30 +43,31 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow):
         """
         # TODO figure out how to get this code into `MainWindow.py`
         try:
-            self.actionRead_ChemCam_Data.triggered.connect(lambda: self.addWidget(ReadChemCamData.Ui_Form))
-            self.actionRemove_Baseline.triggered.connect(lambda: self.addWidget(BaselineRemoval.Ui_Form))
-            self.actionCross_Validation.triggered.connect(lambda: self.addWidget(CrossValidation.Ui_Form))
-            self.actionDimensionality_Reduction.triggered.connect(lambda: self.addWidget(DimensionalityReduction.Ui_Form))
-            self.actionInterpolate.triggered.connect(lambda: self.addWidget(Interpolation.Ui_Form))
-            self.actionLoad_Data.triggered.connect(lambda: self.addWidget(LoadData.Ui_Form))
-            self.actionApply_Mask.triggered.connect(lambda: self.addWidget(MaskData.Ui_Form))
-            self.actionMultiply_by_Vector.triggered.connect(lambda: self.addWidget(MultiplyByVector.Ui_Form))
-            self.actionNormalization.triggered.connect(lambda: self.addWidget(Normalization.Ui_Form))
-            self.actionSet_Output_Path.triggered.connect(lambda: self.addWidget(OutputFolder.Ui_Form))
-            self.actionPeak_Areas.triggered.connect(lambda: self.addWidget(PeakAreas.Ui_Form))
-            self.actionPlot.triggered.connect(lambda: self.addWidget(Plot.Ui_Form))
-            self.actionPlot_ICA_PCA.triggered.connect(lambda: self.addWidget(Plot_ICA_PCA.Ui_Form))
-            self.actionPlot_Spectra.triggered.connect(lambda: self.addWidget(PlotSpectra.Ui_Form))
-            self.actionTrain.triggered.connect(lambda: self.addWidget(RegressionTrain.Ui_Form))
-            self.actionRemove_Rows.triggered.connect(lambda: self.addWidget(RemoveRows.Ui_Form))
-            self.actionSplit_Data.triggered.connect(lambda: self.addWidget(SplitDataset.Ui_Form))
-            self.actionStratified_Folds.triggered.connect(lambda: self.addWidget(StratifiedFolds.Ui_Form))
-            self.actionSubmodel_Predict.triggered.connect(lambda: self.addWidget(SubmodelPredict.Ui_Form))
+            self.actionRead_ChemCam_Data.triggered.connect(lambda: self.addWidget(functions.ReadChemCamData.Ui_Form))
+            self.actionRemove_Baseline.triggered.connect(lambda: self.addWidget(functions.BaselineRemoval.Ui_Form))
+            self.actionCross_Validation.triggered.connect(lambda: self.addWidget(functions.CrossValidation.Ui_Form))
+            self.actionDimensionality_Reduction.triggered.connect(
+                lambda: self.addWidget(functions.DimensionalityReduction.Ui_Form))
+            self.actionInterpolate.triggered.connect(lambda: self.addWidget(functions.Interpolation.Ui_Form))
+            self.actionLoad_Data.triggered.connect(lambda: self.addWidget(functions.LoadData.Ui_Form))
+            self.actionApply_Mask.triggered.connect(lambda: self.addWidget(functions.MaskData.Ui_Form))
+            self.actionMultiply_by_Vector.triggered.connect(lambda: self.addWidget(functions.MultiplyByVector.Ui_Form))
+            self.actionNormalization.triggered.connect(lambda: self.addWidget(functions.Normalization.Ui_Form))
+            self.actionSet_Output_Path.triggered.connect(lambda: self.addWidget(functions.OutputFolder.Ui_Form))
+            self.actionPeak_Areas.triggered.connect(lambda: self.addWidget(functions.PeakAreas.Ui_Form))
+            self.actionPlot.triggered.connect(lambda: self.addWidget(functions.Plot.Ui_Form))
+            self.actionPlot_ICA_PCA.triggered.connect(lambda: self.addWidget(functions.Plot_ICA_PCA.Ui_Form))
+            self.actionPlot_Spectra.triggered.connect(lambda: self.addWidget(functions.PlotSpectra.Ui_Form))
+            self.actionTrain.triggered.connect(lambda: self.addWidget(functions.RegressionTrain.Ui_Form))
+            self.actionRemove_Rows.triggered.connect(lambda: self.addWidget(functions.RemoveRows.Ui_Form))
+            self.actionSplit_Data.triggered.connect(lambda: self.addWidget(functions.SplitDataset.Ui_Form))
+            self.actionStratified_Folds.triggered.connect(lambda: self.addWidget(functions.StratifiedFolds.Ui_Form))
+            self.actionSubmodel_Predict.triggered.connect(lambda: self.addWidget(functions.SubmodelPredict.Ui_Form))
             self.actionSave_Current_Workflow.triggered.connect(lambda: self.on_save_clicked())
         except Exception as e:
             print(e)
 
-    def addWidgetList(self, widgetList):
+    def getWidgetList(self, widgetList):
         """
         Add the pysat_list algorithm here
         This and addWidget() will be working together
