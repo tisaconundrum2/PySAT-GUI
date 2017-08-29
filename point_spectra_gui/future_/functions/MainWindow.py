@@ -8,7 +8,7 @@ from point_spectra_gui.ui import MainWindow
 
 class Ui_MainWindow(MainWindow.Ui_MainWindow):
     def __init__(self):
-        self.widget = None
+        self.widgetList = []
 
     def setupUi(self, MainWindow):
         super().setupUi(MainWindow)  # Run the basic window UI
@@ -21,12 +21,13 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow):
         :param obj:
         :return:
         """
-        self.widget = obj()
-        self.widget.setupUi(self.scrollArea)
+        self.widgetList.append(obj())
+        wl_len = len(self.widgetList) - 1
+        self.widgetList[wl_len].setupUi(self.scrollArea)
         self.widgetLayout = QtWidgets.QVBoxLayout()
         self.widgetLayout.setObjectName("widgetLayout")
         self.verticalLayout_3.addLayout(self.widgetLayout)
-        self.widgetLayout.addWidget(self.widget.get_widget())
+        self.widgetLayout.addWidget(self.widgetList[wl_len].get_widget())
 
     def menu_item_shortcuts(self):
         self.actionExit.setShortcut("ctrl+Q")
@@ -67,21 +68,20 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow):
         except Exception as e:
             print(e)
 
-    def getWidgetList(self, widgetList):
+    def getWidgetItems(self):
         """
-        Add the pysat_list algorithm here
-        This and addWidget() will be working together
-        :param widgetList:
+        return the dictionary from widgetList
+        :param index:
         :return:
         """
-        self.widget
-
-    def getAllParams(self):
-        pass
+        data = []
+        for dat in self.widgetList:
+            data = dat.getGuiParams()
+        return data
 
     def on_save_clicked(self):
         """
-        Save the workflow to a *.wrd file
+        Save the workflow to a *.wrf file
         :return:
         """
         try:
@@ -91,6 +91,6 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow):
                                                                       '(*.wrf)')
             print(filename)
             with open(filename, 'wb') as fp:
-                pickle.dump((), fp)
+                pickle.dump(self.getWidgetItems(), fp)
         except:
             print("File not loaded")
