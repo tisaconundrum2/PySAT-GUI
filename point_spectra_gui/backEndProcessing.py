@@ -277,17 +277,17 @@ class backEndProc(QThread):
 
     def do_mask(self, datakey, maskfile, maskvar='wvl'):
         try:
-            self.data[datakey].mask(maskfile,maskvar=maskvar)
+            self.data[datakey].mask(maskfile, maskvar=maskvar)
             print("Mask applied")
         except Exception as e:
             print(e)
 
     def do_peak_area(self, datakey, peaks_mins_file):
         try:
-            peaks,mins = self.data[datakey].peak_area(peaks_mins_file=peaks_mins_file)
+            peaks, mins = self.data[datakey].peak_area(peaks_mins_file=peaks_mins_file)
             print("Peak Areas Calculated")
-            
-            np.savetxt(self.outpath + '/peaks.csv',peaks,delimiter=',')
+
+            np.savetxt(self.outpath + '/peaks.csv', peaks, delimiter=',')
             np.savetxt(self.outpath + '/mins.csv', mins, delimiter=',')
 
         except Exception as e:
@@ -350,7 +350,7 @@ class backEndProc(QThread):
         print("{}".format(ranges))
         try:
             print(self.data[datakey].df.columns.levels[0])
-            self.data[datakey].norm(ranges,col_var=col_var)
+            self.data[datakey].norm(ranges, col_var=col_var)
             print(self.data[datakey].df.columns.levels[0])
             print("Normalization has been applied to the ranges: " + str(ranges))
         except Exception as e:
@@ -413,9 +413,24 @@ class backEndProc(QThread):
     def do_cv_train(self, datakey, xvars, yvars, yrange, method, params):
 
         try:
+            print(self.data[datakey].df.shape)
+            vars_level0 = self.data[datakey].df.columns.get_level_values(0)
+            vars_level1 = self.data[datakey].df.columns.get_level_values(1)
+            vars_level1 = list(vars_level1[vars_level0 != 'wvl'])
+            vars_level0 = list(vars_level0[vars_level0 != 'wvl'])
+            colname = (vars_level0[vars_level1.index(colname)], colname)
+
+            # find where the values in the specified column match the value to be removed
+            coldata = np.array([str(i) for i in self.data[datakey].df[colname]])
+            # keep everything except where match is true
+            match = coldata >= yrange[0]
+            self.data[datakey] = spectral_data(self.data[datakey].df.ix[~match])
+            match = coldata <= yrange[1]
+            self.data[datakey] = spectral_data(self.data[datakey].df.ix[~match])
+            print(self.data[datakey].df.shape)
             cv_obj = cv.cv(params)
             self.data[datakey].df, self.cv_results = cv_obj.do_cv(self.data[datakey].df, xcols=xvars, ycol=yvars,
-                                                                  yrange=yrange, method=method)
+                                                                  method=method)
             self.data['CV Results'] = self.cv_results
         except Exception as e:
             print(e)
@@ -535,7 +550,7 @@ class backEndProc(QThread):
         y = np.squeeze(np.array(data.loc[data[('meta', col)].isin([row])][xcol].T))
         x = np.array(data[xcol].columns.values)
         if linestyle == 'None':
-            marker='o'
+            marker = 'o'
         try:
             loadfig = self.figs[figname]
         except:
@@ -559,7 +574,6 @@ class backEndProc(QThread):
                                            lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
                                            annot_mask=annot_mask, cmap=cmap,
                                            colortitle=colortitle, loadfig=loadfig, marker=marker, linestyle=linestyle)
-
 
     def do_plot_dim_red(self, datakey,
                         x_component,
