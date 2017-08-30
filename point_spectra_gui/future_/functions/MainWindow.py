@@ -74,10 +74,10 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow):
         :param index:
         :return:
         """
-        data = []
+        ui_items = []
         for dat in self.widgetList:
-            data = dat.getGuiParams()
-        return data
+            ui_items.append(dat.getGuiParams())
+        return ui_items
 
     def on_save_clicked(self):
         """
