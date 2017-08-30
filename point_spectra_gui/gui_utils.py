@@ -16,7 +16,7 @@ def make_combobox(choices):
     combo.setFont(font)
     for i, choice in enumerate(choices):
         combo.addItem("")
-        combo.setItemText(i, choice)
+        combo.setItemText(i, str(choice))
 
     return combo
 
