@@ -413,24 +413,12 @@ class backEndProc(QThread):
     def do_cv_train(self, datakey, xvars, yvars, yrange, method, params):
 
         try:
-            print(self.data[datakey].df.shape)
-            vars_level0 = self.data[datakey].df.columns.get_level_values(0)
-            vars_level1 = self.data[datakey].df.columns.get_level_values(1)
-            vars_level1 = list(vars_level1[vars_level0 != 'wvl'])
-            vars_level0 = list(vars_level0[vars_level0 != 'wvl'])
-            colname = (vars_level0[vars_level1.index(colname)], colname)
-
-            # find where the values in the specified column match the value to be removed
-            coldata = np.array([str(i) for i in self.data[datakey].df[colname]])
-            # keep everything except where match is true
-            match = coldata >= yrange[0]
+            y = np.array(self.data[datakey].df[yvars])
+            match = np.squeeze((y > yrange[0]) & (y < yrange[1]))
             self.data[datakey] = spectral_data(self.data[datakey].df.ix[~match])
-            match = coldata <= yrange[1]
-            self.data[datakey] = spectral_data(self.data[datakey].df.ix[~match])
-            print(self.data[datakey].df.shape)
             cv_obj = cv.cv(params)
             self.data[datakey].df, self.cv_results = cv_obj.do_cv(self.data[datakey].df, xcols=xvars, ycol=yvars,
-                                                                  method=method)
+                                                                  yrange=yrange, method=method)
             self.data['CV Results'] = self.cv_results
         except Exception as e:
             print(e)
