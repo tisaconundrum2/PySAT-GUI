@@ -1,8 +1,8 @@
-from Qtickle import Qtickle
+from point_spectra_gui.future_.functions.BasicFunctionality import Basics
 from point_spectra_gui.ui.Normalization import Ui_Form
 
 
-class Ui_Form(Ui_Form):
+class Ui_Form(Ui_Form, Basics):
     uiID = 0
 
     def setupUi(self, Form):
@@ -14,12 +14,8 @@ class Ui_Form(Ui_Form):
         return self.groupBox
 
     def connectWidgets(self):
-        self.qt = Qtickle.Qtickle(self)
-        self.qt.isGuiChanged(self.qt.guiSave)
+        super().connectWidgets()
         print(Ui_Form.uiID)
 
     def getGuiParams(self):
-        # TODO put the parameters inside of a list/dictionary
-        # TODO create a function that loads in the necessary module
-        print(self.qt.guiSave())
-        return self.qt.guiSave()
+        return super().getGuiParams()

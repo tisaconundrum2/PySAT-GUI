@@ -20,3 +20,4 @@ from point_spectra_gui.future_.functions import SplitDataset
 from point_spectra_gui.future_.functions import StratifiedFolds
 from point_spectra_gui.future_.functions import SubmodelPredict
 from point_spectra_gui.future_.functions.regressionMethods import *
+from point_spectra_gui.future_.functions import BasicFunctionality

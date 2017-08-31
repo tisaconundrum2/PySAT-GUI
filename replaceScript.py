@@ -6,7 +6,7 @@ for filename in glob.iglob('**/*.py', recursive=True):
         filedata = file.read()
 
     # Replace the target string
-    filedata = filedata.replace('e)', 'e)')
+    filedata = filedata.replace('return super().getGuiParams()', 'return return super().getGuiParams()')
 
     # Write the file out again
     with open(filename, 'w') as file:
