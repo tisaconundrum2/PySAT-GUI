@@ -1,8 +1,8 @@
 import pickle
 
 from PyQt5 import QtCore, QtWidgets
-from point_spectra_gself.future_ import functions
-from point_spectra_gself.ui import MainWindow
+from point_spectra_gui.future_ import functions
+from point_spectra_gui.ui import MainWindow
 
 from point_spectra_gui.future_.util import delete
 
@@ -21,7 +21,11 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread):
 
     def addWidget(self, obj):
         """
-        Add a layout to the MainWindow
+        Organize our widgets using a list
+        Each widget is addressed separately due to being in a list
+        This makes deleting easier
+        In the future we will want to parse this list and pull
+        out necessary data
         :param obj:
         :return:
         """
