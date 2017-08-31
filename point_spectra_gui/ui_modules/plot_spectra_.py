@@ -60,7 +60,7 @@ class plot_spectra_:
             color = [0, 0, 0, alpha]
 
         line = self.line_choices.currentText()
-        if line == 'No Line':
+        if line == 'Points (No Line)':
             linestyle = 'None'
         elif line == 'Line':
             linestyle = '-'
@@ -141,8 +141,11 @@ class plot_spectra_:
                 line = 'Dashed Line'
             elif linestyle == ':':
                 line = 'Dotted Line'
+            elif linestyle == 'None':
+                line = 'Points(No Line)'
             else:
                 line = 'Line'
+
             self.line_choices.setCurrentIndex(self.line_choices.findText(line))
 
             figfile = self.kw_list['figfile']
@@ -335,6 +338,8 @@ class plot_spectra_:
         self.line_choices.addItem("Line")
         self.line_choices.addItem("Dashed Line")
         self.line_choices.addItem("Dotted Line")
+        self.line_choices.addItem("Points (No Line)")
+
         self.file_label.setText("Plot Filename:")
         self.alpha_label.setText("Alpha:")
         self.width_label.setText("Line width:")
