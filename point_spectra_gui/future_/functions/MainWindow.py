@@ -1,13 +1,17 @@
 import pickle
 
-from PyQt5 import QtWidgets
+from PyQt5 import QtCore, QtWidgets
+from point_spectra_gself.future_ import functions
+from point_spectra_gself.ui import MainWindow
 
-from point_spectra_gui.future_ import functions
-from point_spectra_gui.ui import MainWindow
+from point_spectra_gui.future_.util import delete
 
 
-class Ui_MainWindow(MainWindow.Ui_MainWindow):
+class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread):
+    taskFinished = QtCore.pyqtSignal()
+
     def __init__(self):
+        super().__init__()
         self.widgetList = []
 
     def setupUi(self, MainWindow):
@@ -65,6 +69,8 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow):
             self.actionStratified_Folds.triggered.connect(lambda: self.addWidget(functions.StratifiedFolds.Ui_Form))
             self.actionSubmodel_Predict.triggered.connect(lambda: self.addWidget(functions.SubmodelPredict.Ui_Form))
             self.actionSave_Current_Workflow.triggered.connect(lambda: self.on_save_clicked())
+            self.deleteModulePushButton.clicked.connect(lambda: delete.del_layout(self.verticalLayout_3))
+            self.deleteModulePushButton.clicked.connect(lambda: self.on_delete_module_clicked())
         except Exception as e:
             print(e)
 
@@ -94,3 +100,11 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow):
                 pickle.dump(self.getWidgetItems(), fp)
         except:
             print("File not loaded")
+
+    # def run(self):
+
+    def on_delete_module_clicked(self):
+        try:
+            del self.widgetList[-1]
+        except:
+            print("Cannot delete")

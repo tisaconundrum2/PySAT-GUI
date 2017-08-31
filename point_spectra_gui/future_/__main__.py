@@ -10,7 +10,6 @@ from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import *
 
 from point_spectra_gui.future_.functions import MainWindow
-from point_spectra_gui.future_.util import delete
 from point_spectra_gui.future_.util.excepthook import my_exception_hook
 
 
@@ -22,7 +21,6 @@ def new():
 def connectWidgets(ui):
     ui.actionCreate_New_Workflow.triggered.connect(lambda: new())
     ui.actionExit.triggered.connect(lambda: sys.exit())
-    ui.deleteModulePushButton.clicked.connect(lambda: delete.del_layout(ui.verticalLayout_3))
 
 
 def get_splash(app):
