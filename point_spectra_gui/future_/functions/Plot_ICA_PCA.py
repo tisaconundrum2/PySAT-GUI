@@ -1,4 +1,4 @@
-from point_spectra_gui.future_.functions.BasicFunctionality import Basics
+from point_spectra_gui.future_.util.BasicFunctionality import Basics
 from point_spectra_gui.ui.Plot_ICA_PCA import Ui_Form
 
 
