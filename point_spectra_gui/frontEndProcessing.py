@@ -131,6 +131,8 @@ class frontEndProc(object):
         self.actionInterpolate.setObjectName(("actionInterpolate"))
         self.actionRemoveBaseline = QtWidgets.QAction(MainWindow)
         self.actionRemoveBaseline.setObjectName(("actionRemoveBaseline"))
+        #self.actionCalTran = QtWidgets.QAction(MainWindow)
+        #self.actionCalTran.setObjectName(("actionCalTran"))
 
         self.actionStratified_Folds = QtWidgets.QAction(MainWindow)
         self.actionStratified_Folds.setObjectName(("actionStratified_Folds"))
@@ -185,6 +187,7 @@ class frontEndProc(object):
         self.menuPreprocessing.addAction(self.actionSplitData)
         self.menuPreprocessing.addAction(self.actionInterpolate)
         self.menuPreprocessing.addAction(self.actionRemoveBaseline)
+        #self.menuPreprocessing.addAction(self.actionCalTran)
         self.menuPreprocessing.addAction(self.actionApply_Mask)
         self.menuPreprocessing.addAction(self.actionPeak_Area)
         self.menuPreprocessing.addAction(self.actionMultiply_Vector)
@@ -235,6 +238,7 @@ class frontEndProc(object):
         self.actionMultiply_Vector.setText("Multiply by Vector")
         self.actionInterpolate.setText("Interpolate")
         self.actionRemoveBaseline.setText("Remove Baseline")
+        #self.actionCalTran.setText("Calibration Transfer")
         self.actionRemoveRows.setText("Remove Rows")
         self.actionSplitData.setText("Split Data")
         self.actionDimRed.setText(("Dimensionality Reduction"))
@@ -321,6 +325,9 @@ class frontEndProc(object):
     def do_remove_baseline(self, arg_list=None, kw_list=None, restr_list=None):
         ui_modules.remove_baseline_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
 
+    #def do_cal_tran(self, arg_list=None, kw_list=None, restr_list=None):
+    #    ui_modules.cal_tran_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
+
     """ =============================================
     Please do not delete the functions below this line!
     These functions are the working functions
@@ -350,6 +357,7 @@ class frontEndProc(object):
         self.actionPredict.triggered.connect(lambda: frontEndProc.do_regression_predict(self))  # regression predict
         self.actionInterpolate.triggered.connect(lambda: frontEndProc.do_interp(self))
         self.actionRemoveBaseline.triggered.connect(lambda: frontEndProc.do_remove_baseline(self))
+        #self.actionCalTran.triggered.connect(lambda: frontEndProc.do_cal_tran(self))
         self.actionPlot.triggered.connect(lambda: frontEndProc.do_plot(self))
         self.actionPlotSpect.triggered.connect(lambda: frontEndProc.do_plot_spect(self))
         self.actionPlotDimRed.triggered.connect(lambda: frontEndProc.do_plot_dim_red(self))
@@ -374,6 +382,7 @@ class frontEndProc(object):
         self.actionPredict.setDisabled(bool)
         self.actionInterpolate.setDisabled(bool)
         self.actionRemoveBaseline.setDisabled(bool)
+        #self.actionCalTran.setDisabled(bool)
         self.actionPlot.setDisabled(bool)
         self.actionPlotSpect.setDisabled(bool)
         self.actionRemoveRows.setDisabled(bool)

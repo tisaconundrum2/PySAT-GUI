@@ -9,7 +9,6 @@ from pysat.regression import cv
 from pysat.regression import regression
 from pysat.regression import sm
 from pysat.spectral.spectral_data import spectral_data
-
 from point_spectra_gui.ui_modules.Error_ import error_print
 from point_spectra_gui.ui_modules.del_layout_ import *
 
@@ -283,7 +282,7 @@ class backEndProc(QThread):
         try:
             peaks,mins = self.data[datakey].peak_area(peaks_mins_file=peaks_mins_file)
             print("Peak Areas Calculated")
-            
+
             np.savetxt(self.outpath + '/peaks.csv',peaks,delimiter=',')
             np.savetxt(self.outpath + '/mins.csv', mins, delimiter=',')
 
@@ -353,6 +352,9 @@ class backEndProc(QThread):
             print("Normalization has been applied to the ranges: " + str(ranges))
         except Exception as e:
             error_print(e)
+
+    def do_cal_tran(self,data_transform,data_ref,col_match_ref,col_match_transform,method):
+        self.data[data_transform].cal_tran(self.data[data_ref].df,col_match_ref,col_match_transform,method)
 
     def do_strat_folds(self, datakey, nfolds, testfold, colname):
         self.data[datakey].stratified_folds(nfolds=nfolds, sortby=colname)
