@@ -13,6 +13,7 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread):
     def __init__(self):
         super().__init__()
         self.widgetList = []
+        self.leftOff = 0
 
     def setupUi(self, MainWindow):
         super().setupUi(MainWindow)  # Run the basic window UI
@@ -75,6 +76,7 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread):
             self.actionSave_Current_Workflow.triggered.connect(lambda: self.on_save_clicked())
             self.deleteModulePushButton.clicked.connect(lambda: delete.del_layout(self.verticalLayout_3))
             self.deleteModulePushButton.clicked.connect(lambda: self.on_delete_module_clicked())
+            self.okPushButton.clicked.connect(lambda: self.start())
         except Exception as e:
             print(e)
 
@@ -112,3 +114,13 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread):
             del self.widgetList[-1]
         except:
             print("Cannot delete")
+
+    def run(self):
+        try:
+            for modules in range(self.leftOff, len(self.widgetList)):
+                self.widgetList[modules].function()
+                self.widgetList[modules].setDisabled(True)
+            self.leftOff = modules
+            self.taskFinished.emit()
+        except Exception as e:
+            print(e)
