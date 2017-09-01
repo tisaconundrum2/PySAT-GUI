@@ -2,6 +2,18 @@ from Qtickle import Qtickle
 
 
 class Basics:
+    """
+    This class is regarded as the scaffolding class
+    It is here to make sure that users remember to
+    add the necessary, Basic, functionalities to
+    each of their UI classes. This will serve as a
+    reminder of what still needs to be added.
+
+    *Note: Rigorous prototyping is still occurring
+    So, naturally assume that something in this class
+    is always getting changed or added to better serve
+    all cases in each UI class.
+    """
     def __init__(self):
         self.data = {}  # initialize with an empty dict to hold data frames
         self.datakeys = []
