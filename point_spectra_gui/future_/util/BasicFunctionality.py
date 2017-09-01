@@ -2,13 +2,26 @@ from Qtickle import Qtickle
 
 
 class Basics:
+    def __init__(self):
+        self.data = {}  # initialize with an empty dict to hold data frames
+        self.datakeys = []
+
     def connectWidgets(self):
         self.qt = Qtickle.Qtickle(self)
         self.qt.isGuiChanged(self.qt.guiSave)
 
     def getGuiParams(self):
-        # TODO put the parameters inside of a list/dictionary
-        # TODO create a function that loads in the necessary module
+        """
+        Return the contents of the UI
+        :return:
+        """
         s = self.qt.guiSave()
         print(s)
         return s
+
+    def function(self):
+        """
+        Each Modules functionality
+        :return:
+        """
+        pass
