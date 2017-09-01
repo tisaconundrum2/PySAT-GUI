@@ -36,4 +36,4 @@ class Ui_Form(Ui_Form, Basics):
             print("Error: {}; using default outpath: {}".format(e, self.outpath))
 
     def setDisabled(self, bool):
-        self.groupBox.setDisabled(bool)
+        self.get_widget().setDisabled(bool)

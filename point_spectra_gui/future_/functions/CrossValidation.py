@@ -57,4 +57,4 @@ class Ui_Form(Ui_Form, Basics):
         return super().getGuiParams()
 
     def setDisabled(self, bool):
-        self.groupBox.setDisabled(bool)
+        self.get_widget().setDisabled(bool)

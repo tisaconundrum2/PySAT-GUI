@@ -43,4 +43,4 @@ class Ui_Form(Ui_loadData, Basics):
             error_print('Problem reading data: {}'.format(e))
 
     def setDisabled(self, bool):
-        self.groupBox.setDisabled(bool)
+        self.get_widget().setDisabled(bool)
