@@ -20,8 +20,11 @@ class Ui_Form(Ui_Form, Basics):
 
     def connectWidgets(self):
         super().connectWidgets()
-        
+
         self.pushButton.clicked.connect(lambda: self.on_getDataButton_clicked(self.maskFileLineEdit))
 
     def getGuiParams(self):
         return super().getGuiParams()
+
+    def setDisabled(self, bool):
+        self.groupBox.setDisabled(bool)

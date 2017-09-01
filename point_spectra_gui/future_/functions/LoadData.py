@@ -25,3 +25,5 @@ class Ui_Form(Ui_loadData, Basics):
 
     def getGuiParams(self):
         return super().getGuiParams()
+    def setDisabled(self, bool):
+        self.groupBox.setDisabled(bool)

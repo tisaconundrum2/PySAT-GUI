@@ -52,7 +52,9 @@ class Ui_Form(Ui_Form, Basics):
 
     def connectWidgets(self):
         super().connectWidgets()
-        
 
     def getGuiParams(self):
         return super().getGuiParams()
+
+    def setDisabled(self, bool):
+        self.groupBox.setDisabled(bool)
