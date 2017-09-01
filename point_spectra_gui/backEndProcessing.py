@@ -258,13 +258,6 @@ class backEndProc(QThread):
         except Exception as e:
             print(e)
 
-    def do_mask(self, datakey, maskfile, maskvar='wvl'):
-        try:
-            self.data[datakey].mask(maskfile, maskvar=maskvar)
-            print("Mask applied")
-        except Exception as e:
-            print(e)
-
     def do_peak_area(self, datakey, peaks_mins_file):
         try:
             peaks, mins = self.data[datakey].peak_area(peaks_mins_file=peaks_mins_file)

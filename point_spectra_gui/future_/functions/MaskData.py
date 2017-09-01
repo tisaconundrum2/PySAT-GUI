@@ -28,3 +28,14 @@ class Ui_Form(Ui_Form, Basics):
 
     def setDisabled(self, bool):
         self.get_widget().setDisabled(bool)
+
+    def function(self):
+        params = self.getGuiParams()
+        datakey = self.datakeys
+        maskfile = params['maskFileLineEdit']
+        maskvar = 'wvl'
+        try:
+            self.data[datakey].mask(maskfile, maskvar=maskvar)
+            print("Mask applied")
+        except Exception as e:
+            print(e)
