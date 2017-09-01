@@ -76,7 +76,7 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread):
             self.actionSave_Current_Workflow.triggered.connect(lambda: self.on_save_clicked())
             self.deleteModulePushButton.clicked.connect(lambda: delete.del_layout(self.verticalLayout_3))
             self.deleteModulePushButton.clicked.connect(lambda: self.on_delete_module_clicked())
-            self.okPushButton.clicked.connect(lambda: self.start())
+            self.okPushButton.clicked.connect(lambda: self.on_okButton_clicked())
         except Exception as e:
             print(e)
 
@@ -115,12 +115,25 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread):
         except:
             print("Cannot delete")
 
+    def on_okButton_clicked(self):
+        self.onStart()
+        self.taskFinished.connect(self.onFinished)
+
+    def onStart(self):  # onStart function
+        self.progressBar.setRange(0, 0)  # make the bar pulse green
+        self.start()  # TaskThread.start()
+        # This is multithreading thus run() == start()
+
+    def onFinished(self):  # onFinished function
+        self.progressBar.setRange(0, 1)  # stop the bar pulsing green
+        self.progressBar.setValue(1)  # displays 100% after process is finished.
+
     def run(self):
         try:
             for modules in range(self.leftOff, len(self.widgetList)):
                 self.widgetList[modules].function()
                 self.widgetList[modules].setDisabled(True)
-            self.leftOff = modules
+                self.leftOff = modules
             self.taskFinished.emit()
         except Exception as e:
             print(e)
