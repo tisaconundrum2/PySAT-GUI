@@ -1,10 +1,10 @@
 import pickle
 
 from PyQt5 import QtCore, QtWidgets
-from point_spectra_gui.future_ import functions
-from point_spectra_gui.ui import MainWindow
 
+from point_spectra_gui.future_ import functions
 from point_spectra_gui.future_.util import delete
+from point_spectra_gui.ui import MainWindow
 
 
 class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread):
