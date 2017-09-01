@@ -155,7 +155,6 @@ class listOfModules:
 
 
 class backEndProc(QThread):
-    taskFinished = QtCore.pyqtSignal()
 
     def __init__(self):
         QThread.__init__(self)
@@ -201,22 +200,6 @@ class backEndProc(QThread):
     """
     Work functions below
     """
-
-    def set_file_outpath(self, outpath):
-        try:
-            self.outpath = outpath
-            print("Output path folder has been set to " + outpath)
-        except Exception as e:
-            print(e)
-
-    def do_get_data(self, filename, keyname):
-        try:
-            print('Loading data file: ' + str(filename))
-            self.data[keyname] = spectral_data(pd.read_csv(filename, header=[0, 1]))
-            self.datakeys.append(keyname)
-            pass
-        except Exception as e:
-            error_print('Problem reading data: {}'.format(e))
 
     def do_write_data(self, filename, datakey, cols):
 

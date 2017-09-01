@@ -20,11 +20,20 @@ class Ui_Form(Ui_Form, Basics):
 
     def connectWidgets(self):
         super().connectWidgets()
-        
+
         self.pushButton.clicked.connect(lambda: self.on_outPutLocationButton_clicked())
 
     def getGuiParams(self):
         return super().getGuiParams()
+
+    def function(self):
+        params = self.getGuiParams()
+        outpath = params['folderNameLineEdit']
+        try:
+            self.outpath = outpath
+            print("Output path folder has been set to " + outpath)
+        except Exception as e:
+            print("Error: {}; using default outpath: {}".format(e, self.outpath))
 
     def setDisabled(self, bool):
         self.groupBox.setDisabled(bool)
