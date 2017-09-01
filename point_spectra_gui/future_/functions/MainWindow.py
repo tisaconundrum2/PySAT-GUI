@@ -133,7 +133,7 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread):
             for modules in range(self.leftOff, len(self.widgetList)):
                 self.widgetList[modules].function()
                 self.widgetList[modules].setDisabled(True)
-                self.leftOff = modules
+                self.leftOff = modules + 1
             self.taskFinished.emit()
         except Exception as e:
             print(e)
