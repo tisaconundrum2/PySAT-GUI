@@ -15,6 +15,13 @@ class Basics:
     all cases in each UI class.
     """
     def __init__(self):
+        """
+        Since `Basics` is shared among all the UI
+        classes it would make sense that we would have
+        some variables, that are necessary among all these
+        classes, be placed here in a high place where they
+        can be referenced often.
+        """
         self.data = {}  # initialize with an empty dict to hold data frames
         self.datakeys = []
 
