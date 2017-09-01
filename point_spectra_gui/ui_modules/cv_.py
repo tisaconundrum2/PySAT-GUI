@@ -1,3 +1,5 @@
+import traceback
+
 from PyQt5 import QtGui, QtCore, QtWidgets
 
 from Qtickle import Qtickle
@@ -95,7 +97,7 @@ class cv_:
                 self.cv_choosealg.setCurrentIndex(self.cv_choosealg.findText(str(method)))
                 self.make_reg_widget(self.cv_choosealg.currentText(), params=params)
             except Exception as e:
-                error_print(e)
+                print(e)
 
     def make_reg_widget(self, alg, params=None):
         print(alg)
@@ -338,6 +340,9 @@ class cv_:
         self.cv_choosealg.currentIndexChanged.connect(lambda: self.get_cv_parameters())
         self.cv_train_choosex.currentItemChanged.connect(lambda: self.get_cv_parameters())
         self.cv_train_choosey.currentItemChanged.connect(lambda: self.get_cv_parameters())
+        self.yvarmax_spin.valueChanged.connect(lambda: self.get_cv_parameters())
+        self.yvarmin_spin.valueChanged.connect(lambda: self.get_cv_parameters())
+
         self.cv_choosedata.activated[int].connect(
             lambda: change_combo_list_vars(self.cv_train_choosey, self.cv_yvar_choices()))
         self.cv_choosedata.activated[int].connect(
