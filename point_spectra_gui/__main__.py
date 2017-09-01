@@ -1,9 +1,12 @@
-import os.path
 import multiprocessing as mp
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import QPixmap
+import os.path
+import sys
+import time
+
 from PyQt5.QtCore import *
-import sys, time
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtWidgets import *
+
 from point_spectra_gui.frontEndProcessing import *
 
 try:
@@ -33,14 +36,13 @@ class Main(QMainWindow):
 
     def new(self):
         # TODO create a new window to work in. The old window does not disappear
-        try:
-            # If opening a seperate process fails. Open it up
-            window = Main(self)
-            window.show()
-        except:
+        # try:
+        #     # If opening a seperate process fails. Open it up
+        #     window = Main(self)
+        #     window.show()
+        # except:
             p = mp.Process(target=main, args=())
             p.start()
-
 
     def exit(self):
         # TODO close the current window

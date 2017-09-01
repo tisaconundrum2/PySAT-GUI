@@ -1,9 +1,8 @@
+import numpy as np
+from PyQt5 import QtGui, QtCore, QtWidgets
+
 from Qtickle import Qtickle
 from point_spectra_gui.gui_utils import make_combobox, make_listwidget
-from point_spectra_gui.ui_modules.Error_ import error_print
-from PyQt5 import QtGui, QtCore, QtWidgets
-import numpy as np
-import inspect
 
 
 class plot_spectra_:
@@ -27,12 +26,15 @@ class plot_spectra_:
 
     def get_plot_spectra_parameters(self):
         datakey = self.choosedata.currentText()
-
+        try:
+            xcol = self.plot_spect_choosexcols.selectedItems()[0].text()
+        except:
+            xcol = 'wvl'
         col = self.col_choices.currentText()
         try:
             row = self.chooserows.selectedItems()[0].text()
         except:
-            row='None Selected'
+            row = 'None Selected'
         figname = self.figname_text.text()
         title = self.plot_spect_title_text.text()
         figfile = self.file_text.text()
@@ -58,7 +60,7 @@ class plot_spectra_:
             color = [0, 0, 0, alpha]
 
         line = self.line_choices.currentText()
-        if line == 'No Line':
+        if line == 'Points (No Line)':
             linestyle = 'None'
         elif line == 'Line':
             linestyle = '-'
@@ -77,6 +79,7 @@ class plot_spectra_:
 
         args = [datakey, row]
         kws = {'col': col,
+               'xcol': xcol,
                'figname': figname,
                'title': title,
                'figfile': figfile,
@@ -89,12 +92,12 @@ class plot_spectra_:
 
         ui_list = "do_plot_spect"
         fun_list = "do_plot_spect"
-        r = self.qtickle.guisave()
+        r = self.qtickle.guiSave()
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def set_plot_spectra_parameters(self):
         if self.restr_list is not None:
-            self.qtickle.guirestore(self.restr_list)
+            self.qtickle.guiRestore(self.restr_list)
 
         if self.arg_list is not None:
             datakey = self.arg_list[0]
@@ -105,6 +108,10 @@ class plot_spectra_:
             self.plot_spect_title_text.setText(title)
             col = self.kw_list['col']
             self.col_choices.setCurrentIndex(self.col_choices.findText(col))
+            xcol = self.kw_list['xcol']
+            items = self.plot_spect_choosexcols.findItems(xcol,QtCore.Qt.MatchExactly)
+            for item in items:
+                item.setSelected(True)
             row = self.arg_list[1]
             items = self.chooserows.findItems(row, QtCore.Qt.MatchExactly)
             for item in items:
@@ -134,8 +141,11 @@ class plot_spectra_:
                 line = 'Dashed Line'
             elif linestyle == ':':
                 line = 'Dotted Line'
+            elif linestyle == 'None':
+                line = 'Points(No Line)'
             else:
                 line = 'Line'
+
             self.line_choices.setCurrentIndex(self.line_choices.findText(line))
 
             figfile = self.kw_list['figfile']
@@ -185,6 +195,14 @@ class plot_spectra_:
         self.plot_spect_title_text.setEnabled(True)
         self.choosedata_flayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.plot_spect_title_text)
         self.verticalLayout.addLayout(self.choosedata_flayout)
+
+        self.plot_spect_choosexcols_label = QtWidgets.QLabel(self.plot_spect)
+        self.plot_spect_choosexcols_label.setText('X variable:')
+        self.plot_spect_choosexcols_label.setObjectName("plot_spect_choosexcols_label")
+        self.verticalLayout.addWidget(self.plot_spect_choosexcols_label)
+        self.plot_spect_choosexcols = make_listwidget(self.xvar_choices())
+        self.plot_spect_choosexcols.setObjectName("plot_spect_choosexcols")
+        self.verticalLayout.addWidget(self.plot_spect_choosexcols)
 
         self.choosecol_flayout = QtWidgets.QFormLayout()
         self.choosecol_flayout.setObjectName("self.choosecol_flayout")
@@ -320,6 +338,8 @@ class plot_spectra_:
         self.line_choices.addItem("Line")
         self.line_choices.addItem("Dashed Line")
         self.line_choices.addItem("Dotted Line")
+        self.line_choices.addItem("Points (No Line)")
+
         self.file_label.setText("Plot Filename:")
         self.alpha_label.setText("Alpha:")
         self.width_label.setText("Line width:")
@@ -329,8 +349,13 @@ class plot_spectra_:
         self.choosedata.activated[int].connect(lambda: self.plot_spect_change_vars(self.col_choices))
         self.col_choices.activated[int].connect(lambda: self.plot_spect_update_list(self.chooserows))
         self.choosedata.activated[int].connect(lambda: self.plot_spect_update_list(self.chooserows))
+        try:
+            self.plot_spect_choosexcols.itemSelectionChanged.connect(lambda: self.set_spect_minmax(self.xmin_spin, self.xmax_spin, self.plot_spect_choosexcols.selectedItems()[0].text()))
+        except:
+            pass
         self.choosedata.currentTextChanged.connect(lambda: self.get_plot_spectra_parameters())
         self.chooserows.itemSelectionChanged.connect(lambda: self.get_plot_spectra_parameters())
+        self.plot_spect_choosexcols.itemSelectionChanged.connect(lambda: self.get_plot_spectra_parameters())
         self.col_choices.currentTextChanged.connect(lambda: self.get_plot_spectra_parameters())
         self.plot_spect_title_text.textChanged.connect(lambda: self.get_plot_spectra_parameters())
         self.figname_text.textChanged.connect(lambda: self.get_plot_spectra_parameters())
@@ -338,8 +363,10 @@ class plot_spectra_:
         self.color_choices.currentTextChanged.connect(lambda: self.get_plot_spectra_parameters())
         self.file_text.textChanged.connect(lambda: self.get_plot_spectra_parameters())
         self.line_choices.currentTextChanged.connect(lambda: self.get_plot_spectra_parameters())
+
         self.xmin_spin.valueChanged.connect(lambda: self.get_plot_spectra_parameters())
         self.xmax_spin.valueChanged.connect(lambda: self.get_plot_spectra_parameters())
+
 
     def plot_spect_update_list(self, obj):
         obj.clear()
@@ -376,21 +403,18 @@ class plot_spectra_:
         for i in choices:
             obj.addItem(str(i))
 
-    def get_minmax(self, objmin, objmax, var):
+    def set_spect_minmax(self, objmin, objmax, var):
+        vars = self.pysat_fun.data[self.choosedata.currentText()].df[var].columns.values
+        objmin.setValue(min(vars))
+        objmax.setValue(max(vars))
+
+    def xvar_choices(self):
         try:
-            varind = self.vars_level1.index(var)
-            vartuple = (self.vars_level0[varind], self.vars_level1[varind])
-            vardata = self.pysat_fun.data[self.choosedata.currentText()].df[vartuple]
-        except:
             try:
-                vardata = self.pysat_fun.data[self.choosedata.currentText()][var]
+                xvarchoices = self.pysat_fun.data[self.choosedata.currentText()].df.columns.levels[0].values
             except:
-                vardata = [0, 0]
-        try:
-            varmin = float(np.min(vardata))
-            varmax = float(np.max(vardata))
-            objmin.setValue(varmin)
-            objmax.setValue(varmax)
+                xvarchoices = self.pysat_fun.data[self.choosedata.currentText()].columns.values
+            xvarchoices = [i for i in xvarchoices if not 'Unnamed' in i]  # remove unnamed columns from choices
         except:
-            objmin.setValue(0)
-            objmax.setValue(1)
+            xvarchoices = ['No valid choices!']
+        return xvarchoices

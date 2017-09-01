@@ -1,6 +1,7 @@
-from PyQt5 import QtGui, QtCore, QtWidgets
+from PyQt5 import QtGui, QtWidgets
+
 from point_spectra_gui.gui_utils import make_combobox
-from point_spectra_gui.ui_modules import error_print, Qtickle
+from point_spectra_gui.ui_modules import Qtickle
 
 
 class multiply_vector_:
@@ -27,7 +28,7 @@ class multiply_vector_:
         fun_list = "do_multiply_vector"
         args = [datakey, vectorfile]
         kws = {}
-        r = self.qtickle.guisave()
+        r = self.qtickle.guiSave()
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def multiply_vector_ui(self):
@@ -43,9 +44,7 @@ class multiply_vector_:
         self.choosedata_label.setObjectName("choosedata_label")
         self.horizontalLayout.addWidget(self.choosedata_label)
         datachoices = self.pysat_fun.datakeys
-        
-            
-            
+
         self.vector_choosedata = make_combobox(datachoices)
         self.vector_choosedata.setObjectName("vector_choosedata")
         self.horizontalLayout.addWidget(self.vector_choosedata)
@@ -77,7 +76,7 @@ class multiply_vector_:
         if self.arg_list is None:
             self.multiply_vector_line_edit.setText("*.csv")
         else:
-            self.qtickle.guirestore(self.restr_list)
+            self.qtickle.guiRestore(self.restr_list)
             self.multiply_vector_line_edit.setText(self.arg_list[1])
             index = self.vector_choosedata.findText(str(self.arg_list[0]))  # findText 'unknown' or 'known'
             if index is not -1:  # if it's there choose it based on the returned index

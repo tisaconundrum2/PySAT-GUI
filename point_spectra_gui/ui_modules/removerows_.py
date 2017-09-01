@@ -1,10 +1,8 @@
+import numpy as np
 from PyQt5 import QtGui, QtCore, QtWidgets
 
 from Qtickle import Qtickle
 from point_spectra_gui.gui_utils import make_combobox, change_combo_list_vars
-from point_spectra_gui.ui_modules.Error_ import error_print
-import inspect
-import numpy as np
 
 
 class removerows_:
@@ -34,13 +32,14 @@ class removerows_:
         kws = {}
         ui_list = 'do_removerows'
         fun_list = 'removerows'
-        r = self.qtickle.guisave()
+        r = self.qtickle.guiSave()
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def set_removerows_parameters(self):
         if self.restr_list is not None:
-            self.qtickle.guirestore(self.restr_list)
+            self.qtickle.guiRestore(self.restr_list)
         self.get_removerows_parameters()
+
     def removerows_ui(self):
         self.removerows = QtWidgets.QGroupBox()
         font = QtGui.QFont()
@@ -60,9 +59,7 @@ class removerows_:
         self.removerows_choosedata_hlayout.addWidget(self.removerows_choosedata_label)
 
         datachoices = self.pysat_fun.datakeys
-        
-            
-            
+
         self.removerows_choosedata = make_combobox(datachoices)
         self.removerows_choosedata.setObjectName("removerows_choosedata")
         self.removerows_choosedata_hlayout.addWidget(self.removerows_choosedata)
@@ -122,8 +119,8 @@ class removerows_:
                 self.removerows_choosedata.currentText()].df.columns.get_level_values(0)
             self.vars_level1 = self.pysat_fun.data[
                 self.removerows_choosedata.currentText()].df.columns.get_level_values(1)
-            self.vars_level1 = list(self.vars_level1[self.vars_level0 != 'wvl'])
-            self.vars_level0 = list(self.vars_level0[self.vars_level0 != 'wvl'])
+            self.vars_level1 = list(self.vars_level1[np.logical_and(self.vars_level0 != 'wvl',self.vars_level0 !='masked')])
+            self.vars_level0 = list(self.vars_level0[np.logical_and(self.vars_level0 != 'wvl',self.vars_level0 !='masked')])
 
             colnamechoices = self.vars_level1
 
@@ -132,16 +129,20 @@ class removerows_:
                 colnamechoices = self.pysat_fun.data[self.removerows_choosedata.currentText()].columns.values
             except:
                 colnamechoices = []
-        colnamechoices = [i for i in colnamechoices if not 'Unnamed' in i]  # remove unnamed columns from choices
+        colnamechoices = [i for i in colnamechoices if not 'Unnamed' in str(i)]  # remove unnamed columns from choices
         return colnamechoices
 
     def get_rowval_choices(self):
         try:
             colname = self.colname_choices.currentText()
             colname = (self.vars_level0[self.vars_level1.index(colname)], colname)
-            choices = np.unique(self.pysat_fun.data[self.removerows_choosedata.currentText()].df[colname])
-            choices = [str(i) for i in choices]
-            choices.append('Null')
+            choices = self.pysat_fun.data[self.removerows_choosedata.currentText()].df[colname]
+            nchoices = choices.size
+            choices = choices[~np.isnan(choices)]
+            nchoices2 = choices.size
+            choices = [str(i) for i in np.unique(choices)]
+            if nchoices2 != nchoices:
+                choices.append('Null')
         except:
             choices = ['-']
         return choices

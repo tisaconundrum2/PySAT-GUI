@@ -2,14 +2,14 @@ from PyQt5 import QtGui, QtCore, QtWidgets
 
 from Qtickle import Qtickle
 from point_spectra_gui.gui_utils import make_combobox, make_listwidget, change_combo_list_vars
-from point_spectra_gui.ui_modules.Error_ import error_print
 
 
 class write_data_:
     """
 
     """
-    def __init__(self, pysat_fun, module_layout, arg_list,kw_list, restr_list):
+
+    def __init__(self, pysat_fun, module_layout, arg_list, kw_list, restr_list):
         self.qtickle = Qtickle.Qtickle(self)
         self.arg_list = arg_list
         self.kw_list = kw_list
@@ -26,22 +26,27 @@ class write_data_:
         self.get_write_params()
         self.pysat_fun.set_greyed_modules(self.write_data)
 
-    def set_write_params(self): #TODO this function should be rewritten to accomodate for restoration
+    def set_write_params(self):  # TODO this function should be rewritten to accomodate for restoration
         if self.restr_list is not None:
-             self.qtickle.guirestore(self.restr_list)
+            self.qtickle.guiRestore(self.restr_list)
+            items = self.restr_list['write_data_choosecols_index']
+            for item in items:
+                temp = self.write_data_choosecols.findItems(item,QtCore.Qt.MatchExactly)
+                for i in temp:
+                    i.setSelected(True)
 
     def get_write_params(self):
         datakey = self.write_data_choose_data.currentText()
         filename = self.write_data_file.text()
-        selected_cols=self.write_data_choosecols.selectedItems()
-        cols=[]
+        selected_cols = self.write_data_choosecols.selectedItems()
+        cols = []
         for selection in selected_cols:
             cols.append(selection.text())
-        args = [filename, datakey,cols]
+        args = [filename, datakey, cols]
         kws = {}
         ui_list = 'do_write_data'
         fun_list = 'do_write_data'
-        r = self.qtickle.guisave()
+        r = self.qtickle.guiSave()
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
 
     def write_data_ui(self):
@@ -69,7 +74,6 @@ class write_data_:
         self.write_data_choosecols.setObjectName("write_data_choosecols")
         self.write_data_choosecols.setSelectionMode(QtWidgets.QAbstractItemView.MultiSelection)
         self.write_data_vlayout.addWidget(self.write_data_choosecols)
-
 
         self.write_data_linedit_label = QtWidgets.QLabel(self.write_data)
         self.write_data_linedit_label.setText('Specify a filename:')

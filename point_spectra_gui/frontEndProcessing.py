@@ -1,9 +1,9 @@
 import pickle
 
-from PyQt5 import QtGui, QtCore, QtWidgets, QtGui
+from PyQt5 import QtCore, QtWidgets, QtGui
+
 from point_spectra_gui import ui_modules
 from point_spectra_gui.backEndProcessing import backEndProc
-from Qtickle import Qtickle
 
 
 class frontEndProc(object):
@@ -123,12 +123,16 @@ class frontEndProc(object):
         self.actionSplitData.setObjectName(("actionSplitData"))
         self.actionApply_Mask = QtWidgets.QAction(MainWindow)
         self.actionApply_Mask.setObjectName(("actionApply_Mask"))
+        self.actionPeak_Area = QtWidgets.QAction(MainWindow)
+        self.actionPeak_Area.setObjectName(("actionPeak_Area"))
         self.actionMultiply_Vector = QtWidgets.QAction(MainWindow)
         self.actionMultiply_Vector.setObjectName(("actionMultiply_Vector"))
         self.actionInterpolate = QtWidgets.QAction(MainWindow)
         self.actionInterpolate.setObjectName(("actionInterpolate"))
         self.actionRemoveBaseline = QtWidgets.QAction(MainWindow)
         self.actionRemoveBaseline.setObjectName(("actionRemoveBaseline"))
+        #self.actionCalTran = QtWidgets.QAction(MainWindow)
+        #self.actionCalTran.setObjectName(("actionCalTran"))
 
         self.actionStratified_Folds = QtWidgets.QAction(MainWindow)
         self.actionStratified_Folds.setObjectName(("actionStratified_Folds"))
@@ -183,7 +187,9 @@ class frontEndProc(object):
         self.menuPreprocessing.addAction(self.actionSplitData)
         self.menuPreprocessing.addAction(self.actionInterpolate)
         self.menuPreprocessing.addAction(self.actionRemoveBaseline)
+        #self.menuPreprocessing.addAction(self.actionCalTran)
         self.menuPreprocessing.addAction(self.actionApply_Mask)
+        self.menuPreprocessing.addAction(self.actionPeak_Area)
         self.menuPreprocessing.addAction(self.actionMultiply_Vector)
         self.menuPreprocessing.addAction(self.actionNormalization)
         self.menuPreprocessing.addAction(self.actionDimRed)
@@ -228,9 +234,11 @@ class frontEndProc(object):
         self.actionCreate_New_Workflow.setText("Create New Workflow")
         self.actionOpen_Workflow.setText("Restore Workflow")
         self.actionApply_Mask.setText("Apply Mask")
+        self.actionPeak_Area.setText("Peak Areas")
         self.actionMultiply_Vector.setText("Multiply by Vector")
         self.actionInterpolate.setText("Interpolate")
         self.actionRemoveBaseline.setText("Remove Baseline")
+        #self.actionCalTran.setText("Calibration Transfer")
         self.actionRemoveRows.setText("Remove Rows")
         self.actionSplitData.setText("Split Data")
         self.actionDimRed.setText(("Dimensionality Reduction"))
@@ -260,6 +268,9 @@ class frontEndProc(object):
 
     def do_mask(self, arg_list=None, kw_list=None, restr_list=None):
         ui_modules.get_mask_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
+
+    def do_peak_area(self, arg_list=None, kw_list=None, restr_list=None):
+        ui_modules.peak_area_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
 
     def do_multiply_vector(self, arg_list=None, kw_list=None, restr_list=None):
         ui_modules.multiply_vector_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
@@ -314,6 +325,9 @@ class frontEndProc(object):
     def do_remove_baseline(self, arg_list=None, kw_list=None, restr_list=None):
         ui_modules.remove_baseline_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
 
+    #def do_cal_tran(self, arg_list=None, kw_list=None, restr_list=None):
+    #    ui_modules.cal_tran_(self.backEndProc, self.module_layout, arg_list, kw_list, restr_list)
+
     """ =============================================
     Please do not delete the functions below this line!
     These functions are the working functions
@@ -333,6 +347,7 @@ class frontEndProc(object):
         self.actionSave_Current_Data.triggered.connect(lambda: frontEndProc.do_write_data(self))
         self.actionNormalization.triggered.connect(lambda: frontEndProc.normalization(self))  # submodel
         self.actionApply_Mask.triggered.connect(lambda: frontEndProc.do_mask(self))  # get_mask
+        self.actionPeak_Area.triggered.connect(lambda: frontEndProc.do_peak_area(self))  # get_mask
         self.actionMultiply_Vector.triggered.connect(
             lambda: frontEndProc.do_multiply_vector(self))  # multiply by vector
         self.actionRemoveRows.triggered.connect(lambda: frontEndProc.do_removerows(self))
@@ -342,6 +357,7 @@ class frontEndProc(object):
         self.actionPredict.triggered.connect(lambda: frontEndProc.do_regression_predict(self))  # regression predict
         self.actionInterpolate.triggered.connect(lambda: frontEndProc.do_interp(self))
         self.actionRemoveBaseline.triggered.connect(lambda: frontEndProc.do_remove_baseline(self))
+        #self.actionCalTran.triggered.connect(lambda: frontEndProc.do_cal_tran(self))
         self.actionPlot.triggered.connect(lambda: frontEndProc.do_plot(self))
         self.actionPlotSpect.triggered.connect(lambda: frontEndProc.do_plot_spect(self))
         self.actionPlotDimRed.triggered.connect(lambda: frontEndProc.do_plot_dim_red(self))
@@ -359,12 +375,14 @@ class frontEndProc(object):
         self.actionPredict.setDisabled(bool)
         self.actionNormalization.setDisabled(bool)
         self.actionApply_Mask.setDisabled(bool)
+        self.actionPeak_Area.setDisabled(bool)
         self.actionMultiply_Vector.setDisabled(bool)
         self.actionStratified_Folds.setDisabled(bool)
         self.actionTrain.setDisabled(bool)
         self.actionPredict.setDisabled(bool)
         self.actionInterpolate.setDisabled(bool)
         self.actionRemoveBaseline.setDisabled(bool)
+        #self.actionCalTran.setDisabled(bool)
         self.actionPlot.setDisabled(bool)
         self.actionPlotSpect.setDisabled(bool)
         self.actionRemoveRows.setDisabled(bool)
@@ -412,12 +430,15 @@ class frontEndProc(object):
     # This function should no longer be necessary once we have error handling with restoration working smoothly
 
     def restore_first(self):
-        self.r_list = self.restore_list.pop()
-        getattr(frontEndProc, self.r_list[1])(self, self.r_list[3], self.r_list[4], self.r_list[5])
-        while not self.restore_list.isEmpty():
+        try:
             self.r_list = self.restore_list.pop()
-            print(self.r_list)
             getattr(frontEndProc, self.r_list[1])(self, self.r_list[3], self.r_list[4], self.r_list[5])
+            while not self.restore_list.isEmpty():
+                self.r_list = self.restore_list.pop()
+                print(self.r_list)
+                getattr(frontEndProc, self.r_list[1])(self, self.r_list[3], self.r_list[4], self.r_list[5])
+        except Exception as e:
+            print(e)
 
     ################# Progress bar toolset below
 

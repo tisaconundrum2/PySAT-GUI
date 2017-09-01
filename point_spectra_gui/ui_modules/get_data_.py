@@ -1,6 +1,5 @@
-import os
+from PyQt5 import QtGui, QtWidgets
 
-from PyQt5 import QtGui, QtCore, QtWidgets
 from Qtickle import Qtickle
 
 
@@ -36,9 +35,8 @@ class get_data_:
         kws = {}
         ui_list = "do_get_data"
         fun_list = "do_get_data"
-        r = self.qtickle.guisave()
+        r = self.qtickle.guiSave()
         self.ui_id = self.pysat_fun.set_list(ui_list, fun_list, args, kws, r, self.ui_id)
-
 
     def get_data_ui(self):
         self.get_data = QtWidgets.QGroupBox()
@@ -79,7 +77,7 @@ class get_data_:
         if self.restr_list is None:
             self.get_data_line_edit.setText("*.csv")
         else:
-            self.qtickle.guirestore(self.restr_list)
+            self.qtickle.guiRestore(self.restr_list)
 
     def on_getDataButton_clicked(self):
         filename, _filter = QtWidgets.QFileDialog.getOpenFileName(None, "Open Data File", '.', "(*.csv)")

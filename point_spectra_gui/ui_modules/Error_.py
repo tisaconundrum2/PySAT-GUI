@@ -1,7 +1,5 @@
-import traceback
-
-from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtWidgets import QDialog
+from PyQt5.QtWidgets import QMessageBox
 
 
 # When a window is opened
@@ -35,7 +33,7 @@ class error_print(QDialog):
         self.error_print(self.message)
         # try:
         #     # stacktracing for original errors location
-        #     traceback.print_exc(self.message)
+        #     self.message)
         # except Exception as e:
         #     print(self.message + e)
 
