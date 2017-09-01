@@ -45,18 +45,17 @@ class Basics:
 
     def connectWidgets(self):
         """
-        For every single click, movement, keyboard click - there will be a state change
-        Get these changes and react
+        Connect the necessary widgets.
         :return:
         """
-        self.qt = Qtickle.Qtickle(self)
-        self.qt.isGuiChanged(self.qt.guiSave)
+        pass
 
     def getGuiParams(self):
         """
         Return the contents from lineEdits, comboBoxes, etc.
         :return:
         """
+        self.qt = Qtickle.Qtickle(self)
         s = self.qt.guiSave()
         print(s)
         return s
