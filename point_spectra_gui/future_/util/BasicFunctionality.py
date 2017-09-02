@@ -14,6 +14,8 @@ class Basics:
     is always getting changed or added to better serve
     all cases in each UI class.
     """
+    data = {}  # initialize with an empty dict to hold data frames
+    datakeys = []
     def __init__(self):
         """
         Since `Basics` is shared among all the UI
@@ -22,8 +24,7 @@ class Basics:
         classes, be placed here in a high place where they
         can be referenced often.
         """
-        self.data = {}  # initialize with an empty dict to hold data frames
-        self.datakeys = []
+
 
     def setupUi(self, Form):
         """
@@ -76,3 +77,14 @@ class Basics:
         :return:
         """
         pass
+
+    def setComboBox(self, comboBox):
+        """
+        Sets up the information inside comboBox widgets
+        :param choices:
+        :param comboBox:
+        :return:
+        """
+        for i, choice in enumerate(self.datakeys):
+            comboBox.addItem("")
+            comboBox.setItemText(i, str(choice))
