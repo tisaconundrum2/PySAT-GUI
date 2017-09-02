@@ -85,6 +85,6 @@ class Basics:
         :param comboBox:
         :return:
         """
-        for i, choice in enumerate(self.datakeys):
+        for i, choice in enumerate(Basics.datakeys):
             comboBox.addItem("")
             comboBox.setItemText(i, str(choice))

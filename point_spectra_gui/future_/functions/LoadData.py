@@ -37,8 +37,8 @@ class Ui_Form(Ui_loadData, Basics):
         keyname = params['dataSetNameLineEdit']
         try:
             print('Loading data file: ' + str(filename))
-            self.data[keyname] = spectral_data(pd.read_csv(filename, header=[0, 1]))
-            self.datakeys.append(keyname)
+            Basics.data[keyname] = spectral_data(pd.read_csv(filename, header=[0, 1]))
+            Basics.datakeys.append(keyname)
         except Exception as e:
             error_print('Problem reading data: {}'.format(e))
 
