@@ -8,6 +8,7 @@ class Ui_Form(Ui_Form, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
         self.connectWidgets()
+        self.setComboBox(self.chooseDataComboBox)
 
     def get_widget(self):
         return self.groupBox
