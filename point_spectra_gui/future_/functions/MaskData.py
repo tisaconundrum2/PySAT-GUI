@@ -20,7 +20,7 @@ class Ui_Form(Ui_Form, Basics):
             lineEdit.setText("*.csv")
 
     def connectWidgets(self):
-        super().connectWidgets()
+        pass
 
         self.pushButton.clicked.connect(lambda: self.on_getDataButton_clicked(self.maskFileLineEdit))
 

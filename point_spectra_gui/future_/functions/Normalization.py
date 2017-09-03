@@ -11,7 +11,7 @@ class Ui_Form(Ui_Form, Basics):
         return self.groupBox
 
     def connectWidgets(self):
-        super().connectWidgets()
+        pass
 
     def getGuiParams(self):
         return super().getGuiParams()

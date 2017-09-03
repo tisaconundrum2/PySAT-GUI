@@ -19,7 +19,7 @@ class Ui_Form(Ui_Form, Basics):
             self.folderNameLineEdit.setText("*/")
 
     def connectWidgets(self):
-        super().connectWidgets()
+        pass
 
         self.pushButton.clicked.connect(lambda: self.on_outPutLocationButton_clicked())
 

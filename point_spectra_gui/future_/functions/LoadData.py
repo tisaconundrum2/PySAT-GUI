@@ -24,7 +24,7 @@ class Ui_Form(Ui_loadData, Basics):
             lineEdit.setText("*.csv")
 
     def connectWidgets(self):
-        super().connectWidgets()
+        pass
 
         self.newFilePushButton.clicked.connect(lambda: self.on_getDataButton_clicked(self.fileNameLineEdit))
 
