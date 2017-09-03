@@ -19,3 +19,12 @@ class Ui_Form(Ui_Form, Basics):
 
     def setDisabled(self, bool):
         self.get_widget().setDisabled(bool)
+
+    def function(self):
+        datakey_new = Basics.datakeys + '-Baseline Removed-' + method + str(params)
+        datakey_baseline = datakey + '-Baseline-' + method + str(params)
+        self.datakeys.append(datakey_new)
+        self.datakeys.append(datakey_baseline)
+        self.data[datakey_new] = spectral_data(self.data[datakey].df.copy(deep=True))
+        self.data[datakey_new].remove_baseline(method, segment=True, params=params)
+        self.data[datakey_baseline] = spectral_data(self.data[datakey_new].df_baseline)
