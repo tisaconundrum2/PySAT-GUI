@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="chooseDataSetLabel">
+     <property name="text">
+      <string>Choose data set to write to *.csv</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QComboBox" name="chooseDataSetComboBox"/>
+   </item>
+   <item>
+    <widget class="QLabel" name="variablesToWriteLabel">
+     <property name="text">
+      <string>Variables to write:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QListWidget" name="variablesToWriteListWidget">
+     <item>
+      <property name="text">
+       <string>comp</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>meta</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>wvl</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Specify a filename:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLineEdit" name="lineEdit">
+     <property name="text">
+      <string>output.csv</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
