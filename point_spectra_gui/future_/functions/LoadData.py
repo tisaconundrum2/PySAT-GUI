@@ -1,5 +1,3 @@
-# from plio import io_ccam_pds
-# from plio import io_ccam_pds
 import pandas as pd
 from PyQt5 import QtWidgets
 from pysat.spectral.spectral_data import spectral_data
