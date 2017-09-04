@@ -29,12 +29,12 @@ class Ui_Form(Ui_Form, Basics):
         except:
             testfold = 1
         colname = ('comp', params['chooseVarComboBox'])
-        Basics.data[datakey].stratified_folds(nfolds=nfolds, sortby=colname)
+        self.data[datakey].stratified_folds(nfolds=nfolds, sortby=colname)
 
-        Basics.data[datakey + '-Train'] = Basics.data[datakey].rows_match(('meta', 'Folds'), [testfold], invert=True)
-        Basics.data[datakey + '-Test'] = Basics.data[datakey].rows_match(('meta', 'Folds'), [testfold])
-        Basics.datakeys = Basics.data.keys()
+        self.data[datakey + '-Train'] = self.data[datakey].rows_match(('meta', 'Folds'), [testfold], invert=True)
+        self.data[datakey + '-Test'] = self.data[datakey].rows_match(('meta', 'Folds'), [testfold])
+        self.datakeys = self.data.keys()
 
-        print(Basics.data.keys())
-        print(Basics.data[datakey + '-Test'].df.index.shape)
-        print(Basics.data[datakey + '-Train'].df.index.shape)
+        print(self.data.keys())
+        print(self.data[datakey + '-Test'].df.index.shape)
+        print(self.data[datakey + '-Train'].df.index.shape)

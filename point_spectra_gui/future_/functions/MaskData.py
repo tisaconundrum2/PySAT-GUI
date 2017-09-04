@@ -36,7 +36,7 @@ class Ui_Form(Ui_Form, Basics):
         maskfile = params['maskFileLineEdit']
         maskvar = 'wvl'
         try:
-            Basics.data[datakey].mask(maskfile, maskvar=maskvar)
+            self.data[datakey].mask(maskfile, maskvar=maskvar)
             print("Mask applied")
         except Exception as e:
             print(e)

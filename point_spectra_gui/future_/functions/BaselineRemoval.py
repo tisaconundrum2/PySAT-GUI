@@ -86,9 +86,9 @@ class Ui_Form(Ui_Form, Basics):
         except:
             pass
 
-        datakey_new = Basics.datakeys + '-Baseline Removed-' + method + str(methodParameters)
+        datakey_new = self.datakeys + '-Baseline Removed-' + method + str(methodParameters)
         datakey_baseline = datakey + '-Baseline-' + method + str(methodParameters)
-        Basics.datakeys.append(datakey_new)
-        Basics.datakeys.append(datakey_baseline)
-        Basics.data[datakey_new].remove_baseline(method, segment=True, params=methodParameters)
-        Basics.data[datakey_baseline] = spectral_data(Basics.data[datakey_new].df_baseline)
+        self.datakeys.append(datakey_new)
+        self.datakeys.append(datakey_baseline)
+        self.data[datakey_new].remove_baseline(method, segment=True, params=methodParameters)
+        self.data[datakey_baseline] = spectral_data(self.data[datakey_new].df_baseline)

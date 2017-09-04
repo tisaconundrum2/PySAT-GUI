@@ -60,8 +60,8 @@ class Ui_Form(Ui_Form, Basics):
     def do_get_data(self, filename, keyname):
         try:
             print('Loading data file: ' + str(filename))
-            Basics.data[keyname] = spectral_data(pd.read_csv(filename, header=[0, 1]))
-            Basics.datakeys.append(keyname)
+            self.data[keyname] = spectral_data(pd.read_csv(filename, header=[0, 1]))
+            self.datakeys.append(keyname)
             pass
         except Exception as e:
             error_print('Problem reading data: {}'.format(e))
