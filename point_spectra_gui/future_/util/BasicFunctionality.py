@@ -81,6 +81,7 @@ class Basics:
     def setComboBox(self, comboBox):
         """
         Sets up the information inside comboBox widgets
+        This function does not be to overridden.
         :param choices:
         :param comboBox:
         :return:
