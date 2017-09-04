@@ -47,10 +47,13 @@ class Ui_Form(Ui_Form, Basics):
         searchdir = params['searchDirectoryLineEdit']
         searchstring = params['searchStringLineEdit']
         to_csv = params['outputFileNameLineEdit']
-        lookupfile = None
+        try:
+            lookupfile = params['metadataFilesLineEdit']
+        except:
+            lookupfile = None
         ave = bool(params['averagesradioButton'])
         progressbar = QtWidgets.QProgressDialog()
-        io_ccam_pds.ccam_batch(searchdir, searchstring=searchstring, to_csv=self.outpath + '/' + to_csv,
+        io_ccam_pds.ccam_batch(searchdir, searchstring=searchstring, to_csv=Basics.outpath + '/' + to_csv,
                                lookupfile=lookupfile, ave=ave, progressbar=progressbar)
         self.do_get_data(Basics.outpath + '/' + to_csv, 'ChemCam')
 
