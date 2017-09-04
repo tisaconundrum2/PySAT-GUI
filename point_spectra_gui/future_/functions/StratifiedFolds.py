@@ -11,6 +11,7 @@ class Ui_Form(Ui_Form, Basics):
         return self.formGroupBox
 
     def connectWidgets(self):
+
         pass
 
     def getGuiParams(self):
@@ -18,3 +19,22 @@ class Ui_Form(Ui_Form, Basics):
 
     def setDisabled(self, bool):
         self.get_widget().setDisabled(bool)
+
+    def function(self):
+        params = self.getGuiParams()
+        datakey = params['chooseDataToStratifyComboBox']
+        nfolds = params['nFoldsSpinBox']
+        try:
+            testfold = int(params['testFoldsSpinBox'])
+        except:
+            testfold = 1
+        colname = ('comp', params['chooseVarComboBox'])
+        Basics.data[datakey].stratified_folds(nfolds=nfolds, sortby=colname)
+
+        Basics.data[datakey + '-Train'] = Basics.data[datakey].rows_match(('meta', 'Folds'), [testfold], invert=True)
+        Basics.data[datakey + '-Test'] = Basics.data[datakey].rows_match(('meta', 'Folds'), [testfold])
+        Basics.datakeys = Basics.data.keys()
+
+        print(Basics.data.keys())
+        print(Basics.data[datakey + '-Test'].df.index.shape)
+        print(Basics.data[datakey + '-Train'].df.index.shape)
