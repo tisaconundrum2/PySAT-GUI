@@ -107,8 +107,6 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread):
         except:
             print("File not loaded")
 
-    # def run(self):
-
     def on_delete_module_clicked(self):
         try:
             del self.widgetList[-1]
