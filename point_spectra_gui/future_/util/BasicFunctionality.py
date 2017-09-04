@@ -24,6 +24,7 @@ class Basics:
     """
     data = {}  # initialize with an empty dict to hold data frames
     datakeys = []
+    outpath = './'
 
     def setupUi(self, Form):
         """
