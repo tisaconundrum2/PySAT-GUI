@@ -30,10 +30,10 @@ class Ui_Form(Ui_Form, Basics):
         params = self.getGuiParams()
         outpath = params['folderNameLineEdit']
         try:
-            self.outpath = outpath
+            Basics.outpath = outpath
             print("Output path folder has been set to " + outpath)
         except Exception as e:
-            print("Error: {}; using default outpath: {}".format(e, self.outpath))
+            print("Error: {}; using default outpath: {}".format(e, Basics.outpath))
 
     def setDisabled(self, bool):
         self.get_widget().setDisabled(bool)
