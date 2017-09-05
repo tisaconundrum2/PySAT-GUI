@@ -78,7 +78,7 @@ class Basics:
         """
         pass
 
-    def setComboBox(self, comboBox):
+    def setComboBox(self, comboBox, keyValues):
         """
         Sets up the information inside comboBox widgets
         This function does not be to overridden.
@@ -86,6 +86,6 @@ class Basics:
         :param comboBox:
         :return:
         """
-        for i, choice in enumerate(self.datakeys):
+        for i, choice in enumerate(keyValues):
             comboBox.addItem("")
             comboBox.setItemText(i, str(choice))
