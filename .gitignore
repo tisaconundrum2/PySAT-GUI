@@ -83,6 +83,7 @@ point_spectra_gui/ui/PythonUI/*.*
 *.png
 *.wrf
 *.dat
+*.csv
 
 # Pysat
 pysat/
@@ -90,3 +91,4 @@ point_spectra_gui/ui/Finished/01_mainwindow_file_out.py
 auto_gitter.bat
 point_spectra_gui/saved.ini
 *.ini
+
