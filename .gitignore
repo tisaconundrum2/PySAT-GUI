@@ -72,7 +72,6 @@ target/
 .png
 .SAV
 *.user
-*.csv
 *.dll
 *.xml
 *.iml
