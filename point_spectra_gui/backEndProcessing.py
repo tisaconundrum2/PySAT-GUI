@@ -34,18 +34,6 @@ class backEndProc(QThread):
         self.greyed_modules = []
         self.outpath = './'
 
-
-    def do_peak_area(self, datakey, peaks_mins_file):
-        try:
-            peaks, mins = self.data[datakey].peak_area(peaks_mins_file=peaks_mins_file)
-            print("Peak Areas Calculated")
-
-            np.savetxt(self.outpath + '/peaks.csv', peaks, delimiter=',')
-            np.savetxt(self.outpath + '/mins.csv', mins, delimiter=',')
-
-        except Exception as e:
-            print(e)
-
     def do_multiply_vector(self, datakey, vectorfile):
         try:
             self.data[datakey].multiply_vector(vectorfile)
