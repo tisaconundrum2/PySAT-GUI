@@ -46,7 +46,7 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.groupBox.setTitle(_translate("Form", "Peak Areas"))
+        self.groupBox.setTitle(_translate("Form", "Multiply By Vector"))
         self.chooseDataLabel.setText(_translate("Form", "Choose data"))
         self.vectorFileLabel.setText(_translate("Form", "Vector file"))
         self.vectorFileLineEdit.setText(_translate("Form", "*.csv"))
