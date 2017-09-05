@@ -58,6 +58,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="okPushButton">
+        <property name="whatsThis">
+         <string>Press this button when you're ready to run. (Ctrl+Enter)</string>
+        </property>
         <property name="text">
          <string>OK</string>
         </property>

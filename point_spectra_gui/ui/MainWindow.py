@@ -162,6 +162,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "PYSAT Point Spectra GUI"))
         self.progressBar.setFormat(_translate("MainWindow", "%p%"))
         self.deleteModulePushButton.setText(_translate("MainWindow", "Delete Module"))
+        self.okPushButton.setWhatsThis(_translate("MainWindow", "Press this button when you\'re ready to run. (Ctrl+Enter)"))
         self.okPushButton.setText(_translate("MainWindow", "OK"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.menuPreprocessing.setTitle(_translate("MainWindow", "Preprocessing"))
