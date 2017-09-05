@@ -44,6 +44,7 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread):
         self.actionOpen_Workflow.setShortcut("ctrl+O")
         self.actionRestore_Workflow.setShortcut("ctrl+R")
         self.actionSave_Current_Workflow.setShortcut("ctrl+S")
+        self.okPushButton.setShortcut("Ctrl+Return")
 
     def connectWidgets(self):
         """
