@@ -24,9 +24,6 @@ class Ui_Form(Ui_Form, Basics):
 
         self.pushButton.clicked.connect(lambda: self.on_getDataButton_clicked(self.maskFileLineEdit))
 
-    def getGuiParams(self):
-        return super().getGuiParams()
-
     def setDisabled(self, bool):
         self.get_widget().setDisabled(bool)
 

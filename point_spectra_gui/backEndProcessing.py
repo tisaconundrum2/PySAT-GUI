@@ -34,24 +34,6 @@ class backEndProc(QThread):
         self.greyed_modules = []
         self.outpath = './'
 
-    def do_write_data(self, filename, datakey, cols):
-
-        try:
-            datatemp = self.data[datakey].df[cols]
-        except:
-            datatemp = self.data[datakey][cols]
-
-        try:
-            datatemp.to_csv(self.outpath + '/' + filename)
-        except:
-            datatemp.to_csv(filename)
-
-    def do_read_ccam(self, searchdir, searchstring, to_csv=None, lookupfile=None, ave=True):
-        progressbar = QtWidgets.QProgressDialog()
-        io_ccam_pds.ccam_batch(searchdir, searchstring=searchstring, to_csv=self.outpath + '/' + to_csv,
-                               lookupfile=lookupfile, ave=ave, progressbar=progressbar)
-        self.do_get_data(self.outpath + '/' + to_csv, 'ChemCam')
-
     def removerows(self, datakey, colname, value):
         try:
             print(self.data[datakey].df.shape)

@@ -15,9 +15,6 @@ class Ui_Form(Ui_Form, Basics):
     def connectWidgets(self):
         pass
 
-    def getGuiParams(self):
-        return super().getGuiParams()
-
     def setDisabled(self, bool):
         self.get_widget().setDisabled(bool)
 
@@ -29,52 +26,52 @@ class Ui_Form(Ui_Form, Basics):
         try:
             if method == 'ALS':
                 methodParameters = {'asymmetry_param': self.br_widget.als_asym_spinbox.value(),
-                          'smoothness_param': self.br_widget.als_smooth_spinbox.value(),
-                          'max_iters': self.br_widget.als_iters_spinbox.value(),
-                          'conv_thresh': self.br_widget.als_conv_spinbox.value()}
+                                    'smoothness_param': self.br_widget.als_smooth_spinbox.value(),
+                                    'max_iters': self.br_widget.als_iters_spinbox.value(),
+                                    'conv_thresh': self.br_widget.als_conv_spinbox.value()}
 
             if method == 'Dietrich':
                 self.br_widget.dietrich_half_win_spinbox.setValue(methodParameters['half_window'])
                 self.br_widget.dietrich_erosions_spinbox.setValue(methodParameters['num_erosions'])
 
                 methodParameters = {'half_window': self.br_widget.dietrich_half_win_spinbox.value(),
-                          'num_erosions': self.br_widget.dietrich_erosions_spinbox.value()}
+                                    'num_erosions': self.br_widget.dietrich_erosions_spinbox.value()}
 
             if method == 'Polyfit':
                 methodParameters = {'poly_order': self.br_widget.polyfit_order_spinbox.value(),
-                          'num_stdev': self.br_widget.polyfit_nstdev_spinbox.value(),
-                          'max_iter': self.br_widget.polyfit_iter_spinbox.value()}
+                                    'num_stdev': self.br_widget.polyfit_nstdev_spinbox.value(),
+                                    'max_iter': self.br_widget.polyfit_iter_spinbox.value()}
 
             if method == 'AirPLS':
                 methodParameters = {'smoothness_param': self.br_widget.airpls_smoothness_spinbox.value(),
-                          'conv_thresh': self.br_widget.airpls_conv_spinbox.value(),
-                          'max_iters': self.br_widget.airpls_iter_spinbox.value()}
+                                    'conv_thresh': self.br_widget.airpls_conv_spinbox.value(),
+                                    'max_iters': self.br_widget.airpls_iter_spinbox.value()}
 
             if method == 'FABC':
                 methodParameters = {'smoothness_param': self.br_widget.fabc_smoothness_spinbox.value(),
-                          'dilation_param': self.br_widget.fabc_dilation_spinbox.value()}
+                                    'dilation_param': self.br_widget.fabc_dilation_spinbox.value()}
 
             if method == 'KK':
                 methodParameters = {'top_width': self.br_widget.kk_top_width_spinbox.value(),
-                          'bottom_width': self.br_widget.kk_bottom_width_spinbox.value(),
-                          'tangent': self.br_widget.kk_tan_checkbox.isChecked(),
-                          'exponent': self.br_widget.kk_exp_spinbox.value()}
+                                    'bottom_width': self.br_widget.kk_bottom_width_spinbox.value(),
+                                    'tangent': self.br_widget.kk_tan_checkbox.isChecked(),
+                                    'exponent': self.br_widget.kk_exp_spinbox.value()}
 
             if method == 'Mario':
                 methodParameters = {'poly_order': self.br_widget.mario_order_spinbox.value(),
-                          'max_iters': self.br_widget.mario_iters_spinbox.value(),
-                          'tol': self.br_widget.mario_tol_spinbox.value()}
+                                    'max_iters': self.br_widget.mario_iters_spinbox.value(),
+                                    'tol': self.br_widget.mario_tol_spinbox.value()}
 
             if method == 'Median':
                 methodParameters = {'window_size': self.br_widget.median_window_spinbox.value()}
 
             if method == 'Rubberband':
                 methodParameters = {'num_iters': self.br_widget.rubberband_iters_spinbox.value(),
-                          'num_ranges': self.br_widget.rubberband_ranges_spinbox.value()}
+                                    'num_ranges': self.br_widget.rubberband_ranges_spinbox.value()}
 
             if method == 'CCAM':
                 methodParameters = {'scale1': self.br_widget.ccam_scale1_spinbox.value(),
-                          'scale2': self.br_widget.ccam_scale2_spinbox.value()}
+                                    'scale2': self.br_widget.ccam_scale2_spinbox.value()}
 
                 int_flag = self.br_widget.ccam_interp_combobox.currentText()
                 if int_flag == 'Linear':

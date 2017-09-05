@@ -13,8 +13,5 @@ class Ui_Form(Ui_Form, Basics):
     def connectWidgets(self):
         pass
 
-    def getGuiParams(self):
-        return super().getGuiParams()
-
     def setDisabled(self, bool):
         self.get_widget().setDisabled(bool)

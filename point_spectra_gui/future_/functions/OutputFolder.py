@@ -23,9 +23,6 @@ class Ui_Form(Ui_Form, Basics):
 
         self.pushButton.clicked.connect(lambda: self.on_outPutLocationButton_clicked())
 
-    def getGuiParams(self):
-        return super().getGuiParams()
-
     def function(self):
         params = self.getGuiParams()
         outpath = params['folderNameLineEdit']

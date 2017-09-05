@@ -25,9 +25,6 @@ class Ui_Form(Ui_loadData, Basics):
 
         self.newFilePushButton.clicked.connect(lambda: self.on_getDataButton_clicked(self.fileNameLineEdit))
 
-    def getGuiParams(self):
-        return super().getGuiParams()
-
     def function(self):
         params = self.getGuiParams()
         filename = params['fileNameLineEdit']

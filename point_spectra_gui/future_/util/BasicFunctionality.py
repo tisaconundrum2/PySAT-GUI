@@ -51,7 +51,7 @@ class Basics:
         """
         pass
 
-    def getGuiParams(self):
+    
         """
         Return the contents from lineEdits, comboBoxes, etc.
         :return:
