@@ -114,8 +114,8 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread):
                 delete.del_layout(self.verticalLayout_3)
             else:
                 print("Cannot delete")
-        except:
-            print("Cannot delete")
+        except Exception as e:
+            print("Cannot delete: {}".format(e))
 
     def on_okButton_clicked(self):
         self.onStart()
