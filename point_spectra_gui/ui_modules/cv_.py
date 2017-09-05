@@ -340,6 +340,9 @@ class cv_:
         self.cv_choosealg.currentIndexChanged.connect(lambda: self.get_cv_parameters())
         self.cv_train_choosex.currentItemChanged.connect(lambda: self.get_cv_parameters())
         self.cv_train_choosey.currentItemChanged.connect(lambda: self.get_cv_parameters())
+        self.yvarmax_spin.valueChanged.connect(lambda: self.get_cv_parameters())
+        self.yvarmin_spin.valueChanged.connect(lambda: self.get_cv_parameters())
+
         self.cv_choosedata.activated[int].connect(
             lambda: change_combo_list_vars(self.cv_train_choosey, self.cv_yvar_choices()))
         self.cv_choosedata.activated[int].connect(
