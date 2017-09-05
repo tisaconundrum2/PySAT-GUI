@@ -75,7 +75,6 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread):
             self.actionStratified_Folds.triggered.connect(lambda: self.addWidget(functions.StratifiedFolds.Ui_Form))
             self.actionSubmodel_Predict.triggered.connect(lambda: self.addWidget(functions.SubmodelPredict.Ui_Form))
             self.actionSave_Current_Workflow.triggered.connect(lambda: self.on_save_clicked())
-            self.deleteModulePushButton.clicked.connect(lambda: delete.del_layout(self.verticalLayout_3))
             self.deleteModulePushButton.clicked.connect(lambda: self.on_delete_module_clicked())
             self.okPushButton.clicked.connect(lambda: self.on_okButton_clicked())
         except Exception as e:
@@ -110,7 +109,11 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread):
 
     def on_delete_module_clicked(self):
         try:
-            del self.widgetList[-1]
+            if len(self.widgetList) == self.leftOff + 1:
+                del self.widgetList[-1]
+                delete.del_layout(self.verticalLayout_3)
+            else:
+                print("Cannot delete")
         except:
             print("Cannot delete")
 
