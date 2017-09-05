@@ -8,7 +8,6 @@ class Ui_Form(Ui_Form, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
         self.connectWidgets()
-        self.setComboBox(self.chooseDataComboBox)
 
     def get_widget(self):
         return self.groupBox
@@ -20,8 +19,7 @@ class Ui_Form(Ui_Form, Basics):
             lineEdit.setText("*.csv")
 
     def connectWidgets(self):
-        pass
-
+        self.setComboBox(self.chooseDataComboBox, self.datakeys)
         self.pushButton.clicked.connect(lambda: self.on_getDataButton_clicked(self.maskFileLineEdit))
 
     def setDisabled(self, bool):
