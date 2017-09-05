@@ -11,7 +11,6 @@ class Ui_Form(Ui_Form, Basics):
         return self.formGroupBox
 
     def connectWidgets(self):
-
         pass
 
     def setDisabled(self, bool):
