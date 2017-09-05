@@ -34,13 +34,6 @@ class backEndProc(QThread):
         self.greyed_modules = []
         self.outpath = './'
 
-    def do_interp(self, datakey_to_interp, datakey_ref):
-        print(self.data[datakey_ref].df.columns.levels[0])
-        try:
-            self.data[datakey_to_interp].interp(self.data[datakey_ref].df['wvl'].columns)
-        except Exception as e:
-            print(e)
-
     def do_remove_baseline(self, datakey, method, params):
         datakey_new = datakey + '-Baseline Removed-' + method + str(params)
         datakey_baseline = datakey + '-Baseline-' + method + str(params)
