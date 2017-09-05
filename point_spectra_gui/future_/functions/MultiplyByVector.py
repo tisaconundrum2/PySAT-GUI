@@ -11,7 +11,17 @@ class Ui_Form(Ui_Form, Basics):
         return self.groupBox
 
     def connectWidgets(self):
-        pass
+        self.setComboBox(self.chooseDataComboBox, self.datakeys)
 
     def setDisabled(self, bool):
         self.get_widget().setDisabled(bool)
+
+    def function(self):
+        params = self.getGuiParams()
+        datakey = params['chooseDataComboBox']
+        vectorfile = params['vectorFileLineEdit']
+
+        try:
+            self.data[datakey].multiply_vector(vectorfile)
+        except Exception as e:
+            print(e)

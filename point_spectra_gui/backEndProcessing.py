@@ -34,12 +34,6 @@ class backEndProc(QThread):
         self.greyed_modules = []
         self.outpath = './'
 
-    def do_multiply_vector(self, datakey, vectorfile):
-        try:
-            self.data[datakey].multiply_vector(vectorfile)
-        except Exception as e:
-            print(e)
-
     def do_interp(self, datakey_to_interp, datakey_ref):
         print(self.data[datakey_ref].df.columns.levels[0])
         try:
