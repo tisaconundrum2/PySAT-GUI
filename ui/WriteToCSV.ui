@@ -2,58 +2,75 @@
 <ui version="4.0">
  <class>Form</class>
  <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>294</width>
+    <height>352</height>
+   </rect>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="chooseDataSetLabel">
-     <property name="text">
-      <string>Choose data set to write to *.csv</string>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Write to CSV</string>
      </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QComboBox" name="chooseDataSetComboBox"/>
-   </item>
-   <item>
-    <widget class="QLabel" name="variablesToWriteLabel">
-     <property name="text">
-      <string>Variables to write:</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QListWidget" name="variablesToWriteListWidget">
-     <item>
-      <property name="text">
-       <string>comp</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>meta</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>wvl</string>
-      </property>
-     </item>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLabel" name="label_3">
-     <property name="text">
-      <string>Specify a filename:</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLineEdit" name="lineEdit">
-     <property name="text">
-      <string>output.csv</string>
-     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QLabel" name="chooseDataSetLabel">
+        <property name="text">
+         <string>Choose data set to write to *.csv:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="chooseDataSetComboBox"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="variablesToWriteLabel">
+        <property name="text">
+         <string>Variables to write:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QListWidget" name="variablesToWriteListWidget">
+        <item>
+         <property name="text">
+          <string>comp</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>meta</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>wvl</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="specifyAFilenameLabel">
+        <property name="text">
+         <string>Specify a filename:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="specifyAFilenameLineEdit">
+        <property name="text">
+         <string>output.csv</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
   </layout>
