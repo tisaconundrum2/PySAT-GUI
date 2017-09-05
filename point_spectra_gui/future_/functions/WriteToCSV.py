@@ -11,7 +11,7 @@ class Ui_Form(Ui_Form, Basics):
         return self.groupBox
 
     def connectWidgets(self):
-        pass
+        self.setComboBox(self.chooseDataSetComboBox, self.datakeys)
 
     def function(self):
         params = self.getGuiParams()
