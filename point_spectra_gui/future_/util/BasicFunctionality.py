@@ -1,3 +1,5 @@
+import sys
+
 from Qtickle import Qtickle
 
 
@@ -34,28 +36,28 @@ class Basics:
         Get the Ui_Form, it is like the HTML of the UI
         It will show the entire the styling of the UI
         :param Form:
-        :return: Return -1, this will let the user know they
-        did not add proper functionality
+        :return:
         """
-        return -1
+        sys.exit('Error: Application closed unexpectedly\n'
+                 'The method "SetupUI" was not found')
 
     def get_widget(self):
         """
         In order to display the UI
         You need to return the UI where the styling was dumped
         use this function to get the variable responsible
-        :return: Return -1, this will let the user know they
-        did not add proper functionality
+        :return:
         """
-        return -1
+        sys.exit('Error: Application closed unexpectedly\n'
+                 'The method "get_widget" was not found')
 
     def connectWidgets(self):
         """
         Connect the necessary widgets.
-        :return: Return -1, this will let the user know they
-        did not add proper functionality
+        :return:
         """
-        return -1
+        sys.exit('Error: Application closed unexpectedly\n'
+                 'The method "connectWidgets" was not found')
 
     def getGuiParams(self):
         """
@@ -70,20 +72,20 @@ class Basics:
         """
         Each Module's functionality will be ran in this function.
         You will define what will happen to the data and parameters in here
-        :return: Return -1, this will let the user know they
-        did not add proper functionality
+        :return:
         """
-        return -1
+        sys.exit('Error: Application closed unexpectedly\n'
+                 'The method "function" was not found')
 
     def setDisabled(self, bool):
         """
         After every execution we want to prevent the user from changing something.
         So, disable the layout (grey it out)
         :param bool:
-        :return: Return -1, this will let the user know they
-        did not add proper functionality
+        :return:
         """
-        return -1
+        sys.exit('Error: Application closed unexpectedly\n'
+                 'The method "setDisabled" was not found')
 
     def setComboBox(self, comboBox, keyValues):
         """
