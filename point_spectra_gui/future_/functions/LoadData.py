@@ -14,16 +14,14 @@ class Ui_Form(Ui_loadData, Basics):
     def get_widget(self):
         return self.groupBox
 
+    def connectWidgets(self):
+        self.newFilePushButton.clicked.connect(lambda: self.on_getDataButton_clicked(self.fileNameLineEdit))
+
     def on_getDataButton_clicked(self, lineEdit):
         filename, _filter = QtWidgets.QFileDialog.getOpenFileName(None, "Open Data File", '.', "(*.csv)")
         lineEdit.setText(filename)
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")
-
-    def connectWidgets(self):
-        pass
-
-        self.newFilePushButton.clicked.connect(lambda: self.on_getDataButton_clicked(self.fileNameLineEdit))
 
     def function(self):
         params = self.getGuiParams()
