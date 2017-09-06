@@ -1,5 +1,6 @@
 import pickle
 
+import time
 from PyQt5 import QtCore, QtWidgets
 
 from point_spectra_gui.future_ import functions
@@ -133,7 +134,10 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread):
     def run(self):
         try:
             for modules in range(self.leftOff, len(self.widgetList)):
+                s = time.time()
                 self.widgetList[modules].function()
+                e = time.time()
+                print("Module executed in: {} seconds".format(e - s))
                 self.widgetList[modules].setDisabled(True)
                 self.leftOff = modules + 1
             self.taskFinished.emit()
