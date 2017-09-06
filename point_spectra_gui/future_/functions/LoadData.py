@@ -1,12 +1,13 @@
 import pandas as pd
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtCore import QThread
 from pysat.spectral.spectral_data import spectral_data
 
 from point_spectra_gui.future_.util.BasicFunctionality import Basics
 from point_spectra_gui.ui.LoadData import Ui_loadData
 
 
-class Ui_Form(Ui_loadData, Basics):
+class Ui_Form(Ui_loadData, Basics, QThread):
     def setupUi(self, Form):
         super().setupUi(Form)
         self.connectWidgets()
@@ -30,9 +31,20 @@ class Ui_Form(Ui_loadData, Basics):
         try:
             print('Loading data file: ' + str(filename))
             self.datakeys.append(keyname)
+            self.start()
             self.data[keyname] = spectral_data(pd.read_csv(filename, header=[0, 1]))
+            self.terminate()
         except Exception as e:
             print('Problem reading data: {}'.format(e))
 
     def setDisabled(self, bool):
         self.get_widget().setDisabled(bool)
+
+    def run(self):
+        progressbar = QtWidgets.QProgressBar()
+        progressbar.setWindowTitle('Data progress')
+        progressbar.setValue(0)
+        progressbar.show()
+
+    def terminate(self):
+        super().terminate()  # Here for the same of understanding
