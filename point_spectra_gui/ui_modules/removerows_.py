@@ -104,14 +104,10 @@ class removerows_:
 
     def connectWidgets(self):
         self.colname_choices.currentIndexChanged.connect(lambda: self.get_removerows_parameters())
-
         self.removerows_choosedata.currentIndexChanged.connect(lambda: self.get_removerows_parameters())
-        self.removerows_choosedata.currentIndexChanged.connect(lambda:
-                                                               change_combo_list_vars(self.colname_choices,
-                                                                                      self.get_colname_choices()))
+        self.removerows_choosedata.currentIndexChanged.connect(lambda:change_combo_list_vars(self.colname_choices, self.get_colname_choices()))
         self.rowval_choices.currentIndexChanged.connect(lambda: self.get_removerows_parameters())
-        self.colname_choices.currentIndexChanged.connect(lambda: change_combo_list_vars(self.rowval_choices,
-                                                                                        self.get_rowval_choices()))
+        self.colname_choices.currentIndexChanged.connect(lambda: change_combo_list_vars(self.rowval_choices, self.get_rowval_choices()))
 
     def get_colname_choices(self):
         try:
