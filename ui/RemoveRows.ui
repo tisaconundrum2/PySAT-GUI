@@ -59,6 +59,11 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>chooseDataComboBox</tabstop>
+  <tabstop>colNameComboBox</tabstop>
+  <tabstop>valueComboBox</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
