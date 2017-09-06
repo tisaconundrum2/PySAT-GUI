@@ -83,9 +83,9 @@
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionRead_ChemCam_Data"/>
     <addaction name="actionLoad_Data"/>
     <addaction name="actionSet_Output_Path"/>
+    <addaction name="actionRead_ChemCam_Data"/>
     <addaction name="separator"/>
     <addaction name="actionSave_Current_Data"/>
     <addaction name="separator"/>
