@@ -1,6 +1,8 @@
 import pandas as pd
 from PyQt5 import QtWidgets
 from pysat.spectral.spectral_data import spectral_data
+from tqdm import tqdm, tqdm_pandas
+tqdm_pandas(tqdm())
 
 from point_spectra_gui.future_.util.BasicFunctionality import Basics
 from point_spectra_gui.ui.LoadData import Ui_loadData
