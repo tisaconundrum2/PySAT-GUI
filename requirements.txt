@@ -6,3 +6,5 @@ sklearn
 numpy
 pandas
 PyQt5
+tqdm
+pysat
