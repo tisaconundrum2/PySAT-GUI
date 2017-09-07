@@ -30,7 +30,7 @@ class Ui_Form(Ui_loadData, Basics):
         try:
             print('Loading data file: ' + str(filename))
             self.datakeys.append(keyname)
-            self.data[keyname] = spectral_data(pd.read_csv(filename, header=[0, 1]))
+            self.data[keyname] = spectral_data(pd.read_csv(filename, header=[0, 1], verbose=True))
         except Exception as e:
             print('Problem reading data: {}'.format(e))
 
