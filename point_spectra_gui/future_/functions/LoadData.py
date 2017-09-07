@@ -8,7 +8,7 @@ from point_spectra_gui.future_.util.BasicFunctionality import Basics
 from point_spectra_gui.ui.LoadData import Ui_loadData
 
 
-class Ui_Form(Ui_loadData, Basics, QThread):
+class Ui_Form(Ui_loadData, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
         self.connectWidgets()
@@ -32,9 +32,8 @@ class Ui_Form(Ui_loadData, Basics, QThread):
         try:
             print('Loading data file: ' + str(filename))
             self.datakeys.append(keyname)
-            self.start()
+            # self.run()
             self.data[keyname] = spectral_data(pd.read_csv(filename, header=[0, 1]))
-            self.terminate()
         except Exception as e:
             print('Problem reading data: {}'.format(e))
 
@@ -45,6 +44,3 @@ class Ui_Form(Ui_loadData, Basics, QThread):
         for i in range(100):
             time.sleep(0.01)
             self.progressBar.setValue(i)
-
-    def terminate(self):
-        super().terminate()  # Here for the same of understanding
