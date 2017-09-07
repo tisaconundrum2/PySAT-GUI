@@ -1,4 +1,5 @@
 import inspect
+import traceback
 from distutils.util import strtobool
 
 from PyQt5 import QtCore
@@ -72,6 +73,7 @@ class Qtickle(object):
                     # we'll just save the string representation of those items to be restored
                     dict[name + "_index"] = [str(x.text()) for x in obj.selectedItems()]
 
+            print(dict)  # Debug purposes
             return dict
         except Exception as e:
             print(e)
@@ -159,9 +161,9 @@ class Qtickle(object):
             except Exception as e:
                 print(e)
 
-    def isGuiChanged(self, functionCall):
+    def isGuiChanged(self, ui, functionCall):
         try:
-            for name, obj in inspect.getmembers(self.ui):
+            for name, obj in inspect.getmembers(ui):
                 if isinstance(obj, QLineEdit):
                     obj.textChanged.connect(lambda: functionCall())
 
