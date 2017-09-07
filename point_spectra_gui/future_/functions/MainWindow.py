@@ -135,6 +135,7 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread):
         try:
             for modules in range(self.leftOff, len(self.widgetList)):
                 s = time.time()
+                self.widgetList[modules].setProgressBar(self.progressBar)
                 self.widgetList[modules].function()
                 e = time.time()
                 print("Module executed in: {} seconds".format(e - s))

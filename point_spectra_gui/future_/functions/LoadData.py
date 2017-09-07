@@ -1,4 +1,5 @@
 import pandas as pd
+import time
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import QThread
 from pysat.spectral.spectral_data import spectral_data
@@ -41,10 +42,9 @@ class Ui_Form(Ui_loadData, Basics, QThread):
         self.get_widget().setDisabled(bool)
 
     def run(self):
-        progressbar = QtWidgets.QProgressBar()
-        progressbar.setWindowTitle('Data progress')
-        progressbar.setValue(0)
-        progressbar.show()
+        for i in range(100):
+            time.sleep(0.01)
+            self.progressBar.setValue(i)
 
     def terminate(self):
         super().terminate()  # Here for the same of understanding

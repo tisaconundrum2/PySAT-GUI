@@ -113,3 +113,6 @@ class Basics:
                 obj.addItem(i[1])
             elif isinstance(i, str):
                 obj.addItem(i)
+
+    def setProgressBar(self, progressBar):
+        self.progressBar = progressBar
