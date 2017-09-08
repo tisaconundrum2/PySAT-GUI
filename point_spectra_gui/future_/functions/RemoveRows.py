@@ -18,9 +18,9 @@ class Ui_Form(Ui_Form, Basics):
         self.setComboBox(self.colNameComboBox, self.get_colname_choices())
         self.setComboBox(self.valueComboBox, self.get_rowval_choices())
         self.chooseDataComboBox.currentIndexChanged.connect(
-            lambda: self.change_combo_list_vars(self.colNameComboBox, self.get_colname_choices()))
+            lambda: self.changeComboListVars(self.colNameComboBox, self.get_colname_choices()))
         self.colNameComboBox.currentIndexChanged.connect(
-            lambda: self.change_combo_list_vars(self.valueComboBox, self.get_rowval_choices()))
+            lambda: self.changeComboListVars(self.valueComboBox, self.get_rowval_choices()))
 
     def setDisabled(self, bool):
         self.get_widget().setDisabled(bool)

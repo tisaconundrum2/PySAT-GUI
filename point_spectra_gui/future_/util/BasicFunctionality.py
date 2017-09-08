@@ -99,7 +99,7 @@ class Basics:
             comboBox.addItem("")
             comboBox.setItemText(i, str(choice))
 
-    def change_combo_list_vars(self, obj, newchoices):
+    def changeComboListVars(self, obj, newchoices):
         """
         Function changes combo boxes
         This function does not need to be overridden.
