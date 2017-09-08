@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\tisaconundrum\Documents\GitHub\PySAT_Point_Spectra_GUI\ui\MainWindow.ui'
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\MainWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.6
 #
@@ -124,7 +124,6 @@ class Ui_MainWindow(object):
         self.menuFile.addAction(self.actionSave_Current_Data)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionCreate_New_Workflow)
-        self.menuFile.addAction(self.actionOpen_Workflow)
         self.menuFile.addAction(self.actionRestore_Workflow)
         self.menuFile.addAction(self.actionSave_Current_Workflow)
         self.menuFile.addSeparator()
