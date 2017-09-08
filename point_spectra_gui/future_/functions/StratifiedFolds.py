@@ -12,19 +12,20 @@ class Ui_Form(Ui_Form, Basics):
 
     def connectWidgets(self):
         self.setComboBox(self.chooseDataToStratifyComboBox, self.datakeys)
+        self.chooseDataToStratifyComboBox.activated[int].connect(self.strat_fold_change_vars)
+        self.nFoldsSpinBox.valueChanged.connect(self.strat_fold_change_testfolds)
 
     def setDisabled(self, bool):
         self.get_widget().setDisabled(bool)
 
     def function(self):
-        params = self.getGuiParams()
-        datakey = params['chooseDataToStratifyComboBox']
-        nfolds = params['nFoldsSpinBox']
+        datakey = self.chooseDataToStratifyComboBox.currentText()
+        nfolds = self.nFoldsSpinBox.value()
         try:
-            testfold = int(params['testFoldsSpinBox'])
+            testfold = int(self.testFoldsSpinBox.currentText())
         except:
             testfold = 1
-        colname = ('comp', params['chooseVarComboBox'])
+        colname = ('comp', self.chooseVarComboBox.currentText())
         self.data[datakey].stratified_folds(nfolds=nfolds, sortby=colname)
 
         self.data[datakey + '-Train'] = self.data[datakey].rows_match(('meta', 'Folds'), [testfold], invert=True)
@@ -34,3 +35,17 @@ class Ui_Form(Ui_Form, Basics):
         print(self.data.keys())
         print(self.data[datakey + '-Test'].df.index.shape)
         print(self.data[datakey + '-Train'].df.index.shape)
+
+
+    def strat_fold_change_vars(self):
+        self.chooseVarComboBox.clear()
+        try:
+            choices = self.data[self.chooseDataToStratifyComboBox.currentText()].df['comp'].columns.values
+        except:
+            choices = ['No composition columns!']
+
+        self.chooseVarComboBox.addItems(choices)
+
+    def strat_fold_change_testfolds(self):
+        self.testFoldsSpinBox.clear()
+        self.testFoldsSpinBox.setMaximum(self.nFoldsSpinBox.value())

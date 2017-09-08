@@ -26,9 +26,8 @@ class Ui_Form(Ui_Form, Basics):
         self.get_widget().setDisabled(bool)
 
     def function(self):
-        params = self.getGuiParams()
-        datakey = self.datakeys
-        maskfile = params['maskFileLineEdit']
+        datakey = self.chooseDataComboBox.currentText()
+        maskfile = self.maskFileLineEdit.text()
         maskvar = 'wvl'
         try:
             self.data[datakey].mask(maskfile, maskvar=maskvar)

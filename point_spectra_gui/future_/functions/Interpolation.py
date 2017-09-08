@@ -11,15 +11,15 @@ class Ui_Form(Ui_Form, Basics):
         return self.formGroupBox
 
     def connectWidgets(self):
-        pass
+        self.setComboBox(self.interpolateDataComboBox, self.datakeys)
+        self.setComboBox(self.referenceDataComboBox, self.datakeys)
 
     def setDisabled(self, bool):
         self.get_widget().setDisabled(bool)
 
     def function(self):
-        params = self.getGuiParams()
-        datakey_to_interp = params['interpolateDataComboBox']
-        datakey_ref = params['referenceDataComboBox']
+        datakey_to_interp = self.interpolateDataComboBox.currentText()
+        datakey_ref = self.referenceDataComboBox.currentText()
         print(self.data[datakey_ref].df.columns.levels[0])
         try:
             self.data[datakey_to_interp].interp(self.data[datakey_ref].df['wvl'].columns)
