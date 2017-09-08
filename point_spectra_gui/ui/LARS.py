@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\LARS.ui'
+# Form implementation generated from reading ui file 'C:\Users\tisaconundrum\Documents\GitHub\PySAT_Point_Spectra_GUI\ui\LARS.ui'
 #
 # Created by: PyQt5 UI code generator 5.6
 #
@@ -101,6 +101,15 @@ class Ui_Form(object):
         self.retranslateUi(Form)
         self.crossValidateCheckBox.toggled['bool'].connect(self.numOfNonzeroCoeffsSpinBox.setDisabled)
         QtCore.QMetaObject.connectSlotsByName(Form)
+        Form.setTabOrder(self.numOfNonzeroCoeffsSpinBox, self.fitInterceptCheckBox)
+        Form.setTabOrder(self.fitInterceptCheckBox, self.positiveCheckBox)
+        Form.setTabOrder(self.positiveCheckBox, self.verboseCheckBox)
+        Form.setTabOrder(self.verboseCheckBox, self.normalizeCheckBox)
+        Form.setTabOrder(self.normalizeCheckBox, self.comboBox)
+        Form.setTabOrder(self.comboBox, self.copyXCheckBox)
+        Form.setTabOrder(self.copyXCheckBox, self.epsDoubleSpinBox)
+        Form.setTabOrder(self.epsDoubleSpinBox, self.fitPathCheckBox)
+        Form.setTabOrder(self.fitPathCheckBox, self.crossValidateCheckBox)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate

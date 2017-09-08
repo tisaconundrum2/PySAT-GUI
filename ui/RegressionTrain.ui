@@ -283,6 +283,14 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>regression_choosedata</tabstop>
+  <tabstop>regression_choosex</tabstop>
+  <tabstop>regression_choosey</tabstop>
+  <tabstop>yvarmin_spin</tabstop>
+  <tabstop>yvarmax_spin</tabstop>
+  <tabstop>regression_alg_choices</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

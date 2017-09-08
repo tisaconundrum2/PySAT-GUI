@@ -233,6 +233,25 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>chooseDataComboBox</tabstop>
+  <tabstop>figureNameLineEdit</tabstop>
+  <tabstop>plotTitleLineEdit</tabstop>
+  <tabstop>chooseXVariableComboBox</tabstop>
+  <tabstop>xTitleLineEdit</tabstop>
+  <tabstop>xMinLineEdit</tabstop>
+  <tabstop>xMaxLineEdit</tabstop>
+  <tabstop>chooseYVariableComboBox</tabstop>
+  <tabstop>xTitleLineEdit_3</tabstop>
+  <tabstop>xMinLineEdit_3</tabstop>
+  <tabstop>xMaxLineEdit_3</tabstop>
+  <tabstop>colorComboBox</tabstop>
+  <tabstop>lineComboBox</tabstop>
+  <tabstop>markerComboBox</tabstop>
+  <tabstop>alphaDoubleSpinBox</tabstop>
+  <tabstop>plotFilenameLineEdit</tabstop>
+  <tabstop>pushButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

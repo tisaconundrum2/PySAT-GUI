@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\ARD.ui'
+# Form implementation generated from reading ui file 'C:\Users\tisaconundrum\Documents\GitHub\PySAT_Point_Spectra_GUI\ui\ARD.ui'
 #
 # Created by: PyQt5 UI code generator 5.6
 #
@@ -111,6 +111,16 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
+        Form.setTabOrder(self.numOfIterationsSpinBox, self.toleranceDoubleSpinBox)
+        Form.setTabOrder(self.toleranceDoubleSpinBox, self.alpha1DoubleSpinBox)
+        Form.setTabOrder(self.alpha1DoubleSpinBox, self.alpha2DoubleSpinBox)
+        Form.setTabOrder(self.alpha2DoubleSpinBox, self.lambdaDoubleSpinBox)
+        Form.setTabOrder(self.lambdaDoubleSpinBox, self.computerScoreCheckBox)
+        Form.setTabOrder(self.computerScoreCheckBox, self.thresholdLambdaSpinBox)
+        Form.setTabOrder(self.thresholdLambdaSpinBox, self.fitInterceptCheckBox)
+        Form.setTabOrder(self.fitInterceptCheckBox, self.normalizeCheckBox)
+        Form.setTabOrder(self.normalizeCheckBox, self.copyXCheckBox)
+        Form.setTabOrder(self.copyXCheckBox, self.verboseCheckBox)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate

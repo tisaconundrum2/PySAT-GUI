@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\Plot_ICA_PCA.ui'
+# Form implementation generated from reading ui file 'C:\Users\tisaconundrum\Documents\GitHub\PySAT_Point_Spectra_GUI\ui\Plot_ICA_PCA.ui'
 #
 # Created by: PyQt5 UI code generator 5.6
 #
@@ -67,6 +67,12 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
+        Form.setTabOrder(self.chooseDataComboBox, self.chooseMethodComboBox)
+        Form.setTabOrder(self.chooseMethodComboBox, self.chooseXVariableComboBox)
+        Form.setTabOrder(self.chooseXVariableComboBox, self.chooseYVariableComboBox)
+        Form.setTabOrder(self.chooseYVariableComboBox, self.colorCodedVariableComboBox)
+        Form.setTabOrder(self.colorCodedVariableComboBox, self.plotFilenameLineEdit)
+        Form.setTabOrder(self.plotFilenameLineEdit, self.pushButton)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate

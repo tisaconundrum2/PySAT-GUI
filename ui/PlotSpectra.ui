@@ -176,6 +176,22 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>chooseDataComboBox</tabstop>
+  <tabstop>figureNameLineEdit</tabstop>
+  <tabstop>plotTitleLineEdit</tabstop>
+  <tabstop>xVariableListView</tabstop>
+  <tabstop>chooseColumnComboBox</tabstop>
+  <tabstop>chooseRowsListView</tabstop>
+  <tabstop>minSpinBox</tabstop>
+  <tabstop>maxSpinBox</tabstop>
+  <tabstop>colorComboBox</tabstop>
+  <tabstop>lineComboBox</tabstop>
+  <tabstop>alphaDoubleSpinBox</tabstop>
+  <tabstop>lineWidthDoubleSpinBox</tabstop>
+  <tabstop>plotFilenameLineEdit</tabstop>
+  <tabstop>pushButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

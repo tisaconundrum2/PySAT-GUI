@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\Lasso.ui'
+# Form implementation generated from reading ui file 'C:\Users\tisaconundrum\Documents\GitHub\PySAT_Point_Spectra_GUI\ui\Lasso.ui'
 #
 # Created by: PyQt5 UI code generator 5.6
 #
@@ -74,6 +74,11 @@ class Ui_Form(object):
         self.retranslateUi(Form)
         self.optimizeWCrossValidaitonCheckBox.toggled['bool'].connect(self.alphaDoubleSpinBox.setDisabled)
         QtCore.QMetaObject.connectSlotsByName(Form)
+        Form.setTabOrder(self.alphaDoubleSpinBox, self.maxNumOfIterationsSpinBox)
+        Form.setTabOrder(self.maxNumOfIterationsSpinBox, self.toleranceDoubleSpinBox)
+        Form.setTabOrder(self.toleranceDoubleSpinBox, self.fitInterceptCheckBox)
+        Form.setTabOrder(self.fitInterceptCheckBox, self.forcePositiveCoefficientsCheckBox)
+        Form.setTabOrder(self.forcePositiveCoefficientsCheckBox, self.optimizeWCrossValidaitonCheckBox)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate

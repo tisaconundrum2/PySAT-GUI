@@ -213,6 +213,19 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>numOfIterationsSpinBox</tabstop>
+  <tabstop>toleranceDoubleSpinBox</tabstop>
+  <tabstop>alpha1DoubleSpinBox</tabstop>
+  <tabstop>alpha2DoubleSpinBox</tabstop>
+  <tabstop>lambdaDoubleSpinBox</tabstop>
+  <tabstop>computerScoreCheckBox</tabstop>
+  <tabstop>thresholdLambdaSpinBox</tabstop>
+  <tabstop>fitInterceptCheckBox</tabstop>
+  <tabstop>normalizeCheckBox</tabstop>
+  <tabstop>copyXCheckBox</tabstop>
+  <tabstop>verboseCheckBox</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

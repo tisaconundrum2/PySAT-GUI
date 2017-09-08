@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\Plot.ui'
+# Form implementation generated from reading ui file 'C:\Users\tisaconundrum\Documents\GitHub\PySAT_Point_Spectra_GUI\ui\Plot.ui'
 #
 # Created by: PyQt5 UI code generator 5.6
 #
@@ -152,6 +152,22 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
+        Form.setTabOrder(self.chooseDataComboBox, self.figureNameLineEdit)
+        Form.setTabOrder(self.figureNameLineEdit, self.plotTitleLineEdit)
+        Form.setTabOrder(self.plotTitleLineEdit, self.chooseXVariableComboBox)
+        Form.setTabOrder(self.chooseXVariableComboBox, self.xTitleLineEdit)
+        Form.setTabOrder(self.xTitleLineEdit, self.xMinLineEdit)
+        Form.setTabOrder(self.xMinLineEdit, self.xMaxLineEdit)
+        Form.setTabOrder(self.xMaxLineEdit, self.chooseYVariableComboBox)
+        Form.setTabOrder(self.chooseYVariableComboBox, self.xTitleLineEdit_3)
+        Form.setTabOrder(self.xTitleLineEdit_3, self.xMinLineEdit_3)
+        Form.setTabOrder(self.xMinLineEdit_3, self.xMaxLineEdit_3)
+        Form.setTabOrder(self.xMaxLineEdit_3, self.colorComboBox)
+        Form.setTabOrder(self.colorComboBox, self.lineComboBox)
+        Form.setTabOrder(self.lineComboBox, self.markerComboBox)
+        Form.setTabOrder(self.markerComboBox, self.alphaDoubleSpinBox)
+        Form.setTabOrder(self.alphaDoubleSpinBox, self.plotFilenameLineEdit)
+        Form.setTabOrder(self.plotFilenameLineEdit, self.pushButton)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate

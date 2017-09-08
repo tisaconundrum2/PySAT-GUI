@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\RegressionTrain.ui'
+# Form implementation generated from reading ui file 'C:\Users\tisaconundrum\Documents\GitHub\PySAT_Point_Spectra_GUI\ui\RegressionTrain.ui'
 #
 # Created by: PyQt5 UI code generator 5.6
 #
@@ -124,6 +124,11 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
+        Form.setTabOrder(self.regression_choosedata, self.regression_choosex)
+        Form.setTabOrder(self.regression_choosex, self.regression_choosey)
+        Form.setTabOrder(self.regression_choosey, self.yvarmin_spin)
+        Form.setTabOrder(self.yvarmin_spin, self.yvarmax_spin)
+        Form.setTabOrder(self.yvarmax_spin, self.regression_alg_choices)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate

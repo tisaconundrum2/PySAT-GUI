@@ -102,6 +102,15 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>chooseDataComboBox</tabstop>
+  <tabstop>chooseMethodComboBox</tabstop>
+  <tabstop>chooseXVariableComboBox</tabstop>
+  <tabstop>chooseYVariableComboBox</tabstop>
+  <tabstop>colorCodedVariableComboBox</tabstop>
+  <tabstop>plotFilenameLineEdit</tabstop>
+  <tabstop>pushButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

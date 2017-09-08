@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\PlotSpectra.ui'
+# Form implementation generated from reading ui file 'C:\Users\tisaconundrum\Documents\GitHub\PySAT_Point_Spectra_GUI\ui\PlotSpectra.ui'
 #
 # Created by: PyQt5 UI code generator 5.6
 #
@@ -112,6 +112,19 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
+        Form.setTabOrder(self.chooseDataComboBox, self.figureNameLineEdit)
+        Form.setTabOrder(self.figureNameLineEdit, self.plotTitleLineEdit)
+        Form.setTabOrder(self.plotTitleLineEdit, self.xVariableListView)
+        Form.setTabOrder(self.xVariableListView, self.chooseColumnComboBox)
+        Form.setTabOrder(self.chooseColumnComboBox, self.chooseRowsListView)
+        Form.setTabOrder(self.chooseRowsListView, self.minSpinBox)
+        Form.setTabOrder(self.minSpinBox, self.maxSpinBox)
+        Form.setTabOrder(self.maxSpinBox, self.colorComboBox)
+        Form.setTabOrder(self.colorComboBox, self.lineComboBox)
+        Form.setTabOrder(self.lineComboBox, self.alphaDoubleSpinBox)
+        Form.setTabOrder(self.alphaDoubleSpinBox, self.lineWidthDoubleSpinBox)
+        Form.setTabOrder(self.lineWidthDoubleSpinBox, self.plotFilenameLineEdit)
+        Form.setTabOrder(self.plotFilenameLineEdit, self.pushButton)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate

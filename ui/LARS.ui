@@ -196,6 +196,18 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>numOfNonzeroCoeffsSpinBox</tabstop>
+  <tabstop>fitInterceptCheckBox</tabstop>
+  <tabstop>positiveCheckBox</tabstop>
+  <tabstop>verboseCheckBox</tabstop>
+  <tabstop>normalizeCheckBox</tabstop>
+  <tabstop>comboBox</tabstop>
+  <tabstop>copyXCheckBox</tabstop>
+  <tabstop>epsDoubleSpinBox</tabstop>
+  <tabstop>fitPathCheckBox</tabstop>
+  <tabstop>crossValidateCheckBox</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
