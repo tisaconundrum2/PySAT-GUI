@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\Normalization.ui'
+# Form implementation generated from reading ui file 'C:\Users\tisaconundrum\Documents\GitHub\PySAT_Point_Spectra_GUI\ui\Normalization.ui'
 #
 # Created by: PyQt5 UI code generator 5.6
 #
@@ -225,12 +225,12 @@ class Ui_Form(object):
         self.Normalization.addLayout(self.waveLengthLayout)
         self.addDelRangeLayout = QtWidgets.QHBoxLayout()
         self.addDelRangeLayout.setObjectName("addDelRangeLayout")
-        self.pushButton = QtWidgets.QPushButton(self.groupBox)
-        self.pushButton.setObjectName("pushButton")
-        self.addDelRangeLayout.addWidget(self.pushButton)
-        self.pushButton_2 = QtWidgets.QPushButton(self.groupBox)
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.addDelRangeLayout.addWidget(self.pushButton_2)
+        self.addRangePushButton = QtWidgets.QPushButton(self.groupBox)
+        self.addRangePushButton.setObjectName("addRangePushButton")
+        self.addDelRangeLayout.addWidget(self.addRangePushButton)
+        self.deleteRangePushButton = QtWidgets.QPushButton(self.groupBox)
+        self.deleteRangePushButton.setObjectName("deleteRangePushButton")
+        self.addDelRangeLayout.addWidget(self.deleteRangePushButton)
         self.Normalization.addLayout(self.addDelRangeLayout)
         self.verticalLayout_3.addWidget(self.groupBox)
 
@@ -273,8 +273,8 @@ class Ui_Form(object):
         self.maximumWavelengthLabel_14.setText(_translate("Form", "Maximum wavelength"))
         self.minimumWavelengthLabel_15.setText(_translate("Form", "Minimum wavelength"))
         self.maximumWavelengthLabel_15.setText(_translate("Form", "Maximum wavelength"))
-        self.pushButton.setText(_translate("Form", "Add Range"))
-        self.pushButton_2.setText(_translate("Form", "Delete Range"))
+        self.addRangePushButton.setText(_translate("Form", "Add Range"))
+        self.deleteRangePushButton.setText(_translate("Form", "Delete Range"))
 
 
 if __name__ == "__main__":

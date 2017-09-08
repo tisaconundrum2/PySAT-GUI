@@ -353,14 +353,14 @@
       <item>
        <layout class="QHBoxLayout" name="addDelRangeLayout">
         <item>
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QPushButton" name="addRangePushButton">
           <property name="text">
            <string>Add Range</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="deleteRangePushButton">
           <property name="text">
            <string>Delete Range</string>
           </property>
