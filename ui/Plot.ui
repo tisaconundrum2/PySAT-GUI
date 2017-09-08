@@ -93,9 +93,6 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
-           <widget class="QLineEdit" name="xMinLineEdit"/>
-          </item>
           <item row="3" column="0">
            <widget class="QLabel" name="xMaxLabel">
             <property name="text">
@@ -103,8 +100,11 @@
             </property>
            </widget>
           </item>
+          <item row="2" column="1">
+           <widget class="QSpinBox" name="xMinSpinBox"/>
+          </item>
           <item row="3" column="1">
-           <widget class="QLineEdit" name="xMaxLineEdit"/>
+           <widget class="QSpinBox" name="xMaxSpinBox"/>
           </item>
          </layout>
         </item>
@@ -121,34 +121,34 @@
            <widget class="QComboBox" name="chooseYVariableComboBox"/>
           </item>
           <item row="1" column="0">
-           <widget class="QLabel" name="xTitleLabel_3">
+           <widget class="QLabel" name="yTitleLabel">
             <property name="text">
-             <string>X title</string>
+             <string>Y title</string>
             </property>
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLineEdit" name="xTitleLineEdit_3"/>
+           <widget class="QLineEdit" name="yTitleLineEdit"/>
           </item>
           <item row="2" column="0">
-           <widget class="QLabel" name="xMinLabel_3">
+           <widget class="QLabel" name="yMinLabel">
             <property name="text">
-             <string>X min</string>
+             <string>Y min</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
-           <widget class="QLineEdit" name="xMinLineEdit_3"/>
-          </item>
           <item row="3" column="0">
-           <widget class="QLabel" name="xMaxLabel_3">
+           <widget class="QLabel" name="yMaxLabel">
             <property name="text">
              <string>X max</string>
             </property>
            </widget>
           </item>
+          <item row="2" column="1">
+           <widget class="QSpinBox" name="yMinSpinBox"/>
+          </item>
           <item row="3" column="1">
-           <widget class="QLineEdit" name="xMaxLineEdit_3"/>
+           <widget class="QSpinBox" name="yMaxSpinBox"/>
           </item>
          </layout>
         </item>
@@ -239,12 +239,12 @@
   <tabstop>plotTitleLineEdit</tabstop>
   <tabstop>chooseXVariableComboBox</tabstop>
   <tabstop>xTitleLineEdit</tabstop>
-  <tabstop>xMinLineEdit</tabstop>
-  <tabstop>xMaxLineEdit</tabstop>
+  <tabstop>xMinSpinBox</tabstop>
+  <tabstop>xMaxSpinBox</tabstop>
   <tabstop>chooseYVariableComboBox</tabstop>
-  <tabstop>xTitleLineEdit_3</tabstop>
-  <tabstop>xMinLineEdit_3</tabstop>
-  <tabstop>xMaxLineEdit_3</tabstop>
+  <tabstop>yTitleLineEdit</tabstop>
+  <tabstop>yMinSpinBox</tabstop>
+  <tabstop>yMaxSpinBox</tabstop>
   <tabstop>colorComboBox</tabstop>
   <tabstop>lineComboBox</tabstop>
   <tabstop>markerComboBox</tabstop>
