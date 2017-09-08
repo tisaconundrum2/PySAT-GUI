@@ -111,13 +111,13 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
 
     def on_delete_module_clicked(self):
         try:
-            if len(self.widgetList) == self.leftOff + 1:
+            if self.widgetList[-1].isEnabled():
                 del self.widgetList[-1]
                 delete.del_layout(self.verticalLayout_3)
             else:
                 print("Cannot delete")
-        except Exception as e:
-            print("Cannot delete: {}".format(e))
+        except:
+            print("Cannot delete")
 
     def on_okButton_clicked(self):
         self.onStart()
