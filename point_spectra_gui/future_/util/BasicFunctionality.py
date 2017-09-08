@@ -39,7 +39,7 @@ class Basics:
         :return:
         """
         sys.exit('Error: Application closed unexpectedly\n'
-                 'The method "SetupUI" was not found in this module ')
+                 'The method "SetupUI()" was not found in this module ')
 
     def get_widget(self):
         """
@@ -49,7 +49,7 @@ class Basics:
         :return:
         """
         sys.exit('Error: Application closed unexpectedly\n'
-                 'The method "get_widget" was not found in this module')
+                 'The method "get_widget()" was not found in this module')
 
     def connectWidgets(self):
         """
@@ -57,7 +57,7 @@ class Basics:
         :return:
         """
         sys.exit('Error: Application closed unexpectedly\n'
-                 'The method "connectWidgets" was not found in this module')
+                 'The method "connectWidgets()" was not found in this module')
 
     def getGuiParams(self):
         """
@@ -74,7 +74,7 @@ class Basics:
         :return:
         """
         sys.exit('Error: Application closed unexpectedly\n'
-                 'The method "function" was not found in this module')
+                 'The method "function()" was not found in this module')
 
     def setDisabled(self, bool):
         """
@@ -84,7 +84,7 @@ class Basics:
         :return:
         """
         sys.exit('Error: Application closed unexpectedly\n'
-                 'The method "setDisabled" was not found in this module')
+                 'The method "setDisabled()" was not found in this module')
 
     def setComboBox(self, comboBox, keyValues):
         """
