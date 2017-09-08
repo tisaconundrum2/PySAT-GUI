@@ -26,11 +26,10 @@ class Ui_Form(Ui_Form, Basics):
         self.get_widget().setDisabled(bool)
 
     def function(self):
-        params = self.getGuiParams()
-        datakey = params['chooseDataComboBox']
-        colname = params['colNameComboBox']
-        value = params['valueComboBox']
-
+        datakey = self.chooseDataComboBox.currentText()
+        colname = self.colNameComboBox.currentText()
+        value = self.valueComboBox.currentText()
+        print(datakey, colname, value)
         try:
             print(self.data[datakey].df.shape)
             vars_level0 = self.data[datakey].df.columns.get_level_values(0)
