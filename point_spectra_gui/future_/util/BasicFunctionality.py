@@ -78,7 +78,12 @@ class Basics:
                  'The method "function()" was not found in this module')
 
     def isEnabled(self):
-        return self.get_widget().isEnabled()
+        """
+        Checks to see if current widget isEnabled or not
+        :return:
+        """
+        sys.exit('Error: Application closed unexpectedly\n'
+                 'The method "setDisabled()" was not found in this module')
 
     def setDisabled(self, bool):
         """
