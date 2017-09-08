@@ -32,5 +32,8 @@ class Ui_Form(Ui_Form, Basics):
         except:
             datatemp.to_csv(filename)
 
+    def isEnabled(self):
+        return self.get_widget().isEnabled()
+
     def setDisabled(self, bool):
         self.get_widget().setDisabled(bool)

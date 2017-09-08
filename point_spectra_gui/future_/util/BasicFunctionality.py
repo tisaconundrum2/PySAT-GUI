@@ -77,6 +77,9 @@ class Basics:
         sys.exit('Error: Application closed unexpectedly\n'
                  'The method "function()" was not found in this module')
 
+    def isEnabled(self):
+        return self.get_widget().isEnabled()
+
     def setDisabled(self, bool):
         """
         After every execution we want to prevent the user from changing something.
@@ -124,7 +127,6 @@ class Basics:
         """
         for item in choices:
             obj.addItem(item)
-
 
     def setProgressBar(self, progressBar):
         """

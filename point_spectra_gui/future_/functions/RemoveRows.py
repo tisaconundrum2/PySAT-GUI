@@ -22,6 +22,9 @@ class Ui_Form(Ui_Form, Basics):
         self.colNameComboBox.currentIndexChanged.connect(
             lambda: self.changeComboListVars(self.valueComboBox, self.get_rowval_choices()))
 
+    def isEnabled(self):
+        return self.get_widget().isEnabled()
+
     def setDisabled(self, bool):
         self.get_widget().setDisabled(bool)
 

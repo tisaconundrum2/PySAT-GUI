@@ -21,6 +21,9 @@ class Ui_Form(Ui_Form, Basics):
         self.searchDirectorypushButton.clicked.connect(self.on_searchpathButton_clicked)
         self.metadatapushButton.clicked.connect(self.on_metadataButton_clicked)
 
+    def isEnabled(self):
+        return self.get_widget().isEnabled()
+
     def setDisabled(self, bool):
         self.get_widget().setDisabled(bool)
 

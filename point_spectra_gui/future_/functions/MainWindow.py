@@ -1,6 +1,6 @@
 import pickle
-
 import time
+
 from PyQt5 import QtCore, QtWidgets
 
 from point_spectra_gui.future_ import functions

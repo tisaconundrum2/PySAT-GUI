@@ -15,6 +15,9 @@ class Ui_Form(Ui_Form, Basics):
         self.chooseDataToStratifyComboBox.activated[int].connect(self.strat_fold_change_vars)
         self.nFoldsSpinBox.valueChanged.connect(self.strat_fold_change_testfolds)
 
+    def isEnabled(self):
+        return self.get_widget().isEnabled()
+
     def setDisabled(self, bool):
         self.get_widget().setDisabled(bool)
 
@@ -35,7 +38,6 @@ class Ui_Form(Ui_Form, Basics):
         print(self.data.keys())
         print(self.data[datakey + '-Test'].df.index.shape)
         print(self.data[datakey + '-Train'].df.index.shape)
-
 
     def strat_fold_change_vars(self):
         self.chooseVarComboBox.clear()

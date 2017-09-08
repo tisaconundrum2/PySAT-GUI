@@ -61,6 +61,9 @@ class Ui_Form(Ui_Form, Basics):
         self.addRangePushButton.clicked.connect(self.on_addRange_pushed)
         self.deleteRangePushButton.clicked.connect(self.on_deleteRange_pushed)
 
+    def isEnabled(self):
+        return self.get_widget().isEnabled()
+
     def setDisabled(self, bool):
         self.get_widget().setDisabled(bool)
 

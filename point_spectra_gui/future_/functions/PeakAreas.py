@@ -1,6 +1,8 @@
+import numpy as np
+
 from point_spectra_gui.future_.util.BasicFunctionality import Basics
 from point_spectra_gui.ui.PeakAreas import Ui_Form
-import numpy as np
+
 
 class Ui_Form(Ui_Form, Basics):
     def setupUi(self, Form):
@@ -12,6 +14,9 @@ class Ui_Form(Ui_Form, Basics):
 
     def connectWidgets(self):
         self.setComboBox(self.chooseDataComboBox, self.datakeys)
+
+    def isEnabled(self):
+        return self.get_widget().isEnabled()
 
     def setDisabled(self, bool):
         self.get_widget().setDisabled(bool)

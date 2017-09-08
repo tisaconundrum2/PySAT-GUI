@@ -16,6 +16,9 @@ class Ui_Form(Ui_Form, Basics):
     def connectWidgets(self):
         self.setComboBox(self.chooseDataComboBox, self.datakeys)
 
+    def isEnabled(self):
+        return self.get_widget().isEnabled()
+
     def setDisabled(self, bool):
         self.get_widget().setDisabled(bool)
 

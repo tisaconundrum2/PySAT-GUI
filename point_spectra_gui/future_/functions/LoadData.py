@@ -34,5 +34,8 @@ class Ui_Form(Ui_loadData, Basics):
         except Exception as e:
             print('Problem reading data: {}'.format(e))
 
+    def isEnabled(self):
+        return self.get_widget().isEnabled()
+
     def setDisabled(self, bool):
         self.get_widget().setDisabled(bool)
