@@ -4,6 +4,8 @@ import numpy as np
 # from plio import io_ccam_pds
 import pandas as pd
 import subprocess
+
+import time
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtCore import QThread
 from pysat.fileio import io_ccam_pds
@@ -12,6 +14,7 @@ from pysat.regression import cv
 from pysat.regression import regression
 from pysat.regression import sm
 from pysat.spectral.spectral_data import spectral_data
+
 from point_spectra_gui.ui_modules.Error_ import error_print
 from point_spectra_gui.ui_modules.del_layout_ import *
 
@@ -565,6 +568,7 @@ class backEndProc(QThread):
                                            annot_mask=annot_mask, cmap=cmap,
                                            colortitle=colortitle, loadfig=loadfig, marker=marker, linestyle=linestyle)
 
+
     def do_plot_dim_red(self, datakey,
                         x_component,
                         y_component,
@@ -592,12 +596,16 @@ class backEndProc(QThread):
         # TODO this function will take all the enumerated functions and parameters and run them
         try:
             for i in range(len(self.greyed_modules)):
+                s = time.time()
                 r_list = self._list.pull()
                 print(r_list)
                 getattr(self, r_list[2])(*r_list[3], **r_list[4])  # TODO add comment about who is who
+                e = time.time()
+                print("Module executed in: {} seconds".format(e - s))
                 self.greyed_modules[0].setDisabled(True)
                 del self.greyed_modules[0]
             self.taskFinished.emit()
         except Exception as e:
             print(e)
             self.taskFinished.emit()
+
