@@ -5,14 +5,14 @@ from Qtickle import Qtickle
 
 class Basics:
     """
-    This class is regarded as the scaffolding class
-    It is here to make sure that users remember to
-    add the necessary, Basic, functionalities to
-    each of their UI classes. This will serve as a
-    reminder of what still needs to be added.
+    This class is a scaffolding class, it holds global
+    functionality for all classes inheriting from it.
+    It is here to simplify and globalize certain
+    variables and functionalities to each of the
+    UI classes.
 
     *Note: Rigorous prototyping is still occurring
-    So, naturally assume that something in this class
+    So, naturally, assume that something in this class
     is always getting changed or added to better serve
     all cases in each UI class.
 
@@ -21,12 +21,12 @@ class Basics:
     Since `Basics` is shared among all the UI
     classes it would make sense that we would have
     some variables, that are necessary among all these
-    classes, be placed here in a high place where they
+    classes, be put here in a high place where they
     can be referenced often.
     """
     data = {}  # initialize with an empty dict to hold data frames
-    datakeys = []
-    outpath = './'
+    datakeys = []  # hold all the specific key for a specific data frame
+    outpath = './'  # Default outpath; can be changed with OutputFolder.py
 
     def __init__(self):
         self.qt = Qtickle.Qtickle(self)
@@ -34,7 +34,9 @@ class Basics:
     def setupUi(self, Form):
         """
         Get the Ui_Form, it is like the HTML of the UI
-        It will show the entire the styling of the UI
+        It will show the styling of the UI. But buttons
+        and widgets have no function. connectWidgets
+        fixes this
         :param Form:
         :return:
         """
@@ -43,9 +45,8 @@ class Basics:
 
     def get_widget(self):
         """
-        In order to display the UI
-        You need to return the UI where the styling was dumped
-        use this function to get the variable responsible
+        This function specifies the variable that holds the
+        styling. Use this function to get the variable
         :return:
         """
         sys.exit('Error: Application closed unexpectedly\n'
@@ -79,7 +80,7 @@ class Basics:
     def setDisabled(self, bool):
         """
         After every execution we want to prevent the user from changing something.
-        So, disable the layout (grey it out)
+        So, disable the layout by greying it out
         :param bool:
         :return:
         """
@@ -89,9 +90,9 @@ class Basics:
     def setComboBox(self, comboBox, keyValues):
         """
         Sets up the information inside comboBox widgets
-        This function does not be to overridden.
-        :param choices:
+        This function does not need to be overridden.
         :param comboBox:
+        :param keyValues:
         :return:
         """
         for i, choice in enumerate(keyValues):
@@ -101,7 +102,7 @@ class Basics:
     def change_combo_list_vars(self, obj, newchoices):
         """
         Function changes combo boxes
-        This function does not be to overridden.
+        This function does not need to be overridden.
         :param obj:
         :param newchoices:
         :return:
@@ -114,4 +115,10 @@ class Basics:
                 obj.addItem(i)
 
     def setProgressBar(self, progressBar):
+        """
+        This function makes it possible to reference the progress bar
+        in MainWindow
+        :param progressBar:
+        :return:
+        """
         self.progressBar = progressBar
