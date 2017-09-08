@@ -5,10 +5,11 @@ from PyQt5 import QtCore, QtWidgets
 
 from point_spectra_gui.future_ import functions
 from point_spectra_gui.future_.util import delete
+from point_spectra_gui.future_.util.BasicFunctionality import Basics
 from point_spectra_gui.ui import MainWindow
 
 
-class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread):
+class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
     taskFinished = QtCore.pyqtSignal()
 
     def __init__(self):
@@ -100,7 +101,7 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread):
         try:
             filename, _filter = QtWidgets.QFileDialog.getSaveFileName(None,
                                                                       "Choose where you want save your file",
-                                                                      '.',
+                                                                      self.outpath,
                                                                       '(*.wrf)')
             print(filename)
             with open(filename, 'wb') as fp:
