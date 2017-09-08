@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\tisaconundrum\Documents\GitHub\PySAT_Point_Spectra_GUI\ui\Normalization.ui'
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\Normalization.ui'
 #
 # Created by: PyQt5 UI code generator 5.6
 #
@@ -36,9 +36,9 @@ class Ui_Form(object):
         self.varToNormalizeLabel = QtWidgets.QLabel(self.groupBox)
         self.varToNormalizeLabel.setObjectName("varToNormalizeLabel")
         self.varToNormalizeVerticalLayout.addWidget(self.varToNormalizeLabel)
-        self.varToNormalizeListView = QtWidgets.QListView(self.groupBox)
-        self.varToNormalizeListView.setObjectName("varToNormalizeListView")
-        self.varToNormalizeVerticalLayout.addWidget(self.varToNormalizeListView)
+        self.varToNormalizeListWidget = QtWidgets.QListWidget(self.groupBox)
+        self.varToNormalizeListWidget.setObjectName("varToNormalizeListWidget")
+        self.varToNormalizeVerticalLayout.addWidget(self.varToNormalizeListWidget)
         self.Normalization.addLayout(self.varToNormalizeVerticalLayout)
         self.waveLengthLayout = QtWidgets.QGridLayout()
         self.waveLengthLayout.setObjectName("waveLengthLayout")

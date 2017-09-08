@@ -42,7 +42,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QListView" name="varToNormalizeListView"/>
+         <widget class="QListWidget" name="varToNormalizeListWidget"/>
         </item>
        </layout>
       </item>
