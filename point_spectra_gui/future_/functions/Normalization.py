@@ -16,11 +16,11 @@ class normWidgets:
         self.maximumWSpinBox.setHidden(bool)
 
     def getValues(self):
-        return [int(self.minimumWSpinBox.text()), int(self.maximumWSpinBox.text())]
+        return (int(self.minimumWSpinBox.text()), int(self.maximumWSpinBox.text()))
 
     def clearValues(self):
-        self.minimumWSpinBox.setValue(0)
-        self.maximumWSpinBox.setValue(0)
+        self.minimumWSpinBox.clear()
+        self.maximumWSpinBox.clear()
 
     def setMaximum(self, int_):
         self.minimumWSpinBox.setMaximum(int_)
@@ -52,7 +52,10 @@ class Ui_Form(Ui_Form, Basics):
 
     def connectWidgets(self):
         self.setupWidgets()
+        self.setComboBox(self.chooseDataComboBox, self.datakeys)
+        self.setListWidget(self.varToNormalizeListView, self.xvar_choices())
         self.setMaximum(9999999)
+        self.clearValues()
         self.setHidden(self.normwidgets)
         self.qt.isGuiChanged(self.checkForNewMax)
         self.addRangePushButton.clicked.connect(self.on_addRange_pushed)
@@ -69,8 +72,9 @@ class Ui_Form(Ui_Form, Basics):
         for items in self.normwidgets:
             items.setMaximum(int_)
 
-    def getGuiParams(self):
-        print(self.qt.guiSave())
+    def clearValues(self):
+        for items in self.normwidgets:
+            items.clearValues()
 
     def on_addRange_pushed(self):
         if self.index < len(self.normwidgets):
@@ -118,10 +122,40 @@ class Ui_Form(Ui_Form, Basics):
                                             self.maximumWavelengthLabel_14, self.maximumWavelengthSpinBox_14))
         self.normwidgets.append(normWidgets(self.minimumWavelengthLabel_15, self.minimumWavelengthSpinBox_15,
                                             self.maximumWavelengthLabel_15, self.maximumWavelengthSpinBox_15))
-        for i in range(len(self.normwidgets) - 1):
+        for i in range(len(self.normwidgets)):
             for j in range(0, 2):
                 self.all_boxes.append(self.normwidgets[i].spinBox(j))
 
     def checkForNewMax(self):
         for i in range(len(self.all_boxes) - 1):
             self.all_boxes[i].valueChanged.connect(self.all_boxes[i + 1].setMinimum)
+
+    def xvar_choices(self):
+        try:
+            try:
+                xvarchoices = self.data[self.chooseDataComboBox.currentText()].df.columns.levels[
+                    0].values
+            except:
+                xvarchoices = self.data[self.chooseDataComboBox.currentText()].columns.values
+            xvarchoices = [i for i in xvarchoices if not 'Unnamed' in i]  # remove unnamed columns from choices
+        except:
+            xvarchoices = ['No valid choices!']
+        return xvarchoices
+
+    def function(self):
+        ranges = []
+        for i in range(self.index):
+            ranges.append(self.normwidgets[i].getValues())
+        datakey = self.chooseDataComboBox.currentText()
+        try:
+            col_var, filter_ = self.varToNormalizeListView.selectedItems().text()
+        except:
+            col_var = 'wvl'
+        print("{}".format(ranges))
+        try:
+            print(self.data[datakey].df.columns.levels[0])
+            self.data[datakey].norm(ranges, col_var=col_var)
+            print(self.data[datakey].df.columns.levels[0])
+            print("Normalization has been applied to the ranges: " + str(ranges))
+        except Exception as e:
+            print("There was a problem: ", e)

@@ -114,6 +114,18 @@ class Basics:
             elif isinstance(i, str):
                 obj.addItem(i)
 
+    def setListWidget(self, obj, choices):
+        """
+        Function changes lists
+        This function does not need to be overridden
+        :param obj:
+        :param choices:
+        :return:
+        """
+        for item in choices:
+            obj.addItem(item)
+
+
     def setProgressBar(self, progressBar):
         """
         This function makes it possible to reference the progress bar
