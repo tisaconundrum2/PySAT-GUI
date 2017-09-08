@@ -53,7 +53,7 @@ class Ui_Form(Ui_Form, Basics):
     def connectWidgets(self):
         self.setupWidgets()
         self.setComboBox(self.chooseDataComboBox, self.datakeys)
-        self.setListWidget(self.varToNormalizeListView, self.xvar_choices())
+        self.setListWidget(self.varToNormalizeListWidget, self.xvar_choices())
         self.setMaximum(9999999)
         self.clearValues()
         self.setHidden(self.normwidgets)
