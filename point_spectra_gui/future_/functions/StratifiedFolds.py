@@ -12,6 +12,7 @@ class Ui_Form(Ui_Form, Basics):
 
     def connectWidgets(self):
         self.setComboBox(self.chooseDataToStratifyComboBox, self.datakeys)
+        self.setComboBox(self.chooseVarComboBox, self.data[self.chooseDataToStratifyComboBox.currentText()].df['comp'].columns.values)
         self.chooseDataToStratifyComboBox.activated[int].connect(self.strat_fold_change_vars)
         self.nFoldsSpinBox.valueChanged.connect(self.strat_fold_change_testfolds)
 
