@@ -65,7 +65,6 @@ class Basics:
         :return:
         """
         s = self.qt.guiSave()
-        print(s)
         return s
 
     def function(self):
