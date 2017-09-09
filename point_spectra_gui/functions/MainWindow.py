@@ -85,7 +85,8 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
             self.actionCross_Validation.triggered.connect(lambda: self.addWidget(functions.CrossValidation.Ui_Form))
             self.actionDimensionality_Reduction.triggered.connect(
                 lambda: self.addWidget(functions.DimensionalityReduction.Ui_Form))
-            self.actionInterpolate.triggered.connect(lambda: self.addWidget(functions.Interpolation.Ui_Form))
+            self.actionInterpolate.triggered.connect(lambda: self.addWidget(
+                point_spectra_gui.functions.Interpolation.Ui_Form))
             self.actionLoad_Data.triggered.connect(lambda: self.addWidget(functions.LoadData.Ui_Form))
             self.actionApply_Mask.triggered.connect(lambda: self.addWidget(functions.MaskData.Ui_Form))
             self.actionMultiply_by_Vector.triggered.connect(lambda: self.addWidget(functions.MultiplyByVector.Ui_Form))
