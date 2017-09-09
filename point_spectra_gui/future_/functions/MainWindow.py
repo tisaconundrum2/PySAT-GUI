@@ -169,3 +169,4 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
             self.taskFinished.emit()
         except Exception as e:
             print(e)
+            self.taskFinished.emit()
