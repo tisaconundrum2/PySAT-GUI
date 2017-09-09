@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\MainWindow.ui'
+# Form implementation generated from reading ui file 'C:\Users\tisaconundrum\Documents\GitHub\PySAT_Point_Spectra_GUI\ui\MainWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.6
 #
@@ -66,6 +66,8 @@ class Ui_MainWindow(object):
         self.menuVisualization.setObjectName("menuVisualization")
         self.menuHelp = QtWidgets.QMenu(self.menubar)
         self.menuHelp.setObjectName("menuHelp")
+        self.menuDebug = QtWidgets.QMenu(self.menuHelp)
+        self.menuDebug.setObjectName("menuDebug")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -126,6 +128,10 @@ class Ui_MainWindow(object):
         self.actionAbout_Qt.setObjectName("actionAbout_Qt")
         self.actionOpen_Workflow = QtWidgets.QAction(MainWindow)
         self.actionOpen_Workflow.setObjectName("actionOpen_Workflow")
+        self.actionOn = QtWidgets.QAction(MainWindow)
+        self.actionOn.setObjectName("actionOn")
+        self.actionOff = QtWidgets.QAction(MainWindow)
+        self.actionOff.setObjectName("actionOff")
         self.menuFile.addAction(self.actionLoad_Data)
         self.menuFile.addAction(self.actionSet_Output_Path)
         self.menuFile.addAction(self.actionRead_ChemCam_Data)
@@ -154,8 +160,11 @@ class Ui_MainWindow(object):
         self.menuVisualization.addAction(self.actionPlot)
         self.menuVisualization.addAction(self.actionPlot_Spectra)
         self.menuVisualization.addAction(self.actionPlot_ICA_PCA)
+        self.menuDebug.addAction(self.actionOn)
+        self.menuDebug.addAction(self.actionOff)
         self.menuHelp.addAction(self.actionAbout)
         self.menuHelp.addAction(self.actionAbout_Qt)
+        self.menuHelp.addAction(self.menuDebug.menuAction())
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuPreprocessing.menuAction())
         self.menubar.addAction(self.menuRegression.menuAction())
@@ -177,6 +186,7 @@ class Ui_MainWindow(object):
         self.menuRegression.setTitle(_translate("MainWindow", "Regression"))
         self.menuVisualization.setTitle(_translate("MainWindow", "Visualization"))
         self.menuHelp.setTitle(_translate("MainWindow", "Help"))
+        self.menuDebug.setTitle(_translate("MainWindow", "Debug Mode"))
         self.actionRead_ChemCam_Data.setText(_translate("MainWindow", "Read ChemCam Data"))
         self.actionLoad_Data.setText(_translate("MainWindow", "Load Data"))
         self.actionSet_Output_Path.setText(_translate("MainWindow", "Set Output Path"))
@@ -205,6 +215,8 @@ class Ui_MainWindow(object):
         self.actionAbout.setText(_translate("MainWindow", "About..."))
         self.actionAbout_Qt.setText(_translate("MainWindow", "About Qt..."))
         self.actionOpen_Workflow.setText(_translate("MainWindow", "Open Workflow"))
+        self.actionOn.setText(_translate("MainWindow", "On"))
+        self.actionOff.setText(_translate("MainWindow", "Off"))
 
 
 if __name__ == "__main__":

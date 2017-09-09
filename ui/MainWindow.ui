@@ -144,8 +144,16 @@
     <property name="title">
      <string>Help</string>
     </property>
+    <widget class="QMenu" name="menuDebug">
+     <property name="title">
+      <string>Debug Mode</string>
+     </property>
+     <addaction name="actionOn"/>
+     <addaction name="actionOff"/>
+    </widget>
     <addaction name="actionAbout"/>
     <addaction name="actionAbout_Qt"/>
+    <addaction name="menuDebug"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuPreprocessing"/>
@@ -292,6 +300,16 @@
   <action name="actionOpen_Workflow">
    <property name="text">
     <string>Open Workflow</string>
+   </property>
+  </action>
+  <action name="actionOn">
+   <property name="text">
+    <string>On</string>
+   </property>
+  </action>
+  <action name="actionOff">
+   <property name="text">
+    <string>Off</string>
    </property>
   </action>
  </widget>
