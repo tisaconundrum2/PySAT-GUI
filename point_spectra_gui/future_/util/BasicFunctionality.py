@@ -27,7 +27,7 @@ class Basics:
     data = {}  # initialize with an empty dict to hold data frames
     datakeys = []  # hold all the specific key for a specific data frame
     outpath = './'  # Default outpath; can be changed with OutputFolder.py
-
+    figs = {}
     def __init__(self):
         self.qt = Qtickle.Qtickle(self)
 

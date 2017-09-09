@@ -2,6 +2,14 @@
 <ui version="4.0">
  <class>Form</class>
  <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>498</width>
+    <height>431</height>
+   </rect>
+  </property>
   <property name="sizePolicy">
    <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
     <horstretch>0</horstretch>
@@ -101,10 +109,10 @@
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QSpinBox" name="xMinSpinBox"/>
+           <widget class="QDoubleSpinBox" name="xMinDoubleSpinBox"/>
           </item>
           <item row="3" column="1">
-           <widget class="QSpinBox" name="xMaxSpinBox"/>
+           <widget class="QDoubleSpinBox" name="xMaxDoubleSpinBox"/>
           </item>
          </layout>
         </item>
@@ -145,10 +153,10 @@
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QSpinBox" name="yMinSpinBox"/>
+           <widget class="QDoubleSpinBox" name="yMinDoubleSpinBox"/>
           </item>
           <item row="3" column="1">
-           <widget class="QSpinBox" name="yMaxSpinBox"/>
+           <widget class="QDoubleSpinBox" name="yMaxDoubleSpinBox"/>
           </item>
          </layout>
         </item>
@@ -163,57 +171,71 @@
       </item>
       <item>
        <layout class="QGridLayout" name="botLayout">
-        <item row="3" column="0">
+        <item row="1" column="0">
+         <widget class="QLabel" name="oneToOneLabel">
+          <property name="text">
+           <string>One to One</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="legendLabel">
+          <property name="text">
+           <string>Legend</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0">
          <widget class="QLabel" name="alphaLabel">
           <property name="text">
            <string>Alpha</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="0">
+        <item row="4" column="0">
          <widget class="QLabel" name="markerLabel">
           <property name="text">
            <string>Marker</string>
           </property>
          </widget>
         </item>
-        <item row="3" column="1">
+        <item row="5" column="1">
          <widget class="QDoubleSpinBox" name="alphaDoubleSpinBox"/>
         </item>
-        <item row="4" column="0">
+        <item row="6" column="0">
          <widget class="QLabel" name="plotFilenameLabel">
           <property name="text">
            <string>Plot Filename</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="1">
+        <item row="3" column="1">
          <widget class="QComboBox" name="lineComboBox"/>
         </item>
-        <item row="1" column="0">
+        <item row="3" column="0">
          <widget class="QLabel" name="lineLabel">
           <property name="text">
            <string>Line</string>
           </property>
          </widget>
         </item>
-        <item row="4" column="1">
+        <item row="6" column="1">
          <widget class="QLineEdit" name="plotFilenameLineEdit"/>
         </item>
-        <item row="0" column="1">
+        <item row="2" column="1">
          <widget class="QComboBox" name="colorComboBox"/>
         </item>
-        <item row="0" column="0">
+        <item row="2" column="0">
          <widget class="QLabel" name="colorLabel">
           <property name="text">
            <string>Color</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="1">
+        <item row="4" column="1">
          <widget class="QComboBox" name="markerComboBox"/>
         </item>
-        <item row="4" column="2">
+        <item row="6" column="2">
          <widget class="QPushButton" name="pushButton">
           <property name="maximumSize">
            <size>
@@ -223,6 +245,16 @@
           </property>
           <property name="text">
            <string>...</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="legendLineEdit"/>
+        </item>
+        <item row="1" column="1">
+         <widget class="QCheckBox" name="oneToOneCheckBox">
+          <property name="text">
+           <string/>
           </property>
          </widget>
         </item>
@@ -239,12 +271,14 @@
   <tabstop>plotTitleLineEdit</tabstop>
   <tabstop>chooseXVariableComboBox</tabstop>
   <tabstop>xTitleLineEdit</tabstop>
-  <tabstop>xMinSpinBox</tabstop>
-  <tabstop>xMaxSpinBox</tabstop>
+  <tabstop>xMinDoubleSpinBox</tabstop>
+  <tabstop>xMaxDoubleSpinBox</tabstop>
   <tabstop>chooseYVariableComboBox</tabstop>
   <tabstop>yTitleLineEdit</tabstop>
-  <tabstop>yMinSpinBox</tabstop>
-  <tabstop>yMaxSpinBox</tabstop>
+  <tabstop>yMinDoubleSpinBox</tabstop>
+  <tabstop>yMaxDoubleSpinBox</tabstop>
+  <tabstop>legendLineEdit</tabstop>
+  <tabstop>oneToOneCheckBox</tabstop>
   <tabstop>colorComboBox</tabstop>
   <tabstop>lineComboBox</tabstop>
   <tabstop>markerComboBox</tabstop>
