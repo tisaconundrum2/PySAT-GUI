@@ -1,7 +1,7 @@
 import numpy as np
 from spectral.spectral_data import spectral_data
 
-from point_spectra_gui.future_.util.BasicFunctionality import Basics
+from point_spectra_gui.util.BasicFunctionality import Basics
 from point_spectra_gui.ui.RemoveRows import Ui_Form
 
 

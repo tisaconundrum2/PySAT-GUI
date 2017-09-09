@@ -2,7 +2,7 @@ from PyQt5 import QtWidgets
 
 from plotting.plots import make_plot
 import numpy as np
-from point_spectra_gui.future_.util.BasicFunctionality import Basics
+from point_spectra_gui.util.BasicFunctionality import Basics
 from point_spectra_gui.ui.Plot import Ui_Form
 
 

@@ -4,9 +4,9 @@ import time
 
 from PyQt5 import QtCore, QtWidgets, QtGui
 
-from point_spectra_gui.future_ import functions
-from point_spectra_gui.future_.util import delete
-from point_spectra_gui.future_.util.BasicFunctionality import Basics
+from point_spectra_gui import functions
+from point_spectra_gui.util import delete
+from point_spectra_gui.util.BasicFunctionality import Basics
 from point_spectra_gui.ui import MainWindow
 
 

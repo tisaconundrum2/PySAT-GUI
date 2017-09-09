@@ -1,1 +1,1 @@
-from point_spectra_gui.future_.functions.regressionMethods import ARD, BayesianRidge, ElasticNet, GP, SVR
+from point_spectra_gui.functions.regressionMethods import ARD, BayesianRidge, ElasticNet, GP, SVR

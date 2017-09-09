@@ -1,6 +1,6 @@
 import numpy as np
 
-from point_spectra_gui.future_.util.BasicFunctionality import Basics
+from point_spectra_gui.util.BasicFunctionality import Basics
 from point_spectra_gui.ui.PeakAreas import Ui_Form
 
 

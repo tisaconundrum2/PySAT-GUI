@@ -9,8 +9,8 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import *
 
-from point_spectra_gui.future_.functions import MainWindow
-from point_spectra_gui.future_.util.excepthook import my_exception_hook
+from point_spectra_gui.functions import MainWindow
+from point_spectra_gui.util.excepthook import my_exception_hook
 
 
 def new():

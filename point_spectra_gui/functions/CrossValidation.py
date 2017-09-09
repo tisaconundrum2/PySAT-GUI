@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets
 
-from point_spectra_gui.future_.util.BasicFunctionality import Basics
+from point_spectra_gui.util.BasicFunctionality import Basics
 from point_spectra_gui.ui.CrossValidation import Ui_Form
 
 
