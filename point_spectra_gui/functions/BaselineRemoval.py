@@ -1,7 +1,7 @@
-from spectral.spectral_data import spectral_data
+from pysat.spectral.spectral_data import spectral_data
 
-from point_spectra_gui.util.BasicFunctionality import Basics
 from point_spectra_gui.ui.BaselineRemoval import Ui_Form
+from point_spectra_gui.util.BasicFunctionality import Basics
 
 
 class Ui_Form(Ui_Form, Basics):

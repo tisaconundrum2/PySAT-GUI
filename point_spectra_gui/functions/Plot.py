@@ -1,9 +1,9 @@
-from PyQt5 import QtWidgets
-
-from plotting.plots import make_plot
 import numpy as np
-from point_spectra_gui.util.BasicFunctionality import Basics
+from PyQt5 import QtWidgets
+from pysat.plotting.plots import make_plot
+
 from point_spectra_gui.ui.Plot import Ui_Form
+from point_spectra_gui.util.BasicFunctionality import Basics
 
 
 class Ui_Form(Ui_Form, Basics):
@@ -46,14 +46,18 @@ class Ui_Form(Ui_Form, Basics):
             lambda: self.changeComboListVars(self.chooseYVariableComboBox, self.get_choices()))
 
         self.chooseDataComboBox.activated[int].connect(
-            lambda: self.get_minmax(self.xMinDoubleSpinBox, self.xMaxDoubleSpinBox, self.chooseXVariableComboBox.currentText()))
+            lambda: self.get_minmax(self.xMinDoubleSpinBox, self.xMaxDoubleSpinBox,
+                                    self.chooseXVariableComboBox.currentText()))
         self.chooseDataComboBox.activated[int].connect(
-            lambda: self.get_minmax(self.yMinDoubleSpinBox, self.yMaxDoubleSpinBox, self.chooseYVariableComboBox.currentText()))
+            lambda: self.get_minmax(self.yMinDoubleSpinBox, self.yMaxDoubleSpinBox,
+                                    self.chooseYVariableComboBox.currentText()))
 
         self.chooseXVariableComboBox.activated[int].connect(
-            lambda: self.get_minmax(self.xMinDoubleSpinBox, self.xMaxDoubleSpinBox, self.chooseXVariableComboBox.currentText()))
+            lambda: self.get_minmax(self.xMinDoubleSpinBox, self.xMaxDoubleSpinBox,
+                                    self.chooseXVariableComboBox.currentText()))
         self.chooseYVariableComboBox.activated[int].connect(
-            lambda: self.get_minmax(self.yMinDoubleSpinBox, self.yMaxDoubleSpinBox, self.chooseYVariableComboBox.currentText()))
+            lambda: self.get_minmax(self.yMinDoubleSpinBox, self.yMaxDoubleSpinBox,
+                                    self.chooseYVariableComboBox.currentText()))
 
     def isEnabled(self):
         return self.get_widget().isEnabled()

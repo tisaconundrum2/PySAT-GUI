@@ -1,5 +1,5 @@
-from point_spectra_gui.util.BasicFunctionality import Basics
 from point_spectra_gui.ui.StratifiedFolds import Ui_Form
+from point_spectra_gui.util.BasicFunctionality import Basics
 
 
 class Ui_Form(Ui_Form, Basics):
@@ -12,7 +12,8 @@ class Ui_Form(Ui_Form, Basics):
 
     def connectWidgets(self):
         self.setComboBox(self.chooseDataToStratifyComboBox, self.datakeys)
-        self.setComboBox(self.chooseVarComboBox, self.data[self.chooseDataToStratifyComboBox.currentText()].df['comp'].columns.values)
+        self.setComboBox(self.chooseVarComboBox,
+                         self.data[self.chooseDataToStratifyComboBox.currentText()].df['comp'].columns.values)
         self.chooseDataToStratifyComboBox.activated[int].connect(self.strat_fold_change_vars)
         self.nFoldsSpinBox.valueChanged.connect(self.strat_fold_change_testfolds)
 

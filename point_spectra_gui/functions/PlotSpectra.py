@@ -1,5 +1,5 @@
-from point_spectra_gui.util.BasicFunctionality import Basics
 from point_spectra_gui.ui.PlotSpectra import Ui_Form
+from point_spectra_gui.util.BasicFunctionality import Basics
 
 
 class Ui_Form(Ui_Form, Basics):

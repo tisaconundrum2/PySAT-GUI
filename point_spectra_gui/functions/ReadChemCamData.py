@@ -1,11 +1,10 @@
 import pandas as pd
 from PyQt5 import QtWidgets
-from fileio import io_ccam_pds
+from pysat.fileio import io_ccam_pds
 from pysat.spectral.spectral_data import spectral_data
 
-from point_spectra_gui.util.BasicFunctionality import Basics
 from point_spectra_gui.ui.ReadChemCamData import Ui_Form
-from point_spectra_gui.ui_modules.Error_ import error_print
+from point_spectra_gui.util.BasicFunctionality import Basics
 
 
 class Ui_Form(Ui_Form, Basics):
@@ -64,4 +63,4 @@ class Ui_Form(Ui_Form, Basics):
             self.datakeys.append(keyname)
             pass
         except Exception as e:
-            error_print('Problem reading data: {}'.format(e))
+            print('Problem reading data: {}'.format(e))

@@ -5,9 +5,9 @@ import time
 from PyQt5 import QtCore, QtWidgets, QtGui
 
 from point_spectra_gui import functions
+from point_spectra_gui.ui import MainWindow
 from point_spectra_gui.util import delete
 from point_spectra_gui.util.BasicFunctionality import Basics
-from point_spectra_gui.ui import MainWindow
 
 
 class EmittingStream(QtCore.QObject):
@@ -83,7 +83,8 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
             self.actionRead_ChemCam_Data.triggered.connect(lambda: self.addWidget(functions.ReadChemCamData.Ui_Form))
             self.actionRemove_Baseline.triggered.connect(lambda: self.addWidget(functions.BaselineRemoval.Ui_Form))
             self.actionCross_Validation.triggered.connect(lambda: self.addWidget(functions.CrossValidation.Ui_Form))
-            self.actionDimensionality_Reduction.triggered.connect(lambda: self.addWidget(functions.DimensionalityReduction.Ui_Form))
+            self.actionDimensionality_Reduction.triggered.connect(
+                lambda: self.addWidget(functions.DimensionalityReduction.Ui_Form))
             self.actionInterpolate.triggered.connect(lambda: self.addWidget(functions.Interpolation.Ui_Form))
             self.actionLoad_Data.triggered.connect(lambda: self.addWidget(functions.LoadData.Ui_Form))
             self.actionApply_Mask.triggered.connect(lambda: self.addWidget(functions.MaskData.Ui_Form))

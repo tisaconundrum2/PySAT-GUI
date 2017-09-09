@@ -1,5 +1,5 @@
-from point_spectra_gui.util.BasicFunctionality import Basics
 from point_spectra_gui.ui.Normalization import Ui_Form
+from point_spectra_gui.util.BasicFunctionality import Basics
 
 
 class normWidgets:
