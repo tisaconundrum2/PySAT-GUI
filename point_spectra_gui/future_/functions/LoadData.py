@@ -18,7 +18,7 @@ class Ui_Form(Ui_loadData, Basics):
         self.newFilePushButton.clicked.connect(lambda: self.on_getDataButton_clicked(self.fileNameLineEdit))
 
     def on_getDataButton_clicked(self, lineEdit):
-        filename, _filter = QtWidgets.QFileDialog.getOpenFileName(None, "Open Data File", '.', "(*.csv)")
+        filename, _filter = QtWidgets.QFileDialog.getOpenFileName(None, "Open Data File", self.outpath, "(*.csv)")
         lineEdit.setText(filename)
         if lineEdit.text() == "":
             lineEdit.setText("*.csv")
