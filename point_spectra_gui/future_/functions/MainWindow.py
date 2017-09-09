@@ -1,12 +1,20 @@
 import pickle
+import sys
 import time
 
-from PyQt5 import QtCore, QtWidgets
+from PyQt5 import QtCore, QtWidgets, QtGui
 
 from point_spectra_gui.future_ import functions
 from point_spectra_gui.future_.util import delete
 from point_spectra_gui.future_.util.BasicFunctionality import Basics
 from point_spectra_gui.ui import MainWindow
+
+
+class EmittingStream(QtCore.QObject):
+    textWritten = QtCore.pyqtSignal(str)
+
+    def write(self, text):
+        self.textWritten.emit(str(text))
 
 
 class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
@@ -21,6 +29,22 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         super().setupUi(MainWindow)  # Run the basic window UI
         self.menu_item_shortcuts()  # set up the shortcuts
         self.connectWidgets()
+        sys.stdout = EmittingStream(textWritten=self.normalOutputWritten)
+        sys.stderr = EmittingStream(textWritten=self.normalOutputWritten)
+
+    def __del__(self):
+        # Restore sys.stdout
+        sys.stdout = sys.__stdout__
+        sys.stderr = sys.__stderr__
+
+    def normalOutputWritten(self, text):
+        """Append text to the QTextEdit."""
+        # Maybe QTextEdit.append() works as well, but this is how I do it:
+        cursor = self.textBrowser.textCursor()
+        cursor.movePosition(QtGui.QTextCursor.End)
+        cursor.insertText(text)
+        self.textBrowser.setTextCursor(cursor)
+        self.textBrowser.ensureCursorVisible()
 
     def addWidget(self, obj):
         """
