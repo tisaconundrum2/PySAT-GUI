@@ -2,14 +2,6 @@
 <ui version="4.0">
  <class>Form</class>
  <widget class="QWidget" name="Form">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>498</width>
-    <height>431</height>
-   </rect>
-  </property>
   <property name="sizePolicy">
    <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
     <horstretch>0</horstretch>
@@ -236,7 +228,7 @@
          <widget class="QComboBox" name="markerComboBox"/>
         </item>
         <item row="6" column="2">
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QPushButton" name="plotFilenamePushButton">
           <property name="maximumSize">
            <size>
             <width>30</width>
@@ -284,7 +276,7 @@
   <tabstop>markerComboBox</tabstop>
   <tabstop>alphaDoubleSpinBox</tabstop>
   <tabstop>plotFilenameLineEdit</tabstop>
-  <tabstop>pushButton</tabstop>
+  <tabstop>plotFilenamePushButton</tabstop>
  </tabstops>
  <resources/>
  <connections/>

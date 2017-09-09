@@ -11,7 +11,6 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(498, 431)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Ignored)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -150,10 +149,10 @@ class Ui_Form(object):
         self.markerComboBox = QtWidgets.QComboBox(self.groupBox)
         self.markerComboBox.setObjectName("markerComboBox")
         self.botLayout.addWidget(self.markerComboBox, 4, 1, 1, 1)
-        self.pushButton = QtWidgets.QPushButton(self.groupBox)
-        self.pushButton.setMaximumSize(QtCore.QSize(30, 16777215))
-        self.pushButton.setObjectName("pushButton")
-        self.botLayout.addWidget(self.pushButton, 6, 2, 1, 1)
+        self.plotFilenamePushButton = QtWidgets.QPushButton(self.groupBox)
+        self.plotFilenamePushButton.setMaximumSize(QtCore.QSize(30, 16777215))
+        self.plotFilenamePushButton.setObjectName("plotFilenamePushButton")
+        self.botLayout.addWidget(self.plotFilenamePushButton, 6, 2, 1, 1)
         self.legendLineEdit = QtWidgets.QLineEdit(self.groupBox)
         self.legendLineEdit.setObjectName("legendLineEdit")
         self.botLayout.addWidget(self.legendLineEdit, 0, 1, 1, 1)
@@ -183,7 +182,7 @@ class Ui_Form(object):
         Form.setTabOrder(self.lineComboBox, self.markerComboBox)
         Form.setTabOrder(self.markerComboBox, self.alphaDoubleSpinBox)
         Form.setTabOrder(self.alphaDoubleSpinBox, self.plotFilenameLineEdit)
-        Form.setTabOrder(self.plotFilenameLineEdit, self.pushButton)
+        Form.setTabOrder(self.plotFilenameLineEdit, self.plotFilenamePushButton)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
@@ -207,7 +206,7 @@ class Ui_Form(object):
         self.plotFilenameLabel.setText(_translate("Form", "Plot Filename"))
         self.lineLabel.setText(_translate("Form", "Line"))
         self.colorLabel.setText(_translate("Form", "Color"))
-        self.pushButton.setText(_translate("Form", "..."))
+        self.plotFilenamePushButton.setText(_translate("Form", "..."))
 
 
 if __name__ == "__main__":
