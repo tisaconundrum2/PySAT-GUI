@@ -1,3 +1,5 @@
+from PyQt5 import QtWidgets
+
 from plotting.plots import make_plot
 import numpy as np
 from point_spectra_gui.future_.util.BasicFunctionality import Basics
@@ -36,6 +38,7 @@ class Ui_Form(Ui_Form, Basics):
         self.markerComboBox.addItem("Triangle Right")
         self.markerComboBox.addItem("None")
         self.alphaDoubleSpinBox.setValue(0.25)
+        self.plotFilenamePushButton.clicked.connect(self.on_plotFilenamePushButton_clicked)
 
         self.chooseDataComboBox.activated[int].connect(
             lambda: self.changeComboListVars(self.chooseXVariableComboBox, self.get_choices()))
@@ -143,8 +146,11 @@ class Ui_Form(Ui_Form, Basics):
             loadfig = self.figs[figname]
         except:
             loadfig = None
-        outpath = self.outpath
-        self.figs[figname] = make_plot(x, y, outpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
+
+        figpath = self.plotFilenameLineEdit.text()
+        if self.plotFilenameLineEdit.text() == "" or self.plotFilenameLineEdit.text() == "*.png":
+            figpath = self.outpath + '/' + figname
+        self.figs[figname] = make_plot(x, y, figpath, xrange=xrange, yrange=yrange, xtitle=xtitle,
                                        ytitle=ytitle, title=title,
                                        lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
                                        annot_mask=annot_mask, cmap=cmap,
@@ -195,3 +201,9 @@ class Ui_Form(Ui_Form, Basics):
         except:
             objmin.setValue(0)
             objmax.setValue(1)
+
+    def on_plotFilenamePushButton_clicked(self):
+        filename, _filter = QtWidgets.QFileDialog.getSaveFileName(None, "Save Plot", self.outpath, "(*.png)")
+        self.plotFilenameLineEdit.setText(filename)
+        if self.plotFilenameLineEdit.text() == "":
+            self.plotFilenameLineEdit.setText("*.png")
