@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\tisaconundrum\Documents\GitHub\PySAT_Point_Spectra_GUI\ui\ElasticNet.ui'
-#
-# Created by: PyQt5 UI code generator 5.6
-#
-# WARNING! All changes made in this file will be lost!
+# Automatically generated - don't edit.
+# Use `python setup.py build_ui` to update it.
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -129,33 +126,23 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.alphaLabel.setText(_translate("Form", "Alpha"))
-        self.l1RatioLabel.setText(_translate("Form", "L1 Ratio"))
-        self.fitInterceptLabel.setText(_translate("Form", "Fit Intercept"))
-        self.normalizeLabel.setText(_translate("Form", "Normalize"))
-        self.precomputeLabel.setText(_translate("Form", "Precompute"))
-        self.precomputeComboBox.setItemText(0, _translate("Form", "False"))
-        self.precomputeComboBox.setItemText(1, _translate("Form", "True"))
-        self.precomputeComboBox.setItemText(2, _translate("Form", "Array-like"))
-        self.maxNumOfIterationsLabel.setText(_translate("Form", "Max Num of Iterations"))
-        self.copyXLabel.setText(_translate("Form", "Copy X"))
-        self.toleranceLabel.setText(_translate("Form", "Tolerance"))
-        self.warmStartLabel.setText(_translate("Form", "Warm Start"))
-        self.positiveLabel.setText(_translate("Form", "Positive"))
-        self.selectionLabel.setText(_translate("Form", "Selection"))
-        self.selectionLineEdit.setText(_translate("Form", "cyclic"))
-        self.randomStateLabel.setText(_translate("Form", "Random State"))
-        self.randomStateLineEdit.setText(_translate("Form", "None"))
-        self.crossValidateLabel.setText(_translate("Form", "Cross Validate"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
-    sys.exit(app.exec_())
+        Form.setWindowTitle(_("Form"))
+        self.alphaLabel.setText(_("Alpha"))
+        self.l1RatioLabel.setText(_("L1 Ratio"))
+        self.fitInterceptLabel.setText(_("Fit Intercept"))
+        self.normalizeLabel.setText(_("Normalize"))
+        self.precomputeLabel.setText(_("Precompute"))
+        self.precomputeComboBox.setItemText(0, _("False"))
+        self.precomputeComboBox.setItemText(1, _("True"))
+        self.precomputeComboBox.setItemText(2, _("Array-like"))
+        self.maxNumOfIterationsLabel.setText(_("Max Num of Iterations"))
+        self.copyXLabel.setText(_("Copy X"))
+        self.toleranceLabel.setText(_("Tolerance"))
+        self.warmStartLabel.setText(_("Warm Start"))
+        self.positiveLabel.setText(_("Positive"))
+        self.selectionLabel.setText(_("Selection"))
+        self.selectionLineEdit.setText(_("cyclic"))
+        self.randomStateLabel.setText(_("Random State"))
+        self.randomStateLineEdit.setText(_("None"))
+        self.crossValidateLabel.setText(_("Cross Validate"))
 

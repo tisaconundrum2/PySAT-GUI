@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\Normalization.ui'
-#
-# Created by: PyQt5 UI code generator 5.6
-#
-# WARNING! All changes made in this file will be lost!
+# Automatically generated - don't edit.
+# Use `python setup.py build_ui` to update it.
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -239,50 +236,40 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.groupBox.setTitle(_translate("Form", "Normalization"))
-        self.chooseDataLabel.setText(_translate("Form", "Choose data"))
-        self.varToNormalizeLabel.setText(_translate("Form", "Variable to normalize"))
-        self.minimumWavelengthLabel.setText(_translate("Form", "Minimum wavelength"))
-        self.maximumWavelengthLabel.setText(_translate("Form", "Maximum wavelength"))
-        self.minimumWavelengthLabel_2.setText(_translate("Form", "Minimum wavelength"))
-        self.maximumWavelengthLabel_2.setText(_translate("Form", "Maximum wavelength"))
-        self.minimumWavelengthLabel_3.setText(_translate("Form", "Minimum wavelength"))
-        self.maximumWavelengthLabel_3.setText(_translate("Form", "Maximum wavelength"))
-        self.minimumWavelengthLabel_4.setText(_translate("Form", "Minimum wavelength"))
-        self.maximumWavelengthLabel_4.setText(_translate("Form", "Maximum wavelength"))
-        self.minimumWavelengthLabel_5.setText(_translate("Form", "Minimum wavelength"))
-        self.maximumWavelengthLabel_5.setText(_translate("Form", "Maximum wavelength"))
-        self.minimumWavelengthLabel_6.setText(_translate("Form", "Minimum wavelength"))
-        self.maximumWavelengthLabel_6.setText(_translate("Form", "Maximum wavelength"))
-        self.minimumWavelengthLabel_7.setText(_translate("Form", "Minimum wavelength"))
-        self.maximumWavelengthLabel_7.setText(_translate("Form", "Maximum wavelength"))
-        self.minimumWavelengthLabel_8.setText(_translate("Form", "Minimum wavelength"))
-        self.maximumWavelengthLabel_8.setText(_translate("Form", "Maximum wavelength"))
-        self.minimumWavelengthLabel_9.setText(_translate("Form", "Minimum wavelength"))
-        self.maximumWavelengthLabel_9.setText(_translate("Form", "Maximum wavelength"))
-        self.minimumWavelengthLabel_10.setText(_translate("Form", "Minimum wavelength"))
-        self.maximumWavelengthLabel_10.setText(_translate("Form", "Maximum wavelength"))
-        self.minimumWavelengthLabel_11.setText(_translate("Form", "Minimum wavelength"))
-        self.maximumWavelengthLabel_11.setText(_translate("Form", "Maximum wavelength"))
-        self.minimumWavelengthLabel_12.setText(_translate("Form", "Minimum wavelength"))
-        self.maximumWavelengthLabel_12.setText(_translate("Form", "Maximum wavelength"))
-        self.minimumWavelengthLabel_13.setText(_translate("Form", "Minimum wavelength"))
-        self.maximumWavelengthLabel_13.setText(_translate("Form", "Maximum wavelength"))
-        self.minimumWavelengthLabel_14.setText(_translate("Form", "Minimum wavelength"))
-        self.maximumWavelengthLabel_14.setText(_translate("Form", "Maximum wavelength"))
-        self.minimumWavelengthLabel_15.setText(_translate("Form", "Minimum wavelength"))
-        self.maximumWavelengthLabel_15.setText(_translate("Form", "Maximum wavelength"))
-        self.addRangePushButton.setText(_translate("Form", "Add Range"))
-        self.deleteRangePushButton.setText(_translate("Form", "Delete Range"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
-    sys.exit(app.exec_())
+        Form.setWindowTitle(_("Form"))
+        self.groupBox.setTitle(_("Normalization"))
+        self.chooseDataLabel.setText(_("Choose data"))
+        self.varToNormalizeLabel.setText(_("Variable to normalize"))
+        self.minimumWavelengthLabel.setText(_("Minimum wavelength"))
+        self.maximumWavelengthLabel.setText(_("Maximum wavelength"))
+        self.minimumWavelengthLabel_2.setText(_("Minimum wavelength"))
+        self.maximumWavelengthLabel_2.setText(_("Maximum wavelength"))
+        self.minimumWavelengthLabel_3.setText(_("Minimum wavelength"))
+        self.maximumWavelengthLabel_3.setText(_("Maximum wavelength"))
+        self.minimumWavelengthLabel_4.setText(_("Minimum wavelength"))
+        self.maximumWavelengthLabel_4.setText(_("Maximum wavelength"))
+        self.minimumWavelengthLabel_5.setText(_("Minimum wavelength"))
+        self.maximumWavelengthLabel_5.setText(_("Maximum wavelength"))
+        self.minimumWavelengthLabel_6.setText(_("Minimum wavelength"))
+        self.maximumWavelengthLabel_6.setText(_("Maximum wavelength"))
+        self.minimumWavelengthLabel_7.setText(_("Minimum wavelength"))
+        self.maximumWavelengthLabel_7.setText(_("Maximum wavelength"))
+        self.minimumWavelengthLabel_8.setText(_("Minimum wavelength"))
+        self.maximumWavelengthLabel_8.setText(_("Maximum wavelength"))
+        self.minimumWavelengthLabel_9.setText(_("Minimum wavelength"))
+        self.maximumWavelengthLabel_9.setText(_("Maximum wavelength"))
+        self.minimumWavelengthLabel_10.setText(_("Minimum wavelength"))
+        self.maximumWavelengthLabel_10.setText(_("Maximum wavelength"))
+        self.minimumWavelengthLabel_11.setText(_("Minimum wavelength"))
+        self.maximumWavelengthLabel_11.setText(_("Maximum wavelength"))
+        self.minimumWavelengthLabel_12.setText(_("Minimum wavelength"))
+        self.maximumWavelengthLabel_12.setText(_("Maximum wavelength"))
+        self.minimumWavelengthLabel_13.setText(_("Minimum wavelength"))
+        self.maximumWavelengthLabel_13.setText(_("Maximum wavelength"))
+        self.minimumWavelengthLabel_14.setText(_("Minimum wavelength"))
+        self.maximumWavelengthLabel_14.setText(_("Maximum wavelength"))
+        self.minimumWavelengthLabel_15.setText(_("Minimum wavelength"))
+        self.maximumWavelengthLabel_15.setText(_("Maximum wavelength"))
+        self.addRangePushButton.setText(_("Add Range"))
+        self.deleteRangePushButton.setText(_("Delete Range"))
 

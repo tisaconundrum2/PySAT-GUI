@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\tisaconundrum\Documents\GitHub\PySAT_Point_Spectra_GUI\ui\SVR.ui'
-#
-# Created by: PyQt5 UI code generator 5.6
-#
-# WARNING! All changes made in this file will be lost!
+# Automatically generated - don't edit.
+# Use `python setup.py build_ui` to update it.
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -114,35 +111,25 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.cLabel.setText(_translate("Form", "C"))
-        self.epsilonLabel.setText(_translate("Form", "Epsilon"))
-        self.kernelLabel.setText(_translate("Form", "Kernel"))
-        self.kernelComboBox.setItemText(0, _translate("Form", "rbf"))
-        self.kernelComboBox.setItemText(1, _translate("Form", "poly"))
-        self.kernelComboBox.setItemText(2, _translate("Form", "sigmoid"))
-        self.kernelComboBox.setItemText(3, _translate("Form", "linear"))
-        self.kernelComboBox.setItemText(4, _translate("Form", "precomputed"))
-        self.degreeLabel.setText(_translate("Form", "Degree"))
-        self.gammaLabel.setText(_translate("Form", "Gamma"))
-        self.gammaComboBox.setItemText(0, _translate("Form", "auto"))
-        self.gammaComboBox.setItemText(1, _translate("Form", "rbf"))
-        self.gammaComboBox.setItemText(2, _translate("Form", "poly"))
-        self.gammaComboBox.setItemText(3, _translate("Form", "sigmoid"))
-        self.coeff0Label.setText(_translate("Form", "Coeff 0"))
-        self.shrinkingLabel.setText(_translate("Form", "Shrinking"))
-        self.toleranceLabel.setText(_translate("Form", "Tolerance"))
-        self.cacheSizeLabel.setText(_translate("Form", "Cache Size"))
-        self.verboseLabel.setText(_translate("Form", "Verbose"))
-        self.maxIterationsLabel.setText(_translate("Form", "Max Iterations"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
-    sys.exit(app.exec_())
+        Form.setWindowTitle(_("Form"))
+        self.cLabel.setText(_("C"))
+        self.epsilonLabel.setText(_("Epsilon"))
+        self.kernelLabel.setText(_("Kernel"))
+        self.kernelComboBox.setItemText(0, _("rbf"))
+        self.kernelComboBox.setItemText(1, _("poly"))
+        self.kernelComboBox.setItemText(2, _("sigmoid"))
+        self.kernelComboBox.setItemText(3, _("linear"))
+        self.kernelComboBox.setItemText(4, _("precomputed"))
+        self.degreeLabel.setText(_("Degree"))
+        self.gammaLabel.setText(_("Gamma"))
+        self.gammaComboBox.setItemText(0, _("auto"))
+        self.gammaComboBox.setItemText(1, _("rbf"))
+        self.gammaComboBox.setItemText(2, _("poly"))
+        self.gammaComboBox.setItemText(3, _("sigmoid"))
+        self.coeff0Label.setText(_("Coeff 0"))
+        self.shrinkingLabel.setText(_("Shrinking"))
+        self.toleranceLabel.setText(_("Tolerance"))
+        self.cacheSizeLabel.setText(_("Cache Size"))
+        self.verboseLabel.setText(_("Verbose"))
+        self.maxIterationsLabel.setText(_("Max Iterations"))
 

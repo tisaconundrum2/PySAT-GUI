@@ -7,7 +7,6 @@ import datetime
 import glob
 import os
 import re
-import subprocess
 import sys
 from io import StringIO
 
@@ -33,7 +32,7 @@ from distutils.command.install import install as install
 from distutils.dep_util import newer
 from distutils.dist import Distribution
 from distutils.spawn import find_executable
-from setuptools import setup, Command, Extension
+from setuptools import setup, Command
 
 PACKAGE_NAME = "Point Spectra GUI"
 
@@ -91,70 +90,7 @@ class point_spectra_gui_test(Command):
             sys.exit("At least one test failed.")
 
 
-class point_spectra_gui_build_locales(Command):
-    description = 'build locale files'
-    user_options = [
-        ('build-dir=', 'd', "directory to build to"),
-        ('inplace', 'i', "ignore build-lib and put compiled locales into the 'locale' directory"),
-    ]
-
-    def initialize_options(self):
-        self.build_dir = None
-        self.inplace = 0
-
-    def finalize_options(self):
-        self.set_undefined_options('build', ('build_locales', 'build_dir'))
-        self.locales = self.distribution.locales
-
-    def run(self):
-        for domain, locale, po in self.locales:
-            if self.inplace:
-                path = os.path.join('locale', locale, 'LC_MESSAGES')
-            else:
-                path = os.path.join(self.build_dir, locale, 'LC_MESSAGES')
-            mo = os.path.join(path, '%s.mo' % domain)
-            self.mkpath(path)
-            self.spawn(['msgfmt', '-o', mo, po])
-
-
 Distribution.locales = None
-
-
-class point_spectra_gui_install_locales(Command):
-    description = "install locale files"
-    user_options = [
-        ('install-dir=', 'd', "directory to install locale files to"),
-        ('build-dir=', 'b', "build directory (where to install from)"),
-        ('force', 'f', "force installation (overwrite existing files)"),
-        ('skip-build', None, "skip the build steps"),
-    ]
-    boolean_options = ['force', 'skip-build']
-
-    def initialize_options(self):
-        self.install_dir = None
-        self.build_dir = None
-        self.force = 0
-        self.skip_build = None
-        self.outfiles = []
-
-    def finalize_options(self):
-        self.set_undefined_options('build', ('build_locales', 'build_dir'))
-        self.set_undefined_options('install',
-                                   ('install_locales', 'install_dir'),
-                                   ('force', 'force'),
-                                   ('skip_build', 'skip_build'),
-                                   )
-
-    def run(self):
-        if not self.skip_build:
-            self.run_command('build_locales')
-        self.outfiles = self.copy_tree(self.build_dir, self.install_dir)
-
-    def get_inputs(self):
-        return self.locales or []
-
-    def get_outputs(self):
-        return self.outfiles
 
 
 class point_spectra_gui_install(install):
@@ -223,15 +159,11 @@ class point_spectra_gui_build(build):
             self.sub_commands.append(('build_locales', None))
 
     def run(self):
-        if 'bdist_nsis' not in sys.argv:  # somebody shoot me please
-            log.info('generating scripts/%s from scripts/point_spectra_gui.in', PACKAGE_NAME)
-            generate_file('scripts/point_spectra_gui.in', 'scripts/' + PACKAGE_NAME,
-                          {'localedir': self.localedir, 'autoupdate': not self.disable_autoupdate})
         build.run(self)
 
 
 def py_from_ui(uifile):
-    return "ui_%s.py" % os.path.splitext(os.path.basename(uifile))[0]
+    return "%s.py" % os.path.splitext(os.path.basename(uifile))[0]
 
 
 def py_from_ui_with_defaultdir(uifile):
@@ -257,7 +189,7 @@ class point_spectra_gui_build_ui(Command):
             files = []
             for f in self.files.split(","):
                 head, tail = os.path.split(f)
-                m = re.match(tail)
+                m = re.match(r'(?:ui_)?([^.]+)', tail)
                 if m:
                     name = m.group(1)
                 else:
@@ -338,32 +270,6 @@ class point_spectra_gui_clean_ui(Command):
             log.warn("'%s' does not exist -- can't clean it", pyfile)
 
 
-class point_spectra_gui_get_po_files(Command):
-    description = "Retrieve po files from transifex"
-    minimum_perc_default = 5
-    user_options = [
-        ('minimum-perc=', 'm',
-         "Specify the minimum acceptable percentage of a translation (default: %d)" % minimum_perc_default)
-    ]
-
-    def initialize_options(self):
-        self.minimum_perc = self.minimum_perc_default
-
-    def finalize_options(self):
-        self.minimum_perc = int(self.minimum_perc)
-
-    def run(self):
-        if tx_executable is None:
-            sys.exit('Transifex client executable (tx) not found.')
-        txpull_cmd = [
-            tx_executable,
-            'pull',
-            '--force',
-            '--all',
-            '--minimum-perc=%d' % self.minimum_perc
-        ]
-        self.spawn(txpull_cmd)
-
 
 _regen_pot_description = "Regenerate po/point_spectra_gui.pot, parsing source tree for new or updated strings"
 try:
@@ -417,117 +323,6 @@ def _get_option_name(obj):
         if obj.__class__ == klass:
             return name
     raise Exception("No such command class")
-
-
-class point_spectra_gui_update_constants(Command):
-    description = "Regenerate attributes.py and countries.py"
-    user_options = [
-        ('skip-pull', None, "skip the tx pull steps"),
-    ]
-    boolean_options = ['skip-pull']
-
-    def initialize_options(self):
-        self.skip_pull = None
-
-    def finalize_options(self):
-        self.locales = self.distribution.locales
-
-    def run(self):
-        if tx_executable is None:
-            sys.exit('Transifex client executable (tx) not found.')
-
-        from babel.messages import pofile
-
-        if not self.skip_pull:
-            txpull_cmd = [
-                tx_executable,
-                'pull',
-                '--force',
-                '--resource=musicbrainz.attributes,musicbrainz.countries',
-                '--source',
-                '--language=none',
-            ]
-            self.spawn(txpull_cmd)
-
-        countries = dict()
-        countries_potfile = os.path.join('po', 'countries', 'countries.pot')
-        isocode_comment = 'iso.code:'
-        with open(countries_potfile, 'rb') as f:
-            log.info('Parsing %s' % countries_potfile)
-            po = pofile.read_po(f)
-            for message in po:
-                if not message.id or not isinstance(message.id, str):
-                    continue
-                for comment in message.auto_comments:
-                    if comment.startswith(isocode_comment):
-                        code = comment.replace(isocode_comment, '')
-                        countries[code] = message.id
-            if countries:
-                self.countries_py_file(countries)
-            else:
-                sys.exit('Failed to extract any country code/name !')
-
-        attributes = dict()
-        attributes_potfile = os.path.join('po', 'attributes', 'attributes.pot')
-        extract_attributes = (
-            'DB:cover_art_archive.art_type/name',
-            'DB:medium_format/name',
-            'DB:release_group_primary_type/name',
-            'DB:release_group_secondary_type/name',
-        )
-        with open(attributes_potfile, 'rb') as f:
-            log.info('Parsing %s' % attributes_potfile)
-            po = pofile.read_po(f)
-            for message in po:
-                if not message.id or not isinstance(message.id, str):
-                    continue
-                for loc, pos in message.locations:
-                    if loc in extract_attributes:
-                        attributes["%s:%03d" % (loc, pos)] = message.id
-            if attributes:
-                self.attributes_py_file(attributes)
-            else:
-                sys.exit('Failed to extract any attribute !')
-
-    def countries_py_file(self, countries):
-        header = ("# -*- coding: utf-8 -*-\n"
-                  "# Automatically generated - don't edit.\n"
-                  "# Use `python setup.py {option}` to update it.\n"
-                  "\n"
-                  "RELEASE_COUNTRIES = {{\n")
-        line = "    '{code}': '{name}',\n"
-        footer = "}}\n"
-        filename = os.path.join('point_spectra_gui', 'const', 'countries.py')
-        with open(filename, 'w') as countries_py:
-            def write(s, **kwargs):
-                countries_py.write(s.format(**kwargs))
-
-            write(header, option=_get_option_name(self))
-            for code, name in sorted(countries.items(), key=lambda t: t[0]):
-                write(line, code=code, name=name.replace("'", "\\'"))
-            write(footer)
-            log.info("%s was rewritten (%d countries)" % (filename,
-                                                          len(countries)))
-
-    def attributes_py_file(self, attributes):
-        header = ("# -*- coding: utf-8 -*-\n"
-                  "# Automatically generated - don't edit.\n"
-                  "# Use `python setup.py {option}` to update it.\n"
-                  "\n"
-                  "MB_ATTRIBUTES = {{\n")
-        line = "    '{key}': '{value}',\n"
-        footer = "}}\n"
-        filename = os.path.join('point_spectra_gui', 'const', 'attributes.py')
-        with open(filename, 'w') as attributes_py:
-            def write(s, **kwargs):
-                attributes_py.write(s.format(**kwargs))
-
-            write(header, option=_get_option_name(self))
-            for key, value in sorted(attributes.items(), key=lambda i: i[0]):
-                write(line, key=key, value=value.replace("'", "\\'"))
-            write(footer)
-            log.info("%s was rewritten (%d attributes)" % (filename,
-                                                           len(attributes)))
 
 
 class point_spectra_gui_patch_version(Command):
@@ -598,41 +393,31 @@ def _point_spectra_gui_packages():
         packages.append(".".join(_explode_path(subdir)))
     return tuple(sorted(packages))
 
-    entry_points = {
-        'console_scripts': [
-            'point_spectra_gui = point_spectra_gui.__main__:main']}
-
-
-
 
 args2 = {
     'name': PACKAGE_NAME,
     'version': __version__,
     'description': "A PDART-funded effort to design a spectral analysis tool for LIBS (and other) spectra",
     # long_description=long_description,
-    'url':"https://github.com/USGS-Astrogeology/PySAT",
-    'author':"Ryan B. Anderson, Nicholas Finch",
-    'author_email':'rbanderson@usgs.gov, ngf4@nau.edu',
-    'license':"Public Domain",
+    'url': "https://github.com/USGS-Astrogeology/PySAT",
+    'author': "Ryan B. Anderson, Nicholas Finch",
+    'author_email': 'rbanderson@usgs.gov, ngf4@nau.edu',
+    'license': "Public Domain",
     'keywords': 'MusicBrainz metadata tagger point_spectra_gui',
     'package_dir': {'point_spectra_gui': 'point_spectra_gui'},
     'packages': _point_spectra_gui_packages(),
     'locales': _point_spectra_gui_get_locale_files(),
     'data_files': [],
+    'console_scripts': ['point_spectra_gui = point_spectra_gui.__main__:main'],
     'cmdclass': {
         'test': point_spectra_gui_test,
         'build': point_spectra_gui_build,
-        'build_locales': point_spectra_gui_build_locales,
         'build_ui': point_spectra_gui_build_ui,
         'clean_ui': point_spectra_gui_clean_ui,
         'install': point_spectra_gui_install,
-        'install_locales': point_spectra_gui_install_locales,
-        'update_constants': point_spectra_gui_update_constants,
-        'get_po_files': point_spectra_gui_get_po_files,
         'regen_pot_file': point_spectra_gui_regen_pot_file,
         'patch_version': point_spectra_gui_patch_version,
     },
-    'scripts': ['scripts/' + PACKAGE_NAME],
     'install_requires': ['PyQt5'],
     'classifiers': [
         'License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)',
@@ -668,6 +453,7 @@ def contrib_plugin_files():
                     plugin_files[file_root] = [os.path.join(root, file)]
     data_files = [(x, sorted(y)) for x, y in plugin_files.items()]
     return sorted(data_files, key=lambda x: x[0])
+
 
 def find_file_in_path(filename):
     for include_path in sys.path:

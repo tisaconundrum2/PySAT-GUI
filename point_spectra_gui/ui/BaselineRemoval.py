@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\tisaconundrum\Documents\GitHub\PySAT_Point_Spectra_GUI\ui\BaselineRemoval.ui'
-#
-# Created by: PyQt5 UI code generator 5.6
-#
-# WARNING! All changes made in this file will be lost!
+# Automatically generated - don't edit.
+# Use `python setup.py build_ui` to update it.
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -42,18 +39,8 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.formGroupBox.setTitle(_translate("Form", "Baseline Removal"))
-        self.chooseDataLabel.setText(_translate("Form", "Choose data"))
-        self.chooseAlgorithmLabel.setText(_translate("Form", "Choose algorithm"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
-    sys.exit(app.exec_())
+        Form.setWindowTitle(_("Form"))
+        self.formGroupBox.setTitle(_("Baseline Removal"))
+        self.chooseDataLabel.setText(_("Choose data"))
+        self.chooseAlgorithmLabel.setText(_("Choose algorithm"))
 

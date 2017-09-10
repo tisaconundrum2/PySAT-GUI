@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\tisaconundrum\Documents\GitHub\PySAT_Point_Spectra_GUI\ui\SubmodelPredict.ui'
-#
-# Created by: PyQt5 UI code generator 5.6
-#
-# WARNING! All changes made in this file will be lost!
+# Automatically generated - don't edit.
+# Use `python setup.py build_ui` to update it.
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -357,55 +354,45 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.groupBox.setTitle(_translate("Form", "Submodel - Predict"))
-        self.referenceModelLabel.setText(_translate("Form", "Choose reference model: "))
-        self.lowModelLabel.setText(_translate("Form", "Low Model"))
-        self.lowModelMaxLabel.setText(_translate("Form", "Max"))
-        self.minLabel.setText(_translate("Form", "Min"))
-        self.maxLabel.setText(_translate("Form", "Max"))
-        self.minLabel_2.setText(_translate("Form", "Min"))
-        self.maxLabel_2.setText(_translate("Form", "Max"))
-        self.minLabel_3.setText(_translate("Form", "Min"))
-        self.maxLabel_3.setText(_translate("Form", "Max"))
-        self.minLabel_4.setText(_translate("Form", "Min"))
-        self.maxLabel_4.setText(_translate("Form", "Max"))
-        self.minLabel_5.setText(_translate("Form", "Min"))
-        self.maxLabel_5.setText(_translate("Form", "Max"))
-        self.minLabel_6.setText(_translate("Form", "Min"))
-        self.maxLabel_6.setText(_translate("Form", "Max"))
-        self.minLabel_7.setText(_translate("Form", "Min"))
-        self.maxLabel_7.setText(_translate("Form", "Max"))
-        self.minLabel_8.setText(_translate("Form", "Min"))
-        self.maxLabel_8.setText(_translate("Form", "Max"))
-        self.minLabel_9.setText(_translate("Form", "Min"))
-        self.maxLabel_9.setText(_translate("Form", "Max"))
-        self.minLabel_10.setText(_translate("Form", "Min"))
-        self.maxLabel_10.setText(_translate("Form", "Max"))
-        self.minLabel_11.setText(_translate("Form", "Min"))
-        self.maxLabel_11.setText(_translate("Form", "Max"))
-        self.minLabel_12.setText(_translate("Form", "Min"))
-        self.maxLabel_12.setText(_translate("Form", "Max"))
-        self.minLabel_13.setText(_translate("Form", "Min"))
-        self.maxLabel_13.setText(_translate("Form", "Max"))
-        self.minLabel_14.setText(_translate("Form", "Min"))
-        self.maxLabel_14.setText(_translate("Form", "Max"))
-        self.minLabel_15.setText(_translate("Form", "Min"))
-        self.maxLabel_15.setText(_translate("Form", "Max"))
-        self.highModelLabel.setText(_translate("Form", "High Model"))
-        self.highModelMinLabel.setText(_translate("Form", "Min"))
-        self.pushButton.setText(_translate("Form", "Add submodel"))
-        self.pushButton_2.setText(_translate("Form", "Delete submodel"))
-        self.checkBox.setText(_translate("Form", "Optimize "))
-        self.chooseDataLabel.setText(_translate("Form", "Choose data to predict"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
-    sys.exit(app.exec_())
+        Form.setWindowTitle(_("Form"))
+        self.groupBox.setTitle(_("Submodel - Predict"))
+        self.referenceModelLabel.setText(_("Choose reference model: "))
+        self.lowModelLabel.setText(_("Low Model"))
+        self.lowModelMaxLabel.setText(_("Max"))
+        self.minLabel.setText(_("Min"))
+        self.maxLabel.setText(_("Max"))
+        self.minLabel_2.setText(_("Min"))
+        self.maxLabel_2.setText(_("Max"))
+        self.minLabel_3.setText(_("Min"))
+        self.maxLabel_3.setText(_("Max"))
+        self.minLabel_4.setText(_("Min"))
+        self.maxLabel_4.setText(_("Max"))
+        self.minLabel_5.setText(_("Min"))
+        self.maxLabel_5.setText(_("Max"))
+        self.minLabel_6.setText(_("Min"))
+        self.maxLabel_6.setText(_("Max"))
+        self.minLabel_7.setText(_("Min"))
+        self.maxLabel_7.setText(_("Max"))
+        self.minLabel_8.setText(_("Min"))
+        self.maxLabel_8.setText(_("Max"))
+        self.minLabel_9.setText(_("Min"))
+        self.maxLabel_9.setText(_("Max"))
+        self.minLabel_10.setText(_("Min"))
+        self.maxLabel_10.setText(_("Max"))
+        self.minLabel_11.setText(_("Min"))
+        self.maxLabel_11.setText(_("Max"))
+        self.minLabel_12.setText(_("Min"))
+        self.maxLabel_12.setText(_("Max"))
+        self.minLabel_13.setText(_("Min"))
+        self.maxLabel_13.setText(_("Max"))
+        self.minLabel_14.setText(_("Min"))
+        self.maxLabel_14.setText(_("Max"))
+        self.minLabel_15.setText(_("Min"))
+        self.maxLabel_15.setText(_("Max"))
+        self.highModelLabel.setText(_("High Model"))
+        self.highModelMinLabel.setText(_("Min"))
+        self.pushButton.setText(_("Add submodel"))
+        self.pushButton_2.setText(_("Delete submodel"))
+        self.checkBox.setText(_("Optimize "))
+        self.chooseDataLabel.setText(_("Choose data to predict"))
 

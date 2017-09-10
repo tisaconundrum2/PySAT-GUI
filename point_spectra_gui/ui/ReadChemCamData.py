@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\tisaconundrum\Documents\GitHub\PySAT_Point_Spectra_GUI\ui\ReadChemCamData.ui'
-#
-# Created by: PyQt5 UI code generator 5.6
-#
-# WARNING! All changes made in this file will be lost!
+# Automatically generated - don't edit.
+# Use `python setup.py build_ui` to update it.
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -76,24 +73,14 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.groupBox.setTitle(_translate("Form", "Read ChemCam Data"))
-        self.searchStringLabel.setText(_translate("Form", "Search String:"))
-        self.searchDirectoryLabel.setText(_translate("Form", "Search directory:"))
-        self.searchDirectorypushButton.setText(_translate("Form", "..."))
-        self.metadataFilesLabel.setText(_translate("Form", "Metadata file(s):"))
-        self.metadatapushButton.setText(_translate("Form", "..."))
-        self.outputFileNameLabel.setText(_translate("Form", "Output file name:"))
-        self.averagesLabel.setText(_translate("Form", "Averages"))
-        self.singleShotsLabel.setText(_translate("Form", "Single Shots"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
-    sys.exit(app.exec_())
+        Form.setWindowTitle(_("Form"))
+        self.groupBox.setTitle(_("Read ChemCam Data"))
+        self.searchStringLabel.setText(_("Search String:"))
+        self.searchDirectoryLabel.setText(_("Search directory:"))
+        self.searchDirectorypushButton.setText(_("..."))
+        self.metadataFilesLabel.setText(_("Metadata file(s):"))
+        self.metadatapushButton.setText(_("..."))
+        self.outputFileNameLabel.setText(_("Output file name:"))
+        self.averagesLabel.setText(_("Averages"))
+        self.singleShotsLabel.setText(_("Single Shots"))
 

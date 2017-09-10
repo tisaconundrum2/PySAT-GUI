@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\tisaconundrum\Documents\GitHub\PySAT_Point_Spectra_GUI\ui\RegressionTrain.ui'
-#
-# Created by: PyQt5 UI code generator 5.6
-#
-# WARNING! All changes made in this file will be lost!
+# Automatically generated - don't edit.
+# Use `python setup.py build_ui` to update it.
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -132,44 +129,34 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.regression.setTitle(_translate("Form", "Regression - Train"))
-        self.regression_choosedata_label.setText(_translate("Form", "Choose data:"))
-        self.regression_choosedata.setItemText(0, _translate("Form", "Choose Data"))
-        self.regression_choosedata.setItemText(1, _translate("Form", "Known Data"))
-        self.regression_choosex_label.setText(_translate("Form", "X Variable:"))
+        Form.setWindowTitle(_("Form"))
+        self.regression.setTitle(_("Regression - Train"))
+        self.regression_choosedata_label.setText(_("Choose data:"))
+        self.regression_choosedata.setItemText(0, _("Choose Data"))
+        self.regression_choosedata.setItemText(1, _("Known Data"))
+        self.regression_choosex_label.setText(_("X Variable:"))
         __sortingEnabled = self.regression_choosex.isSortingEnabled()
         self.regression_choosex.setSortingEnabled(False)
         item = self.regression_choosex.item(0)
-        item.setText(_translate("Form", "Choose X"))
+        item.setText(_("Choose X"))
         self.regression_choosex.setSortingEnabled(__sortingEnabled)
-        self.regression_choosey_label.setText(_translate("Form", "Y Variable:"))
+        self.regression_choosey_label.setText(_("Y Variable:"))
         self.regression_choosey.setSortingEnabled(True)
         __sortingEnabled = self.regression_choosey.isSortingEnabled()
         self.regression_choosey.setSortingEnabled(False)
         item = self.regression_choosey.item(0)
-        item.setText(_translate("Form", "Choose Y"))
+        item.setText(_("Choose Y"))
         self.regression_choosey.setSortingEnabled(__sortingEnabled)
-        self.min_label.setText(_translate("Form", "Min:"))
-        self.max_label.setText(_translate("Form", "Max:"))
-        self.regression_alg_choices.setItemText(0, _translate("Form", "Choose an algorithm"))
-        self.regression_alg_choices.setItemText(1, _translate("Form", "PLS"))
-        self.regression_alg_choices.setItemText(2, _translate("Form", "GP"))
-        self.regression_alg_choices.setItemText(3, _translate("Form", "OLS"))
-        self.regression_alg_choices.setItemText(4, _translate("Form", "OMP"))
-        self.regression_alg_choices.setItemText(5, _translate("Form", "Lasso"))
-        self.regression_alg_choices.setItemText(6, _translate("Form", "Lasso LARS"))
-        self.regression_alg_choices.setItemText(7, _translate("Form", "Elastic Net"))
-        self.regression_alg_choices.setItemText(8, _translate("Form", "Ridge"))
-        self.regression_alg_choices.setItemText(9, _translate("Form", "More to come..."))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
-    sys.exit(app.exec_())
+        self.min_label.setText(_("Min:"))
+        self.max_label.setText(_("Max:"))
+        self.regression_alg_choices.setItemText(0, _("Choose an algorithm"))
+        self.regression_alg_choices.setItemText(1, _("PLS"))
+        self.regression_alg_choices.setItemText(2, _("GP"))
+        self.regression_alg_choices.setItemText(3, _("OLS"))
+        self.regression_alg_choices.setItemText(4, _("OMP"))
+        self.regression_alg_choices.setItemText(5, _("Lasso"))
+        self.regression_alg_choices.setItemText(6, _("Lasso LARS"))
+        self.regression_alg_choices.setItemText(7, _("Elastic Net"))
+        self.regression_alg_choices.setItemText(8, _("Ridge"))
+        self.regression_alg_choices.setItemText(9, _("More to come..."))
 

@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\tisaconundrum\Documents\GitHub\PySAT_Point_Spectra_GUI\ui\Ridge.ui'
-#
-# Created by: PyQt5 UI code generator 5.6
-#
-# WARNING! All changes made in this file will be lost!
+# Automatically generated - don't edit.
+# Use `python setup.py build_ui` to update it.
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -163,48 +160,38 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.alphaLabel_2.setText(_translate("Form", "Alpha"))
-        self.copyXLabel_2.setText(_translate("Form", "Copy X"))
-        self.fitInterceptLabel_4.setText(_translate("Form", "Fit Intercept"))
-        self.maxNumOfIterationsLabel_2.setText(_translate("Form", "Max num of Iterations"))
-        self.maxNumOfIterationslineEdit_2.setText(_translate("Form", "None"))
-        self.normalizeLabel_4.setText(_translate("Form", "Normalize"))
-        self.solverLabel_2.setText(_translate("Form", "Solver"))
-        self.solverComboBox_2.setItemText(0, _translate("Form", "auto"))
-        self.solverComboBox_2.setItemText(1, _translate("Form", "svd"))
-        self.solverComboBox_2.setItemText(2, _translate("Form", "cholesky"))
-        self.solverComboBox_2.setItemText(3, _translate("Form", "lsqr"))
-        self.solverComboBox_2.setItemText(4, _translate("Form", "sparse_cg"))
-        self.solverComboBox_2.setItemText(5, _translate("Form", "sag"))
-        self.toleranceLabel_2.setText(_translate("Form", "Tolerance"))
-        self.randomStateLabel_2.setText(_translate("Form", "Random State"))
-        self.randomStateLineEdit_2.setText(_translate("Form", "None"))
-        self.alphasLabel_2.setText(_translate("Form", "alphas"))
-        self.alphasLineEdit_2.setText(_translate("Form", "0.1, 1.0, 10.0"))
-        self.fitInterceptLabel_3.setText(_translate("Form", "Fit intercept "))
-        self.normalizeLabel_3.setText(_translate("Form", "Normalize "))
-        self.scoringLabel_2.setText(_translate("Form", "Scoring"))
-        self.scoringComboBox_2.setItemText(0, _translate("Form", "None"))
-        self.scoringComboBox_2.setItemText(1, _translate("Form", "string"))
-        self.scoringComboBox_2.setItemText(2, _translate("Form", "callable"))
-        self.cvLabel_2.setText(_translate("Form", "CV"))
-        self.cvLineEdit_2.setText(_translate("Form", "None"))
-        self.gCVModeLabel_2.setText(_translate("Form", "GCV mode"))
-        self.gCVModeComboBox_2.setItemText(0, _translate("Form", "None"))
-        self.gCVModeComboBox_2.setItemText(1, _translate("Form", "auto"))
-        self.gCVModeComboBox_2.setItemText(2, _translate("Form", "svd"))
-        self.gCVModeComboBox_2.setItemText(3, _translate("Form", "eigen"))
-        self.storeCVValuesLabel_2.setText(_translate("Form", "Store CV Values           "))
-        self.crossValidateLabel_2.setText(_translate("Form", "Cross Validate              "))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
-    sys.exit(app.exec_())
+        Form.setWindowTitle(_("Form"))
+        self.alphaLabel_2.setText(_("Alpha"))
+        self.copyXLabel_2.setText(_("Copy X"))
+        self.fitInterceptLabel_4.setText(_("Fit Intercept"))
+        self.maxNumOfIterationsLabel_2.setText(_("Max num of Iterations"))
+        self.maxNumOfIterationslineEdit_2.setText(_("None"))
+        self.normalizeLabel_4.setText(_("Normalize"))
+        self.solverLabel_2.setText(_("Solver"))
+        self.solverComboBox_2.setItemText(0, _("auto"))
+        self.solverComboBox_2.setItemText(1, _("svd"))
+        self.solverComboBox_2.setItemText(2, _("cholesky"))
+        self.solverComboBox_2.setItemText(3, _("lsqr"))
+        self.solverComboBox_2.setItemText(4, _("sparse_cg"))
+        self.solverComboBox_2.setItemText(5, _("sag"))
+        self.toleranceLabel_2.setText(_("Tolerance"))
+        self.randomStateLabel_2.setText(_("Random State"))
+        self.randomStateLineEdit_2.setText(_("None"))
+        self.alphasLabel_2.setText(_("alphas"))
+        self.alphasLineEdit_2.setText(_("0.1, 1.0, 10.0"))
+        self.fitInterceptLabel_3.setText(_("Fit intercept "))
+        self.normalizeLabel_3.setText(_("Normalize "))
+        self.scoringLabel_2.setText(_("Scoring"))
+        self.scoringComboBox_2.setItemText(0, _("None"))
+        self.scoringComboBox_2.setItemText(1, _("string"))
+        self.scoringComboBox_2.setItemText(2, _("callable"))
+        self.cvLabel_2.setText(_("CV"))
+        self.cvLineEdit_2.setText(_("None"))
+        self.gCVModeLabel_2.setText(_("GCV mode"))
+        self.gCVModeComboBox_2.setItemText(0, _("None"))
+        self.gCVModeComboBox_2.setItemText(1, _("auto"))
+        self.gCVModeComboBox_2.setItemText(2, _("svd"))
+        self.gCVModeComboBox_2.setItemText(3, _("eigen"))
+        self.storeCVValuesLabel_2.setText(_("Store CV Values           "))
+        self.crossValidateLabel_2.setText(_("Cross Validate              "))
 

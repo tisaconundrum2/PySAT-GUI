@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\tisaconundrum\Documents\GitHub\PySAT_Point_Spectra_GUI\ui\MainWindow.ui'
-#
-# Created by: PyQt5 UI code generator 5.6
-#
-# WARNING! All changes made in this file will be lost!
+# Automatically generated - don't edit.
+# Use `python setup.py build_ui` to update it.
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -176,55 +173,45 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "PYSAT Point Spectra GUI"))
-        self.progressBar.setFormat(_translate("MainWindow", "%p%"))
-        self.deleteModulePushButton.setText(_translate("MainWindow", "Delete Module"))
-        self.okPushButton.setWhatsThis(_translate("MainWindow", "Press this button when you\'re ready to run. (Ctrl+Enter)"))
-        self.okPushButton.setText(_translate("MainWindow", "OK"))
-        self.menuFile.setTitle(_translate("MainWindow", "File"))
-        self.menuPreprocessing.setTitle(_translate("MainWindow", "Preprocessing"))
-        self.menuRegression.setTitle(_translate("MainWindow", "Regression"))
-        self.menuVisualization.setTitle(_translate("MainWindow", "Visualization"))
-        self.menuHelp.setTitle(_translate("MainWindow", "Help"))
-        self.menuDebug.setTitle(_translate("MainWindow", "Debug Mode"))
-        self.actionRead_ChemCam_Data.setText(_translate("MainWindow", "Read ChemCam Data"))
-        self.actionLoad_Data.setText(_translate("MainWindow", "Load Data"))
-        self.actionSet_Output_Path.setText(_translate("MainWindow", "Set Output Path"))
-        self.actionSave_Current_Data.setText(_translate("MainWindow", "Save Current Data"))
-        self.actionCreate_New_Workflow.setText(_translate("MainWindow", "Create New Workflow"))
-        self.actionRestore_Workflow.setText(_translate("MainWindow", "Restore Workflow"))
-        self.actionSave_Current_Workflow.setText(_translate("MainWindow", "Save Current Workflow"))
-        self.actionExit.setText(_translate("MainWindow", "Exit"))
-        self.actionRemove_Rows.setText(_translate("MainWindow", "Remove Rows"))
-        self.actionSplit_Data.setText(_translate("MainWindow", "Split Data"))
-        self.actionInterpolate.setText(_translate("MainWindow", "Interpolate"))
-        self.actionRemove_Baseline.setText(_translate("MainWindow", "Remove Baseline"))
-        self.actionApply_Mask.setText(_translate("MainWindow", "Apply Mask"))
-        self.actionPeak_Areas.setText(_translate("MainWindow", "Peak Areas"))
-        self.actionMultiply_by_Vector.setText(_translate("MainWindow", "Multiply by Vector"))
-        self.actionNormalization.setText(_translate("MainWindow", "Normalization"))
-        self.actionDimensionality_Reduction.setText(_translate("MainWindow", "Dimensionality Reduction"))
-        self.actionStratified_Folds.setText(_translate("MainWindow", "Stratified Folds"))
-        self.actionCross_Validation.setText(_translate("MainWindow", "Cross Validation"))
-        self.actionTrain.setText(_translate("MainWindow", "Train"))
-        self.actionSubmodel_Predict.setText(_translate("MainWindow", "Submodel Predict"))
-        self.actionPredict.setText(_translate("MainWindow", "Predict"))
-        self.actionPlot.setText(_translate("MainWindow", "Plot"))
-        self.actionPlot_Spectra.setText(_translate("MainWindow", "Plot Spectra"))
-        self.actionPlot_ICA_PCA.setText(_translate("MainWindow", "Plot ICA/PCA"))
-        self.actionAbout.setText(_translate("MainWindow", "About..."))
-        self.actionAbout_Qt.setText(_translate("MainWindow", "About Qt..."))
-        self.actionOpen_Workflow.setText(_translate("MainWindow", "Open Workflow"))
-        self.actionOn.setText(_translate("MainWindow", "On"))
-        self.actionOff.setText(_translate("MainWindow", "Off"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
+        MainWindow.setWindowTitle(_("PYSAT Point Spectra GUI"))
+        self.progressBar.setFormat(_("%p%"))
+        self.deleteModulePushButton.setText(_("Delete Module"))
+        self.okPushButton.setWhatsThis(_("Press this button when you\'re ready to run. (Ctrl+Enter)"))
+        self.okPushButton.setText(_("OK"))
+        self.menuFile.setTitle(_("File"))
+        self.menuPreprocessing.setTitle(_("Preprocessing"))
+        self.menuRegression.setTitle(_("Regression"))
+        self.menuVisualization.setTitle(_("Visualization"))
+        self.menuHelp.setTitle(_("Help"))
+        self.menuDebug.setTitle(_("Debug Mode"))
+        self.actionRead_ChemCam_Data.setText(_("Read ChemCam Data"))
+        self.actionLoad_Data.setText(_("Load Data"))
+        self.actionSet_Output_Path.setText(_("Set Output Path"))
+        self.actionSave_Current_Data.setText(_("Save Current Data"))
+        self.actionCreate_New_Workflow.setText(_("Create New Workflow"))
+        self.actionRestore_Workflow.setText(_("Restore Workflow"))
+        self.actionSave_Current_Workflow.setText(_("Save Current Workflow"))
+        self.actionExit.setText(_("Exit"))
+        self.actionRemove_Rows.setText(_("Remove Rows"))
+        self.actionSplit_Data.setText(_("Split Data"))
+        self.actionInterpolate.setText(_("Interpolate"))
+        self.actionRemove_Baseline.setText(_("Remove Baseline"))
+        self.actionApply_Mask.setText(_("Apply Mask"))
+        self.actionPeak_Areas.setText(_("Peak Areas"))
+        self.actionMultiply_by_Vector.setText(_("Multiply by Vector"))
+        self.actionNormalization.setText(_("Normalization"))
+        self.actionDimensionality_Reduction.setText(_("Dimensionality Reduction"))
+        self.actionStratified_Folds.setText(_("Stratified Folds"))
+        self.actionCross_Validation.setText(_("Cross Validation"))
+        self.actionTrain.setText(_("Train"))
+        self.actionSubmodel_Predict.setText(_("Submodel Predict"))
+        self.actionPredict.setText(_("Predict"))
+        self.actionPlot.setText(_("Plot"))
+        self.actionPlot_Spectra.setText(_("Plot Spectra"))
+        self.actionPlot_ICA_PCA.setText(_("Plot ICA/PCA"))
+        self.actionAbout.setText(_("About..."))
+        self.actionAbout_Qt.setText(_("About Qt..."))
+        self.actionOpen_Workflow.setText(_("Open Workflow"))
+        self.actionOn.setText(_("On"))
+        self.actionOff.setText(_("Off"))
 

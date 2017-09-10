@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\tisaconundrum\Documents\GitHub\PySAT_Point_Spectra_GUI\ui\GP.ui'
-#
-# Created by: PyQt5 UI code generator 5.6
-#
-# WARNING! All changes made in this file will be lost!
+# Automatically generated - don't edit.
+# Use `python setup.py build_ui` to update it.
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -76,23 +73,13 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.chooseDimensionalityReductionMethodLabel.setText(_translate("Form", "Choose dimensionality reduction method:"))
-        self.chooseDimensionalityReductionMethodComboBox.setItemText(0, _translate("Form", "PCA"))
-        self.chooseDimensionalityReductionMethodComboBox.setItemText(1, _translate("Form", "ICA"))
-        self.numOfComponentsLabel.setText(_translate("Form", "# of components"))
-        self.numOfRandomStartsLabel.setText(_translate("Form", "# of random starts"))
-        self.startingThetaLabel.setText(_translate("Form", "Starting Theta"))
-        self.lowerBoundOnThetaLabel.setText(_translate("Form", "Lower bound on Theta"))
-        self.upperBoundOnThetaLabel.setText(_translate("Form", "Upper bound on theta"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
-    sys.exit(app.exec_())
+        Form.setWindowTitle(_("Form"))
+        self.chooseDimensionalityReductionMethodLabel.setText(_("Choose dimensionality reduction method:"))
+        self.chooseDimensionalityReductionMethodComboBox.setItemText(0, _("PCA"))
+        self.chooseDimensionalityReductionMethodComboBox.setItemText(1, _("ICA"))
+        self.numOfComponentsLabel.setText(_("# of components"))
+        self.numOfRandomStartsLabel.setText(_("# of random starts"))
+        self.startingThetaLabel.setText(_("Starting Theta"))
+        self.lowerBoundOnThetaLabel.setText(_("Lower bound on Theta"))
+        self.upperBoundOnThetaLabel.setText(_("Upper bound on theta"))
 

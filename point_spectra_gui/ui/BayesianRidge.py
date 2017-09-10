@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\tisaconundrum\Documents\GitHub\PySAT_Point_Spectra_GUI\ui\BayesianRidge.ui'
-#
-# Created by: PyQt5 UI code generator 5.6
-#
-# WARNING! All changes made in this file will be lost!
+# Automatically generated - don't edit.
+# Use `python setup.py build_ui` to update it.
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -106,30 +103,20 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.numOfIterationsLabel.setText(_translate("Form", "num of iterations"))
-        self.toleranceLabel.setText(_translate("Form", "Tolerance"))
-        self.alpha1Label.setText(_translate("Form", "Alpha 1"))
-        self.alpha2Label.setText(_translate("Form", "Alpha 2"))
-        self.lambdaLabel.setText(_translate("Form", "Lambda"))
-        self.computerScoreLabel.setText(_translate("Form", "Computer Score"))
-        self.computerScoreCheckBox.setText(_translate("Form", "compute the objective function at each step of the model"))
-        self.fitInterceptLabel.setText(_translate("Form", "Fit Intercept"))
-        self.fitInterceptCheckBox.setText(_translate("Form", "calculate the intercept for this model"))
-        self.normalizeLabel.setText(_translate("Form", "Normalize"))
-        self.normalizeCheckBox.setText(_translate("Form", "regressors X will be normlized before regression"))
-        self.copyXLabel.setText(_translate("Form", "Copy X"))
-        self.copyXCheckBox.setText(_translate("Form", "X will be copied; else, it may be overwritten"))
-        self.verboseLabel.setText(_translate("Form", "Verbose"))
-        self.verboseCheckBox.setText(_translate("Form", "Verbose mode when fitting the model"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
-    sys.exit(app.exec_())
+        Form.setWindowTitle(_("Form"))
+        self.numOfIterationsLabel.setText(_("num of iterations"))
+        self.toleranceLabel.setText(_("Tolerance"))
+        self.alpha1Label.setText(_("Alpha 1"))
+        self.alpha2Label.setText(_("Alpha 2"))
+        self.lambdaLabel.setText(_("Lambda"))
+        self.computerScoreLabel.setText(_("Computer Score"))
+        self.computerScoreCheckBox.setText(_("compute the objective function at each step of the model"))
+        self.fitInterceptLabel.setText(_("Fit Intercept"))
+        self.fitInterceptCheckBox.setText(_("calculate the intercept for this model"))
+        self.normalizeLabel.setText(_("Normalize"))
+        self.normalizeCheckBox.setText(_("regressors X will be normlized before regression"))
+        self.copyXLabel.setText(_("Copy X"))
+        self.copyXCheckBox.setText(_("X will be copied; else, it may be overwritten"))
+        self.verboseLabel.setText(_("Verbose"))
+        self.verboseCheckBox.setText(_("Verbose mode when fitting the model"))
 

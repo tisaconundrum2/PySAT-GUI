@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\tisaconundrum\Documents\GitHub\PySAT_Point_Spectra_GUI\ui\CCAM.ui'
-#
-# Created by: PyQt5 UI code generator 5.6
-#
-# WARNING! All changes made in this file will be lost!
+# Automatically generated - don't edit.
+# Use `python setup.py build_ui` to update it.
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -44,21 +41,11 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.largestWaveletScaleLabel.setText(_translate("Form", "Largest Wavelet Scale"))
-        self.lowestWaveletScaleLabel.setText(_translate("Form", "Lowest Wavelet Scale"))
-        self.interpolationMethodLabel.setText(_translate("Form", "Interpolation Method"))
-        self.interpolationMethodComboBox.setItemText(0, _translate("Form", "Spline"))
-        self.interpolationMethodComboBox.setItemText(1, _translate("Form", "Quadratic"))
-        self.interpolationMethodComboBox.setItemText(2, _translate("Form", "Linear"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
-    sys.exit(app.exec_())
+        Form.setWindowTitle(_("Form"))
+        self.largestWaveletScaleLabel.setText(_("Largest Wavelet Scale"))
+        self.lowestWaveletScaleLabel.setText(_("Lowest Wavelet Scale"))
+        self.interpolationMethodLabel.setText(_("Interpolation Method"))
+        self.interpolationMethodComboBox.setItemText(0, _("Spline"))
+        self.interpolationMethodComboBox.setItemText(1, _("Quadratic"))
+        self.interpolationMethodComboBox.setItemText(2, _("Linear"))
 

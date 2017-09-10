@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\tisaconundrum\Documents\GitHub\PySAT_Point_Spectra_GUI\ui\WriteToCSV.ui'
-#
-# Created by: PyQt5 UI code generator 5.6
-#
-# WARNING! All changes made in this file will be lost!
+# Automatically generated - don't edit.
+# Use `python setup.py build_ui` to update it.
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -49,29 +46,19 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.groupBox.setTitle(_translate("Form", "Write to CSV"))
-        self.chooseDataSetLabel.setText(_translate("Form", "Choose data set to write to *.csv:"))
-        self.variablesToWriteLabel.setText(_translate("Form", "Variables to write:"))
+        Form.setWindowTitle(_("Form"))
+        self.groupBox.setTitle(_("Write to CSV"))
+        self.chooseDataSetLabel.setText(_("Choose data set to write to *.csv:"))
+        self.variablesToWriteLabel.setText(_("Variables to write:"))
         __sortingEnabled = self.variablesToWriteListWidget.isSortingEnabled()
         self.variablesToWriteListWidget.setSortingEnabled(False)
         item = self.variablesToWriteListWidget.item(0)
-        item.setText(_translate("Form", "comp"))
+        item.setText(_("comp"))
         item = self.variablesToWriteListWidget.item(1)
-        item.setText(_translate("Form", "meta"))
+        item.setText(_("meta"))
         item = self.variablesToWriteListWidget.item(2)
-        item.setText(_translate("Form", "wvl"))
+        item.setText(_("wvl"))
         self.variablesToWriteListWidget.setSortingEnabled(__sortingEnabled)
-        self.specifyAFilenameLabel.setText(_translate("Form", "Specify a filename:"))
-        self.specifyAFilenameLineEdit.setText(_translate("Form", "output.csv"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
-    sys.exit(app.exec_())
+        self.specifyAFilenameLabel.setText(_("Specify a filename:"))
+        self.specifyAFilenameLineEdit.setText(_("output.csv"))
 

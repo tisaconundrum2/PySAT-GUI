@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\tisaconundrum\Documents\GitHub\PySAT_Point_Spectra_GUI\ui\KRR.ui'
-#
-# Created by: PyQt5 UI code generator 5.6
-#
-# WARNING! All changes made in this file will be lost!
+# Automatically generated - don't edit.
+# Use `python setup.py build_ui` to update it.
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -70,24 +67,14 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.alphaLabel.setText(_translate("Form", "Alpha"))
-        self.kernelLabel.setText(_translate("Form", "Kernel"))
-        self.kernelLineEdit.setText(_translate("Form", "linear"))
-        self.gammaLabel.setText(_translate("Form", "Gamma"))
-        self.gammaLineEdit.setText(_translate("Form", "None"))
-        self.degreeLabel.setText(_translate("Form", "Degree"))
-        self.coeff0Label.setText(_translate("Form", "Coeff 0"))
-        self.kernelParametersLabel.setText(_translate("Form", "Kernel Parameters"))
-        self.kernelParametersLineEdit.setText(_translate("Form", "None"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
-    sys.exit(app.exec_())
+        Form.setWindowTitle(_("Form"))
+        self.alphaLabel.setText(_("Alpha"))
+        self.kernelLabel.setText(_("Kernel"))
+        self.kernelLineEdit.setText(_("linear"))
+        self.gammaLabel.setText(_("Gamma"))
+        self.gammaLineEdit.setText(_("None"))
+        self.degreeLabel.setText(_("Degree"))
+        self.coeff0Label.setText(_("Coeff 0"))
+        self.kernelParametersLabel.setText(_("Kernel Parameters"))
+        self.kernelParametersLineEdit.setText(_("None"))
 

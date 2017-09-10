@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\tisaconundrum\Documents\GitHub\PySAT_Point_Spectra_GUI\ui\LoadData.ui'
-#
-# Created by: PyQt5 UI code generator 5.6
-#
-# WARNING! All changes made in this file will be lost!
+# Automatically generated - don't edit.
+# Use `python setup.py build_ui` to update it.
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -45,20 +42,10 @@ class Ui_loadData(object):
 
     def retranslateUi(self, loadData):
         _translate = QtCore.QCoreApplication.translate
-        loadData.setWindowTitle(_translate("loadData", "Form"))
-        self.groupBox.setTitle(_translate("loadData", "Load Data"))
-        self.fileNameLabel.setText(_translate("loadData", "File Name"))
-        self.fileNameLineEdit.setText(_translate("loadData", "*.csv"))
-        self.newFilePushButton.setText(_translate("loadData", "..."))
-        self.dataSetNameLabel.setText(_translate("loadData", "Data Set Name"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    loadData = QtWidgets.QWidget()
-    ui = Ui_loadData()
-    ui.setupUi(loadData)
-    loadData.show()
-    sys.exit(app.exec_())
+        loadData.setWindowTitle(_("Form"))
+        self.groupBox.setTitle(_("Load Data"))
+        self.fileNameLabel.setText(_("File Name"))
+        self.fileNameLineEdit.setText(_("*.csv"))
+        self.newFilePushButton.setText(_("..."))
+        self.dataSetNameLabel.setText(_("Data Set Name"))
 

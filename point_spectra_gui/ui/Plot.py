@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\tisaconundrum\Documents\GitHub\PySAT_Point_Spectra_GUI\ui\Plot.ui'
-#
-# Created by: PyQt5 UI code generator 5.6
-#
-# WARNING! All changes made in this file will be lost!
+# Automatically generated - don't edit.
+# Use `python setup.py build_ui` to update it.
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -186,35 +183,25 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.groupBox.setTitle(_translate("Form", "Plot"))
-        self.chooseDataLabel.setText(_translate("Form", "Choose data"))
-        self.figureNameLabel.setText(_translate("Form", "Figure name"))
-        self.plotTitleLabel.setText(_translate("Form", "Plot Title"))
-        self.chooseXVariableLabel.setText(_translate("Form", "Choose X Variable"))
-        self.xTitleLabel.setText(_translate("Form", "X title"))
-        self.xMinLabel.setText(_translate("Form", "X min"))
-        self.xMaxLabel.setText(_translate("Form", "X max"))
-        self.chooseYVariableLabel.setText(_translate("Form", "Choose Y Variable"))
-        self.yTitleLabel.setText(_translate("Form", "Y title"))
-        self.yMinLabel.setText(_translate("Form", "Y min"))
-        self.yMaxLabel.setText(_translate("Form", "X max"))
-        self.oneToOneLabel.setText(_translate("Form", "One to One"))
-        self.legendLabel.setText(_translate("Form", "Legend"))
-        self.alphaLabel.setText(_translate("Form", "Alpha"))
-        self.markerLabel.setText(_translate("Form", "Marker"))
-        self.plotFilenameLabel.setText(_translate("Form", "Plot Filename"))
-        self.lineLabel.setText(_translate("Form", "Line"))
-        self.colorLabel.setText(_translate("Form", "Color"))
-        self.plotFilenamePushButton.setText(_translate("Form", "..."))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
-    sys.exit(app.exec_())
+        Form.setWindowTitle(_("Form"))
+        self.groupBox.setTitle(_("Plot"))
+        self.chooseDataLabel.setText(_("Choose data"))
+        self.figureNameLabel.setText(_("Figure name"))
+        self.plotTitleLabel.setText(_("Plot Title"))
+        self.chooseXVariableLabel.setText(_("Choose X Variable"))
+        self.xTitleLabel.setText(_("X title"))
+        self.xMinLabel.setText(_("X min"))
+        self.xMaxLabel.setText(_("X max"))
+        self.chooseYVariableLabel.setText(_("Choose Y Variable"))
+        self.yTitleLabel.setText(_("Y title"))
+        self.yMinLabel.setText(_("Y min"))
+        self.yMaxLabel.setText(_("X max"))
+        self.oneToOneLabel.setText(_("One to One"))
+        self.legendLabel.setText(_("Legend"))
+        self.alphaLabel.setText(_("Alpha"))
+        self.markerLabel.setText(_("Marker"))
+        self.plotFilenameLabel.setText(_("Plot Filename"))
+        self.lineLabel.setText(_("Line"))
+        self.colorLabel.setText(_("Color"))
+        self.plotFilenamePushButton.setText(_("..."))
 
