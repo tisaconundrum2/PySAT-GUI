@@ -1,37 +1,14 @@
-from os import path
-from setuptools import setup, find_packages
-
-import point_spectra_gui
-
-VERSION = point_spectra_gui.__version__
-here = path.abspath(path.dirname(__file__))
-
-# TODO PyPi requires a README.rst file, not a README.md
-# with open(path.join(here, 'README.md'), encoding='utf-8') as f:
-#     long_description = f.read()
-
-setup(
-    name="Point Spectra GUI",
-    version=VERSION,
-    description="A PDART-funded effort to design a spectral analysis tool for LIBS (and other) spectra",
-    # long_description=long_description,
-    url="https://github.com/USGS-Astrogeology/PySAT",
-    author="Ryan B. Anderson, Nicholas Finch",
-    author_email='rbanderson@usgs.gov, ngf4@nau.edu',
-    license="Public Domain",
-    entry_points={
-        'console_scripts': [
-            'point_spectra_gui = point_spectra_gui.__main__:main'
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 from __future__ import print_function
+
 import datetime
 import glob
 import os
 import re
-import sys
 import subprocess
+import sys
 from io import StringIO
 
 from point_spectra_gui import __version__
@@ -39,11 +16,11 @@ from point_spectra_gui import __version__
 if sys.version_info < (3, 5):
     sys.exit("ERROR: You need Python 3.5 or higher to use point_spectra_gui.")
 
-
 args = {}
 
 try:
     from py2app.build_app import py2app
+
     do_py2app = True
 except ImportError:
     do_py2app = False
@@ -58,19 +35,7 @@ from distutils.dist import Distribution
 from distutils.spawn import find_executable
 from setuptools import setup, Command, Extension
 
-
 PACKAGE_NAME = "Point Spectra GUI"
-
-ext_modules = [
-    Extension('point_spectra_gui.util._astrcmp', sources=['point_spectra_gui/util/_astrcmp.c']),
-]
-
-py2app_exclude_modules = [
-    'pydoc',
-    'PyQt5.QtDeclarative', 'PyQt5.QtDesigner', 'PyQt5.QtHelp', 'PyQt5.QtMultimedia',
-    'PyQt5.QtOpenGL', 'PyQt5.QtScript', 'PyQt5.QtScriptTools', 'PyQt5.QtSql', 'PyQt5.QtSvg',
-    'PyQt5.QtTest', 'PyQt5.QtWebKit', 'PyQt5.QtXml', 'PyQt5.QtXmlPatterns', 'PyQt5.phonon'
-]
 
 # sockets module, however not excluded from py2exe should not be used in point_spectra_gui. Instead
 # the QtNetwork module should be used. sockets module was removed from the excluded list
@@ -151,6 +116,7 @@ class point_spectra_gui_build_locales(Command):
             self.mkpath(path)
             self.spawn(['msgfmt', '-o', mo, po])
 
+
 Distribution.locales = None
 
 
@@ -177,7 +143,7 @@ class point_spectra_gui_install_locales(Command):
                                    ('install_locales', 'install_dir'),
                                    ('force', 'force'),
                                    ('skip_build', 'skip_build'),
-                                  )
+                                   )
 
     def run(self):
         if not self.skip_build:
@@ -192,7 +158,6 @@ class point_spectra_gui_install_locales(Command):
 
 
 class point_spectra_gui_install(install):
-
     user_options = install.user_options + [
         ('install-locales=', None,
          "installation directory for locales"),
@@ -230,7 +195,6 @@ class point_spectra_gui_install(install):
 
 
 class point_spectra_gui_build(build):
-
     user_options = build.user_options + [
         ('build-locales=', 'd', "build directory for locale files"),
         ('localedir=', None, ''),
@@ -261,7 +225,8 @@ class point_spectra_gui_build(build):
     def run(self):
         if 'bdist_nsis' not in sys.argv:  # somebody shoot me please
             log.info('generating scripts/%s from scripts/point_spectra_gui.in', PACKAGE_NAME)
-            generate_file('scripts/point_spectra_gui.in', 'scripts/' + PACKAGE_NAME, {'localedir': self.localedir, 'autoupdate': not self.disable_autoupdate})
+            generate_file('scripts/point_spectra_gui.in', 'scripts/' + PACKAGE_NAME,
+                          {'localedir': self.localedir, 'autoupdate': not self.disable_autoupdate})
         build.run(self)
 
 
@@ -292,7 +257,7 @@ class point_spectra_gui_build_ui(Command):
             files = []
             for f in self.files.split(","):
                 head, tail = os.path.split(f)
-                m = re.match(r'(?:ui_)?([^.]+)', tail)
+                m = re.match(tail)
                 if m:
                     name = m.group(1)
                 else:
@@ -328,7 +293,7 @@ class point_spectra_gui_build_ui(Command):
             tmp = StringIO()
             uic.compileUi(uifile, tmp)
             source = tmp.getvalue()
-            rc = re.compile(r'\n\n#.*?(?=\n\n)', re.MULTILINE|re.DOTALL)
+            rc = re.compile(r'\n\n#.*?(?=\n\n)', re.MULTILINE | re.DOTALL)
             comment = ("\n\n# Automatically generated - don't edit.\n"
                        "# Use `python setup.py %s` to update it."
                        % _get_option_name(self))
@@ -346,10 +311,6 @@ class point_spectra_gui_build_ui(Command):
             for uifile, pyfile in ui_files():
                 if newer(uifile, pyfile):
                     compile_ui(uifile, pyfile)
-
-        from resources import compile, makeqrc
-        makeqrc.main()
-        compile.main()
 
 
 class point_spectra_gui_clean_ui(Command):
@@ -409,12 +370,15 @@ try:
     from babel import __version__ as babel_version
     from babel.messages import frontend as babel
 
+
     def versiontuple(v):
         return tuple(map(int, (v.split("."))))
+
 
     # input_dirs are incorrectly handled in babel versions < 1.0
     # http://babel.edgewall.org/ticket/232
     input_dirs_workaround = versiontuple(babel_version) < (1, 0, 0)
+
 
     class point_spectra_gui_regen_pot_file(babel.extract_messages):
         description = _regen_pot_description
@@ -450,8 +414,8 @@ except ImportError:
 def _get_option_name(obj):
     """Returns the name of the option for specified Command object"""
     for name, klass in obj.distribution.cmdclass.items():
-            if obj.__class__ == klass:
-                return name
+        if obj.__class__ == klass:
+            return name
     raise Exception("No such command class")
 
 
@@ -531,8 +495,8 @@ class point_spectra_gui_update_constants(Command):
                   "# Use `python setup.py {option}` to update it.\n"
                   "\n"
                   "RELEASE_COUNTRIES = {{\n")
-        line   =  "    '{code}': '{name}',\n"
-        footer =  "}}\n"
+        line = "    '{code}': '{name}',\n"
+        footer = "}}\n"
         filename = os.path.join('point_spectra_gui', 'const', 'countries.py')
         with open(filename, 'w') as countries_py:
             def write(s, **kwargs):
@@ -551,8 +515,8 @@ class point_spectra_gui_update_constants(Command):
                   "# Use `python setup.py {option}` to update it.\n"
                   "\n"
                   "MB_ATTRIBUTES = {{\n")
-        line   =  "    '{key}': '{value}',\n"
-        footer =  "}}\n"
+        line = "    '{key}': '{value}',\n"
+        footer = "}}\n"
         filename = os.path.join('point_spectra_gui', 'const', 'attributes.py')
         with open(filename, 'w') as attributes_py:
             def write(s, **kwargs):
@@ -620,7 +584,7 @@ def _explode_path(path):
     """Return a list of components of the path (ie. "/a/b" -> ["a", "b"])"""
     components = []
     while True:
-        (path,tail) = os.path.split(path)
+        (path, tail) = os.path.split(path)
         if tail == "":
             components.reverse()
             return components
@@ -634,17 +598,26 @@ def _point_spectra_gui_packages():
         packages.append(".".join(_explode_path(subdir)))
     return tuple(sorted(packages))
 
+    entry_points = {
+        'console_scripts': [
+            'point_spectra_gui = point_spectra_gui.__main__:main']}
+
+
+
 
 args2 = {
     'name': PACKAGE_NAME,
     'version': __version__,
-    'description': 'The next generation MusicBrainz tagger',
+    'description': "A PDART-funded effort to design a spectral analysis tool for LIBS (and other) spectra",
+    # long_description=long_description,
+    'url':"https://github.com/USGS-Astrogeology/PySAT",
+    'author':"Ryan B. Anderson, Nicholas Finch",
+    'author_email':'rbanderson@usgs.gov, ngf4@nau.edu',
+    'license':"Public Domain",
     'keywords': 'MusicBrainz metadata tagger point_spectra_gui',
-    'url': 'https://point_spectra_gui.musicbrainz.org/',
     'package_dir': {'point_spectra_gui': 'point_spectra_gui'},
     'packages': _point_spectra_gui_packages(),
     'locales': _point_spectra_gui_get_locale_files(),
-    'ext_modules': ext_modules,
     'data_files': [],
     'cmdclass': {
         'test': point_spectra_gui_test,
@@ -660,17 +633,16 @@ args2 = {
         'patch_version': point_spectra_gui_patch_version,
     },
     'scripts': ['scripts/' + PACKAGE_NAME],
-    'install_requires': ['PyQt5', 'mutagen'],
+    'install_requires': ['PyQt5'],
     'classifiers': [
-    'License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)',
-    'Development Status :: 3 - Alpha',
-    'Programming Language :: Python :: 3.5',
-    'Programming Language :: Python :: 3.6',
-    'Operating System :: Microsoft :: Windows',
-    'Operating System :: MacOS',
-    'Operating System :: POSIX :: Linux',
-    'Topic :: Multimedia :: Sound/Audio',
-    'Topic :: Multimedia :: Sound/Audio :: Analysis'
+        'License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Operating System :: Microsoft :: Windows',
+        'Operating System :: MacOS',
+        'Operating System :: POSIX :: Linux',
+        'Topic :: Science :: Spectral/LIBS',
+        'Topic :: Science :: Spectral/LIBS :: Analysis'
     ]
 }
 args.update(args2)
@@ -696,62 +668,6 @@ def contrib_plugin_files():
                     plugin_files[file_root] = [os.path.join(root, file)]
     data_files = [(x, sorted(y)) for x, y in plugin_files.items()]
     return sorted(data_files, key=lambda x: x[0])
-
-
-try:
-    from py2exe.build_exe import py2exe
-
-    class bdist_nsis(py2exe):
-
-        def run(self):
-            generate_file('scripts/point_spectra_gui.py2exe.in', 'scripts/point_spectra_gui', {})
-            self.distribution.data_files.append(
-                ("", ["discid.dll", "fpcalc.exe", "msvcr90.dll", "msvcp90.dll"]))
-            for locale in self.distribution.locales:
-                self.distribution.data_files.append(
-                    ("locale/" + locale[1] + "/LC_MESSAGES",
-                     ["build/locale/" + locale[1] + "/LC_MESSAGES/" + locale[0] + ".mo"]))
-            self.distribution.data_files.append(
-                ("imageformats", [find_file_in_path("PyQt5/plugins/imageformats/qgif4.dll"),
-                                  find_file_in_path("PyQt5/plugins/imageformats/qjpeg4.dll"),
-                                  find_file_in_path("PyQt5/plugins/imageformats/qtiff4.dll")]))
-            self.distribution.data_files.append(
-                ("accessible", [find_file_in_path("PyQt5/plugins/accessible/qtaccessiblewidgets4.dll")]))
-            self.distribution.data_files += contrib_plugin_files()
-
-            py2exe.run(self)
-            print("*** creating the NSIS setup script ***")
-            pathname = r"installer\point_spectra_gui-setup.nsi"
-            generate_file(pathname + ".in", pathname,
-                          {'name': 'MusicBrainz point_spectra_gui',
-                           'version': __version__,
-                           'description': 'The next generation MusicBrainz tagger.',
-                           'url': 'https://point_spectra_gui.musicbrainz.org/', })
-            print("*** compiling the NSIS setup script ***")
-            subprocess.call([self.find_nsis(), pathname])
-
-        def find_nsis(self):
-            import _winreg
-            with _winreg.OpenKey(_winreg.HKEY_LOCAL_MACHINE, "Software\\NSIS") as reg_key:
-                nsis_path = _winreg.QueryValueEx(reg_key, "")[0]
-                return os.path.join(nsis_path, "makensis.exe")
-
-    args['cmdclass']['bdist_nsis'] = bdist_nsis
-    args['windows'] = [{
-        'script': 'scripts/point_spectra_gui',
-        'icon_resources': [(1, 'point_spectra_gui.ico')],
-    }]
-    args['options'] = {
-        'bdist_nsis': {
-            # mimetypes is necessary for the videotools plugin
-            'includes': ['json', 'sip', 'mimetypes'] + [e.name for e in ext_modules],
-            'excludes': exclude_modules + py2exe_exclude_modules,
-            'optimize': 2,
-        },
-    }
-except ImportError:
-    py2exe = None
-
 
 def find_file_in_path(filename):
     for include_path in sys.path:
