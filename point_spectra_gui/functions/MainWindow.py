@@ -32,10 +32,6 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         sys.stdout = EmittingStream(textWritten=self.normalOutputWritten)
         sys.stderr = EmittingStream(textWritten=self.normalOutputWritten)
 
-    def retranslateUi(self, MainWindow):
-        _ = QtCore.QCoreApplication.translate
-        super().retranslateUi(MainWindow)
-
     def __del__(self):
         # Restore sys.stdout
         sys.stdout = sys.__stdout__
