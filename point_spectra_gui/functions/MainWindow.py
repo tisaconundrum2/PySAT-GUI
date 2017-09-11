@@ -33,14 +33,14 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
 
     def normal(self):
         sys.stdout = EmittingStream(textWritten=self.normalOutputWritten)
-        sys.stderr = EmittingStream(textWritten=self.normalOutputWritten)
+        sys.stderr = sys.__stderr__
+        # sys.stderr = EmittingStream(textWritten=self.normalOutputWritten)
         self.actionOn.setDisabled(False)
         self.actionOff.setDisabled(True)
 
     def debug(self):
         # Restore sys.stdout
         sys.stdout = sys.__stdout__
-        sys.stderr = sys.__stderr__
         self.actionOn.setDisabled(True)
         self.actionOff.setDisabled(False)
 

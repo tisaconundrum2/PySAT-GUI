@@ -15,7 +15,7 @@ class Ui_Form(Ui_Form, Basics):
         self.connectWidgets()
 
     def get_widget(self):
-        return self.gridGroupBox
+        return self.groupLayout
 
     def make_regression_widget(self, alg, params=None):
         self.hideAll()
@@ -42,6 +42,9 @@ class Ui_Form(Ui_Form, Basics):
                                'More to come...']
         self.setComboBox(self.chooseDataComboBox, self.datakeys)
         self.setComboBox(self.chooseAlgorithmComboBox, self.algorithm_list)
+        self.yMaxDoubleSpinBox.setMaximum(999999)
+        self.yMinDoubleSpinBox.setMaximum(999999)
+        self.yMaxDoubleSpinBox.setValue(100)
         self.chooseAlgorithmComboBox.currentIndexChanged.connect(
             lambda: self.make_regression_widget(self.chooseAlgorithmComboBox.currentText()))
         self.chooseDataComboBox.activated[int].connect(

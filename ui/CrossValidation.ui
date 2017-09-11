@@ -2,138 +2,147 @@
 <ui version="4.0">
  <class>Form</class>
  <widget class="QWidget" name="Form">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>538</width>
-    <height>317</height>
-   </rect>
-  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0">
-      <widget class="QLabel" name="chooseDataLabel">
-       <property name="text">
-        <string>Choose Data</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="xVariableLabel">
-       <property name="text">
-        <string>X Variable</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="3">
-      <widget class="QLabel" name="yVariableLabel">
-       <property name="text">
-        <string>Y Variable</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0" colspan="3">
-      <widget class="QListWidget" name="xVariableList">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>900</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <item>
+    <widget class="QGroupBox" name="groupLayout">
+     <property name="title">
+      <string>Cross Validation / Training</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QLabel" name="chooseDataLabel">
+          <property name="text">
+           <string>Choose Data</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="chooseDataComboBox"/>
+        </item>
+       </layout>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="xVariableLabel">
         <property name="text">
-         <string>Choose X</string>
+         <string>X Variable</string>
         </property>
-       </item>
-      </widget>
-     </item>
-     <item row="2" column="3" colspan="4">
-      <widget class="QListWidget" name="yVariableList">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>900</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="sortingEnabled">
-        <bool>true</bool>
-       </property>
-       <item>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLabel" name="yVariableLabel">
         <property name="text">
-         <string>Choose Y</string>
+         <string>Y Variable</string>
         </property>
-       </item>
-      </widget>
-     </item>
-     <item row="3" column="3">
-      <widget class="QLabel" name="yMaxLabel">
-       <property name="text">
-        <string>Y Max</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="4">
-      <widget class="QDoubleSpinBox" name="yMaxDoubleSpinBox"/>
-     </item>
-     <item row="3" column="5">
-      <widget class="QLabel" name="yMinLabel">
-       <property name="text">
-        <string>Y Min</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="6">
-      <widget class="QDoubleSpinBox" name="yMinDoubleSpinBox"/>
-     </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="chooseAlgorithmLabel">
-       <property name="text">
-        <string>Choose Algorithm</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="0" colspan="7">
-      <layout class="QVBoxLayout" name="algorithmLayout"/>
-     </item>
-     <item row="4" column="1" colspan="2">
-      <widget class="QComboBox" name="chooseAlgorithmComboBox"/>
-     </item>
-     <item row="0" column="1" colspan="2">
-      <widget class="QComboBox" name="chooseDataComboBox"/>
-     </item>
-    </layout>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QListWidget" name="xVariableList">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>900</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <item>
+         <property name="text">
+          <string>Choose X</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QListWidget" name="yVariableList">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>900</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="sortingEnabled">
+         <bool>true</bool>
+        </property>
+        <item>
+         <property name="text">
+          <string>Choose Y</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QLabel" name="chooseAlgorithmLabel">
+          <property name="text">
+           <string>Choose Algorithm</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="chooseAlgorithmComboBox"/>
+        </item>
+       </layout>
+      </item>
+      <item row="3" column="1">
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QLabel" name="yMinLabel">
+          <property name="text">
+           <string>Y Min</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDoubleSpinBox" name="yMinDoubleSpinBox"/>
+        </item>
+        <item>
+         <widget class="QLabel" name="yMaxLabel">
+          <property name="text">
+           <string>Y Max</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDoubleSpinBox" name="yMaxDoubleSpinBox"/>
+        </item>
+       </layout>
+      </item>
+      <item row="4" column="0" colspan="2">
+       <layout class="QVBoxLayout" name="algorithmLayout"/>
+      </item>
+     </layout>
+    </widget>
    </item>
   </layout>
  </widget>

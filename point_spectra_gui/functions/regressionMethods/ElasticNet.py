@@ -35,4 +35,4 @@ class Ui_Form(Ui_Form):
                   'selection': self.selectionLineEdit.text(),
                   'random_state': r_state,
                   'CV': self.crossValidateCheckBox.isChecked()}
-        return (params)
+        return params

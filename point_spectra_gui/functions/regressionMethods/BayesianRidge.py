@@ -12,15 +12,15 @@ class Ui_Form(Ui_Form):
         self.get_widget().setHidden(bool)
 
     def function(self):
-        params = {'n_iter': self.br.numOfIterationsSpinBox.value(),
-                  'tol': self.br.toleranceDoubleSpinBox.value(),
-                  'alpha_1': self.br.alpha1DoubleSpinBox.value(),
-                  'alpha_2': self.br.alpha2DoubleSpinBox.value(),
-                  'lambda_1': self.br.lambdaDoubleSpinBox.value(),
-                  'lambda_2': self.br.lambdaDoubleSpinBox.value(),
-                  'compute_score': self.br.computerScoreCheckBox.isChecked(),
-                  'fit_intercept': self.br.fitInterceptCheckBox.isChecked(),
-                  'normalize': self.br.normalizeCheckBox.isChecked(),
-                  'copy_X': self.br.copyXCheckBox.isChecked(),
-                  'verbose': self.br.verboseCheckBox.isChecked()}
-        return (params)
+        params = {'n_iter': self.numOfIterationsSpinBox.value(),
+                  'tol': self.toleranceDoubleSpinBox.value(),
+                  'alpha_1': self.alpha1DoubleSpinBox.value(),
+                  'alpha_2': self.alpha2DoubleSpinBox.value(),
+                  'lambda_1': self.lambdaDoubleSpinBox.value(),
+                  'lambda_2': self.lambdaDoubleSpinBox.value(),
+                  'compute_score': self.computerScoreCheckBox.isChecked(),
+                  'fit_intercept': self.fitInterceptCheckBox.isChecked(),
+                  'normalize': self.normalizeCheckBox.isChecked(),
+                  'copy_X': self.copyXCheckBox.isChecked(),
+                  'verbose': self.verboseCheckBox.isChecked()}
+        return params
