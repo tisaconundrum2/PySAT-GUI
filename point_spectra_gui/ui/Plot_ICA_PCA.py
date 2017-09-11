@@ -83,3 +83,13 @@ class Ui_Form(object):
         self.pushButton.setText(("..."))
         self.colorCodedVariableLabel.setText(("Choose variable to color code points (optional)"))
 
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())
+

@@ -139,3 +139,13 @@ class Ui_Form(object):
         self.verboseCheckBox.setText(("Verbose mode when fitting the model"))
         self.thresholdLambdaLabel.setText(("Threshold Lambda"))
 
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())
+

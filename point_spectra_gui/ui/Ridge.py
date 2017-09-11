@@ -195,3 +195,13 @@ class Ui_Form(object):
         self.storeCVValuesLabel_2.setText(("Store CV Values           "))
         self.crossValidateLabel_2.setText(("Cross Validate              "))
 
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())
+

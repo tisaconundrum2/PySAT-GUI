@@ -43,3 +43,13 @@ class Ui_Form(object):
         self.maximumNumOfIterationsLabel.setText(("Maximum num of Iterations"))
         self.toleranceLabel.setText(("Tolerance"))
 
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())
+

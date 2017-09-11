@@ -56,3 +56,13 @@ class Ui_Form(object):
         self.fitInterceptLabel.setText(("Fit Intercept"))
         self.optimizeWCrossValidationLabel.setText(("Optimize w/ Cross Validation (Ignores # of Coeffs)"))
 
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())
+

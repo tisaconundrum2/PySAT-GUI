@@ -58,3 +58,13 @@ class Ui_Form(object):
         self.nFoldsLabel.setText(("N Folds"))
         self.testFoldsLabel.setText(("Test Folds"))
 
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())
+

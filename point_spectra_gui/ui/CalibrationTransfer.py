@@ -57,3 +57,13 @@ class Ui_Form(object):
         self.methodComboBox.setItemText(0, ("LRA - Low Rank Alignment"))
         self.methodComboBox.setItemText(1, ("PDS - Piecewise Direct Standardization"))
 
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())
+

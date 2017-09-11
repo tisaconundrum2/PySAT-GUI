@@ -106,25 +106,17 @@ class point_spectra_gui_install(install):
 
     def initialize_options(self):
         install.initialize_options(self)
-        self.install_locales = None
         self.localedir = None
         self.disable_autoupdate = None
         self.disable_locales = None
 
     def finalize_options(self):
         install.finalize_options(self)
-        if self.install_locales is None:
-            self.install_locales = '$base/share/locale'
-            self._expand_attrs(['install_locales'])
-        self.install_locales = os.path.normpath(self.install_locales)
-        self.localedir = self.install_locales
         # can't use set_undefined_options :/
         self.distribution.get_command_obj('build').localedir = self.localedir
         self.distribution.get_command_obj('build').disable_autoupdate = self.disable_autoupdate
         if self.root is not None:
             self.change_roots('locales')
-        if self.disable_locales is None:
-            self.sub_commands.append(('install_locales', None))
 
     def run(self):
         install.run(self)
@@ -142,21 +134,16 @@ class point_spectra_gui_build(build):
 
     def initialize_options(self):
         build.initialize_options(self)
-        self.build_locales = None
         self.localedir = None
         self.disable_autoupdate = None
         self.disable_locales = None
 
     def finalize_options(self):
         build.finalize_options(self)
-        if self.build_locales is None:
-            self.build_locales = os.path.join(self.build_base, 'locale')
         if self.localedir is None:
             self.localedir = '/usr/share/locale'
         if self.disable_autoupdate is None:
             self.disable_autoupdate = False
-        if self.disable_locales is None:
-            self.sub_commands.append(('build_locales', None))
 
     def run(self):
         build.run(self)
@@ -223,7 +210,7 @@ class point_spectra_gui_build_ui(Command):
         def compile_ui(uifile, pyfile):
             log.info("compiling %s -> %s", uifile, pyfile)
             tmp = StringIO()
-            uic.compileUi(uifile, tmp)
+            uic.compileUi(uifile, tmp, True)
             source = tmp.getvalue()
             rc = re.compile(r'\n\n#.*?(?=\n\n)', re.MULTILINE | re.DOTALL)
             comment = ("\n\n# Automatically generated - don't edit.\n"
@@ -410,7 +397,6 @@ args2 = {
     'data_files': [],
     'console_scripts': ['point_spectra_gui = point_spectra_gui.__main__:main'],
     'cmdclass': {
-        'test': point_spectra_gui_test,
         'build': point_spectra_gui_build,
         'build_ui': point_spectra_gui_build_ui,
         'clean_ui': point_spectra_gui_clean_ui,

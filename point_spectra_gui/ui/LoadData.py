@@ -49,3 +49,13 @@ class Ui_loadData(object):
         self.newFilePushButton.setText(("..."))
         self.dataSetNameLabel.setText(("Data Set Name"))
 
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    loadData = QtWidgets.QWidget()
+    ui = Ui_loadData()
+    ui.setupUi(loadData)
+    loadData.show()
+    sys.exit(app.exec_())
+

@@ -43,3 +43,13 @@ class Ui_Form(object):
         self.chooseDataLabel.setText(("Choose Data"))
         self.splitOnUniqueValuesOfLabel.setText(("Split on unique values of"))
 
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())
+

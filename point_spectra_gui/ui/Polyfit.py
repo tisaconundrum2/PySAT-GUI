@@ -43,3 +43,13 @@ class Ui_Form(object):
         self.numOfStandardDeviationsLabel.setText(("Num of Standard Deviations"))
         self.maxNumOfIterationsLabel.setText(("Max Num of Iterations"))
 
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())
+

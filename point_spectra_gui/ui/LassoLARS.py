@@ -127,3 +127,13 @@ class Ui_Form(object):
         self.modelComboBox.setItemText(1, ("Cross Validated Lasso Lars"))
         self.modelComboBox.setItemText(2, ("Information Criterion Lasso Lars"))
 
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())
+

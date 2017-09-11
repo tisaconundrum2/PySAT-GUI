@@ -44,3 +44,13 @@ class Ui_Form(object):
         self.interpolateDataLabel.setText(("Choose data to interpolate"))
         self.referenceDataLabel.setText(("Choose data to use as reference"))
 
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())
+
