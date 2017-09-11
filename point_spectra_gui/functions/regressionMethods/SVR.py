@@ -25,4 +25,4 @@ class Ui_Form(Ui_Form):
                   'cache_size': self.cacheSizeSpinBox.value(),
                   'verbose': self.verboseCheckBox.isChecked(),
                   'max_iter': int(self.maxIterationsSpinBox.value())}
-        return (params)
+        return params

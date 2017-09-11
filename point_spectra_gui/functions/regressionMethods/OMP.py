@@ -15,4 +15,4 @@ class Ui_Form(Ui_Form):
         params = {'fit_intercept': self.fitInterceptCheckBox.isChecked(),
                   'n_nonzero_coefs': self.numOfNonZeroCoeffsSpinBox.value(),
                   'CV': self.optimizeWCrossValidationCheckBox.isChecked()}
-        return (params)
+        return params

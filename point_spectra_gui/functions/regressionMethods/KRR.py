@@ -19,4 +19,4 @@ class Ui_Form(Ui_Form):
                   'degree': self.degreeDoubleSpinBox.value(),
                   'coef0': self.coeff0DoubleSpinBox.value(),
                   'kernel_params': k_attrib[self.kernelParametersLineEdit.text()]}
-        return (params)
+        return params

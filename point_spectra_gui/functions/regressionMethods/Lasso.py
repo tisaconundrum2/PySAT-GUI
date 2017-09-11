@@ -19,5 +19,5 @@ class Ui_Form(Ui_Form):
                   'positive': self.forcePositiveCoefficientsCheckBox.isChecked(),
                   'selection': 'random',
                   'CV': self.optimizeWCrossValidaitonCheckBox.isChecked()}
-        return (params)
+        return params
 

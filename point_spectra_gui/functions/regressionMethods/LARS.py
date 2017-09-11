@@ -25,4 +25,4 @@ class Ui_Form(Ui_Form):
                   'CV': self.crossValidateCheckBox.isChecked()}
         self.numOfNonzeroCoeffsSpinBox.setDisabled(params['CV'])
         self.fitPathCheckBox.setDisabled(params['CV'])
-        return (params)
+        return params

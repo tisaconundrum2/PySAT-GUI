@@ -41,4 +41,4 @@ class Ui_Form(Ui_Form):
                       'solver': self.solverComboBox.itemText(index),
                       'tol': self.toleranceDoubleSpinBox.value(),
                       'random_state': r_state}
-        return (params)
+        return params

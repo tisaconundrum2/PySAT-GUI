@@ -27,4 +27,4 @@ class Ui_Form(Ui_Form):
                   'eps': self.epsDoubleSpinBox.value(),
                   'fit_path': self.fitInterceptCheckBox.isChecked(),
                   'model': self.modelComboBox.currentIndex()}
-        return (params)
+        return params
