@@ -17,7 +17,8 @@ class Ui_Form(Ui_Form):
                   'positive': self.positiveCheckBox.isChecked(),
                   'verbose': self.verboseCheckBox.isChecked(),
                   'normalize': self.normalizeCheckBox.isChecked(),
-                  'precompute': self.precomputeComboBox.itemText(self.precomputeComboBox.currentIndex()),
+                  'precompute': {'True': True, 'False': False, 'array': 'array'}.get(
+                      self.precomputeComboBox.currentText()),
                   'copy_X': self.copyXCheckBox.isChecked(),
                   'eps': self.epsDoubleSpinBox.value(),
                   'fit_path': self.fitPathCheckBox.isChecked(),
