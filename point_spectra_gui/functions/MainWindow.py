@@ -29,13 +29,20 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         super().setupUi(MainWindow)  # Run the basic window UI
         self.menu_item_shortcuts()  # set up the shortcuts
         self.connectWidgets()
+        self.normal()
+
+    def normal(self):
         sys.stdout = EmittingStream(textWritten=self.normalOutputWritten)
         sys.stderr = EmittingStream(textWritten=self.normalOutputWritten)
+        self.actionOn.setDisabled(False)
+        self.actionOff.setDisabled(True)
 
-    def __del__(self):
+    def debug(self):
         # Restore sys.stdout
         sys.stdout = sys.__stdout__
         sys.stderr = sys.__stderr__
+        self.actionOn.setDisabled(True)
+        self.actionOff.setDisabled(False)
 
     def normalOutputWritten(self, text):
         """Append text to the QTextEdit."""
@@ -103,6 +110,8 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
             self.actionSave_Current_Workflow.triggered.connect(lambda: self.on_save_clicked())
             self.deleteModulePushButton.clicked.connect(lambda: self.on_delete_module_clicked())
             self.okPushButton.clicked.connect(lambda: self.on_okButton_clicked())
+            self.actionOn.triggered.connect(self.debug)
+            self.actionOff.triggered.connect(self.normal)
         except Exception as e:
             print(e)
 
