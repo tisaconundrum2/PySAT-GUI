@@ -213,56 +213,6 @@
           <height>20</height>
          </size>
         </property>
-        <item>
-         <property name="text">
-          <string>Choose an algorithm</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>PLS</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>GP</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>OLS</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>OMP</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Lasso</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Lasso LARS</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Elastic Net</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Ridge</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>More to come...</string>
-         </property>
-        </item>
        </widget>
       </item>
       <item>
