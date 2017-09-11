@@ -64,12 +64,11 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         :return:
         """
         self.widgetList.append(obj())
-        wl_len = len(self.widgetList) - 1
-        self.widgetList[wl_len].setupUi(self.scrollArea)
+        self.widgetList[-1].setupUi(self.scrollArea)
         self.widgetLayout = QtWidgets.QVBoxLayout()
         self.widgetLayout.setObjectName("widgetLayout")
         self.verticalLayout_3.addLayout(self.widgetLayout)
-        self.widgetLayout.addWidget(self.widgetList[wl_len].get_widget())
+        self.widgetLayout.addWidget(self.widgetList[-1].get_widget())
 
     def menu_item_shortcuts(self):
         self.actionExit.setShortcut("ctrl+Q")
