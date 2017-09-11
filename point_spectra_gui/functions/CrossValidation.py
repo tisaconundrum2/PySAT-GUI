@@ -15,7 +15,7 @@ class Ui_Form(Ui_Form, Basics):
         self.connectWidgets()
 
     def get_widget(self):
-        return self.regression
+        return self.gridGroupBox
 
     def make_regression_widget(self, alg, params=None):
         self.hideAll()
@@ -40,11 +40,14 @@ class Ui_Form(Ui_Form, Basics):
                                'SVR',
                                'KRR',
                                'More to come...']
-        self.setComboBox(self.regression_choosedata, self.datakeys)
-        self.setComboBox(self.regression_alg_choices, self.algorithm_list)
-        self.regression_alg_choices.currentIndexChanged.connect(lambda: self.make_regression_widget(self.regression_alg_choices.currentText()))
-        self.regression_choosedata.activated[int].connect(lambda: self.changeComboListVars(self.regression_choosey, self.yvar_choices()))
-        self.regression_choosedata.activated[int].connect(lambda: self.changeComboListVars(self.regression_choosex, self.xvar_choices()))
+        self.setComboBox(self.chooseDataComboBox, self.datakeys)
+        self.setComboBox(self.chooseAlgorithmComboBox, self.algorithm_list)
+        self.chooseAlgorithmComboBox.currentIndexChanged.connect(
+            lambda: self.make_regression_widget(self.chooseAlgorithmComboBox.currentText()))
+        self.chooseDataComboBox.activated[int].connect(
+            lambda: self.changeComboListVars(self.yVariableList, self.yvar_choices()))
+        self.chooseDataComboBox.activated[int].connect(
+            lambda: self.changeComboListVars(self.xVariableList, self.xvar_choices()))
 
     def isEnabled(self):
         return self.get_widget().isEnabled()
@@ -53,21 +56,21 @@ class Ui_Form(Ui_Form, Basics):
         self.get_widget().setDisabled(bool)
 
     def function(self):
-        method = self.regression_alg_choices.currentText()
-        datakey = self.regression_choosedata.currentText()
-        xvars = [str(x.text()) for x in self.regression_choosex.selectedItems()]
-        yvars = [('comp', str(y.text())) for y in self.regression_choosey.selectedItems()]
-        yrange = [self.yvarmin_spin.value(), self.yvarmax_spin.value()]
+        method = self.chooseAlgorithmComboBox.currentText()
+        datakey = self.chooseDataComboBox.currentText()
+        xvars = [str(x.text()) for x in self.xVariableList.selectedItems()]
+        yvars = [('comp', str(y.text())) for y in self.yVariableList.selectedItems()]
+        yrange = [self.yMinDoubleSpinBox.value(), self.yMaxDoubleSpinBox.value()]
         try:
             modelkey = method + ' - ' + str(yvars[0][-1]) + ' (' + str(yrange[0]) + '-' + str(yrange[1]) + ') '
         except:
             modelkey = method
 
         try:
-            params,modelkey = self.getMethodParams(self.regression_alg_choices.currentIndex())
+            params, modelkey = self.getMethodParams(self.chooseAlgorithmComboBox.currentIndex())
             print(params, modelkey)
         except:
-            params = self.getMethodParams(self.regression_alg_choices.currentIndex())
+            params = self.getMethodParams(self.chooseAlgorithmComboBox.currentIndex())
             print(params)
 
         try:
@@ -83,7 +86,7 @@ class Ui_Form(Ui_Form, Basics):
 
     def yvar_choices(self):
         try:
-            yvarchoices = self.data[self.regression_choosedata.currentText()].df['comp'].columns.values
+            yvarchoices = self.data[self.chooseDataComboBox.currentText()].df['comp'].columns.values
             yvarchoices = [i for i in yvarchoices if not 'Unnamed' in i]  # remove unnamed columns from choices
         except:
             yvarchoices = ['No composition columns!']
@@ -91,7 +94,7 @@ class Ui_Form(Ui_Form, Basics):
 
     def xvar_choices(self):
         try:
-            xvarchoices = self.data[self.regression_choosedata.currentText()].df.columns.levels[0].values
+            xvarchoices = self.data[self.chooseDataComboBox.currentText()].df.columns.levels[0].values
             xvarchoices = [i for i in xvarchoices if not 'Unnamed' in i]  # remove unnamed columns from choices
         except:
             xvarchoices = ['No valid choices!']
