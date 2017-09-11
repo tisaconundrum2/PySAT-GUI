@@ -67,14 +67,14 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_("Form"))
-        self.alphaLabel.setText(_("Alpha"))
-        self.kernelLabel.setText(_("Kernel"))
-        self.kernelLineEdit.setText(_("linear"))
-        self.gammaLabel.setText(_("Gamma"))
-        self.gammaLineEdit.setText(_("None"))
-        self.degreeLabel.setText(_("Degree"))
-        self.coeff0Label.setText(_("Coeff 0"))
-        self.kernelParametersLabel.setText(_("Kernel Parameters"))
-        self.kernelParametersLineEdit.setText(_("None"))
+        Form.setWindowTitle(("Form"))
+        self.alphaLabel.setText(("Alpha"))
+        self.kernelLabel.setText(("Kernel"))
+        self.kernelLineEdit.setText(("linear"))
+        self.gammaLabel.setText(("Gamma"))
+        self.gammaLineEdit.setText(("None"))
+        self.degreeLabel.setText(("Degree"))
+        self.coeff0Label.setText(("Coeff 0"))
+        self.kernelParametersLabel.setText(("Kernel Parameters"))
+        self.kernelParametersLineEdit.setText(("None"))
 

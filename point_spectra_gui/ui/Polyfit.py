@@ -38,8 +38,8 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_("Form"))
-        self.orderLabel.setText(_("Order"))
-        self.numOfStandardDeviationsLabel.setText(_("Num of Standard Deviations"))
-        self.maxNumOfIterationsLabel.setText(_("Max Num of Iterations"))
+        Form.setWindowTitle(("Form"))
+        self.orderLabel.setText(("Order"))
+        self.numOfStandardDeviationsLabel.setText(("Num of Standard Deviations"))
+        self.maxNumOfIterationsLabel.setText(("Max Num of Iterations"))
 

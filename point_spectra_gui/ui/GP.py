@@ -73,13 +73,13 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_("Form"))
-        self.chooseDimensionalityReductionMethodLabel.setText(_("Choose dimensionality reduction method:"))
-        self.chooseDimensionalityReductionMethodComboBox.setItemText(0, _("PCA"))
-        self.chooseDimensionalityReductionMethodComboBox.setItemText(1, _("ICA"))
-        self.numOfComponentsLabel.setText(_("# of components"))
-        self.numOfRandomStartsLabel.setText(_("# of random starts"))
-        self.startingThetaLabel.setText(_("Starting Theta"))
-        self.lowerBoundOnThetaLabel.setText(_("Lower bound on Theta"))
-        self.upperBoundOnThetaLabel.setText(_("Upper bound on theta"))
+        Form.setWindowTitle(("Form"))
+        self.chooseDimensionalityReductionMethodLabel.setText(("Choose dimensionality reduction method:"))
+        self.chooseDimensionalityReductionMethodComboBox.setItemText(0, ("PCA"))
+        self.chooseDimensionalityReductionMethodComboBox.setItemText(1, ("ICA"))
+        self.numOfComponentsLabel.setText(("# of components"))
+        self.numOfRandomStartsLabel.setText(("# of random starts"))
+        self.startingThetaLabel.setText(("Starting Theta"))
+        self.lowerBoundOnThetaLabel.setText(("Lower bound on Theta"))
+        self.upperBoundOnThetaLabel.setText(("Upper bound on theta"))
 

@@ -38,8 +38,8 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_("Form"))
-        self.polynomialOrderLabel.setText(_("Polynomial Order"))
-        self.maximumNumOfIterationsLabel.setText(_("Maximum num of Iterations"))
-        self.toleranceLabel.setText(_("Tolerance"))
+        Form.setWindowTitle(("Form"))
+        self.polynomialOrderLabel.setText(("Polynomial Order"))
+        self.maximumNumOfIterationsLabel.setText(("Maximum num of Iterations"))
+        self.toleranceLabel.setText(("Tolerance"))
 

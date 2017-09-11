@@ -51,8 +51,8 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_("Form"))
-        self.numOfNonZeroCoeffsLabel.setText(_("# of non-zero coeffs"))
-        self.fitInterceptLabel.setText(_("Fit Intercept"))
-        self.optimizeWCrossValidationLabel.setText(_("Optimize w/ Cross Validation (Ignores # of Coeffs)"))
+        Form.setWindowTitle(("Form"))
+        self.numOfNonZeroCoeffsLabel.setText(("# of non-zero coeffs"))
+        self.fitInterceptLabel.setText(("Fit Intercept"))
+        self.optimizeWCrossValidationLabel.setText(("Optimize w/ Cross Validation (Ignores # of Coeffs)"))
 

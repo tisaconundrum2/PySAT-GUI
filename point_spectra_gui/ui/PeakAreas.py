@@ -42,10 +42,10 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_("Form"))
-        self.groupBox.setTitle(_("Peak Areas"))
-        self.chooseDataLabel.setText(_("Choose data"))
-        self.peakMinimaLabel.setText(_("Peaks and minima file:"))
-        self.peakMinimaLineEdit.setText(_("None (Calculate from avg spectrum)"))
-        self.pushButton.setText(_("..."))
+        Form.setWindowTitle(("Form"))
+        self.groupBox.setTitle(("Peak Areas"))
+        self.chooseDataLabel.setText(("Choose data"))
+        self.peakMinimaLabel.setText(("Peaks and minima file:"))
+        self.peakMinimaLineEdit.setText(("None (Calculate from avg spectrum)"))
+        self.pushButton.setText(("..."))
 

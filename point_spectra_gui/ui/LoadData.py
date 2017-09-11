@@ -42,10 +42,10 @@ class Ui_loadData(object):
 
     def retranslateUi(self, loadData):
         _translate = QtCore.QCoreApplication.translate
-        loadData.setWindowTitle(_("Form"))
-        self.groupBox.setTitle(_("Load Data"))
-        self.fileNameLabel.setText(_("File Name"))
-        self.fileNameLineEdit.setText(_("*.csv"))
-        self.newFilePushButton.setText(_("..."))
-        self.dataSetNameLabel.setText(_("Data Set Name"))
+        loadData.setWindowTitle(("Form"))
+        self.groupBox.setTitle(("Load Data"))
+        self.fileNameLabel.setText(("File Name"))
+        self.fileNameLineEdit.setText(("*.csv"))
+        self.newFilePushButton.setText(("..."))
+        self.dataSetNameLabel.setText(("Data Set Name"))
 

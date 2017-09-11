@@ -31,7 +31,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_("Form"))
-        self.halfWindowLabel.setText(_("Half Window:"))
-        self.numOfErosionsLabel.setText(_("Num of Erosions:"))
+        Form.setWindowTitle(("Form"))
+        self.halfWindowLabel.setText(("Half Window:"))
+        self.numOfErosionsLabel.setText(("Num of Erosions:"))
 

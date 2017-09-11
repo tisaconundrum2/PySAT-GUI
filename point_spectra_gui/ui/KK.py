@@ -44,9 +44,9 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_("Form"))
-        self.topWidthLabel.setText(_("Top Width"))
-        self.bottomWidthLabel.setText(_("Bottom Width"))
-        self.exponentLabel.setText(_("Exponent"))
-        self.tangentLabel.setText(_("Tangent"))
+        Form.setWindowTitle(("Form"))
+        self.topWidthLabel.setText(("Top Width"))
+        self.bottomWidthLabel.setText(("Bottom Width"))
+        self.exponentLabel.setText(("Exponent"))
+        self.tangentLabel.setText(("Tangent"))
 

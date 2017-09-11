@@ -46,19 +46,19 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_("Form"))
-        self.groupBox.setTitle(_("Write to CSV"))
-        self.chooseDataSetLabel.setText(_("Choose data set to write to *.csv:"))
-        self.variablesToWriteLabel.setText(_("Variables to write:"))
+        Form.setWindowTitle(("Form"))
+        self.groupBox.setTitle(("Write to CSV"))
+        self.chooseDataSetLabel.setText(("Choose data set to write to *.csv:"))
+        self.variablesToWriteLabel.setText(("Variables to write:"))
         __sortingEnabled = self.variablesToWriteListWidget.isSortingEnabled()
         self.variablesToWriteListWidget.setSortingEnabled(False)
         item = self.variablesToWriteListWidget.item(0)
-        item.setText(_("comp"))
+        item.setText(("comp"))
         item = self.variablesToWriteListWidget.item(1)
-        item.setText(_("meta"))
+        item.setText(("meta"))
         item = self.variablesToWriteListWidget.item(2)
-        item.setText(_("wvl"))
+        item.setText(("wvl"))
         self.variablesToWriteListWidget.setSortingEnabled(__sortingEnabled)
-        self.specifyAFilenameLabel.setText(_("Specify a filename:"))
-        self.specifyAFilenameLineEdit.setText(_("output.csv"))
+        self.specifyAFilenameLabel.setText(("Specify a filename:"))
+        self.specifyAFilenameLineEdit.setText(("output.csv"))
 

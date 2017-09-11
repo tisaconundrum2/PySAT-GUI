@@ -39,8 +39,8 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_("Form"))
-        self.formGroupBox.setTitle(_("Regression - Predict"))
-        self.chooseModelLabel.setText(_("Choose model:"))
-        self.chooseDataLabel.setText(_("Choose data:"))
+        Form.setWindowTitle(("Form"))
+        self.formGroupBox.setTitle(("Regression - Predict"))
+        self.chooseModelLabel.setText(("Choose model:"))
+        self.chooseDataLabel.setText(("Choose data:"))
 

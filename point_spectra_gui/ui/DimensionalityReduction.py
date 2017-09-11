@@ -39,8 +39,8 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_("Form"))
-        self.formGroupBox.setTitle(_("Dimensionality Reduction"))
-        self.chooseDataLabel.setText(_("Choose data:"))
-        self.chooseMethodLabel.setText(_("Choose method:"))
+        Form.setWindowTitle(("Form"))
+        self.formGroupBox.setTitle(("Dimensionality Reduction"))
+        self.chooseDataLabel.setText(("Choose data:"))
+        self.chooseMethodLabel.setText(("Choose method:"))
 

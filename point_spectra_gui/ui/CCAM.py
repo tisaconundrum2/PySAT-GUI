@@ -41,11 +41,11 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_("Form"))
-        self.largestWaveletScaleLabel.setText(_("Largest Wavelet Scale"))
-        self.lowestWaveletScaleLabel.setText(_("Lowest Wavelet Scale"))
-        self.interpolationMethodLabel.setText(_("Interpolation Method"))
-        self.interpolationMethodComboBox.setItemText(0, _("Spline"))
-        self.interpolationMethodComboBox.setItemText(1, _("Quadratic"))
-        self.interpolationMethodComboBox.setItemText(2, _("Linear"))
+        Form.setWindowTitle(("Form"))
+        self.largestWaveletScaleLabel.setText(("Largest Wavelet Scale"))
+        self.lowestWaveletScaleLabel.setText(("Lowest Wavelet Scale"))
+        self.interpolationMethodLabel.setText(("Interpolation Method"))
+        self.interpolationMethodComboBox.setItemText(0, ("Spline"))
+        self.interpolationMethodComboBox.setItemText(1, ("Quadratic"))
+        self.interpolationMethodComboBox.setItemText(2, ("Linear"))
 

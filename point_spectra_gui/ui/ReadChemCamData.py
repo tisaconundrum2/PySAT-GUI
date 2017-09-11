@@ -73,14 +73,14 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_("Form"))
-        self.groupBox.setTitle(_("Read ChemCam Data"))
-        self.searchStringLabel.setText(_("Search String:"))
-        self.searchDirectoryLabel.setText(_("Search directory:"))
-        self.searchDirectorypushButton.setText(_("..."))
-        self.metadataFilesLabel.setText(_("Metadata file(s):"))
-        self.metadatapushButton.setText(_("..."))
-        self.outputFileNameLabel.setText(_("Output file name:"))
-        self.averagesLabel.setText(_("Averages"))
-        self.singleShotsLabel.setText(_("Single Shots"))
+        Form.setWindowTitle(("Form"))
+        self.groupBox.setTitle(("Read ChemCam Data"))
+        self.searchStringLabel.setText(("Search String:"))
+        self.searchDirectoryLabel.setText(("Search directory:"))
+        self.searchDirectorypushButton.setText(("..."))
+        self.metadataFilesLabel.setText(("Metadata file(s):"))
+        self.metadatapushButton.setText(("..."))
+        self.outputFileNameLabel.setText(("Output file name:"))
+        self.averagesLabel.setText(("Averages"))
+        self.singleShotsLabel.setText(("Single Shots"))
 

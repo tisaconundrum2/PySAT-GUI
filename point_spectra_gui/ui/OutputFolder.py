@@ -36,9 +36,9 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_("Form"))
-        self.groupBox.setTitle(_("Output Folder"))
-        self.folderNameLabel.setText(_("Folder name"))
-        self.folderNameLineEdit.setText(_("*/"))
-        self.pushButton.setText(_("..."))
+        Form.setWindowTitle(("Form"))
+        self.groupBox.setTitle(("Output Folder"))
+        self.folderNameLabel.setText(("Folder name"))
+        self.folderNameLineEdit.setText(("*/"))
+        self.pushButton.setText(("..."))
 

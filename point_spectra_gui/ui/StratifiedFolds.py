@@ -51,10 +51,10 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_("Form"))
-        self.formGroupBox.setTitle(_("Stratified Folds"))
-        self.chooseDataToStratifyLabel.setText(_("Choose data to stratify: "))
-        self.chooseVarLabel.setText(_("Choose variable on which to sort: "))
-        self.nFoldsLabel.setText(_("N Folds"))
-        self.testFoldsLabel.setText(_("Test Folds"))
+        Form.setWindowTitle(("Form"))
+        self.formGroupBox.setTitle(("Stratified Folds"))
+        self.chooseDataToStratifyLabel.setText(("Choose data to stratify: "))
+        self.chooseVarLabel.setText(("Choose variable on which to sort: "))
+        self.nFoldsLabel.setText(("N Folds"))
+        self.testFoldsLabel.setText(("Test Folds"))
 

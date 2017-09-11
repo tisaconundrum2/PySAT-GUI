@@ -230,7 +230,7 @@ class point_spectra_gui_build_ui(Command):
                        "# Use `python setup.py %s` to update it."
                        % _get_option_name(self))
             for r in list(_translate_re):
-                source = r.sub(r'_(\1)', source)
+                source = r.sub(r'(\1)', source)
                 source = rc.sub(comment, source)
             f = open(pyfile, "w")
             f.write(source)

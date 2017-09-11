@@ -26,6 +26,6 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_("Form"))
-        self.windowSizeLabel.setText(_("Window Size"))
+        Form.setWindowTitle(("Form"))
+        self.windowSizeLabel.setText(("Window Size"))
 

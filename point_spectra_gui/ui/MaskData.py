@@ -42,10 +42,10 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_("Form"))
-        self.groupBox.setTitle(_("Mask Data"))
-        self.chooseDataLabel.setText(_("Choose Data:"))
-        self.maskFileLabel.setText(_("Mask file:"))
-        self.maskFileLineEdit.setText(_("*.csv"))
-        self.pushButton.setText(_("..."))
+        Form.setWindowTitle(("Form"))
+        self.groupBox.setTitle(("Mask Data"))
+        self.chooseDataLabel.setText(("Choose Data:"))
+        self.maskFileLabel.setText(("Mask file:"))
+        self.maskFileLineEdit.setText(("*.csv"))
+        self.pushButton.setText(("..."))
 

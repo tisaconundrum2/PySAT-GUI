@@ -34,6 +34,6 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_("Form"))
-        self.fitInterceptLabel.setText(_("Fit Intercept"))
+        Form.setWindowTitle(("Form"))
+        self.fitInterceptLabel.setText(("Fit Intercept"))
 

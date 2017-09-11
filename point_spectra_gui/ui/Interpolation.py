@@ -39,8 +39,8 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_("Form"))
-        self.formGroupBox.setTitle(_("Interpolation"))
-        self.interpolateDataLabel.setText(_("Choose data to interpolate"))
-        self.referenceDataLabel.setText(_("Choose data to use as reference"))
+        Form.setWindowTitle(("Form"))
+        self.formGroupBox.setTitle(("Interpolation"))
+        self.interpolateDataLabel.setText(("Choose data to interpolate"))
+        self.referenceDataLabel.setText(("Choose data to use as reference"))
 

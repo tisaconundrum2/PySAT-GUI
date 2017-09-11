@@ -32,7 +32,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_("Form"))
-        self.smoothnessLabel.setText(_("Smoothness"))
-        self.dilationLabel.setText(_("Dilation"))
+        Form.setWindowTitle(("Form"))
+        self.smoothnessLabel.setText(("Smoothness"))
+        self.dilationLabel.setText(("Dilation"))
 

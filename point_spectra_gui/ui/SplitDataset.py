@@ -38,8 +38,8 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_("Form"))
-        self.formGroupBox.setTitle(_("Split Dataset"))
-        self.chooseDataLabel.setText(_("Choose Data"))
-        self.splitOnUniqueValuesOfLabel.setText(_("Split on unique values of"))
+        Form.setWindowTitle(("Form"))
+        self.formGroupBox.setTitle(("Split Dataset"))
+        self.chooseDataLabel.setText(("Choose Data"))
+        self.splitOnUniqueValuesOfLabel.setText(("Split on unique values of"))
 

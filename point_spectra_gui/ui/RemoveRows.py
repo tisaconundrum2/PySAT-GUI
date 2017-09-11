@@ -47,9 +47,9 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_("Form"))
-        self.groupBox.setTitle(_("Remove Rows"))
-        self.isLabel.setText(_("is "))
-        self.removeRowsWhereLabel.setText(_("Remove rows where"))
-        self.chooseDataLabel.setText(_("Choose Data:"))
+        Form.setWindowTitle(("Form"))
+        self.groupBox.setTitle(("Remove Rows"))
+        self.isLabel.setText(("is "))
+        self.removeRowsWhereLabel.setText(("Remove rows where"))
+        self.chooseDataLabel.setText(("Choose Data:"))
 

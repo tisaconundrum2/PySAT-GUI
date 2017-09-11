@@ -79,11 +79,11 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_("Form"))
-        self.alphaLabel.setText(_("Alpha"))
-        self.maxNumOfIterationsLabel.setText(_("Max # of iterations"))
-        self.toleranceLabel.setText(_("Tolerance"))
-        self.fitInterceptLabel.setText(_("Fit Intercept"))
-        self.forcePositiveCoefficientsLabel.setText(_("Force positive coefficients"))
-        self.optimizeWCrossValidaitonLabel.setText(_("Optimize w/ Cross Validaiton (Ignores alpha)"))
+        Form.setWindowTitle(("Form"))
+        self.alphaLabel.setText(("Alpha"))
+        self.maxNumOfIterationsLabel.setText(("Max # of iterations"))
+        self.toleranceLabel.setText(("Tolerance"))
+        self.fitInterceptLabel.setText(("Fit Intercept"))
+        self.forcePositiveCoefficientsLabel.setText(("Force positive coefficients"))
+        self.optimizeWCrossValidaitonLabel.setText(("Optimize w/ Cross Validaiton (Ignores alpha)"))
 

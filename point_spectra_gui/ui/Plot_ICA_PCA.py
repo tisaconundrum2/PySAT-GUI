@@ -73,13 +73,13 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_("Form"))
-        self.groupBox.setTitle(_("Plot ICA/PCA"))
-        self.chooseDataLabel.setText(_("Choose data"))
-        self.chooseMethodLabel.setText(_("Choose method"))
-        self.chooseXVariableLabel.setText(_("Choose X Variable"))
-        self.chooseYVariableLabel.setText(_("Choose Y Variable"))
-        self.plotFilenameLabel.setText(_("Plot Filename"))
-        self.pushButton.setText(_("..."))
-        self.colorCodedVariableLabel.setText(_("Choose variable to color code points (optional)"))
+        Form.setWindowTitle(("Form"))
+        self.groupBox.setTitle(("Plot ICA/PCA"))
+        self.chooseDataLabel.setText(("Choose data"))
+        self.chooseMethodLabel.setText(("Choose method"))
+        self.chooseXVariableLabel.setText(("Choose X Variable"))
+        self.chooseYVariableLabel.setText(("Choose Y Variable"))
+        self.plotFilenameLabel.setText(("Plot Filename"))
+        self.pushButton.setText(("..."))
+        self.colorCodedVariableLabel.setText(("Choose variable to color code points (optional)"))
 

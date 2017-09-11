@@ -44,9 +44,9 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_("Form"))
-        self.asymmetryLabel.setText(_("Asymmetry"))
-        self.smoothnessLabel.setText(_("Smoothness"))
-        self.maxNumOfIterationsLabel.setText(_("Max Num of Iterations"))
-        self.convergenceThresholdLabel.setText(_("Convergence Threshold"))
+        Form.setWindowTitle(("Form"))
+        self.asymmetryLabel.setText(("Asymmetry"))
+        self.smoothnessLabel.setText(("Smoothness"))
+        self.maxNumOfIterationsLabel.setText(("Max Num of Iterations"))
+        self.convergenceThresholdLabel.setText(("Convergence Threshold"))
 

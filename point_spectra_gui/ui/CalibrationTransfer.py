@@ -48,12 +48,12 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_("Form"))
-        self.formGroupBox.setTitle(_("Calibration Transfer"))
-        self.CalTran_dataSetRefLabel.setText(_("Reference Data Set:"))
-        self.CalTran_dataSetTransformLabel.setText(_("Data Set to Transform:"))
-        self.CalTran_columnToMatchLabel.setText(_("Column to Match:"))
-        self.methodLabel.setText(_("Method:"))
-        self.methodComboBox.setItemText(0, _("LRA - Low Rank Alignment"))
-        self.methodComboBox.setItemText(1, _("PDS - Piecewise Direct Standardization"))
+        Form.setWindowTitle(("Form"))
+        self.formGroupBox.setTitle(("Calibration Transfer"))
+        self.CalTran_dataSetRefLabel.setText(("Reference Data Set:"))
+        self.CalTran_dataSetTransformLabel.setText(("Data Set to Transform:"))
+        self.CalTran_columnToMatchLabel.setText(("Column to Match:"))
+        self.methodLabel.setText(("Method:"))
+        self.methodComboBox.setItemText(0, ("LRA - Low Rank Alignment"))
+        self.methodComboBox.setItemText(1, ("PDS - Piecewise Direct Standardization"))
 

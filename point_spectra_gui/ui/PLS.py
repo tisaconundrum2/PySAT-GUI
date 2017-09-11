@@ -33,6 +33,6 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_("Form"))
-        self.numOfComponentsLabel.setText(_("num of components"))
+        Form.setWindowTitle(("Form"))
+        self.numOfComponentsLabel.setText(("num of components"))
 
