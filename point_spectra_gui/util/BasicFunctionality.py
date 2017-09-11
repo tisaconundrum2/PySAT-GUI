@@ -83,7 +83,7 @@ class Basics:
         :return:
         """
         sys.exit('Error: Application closed unexpectedly\n'
-                 'The method "setDisabled()" was not found in this module')
+                 'The method "isEnabled()" was not found in this module')
 
     def setDisabled(self, bool):
         """
