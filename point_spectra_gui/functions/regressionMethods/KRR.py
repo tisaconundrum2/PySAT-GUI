@@ -10,3 +10,13 @@ class Ui_Form(Ui_Form):
 
     def setHidden(self, bool):
         self.get_widget().setHidden(bool)
+
+    def function(self):
+        k_attrib = {'None': None}
+        params = {'alpha': self.alphaSpinBox.value(),
+                  'kernel': self.kernelLineEdit.text(),
+                  'gamma': self.gammaLineEdit.text(),
+                  'degree': self.degreeDoubleSpinBox.value(),
+                  'coef0': self.coeff0DoubleSpinBox.value(),
+                  'kernel_params': k_attrib[self.kernelParametersLineEdit.text()]}
+        return (params)
