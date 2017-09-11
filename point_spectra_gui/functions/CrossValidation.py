@@ -2,12 +2,15 @@ from PyQt5 import QtWidgets
 
 from point_spectra_gui.functions.regressionMethods import *
 from point_spectra_gui.ui.CrossValidation import Ui_Form
+from point_spectra_gui.util import delete
 from point_spectra_gui.util.BasicFunctionality import Basics
 
 
 class Ui_Form(Ui_Form, Basics):
     def setupUi(self, Form):
+        self.Form = Form
         super().setupUi(Form)
+        self.regressionMethods()
         self.connectWidgets()
 
     def get_widget(self):
@@ -30,96 +33,52 @@ class Ui_Form(Ui_Form, Basics):
                                'KRR',  # 13
                                'More to come...']
         print(alg)
-        try:
 
-        except:
-            pass
-        self.reg_widget = QtWidgets.QWidget()
-
-        if alg == self.algorithm_list[1]:
-            self.pls = PLS.Ui_Form()
-            self.pls.setupUi(self.reg_widget)
-            self.algorithmLayout.addWidget(self.pls.get_widget())
-
-
-        if alg == self.algorithm_list[2]:
-            self.gp = GP.Ui_Form()
-            self.gp.setupUi(self.reg_widget)
-            self.algorithmLayout.addWidget(self.gp.get_widget())
-
-
-        if alg == self.algorithm_list[3]:
-            self.ols = OLS.Ui_Form()
-            self.ols.setupUi(self.reg_widget)
-            self.algorithmLayout.addWidget(self.ols.get_widget())
-
-
-            if params is not None:
-                self.ols.fitInterceptCheckBox.setChecked(params['fit_intercept'])
-
-        if alg == self.algorithm_list[4]:
-            self.omp = OMP.Ui_Form()
-            self.omp.setupUi(self.reg_widget)
-            self.algorithmLayout.addWidget(self.omp.get_widget())
-
-
-            if params is not None:
-                self.omp.fitInterceptCheckBox.setChecked(params['fit_intercept'])
-                self.omp.optimizeWCrossValidationCheckBox.setChecked(params['CV'])
-                self.omp.numOfNonZeroCoeffsSpinBox.setValue(params['n_nonzero_coefs'])
-
-        if alg == self.algorithm_list[5]:
-            self.lasso = Lasso.Ui_Form()
-            self.lasso.setupUi(self.reg_widget)
-            self.algorithmLayout.addWidget(self.lasso.get_widget())
-
-
-        if alg == self.algorithm_list[6]:
-            self.elastic_net = ElasticNet.Ui_Form()
-            self.elastic_net.setupUi(self.reg_widget)
-            self.algorithmLayout.addWidget(self.elastic_net.get_widget())
-
-
-        if alg == self.algorithm_list[7]:
-            self.ridge = Ridge.Ui_Form()
-            self.ridge.setupUi(self.reg_widget)
-            self.algorithmLayout.addWidget(self.ridge.get_widget())
-
-
-        if alg == self.algorithm_list[8]:
-            self.br = BayesianRidge.Ui_Form()
-            self.br.setupUi(self.reg_widget)
-            self.algorithmLayout.addWidget(self.br.get_widget())
-
-
-        if alg == self.algorithm_list[9]:
-            self.ard = ARD.Ui_Form()
-            self.ard.setupUi(self.reg_widget)
-            self.algorithmLayout.addWidget(self.ard.get_widget())
-
-
-        if alg == self.algorithm_list[10]:
-            self.lars = LARS.Ui_Form()
-            self.lars.setupUi(self.reg_widget)
-            self.algorithmLayout.addWidget(self.lars.get_widget())
-
-
-        if alg == self.algorithm_list[11]:
-            self.lassoLARS = LassoLARS.Ui_Form()
-            self.lassoLARS.setupUi(self.reg_widget)
-            self.algorithmLayout.addWidget(self.lassoLARS.get_widget())
-
-
-        if alg == self.algorithm_list[12]:
-            self.svr = SVR.Ui_Form()
-            self.svr.setupUi(self.reg_widget)
-            self.algorithmLayout.addWidget(self.svr.get_widget())
-
-
-        if alg == self.algorithm_list[13]:
-            self.krr = KRR.Ui_Form()
-            self.krr.setupUi(self.reg_widget)
-            self.algorithmLayout.addWidget(self.krr.get_widget())
+        # if alg == self.algorithm_list[1]:
+        #
+        #
+        # if alg == self.algorithm_list[2]:
+        #
+        #
+        # if alg == self.algorithm_list[3]:
+        #
+        #
+        #     if params is not None:
+        #         self.ols.fitInterceptCheckBox.setChecked(params['fit_intercept'])
+        #
+        # if alg == self.algorithm_list[4]:
+        #
+        #
+        #     if params is not None:
+        #         self.omp.fitInterceptCheckBox.setChecked(params['fit_intercept'])
+        #         self.omp.optimizeWCrossValidationCheckBox.setChecked(params['CV'])
+        #         self.omp.numOfNonZeroCoeffsSpinBox.setValue(params['n_nonzero_coefs'])
+        #
+        # if alg == self.algorithm_list[5]:
+        #
+        #
+        # if alg == self.algorithm_list[6]:
+        #
+        #
+        # if alg == self.algorithm_list[7]:
+        #
+        #
+        # if alg == self.algorithm_list[8]:
+        #
+        #
+        # if alg == self.algorithm_list[9]:
+        #
+        #
+        # if alg == self.algorithm_list[10]:
+        #
+        #
+        # if alg == self.algorithm_list[11]:
+        #
+        #
+        # if alg == self.algorithm_list[12]:
+        #
+        #
+        # if alg == self.algorithm_list[13]:
 
 
     def connectWidgets(self):
@@ -350,3 +309,25 @@ class Ui_Form(Ui_Form, Basics):
         except:
             xvarchoices = ['No valid choices!']
         return xvarchoices
+
+    def regressionMethods(self):
+        self.alg = []
+        list_forms = []
+        list_forms.append(PLS)
+        list_forms.append(GP)
+        list_forms.append(OLS)
+        list_forms.append(OMP)
+        list_forms.append(Lasso)
+        list_forms.append(ElasticNet)
+        list_forms.append(Ridge)
+        list_forms.append(BayesianRidge)
+        list_forms.append(ARD)
+        list_forms.append(LARS)
+        list_forms.append(LassoLARS)
+        list_forms.append(SVR)
+        list_forms.append(KRR)
+        for items in list_forms:
+            self.alg.append(items.Ui_Form())
+            self.alg[-1].setupUi(self.Form)
+            self.algorithmLayout.addWidget(self.alg[-1].get_widget())
+            self.alg[-1].setHidden(True)

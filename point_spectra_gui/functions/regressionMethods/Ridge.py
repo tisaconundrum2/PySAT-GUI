@@ -7,3 +7,6 @@ class Ui_Form(Ui_Form):
 
     def get_widget(self):
         return self.groupbox
+
+    def setHidden(self, bool):
+        self.get_widget().setHidden(bool)
