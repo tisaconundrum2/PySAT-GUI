@@ -12,8 +12,7 @@ class Ui_Form(Ui_Form):
         self.get_widget().setHidden(bool)
 
     def function(self):
-        index = self.chooseDimensionalityReductionMethodComboBox.currentIndex()
-        params = {'reduce_dim': self.chooseDimensionalityReductionMethodComboBox.itemText(index),
+        params = {'reduce_dim': self.chooseDimensionalityReductionMethodComboBox.currentText(),
                   'n_components': self.numOfComponentsSpinBox.value(),
                   'random_start': self.numOfRandomStartsSpinBox.value(),
                   'theta0': self.startingThetaDoubleSpinBox.value(),
