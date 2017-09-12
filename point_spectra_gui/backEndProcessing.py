@@ -225,6 +225,7 @@ class backEndProc(QThread):
         try:
             datatemp = self.data[datakey].df[cols]
         except:
+            cols=[('cv',i) for i in cols]
             datatemp = self.data[datakey][cols]
 
         try:
