@@ -38,6 +38,7 @@ class Ui_Form(Ui_Form, Basics):
         self.markerComboBox.addItem("Triangle Right")
         self.markerComboBox.addItem("None")
         self.alphaDoubleSpinBox.setValue(0.25)
+        self.alphaDoubleSpinBox.setMaximum(1)
         self.plotFilenamePushButton.clicked.connect(self.on_plotFilenamePushButton_clicked)
 
         self.chooseDataComboBox.activated[int].connect(
@@ -79,7 +80,6 @@ class Ui_Form(Ui_Form, Basics):
         ytitle = self.yTitleLineEdit.text()
         lbl = self.legendLineEdit.text()
         one_to_one = self.oneToOneCheckBox.isChecked()
-        figfile = self.plotFilenameLabel.text()
 
         color = self.colorComboBox.currentText()
         alpha = self.alphaDoubleSpinBox.value()
