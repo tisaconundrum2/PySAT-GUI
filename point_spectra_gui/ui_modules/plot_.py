@@ -390,7 +390,8 @@ class plot_:
             vardata = self.pysat_fun.data[self.scatter_choosedata.currentText()].df[vartuple]
         except:
             try:
-                vardata = self.pysat_fun.data[self.scatter_choosedata.currentText()][var]
+                #if the data is not a spectral data object, then it must be cv results
+                vardata = self.pysat_fun.data[self.scatter_choosedata.currentText()][('cv',var)]
             except:
                 vardata = [0, 0]
         try:

@@ -417,24 +417,23 @@ class backEndProc(QThread):
 
     def do_cv_train(self, datakey, xvars, yvars, yrange, method, params):
 
-        try:
+            modelkey = method + '-' + str(yvars) + ' (' + str(yrange[0]) + '-' + str(yrange[1]) + ') '
             y = np.array(self.data[datakey].df[yvars])
             match = np.squeeze((y > yrange[0]) & (y < yrange[1]))
             data_for_cv = spectral_data(self.data[datakey].df.ix[match])
             cv_obj = cv.cv(params)
             self.data[datakey].df, self.cv_results = cv_obj.do_cv(data_for_cv.df, xcols=xvars, ycol=yvars,
                                                                   yrange=yrange, method=method)
-            self.data['CV Results'] = self.cv_results
-        except Exception as e:
-            print(e)
+            self.data['CV Results '+modelkey] = self.cv_results
+
 
     def do_regression_predict(self, datakey, modelkey, predictname):
-        try:
+        #try:
             prediction = self.models[modelkey].predict(self.data[datakey].df[self.model_xvars[modelkey]])
             self.data[datakey].df[predictname] = prediction
             pass
-        except Exception as e:
-            print(e)
+        # except Exception as e:
+        #     print(e)
 
     def do_submodel_predict(self, datakey, submodel_names, modelranges, trueval_data):
         # Check if reference data name has been provided
@@ -501,8 +500,9 @@ class backEndProc(QThread):
             x = self.data[datakey].df[xvar]
             y = self.data[datakey].df[yvar]
         except:
-            x = self.data[datakey][xvar]
-            y = self.data[datakey][yvar]
+            #if the data is not a spectral data object, then it must be CV results
+            x = self.data[datakey][('cv',xvar)]
+            y = self.data[datakey][('cv',yvar)]
         try:
             loadfig = self.figs[figname]
         except:
@@ -594,7 +594,7 @@ class backEndProc(QThread):
 
     def run(self):
         # TODO this function will take all the enumerated functions and parameters and run them
-        try:
+        # try:
             for i in range(len(self.greyed_modules)):
                 s = time.time()
                 r_list = self._list.pull()
@@ -605,7 +605,7 @@ class backEndProc(QThread):
                 self.greyed_modules[0].setDisabled(True)
                 del self.greyed_modules[0]
             self.taskFinished.emit()
-        except Exception as e:
-            print(e)
+        # except Exception as e:
+        #     print(e)
             self.taskFinished.emit()
 
