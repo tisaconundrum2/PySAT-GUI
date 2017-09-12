@@ -88,7 +88,8 @@ class Ui_Form(Ui_Form, Basics):
             cv_obj = cv.cv(params)
             self.data[datakey].df, self.cv_results = cv_obj.do_cv(data_for_cv.df, xcols=xvars, ycol=yvars,
                                                                   yrange=yrange, method=method)
-            self.data['CV Results'] = self.cv_results
+            self.datakeys.append('CV Results ' + modelkey)
+            self.data['CV Results ' + modelkey] = self.cv_results
         except Exception as e:
             print(e)
 
