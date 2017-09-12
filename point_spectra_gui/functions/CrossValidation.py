@@ -83,6 +83,8 @@ class Ui_Form(Ui_Form, Basics):
             y = np.array(self.data[datakey].df[yvars])
             match = np.squeeze((y > yrange[0]) & (y < yrange[1]))
             data_for_cv = spectral_data(self.data[datakey].df.ix[match])
+            # Warning: Params passing through cv.cv(params) needs to be in lists
+            # Example: {'n_components': [4], 'scale': [False]}
             cv_obj = cv.cv(params)
             self.data[datakey].df, self.cv_results = cv_obj.do_cv(data_for_cv.df, xcols=xvars, ycol=yvars,
                                                                   yrange=yrange, method=method)

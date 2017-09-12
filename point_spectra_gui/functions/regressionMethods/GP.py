@@ -12,12 +12,12 @@ class Ui_Form(Ui_Form):
         self.get_widget().setHidden(bool)
 
     def function(self):
-        params = {'reduce_dim': self.chooseDimensionalityReductionMethodComboBox.currentText(),
-                  'n_components': self.numOfComponentsSpinBox.value(),
-                  'random_start': self.numOfRandomStartsSpinBox.value(),
-                  'theta0': self.startingThetaDoubleSpinBox.value(),
-                  'thetaL': self.lowerBoundOnThetaDoubleSpinBox.value(),
-                  'thetaU': self.upperBoundOnThetaDoubleSpinBox.value()}
+        params = {'reduce_dim': self.chooseDimensionalityReductionMethodComboBox.currentText().split(','),
+                  'n_components': [self.numOfComponentsSpinBox.value()],
+                  'random_start': [self.numOfRandomStartsSpinBox.value()],
+                  'theta0': [self.startingThetaDoubleSpinBox.value()],
+                  'thetaL': [self.lowerBoundOnThetaDoubleSpinBox.value()],
+                  'thetaU': [self.upperBoundOnThetaDoubleSpinBox.value()]}
 
         modelkey = str(params)
         return params, modelkey

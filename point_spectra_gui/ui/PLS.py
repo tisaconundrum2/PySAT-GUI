@@ -15,18 +15,17 @@ class Ui_Form(object):
         Form.setSizePolicy(sizePolicy)
         self.verticalLayout = QtWidgets.QVBoxLayout(Form)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.groupBox = QtWidgets.QGroupBox(Form)
-        self.groupBox.setObjectName("groupBox")
-        self.formLayout = QtWidgets.QFormLayout(self.groupBox)
-        self.formLayout.setFieldGrowthPolicy(QtWidgets.QFormLayout.AllNonFixedFieldsGrow)
+        self.formGroupBox = QtWidgets.QGroupBox(Form)
+        self.formGroupBox.setObjectName("formGroupBox")
+        self.formLayout = QtWidgets.QFormLayout(self.formGroupBox)
         self.formLayout.setObjectName("formLayout")
-        self.numOfComponentsLabel = QtWidgets.QLabel(self.groupBox)
+        self.numOfComponentsLabel = QtWidgets.QLabel(self.formGroupBox)
         self.numOfComponentsLabel.setObjectName("numOfComponentsLabel")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.numOfComponentsLabel)
-        self.numOfComponentsSpinBox = QtWidgets.QSpinBox(self.groupBox)
-        self.numOfComponentsSpinBox.setObjectName("numOfComponentsSpinBox")
-        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.numOfComponentsSpinBox)
-        self.verticalLayout.addWidget(self.groupBox)
+        self.numOfComponentsLineEdit = QtWidgets.QLineEdit(self.formGroupBox)
+        self.numOfComponentsLineEdit.setObjectName("numOfComponentsLineEdit")
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.numOfComponentsLineEdit)
+        self.verticalLayout.addWidget(self.formGroupBox)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -34,7 +33,7 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(("Form"))
-        self.numOfComponentsLabel.setText(("num of components"))
+        self.numOfComponentsLabel.setText(("Num of Components"))
 
 
 if __name__ == "__main__":
