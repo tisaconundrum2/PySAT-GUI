@@ -72,7 +72,6 @@ target/
 .png
 .SAV
 *.user
-*.dll
 *.xml
 *.iml
 point_spectra_gui/ui/FINISHED/*.*
