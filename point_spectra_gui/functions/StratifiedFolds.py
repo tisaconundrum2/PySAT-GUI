@@ -35,7 +35,8 @@ class Ui_Form(Ui_Form, Basics):
 
         self.data[datakey + '-Train'] = self.data[datakey].rows_match(('meta', 'Folds'), [testfold], invert=True)
         self.data[datakey + '-Test'] = self.data[datakey].rows_match(('meta', 'Folds'), [testfold])
-        self.datakeys = self.data.keys()
+        self.datakeys.append(datakey + '-Train')
+        self.datakeys.append(datakey + '-Test')
 
         print(self.data.keys())
         print(self.data[datakey + '-Test'].df.index.shape)
