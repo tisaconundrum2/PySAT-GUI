@@ -18,6 +18,14 @@ if sys.version_info < (3, 5):
 args = {}
 
 try:
+    from distutils.core import setup
+    import py2exe
+    do_py2exe = True
+except ImportError:
+    do_py2exe = False
+
+
+try:
     from py2app.build_app import py2app
 
     do_py2app = True
@@ -35,13 +43,6 @@ from distutils.spawn import find_executable
 from setuptools import setup, Command
 
 PACKAGE_NAME = "Point Spectra GUI"
-
-# sockets module, however not excluded from py2exe should not be used in point_spectra_gui. Instead
-# the QtNetwork module should be used. sockets module was removed from the excluded list
-# to support bundled plugins on platforms it is not available.
-py2exe_exclude_modules = [
-    'select',
-]
 
 exclude_modules = [
     'ssl', 'bz2',
@@ -257,7 +258,6 @@ class point_spectra_gui_clean_ui(Command):
             log.warn("'%s' does not exist -- can't clean it", pyfile)
 
 
-
 _regen_pot_description = "Regenerate po/point_spectra_gui.pot, parsing source tree for new or updated strings"
 try:
     from babel import __version__ as babel_version
@@ -396,6 +396,7 @@ args2 = {
     'locales': _point_spectra_gui_get_locale_files(),
     'data_files': [],
     'console_scripts': ['point_spectra_gui = point_spectra_gui.__main__:main'],
+    'console': ['__main__.py'],
     'cmdclass': {
         'build': point_spectra_gui_build,
         'build_ui': point_spectra_gui_build_ui,
