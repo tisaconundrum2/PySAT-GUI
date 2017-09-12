@@ -1,0 +1,26 @@
+from point_spectra_gui.ui.RenameData import Ui_Form
+from point_spectra_gui.util.BasicFunctionality import Basics
+
+
+class Ui_Form(Ui_Form, Basics):
+    def setupUi(self, Form):
+        super().setupUi(Form)
+
+    def get_widget(self):
+        return self.groupbox
+
+    def connectWidgets(self):
+        self.setComboBox(self.renameDataComboBox, self.datakeys)
+
+    def function(self):
+        self.datakeys.append(self.toDataLineEdit.text())
+        self.data[self.toDataLineEdit.text()] = self.data[self.renameDataComboBox.currentText()]
+        for i in range(len(self.datakeys) - 1):
+            if self.datakeys[i] == self.renameDataComboBox.currentText():
+                del self.datakeys[i]
+
+    def isEnabled(self):
+        return self.get_widget().isEnabled()
+
+    def setDisabled(self, bool):
+        self.get_widget().setDisabled(bool)

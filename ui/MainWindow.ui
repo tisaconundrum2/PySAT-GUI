@@ -97,10 +97,11 @@
      <string>File</string>
     </property>
     <addaction name="actionLoad_Data"/>
+    <addaction name="actionRename_Data"/>
+    <addaction name="actionSave_Current_Data"/>
+    <addaction name="separator"/>
     <addaction name="actionSet_Output_Path"/>
     <addaction name="actionRead_ChemCam_Data"/>
-    <addaction name="separator"/>
-    <addaction name="actionSave_Current_Data"/>
     <addaction name="separator"/>
     <addaction name="actionCreate_New_Workflow"/>
     <addaction name="actionRestore_Workflow"/>
@@ -310,6 +311,11 @@
   <action name="actionOff">
    <property name="text">
     <string>Off</string>
+   </property>
+  </action>
+  <action name="actionRename_Data">
+   <property name="text">
+    <string>Rename Data</string>
    </property>
   </action>
  </widget>

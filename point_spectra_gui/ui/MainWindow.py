@@ -129,11 +129,14 @@ class Ui_MainWindow(object):
         self.actionOn.setObjectName("actionOn")
         self.actionOff = QtWidgets.QAction(MainWindow)
         self.actionOff.setObjectName("actionOff")
+        self.actionRename_Data = QtWidgets.QAction(MainWindow)
+        self.actionRename_Data.setObjectName("actionRename_Data")
         self.menuFile.addAction(self.actionLoad_Data)
+        self.menuFile.addAction(self.actionRename_Data)
+        self.menuFile.addAction(self.actionSave_Current_Data)
+        self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionSet_Output_Path)
         self.menuFile.addAction(self.actionRead_ChemCam_Data)
-        self.menuFile.addSeparator()
-        self.menuFile.addAction(self.actionSave_Current_Data)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionCreate_New_Workflow)
         self.menuFile.addAction(self.actionRestore_Workflow)
@@ -214,6 +217,7 @@ class Ui_MainWindow(object):
         self.actionOpen_Workflow.setText(("Open Workflow"))
         self.actionOn.setText(("On"))
         self.actionOff.setText(("Off"))
+        self.actionRename_Data.setText(("Rename Data"))
 
 
 if __name__ == "__main__":

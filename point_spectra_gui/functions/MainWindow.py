@@ -93,6 +93,7 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
                 lambda: self.addWidget(functions.DimensionalityReduction.Ui_Form))
             self.actionInterpolate.triggered.connect(lambda: self.addWidget(functions.Interpolation.Ui_Form))
             self.actionLoad_Data.triggered.connect(lambda: self.addWidget(functions.LoadData.Ui_Form))
+            self.actionRename_Data.triggered.connect(lambda: self.addWidget(functions.RenameData.Ui_Form))
             self.actionApply_Mask.triggered.connect(lambda: self.addWidget(functions.MaskData.Ui_Form))
             self.actionMultiply_by_Vector.triggered.connect(lambda: self.addWidget(functions.MultiplyByVector.Ui_Form))
             self.actionNormalization.triggered.connect(lambda: self.addWidget(functions.Normalization.Ui_Form))

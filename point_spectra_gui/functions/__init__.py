@@ -21,4 +21,5 @@ from point_spectra_gui.functions import SplitDataset
 from point_spectra_gui.functions import StratifiedFolds
 from point_spectra_gui.functions import SubmodelPredict
 from point_spectra_gui.functions import WriteToCSV
+from point_spectra_gui.functions import RenameData
 from point_spectra_gui.functions.regressionMethods import *
