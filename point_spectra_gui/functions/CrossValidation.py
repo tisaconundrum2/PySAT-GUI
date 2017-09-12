@@ -45,11 +45,14 @@ class Ui_Form(Ui_Form, Basics):
         self.yMaxDoubleSpinBox.setMaximum(999999)
         self.yMinDoubleSpinBox.setMaximum(999999)
         self.yMaxDoubleSpinBox.setValue(100)
+        self.changeComboListVars(self.yVariableList, self.yvar_choices())
+        self.changeComboListVars(self.xVariableList, self.xvar_choices())
+        self.xvar_choices()
         self.chooseAlgorithmComboBox.currentIndexChanged.connect(
             lambda: self.make_regression_widget(self.chooseAlgorithmComboBox.currentText()))
-        self.chooseDataComboBox.activated[int].connect(
+        self.chooseDataComboBox.currentIndexChanged.connect(
             lambda: self.changeComboListVars(self.yVariableList, self.yvar_choices()))
-        self.chooseDataComboBox.activated[int].connect(
+        self.chooseDataComboBox.currentIndexChanged.connect(
             lambda: self.changeComboListVars(self.xVariableList, self.xvar_choices()))
 
     def isEnabled(self):
@@ -108,7 +111,7 @@ class Ui_Form(Ui_Form, Basics):
             a.setHidden(True)
 
     def getMethodParams(self, index):
-        return self.alg[index].function()
+        return self.alg[index-1].function()
 
     def regressionMethods(self):
         self.alg = []
