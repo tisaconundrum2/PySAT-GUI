@@ -1,3 +1,5 @@
+from PyQt5 import QtWidgets
+
 from point_spectra_gui.ui.CCAM import Ui_Form
 from point_spectra_gui.util.BasicFunctionality import Basics
 
@@ -7,7 +9,7 @@ class Ui_Form(Ui_Form, Basics):
         super().setupUi(Form)
 
     def get_widget(self):
-        return self.formLayout_2
+        return self.groupbox
 
     def setHidden(self, bool):
         self.get_widget().setHidden(bool)
@@ -23,3 +25,14 @@ class Ui_Form(Ui_Form, Basics):
             methodParameters['int_flag'] = 1
         elif int_flag == 'Spline':
             methodParameters['int_flag'] = 2
+
+
+if __name__ == "__main__":
+    import sys
+
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())
