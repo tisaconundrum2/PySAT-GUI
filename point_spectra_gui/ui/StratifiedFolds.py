@@ -8,6 +8,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
+        Form.resize(277, 149)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Ignored)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -56,7 +57,7 @@ class Ui_Form(object):
         self.chooseDataToStratifyLabel.setText(("Choose data to stratify: "))
         self.chooseVarLabel.setText(("Choose variable on which to sort: "))
         self.nFoldsLabel.setText(("N Folds"))
-        self.testFoldsLabel.setText(("Test Folds"))
+        self.testFoldsLabel.setText(("Test Fold"))
 
 
 if __name__ == "__main__":
