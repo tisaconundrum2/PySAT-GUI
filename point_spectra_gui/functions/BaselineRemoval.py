@@ -1,3 +1,4 @@
+from PyQt5 import QtWidgets
 from pysat.spectral.spectral_data import spectral_data
 
 from point_spectra_gui.functions.baselineRemovalMethods import *
@@ -7,6 +8,7 @@ from point_spectra_gui.util.BasicFunctionality import Basics
 
 class Ui_Form(Ui_Form, Basics):
     def setupUi(self, Form):
+        self.Form = Form
         super().setupUi(Form)
         self.connectWidgets()
 
@@ -35,11 +37,7 @@ class Ui_Form(Ui_Form, Basics):
         method = params['chooseAlgorithmComboBox']
         datakey = params['chooseDataComboBox']
 
-        try:
-
-
-        except:
-            pass
+        methodParameters = self.getMethodParams(self.chooseAlgorithmComboBox.currentIndex())
 
         datakey_new = self.datakeys + '-Baseline Removed-' + method + str(methodParameters)
         datakey_baseline = datakey + '-Baseline-' + method + str(methodParameters)
@@ -48,17 +46,35 @@ class Ui_Form(Ui_Form, Basics):
         self.data[datakey_new].remove_baseline(method, segment=True, params=methodParameters)
         self.data[datakey_baseline] = spectral_data(self.data[datakey_new].df_baseline)
 
+    def hideAll(self):
+        for a in self.alg:
+            a.setHidden(True)
+
+    def getMethodParams(self, index):
+        return self.alg[index].function()
+
     def baselineMethods(self):
         self.alg = []
-        list_forms = []
-        list_forms.append(FABC)
-        list_forms.append(KK)
-        list_forms.append(Mario)
-        list_forms.append(Median)
-        list_forms.append(Rubberband)
-        list_forms.append(CCAM)
+        list_forms = [FABC,
+                      KK,
+                      Mario,
+                      Median,
+                      Rubberband,
+                      CCAM]
         for items in list_forms:
             self.alg.append(items.Ui_Form())
             self.alg[-1].setupUi(self.Form)
             self.algorithmLayout.addWidget(self.alg[-1].get_widget())
             self.alg[-1].setHidden(True)
+
+
+if __name__ == "__main__":
+    import sys
+
+    app = QtWidgets.QApplication(sys.argv)
+    # noinspection PyArgumentList
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())
