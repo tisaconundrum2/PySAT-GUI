@@ -7,7 +7,6 @@ import datetime
 import glob
 import os
 import re
-import subprocess
 import sys
 from io import StringIO
 
@@ -17,14 +16,6 @@ if sys.version_info < (3, 5):
     sys.exit("ERROR: You need Python 3.5 or higher to use point_spectra_gui.")
 
 args = {}
-
-try:
-    from distutils.core import setup
-    import py2exe
-
-    do_py2exe = True
-except ImportError:
-    do_py2exe = False
 
 try:
     from py2app.build_app import py2app
@@ -45,7 +36,6 @@ from setuptools import setup, Command
 
 PACKAGE_NAME = "Point Spectra GUI"
 
-ext_modules = []
 
 exclude_modules = [
     'ssl', 'bz2',
@@ -261,6 +251,7 @@ class point_spectra_gui_clean_ui(Command):
             log.warn("'%s' does not exist -- can't clean it", pyfile)
 
 
+
 _regen_pot_description = "Regenerate po/point_spectra_gui.pot, parsing source tree for new or updated strings"
 try:
     from babel import __version__ as babel_version
@@ -399,7 +390,6 @@ args2 = {
     'locales': _point_spectra_gui_get_locale_files(),
     'data_files': [],
     'console_scripts': ['point_spectra_gui = point_spectra_gui.__main__:main'],
-    'console': ['__main__.py'],
     'cmdclass': {
         'build': point_spectra_gui_build,
         'build_ui': point_spectra_gui_build_ui,
@@ -443,41 +433,6 @@ def contrib_plugin_files():
                     plugin_files[file_root] = [os.path.join(root, file)]
     data_files = [(x, sorted(y)) for x, y in plugin_files.items()]
     return sorted(data_files, key=lambda x: x[0])
-
-
-try:
-    from py2exe.build_exe import py2exe
-
-
-    class bdist_nsis(py2exe):
-
-        def run(self):
-            self.distribution.data_files.append(("", ["bin/msvcr90.dll", "bin/msvcp90.dll"]))
-            for locale in self.distribution.locales:
-                self.distribution.data_files.append(("locale/" + locale[1] + "/LC_MESSAGES",["build/locale/" + locale[1] + "/LC_MESSAGES/" + locale[0] + ".mo"]))
-            self.distribution.data_files.append(("imageformats", [find_file_in_path("PyQt5/plugins/imageformats/qgif4.dll"),find_file_in_path("PyQt5/plugins/imageformats/qjpeg4.dll"),find_file_in_path("PyQt5/plugins/imageformats/qtiff4.dll")]))
-            self.distribution.data_files.append(("accessible", [find_file_in_path("PyQt5/plugins/accessible/qtaccessiblewidgets4.dll")]))
-            self.distribution.data_files += contrib_plugin_files()
-
-            py2exe.run(self)
-            print("*** creating the NSIS setup script ***")
-            pathname = r"installer\picard-setup.nsi"
-            generate_file(pathname + ".in", pathname,{'name': 'MusicBrainz Picard','version': __version__,'description': 'The next generation MusicBrainz tagger.','url': 'https://picard.musicbrainz.org/', })
-            print("*** compiling the NSIS setup script ***")
-            subprocess.call([self.find_nsis(), pathname])
-
-        def find_nsis(self):
-            import _winreg
-            with _winreg.OpenKey(_winreg.HKEY_LOCAL_MACHINE, "Software\\NSIS") as reg_key:
-                nsis_path = _winreg.QueryValueEx(reg_key, "")[0]
-                return os.path.join(nsis_path, "makensis.exe")
-
-
-    args['cmdclass']['bdist_nsis'] = bdist_nsis
-    args['windows'] = [{'script': 'point_spectra_gui/__main__.py',}]
-    args['options'] = {'bdist_nsis': {'includes': ext_modules,'excludes': exclude_modules,'optimize': 2,},}
-except ImportError:
-    py2exe = None
 
 
 def find_file_in_path(filename):
