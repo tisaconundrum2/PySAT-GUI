@@ -11,12 +11,21 @@ class Ui_Form(Ui_Form, Basics):
         self.Form = Form
         super().setupUi(Form)
         self.connectWidgets()
+        self.baselineMethods()
 
     def get_widget(self):
         return self.formGroupBox
 
+    def make_regression_widget(self, alg, params=None):
+        self.hideAll()
+        print(alg)
+        for i in range(len(self.chooseAlgorithmList)):
+            if alg == self.chooseAlgorithmList[i] and i > 0:
+                self.alg[i - 1].setHidden(False)
+
     def connectWidgets(self):
-        self.chooseAlgorithmList = ['FABC',
+        self.chooseAlgorithmList = ['Choose an algorithm',
+                                    'FABC',
                                     'KK',
                                     'Mario',
                                     'Median',
@@ -25,6 +34,8 @@ class Ui_Form(Ui_Form, Basics):
                                     ]
         self.setComboBox(self.chooseDataComboBox, self.datakeys)
         self.setComboBox(self.chooseAlgorithmComboBox, self.chooseAlgorithmList)
+        self.chooseAlgorithmComboBox.currentIndexChanged.connect(
+            lambda: self.make_regression_widget(self.chooseAlgorithmComboBox.currentText()))
 
     def isEnabled(self):
         return self.get_widget().isEnabled()
@@ -51,7 +62,7 @@ class Ui_Form(Ui_Form, Basics):
             a.setHidden(True)
 
     def getMethodParams(self, index):
-        return self.alg[index].function()
+        return self.alg[index - 1].function()
 
     def baselineMethods(self):
         self.alg = []
