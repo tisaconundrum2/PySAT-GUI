@@ -7,31 +7,33 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QFormLayout" name="formLayout_2">
-     <property name="fieldGrowthPolicy">
-      <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-     </property>
-     <item row="0" column="0">
-      <widget class="QLabel" name="smoothnessLabel">
-       <property name="text">
-        <string>Smoothness</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QDoubleSpinBox" name="smoothnessDoubleSpinBox"/>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="dilationLabel">
-       <property name="text">
-        <string>Dilation</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QSpinBox" name="dilationSpinBox"/>
-     </item>
-    </layout>
+    <widget class="QGroupBox" name="">
+     <layout class="QFormLayout" name="formLayout_2">
+      <property name="fieldGrowthPolicy">
+       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="smoothnessLabel">
+        <property name="text">
+         <string>Smoothness</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QDoubleSpinBox" name="smoothnessDoubleSpinBox"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="dilationLabel">
+        <property name="text">
+         <string>Dilation</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QSpinBox" name="dilationSpinBox"/>
+      </item>
+     </layout>
+    </widget>
    </item>
   </layout>
  </widget>
