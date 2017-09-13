@@ -18,6 +18,7 @@ class Ui_Form(Ui_loadData, Basics):
         self.newFilePushButton.clicked.connect(lambda: self.on_getDataButton_clicked(self.fileNameLineEdit))
 
     def on_getDataButton_clicked(self, lineEdit):
+        # noinspection PyArgumentList
         filename, _filter = QtWidgets.QFileDialog.getOpenFileName(None, "Open Data File", self.outpath, "(*.csv)")
         lineEdit.setText(filename)
         if lineEdit.text() == "":
@@ -40,3 +41,15 @@ class Ui_Form(Ui_loadData, Basics):
 
     def setDisabled(self, bool):
         self.get_widget().setDisabled(bool)
+
+
+if __name__ == "__main__":
+    import sys
+
+    app = QtWidgets.QApplication(sys.argv)
+    # noinspection PyArgumentList
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())

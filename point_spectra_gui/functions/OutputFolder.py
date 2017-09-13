@@ -37,3 +37,15 @@ class Ui_Form(Ui_Form, Basics):
 
     def setDisabled(self, bool):
         self.get_widget().setDisabled(bool)
+
+
+if __name__ == "__main__":
+    import sys
+
+    app = QtWidgets.QApplication(sys.argv)
+    # noinspection PyArgumentList
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())

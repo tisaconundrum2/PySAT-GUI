@@ -39,7 +39,7 @@
        <widget class="QComboBox" name="chooseAlgorithmComboBox"/>
       </item>
       <item row="2" column="0" colspan="2">
-       <layout class="QVBoxLayout" name="verticalLayout_2"/>
+       <layout class="QVBoxLayout" name="algorithmLayout"/>
       </item>
      </layout>
     </widget>

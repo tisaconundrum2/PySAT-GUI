@@ -81,7 +81,6 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
     def connectWidgets(self):
         """
         Connect all the widgets associated with the MainWindow UI
-        :param ui:
         :return:
         """
         # TODO figure out how to get this code into `MainWindow.py`
@@ -118,7 +117,6 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
     def getWidgetItems(self):
         """
         return the dictionary from widgetList
-        :param index:
         :return:
         """
         ui_items = []

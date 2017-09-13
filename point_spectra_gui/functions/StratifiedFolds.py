@@ -1,3 +1,5 @@
+from PyQt5 import QtWidgets
+
 from point_spectra_gui.ui.StratifiedFolds import Ui_Form
 from point_spectra_gui.util.BasicFunctionality import Basics
 
@@ -54,3 +56,15 @@ class Ui_Form(Ui_Form, Basics):
     def strat_fold_change_testfolds(self):
         self.testFoldsSpinBox.clear()
         self.testFoldsSpinBox.setMaximum(self.nFoldsSpinBox.value())
+
+
+if __name__ == "__main__":
+    import sys
+
+    app = QtWidgets.QApplication(sys.argv)
+    # noinspection PyArgumentList
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())

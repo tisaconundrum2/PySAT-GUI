@@ -1,4 +1,5 @@
 import numpy as np
+from PyQt5 import QtWidgets
 from pysat.regression import cv
 from pysat.spectral.spectral_data import spectral_data
 
@@ -114,26 +115,36 @@ class Ui_Form(Ui_Form, Basics):
             a.setHidden(True)
 
     def getMethodParams(self, index):
-        return self.alg[index-1].function()
+        return self.alg[index - 1].function()
 
     def regressionMethods(self):
         self.alg = []
-        list_forms = []
-        list_forms.append(PLS)
-        list_forms.append(GP)
-        list_forms.append(OLS)
-        list_forms.append(OMP)
-        list_forms.append(Lasso)
-        list_forms.append(ElasticNet)
-        list_forms.append(Ridge)
-        list_forms.append(BayesianRidge)
-        list_forms.append(ARD)
-        list_forms.append(LARS)
-        list_forms.append(LassoLARS)
-        list_forms.append(SVR)
-        list_forms.append(KRR)
+        list_forms = [PLS,
+                      GP,
+                      OLS,
+                      OMP,
+                      Lasso,
+                      ElasticNet,
+                      Ridge,
+                      BayesianRidge,
+                      ARD,
+                      LARS,
+                      LassoLARS,
+                      SVR,
+                      KRR]
         for items in list_forms:
             self.alg.append(items.Ui_Form())
             self.alg[-1].setupUi(self.Form)
             self.algorithmLayout.addWidget(self.alg[-1].get_widget())
             self.alg[-1].setHidden(True)
+
+
+if __name__ == "__main__":
+    import sys
+
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())

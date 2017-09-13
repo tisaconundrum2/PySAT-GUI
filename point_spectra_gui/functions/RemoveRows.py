@@ -1,3 +1,5 @@
+from PyQt5 import QtWidgets
+
 import numpy as np
 from pysat.spectral.spectral_data import spectral_data
 
@@ -87,3 +89,15 @@ class Ui_Form(Ui_Form, Basics):
         except:
             choices = ['-']
         return choices
+
+
+if __name__ == "__main__":
+    import sys
+
+    app = QtWidgets.QApplication(sys.argv)
+    # noinspection PyArgumentList
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())

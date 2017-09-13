@@ -211,3 +211,15 @@ class Ui_Form(Ui_Form, Basics):
         self.plotFilenameLineEdit.setText(filename)
         if self.plotFilenameLineEdit.text() == "":
             self.plotFilenameLineEdit.setText("*.png")
+
+
+if __name__ == "__main__":
+    import sys
+
+    app = QtWidgets.QApplication(sys.argv)
+    # noinspection PyArgumentList
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())

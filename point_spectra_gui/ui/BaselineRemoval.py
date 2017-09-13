@@ -31,9 +31,9 @@ class Ui_Form(object):
         self.chooseAlgorithmComboBox = QtWidgets.QComboBox(self.formGroupBox)
         self.chooseAlgorithmComboBox.setObjectName("chooseAlgorithmComboBox")
         self.gridLayout.addWidget(self.chooseAlgorithmComboBox, 1, 1, 1, 1)
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout()
-        self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.gridLayout.addLayout(self.verticalLayout_2, 2, 0, 1, 2)
+        self.algorithmLayout = QtWidgets.QVBoxLayout()
+        self.algorithmLayout.setObjectName("algorithmLayout")
+        self.gridLayout.addLayout(self.algorithmLayout, 2, 0, 1, 2)
         self.verticalLayout.addWidget(self.formGroupBox)
 
         self.retranslateUi(Form)

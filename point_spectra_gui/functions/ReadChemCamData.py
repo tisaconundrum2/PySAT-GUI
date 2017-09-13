@@ -64,3 +64,15 @@ class Ui_Form(Ui_Form, Basics):
             pass
         except Exception as e:
             print('Problem reading data: {}'.format(e))
+
+
+if __name__ == "__main__":
+    import sys
+
+    app = QtWidgets.QApplication(sys.argv)
+    # noinspection PyArgumentList
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())

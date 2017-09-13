@@ -16,7 +16,7 @@ class normWidgets:
         self.maximumWSpinBox.setHidden(bool)
 
     def getValues(self):
-        return (int(self.minimumWSpinBox.text()), int(self.maximumWSpinBox.text()))
+        return int(self.minimumWSpinBox.text()), int(self.maximumWSpinBox.text())
 
     def clearValues(self):
         self.minimumWSpinBox.clear()
@@ -162,3 +162,14 @@ class Ui_Form(Ui_Form, Basics):
             print("Normalization has been applied to the ranges: " + str(ranges))
         except Exception as e:
             print("There was a problem: ", e)
+
+
+if __name__ == "__main__":
+    import sys
+
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())

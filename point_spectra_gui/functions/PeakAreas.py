@@ -1,3 +1,5 @@
+from PyQt5 import QtWidgets
+
 import numpy as np
 
 from point_spectra_gui.ui.PeakAreas import Ui_Form
@@ -37,3 +39,15 @@ class Ui_Form(Ui_Form, Basics):
 
         except Exception as e:
             print(e)
+
+
+if __name__ == "__main__":
+    import sys
+
+    app = QtWidgets.QApplication(sys.argv)
+    # noinspection PyArgumentList
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())
