@@ -12,7 +12,7 @@ class Ui_Form(Ui_Form, GaussianProcess, Basics):
         self.checkMinAndMax()
 
     def get_widget(self):
-        return self.groupBox
+        return self.formGroupBox
 
     def setHidden(self, bool):
         self.get_widget().setHidden(bool)
