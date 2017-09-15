@@ -176,7 +176,7 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
             self.taskFinished.emit()
         except Exception as e:
             print("Your module broke: please fix.", e)
-            self.widgetList[self.leftOff-1].setDisabled(False)
+            self.widgetList[self.leftOff].setDisabled(False)
             self.taskFinished.emit()
 
 def main():
