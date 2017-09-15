@@ -25,7 +25,6 @@ class Ui_Form(Ui_Form, ElasticNet, Basics):
         self.maxNumOfIterationsSpinBox.setValue(self.max_iter),
         self.copyXCheckBox.setChecked(self.copy_X),
         self.toleranceDoubleSpinBox.setValue(self.tol),
-        self.warmStartCheckBox.setChecked(self.warm_start),
         self.positiveCheckBox.setChecked(self.positive),
 
     def function(self):
@@ -48,7 +47,6 @@ class Ui_Form(Ui_Form, ElasticNet, Basics):
             'max_iter': [int(self.maxNumOfIterationsSpinBox.value())],
             'copy_X': [self.copyXCheckBox.isChecked()],
             'tol': [self.toleranceDoubleSpinBox.value()],
-            'warm_start': [self.warmStartCheckBox.isChecked()],
             'positive': [self.positiveCheckBox.isChecked()],
             'selection': [self.selectionLineEdit.text()],
             'random_state': [r_state],
