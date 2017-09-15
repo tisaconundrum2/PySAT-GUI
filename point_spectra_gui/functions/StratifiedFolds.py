@@ -13,6 +13,8 @@ class Ui_Form(Ui_Form, Basics):
         return self.formGroupBox
 
     def connectWidgets(self):
+        self.nFoldsSpinBox.setValue(2)
+        self.testFoldsSpinBox.setValue(2)
         self.setComboBox(self.chooseDataToStratifyComboBox, self.datakeys)
         data = self.data[self.chooseDataToStratifyComboBox.currentText()].df['comp'].columns.values
         self.setComboBox(self.chooseVarComboBox, data)
