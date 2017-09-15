@@ -73,12 +73,8 @@ class Ui_Form(Ui_Form, Basics):
         except:
             modelkey = method
 
-        try:
-            params, modelkey = self.getMethodParams(self.chooseAlgorithmComboBox.currentIndex())
-            print(params, modelkey)
-        except:
-            params = self.getMethodParams(self.chooseAlgorithmComboBox.currentIndex())
-            print(params)
+        params, modelkey = self.getMethodParams(self.chooseAlgorithmComboBox.currentIndex())
+        print(params, modelkey)
 
         try:
             y = np.array(self.data[datakey].df[yvars])
