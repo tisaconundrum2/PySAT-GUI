@@ -147,6 +147,10 @@ class Basics:
         self.progressBar = progressBar
 
     def checkMinAndMax(self):
+        """
+        Go through the entire UI and set the maximums and minimums of each widget
+        :return:
+        """
         for name, obj in inspect.getmembers(self):
             if isinstance(obj, QSpinBox):
                 print(obj.maximum())
@@ -156,4 +160,10 @@ class Basics:
                 print(obj.minimum())
 
     def defaultComboItem(self, obj, item):
+        """
+        Set the default selected item in a box.
+        :param obj:
+        :param item:
+        :return:
+        """
         obj.setCurrentIndex(obj.findText(str(item)))
