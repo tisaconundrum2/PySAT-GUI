@@ -166,61 +166,51 @@
        </widget>
       </item>
       <item row="8" column="0">
-       <widget class="QLabel" name="warmStartLabel">
-        <property name="text">
-         <string>Warm Start</string>
-        </property>
-       </widget>
-      </item>
-      <item row="8" column="1">
-       <widget class="QCheckBox" name="warmStartCheckBox"/>
-      </item>
-      <item row="9" column="0">
        <widget class="QLabel" name="positiveLabel">
         <property name="text">
          <string>Positive</string>
         </property>
        </widget>
       </item>
-      <item row="9" column="1">
+      <item row="8" column="1">
        <widget class="QCheckBox" name="positiveCheckBox"/>
       </item>
-      <item row="10" column="0">
+      <item row="9" column="0">
        <widget class="QLabel" name="selectionLabel">
         <property name="text">
          <string>Selection</string>
         </property>
        </widget>
       </item>
-      <item row="10" column="1">
+      <item row="9" column="1">
        <widget class="QLineEdit" name="selectionLineEdit">
         <property name="text">
          <string>cyclic</string>
         </property>
        </widget>
       </item>
-      <item row="11" column="0">
+      <item row="10" column="0">
        <widget class="QLabel" name="randomStateLabel">
         <property name="text">
          <string>Random State</string>
         </property>
        </widget>
       </item>
-      <item row="11" column="1">
+      <item row="10" column="1">
        <widget class="QLineEdit" name="randomStateLineEdit">
         <property name="text">
          <string>None</string>
         </property>
        </widget>
       </item>
-      <item row="12" column="0">
+      <item row="11" column="0">
        <widget class="QLabel" name="crossValidateLabel">
         <property name="text">
          <string>Cross Validate</string>
         </property>
        </widget>
       </item>
-      <item row="12" column="1">
+      <item row="11" column="1">
        <widget class="QCheckBox" name="crossValidateCheckBox">
         <property name="checked">
          <bool>true</bool>
