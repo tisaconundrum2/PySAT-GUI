@@ -177,3 +177,16 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         except Exception as e:
             print(e)
             self.taskFinished.emit()
+
+def main():
+
+    app = QtWidgets.QApplication(sys.argv)
+    mainWindow = QtWidgets.QMainWindow()
+    ui = MainWindow.Ui_MainWindow()
+    ui.setupUi(mainWindow)
+    mainWindow.show()
+    sys.exit(app.exec_())
+
+
+if __name__ == '__main__':
+    main()
