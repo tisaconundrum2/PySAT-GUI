@@ -15,9 +15,9 @@ class Ui_Form(Ui_Form, Basics):
         self.get_widget().setHidden(bool)
 
     def function(self):
-        methodParameters = {'poly_order': self.orderSpinBox.value(),
-                            'num_stdev': self.numOfStandardDeviationsSpinBox.value(),
-                            'max_iter': self.maxNumOfIterationsSpinBox.value()}
+        methodParameters = {'poly_order': int(self.orderSpinBox.value()),
+                            'num_stdev': int(self.numOfStandardDeviationsSpinBox.value()),
+                            'max_iter': int(self.maxNumOfIterationsSpinBox.value())}
         return methodParameters
 
 

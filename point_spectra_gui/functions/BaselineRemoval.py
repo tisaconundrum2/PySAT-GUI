@@ -44,9 +44,8 @@ class Ui_Form(Ui_Form, Basics):
         self.get_widget().setDisabled(bool)
 
     def function(self):
-        params = self.getGuiParams()
-        method = params['chooseAlgorithmComboBox']
-        datakey = params['chooseDataComboBox']
+        method = self.chooseAlgorithmComboBox.currentText()
+        datakey = self.chooseDataComboBox.currentText()
 
         methodParameters = self.getMethodParams(self.chooseAlgorithmComboBox.currentIndex())
 

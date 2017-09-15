@@ -15,8 +15,8 @@ class Ui_Form(Ui_Form, Basics):
         self.get_widget().setHidden(bool)
 
     def function(self):
-        methodParameters = {'num_iters': self.windowSizeSpinBox.value(),
-                            'num_ranges': self.numOfRangesSpinBox.value()}
+        methodParameters = {'num_iters': int(self.windowSizeSpinBox.value()),
+                            'num_ranges': int(self.numOfRangesSpinBox.value())}
         return methodParameters
 
 

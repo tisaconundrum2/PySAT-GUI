@@ -15,8 +15,8 @@ class Ui_Form(Ui_Form, Basics):
         self.get_widget().setHidden(bool)
 
     def function(self):
-        methodParameters = {'half_window': self.halfWindowSpinBox.value(),
-                            'num_erosions': self.numOfErosionsSpinBox.value()}
+        methodParameters = {'half_window': int(self.halfWindowSpinBox.value()),
+                            'num_erosions': int(self.numOfErosionsSpinBox.value())}
         return methodParameters
 
 

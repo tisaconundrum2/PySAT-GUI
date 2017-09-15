@@ -15,8 +15,8 @@ class Ui_Form(Ui_Form, Basics):
         self.get_widget().setHidden(bool)
 
     def function(self):
-        methodParameters = {'smoothness_param': self.smoothnessDoubleSpinBox.value(),
-                            'dilation_param': self.dilationSpinBox.value()}
+        methodParameters = {'smoothness_param': float(self.smoothnessDoubleSpinBox.value()),
+                            'dilation_param': int(self.dilationSpinBox.value())}
         return methodParameters
 
 

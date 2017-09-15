@@ -15,10 +15,10 @@ class Ui_Form(Ui_Form, Basics):
         self.get_widget().setHidden(bool)
 
     def function(self):
-        methodParameters = {'asymmetry_param': self.asymmetryDoubleSpinBox.value(),
-                            'smoothness_param': self.smoothnessDoubleSpinBox.value(),
-                            'max_iters': self.maxNumOfIterationsSpinBox.value(),
-                            'conv_thresh': self.convergenceThresholdDoubleSpinBox.value()}
+        methodParameters = {'asymmetry_param': float(self.asymmetryDoubleSpinBox.value()),
+                            'smoothness_param': float(self.smoothnessDoubleSpinBox.value()),
+                            'max_iters': int(self.maxNumOfIterationsSpinBox.value()),
+                            'conv_thresh': float(self.convergenceThresholdDoubleSpinBox.value())}
         return methodParameters
 
 

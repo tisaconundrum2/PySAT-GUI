@@ -15,10 +15,10 @@ class Ui_Form(Ui_Form, Basics):
         self.get_widget().setHidden(bool)
 
     def function(self):
-        methodParameters = {'top_width': self.topWidthSpinBox.value(),
-                            'bottom_width': self.bottomWidthSpinBox.value(),
+        methodParameters = {'top_width': int(self.topWidthSpinBox.value()),
+                            'bottom_width': int(self.bottomWidthSpinBox.value()),
                             'tangent': self.tangentCheckBox.isChecked(),
-                            'exponent': self.exponentSpinBox.value()}
+                            'exponent': int(self.exponentSpinBox.value())}
         return methodParameters
 
 

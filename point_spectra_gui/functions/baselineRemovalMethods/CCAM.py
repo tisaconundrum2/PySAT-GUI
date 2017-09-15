@@ -15,8 +15,8 @@ class Ui_Form(Ui_Form, Basics):
         self.get_widget().setHidden(bool)
 
     def function(self):
-        methodParameters = {'scale1': self.lowestWaveletScaleSpinBox.value(),
-                            'scale2': self.largestWaveletScaleSpinBox.value()}
+        methodParameters = {'scale1': int(self.lowestWaveletScaleSpinBox.value()),
+                            'scale2': int(self.largestWaveletScaleSpinBox.value())}
 
         int_flag = self.interpolationMethodComboBox.currentText()
         if int_flag == 'Linear':

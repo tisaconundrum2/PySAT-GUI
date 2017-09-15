@@ -15,9 +15,9 @@ class Ui_Form(Ui_Form, Basics):
         self.get_widget().setHidden(bool)
 
     def function(self):
-        methodParameters = {'smoothness_param': self.smoothnessSpinBox.value(),
-                            'conv_thresh': self.convergenceThresholdDoubleSpinBox.value(),
-                            'max_iters': self.maxNumOfIterationsSpinBox.value()}
+        methodParameters = {'smoothness_param': float(self.smoothnessSpinBox.value()),
+                            'conv_thresh': int(self.convergenceThresholdDoubleSpinBox.value()),
+                            'max_iters': float(self.maxNumOfIterationsSpinBox.value())}
         return methodParameters
 
 
