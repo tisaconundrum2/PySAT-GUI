@@ -52,31 +52,31 @@ class Ui_Form(Ui_Form, Ridge, RidgeCV, Basics):
             r_state = r_attrib[self.randomStateLineEdit.text()]
 
         if self.crossValidateCheckBox:
-            params = {'alphas': self.alphasLineEdit_cv,
-                      'fit_intercept': self.fitInterceptCheckBox_cv,
-                      'normalize': self.normalizeCheckBox_cv,
-                      'scoring': self.scoringComboBox_cv,
-                      'cv': self.cvLineEdit_cv,
-                      'gcv_mode': self.gCVModeComboBox_cv,
-                      'store_cv_values': self.storeCVValuesCheckBox_cv}
+            params = {'alphas': [self.alphasLineEdit_cv],
+                      'fit_intercept': [self.fitInterceptCheckBox_cv],
+                      'normalize': [self.normalizeCheckBox_cv],
+                      'scoring': [self.scoringComboBox_cv],
+                      'cv': [self.cvLineEdit_cv],
+                      'gcv_mode': [self.gCVModeComboBox_cv],
+                      'store_cv_values': [self.storeCVValuesCheckBox_cv]}
         else:
-            params = {'alpha': self.alphaDoubleSpinBox.value(),
-                      'copy_X': self.copyXCheckBox.isChecked(),
-                      'fit_intercept': self.fitInterceptCheckBox.isChecked(),
-                      'max_iter': m_state,
-                      'normalize': self.normalizeCheckBox.isChecked(),
-                      'solver': self.solverComboBox.currentText(),
-                      'tol': self.toleranceDoubleSpinBox.value(),
-                      'random_state': r_state}
-        return params
+            params = {'alpha': [self.alphaDoubleSpinBox.value()],
+                      'copy_X': [self.copyXCheckBox.isChecked()],
+                      'fit_intercept': [self.fitInterceptCheckBox.isChecked()],
+                      'max_iter': [m_state],
+                      'normalize': [self.normalizeCheckBox.isChecked()],
+                      'solver': [self.solverComboBox.currentText()],
+                      'tol': [self.toleranceDoubleSpinBox.value()],
+                      'random_state': [r_state]}
+            modelkey = str(params)
+            return params, modelkey
 
+    if __name__ == "__main__":
+        import sys
 
-if __name__ == "__main__":
-    import sys
-
-    app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
-    sys.exit(app.exec_())
+        app = QtWidgets.QApplication(sys.argv)
+        Form = QtWidgets.QWidget()
+        ui = Ui_Form()
+        ui.setupUi(Form)
+        Form.show()
+        sys.exit(app.exec_())

@@ -32,7 +32,7 @@ class Ui_Form(Ui_Form, GaussianProcess, Basics):
         self.normalizeCheckBox.setChecked(self.normalize)
 
     def function(self):
-        params = {'reduce_dim': self.chooseDimensionalityReductionMethodComboBox.currentText().split(','),
+        params = {'reduce_dim': [self.chooseDimensionalityReductionMethodComboBox.currentText().split(',')],
                   'n_components': [self.numOfComponentsLineEdit.text()],
                   'random_start': [self.numOfRandomStartsSpinBox.value()],
                   'theta0': [self.startingThetaDoubleSpinBox.value()],

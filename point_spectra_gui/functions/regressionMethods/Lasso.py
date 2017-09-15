@@ -1,5 +1,4 @@
 from PyQt5 import QtWidgets
-
 from sklearn.linear_model.coordinate_descent import Lasso
 
 from point_spectra_gui.ui.Lasso import Ui_Form
@@ -26,14 +25,15 @@ class Ui_Form(Ui_Form, Lasso, Basics):
         self.forcePositiveCoefficientsCheckBox.setChecked(self.positive)
 
     def function(self):
-        params = {'alpha': self.alphaDoubleSpinBox.value(),
-                  'fit_intercept': self.fitInterceptCheckBox.isChecked(),
-                  'max_iter': int(self.maxNumOfIterationsSpinBox.value()),
-                  'tol': self.toleranceDoubleSpinBox.value(),
-                  'positive': self.forcePositiveCoefficientsCheckBox.isChecked(),
-                  'selection': 'random',
-                  'CV': self.optimizeWCrossValidaitonCheckBox.isChecked()}
-        return params
+        params = {'alpha': [self.alphaDoubleSpinBox.value()],
+                  'fit_intercept': [self.fitInterceptCheckBox.isChecked()],
+                  'max_iter': [int(self.maxNumOfIterationsSpinBox.value())],
+                  'tol': [self.toleranceDoubleSpinBox.value()],
+                  'positive': [self.forcePositiveCoefficientsCheckBox.isChecked()],
+                  'selection': ['random'],
+                  'CV': [self.optimizeWCrossValidaitonCheckBox.isChecked()]}
+        modelkey = str(params)
+        return params, modelkey
 
 
 if __name__ == "__main__":

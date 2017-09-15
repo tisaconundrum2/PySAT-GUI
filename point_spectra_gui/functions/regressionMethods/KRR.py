@@ -33,13 +33,14 @@ class Ui_Form(Ui_Form, KernelRidge, Basics):
 
     def function(self):
         k_attrib = {'None': None}
-        params = {'alpha': self.alphaSpinBox.value(),
-                  'kernel': self.kernelLineEdit.text(),
-                  'gamma': self.gammaLineEdit.text(),
-                  'degree': self.degreeDoubleSpinBox.value(),
-                  'coef0': self.coeff0DoubleSpinBox.value(),
-                  'kernel_params': k_attrib[self.kernelParametersLineEdit.text()]}
-        return params
+        params = {'alpha': [self.alphaSpinBox.value()],
+                  'kernel': [self.kernelLineEdit.text()],
+                  'gamma': [self.gammaLineEdit.text()],
+                  'degree': [self.degreeDoubleSpinBox.value()],
+                  'coef0': [self.coeff0DoubleSpinBox.value()],
+                  'kernel_params': [k_attrib[self.kernelParametersLineEdit.text()]]}
+        modelkey = str(params)
+        return params, modelkey
 
 
 if __name__ == "__main__":

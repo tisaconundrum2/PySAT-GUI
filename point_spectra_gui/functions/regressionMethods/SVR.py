@@ -1,5 +1,4 @@
 from PyQt5 import QtWidgets
-
 from sklearn.svm.classes import SVR
 
 from point_spectra_gui.ui.SVR import Ui_Form
@@ -10,7 +9,6 @@ class Ui_Form(Ui_Form, SVR, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
         self.connectWidgets()
-
 
     def get_widget(self):
         return self.formGroupBox
@@ -45,18 +43,19 @@ class Ui_Form(Ui_Form, SVR, Basics):
     def function(self):
         gamma_index = self.gammaComboBox.currentIndex()
         kernel_index = self.kernelComboBox.currentIndex()
-        params = {'C': self.cDoubleSpinBox.value(),
-                  'epsilon': self.epsilonDoubleSpinBox.value(),
-                  'kernel': self.kernelComboBox.itemText(kernel_index),
-                  'degree': self.degreeSpinBox.value(),
-                  'gamma': self.gammaComboBox.itemText(gamma_index),
-                  'coef0': self.coeff0DoubleSpinBox.value(),
-                  'shrinking': self.shrinkingCheckBox.isChecked(),
-                  'tol': self.toleranceDoubleSpinBox.value(),
-                  'cache_size': self.cacheSizeSpinBox.value(),
-                  'verbose': self.verboseCheckBox.isChecked(),
-                  'max_iter': int(self.maxIterationsSpinBox.value())}
-        return params
+        params = {'C': [self.cDoubleSpinBox.value()],
+                  'epsilon': [self.epsilonDoubleSpinBox.value()],
+                  'kernel': [self.kernelComboBox.itemText(kernel_index)],
+                  'degree': [self.degreeSpinBox.value()],
+                  'gamma': [self.gammaComboBox.itemText(gamma_index)],
+                  'coef0': [self.coeff0DoubleSpinBox.value()],
+                  'shrinking': [self.shrinkingCheckBox.isChecked()],
+                  'tol': [self.toleranceDoubleSpinBox.value()],
+                  'cache_size': [self.cacheSizeSpinBox.value()],
+                  'verbose': [self.verboseCheckBox.isChecked()],
+                  'max_iter': [int(self.maxIterationsSpinBox.value())]}
+        modelkey = str(params)
+        return params, modelkey
 
 
 if __name__ == "__main__":

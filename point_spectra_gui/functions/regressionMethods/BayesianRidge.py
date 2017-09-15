@@ -31,17 +31,17 @@ class Ui_Form(Ui_Form, BayesianRidge, Basics):
         self.verboseCheckBox.setChecked(self.verbose)
 
     def function(self):
-        params = {'n_iter': self.numOfIterationsSpinBox.value(),
-                  'tol': self.toleranceDoubleSpinBox.value(),
-                  'alpha_1': self.alpha1DoubleSpinBox.value(),
-                  'alpha_2': self.alpha2DoubleSpinBox.value(),
-                  'lambda_1': self.lambdaDoubleSpinBox.value(),
-                  'lambda_2': self.lambdaDoubleSpinBox.value(),
-                  'compute_score': self.computerScoreCheckBox.isChecked(),
-                  'fit_intercept': self.fitInterceptCheckBox.isChecked(),
-                  'normalize': self.normalizeCheckBox.isChecked(),
-                  'copy_X': self.copyXCheckBox.isChecked(),
-                  'verbose': self.verboseCheckBox.isChecked()}
+        params = {'n_iter': [self.numOfIterationsSpinBox.value()],
+                  'tol': [self.toleranceDoubleSpinBox.value()],
+                  'alpha_1': [self.alpha1DoubleSpinBox.value()],
+                  'alpha_2': [self.alpha2DoubleSpinBox.value()],
+                  'lambda_1': [self.lambdaDoubleSpinBox.value()],
+                  'lambda_2': [self.lambdaDoubleSpinBox.value()],
+                  'compute_score': [self.computerScoreCheckBox.isChecked()],
+                  'fit_intercept': [self.fitInterceptCheckBox.isChecked()],
+                  'normalize': [self.normalizeCheckBox.isChecked()],
+                  'copy_X': [self.copyXCheckBox.isChecked()],
+                  'verbose': [self.verboseCheckBox.isChecked()]}
         modelkey = str(params)
         return params, modelkey
 
