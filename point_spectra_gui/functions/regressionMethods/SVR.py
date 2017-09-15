@@ -17,17 +17,6 @@ class Ui_Form(Ui_Form, SVR, Basics):
         self.get_widget().setHidden(bool)
 
     def connectWidgets(self):
-        print("C", self.C)
-        print("epsilon", self.epsilon)
-        print("kernel", self.kernel)
-        print("degree", self.degree)
-        print("gamma", self.gamma)
-        print("coef0", self.coef0)
-        print("shrinking", self.shrinking)
-        print("tol", self.tol)
-        print("cache_size", self.cache_size)
-        print("verbose", self.verbose)
-        print("max_iter", self.max_iter)
         self.cDoubleSpinBox.setValue(self.C)
         self.epsilonDoubleSpinBox.setValue(self.epsilon)
         self.defaultComboItem(self.kernelComboBox, self.kernel)
