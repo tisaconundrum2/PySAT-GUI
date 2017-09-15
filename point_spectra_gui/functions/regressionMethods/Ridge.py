@@ -59,6 +59,7 @@ class Ui_Form(Ui_Form, Ridge, RidgeCV, Basics):
                       'scoring': [self.scoringComboBox_cv.currentText()],
                       'gcv_mode': [self.gCVModeComboBox_cv.currentText()],
                       'store_cv_values': [self.storeCVValuesCheckBox_cv.isChecked()]}
+                      'CV': [self.crossValidateCheckBox.isChecked()]}
         else:
             params = {'alpha': [self.alphaDoubleSpinBox.value()],
                       'copy_X': [self.copyXCheckBox.isChecked()],
@@ -68,7 +69,7 @@ class Ui_Form(Ui_Form, Ridge, RidgeCV, Basics):
                       'solver': [self.solverComboBox.currentText()],
                       'tol': [self.toleranceDoubleSpinBox.value()],
                       'random_state': [r_state],
-                      'CV': [self.cro.isChecked()]}
+                      'CV': [self.crossValidateCheckBox.isChecked()]}
         modelkey = str(params)
         return params, modelkey
 
