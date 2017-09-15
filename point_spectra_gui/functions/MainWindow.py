@@ -167,6 +167,7 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         try:
             for modules in range(self.leftOff, len(self.widgetList)):
                 s = time.time()
+                print("Module Running...")
                 self.widgetList[modules].setProgressBar(self.progressBar)
                 self.widgetList[modules].function()
                 e = time.time()
