@@ -1,4 +1,7 @@
+import inspect
 import sys
+
+from PyQt5.QtWidgets import *
 
 from Qtickle import Qtickle
 
@@ -28,6 +31,7 @@ class Basics:
     datakeys = []  # hold all the specific key for a specific data frame
     outpath = './'  # Default outpath; can be changed with OutputFolder.py
     figs = {}
+
     def __init__(self):
         self.qt = Qtickle.Qtickle(self)
 
@@ -141,3 +145,15 @@ class Basics:
         :return:
         """
         self.progressBar = progressBar
+
+    def checkMinAndMax(self):
+        for name, obj in inspect.getmembers(self):
+            if isinstance(obj, QSpinBox):
+                print(obj.maximum())
+
+            if isinstance(obj, QDoubleSpinBox):
+                obj.setDecimals(7)
+                print(obj.minimum())
+
+    def defaultComboItem(self, obj, item):
+        obj.setCurrentIndex(obj.findText(str(item)))

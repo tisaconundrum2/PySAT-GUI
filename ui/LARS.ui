@@ -2,6 +2,14 @@
 <ui version="4.0">
  <class>Form</class>
  <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>677</width>
+    <height>267</height>
+   </rect>
+  </property>
   <property name="sizePolicy">
    <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
     <horstretch>0</horstretch>
@@ -83,11 +91,44 @@
         </property>
        </widget>
       </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="normalizeLabel">
+        <property name="text">
+         <string>Normalize</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QCheckBox" name="normalizeCheckBox">
+        <property name="text">
+         <string>If True, the regressors X will be normalized before regression. ignored when fit_intercept is set to False.</string>
+        </property>
+       </widget>
+      </item>
       <item row="5" column="0">
        <widget class="QLabel" name="precomputeLabel">
         <property name="text">
          <string>Precompute</string>
         </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QComboBox" name="precomputeComboBox">
+        <item>
+         <property name="text">
+          <string>True</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>False</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>auto</string>
+         </property>
+        </item>
        </widget>
       </item>
       <item row="6" column="0">
@@ -114,16 +155,6 @@
         </property>
        </widget>
       </item>
-      <item row="7" column="1">
-       <widget class="QDoubleSpinBox" name="epsDoubleSpinBox">
-        <property name="decimals">
-         <number>16</number>
-        </property>
-        <property name="value">
-         <double>2.220445000000000</double>
-        </property>
-       </widget>
-      </item>
       <item row="8" column="0">
        <widget class="QLabel" name="fitPathLabel">
         <property name="text">
@@ -138,20 +169,6 @@
         </property>
         <property name="checked">
          <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="normalizeLabel">
-        <property name="text">
-         <string>Normalize</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1">
-       <widget class="QCheckBox" name="normalizeCheckBox">
-        <property name="text">
-         <string>If True, the regressors X will be normalized before regression. ignored when fit_intercept is set to False.</string>
         </property>
        </widget>
       </item>
@@ -172,24 +189,8 @@
         </property>
        </widget>
       </item>
-      <item row="5" column="1">
-       <widget class="QComboBox" name="precomputeComboBox">
-        <item>
-         <property name="text">
-          <string>True</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>False</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>auto</string>
-         </property>
-        </item>
-       </widget>
+      <item row="7" column="1">
+       <widget class="QLineEdit" name="epsDoubleLineEdit"/>
       </item>
      </layout>
     </widget>
@@ -204,7 +205,6 @@
   <tabstop>normalizeCheckBox</tabstop>
   <tabstop>precomputeComboBox</tabstop>
   <tabstop>copyXCheckBox</tabstop>
-  <tabstop>epsDoubleSpinBox</tabstop>
   <tabstop>fitPathCheckBox</tabstop>
   <tabstop>crossValidateCheckBox</tabstop>
  </tabstops>
