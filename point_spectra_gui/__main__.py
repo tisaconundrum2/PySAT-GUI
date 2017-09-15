@@ -30,7 +30,7 @@ def get_splash(app):
     :param app:
     :return:
     """
-    dir = '../../images/'
+    dir = '../images/'
     if os.path.exists(dir + 'splash.png'):
         splash_pix = QPixmap(dir + 'splash.png')  # default
         app_icon = QtGui.QIcon(dir + 'icon.png')
