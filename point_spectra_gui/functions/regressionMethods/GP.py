@@ -32,12 +32,16 @@ class Ui_Form(Ui_Form, GaussianProcess, Basics):
         self.normalizeCheckBox.setChecked(self.normalize)
 
     def function(self):
-        params = {'reduce_dim': [self.chooseDimensionalityReductionMethodComboBox.currentText().split(',')],
-                  'n_components': [self.numOfComponentsLineEdit.text()],
-                  'random_start': [self.numOfRandomStartsSpinBox.value()],
-                  'theta0': [self.startingThetaDoubleSpinBox.value()],
-                  'thetaL': [self.lowerBoundOnThetaDoubleSpinBox.value()],
-                  'thetaU': [self.upperBoundOnThetaDoubleSpinBox.value()]}
+        params = {
+            'regr': [self.regrComboBox.currentText()],
+            'corr': [self.corrComboBox.currentText()],
+            'storage_mode': [self.storageModeComboBox.currentText()],
+            'verbose': [self.verboseCheckBox.isChecked()],
+            'theta0': [self.theta0DoubleSpinBox.value()],
+            'normalize': [self.normalizeCheckBox.isChecked()],
+            'optimizer': [self.optimizerComboBox.currentText()],
+            'random_start': [self.randomStartSpinBox.value()],
+        }
 
         modelkey = str(params)
         return params, modelkey
