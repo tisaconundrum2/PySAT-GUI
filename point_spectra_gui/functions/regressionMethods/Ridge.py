@@ -57,8 +57,8 @@ class Ui_Form(Ui_Form, Ridge, RidgeCV, Basics):
                       'fit_intercept': [self.fitInterceptCheckBox_cv.isChecked()],
                       'normalize': [self.normalizeCheckBox_cv.isChecked()],
                       'scoring': [self.scoringComboBox_cv.currentText()],
-                      'gcv_mode': [self.gCVModeComboBox_cv.currentText()],
-                      'store_cv_values': [self.storeCVValuesCheckBox_cv.isChecked()]}
+                      'gcv_mode': [{'None': None}.get(self.gCVModeComboBox_cv.currentText())],
+                      'store_cv_values': [self.storeCVValuesCheckBox_cv.isChecked()],
                       'CV': [self.crossValidateCheckBox.isChecked()]}
         else:
             params = {'alpha': [self.alphaDoubleSpinBox.value()],
