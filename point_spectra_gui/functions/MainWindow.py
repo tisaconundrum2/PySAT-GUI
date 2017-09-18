@@ -69,8 +69,6 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         self.widgetLayout.setObjectName("widgetLayout")
         self.verticalLayout_3.addLayout(self.widgetLayout)
         self.widgetLayout.addWidget(self.widgetList[-1].get_widget())
-        scrollbar = self.scrollArea.verticalScrollBar()
-        self.scrollArea.scrol
 
     def menu_item_shortcuts(self):
         self.actionExit.setShortcut("ctrl+Q")
