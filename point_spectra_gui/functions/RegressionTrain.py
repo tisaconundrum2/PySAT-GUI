@@ -64,7 +64,6 @@ class Ui_Form(Ui_Form, Basics):
         self.get_widget().setDisabled(bool)
 
     def function(self):
-        self.modelkeys = []
         method = self.chooseAlgorithmComboBox.currentText()
         datakey = self.chooseDataComboBox.currentText()
         xvars = [str(x.text()) for x in self.xVariableList.selectedItems()]
@@ -72,39 +71,33 @@ class Ui_Form(Ui_Form, Basics):
         yrange = [self.yMinDoubleSpinBox.value(), self.yMaxDoubleSpinBox.value()]
 
         params, modelkey = self.getMethodParams(self.chooseAlgorithmComboBox.currentIndex())
-        modelkey = method + ' - ' + modelkey
+        modelkey = method + ' - ' + modelkey + ' - ' + str(yvars[0][-1]) + ' (' + str(yrange[0]) + '-' + str(
+            yrange[1]) + ') '
+        self.datakeys.append(modelkey)
         print(params, modelkey)
 
-        try:
-            self.models[modelkey] = regression.regression([method], [params])
-            self.modelkeys.append(modelkey)
-            x = self.data[datakey].df[xvars]
-            y = self.data[datakey].df[yvars]
-            x = np.array(x)
-            y = np.array(y)
-            ymask = np.squeeze((y > yrange[0]) & (y < yrange[1]))
-            y = y[ymask]
-            x = x[ymask, :]
-            try:
-                self.models[modelkey].fit(x, y)
-            except TypeError:
-                sys.exit("Don't use a list here, use a single value")
-            self.model_xvars[modelkey] = xvars
-            self.model_yvars[modelkey] = yvars
-            coef = np.squeeze(self.models[modelkey].model.coef_)
-            coef = pd.DataFrame(coef)
-            coef.index = pd.MultiIndex.from_tuples(self.data[datakey].df[xvars].columns.values)
-            coef = coef.T
-            coef[('meta', 'Model')] = modelkey
+        self.models[modelkey] = regression.regression([method], [params])
+        x = self.data[datakey].df[xvars]
+        y = self.data[datakey].df[yvars]
+        x = np.array(x)
+        y = np.array(y)
+        ymask = np.squeeze((y > yrange[0]) & (y < yrange[1]))
+        y = y[ymask]
+        x = x[ymask, :]
+        self.models[modelkey].fit(x, y)
+        self.model_xvars[modelkey] = xvars
+        self.model_yvars[modelkey] = yvars
+        coef = np.squeeze(self.models[modelkey].model.coef_)
+        coef = pd.DataFrame(coef)
+        coef.index = pd.MultiIndex.from_tuples(self.data[datakey].df[xvars].columns.values)
+        coef = coef.T
+        coef[('meta', 'Model')] = modelkey
 
-            try:
-                self.data['Model Coefficients'] = spectral_data(pd.concat([self.data['Model Coefficients'].df, coef]))
-                self.datakeys.append('Model Coefficients' + modelkey)
-            except:
-                self.data['Model Coefficients'] = spectral_data(coef)
-                self.datakeys.append('Model Coefficients' + modelkey)
+        try:
+            self.data[modelkey] = spectral_data(
+                pd.concat([self.data['Model Coefficients'].df, coef]))
         except:
-            pass
+            self.data['Model Coefficients'] = spectral_data(coef)
 
     def yvar_choices(self):
         try:
