@@ -68,13 +68,10 @@ class Ui_Form(Ui_Form, Basics):
         xvars = [str(x.text()) for x in self.xVariableList.selectedItems()]
         yvars = [('comp', str(y.text())) for y in self.yVariableList.selectedItems()]
         yrange = [self.yMinDoubleSpinBox.value(), self.yMaxDoubleSpinBox.value()]
-        try:
-            modelkey = method + ' - ' + str(yvars[0][-1]) + ' (' + str(yrange[0]) + '-' + str(yrange[1]) + ') '
-        except:
-            modelkey = method
-
         params, modelkey = self.getMethodParams(self.chooseAlgorithmComboBox.currentIndex())
+        modelkey = method + ' - ' + str(yvars[0][-1]) + ' (' + str(yrange[0]) + '-' + str(yrange[1]) + ') '
         print(params, modelkey)
+
 
         try:
             y = np.array(self.data[datakey].df[yvars])
