@@ -31,6 +31,9 @@ class Basics:
     datakeys = []  # hold all the specific key for a specific data frame
     outpath = './'  # Default outpath; can be changed with OutputFolder.py
     figs = {}
+    models = {}  # For regression training
+    model_xvars = {}
+    model_yvars = {}
 
     def __init__(self):
         self.qt = Qtickle.Qtickle(self)
