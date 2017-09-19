@@ -1,24 +1,154 @@
+import numpy as np
+import pandas as pd
 from PyQt5 import QtWidgets
+from pysat.regression import regression
+from pysat.spectral.spectral_data import spectral_data
 
+from point_spectra_gui.functions.regressionMethods import *
 from point_spectra_gui.ui.RegressionTrain import Ui_Form
 from point_spectra_gui.util.BasicFunctionality import Basics
 
 
 class Ui_Form(Ui_Form, Basics):
     def setupUi(self, Form):
+        self.Form = Form
         super().setupUi(Form)
+        self.regressionMethods()
         self.connectWidgets()
 
     def get_widget(self):
-        return self.regression
+        return self.groupLayout
+
+    def make_regression_widget(self, alg, params=None):
+        self.hideAll()
+        print(alg)
+        for i in range(len(self.algorithm_list) - 1):
+            if alg == self.algorithm_list[i] and i > 0:
+                self.alg[i - 1].setHidden(False)
 
     def connectWidgets(self):
-        pass
+        self.algorithm_list = ['Choose an algorithm',
+                               'PLS',
+                               'GP',
+                               'OLS',
+                               'OMP',
+                               'Lasso',
+                               'Elastic Net',
+                               'Ridge',
+                               'Bayesian Ridge',
+                               'ARD',
+                               'LARS',
+                               'Lasso LARS',
+                               'SVR',
+                               'KRR',
+                               'More to come...']
+        self.setComboBox(self.chooseDataComboBox, self.datakeys)
+        self.setComboBox(self.chooseAlgorithmComboBox, self.algorithm_list)
+        self.yMaxDoubleSpinBox.setMaximum(999999)
+        self.yMinDoubleSpinBox.setMaximum(999999)
+        self.yMaxDoubleSpinBox.setValue(100)
+        self.changeComboListVars(self.yVariableList, self.yvar_choices())
+        self.changeComboListVars(self.xVariableList, self.xvar_choices())
+        self.xvar_choices()
+        self.chooseAlgorithmComboBox.currentIndexChanged.connect(
+            lambda: self.make_regression_widget(self.chooseAlgorithmComboBox.currentText()))
+        self.chooseDataComboBox.currentIndexChanged.connect(
+            lambda: self.changeComboListVars(self.yVariableList, self.yvar_choices()))
+        self.chooseDataComboBox.currentIndexChanged.connect(
+            lambda: self.changeComboListVars(self.xVariableList, self.xvar_choices()))
 
-    def isEnabled(self): return self.get_widget().isEnabled()
+    def isEnabled(self):
+        return self.get_widget().isEnabled()
 
     def setDisabled(self, bool):
         self.get_widget().setDisabled(bool)
+
+    def function(self):
+        self.modelkeys = []
+        method = self.chooseAlgorithmComboBox.currentText()
+        datakey = self.chooseDataComboBox.currentText()
+        xvars = [str(x.text()) for x in self.xVariableList.selectedItems()]
+        yvars = [('comp', str(y.text())) for y in self.yVariableList.selectedItems()]
+        yrange = [self.yMinDoubleSpinBox.value(), self.yMaxDoubleSpinBox.value()]
+
+        params, modelkey = self.getMethodParams(self.chooseAlgorithmComboBox.currentIndex())
+        modelkey = method + ' - ' + modelkey
+        print(params, modelkey)
+
+        try:
+            self.models[modelkey] = regression.regression([method], [params])
+            self.modelkeys.append(modelkey)
+            x = self.data[datakey].df[xvars]
+            y = self.data[datakey].df[yvars]
+            x = np.array(x)
+            y = np.array(y)
+            ymask = np.squeeze((y > yrange[0]) & (y < yrange[1]))
+            y = y[ymask]
+            x = x[ymask, :]
+            try:
+                self.models[modelkey].fit(x, y)
+            except TypeError:
+                sys.exit("Don't use a list here, use a single value")
+            self.model_xvars[modelkey] = xvars
+            self.model_yvars[modelkey] = yvars
+            coef = np.squeeze(self.models[modelkey].model.coef_)
+            coef = pd.DataFrame(coef)
+            coef.index = pd.MultiIndex.from_tuples(self.data[datakey].df[xvars].columns.values)
+            coef = coef.T
+            coef[('meta', 'Model')] = modelkey
+
+            try:
+                self.data['Model Coefficients'] = spectral_data(pd.concat([self.data['Model Coefficients'].df, coef]))
+                self.datakeys.append('Model Coefficients' + modelkey)
+            except:
+                self.data['Model Coefficients'] = spectral_data(coef)
+                self.datakeys.append('Model Coefficients' + modelkey)
+        except:
+            pass
+
+    def yvar_choices(self):
+        try:
+            yvarchoices = self.data[self.chooseDataComboBox.currentText()].df['comp'].columns.values
+            yvarchoices = [i for i in yvarchoices if not 'Unnamed' in i]  # remove unnamed columns from choices
+        except:
+            yvarchoices = ['No composition columns!']
+        return yvarchoices
+
+    def xvar_choices(self):
+        try:
+            xvarchoices = self.data[self.chooseDataComboBox.currentText()].df.columns.levels[0].values
+            xvarchoices = [i for i in xvarchoices if not 'Unnamed' in i]  # remove unnamed columns from choices
+        except:
+            xvarchoices = ['No valid choices!']
+        return xvarchoices
+
+    def hideAll(self):
+        for a in self.alg:
+            a.setHidden(True)
+
+    def getMethodParams(self, index):
+        return self.alg[index - 1].function()
+
+    def regressionMethods(self):
+        self.alg = []
+        list_forms = [PLS,
+                      GP,
+                      OLS,
+                      OMP,
+                      Lasso,
+                      ElasticNet,
+                      Ridge,
+                      BayesianRidge,
+                      ARD,
+                      LARS,
+                      LassoLARS,
+                      SVR,
+                      KRR]
+        for items in list_forms:
+            self.alg.append(items.Ui_Form())
+            self.alg[-1].setupUi(self.Form)
+            self.algorithmLayout.addWidget(self.alg[-1].get_widget())
+            self.alg[-1].setHidden(True)
 
 
 if __name__ == "__main__":
