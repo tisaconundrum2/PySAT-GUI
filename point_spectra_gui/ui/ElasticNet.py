@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
-# Automatically generated - don't edit.
-# Use `python setup.py build_ui` to update it.
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\ElasticNet.ui'
+#
+# Created by: PyQt5 UI code generator 5.6
+#
+# WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -120,24 +123,24 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(("Form"))
-        self.alphaLabel.setText(("Alpha"))
-        self.l1RatioLabel.setText(("L1 Ratio"))
-        self.fitInterceptLabel.setText(("Fit Intercept"))
-        self.normalizeLabel.setText(("Normalize"))
-        self.precomputeLabel.setText(("Precompute"))
-        self.precomputeComboBox.setItemText(0, ("False"))
-        self.precomputeComboBox.setItemText(1, ("True"))
-        self.precomputeComboBox.setItemText(2, ("Array-like"))
-        self.maxNumOfIterationsLabel.setText(("Max Num of Iterations"))
-        self.copyXLabel.setText(("Copy X"))
-        self.toleranceLabel.setText(("Tolerance"))
-        self.positiveLabel.setText(("Positive"))
-        self.selectionLabel.setText(("Selection"))
-        self.selectionLineEdit.setText(("cyclic"))
-        self.randomStateLabel.setText(("Random State"))
-        self.randomStateLineEdit.setText(("None"))
-        self.crossValidateLabel.setText(("Cross Validate"))
+        Form.setWindowTitle(_translate("Form", "Form"))
+        self.alphaLabel.setText(_translate("Form", "Alpha"))
+        self.l1RatioLabel.setText(_translate("Form", "L1 Ratio"))
+        self.fitInterceptLabel.setText(_translate("Form", "Fit Intercept"))
+        self.normalizeLabel.setText(_translate("Form", "Normalize"))
+        self.precomputeLabel.setText(_translate("Form", "Precompute"))
+        self.precomputeComboBox.setItemText(0, _translate("Form", "False"))
+        self.precomputeComboBox.setItemText(1, _translate("Form", "True"))
+        self.precomputeComboBox.setItemText(2, _translate("Form", "Array-like"))
+        self.maxNumOfIterationsLabel.setText(_translate("Form", "Max Num of Iterations"))
+        self.copyXLabel.setText(_translate("Form", "Copy X"))
+        self.toleranceLabel.setText(_translate("Form", "Tolerance"))
+        self.positiveLabel.setText(_translate("Form", "Positive"))
+        self.selectionLabel.setText(_translate("Form", "Selection"))
+        self.selectionLineEdit.setText(_translate("Form", "cyclic"))
+        self.randomStateLabel.setText(_translate("Form", "Random State"))
+        self.randomStateLineEdit.setText(_translate("Form", "None"))
+        self.crossValidateLabel.setText(_translate("Form", "Cross Validate"))
 
 
 if __name__ == "__main__":

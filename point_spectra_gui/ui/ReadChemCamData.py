@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
-# Automatically generated - don't edit.
-# Use `python setup.py build_ui` to update it.
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\ReadChemCamData.ui'
+#
+# Created by: PyQt5 UI code generator 5.6
+#
+# WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -73,16 +76,16 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(("Form"))
-        self.groupBox.setTitle(("Read ChemCam Data"))
-        self.searchStringLabel.setText(("Search String:"))
-        self.searchDirectoryLabel.setText(("Search directory:"))
-        self.searchDirectorypushButton.setText(("..."))
-        self.metadataFilesLabel.setText(("Metadata file(s):"))
-        self.metadatapushButton.setText(("..."))
-        self.outputFileNameLabel.setText(("Output file name:"))
-        self.averagesLabel.setText(("Averages"))
-        self.singleShotsLabel.setText(("Single Shots"))
+        Form.setWindowTitle(_translate("Form", "Form"))
+        self.groupBox.setTitle(_translate("Form", "Read ChemCam Data"))
+        self.searchStringLabel.setText(_translate("Form", "Search String:"))
+        self.searchDirectoryLabel.setText(_translate("Form", "Search directory:"))
+        self.searchDirectorypushButton.setText(_translate("Form", "..."))
+        self.metadataFilesLabel.setText(_translate("Form", "Metadata file(s):"))
+        self.metadatapushButton.setText(_translate("Form", "..."))
+        self.outputFileNameLabel.setText(_translate("Form", "Output file name:"))
+        self.averagesLabel.setText(_translate("Form", "Averages"))
+        self.singleShotsLabel.setText(_translate("Form", "Single Shots"))
 
 
 if __name__ == "__main__":

@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
-# Automatically generated - don't edit.
-# Use `python setup.py build_ui` to update it.
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\GP.ui'
+#
+# Created by: PyQt5 UI code generator 5.6
+#
+# WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -75,16 +78,16 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(("Form"))
-        self.formGroupBox.setTitle(("Gaussian Process"))
-        self.regrLabel.setText(("Regression Types"))
-        self.corrLabel.setText(("Correlation Types"))
-        self.storageModeLabel.setText(("Storage Mode"))
-        self.verboseLabel.setText(("Verbose"))
-        self.theta0Label.setText(("Theta 0"))
-        self.optimizerLabel.setText(("Optimizer Types"))
-        self.randomStartLabel.setText(("Random Start"))
-        self.normalizeLabel.setText(("Normalize"))
+        Form.setWindowTitle(_translate("Form", "Form"))
+        self.formGroupBox.setTitle(_translate("Form", "Gaussian Process"))
+        self.regrLabel.setText(_translate("Form", "Regression Types"))
+        self.corrLabel.setText(_translate("Form", "Correlation Types"))
+        self.storageModeLabel.setText(_translate("Form", "Storage Mode"))
+        self.verboseLabel.setText(_translate("Form", "Verbose"))
+        self.theta0Label.setText(_translate("Form", "Theta 0"))
+        self.optimizerLabel.setText(_translate("Form", "Optimizer Types"))
+        self.randomStartLabel.setText(_translate("Form", "Random Start"))
+        self.normalizeLabel.setText(_translate("Form", "Normalize"))
 
 
 if __name__ == "__main__":

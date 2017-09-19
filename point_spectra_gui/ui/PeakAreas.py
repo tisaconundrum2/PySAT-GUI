@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
-# Automatically generated - don't edit.
-# Use `python setup.py build_ui` to update it.
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\PeakAreas.ui'
+#
+# Created by: PyQt5 UI code generator 5.6
+#
+# WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -42,12 +45,12 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(("Form"))
-        self.groupBox.setTitle(("Peak Areas"))
-        self.chooseDataLabel.setText(("Choose data"))
-        self.peakMinimaLabel.setText(("Peaks and minima file:"))
-        self.peakMinimaLineEdit.setText(("None (Calculate from avg spectrum)"))
-        self.pushButton.setText(("..."))
+        Form.setWindowTitle(_translate("Form", "Form"))
+        self.groupBox.setTitle(_translate("Form", "Peak Areas"))
+        self.chooseDataLabel.setText(_translate("Form", "Choose data"))
+        self.peakMinimaLabel.setText(_translate("Form", "Peaks and minima file:"))
+        self.peakMinimaLineEdit.setText(_translate("Form", "None (Calculate from avg spectrum)"))
+        self.pushButton.setText(_translate("Form", "..."))
 
 
 if __name__ == "__main__":

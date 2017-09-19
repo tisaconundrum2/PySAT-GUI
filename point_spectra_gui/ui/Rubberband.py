@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
-# Automatically generated - don't edit.
-# Use `python setup.py build_ui` to update it.
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\Rubberband.ui'
+#
+# Created by: PyQt5 UI code generator 5.6
+#
+# WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -34,9 +37,9 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(("Form"))
-        self.windowSizeLabel.setText(("Window Size"))
-        self.numOfRangesLabel.setText(("Num of Ranges"))
+        Form.setWindowTitle(_translate("Form", "Form"))
+        self.windowSizeLabel.setText(_translate("Form", "Window Size"))
+        self.numOfRangesLabel.setText(_translate("Form", "Num of Ranges"))
 
 
 if __name__ == "__main__":

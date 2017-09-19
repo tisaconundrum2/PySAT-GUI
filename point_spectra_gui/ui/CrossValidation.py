@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
-# Automatically generated - don't edit.
-# Use `python setup.py build_ui` to update it.
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\CrossValidation.ui'
+#
+# Created by: PyQt5 UI code generator 5.6
+#
+# WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -88,25 +91,25 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(("Form"))
-        self.groupLayout.setTitle(("Cross Validation / Training"))
-        self.chooseDataLabel.setText(("Choose Data"))
-        self.xVariableLabel.setText(("X Variable"))
-        self.yVariableLabel.setText(("Y Variable"))
+        Form.setWindowTitle(_translate("Form", "Form"))
+        self.groupLayout.setTitle(_translate("Form", "Cross Validation / Training"))
+        self.chooseDataLabel.setText(_translate("Form", "Choose Data"))
+        self.xVariableLabel.setText(_translate("Form", "X Variable"))
+        self.yVariableLabel.setText(_translate("Form", "Y Variable"))
         __sortingEnabled = self.xVariableList.isSortingEnabled()
         self.xVariableList.setSortingEnabled(False)
         item = self.xVariableList.item(0)
-        item.setText(("Choose X"))
+        item.setText(_translate("Form", "Choose X"))
         self.xVariableList.setSortingEnabled(__sortingEnabled)
         self.yVariableList.setSortingEnabled(True)
         __sortingEnabled = self.yVariableList.isSortingEnabled()
         self.yVariableList.setSortingEnabled(False)
         item = self.yVariableList.item(0)
-        item.setText(("Choose Y"))
+        item.setText(_translate("Form", "Choose Y"))
         self.yVariableList.setSortingEnabled(__sortingEnabled)
-        self.chooseAlgorithmLabel.setText(("Choose Algorithm"))
-        self.yMinLabel.setText(("Y Min"))
-        self.yMaxLabel.setText(("Y Max"))
+        self.chooseAlgorithmLabel.setText(_translate("Form", "Choose Algorithm"))
+        self.yMinLabel.setText(_translate("Form", "Y Min"))
+        self.yMaxLabel.setText(_translate("Form", "Y Max"))
 
 
 if __name__ == "__main__":

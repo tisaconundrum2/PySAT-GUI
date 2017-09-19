@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
-# Automatically generated - don't edit.
-# Use `python setup.py build_ui` to update it.
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\RenameData.ui'
+#
+# Created by: PyQt5 UI code generator 5.6
+#
+# WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -33,10 +36,10 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(("Form"))
-        self.groupBox.setTitle(("Rename Data Set"))
-        self.renameDataLabel.setText(("Rename Data"))
-        self.toDataLabel.setText(("to"))
+        Form.setWindowTitle(_translate("Form", "Form"))
+        self.groupBox.setTitle(_translate("Form", "Rename Data Set"))
+        self.renameDataLabel.setText(_translate("Form", "Rename Data"))
+        self.toDataLabel.setText(_translate("Form", "to"))
 
 
 if __name__ == "__main__":

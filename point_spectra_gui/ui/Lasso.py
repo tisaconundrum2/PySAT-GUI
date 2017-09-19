@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
-# Automatically generated - don't edit.
-# Use `python setup.py build_ui` to update it.
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\Lasso.ui'
+#
+# Created by: PyQt5 UI code generator 5.6
+#
+# WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -79,13 +82,13 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(("Form"))
-        self.alphaLabel.setText(("Alpha"))
-        self.maxNumOfIterationsLabel.setText(("Max # of iterations"))
-        self.toleranceLabel.setText(("Tolerance"))
-        self.fitInterceptLabel.setText(("Fit Intercept"))
-        self.forcePositiveCoefficientsLabel.setText(("Force positive coefficients"))
-        self.optimizeWCrossValidaitonLabel.setText(("Optimize w/ Cross Validaiton (Ignores alpha)"))
+        Form.setWindowTitle(_translate("Form", "Form"))
+        self.alphaLabel.setText(_translate("Form", "Alpha"))
+        self.maxNumOfIterationsLabel.setText(_translate("Form", "Max # of iterations"))
+        self.toleranceLabel.setText(_translate("Form", "Tolerance"))
+        self.fitInterceptLabel.setText(_translate("Form", "Fit Intercept"))
+        self.forcePositiveCoefficientsLabel.setText(_translate("Form", "Force positive coefficients"))
+        self.optimizeWCrossValidaitonLabel.setText(_translate("Form", "Optimize w/ Cross Validaiton (Ignores alpha)"))
 
 
 if __name__ == "__main__":

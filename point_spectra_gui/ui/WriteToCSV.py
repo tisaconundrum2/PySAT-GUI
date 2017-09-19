@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
-# Automatically generated - don't edit.
-# Use `python setup.py build_ui` to update it.
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\WriteToCSV.ui'
+#
+# Created by: PyQt5 UI code generator 5.6
+#
+# WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -46,21 +49,21 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(("Form"))
-        self.groupBox.setTitle(("Write to CSV"))
-        self.chooseDataSetLabel.setText(("Choose data set to write to *.csv:"))
-        self.variablesToWriteLabel.setText(("Variables to write:"))
+        Form.setWindowTitle(_translate("Form", "Form"))
+        self.groupBox.setTitle(_translate("Form", "Write to CSV"))
+        self.chooseDataSetLabel.setText(_translate("Form", "Choose data set to write to *.csv:"))
+        self.variablesToWriteLabel.setText(_translate("Form", "Variables to write:"))
         __sortingEnabled = self.variablesToWriteListWidget.isSortingEnabled()
         self.variablesToWriteListWidget.setSortingEnabled(False)
         item = self.variablesToWriteListWidget.item(0)
-        item.setText(("comp"))
+        item.setText(_translate("Form", "comp"))
         item = self.variablesToWriteListWidget.item(1)
-        item.setText(("meta"))
+        item.setText(_translate("Form", "meta"))
         item = self.variablesToWriteListWidget.item(2)
-        item.setText(("wvl"))
+        item.setText(_translate("Form", "wvl"))
         self.variablesToWriteListWidget.setSortingEnabled(__sortingEnabled)
-        self.specifyAFilenameLabel.setText(("Specify a filename:"))
-        self.specifyAFilenameLineEdit.setText(("output.csv"))
+        self.specifyAFilenameLabel.setText(_translate("Form", "Specify a filename:"))
+        self.specifyAFilenameLineEdit.setText(_translate("Form", "output.csv"))
 
 
 if __name__ == "__main__":

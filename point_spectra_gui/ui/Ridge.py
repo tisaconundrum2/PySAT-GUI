@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
-# Automatically generated - don't edit.
-# Use `python setup.py build_ui` to update it.
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\Ridge.ui'
+#
+# Created by: PyQt5 UI code generator 5.6
+#
+# WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -154,38 +157,38 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(("Form"))
-        self.alphaLabel.setText(("Alpha"))
-        self.copyXLabel.setText(("Copy X"))
-        self.fitInterceptLabel.setText(("Fit Intercept"))
-        self.maxNumOfIterationsLabel.setText(("Max num of Iterations"))
-        self.maxNumOfIterationslineEdit.setText(("None"))
-        self.normalizeLabel.setText(("Normalize"))
-        self.solverLabel.setText(("Solver"))
-        self.solverComboBox.setItemText(0, ("auto"))
-        self.solverComboBox.setItemText(1, ("svd"))
-        self.solverComboBox.setItemText(2, ("cholesky"))
-        self.solverComboBox.setItemText(3, ("lsqr"))
-        self.solverComboBox.setItemText(4, ("sparse_cg"))
-        self.solverComboBox.setItemText(5, ("sag"))
-        self.toleranceLabel.setText(("Tolerance"))
-        self.randomStateLabel.setText(("Random State"))
-        self.randomStateLineEdit.setText(("None"))
-        self.alphasLabel_cv.setText(("alphas"))
-        self.alphasLineEdit_cv.setText(("0.1, 1.0, 10.0"))
-        self.fitInterceptLabel_cv.setText(("Fit intercept "))
-        self.normalizeLabel_cv.setText(("Normalize "))
-        self.scoringLabel_cv.setText(("Scoring"))
-        self.scoringComboBox_cv.setItemText(0, ("None"))
-        self.scoringComboBox_cv.setItemText(1, ("string"))
-        self.scoringComboBox_cv.setItemText(2, ("callable"))
-        self.gCVModeLabel_cv.setText(("GCV mode"))
-        self.gCVModeComboBox_cv.setItemText(0, ("None"))
-        self.gCVModeComboBox_cv.setItemText(1, ("auto"))
-        self.gCVModeComboBox_cv.setItemText(2, ("svd"))
-        self.gCVModeComboBox_cv.setItemText(3, ("eigen"))
-        self.storeCVValuesLabel_cv.setText(("Store CV Values           "))
-        self.crossValidateLabel.setText(("Cross Validate              "))
+        Form.setWindowTitle(_translate("Form", "Form"))
+        self.alphaLabel.setText(_translate("Form", "Alpha"))
+        self.copyXLabel.setText(_translate("Form", "Copy X"))
+        self.fitInterceptLabel.setText(_translate("Form", "Fit Intercept"))
+        self.maxNumOfIterationsLabel.setText(_translate("Form", "Max num of Iterations"))
+        self.maxNumOfIterationslineEdit.setText(_translate("Form", "None"))
+        self.normalizeLabel.setText(_translate("Form", "Normalize"))
+        self.solverLabel.setText(_translate("Form", "Solver"))
+        self.solverComboBox.setItemText(0, _translate("Form", "auto"))
+        self.solverComboBox.setItemText(1, _translate("Form", "svd"))
+        self.solverComboBox.setItemText(2, _translate("Form", "cholesky"))
+        self.solverComboBox.setItemText(3, _translate("Form", "lsqr"))
+        self.solverComboBox.setItemText(4, _translate("Form", "sparse_cg"))
+        self.solverComboBox.setItemText(5, _translate("Form", "sag"))
+        self.toleranceLabel.setText(_translate("Form", "Tolerance"))
+        self.randomStateLabel.setText(_translate("Form", "Random State"))
+        self.randomStateLineEdit.setText(_translate("Form", "None"))
+        self.alphasLabel_cv.setText(_translate("Form", "alphas"))
+        self.alphasLineEdit_cv.setText(_translate("Form", "0.1, 1.0, 10.0"))
+        self.fitInterceptLabel_cv.setText(_translate("Form", "Fit intercept "))
+        self.normalizeLabel_cv.setText(_translate("Form", "Normalize "))
+        self.scoringLabel_cv.setText(_translate("Form", "Scoring"))
+        self.scoringComboBox_cv.setItemText(0, _translate("Form", "None"))
+        self.scoringComboBox_cv.setItemText(1, _translate("Form", "string"))
+        self.scoringComboBox_cv.setItemText(2, _translate("Form", "callable"))
+        self.gCVModeLabel_cv.setText(_translate("Form", "GCV mode"))
+        self.gCVModeComboBox_cv.setItemText(0, _translate("Form", "None"))
+        self.gCVModeComboBox_cv.setItemText(1, _translate("Form", "auto"))
+        self.gCVModeComboBox_cv.setItemText(2, _translate("Form", "svd"))
+        self.gCVModeComboBox_cv.setItemText(3, _translate("Form", "eigen"))
+        self.storeCVValuesLabel_cv.setText(_translate("Form", "Store CV Values           "))
+        self.crossValidateLabel.setText(_translate("Form", "Cross Validate              "))
 
 
 if __name__ == "__main__":

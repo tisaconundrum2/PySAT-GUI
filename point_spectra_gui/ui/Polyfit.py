@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
-# Automatically generated - don't edit.
-# Use `python setup.py build_ui` to update it.
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\Polyfit.ui'
+#
+# Created by: PyQt5 UI code generator 5.6
+#
+# WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -40,10 +43,10 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(("Form"))
-        self.orderLabel.setText(("Order"))
-        self.numOfStandardDeviationsLabel.setText(("Num of Standard Deviations"))
-        self.maxNumOfIterationsLabel.setText(("Max Num of Iterations"))
+        Form.setWindowTitle(_translate("Form", "Form"))
+        self.orderLabel.setText(_translate("Form", "Order"))
+        self.numOfStandardDeviationsLabel.setText(_translate("Form", "Num of Standard Deviations"))
+        self.maxNumOfIterationsLabel.setText(_translate("Form", "Max Num of Iterations"))
 
 
 if __name__ == "__main__":

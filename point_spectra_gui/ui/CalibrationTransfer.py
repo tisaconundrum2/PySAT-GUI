@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
-# Automatically generated - don't edit.
-# Use `python setup.py build_ui` to update it.
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\CalibrationTransfer.ui'
+#
+# Created by: PyQt5 UI code generator 5.6
+#
+# WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -48,14 +51,14 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(("Form"))
-        self.formGroupBox.setTitle(("Calibration Transfer"))
-        self.CalTran_dataSetRefLabel.setText(("Reference Data Set:"))
-        self.CalTran_dataSetTransformLabel.setText(("Data Set to Transform:"))
-        self.CalTran_columnToMatchLabel.setText(("Column to Match:"))
-        self.methodLabel.setText(("Method:"))
-        self.methodComboBox.setItemText(0, ("LRA - Low Rank Alignment"))
-        self.methodComboBox.setItemText(1, ("PDS - Piecewise Direct Standardization"))
+        Form.setWindowTitle(_translate("Form", "Form"))
+        self.formGroupBox.setTitle(_translate("Form", "Calibration Transfer"))
+        self.CalTran_dataSetRefLabel.setText(_translate("Form", "Reference Data Set:"))
+        self.CalTran_dataSetTransformLabel.setText(_translate("Form", "Data Set to Transform:"))
+        self.CalTran_columnToMatchLabel.setText(_translate("Form", "Column to Match:"))
+        self.methodLabel.setText(_translate("Form", "Method:"))
+        self.methodComboBox.setItemText(0, _translate("Form", "LRA - Low Rank Alignment"))
+        self.methodComboBox.setItemText(1, _translate("Form", "PDS - Piecewise Direct Standardization"))
 
 
 if __name__ == "__main__":

@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
-# Automatically generated - don't edit.
-# Use `python setup.py build_ui` to update it.
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\LARS.ui'
+#
+# Created by: PyQt5 UI code generator 5.6
+#
+# WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -108,26 +111,26 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(("Form"))
-        self.numOfNonzeroCoeffsLabel.setText(("Num of Nonzero Coeffs"))
-        self.fitInterceptLabel.setText(("Fit Intercept"))
-        self.fitInterceptCheckBox.setText(("Calculate the intercept for this model"))
-        self.positiveLabel.setText(("Positive"))
-        self.positiveCheckBox.setText(("Restrict coefficients to be >= 0"))
-        self.verboseLabel.setText(("Verbose"))
-        self.verboseCheckBox.setText(("Verbose mode when fitting the model"))
-        self.normalizeLabel.setText(("Normalize"))
-        self.normalizeCheckBox.setText(("If True, the regressors X will be normalized before regression. ignored when fit_intercept is set to False."))
-        self.precomputeLabel.setText(("Precompute"))
-        self.precomputeComboBox.setItemText(0, ("True"))
-        self.precomputeComboBox.setItemText(1, ("False"))
-        self.precomputeComboBox.setItemText(2, ("auto"))
-        self.copyXLabel.setText(("Copy X"))
-        self.copyXCheckBox.setText(("Computer the objective function at each step of the model"))
-        self.epsLabel.setText(("Eps"))
-        self.fitPathLabel.setText(("Fit Path"))
-        self.fitPathCheckBox.setText(("Store the full path in the coef_path_attribute"))
-        self.crossValidatePathLabel.setText(("Cross Validate"))
+        Form.setWindowTitle(_translate("Form", "Form"))
+        self.numOfNonzeroCoeffsLabel.setText(_translate("Form", "Num of Nonzero Coeffs"))
+        self.fitInterceptLabel.setText(_translate("Form", "Fit Intercept"))
+        self.fitInterceptCheckBox.setText(_translate("Form", "Calculate the intercept for this model"))
+        self.positiveLabel.setText(_translate("Form", "Positive"))
+        self.positiveCheckBox.setText(_translate("Form", "Restrict coefficients to be >= 0"))
+        self.verboseLabel.setText(_translate("Form", "Verbose"))
+        self.verboseCheckBox.setText(_translate("Form", "Verbose mode when fitting the model"))
+        self.normalizeLabel.setText(_translate("Form", "Normalize"))
+        self.normalizeCheckBox.setText(_translate("Form", "If True, the regressors X will be normalized before regression. ignored when fit_intercept is set to False."))
+        self.precomputeLabel.setText(_translate("Form", "Precompute"))
+        self.precomputeComboBox.setItemText(0, _translate("Form", "True"))
+        self.precomputeComboBox.setItemText(1, _translate("Form", "False"))
+        self.precomputeComboBox.setItemText(2, _translate("Form", "auto"))
+        self.copyXLabel.setText(_translate("Form", "Copy X"))
+        self.copyXCheckBox.setText(_translate("Form", "Computer the objective function at each step of the model"))
+        self.epsLabel.setText(_translate("Form", "Eps"))
+        self.fitPathLabel.setText(_translate("Form", "Fit Path"))
+        self.fitPathCheckBox.setText(_translate("Form", "Store the full path in the coef_path_attribute"))
+        self.crossValidatePathLabel.setText(_translate("Form", "Cross Validate"))
 
 
 if __name__ == "__main__":

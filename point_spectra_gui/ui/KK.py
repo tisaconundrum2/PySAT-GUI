@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
-# Automatically generated - don't edit.
-# Use `python setup.py build_ui` to update it.
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\KK.ui'
+#
+# Created by: PyQt5 UI code generator 5.6
+#
+# WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -46,11 +49,11 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(("Form"))
-        self.topWidthLabel.setText(("Top Width"))
-        self.bottomWidthLabel.setText(("Bottom Width"))
-        self.exponentLabel.setText(("Exponent"))
-        self.tangentLabel.setText(("Tangent"))
+        Form.setWindowTitle(_translate("Form", "Form"))
+        self.topWidthLabel.setText(_translate("Form", "Top Width"))
+        self.bottomWidthLabel.setText(_translate("Form", "Bottom Width"))
+        self.exponentLabel.setText(_translate("Form", "Exponent"))
+        self.tangentLabel.setText(_translate("Form", "Tangent"))
 
 
 if __name__ == "__main__":

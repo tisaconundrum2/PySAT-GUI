@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
-# Automatically generated - don't edit.
-# Use `python setup.py build_ui` to update it.
+# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\Plot_ICA_PCA.ui'
+#
+# Created by: PyQt5 UI code generator 5.6
+#
+# WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -73,15 +76,15 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(("Form"))
-        self.groupBox.setTitle(("Plot ICA/PCA"))
-        self.chooseDataLabel.setText(("Choose data"))
-        self.chooseMethodLabel.setText(("Choose method"))
-        self.chooseXVariableLabel.setText(("Choose X Variable"))
-        self.chooseYVariableLabel.setText(("Choose Y Variable"))
-        self.plotFilenameLabel.setText(("Plot Filename"))
-        self.pushButton.setText(("..."))
-        self.colorCodedVariableLabel.setText(("Choose variable to color code points (optional)"))
+        Form.setWindowTitle(_translate("Form", "Form"))
+        self.groupBox.setTitle(_translate("Form", "Plot ICA/PCA"))
+        self.chooseDataLabel.setText(_translate("Form", "Choose data"))
+        self.chooseMethodLabel.setText(_translate("Form", "Choose method"))
+        self.chooseXVariableLabel.setText(_translate("Form", "Choose X Variable"))
+        self.chooseYVariableLabel.setText(_translate("Form", "Choose Y Variable"))
+        self.plotFilenameLabel.setText(_translate("Form", "Plot Filename"))
+        self.pushButton.setText(_translate("Form", "..."))
+        self.colorCodedVariableLabel.setText(_translate("Form", "Choose variable to color code points (optional)"))
 
 
 if __name__ == "__main__":
