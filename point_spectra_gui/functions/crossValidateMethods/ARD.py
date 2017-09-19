@@ -33,18 +33,18 @@ class Ui_Form(Ui_Form, ARDRegression, Basics):
 
     def function(self):
         params = {
-            'n_iter': self.numOfIterationsSpinBox.value(),
-            'tol': self.toleranceDoubleSpinBox.value(),
-            'alpha_1': self.alpha1DoubleSpinBox.value(),
-            'alpha_2': self.alpha2DoubleSpinBox.value(),
-            'lambda_1': self.lambdaDoubleSpinBox.value(),
-            'lambda_2': self.lambdaDoubleSpinBox_2.value(),
-            'compute_score': self.computerScoreCheckBox.isChecked(),
-            'threshold_lambda': self.thresholdLambdaSpinBox.value(),
-            'fit_intercept': self.fitInterceptCheckBox.isChecked(),
-            'normalize': self.normalizeCheckBox.isChecked(),
-            'copy_X': self.copyXCheckBox.isChecked(),
-            'verbose': self.verboseCheckBox.isChecked()}
+            'n_iter': [self.numOfIterationsSpinBox.value()],
+            'tol': [self.toleranceDoubleSpinBox.value()],
+            'alpha_1': [self.alpha1DoubleSpinBox.value()],
+            'alpha_2': [self.alpha2DoubleSpinBox.value()],
+            'lambda_1': [self.lambdaDoubleSpinBox.value()],
+            'lambda_2': [self.lambdaDoubleSpinBox_2.value()],
+            'compute_score': [self.computerScoreCheckBox.isChecked()],
+            'threshold_lambda': [self.thresholdLambdaSpinBox.value()],
+            'fit_intercept': [self.fitInterceptCheckBox.isChecked()],
+            'normalize': [self.normalizeCheckBox.isChecked()],
+            'copy_X': [self.copyXCheckBox.isChecked()],
+            'verbose': [self.verboseCheckBox.isChecked()]}
         modelkey = str(params)
         return params, modelkey
 

@@ -24,10 +24,10 @@ class Ui_Form(Ui_Form, OrthogonalMatchingPursuit, OrthogonalMatchingPursuitCV, B
         self.defaultComboItem(self.precomputeComboBox, self.precompute)
 
     def function(self):
-        params = {'fit_intercept': self.fitInterceptCheckBox.isChecked(),
-                  'normalize': self.normalizeCheckBox.isChecked(),
-                  'precompute': self.precomputeComboBox.currentText(),
-                  'cv': self.cVCheckBox.isChecked()}
+        params = {'fit_intercept': [self.fitInterceptCheckBox.isChecked()],
+                  'normalize': [self.normalizeCheckBox.isChecked()],
+                  'precompute': [self.precomputeComboBox.currentText()],
+                  'cv': [self.cVCheckBox.isChecked()]}
         modelkey = str(params)
         return params, modelkey
 

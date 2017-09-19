@@ -23,9 +23,8 @@ class Ui_Form(Ui_Form, PLSRegression, Basics):
     def function(self):
         nc = self.numOfComponentsLineEdit.text().split(',')
         nc = [int(i) for i in nc]
-        print("PLS is using the first value")
-        params = {'n_components': nc[0],
-                  'scale': False}
+        params = {'n_components': nc,
+                  'scale': [False]}
         modelkey = '(nc=' + str(params['n_components']) + ')'
         return params, modelkey
 

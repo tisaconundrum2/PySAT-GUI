@@ -1,32 +1,28 @@
 from PyQt5 import QtWidgets
-from sklearn.cross_decomposition.pls_ import PLSRegression
+from sklearn.linear_model.base import LinearRegression
 
-from point_spectra_gui.ui.PLS import Ui_Form
+from point_spectra_gui.ui.OLS import Ui_Form
 from point_spectra_gui.util.BasicFunctionality import Basics
 
 
-class Ui_Form(Ui_Form, PLSRegression, Basics):
+class Ui_Form(Ui_Form, LinearRegression, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
         self.checkMinAndMax()
         self.connectWidgets()
 
     def get_widget(self):
-        return self.formGroupBox
+        return self.groupBox
 
     def setHidden(self, bool):
         self.get_widget().setHidden(bool)
 
     def connectWidgets(self):
-        self.numOfComponentsLineEdit.setText(str(self.n_components))
+        self.fitInterceptCheckBox.setChecked(self.fit_intercept)
 
     def function(self):
-        nc = self.numOfComponentsLineEdit.text().split(',')
-        nc = [int(i) for i in nc]
-        print("PLS is using the first value")
-        params = {'n_components': nc[0],
-                  'scale': False}
-        modelkey = '(nc=' + str(params['n_components']) + ')'
+        params = {'fit_intercept': [self.fitInterceptCheckBox.isChecked()]}
+        modelkey = str(params)
         return params, modelkey
 
 

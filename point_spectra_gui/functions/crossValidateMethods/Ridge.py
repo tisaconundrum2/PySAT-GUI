@@ -53,23 +53,23 @@ class Ui_Form(Ui_Form, Ridge, RidgeCV, Basics):
             r_state = r_attrib[self.randomStateLineEdit.text()]
 
         if self.crossValidateCheckBox:
-            params = {'alphas': ast.literal_eval(self.alphasLineEdit_cv.text()),
-                      'fit_intercept': self.fitInterceptCheckBox_cv.isChecked(),
-                      'normalize': self.normalizeCheckBox_cv.isChecked(),
-                      'scoring': {'None': None}.get(self.scoringComboBox_cv.currentText()),
-                      'gcv_mode': {'None': None}.get(self.gCVModeComboBox_cv.currentText()),
-                      'store_cv_values': self.storeCVValuesCheckBox_cv.isChecked(),
-                      'CV': self.crossValidateCheckBox.isChecked()}
+            params = {'alphas': [ast.literal_eval(self.alphasLineEdit_cv.text())],
+                      'fit_intercept': [self.fitInterceptCheckBox_cv.isChecked()],
+                      'normalize': [self.normalizeCheckBox_cv.isChecked()],
+                      'scoring': [{'None': None}.get(self.scoringComboBox_cv.currentText())],
+                      'gcv_mode': [{'None': None}.get(self.gCVModeComboBox_cv.currentText())],
+                      'store_cv_values': [self.storeCVValuesCheckBox_cv.isChecked()],
+                      'CV': [self.crossValidateCheckBox.isChecked()]}
         else:
-            params = {'alpha': self.alphaDoubleSpinBox.value(),
-                      'copy_X': self.copyXCheckBox.isChecked(),
-                      'fit_intercept': self.fitInterceptCheckBox.isChecked(),
-                      'max_iter': m_state,
-                      'normalize': self.normalizeCheckBox.isChecked(),
-                      'solver': self.solverComboBox.currentText(),
-                      'tol': self.toleranceDoubleSpinBox.value(),
-                      'random_state': r_state,
-                      'CV': self.crossValidateCheckBox.isChecked()}
+            params = {'alpha': [self.alphaDoubleSpinBox.value()],
+                      'copy_X': [self.copyXCheckBox.isChecked()],
+                      'fit_intercept': [self.fitInterceptCheckBox.isChecked()],
+                      'max_iter': [m_state],
+                      'normalize': [self.normalizeCheckBox.isChecked()],
+                      'solver': [self.solverComboBox.currentText()],
+                      'tol': [self.toleranceDoubleSpinBox.value()],
+                      'random_state': [r_state],
+                      'CV': [self.crossValidateCheckBox.isChecked()]}
         modelkey = str(params)
         return params, modelkey
 

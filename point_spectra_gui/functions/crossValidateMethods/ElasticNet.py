@@ -39,18 +39,18 @@ class Ui_Form(Ui_Form, ElasticNet, Basics):
         precomputeComboBox = self.precomputeComboBox.itemText(index)
 
         params = {
-            'alpha': self.alphaDoubleSpinBox.value(),
-            'l1_ratio': self.l1RatioDoubleSpinBox.value(),
-            'fit_intercept': self.fitInterceptCheckBox.isChecked(),
-            'normalize': self.normalizeCheckBox.isChecked(),
-            'precompute': p_attrib[precomputeComboBox],
-            'max_iter': int(self.maxNumOfIterationsSpinBox.value()),
-            'copy_X': self.copyXCheckBox.isChecked(),
-            'tol': self.toleranceDoubleSpinBox.value(),
-            'positive': self.positiveCheckBox.isChecked(),
-            'selection': self.selectionLineEdit.text(),
-            'random_state': r_state,
-            'CV': self.crossValidateCheckBox.isChecked()}
+            'alpha': [self.alphaDoubleSpinBox.value()],
+            'l1_ratio': [self.l1RatioDoubleSpinBox.value()],
+            'fit_intercept': [self.fitInterceptCheckBox.isChecked()],
+            'normalize': [self.normalizeCheckBox.isChecked()],
+            'precompute': [p_attrib[precomputeComboBox]],
+            'max_iter': [int(self.maxNumOfIterationsSpinBox.value())],
+            'copy_X': [self.copyXCheckBox.isChecked()],
+            'tol': [self.toleranceDoubleSpinBox.value()],
+            'positive': [self.positiveCheckBox.isChecked()],
+            'selection': [self.selectionLineEdit.text()],
+            'random_state': [r_state],
+            'CV': [self.crossValidateCheckBox.isChecked()]}
         modelkey = str(params)
         return params, modelkey
 

@@ -25,13 +25,13 @@ class Ui_Form(Ui_Form, Lasso, Basics):
         self.forcePositiveCoefficientsCheckBox.setChecked(self.positive)
 
     def function(self):
-        params = {'alpha': self.alphaDoubleSpinBox.value(),
-                  'fit_intercept': self.fitInterceptCheckBox.isChecked(),
-                  'max_iter': int(self.maxNumOfIterationsSpinBox.value()),
-                  'tol': self.toleranceDoubleSpinBox.value(),
-                  'positive': self.forcePositiveCoefficientsCheckBox.isChecked(),
-                  'selection': 'random',
-                  'CV': self.optimizeWCrossValidaitonCheckBox.isChecked()}
+        params = {'alpha': [self.alphaDoubleSpinBox.value()],
+                  'fit_intercept': [self.fitInterceptCheckBox.isChecked()],
+                  'max_iter': [int(self.maxNumOfIterationsSpinBox.value())],
+                  'tol': [self.toleranceDoubleSpinBox.value()],
+                  'positive': [self.forcePositiveCoefficientsCheckBox.isChecked()],
+                  'selection': ['random'],
+                  'CV': [self.optimizeWCrossValidaitonCheckBox.isChecked()]}
         modelkey = str(params)
         return params, modelkey
 

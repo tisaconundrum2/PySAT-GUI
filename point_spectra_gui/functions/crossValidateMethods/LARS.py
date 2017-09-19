@@ -29,17 +29,17 @@ class Ui_Form(Ui_Form, Lars, Basics):
         self.fitPathCheckBox.setChecked(self.fit_path)
 
     def function(self):
-        params = {'n_nonzero_coefs': self.numOfNonzeroCoeffsSpinBox.value(),
-                  'fit_intercept': self.fitInterceptCheckBox.isChecked(),
-                  'positive': self.positiveCheckBox.isChecked(),
-                  'verbose': self.verboseCheckBox.isChecked(),
-                  'normalize': self.normalizeCheckBox.isChecked(),
-                  'precompute': {'True': True, 'False': False, 'array': 'array'}.get(
-                      self.precomputeComboBox.currentText()),
-                  'copy_X': self.copyXCheckBox.isChecked(),
-                  'eps': int(self.epsDoubleLineEdit.text()),
-                  'fit_path': self.fitPathCheckBox.isChecked(),
-                  'CV': self.crossValidateCheckBox.isChecked()}
+        params = {'n_nonzero_coefs': [self.numOfNonzeroCoeffsSpinBox.value()],
+                  'fit_intercept': [self.fitInterceptCheckBox.isChecked()],
+                  'positive': [self.positiveCheckBox.isChecked()],
+                  'verbose': [self.verboseCheckBox.isChecked()],
+                  'normalize': [self.normalizeCheckBox.isChecked()],
+                  'precompute': [{'True': True, 'False': False, 'array': 'array'}.get(
+                      self.precomputeComboBox.currentText())],
+                  'copy_X': [self.copyXCheckBox.isChecked()],
+                  'eps': [int(self.epsDoubleLineEdit.text())],
+                  'fit_path': [self.fitPathCheckBox.isChecked()],
+                  'CV': [self.crossValidateCheckBox.isChecked()]}
 
         self.numOfNonzeroCoeffsSpinBox.setDisabled(params['CV'])
         self.fitPathCheckBox.setDisabled(params['CV'])
