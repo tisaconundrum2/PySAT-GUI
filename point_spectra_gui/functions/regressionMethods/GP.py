@@ -18,6 +18,7 @@ class Ui_Form(Ui_Form, GaussianProcess, Basics):
         self.get_widget().setHidden(bool)
 
     def connectWidgets(self):
+        self.numOfComponenetsSpinBox.setValue(4)
         self.setComboBox(self.regrComboBox, self._regression_types)
         self.defaultComboItem(self.regrComboBox, self.regr)
         self.setComboBox(self.corrComboBox, self._correlation_types)
@@ -33,6 +34,8 @@ class Ui_Form(Ui_Form, GaussianProcess, Basics):
 
     def function(self):
         params = {
+            'reduce_dim': self.reductionMethodComboBox.currentText(),
+            'n_components': self.numOfComponenetsSpinBox.value(),
             'regr': self.regrComboBox.currentText(),
             'corr': self.corrComboBox.currentText(),
             'storage_mode': self.storageModeComboBox.currentText(),
