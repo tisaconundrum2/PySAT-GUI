@@ -71,8 +71,7 @@ class Ui_Form(Ui_Form, Basics):
         yrange = [self.yMinDoubleSpinBox.value(), self.yMaxDoubleSpinBox.value()]
 
         params, modelkey = self.getMethodParams(self.chooseAlgorithmComboBox.currentIndex())
-        modelkey = method + ' - ' + modelkey + ' - ' + str(yvars[0][-1]) + ' (' + str(yrange[0]) + '-' + str(
-            yrange[1]) + ') '
+        modelkey = "{} - {} - ({}, {})".format(method, yvars[0][-1], yrange[0], yrange[1])
         self.datakeys.append(modelkey)
         print(params, modelkey)
 
