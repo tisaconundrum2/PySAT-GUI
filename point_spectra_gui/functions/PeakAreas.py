@@ -15,7 +15,9 @@ class Ui_Form(Ui_Form, Basics):
         return self.groupBox
 
     def connectWidgets(self):
+        self.peakMinimaLineEdit.setText("None (calculate from average spectrum)")
         self.setComboBox(self.chooseDataComboBox, self.datakeys)
+        self.pushButton.clicked.connect(lambda: self.on_getDataButton_clicked(self.peakMinimaLineEdit))
 
     def isEnabled(self):
         return self.get_widget().isEnabled()
@@ -24,10 +26,9 @@ class Ui_Form(Ui_Form, Basics):
         self.get_widget().setDisabled(bool)
 
     def function(self):
-        params = self.getGuiParams()
-        datakey = params['chooseDataComboBox']
-        peaks_mins_file = params['[peakMinimaLineEdit']
-        if peaks_mins_file == "None (Calculate from avg spectrum)":
+        datakey = self.chooseDataComboBox.currentText()
+        peaks_mins_file = self.peakMinimaLineEdit.text()
+        if peaks_mins_file == "None (calculate from average spectrum)":
             peaks_mins_file = None
 
         try:
@@ -39,6 +40,12 @@ class Ui_Form(Ui_Form, Basics):
 
         except Exception as e:
             print(e)
+
+    def on_getDataButton_clicked(self, lineEdit):
+        filename, _filter = QtWidgets.QFileDialog.getOpenFileName(None, "Open peaks and minima File", '.', "(*.csv)")
+        lineEdit.setText(filename)
+        if lineEdit.text() == "":
+            lineEdit.setText("None (calculate from average spectrum)")
 
 
 if __name__ == "__main__":
