@@ -70,6 +70,13 @@
        </widget>
       </item>
       <item>
+       <widget class="QPushButton" name="stopPushButton">
+        <property name="text">
+         <string>Stop Module</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="deleteModulePushButton">
         <property name="text">
          <string>Delete Module</string>

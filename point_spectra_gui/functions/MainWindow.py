@@ -112,6 +112,7 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
             self.undoModulePushButton.clicked.connect(lambda: self.on_undoButton_clicked())
             self.actionOn.triggered.connect(self.debug)
             self.actionOff.triggered.connect(self.normal)
+            self.stopPushButton.clicked.connect(self.on_stopButton_clicked)
         except Exception as e:
             print(e)
 
@@ -162,6 +163,10 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
                 self.widgetList[self.leftOff].setDisabled(False)
         except:
             pass
+
+    def on_stopButton_clicked(self):
+        self.terminate()
+        self.taskFinished.emit()
 
     def onStart(self):  # onStart function
         self.progressBar.setRange(0, 0)  # make the bar pulse green
