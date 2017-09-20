@@ -3,6 +3,7 @@ import sys
 import time
 
 from PyQt5 import QtCore, QtWidgets, QtGui
+from PyQt5.QtCore import QSettings
 
 from point_spectra_gui import functions
 from point_spectra_gui.ui import MainWindow
@@ -24,6 +25,9 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         super().__init__()
         self.widgetList = []
         self.leftOff = 0
+        self.settings = QSettings(QSettings.IniFormat, QSettings.SystemScope, 'USGS', 'settings')
+        self.settings.setFallbacksEnabled(False)  # File only, not registry or or.
+        self.settings.setPath(QSettings.IniFormat, QSettings.SystemScope, './settings.ini')
 
     def setupUi(self, MainWindow):
         super().setupUi(MainWindow)  # Run the basic window UI
@@ -113,8 +117,17 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
             self.stopPushButton.clicked.connect(self.on_stopButton_clicked)
             self.actionOn.triggered.connect(self.debug_mode)
             self.actionOff.triggered.connect(self.normal_mode)
+            self.actionExit.triggered.connect(lambda: sys.exit())
+
         except Exception as e:
             print(e)
+
+    def closeEvent(self, e):
+        # Write window size and position to config file
+        print("Closing application")
+        self.settings.setValue("size", self.size())
+        self.settings.setValue("pos", self.pos())
+        e.accept()
 
     def getWidgetItems(self):
         """
