@@ -29,16 +29,16 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         super().setupUi(MainWindow)  # Run the basic window UI
         self.menu_item_shortcuts()  # set up the shortcuts
         self.connectWidgets()
-        self.normal()
+        self.normal_mode()
 
-    def normal(self):
+    def normal_mode(self):
         sys.stdout = EmittingStream(textWritten=self.normalOutputWritten)
         sys.stderr = sys.__stderr__
         # sys.stderr = EmittingStream(textWritten=self.normalOutputWritten)
         self.actionOn.setDisabled(False)
         self.actionOff.setDisabled(True)
 
-    def debug(self):
+    def debug_mode(self):
         # Restore sys.stdout
         sys.stdout = sys.__stdout__
         self.actionOn.setDisabled(True)
@@ -106,13 +106,13 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
             self.actionSplit_Data.triggered.connect(lambda: self.addWidget(functions.SplitDataset.Ui_Form))
             self.actionStratified_Folds.triggered.connect(lambda: self.addWidget(functions.StratifiedFolds.Ui_Form))
             self.actionSubmodel_Predict.triggered.connect(lambda: self.addWidget(functions.SubmodelPredict.Ui_Form))
-            self.actionSave_Current_Workflow.triggered.connect(lambda: self.on_save_clicked())
-            self.deleteModulePushButton.clicked.connect(lambda: self.on_delete_module_clicked())
-            self.okPushButton.clicked.connect(lambda: self.on_okButton_clicked())
-            self.undoModulePushButton.clicked.connect(lambda: self.on_undoButton_clicked())
-            self.actionOn.triggered.connect(self.debug)
-            self.actionOff.triggered.connect(self.normal)
+            self.actionSave_Current_Workflow.triggered.connect(self.on_save_clicked)
+            self.deleteModulePushButton.clicked.connect(self.on_delete_module_clicked)
+            self.okPushButton.clicked.connect(self.on_okButton_clicked)
+            self.undoModulePushButton.clicked.connect(self.on_undoButton_clicked)
             self.stopPushButton.clicked.connect(self.on_stopButton_clicked)
+            self.actionOn.triggered.connect(self.debug_mode)
+            self.actionOff.triggered.connect(self.normal_mode)
         except Exception as e:
             print(e)
 
