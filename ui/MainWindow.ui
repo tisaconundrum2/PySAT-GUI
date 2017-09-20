@@ -63,6 +63,13 @@
        </widget>
       </item>
       <item>
+       <widget class="QPushButton" name="deleteModulePushButton_2">
+        <property name="text">
+         <string>Undo Module</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="deleteModulePushButton">
         <property name="text">
          <string>Delete Module</string>

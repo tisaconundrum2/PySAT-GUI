@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\OMP.ui'
-#
-# Created by: PyQt5 UI code generator 5.6
-#
-# WARNING! All changes made in this file will be lost!
+# Automatically generated - don't edit.
+# Use `python setup.py build_ui` to update it.
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -57,14 +54,14 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.fitInterceptLabel.setText(_translate("Form", "Fit Intercept"))
-        self.normalizeLabel.setText(_translate("Form", "Normalize"))
-        self.precomputeLabel.setText(_translate("Form", "Precompute"))
-        self.precomputeComboBox.setItemText(0, _translate("Form", "auto"))
-        self.precomputeComboBox.setItemText(1, _translate("Form", "True"))
-        self.precomputeComboBox.setItemText(2, _translate("Form", "False"))
-        self.cVLabel.setText(_translate("Form", "CV"))
+        Form.setWindowTitle(("Form"))
+        self.fitInterceptLabel.setText(("Fit Intercept"))
+        self.normalizeLabel.setText(("Normalize"))
+        self.precomputeLabel.setText(("Precompute"))
+        self.precomputeComboBox.setItemText(0, ("auto"))
+        self.precomputeComboBox.setItemText(1, ("True"))
+        self.precomputeComboBox.setItemText(2, ("False"))
+        self.cVLabel.setText(("CV"))
 
 
 if __name__ == "__main__":

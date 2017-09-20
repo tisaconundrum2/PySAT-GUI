@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\ALS.ui'
-#
-# Created by: PyQt5 UI code generator 5.6
-#
-# WARNING! All changes made in this file will be lost!
+# Automatically generated - don't edit.
+# Use `python setup.py build_ui` to update it.
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -49,11 +46,11 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.asymmetryLabel.setText(_translate("Form", "Asymmetry"))
-        self.smoothnessLabel.setText(_translate("Form", "Smoothness"))
-        self.maxNumOfIterationsLabel.setText(_translate("Form", "Max Num of Iterations"))
-        self.convergenceThresholdLabel.setText(_translate("Form", "Convergence Threshold"))
+        Form.setWindowTitle(("Form"))
+        self.asymmetryLabel.setText(("Asymmetry"))
+        self.smoothnessLabel.setText(("Smoothness"))
+        self.maxNumOfIterationsLabel.setText(("Max Num of Iterations"))
+        self.convergenceThresholdLabel.setText(("Convergence Threshold"))
 
 
 if __name__ == "__main__":

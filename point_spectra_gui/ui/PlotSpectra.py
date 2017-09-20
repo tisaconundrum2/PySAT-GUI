@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\PlotSpectra.ui'
-#
-# Created by: PyQt5 UI code generator 5.6
-#
-# WARNING! All changes made in this file will be lost!
+# Automatically generated - don't edit.
+# Use `python setup.py build_ui` to update it.
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -128,22 +125,22 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.groupBox.setTitle(_translate("Form", "Plot Spectra"))
-        self.chooseDataLabel.setText(_translate("Form", "Choose Data"))
-        self.figureNameLabel.setText(_translate("Form", "Figure Name"))
-        self.plotTitleLabel.setText(_translate("Form", "Plot Title"))
-        self.xVariableLabel.setText(_translate("Form", "X Variable:"))
-        self.chooseColumnLabel.setText(_translate("Form", "Choose Column"))
-        self.chooseRowsLabel.setText(_translate("Form", "Choose Rows:"))
-        self.colorLabel.setText(_translate("Form", "Color"))
-        self.lineLabel.setText(_translate("Form", "Line"))
-        self.alphaLabel.setText(_translate("Form", "Alpha"))
-        self.lineWidthLabel.setText(_translate("Form", "Line width"))
-        self.plotFilenameLabel.setText(_translate("Form", "Plot Filename"))
-        self.pushButton.setText(_translate("Form", "..."))
-        self.minLabel.setText(_translate("Form", "Min"))
-        self.maxLabel.setText(_translate("Form", "Max"))
+        Form.setWindowTitle(("Form"))
+        self.groupBox.setTitle(("Plot Spectra"))
+        self.chooseDataLabel.setText(("Choose Data"))
+        self.figureNameLabel.setText(("Figure Name"))
+        self.plotTitleLabel.setText(("Plot Title"))
+        self.xVariableLabel.setText(("X Variable:"))
+        self.chooseColumnLabel.setText(("Choose Column"))
+        self.chooseRowsLabel.setText(("Choose Rows:"))
+        self.colorLabel.setText(("Color"))
+        self.lineLabel.setText(("Line"))
+        self.alphaLabel.setText(("Alpha"))
+        self.lineWidthLabel.setText(("Line width"))
+        self.plotFilenameLabel.setText(("Plot Filename"))
+        self.pushButton.setText(("..."))
+        self.minLabel.setText(("Min"))
+        self.maxLabel.setText(("Max"))
 
 
 if __name__ == "__main__":

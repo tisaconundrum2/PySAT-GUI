@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\CCAM.ui'
-#
-# Created by: PyQt5 UI code generator 5.6
-#
-# WARNING! All changes made in this file will be lost!
+# Automatically generated - don't edit.
+# Use `python setup.py build_ui` to update it.
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -46,13 +43,13 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.largestWaveletScaleLabel.setText(_translate("Form", "Largest Wavelet Scale"))
-        self.lowestWaveletScaleLabel.setText(_translate("Form", "Lowest Wavelet Scale"))
-        self.interpolationMethodLabel.setText(_translate("Form", "Interpolation Method"))
-        self.interpolationMethodComboBox.setItemText(0, _translate("Form", "Spline"))
-        self.interpolationMethodComboBox.setItemText(1, _translate("Form", "Quadratic"))
-        self.interpolationMethodComboBox.setItemText(2, _translate("Form", "Linear"))
+        Form.setWindowTitle(("Form"))
+        self.largestWaveletScaleLabel.setText(("Largest Wavelet Scale"))
+        self.lowestWaveletScaleLabel.setText(("Lowest Wavelet Scale"))
+        self.interpolationMethodLabel.setText(("Interpolation Method"))
+        self.interpolationMethodComboBox.setItemText(0, ("Spline"))
+        self.interpolationMethodComboBox.setItemText(1, ("Quadratic"))
+        self.interpolationMethodComboBox.setItemText(2, ("Linear"))
 
 
 if __name__ == "__main__":

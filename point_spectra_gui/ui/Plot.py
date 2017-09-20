@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\Plot.ui'
-#
-# Created by: PyQt5 UI code generator 5.6
-#
-# WARNING! All changes made in this file will be lost!
+# Automatically generated - don't edit.
+# Use `python setup.py build_ui` to update it.
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -190,28 +187,28 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.groupBox.setTitle(_translate("Form", "Plot"))
-        self.chooseDataLabel.setText(_translate("Form", "Choose data"))
-        self.figureNameLabel.setText(_translate("Form", "Figure name"))
-        self.figureNameComboBox.setToolTip(_translate("Form", "Already have a figure, select from the ones available here"))
-        self.plotTitleLabel.setText(_translate("Form", "Plot Title"))
-        self.chooseXVariableLabel.setText(_translate("Form", "Choose X Variable"))
-        self.xTitleLabel.setText(_translate("Form", "X title"))
-        self.xMinLabel.setText(_translate("Form", "X min"))
-        self.xMaxLabel.setText(_translate("Form", "X max"))
-        self.chooseYVariableLabel.setText(_translate("Form", "Choose Y Variable"))
-        self.yTitleLabel.setText(_translate("Form", "Y title"))
-        self.yMinLabel.setText(_translate("Form", "Y min"))
-        self.yMaxLabel.setText(_translate("Form", "X max"))
-        self.oneToOneLabel.setText(_translate("Form", "One to One"))
-        self.legendLabel.setText(_translate("Form", "Legend"))
-        self.alphaLabel.setText(_translate("Form", "Alpha"))
-        self.markerLabel.setText(_translate("Form", "Marker"))
-        self.plotFilenameLabel.setText(_translate("Form", "Plot Filename"))
-        self.lineLabel.setText(_translate("Form", "Line"))
-        self.colorLabel.setText(_translate("Form", "Color"))
-        self.plotFilenamePushButton.setText(_translate("Form", "..."))
+        Form.setWindowTitle(("Form"))
+        self.groupBox.setTitle(("Plot"))
+        self.chooseDataLabel.setText(("Choose data"))
+        self.figureNameLabel.setText(("Figure name"))
+        self.figureNameComboBox.setToolTip(("Already have a figure, select from the ones available here"))
+        self.plotTitleLabel.setText(("Plot Title"))
+        self.chooseXVariableLabel.setText(("Choose X Variable"))
+        self.xTitleLabel.setText(("X title"))
+        self.xMinLabel.setText(("X min"))
+        self.xMaxLabel.setText(("X max"))
+        self.chooseYVariableLabel.setText(("Choose Y Variable"))
+        self.yTitleLabel.setText(("Y title"))
+        self.yMinLabel.setText(("Y min"))
+        self.yMaxLabel.setText(("X max"))
+        self.oneToOneLabel.setText(("One to One"))
+        self.legendLabel.setText(("Legend"))
+        self.alphaLabel.setText(("Alpha"))
+        self.markerLabel.setText(("Marker"))
+        self.plotFilenameLabel.setText(("Plot Filename"))
+        self.lineLabel.setText(("Line"))
+        self.colorLabel.setText(("Color"))
+        self.plotFilenamePushButton.setText(("..."))
 
 
 if __name__ == "__main__":

@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\LassoLARS.ui'
-#
-# Created by: PyQt5 UI code generator 5.6
-#
-# WARNING! All changes made in this file will be lost!
+# Automatically generated - don't edit.
+# Use `python setup.py build_ui` to update it.
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -110,25 +107,25 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.alphaLabel.setText(_translate("Form", "Alpha "))
-        self.fitInterceptLabel.setText(_translate("Form", "Fit Intercept"))
-        self.positiveLabel.setText(_translate("Form", "Positive"))
-        self.verboseLabel.setText(_translate("Form", "Verbose"))
-        self.normalizeLabel.setText(_translate("Form", "Normalize"))
-        self.copyXLabel.setText(_translate("Form", "Copy X"))
-        self.precomputeLabel.setText(_translate("Form", "Precompute"))
-        self.precomputeComboBox.setItemText(0, _translate("Form", "Auto"))
-        self.precomputeComboBox.setItemText(1, _translate("Form", "True"))
-        self.precomputeComboBox.setItemText(2, _translate("Form", "False"))
-        self.precomputeComboBox.setItemText(3, _translate("Form", "array-like"))
-        self.maxIterationsLabel.setText(_translate("Form", "Max Iterations"))
-        self.epsLabel.setText(_translate("Form", "Eps"))
-        self.fitPathLabel.setText(_translate("Form", "Fit Path"))
-        self.modelLabel.setText(_translate("Form", "Model"))
-        self.modelComboBox.setItemText(0, _translate("Form", "Lasso Lars"))
-        self.modelComboBox.setItemText(1, _translate("Form", "Cross Validated Lasso Lars"))
-        self.modelComboBox.setItemText(2, _translate("Form", "Information Criterion Lasso Lars"))
+        Form.setWindowTitle(("Form"))
+        self.alphaLabel.setText(("Alpha "))
+        self.fitInterceptLabel.setText(("Fit Intercept"))
+        self.positiveLabel.setText(("Positive"))
+        self.verboseLabel.setText(("Verbose"))
+        self.normalizeLabel.setText(("Normalize"))
+        self.copyXLabel.setText(("Copy X"))
+        self.precomputeLabel.setText(("Precompute"))
+        self.precomputeComboBox.setItemText(0, ("Auto"))
+        self.precomputeComboBox.setItemText(1, ("True"))
+        self.precomputeComboBox.setItemText(2, ("False"))
+        self.precomputeComboBox.setItemText(3, ("array-like"))
+        self.maxIterationsLabel.setText(("Max Iterations"))
+        self.epsLabel.setText(("Eps"))
+        self.fitPathLabel.setText(("Fit Path"))
+        self.modelLabel.setText(("Model"))
+        self.modelComboBox.setItemText(0, ("Lasso Lars"))
+        self.modelComboBox.setItemText(1, ("Cross Validated Lasso Lars"))
+        self.modelComboBox.setItemText(2, ("Information Criterion Lasso Lars"))
 
 
 if __name__ == "__main__":
