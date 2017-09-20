@@ -14,6 +14,7 @@ class Ui_Form(Ui_Form, Basics):
 
     def connectWidgets(self):
         self.setComboBox(self.chooseDataComboBox, self.datakeys)
+        self.pushButton.clicked.connect(lambda: self.on_getDataButton_clicked(self.vectorFileLineEdit))
 
     def isEnabled(self):
         return self.get_widget().isEnabled()
@@ -22,14 +23,20 @@ class Ui_Form(Ui_Form, Basics):
         self.get_widget().setDisabled(bool)
 
     def function(self):
-        params = self.getGuiParams()
-        datakey = params['chooseDataComboBox']
-        vectorfile = params['vectorFileLineEdit']
+        datakey = self.chooseDataComboBox.currentText()
+        vectorfile = self.vectorFileLineEdit.text()
 
         try:
             self.data[datakey].multiply_vector(vectorfile)
         except Exception as e:
             print(e)
+
+    def on_getDataButton_clicked(self, lineEdit):
+        filename, _filter = QtWidgets.QFileDialog.getOpenFileName(None, "Open Vector Data File", '.', "(*.csv)")
+        lineEdit.setText(filename)
+        if lineEdit.text() == "":
+            lineEdit.setText("*.csv")
+
 
 
 if __name__ == "__main__":
