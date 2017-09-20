@@ -18,7 +18,6 @@ class Ui_Form(object):
         self.formGroupBox = QtWidgets.QGroupBox(Form)
         self.formGroupBox.setObjectName("formGroupBox")
         self.formLayout = QtWidgets.QFormLayout(self.formGroupBox)
-        self.formLayout.setFieldGrowthPolicy(QtWidgets.QFormLayout.AllNonFixedFieldsGrow)
         self.formLayout.setObjectName("formLayout")
         self.chooseDataLabel = QtWidgets.QLabel(self.formGroupBox)
         self.chooseDataLabel.setObjectName("chooseDataLabel")
@@ -32,6 +31,9 @@ class Ui_Form(object):
         self.chooseMethodComboBox = QtWidgets.QComboBox(self.formGroupBox)
         self.chooseMethodComboBox.setObjectName("chooseMethodComboBox")
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.chooseMethodComboBox)
+        self.dim_reduction_vlayout = QtWidgets.QVBoxLayout()
+        self.dim_reduction_vlayout.setObjectName("dim_reduction_vlayout")
+        self.formLayout.setLayout(2, QtWidgets.QFormLayout.SpanningRole, self.dim_reduction_vlayout)
         self.verticalLayout.addWidget(self.formGroupBox)
 
         self.retranslateUi(Form)
