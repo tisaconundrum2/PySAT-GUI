@@ -63,7 +63,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="deleteModulePushButton_2">
+       <widget class="QPushButton" name="undoModulePushButton">
         <property name="text">
          <string>Undo Module</string>
         </property>
