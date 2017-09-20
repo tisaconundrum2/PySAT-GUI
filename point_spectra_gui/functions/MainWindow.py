@@ -156,9 +156,12 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         self.taskFinished.connect(self.onFinished)
 
     def on_undoButton_clicked(self):
-        if not self.widgetList[-1].isEnabled():
-            self.leftOff -= 1
-            self.widgetList[self.leftOff].setDisabled(False)
+        try:
+            if not self.widgetList[-1].isEnabled():
+                self.leftOff -= 1
+                self.widgetList[self.leftOff].setDisabled(False)
+        except:
+            pass
 
     def onStart(self):  # onStart function
         self.progressBar.setRange(0, 0)  # make the bar pulse green
