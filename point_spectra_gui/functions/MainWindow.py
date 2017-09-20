@@ -165,8 +165,11 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
             pass
 
     def on_stopButton_clicked(self):
-        self.terminate()
-        self.taskFinished.emit()
+        if self.isRunning():
+            self.terminate()
+            self.taskFinished.emit()
+        else:
+            print("There is nothing running right now")
 
     def onStart(self):  # onStart function
         self.progressBar.setRange(0, 0)  # make the bar pulse green
