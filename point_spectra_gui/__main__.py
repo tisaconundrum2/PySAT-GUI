@@ -20,7 +20,6 @@ def new():
 
 def connectWidgets(ui):
     ui.actionCreate_New_Workflow.triggered.connect(lambda: new())
-    ui.actionExit.triggered.connect(lambda: sys.exit())
 
 
 def get_splash(app):
