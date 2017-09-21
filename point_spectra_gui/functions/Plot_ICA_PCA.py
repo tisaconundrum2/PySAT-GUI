@@ -42,7 +42,7 @@ class Ui_Form(Ui_Form, Basics):
             colorvar = None
         filename = self.plotFilenameLineEdit.text()
         pca_ica_plot(self.data[datakey], x_component, y_component, colorvar=colorvar, cmap=cmap, method=method,
-                     figpath=self.outpath)
+                     figpath=filename)
 
     def xychoices(self):
         try:
