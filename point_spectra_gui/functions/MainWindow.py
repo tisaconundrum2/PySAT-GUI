@@ -17,6 +17,9 @@ class EmittingStream(QtCore.QObject):
     def write(self, text):
         self.textWritten.emit(str(text))
 
+    def flush(self):
+        pass
+
 
 class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
     taskFinished = QtCore.pyqtSignal()
