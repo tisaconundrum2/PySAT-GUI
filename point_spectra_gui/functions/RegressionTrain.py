@@ -126,7 +126,6 @@ class Ui_Form(Ui_Form, Basics):
     def regressionMethods(self):
         self.alg = []
         list_forms = [PLS,
-                      GP,
                       OLS,
                       OMP,
                       Lasso,
