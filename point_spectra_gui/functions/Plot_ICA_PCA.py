@@ -48,7 +48,8 @@ class Ui_Form(Ui_Form, Basics):
         try:
             choices = self.data[self.chooseDataComboBox.currentText()].df[
                 self.chooseMethodComboBox.currentText()].columns.values
-        except:
+        except Exception as e:
+            print(e)
             choices = ['-']
         return choices
 
@@ -73,20 +74,24 @@ class Ui_Form(Ui_Form, Basics):
             try:
                 self.vars_level0 = [i for i in self.vars_level0 if
                                     'Unnamed' not in str(i)]  # remove unnamed columns from choices
-            except:
+            except Exception as e:
+                print(e)
                 pass
             try:
                 self.vars_level1 = [i for i in self.vars_level1 if
                                     'Unnamed' not in str(i)]  # remove unnamed columns from choices
-            except:
+            except Exception as e:
+                print(e)
                 pass
             for i in self.vars_level1:
                 choices.append(str(i))
 
-        except:
+        except Exception as e:
+            print(e)
             try:
                 choices.append(self.data[self.chooseDataComboBox.currentText()].columns.values)
-            except:
+            except Exception as e:
+                print(e)
                 pass
         for i in choices:
             obj.addItem(str(i))
