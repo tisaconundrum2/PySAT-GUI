@@ -10,7 +10,7 @@ class Ui_Form(Ui_Form, Basics):
         self.connectWidgets()
 
     def get_widget(self):
-        return self.groupbox
+        return self.groupBox
 
     def connectWidgets(self):
         self.setComboBox(self.chooseDataSetComboBox, self.datakeys)
