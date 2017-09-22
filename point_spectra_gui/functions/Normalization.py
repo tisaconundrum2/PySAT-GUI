@@ -77,10 +77,6 @@ class Ui_Form(Ui_Form, Basics):
         for items in self.normwidgets:
             items.setMaximum(int_)
 
-    def setZero(self):
-        for items in self.normwidgets:
-            items.setValue(0)
-
     def on_addRange_pushed(self):
         if self.index < len(self.normwidgets):
             self.normwidgets[self.index].setHidden(False)
@@ -92,7 +88,7 @@ class Ui_Form(Ui_Form, Basics):
         if self.index > 1:
             self.index -= 1
             self.normwidgets[self.index].setHidden(True)
-            self.normwidgets[self.index].clearValues()
+            self.normwidgets[self.index].setValue(0)
         else:
             print("Cannot delete any more wavelengths")
 
@@ -153,7 +149,7 @@ class Ui_Form(Ui_Form, Basics):
             ranges.append(self.normwidgets[i].getValues())
         datakey = self.chooseDataComboBox.currentText()
         try:
-            col_var, filter_ = self.varToNormalizeListView.selectedItems().text()
+            col_var, filter_ = self.varToNormalizeListWidget.selectedItems().text()
         except:
             col_var = 'wvl'
         print("{}".format(ranges))
