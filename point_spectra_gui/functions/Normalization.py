@@ -154,9 +154,7 @@ class Ui_Form(Ui_Form, Basics):
             col_var = 'wvl'
         print("{}".format(ranges))
         try:
-            print(self.data[datakey].df.columns.levels[0])
             self.data[datakey].norm(ranges, col_var=col_var)
-            print(self.data[datakey].df.columns.levels[0])
             print("Normalization has been applied to the ranges: " + str(ranges))
         except Exception as e:
             print("There was a problem: ", e)
