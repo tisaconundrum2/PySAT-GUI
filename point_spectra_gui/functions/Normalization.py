@@ -26,6 +26,10 @@ class normWidgets:
         self.minimumWSpinBox.setMaximum(int_)
         self.maximumWSpinBox.setMaximum(int_)
 
+    def setValue(self, int_):
+        self.minimumWSpinBox.setValue(int_)
+        self.maximumWSpinBox.setValue(int_)
+
     def spinBox(self, int_):
         if int_ == 0:
             return self.minimumWSpinBox
