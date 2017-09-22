@@ -26,7 +26,7 @@
          <x>0</x>
          <y>0</y>
          <width>678</width>
-         <height>566</height>
+         <height>661</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -47,6 +47,12 @@
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>97</height>
+       </size>
       </property>
      </widget>
     </item>
