@@ -1,3 +1,5 @@
+from PyQt5 import QtWidgets
+
 from point_spectra_gui.ui.Normalization import Ui_Form
 from point_spectra_gui.util.BasicFunctionality import Basics
 
@@ -17,10 +19,6 @@ class normWidgets:
 
     def getValues(self):
         return int(self.minimumWSpinBox.text()), int(self.maximumWSpinBox.text())
-
-    def clearValues(self):
-        self.minimumWSpinBox.clear()
-        self.maximumWSpinBox.clear()
 
     def setMaximum(self, int_):
         self.minimumWSpinBox.setMaximum(int_)
@@ -60,8 +58,6 @@ class Ui_Form(Ui_Form, Basics):
         self.chooseDataComboBox.currentIndexChanged.connect(lambda: self.changeComboListVars(self.changeComboListVars, self.xvar_choices()))
         self.setListWidget(self.varToNormalizeListWidget, self.xvar_choices())
         self.setMaximum(9999999)
-        self.setZero()
-        self.clearValues()
         self.setHidden(self.normwidgets)
         self.qt.isGuiChanged(self.checkForNewMax)
         self.addRangePushButton.clicked.connect(self.on_addRange_pushed)
@@ -84,10 +80,6 @@ class Ui_Form(Ui_Form, Basics):
     def setZero(self):
         for items in self.normwidgets:
             items.setValue(0)
-
-    def clearValues(self):
-        for items in self.normwidgets:
-            items.clearValues()
 
     def on_addRange_pushed(self):
         if self.index < len(self.normwidgets):
