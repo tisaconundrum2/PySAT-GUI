@@ -18,7 +18,7 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QGroupBox" name="formGroupBox_CV">
+         <widget class="QGroupBox" name="Ridge_CV">
           <property name="title">
            <string>Ridge CV</string>
           </property>
@@ -135,7 +135,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QGroupBox" name="formGroupBox">
+         <widget class="QGroupBox" name="Ridge">
           <property name="enabled">
            <bool>true</bool>
           </property>
@@ -312,7 +312,7 @@
   <connection>
    <sender>crossValidateCheckBox</sender>
    <signal>toggled(bool)</signal>
-   <receiver>formGroupBox_CV</receiver>
+   <receiver>Ridge_CV</receiver>
    <slot>setVisible(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -328,7 +328,7 @@
   <connection>
    <sender>crossValidateCheckBox</sender>
    <signal>toggled(bool)</signal>
-   <receiver>formGroupBox</receiver>
+   <receiver>Ridge</receiver>
    <slot>setHidden(bool)</slot>
    <hints>
     <hint type="sourcelabel">
