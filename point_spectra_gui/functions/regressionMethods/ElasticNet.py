@@ -57,45 +57,46 @@ class Ui_Form(Ui_Form, ElasticNet, ElasticNetCV, Basics):
     def function(self):
         p_attrib = {'False': False, 'True': True, 'Array-like': 'array-like'}
         r_attrib = {'None': None}
-        try:
-            r_state = int(self.randomStateLineEdit.text())
-        except:
-            r_state = r_attrib[self.randomStateLineEdit.text()]
+        # TODO Add back the random state later.
+        # try:
+        #     r_state = int(self.randomStateLineEdit.text())
+        # except:
+        #     r_state = r_attrib[self.randomStateLineEdit.text()]
 
         index = self.precomputeComboBox.currentIndex()
         precomputeComboBox = self.precomputeComboBox.itemText(index)
 
         if self.CVCheckBox.isChecked():
             params = {
-                'alpha': [],
-                'l1_ratio': [],
-                'fit_intercept': [],
-                'normalize': [],
-                'precompute': [],
-                'max_iter': [],
-                'copy_X': [],
-                'tol': [],
-                'warm_start': [],
-                'positive': [],
-                'selection': [],
+                'l1_ratio': self.l1_ratioDoubleSpinBox.value(),
+                'eps': self.epsDoubleSpinBox.value(),
+                'n_alphas': self.n_alphasSpinBox.value(),
+                'alphas': self.alphasLineEdit.text(),
+                'fit_intercept': self.fit_interceptCheckBox.isChecked(),
+                'normalize': self.normalizeCheckBox.isChecked(),
+                'precompute': self.precomputeComboBox.currentIndex(),
+                'max_iter': self.max_iterSpinBox.value(),
+                'tol': self.max_iterSpinBox.value(),
+                'cv': self.tolDoubleSpinBox.value(),
+                'copy_X': self.copy_XCheckBox.isChecked(),
+                'verbose': self.verboseCheckBox.isChecked(),
+                'n_jobs': self.n_jobsSpinBox.value(),
+                'positive': self.positiveCheckBox.isChecked(),
+                'selection': self.selectionComboBox.currentIndex(),
                 'CV': self.CVCheckBox.isChecked()}
         else:
             params = {
-                'l1_ratio': [],
-                'eps': [],
-                'n_alphas': [],
-                'alphas': [],
-                'fit_intercept': [],
-                'normalize': [],
-                'precompute': [],
-                'max_iter': [],
-                'tol': [],
-                'cv': [],
-                'copy_X': [],
-                'verbose': [],
-                'n_jobs': [],
-                'positive': [],
-                'selection': [],
+                'alpha': self.enalphaDoubleSpinBox.value(),
+                'l1_ratio': self.enl1_ratioDoubleSpinBox.value(),
+                'fit_intercept': self.enfit_interceptCheckBox.isChecked(),
+                'normalize': self.ennormalizeCheckBox.isChecked(),
+                'precompute': self.enprecomputeCheckBox.isChecked(),
+                'max_iter': self.enmax_iterSpinBox.value(),
+                'copy_X': self.encopy_XCheckBox.isChecked(),
+                'tol': self.entolDoubleSpinBox.value(),
+                'warm_start': self.enwarm_startCheckBox.isChecked(),
+                'positive': self.enpositiveCheckBox.isChecked(),
+                'selection': self.selectionComboBox.currentText(),
                 'CV': self.CVCheckBox.isChecked()}
 
         modelkey = str(params)
