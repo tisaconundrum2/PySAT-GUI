@@ -3,6 +3,13 @@ import os.path
 import sys
 import time
 
+try:
+    import qtmodern.styles
+    q = True
+except:
+    q = False
+    sys.stderr.write("Missing qtmodern package")
+    pass
 from PyQt5 import QtGui
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import *
@@ -47,6 +54,8 @@ def main():
 
     app = QtWidgets.QApplication(sys.argv)
     get_splash(app)
+    if q:
+        qtmodern.styles.dark(app)
     mainWindow = QtWidgets.QMainWindow()
     ui = MainWindow.Ui_MainWindow()
     ui.setupUi(mainWindow)
