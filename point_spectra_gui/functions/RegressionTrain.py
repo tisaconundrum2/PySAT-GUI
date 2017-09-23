@@ -90,14 +90,14 @@ class Ui_Form(Ui_Form, Basics):
             coef.index = pd.MultiIndex.from_tuples(self.data[datakey].df[xvars].columns.values)
             coef = coef.T
             coef[('meta', 'Model')] = modelkey
+            try:
+                self.data[modelkey] = spectral_data(pd.concat([self.data['Model Coefficients'].df, coef]))
+            except:
+                self.data['Model Coefficients'] = spectral_data(coef)
         except IndexError:
-            print("Did you remember to select an X Variable and Y Variable?")
+            print("Error: Did you remember to select an X Variable and Y Variable?")
             pass
 
-        try:
-            self.data[modelkey] = spectral_data(pd.concat([self.data['Model Coefficients'].df, coef]))
-        except:
-            self.data['Model Coefficients'] = spectral_data(coef)
 
     def yvar_choices(self):
         try:
