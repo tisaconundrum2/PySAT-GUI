@@ -176,10 +176,24 @@
     <addaction name="actionAbout_Qt"/>
     <addaction name="menuDebug"/>
    </widget>
+   <widget class="QMenu" name="menuOptions">
+    <property name="title">
+     <string>Options</string>
+    </property>
+    <widget class="QMenu" name="menuDark_Mode">
+     <property name="title">
+      <string>Dark Mode</string>
+     </property>
+     <addaction name="actionDefault"/>
+     <addaction name="actionQtmodern"/>
+    </widget>
+    <addaction name="menuDark_Mode"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuPreprocessing"/>
    <addaction name="menuRegression"/>
    <addaction name="menuVisualization"/>
+   <addaction name="menuOptions"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -336,6 +350,16 @@
   <action name="actionRename_Data">
    <property name="text">
     <string>Rename Data</string>
+   </property>
+  </action>
+  <action name="actionQtmodern">
+   <property name="text">
+    <string>qtmodern</string>
+   </property>
+  </action>
+  <action name="actionDefault">
+   <property name="text">
+    <string>Default</string>
    </property>
   </action>
  </widget>
