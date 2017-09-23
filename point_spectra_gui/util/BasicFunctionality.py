@@ -156,6 +156,7 @@ class Basics:
         """
         for name, obj in inspect.getmembers(self):
             if isinstance(obj, QSpinBox):
+                obj.setMaximum(999999)
                 print(obj.maximum())
 
             if isinstance(obj, QDoubleSpinBox):
