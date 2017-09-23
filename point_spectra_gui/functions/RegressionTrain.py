@@ -29,7 +29,6 @@ class Ui_Form(Ui_Form, Basics):
     def connectWidgets(self):
         self.algorithm_list = ['Choose an algorithm',
                                'PLS',
-                               'GP',
                                'OLS',
                                'OMP',
                                'Lasso',
