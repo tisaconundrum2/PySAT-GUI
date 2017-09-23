@@ -21,6 +21,7 @@ class Ui_Form(Ui_Form, Ridge, RidgeCV, Basics):
         self.get_widget().setHidden(bool)
 
     def connectWidgets(self):
+        self.Ridge.setVisible(False)
         ridgecv = RidgeCV()
 
         self.alphasLineEdit_cv.setText(str(ridgecv.alphas))
