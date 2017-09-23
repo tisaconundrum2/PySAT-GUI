@@ -13,7 +13,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <widget class="QGroupBox" name="">
+    <widget class="QGroupBox" name="groupBox">
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
@@ -306,13 +306,40 @@
     </widget>
    </item>
   </layout>
-  <zorder>formGroupBox_2</zorder>
-  <zorder>formGroupBox_CV</zorder>
-  <zorder>formGroupBox</zorder>
-  <zorder>formGroupBox_2</zorder>
-  <zorder>formGroupBox_CV</zorder>
-  <zorder>formGroupBox</zorder>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>crossValidateCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>formGroupBox_CV</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>148</x>
+     <y>256</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>147</x>
+     <y>213</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>crossValidateCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>formGroupBox</receiver>
+   <slot>setHidden(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>356</x>
+     <y>255</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>357</x>
+     <y>227</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
