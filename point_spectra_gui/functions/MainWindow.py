@@ -110,6 +110,7 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
             self.actionPlot_ICA_PCA.triggered.connect(lambda: self.addWidget(functions.Plot_ICA_PCA.Ui_Form))
             self.actionPlot_Spectra.triggered.connect(lambda: self.addWidget(functions.PlotSpectra.Ui_Form))
             self.actionTrain.triggered.connect(lambda: self.addWidget(functions.RegressionTrain.Ui_Form))
+            self.actionPredict.triggered.connect(lambda: self.addWidget(functions.RegressionPredict.Ui_Form))
             self.actionRemove_Rows.triggered.connect(lambda: self.addWidget(functions.RemoveRows.Ui_Form))
             self.actionSplit_Data.triggered.connect(lambda: self.addWidget(functions.SplitDataset.Ui_Form))
             self.actionStratified_Folds.triggered.connect(lambda: self.addWidget(functions.StratifiedFolds.Ui_Form))

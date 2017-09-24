@@ -72,7 +72,7 @@ class Ui_Form(Ui_Form, Basics):
         params, modelkey = self.getMethodParams(self.chooseAlgorithmComboBox.currentIndex())
         try:
             modelkey = "{} - {} - ({}, {})".format(method, yvars[0][-1], yrange[0], yrange[1])
-            self.datakeys.append(modelkey)
+            self.modelkeys.append(modelkey)
             print(params, modelkey)
             self.models[modelkey] = regression.regression([method], [params])
             x = self.data[datakey].df[xvars]
@@ -97,7 +97,6 @@ class Ui_Form(Ui_Form, Basics):
         except IndexError:
             print("Error: Did you remember to select an X Variable and Y Variable?")
             pass
-
 
     def yvar_choices(self):
         try:

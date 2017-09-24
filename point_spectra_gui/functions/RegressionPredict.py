@@ -13,7 +13,9 @@ class Ui_Form(Ui_Form, Basics):
         return self.formGroupBox
 
     def connectWidgets(self):
-        self.setComboBox()
+        self.setComboBox(self.chooseDataComboBox, self.data)
+        self.setComboBox(self.chooseModelComboBox, self.modelkeys)
+
 
     def isEnabled(self):
         return self.get_widget().isEnabled()
@@ -26,6 +28,12 @@ class Ui_Form(Ui_Form, Basics):
         modelkey = self.chooseModelComboBox.currentText()
         predictname = ('predict', modelkey + ' - ' + datakey + ' - Predict')
 
+        try:
+            prediction = self.models[modelkey].predict(self.data[datakey].df[self.model_xvars[modelkey]])
+            self.data[datakey].df[predictname] = prediction
+            pass
+        except Exception as e:
+            print(e)
 
 
 if __name__ == "__main__":
