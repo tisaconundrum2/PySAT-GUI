@@ -209,7 +209,7 @@ class Ui_MainWindow(object):
         self.menuHelp.setTitle(("Help"))
         self.menuDebug.setTitle(("Debug Mode"))
         self.menuOptions.setTitle(("Options"))
-        self.menuDark_Mode.setTitle(("Dark Mode"))
+        self.menuDark_Mode.setTitle(("Theme"))
         self.actionRead_ChemCam_Data.setText(("Read ChemCam Data"))
         self.actionLoad_Data.setText(("Load Data"))
         self.actionSet_Output_Path.setText(("Set Output Path"))
