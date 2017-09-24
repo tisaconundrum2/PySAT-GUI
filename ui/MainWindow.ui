@@ -182,7 +182,7 @@
     </property>
     <widget class="QMenu" name="menuDark_Mode">
      <property name="title">
-      <string>Dark Mode</string>
+      <string>Theme</string>
      </property>
      <addaction name="actionDefault"/>
      <addaction name="actionQtmodern"/>
