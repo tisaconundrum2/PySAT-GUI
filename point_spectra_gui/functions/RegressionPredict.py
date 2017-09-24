@@ -13,19 +13,26 @@ class Ui_Form(Ui_Form, Basics):
         return self.formGroupBox
 
     def connectWidgets(self):
-        pass
+        setComboBox()
 
-    def isEnabled(self): return self.get_widget().isEnabled()
+    def isEnabled(self):
+        return self.get_widget().isEnabled()
 
     def setDisabled(self, bool):
         self.get_widget().setDisabled(bool)
+
+    def function(self):
+        datakey = self.chooseDataComboBox.currentText()
+        modelkey = self.chooseModelComboBox.currentText()
+        predictname = ('predict', modelkey + ' - ' + datakey + ' - Predict')
+
 
 
 if __name__ == "__main__":
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
-    
+
     Form = QtWidgets.QWidget()
     ui = Ui_Form()
     ui.setupUi(Form)
