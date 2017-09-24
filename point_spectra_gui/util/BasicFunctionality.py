@@ -102,44 +102,6 @@ class Basics:
         sys.exit('Error: Application closed unexpectedly\n'
                  'The method "setDisabled()" was not found in this module')
 
-    def setComboBox(self, comboBox, keyValues):
-        """
-        Sets up the information inside comboBox widgets
-        This function does not need to be overridden.
-        :param comboBox:
-        :param keyValues:
-        :return:
-        """
-        for i, choice in enumerate(keyValues):
-            comboBox.addItem("")
-            comboBox.setItemText(i, str(choice))
-
-    def changeComboListVars(self, obj, newchoices):
-        """
-        Function changes combo boxes
-        This function does not need to be overridden.
-        :param obj:
-        :param newchoices:
-        :return:
-        """
-        obj.clear()
-        for i in newchoices:
-            if isinstance(i, tuple):
-                obj.addItem(i[1])
-            elif isinstance(i, str):
-                obj.addItem(i)
-
-    def setListWidget(self, obj, choices):
-        """
-        Function changes lists
-        This function does not need to be overridden
-        :param obj:
-        :param choices:
-        :return:
-        """
-        for item in choices:
-            obj.addItem(item)
-
     def setProgressBar(self, progressBar):
         """
         This function makes it possible to reference the progress bar
@@ -163,7 +125,49 @@ class Basics:
                 obj.setDecimals(7)
                 print(obj.minimum())
 
-    def defaultComboItem(self, obj, item):
+    @staticmethod
+    def setComboBox(comboBox, keyValues):
+        """
+        Sets up the information inside comboBox widgets
+        This function does not need to be overridden.
+        :param comboBox:
+        :param keyValues:
+        :return:
+        """
+        for i, choice in enumerate(keyValues):
+            comboBox.addItem("")
+            comboBox.setItemText(i, str(choice))
+
+    @staticmethod
+    def changeComboListVars(obj, newchoices):
+        """
+        Function changes combo boxes
+        This function does not need to be overridden.
+        :param obj:
+        :param newchoices:
+        :return:
+        """
+        obj.clear()
+        for i in newchoices:
+            if isinstance(i, tuple):
+                obj.addItem(i[1])
+            elif isinstance(i, str):
+                obj.addItem(i)
+
+    @staticmethod
+    def setListWidget(obj, choices):
+        """
+        Function changes lists
+        This function does not need to be overridden
+        :param obj:
+        :param choices:
+        :return:
+        """
+        for item in choices:
+            obj.addItem(item)
+
+    @staticmethod
+    def defaultComboItem(obj, item):
         """
         Set the default selected item in a box.
         :param obj:

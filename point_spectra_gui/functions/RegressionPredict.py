@@ -13,7 +13,7 @@ class Ui_Form(Ui_Form, Basics):
         return self.formGroupBox
 
     def connectWidgets(self):
-        setComboBox()
+        self.setComboBox()
 
     def isEnabled(self):
         return self.get_widget().isEnabled()
