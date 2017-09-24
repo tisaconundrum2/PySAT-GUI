@@ -15,7 +15,7 @@ class Ui_Form(Ui_Form, Ridge, RidgeCV, Basics):
         self.connectWidgets()
 
     def get_widget(self):
-        return self.groupbox
+        return self.groupBox
 
     def setHidden(self, bool):
         self.get_widget().setHidden(bool)
@@ -53,7 +53,7 @@ class Ui_Form(Ui_Form, Ridge, RidgeCV, Basics):
         except:
             r_state = r_attrib[self.randomStateLineEdit.text()]
 
-        if self.crossValidateCheckBox:
+        if self.crossValidateCheckBox.isChecked():
             params = {'alphas': ast.literal_eval(self.alphasLineEdit_cv.text()),
                       'fit_intercept': self.fitInterceptCheckBox_cv.isChecked(),
                       'normalize': self.normalizeCheckBox_cv.isChecked(),
