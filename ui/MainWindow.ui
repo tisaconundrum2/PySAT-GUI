@@ -17,6 +17,9 @@
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QScrollArea" name="scrollArea">
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This is your workflow. &lt;/p&gt;&lt;p&gt;Select from the menu above to get started&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
       <property name="widgetResizable">
        <bool>true</bool>
       </property>
@@ -54,12 +57,18 @@
         <height>97</height>
        </size>
       </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Console window&lt;/p&gt;&lt;p&gt;This window gives you information about your running module&lt;/p&gt;&lt;p&gt;Errors will also show up here, if they occur&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
      </widget>
     </item>
     <item>
      <layout class="QHBoxLayout" name="progress_OK">
       <item>
        <widget class="QProgressBar" name="progressBar">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Your current progression.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
         <property name="value">
          <number>0</number>
         </property>
@@ -70,6 +79,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="undoModulePushButton">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Undo your last ran module&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
         <property name="text">
          <string>Undo Module</string>
         </property>
@@ -77,6 +89,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="stopPushButton">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Completely stop the module&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
         <property name="text">
          <string>Stop Module</string>
         </property>
@@ -84,6 +99,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="deleteModulePushButton">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Delete a module that has not been ran&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
         <property name="text">
          <string>Delete Module</string>
         </property>
@@ -91,6 +109,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="okPushButton">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Press this button when you are ready to run the modules in your workflow&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
         <property name="whatsThis">
          <string>Press this button when you're ready to run. (Ctrl+Enter)</string>
         </property>

@@ -196,10 +196,17 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(("PYSAT Point Spectra GUI"))
+        self.scrollArea.setToolTip(("<html><head/><body><p>This is your workflow. </p><p>Select from the menu above to get started</p></body></html>"))
+        self.textBrowser.setToolTip(("<html><head/><body><p>Console window</p><p>This window gives you information about your running module</p><p>Errors will also show up here, if they occur</p></body></html>"))
+        self.progressBar.setToolTip(("<html><head/><body><p>Your current progression.</p></body></html>"))
         self.progressBar.setFormat(("%p%"))
+        self.undoModulePushButton.setToolTip(("<html><head/><body><p>Undo your last ran module</p></body></html>"))
         self.undoModulePushButton.setText(("Undo Module"))
+        self.stopPushButton.setToolTip(("<html><head/><body><p>Completely stop the module</p></body></html>"))
         self.stopPushButton.setText(("Stop Module"))
+        self.deleteModulePushButton.setToolTip(("<html><head/><body><p>Delete a module that has not been ran</p></body></html>"))
         self.deleteModulePushButton.setText(("Delete Module"))
+        self.okPushButton.setToolTip(("<html><head/><body><p>Press this button when you are ready to run the modules in your workflow</p></body></html>"))
         self.okPushButton.setWhatsThis(("Press this button when you\'re ready to run. (Ctrl+Enter)"))
         self.okPushButton.setText(("OK"))
         self.menuFile.setTitle(("File"))
