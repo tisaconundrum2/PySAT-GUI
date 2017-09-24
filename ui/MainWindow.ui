@@ -18,7 +18,7 @@
     <item>
      <widget class="QScrollArea" name="scrollArea">
       <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This is your workflow. &lt;/p&gt;&lt;p&gt;Select from the menu above to get started&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="widgetResizable">
        <bool>true</bool>
