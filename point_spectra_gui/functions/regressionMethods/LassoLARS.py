@@ -1,11 +1,11 @@
 from PyQt5 import QtWidgets
-from sklearn.linear_model.least_angle import LassoLars
+from sklearn.linear_model.least_angle import LassoLars, LassoLarsCV, LassoLarsIC
 
 from point_spectra_gui.ui.LassoLARS import Ui_Form
 from point_spectra_gui.util.BasicFunctionality import Basics
 
 
-class Ui_Form(Ui_Form, LassoLars, Basics):
+class Ui_Form(Ui_Form, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
         self.checkMinAndMax()
@@ -18,35 +18,74 @@ class Ui_Form(Ui_Form, LassoLars, Basics):
         self.get_widget().setHidden(bool)
 
     def connectWidgets(self):
-        self.p_attrib = {'auto': 'auto', 'True': True, 'False': False, 'array-like': 'array-like'}
-        self.alphaDoubleSpinBox.setValue(self.alpha)
-        self.fitInterceptCheckBox.setChecked(self.fit_intercept)
-        self.maxIterationsSpinBox.setValue(self.max_iter)
-        self.verboseCheckBox.setChecked(self.verbose)
-        self.normalizeCheckBox.setChecked(self.normalize)
-        self.positiveCheckBox.setChecked(self.positive)
-        self.setComboBox(self.precomputeComboBox, self.p_attrib)
-        self.defaultComboItem(self.precomputeComboBox, self.precompute)
-        print(self.precompute)
-        self.copyXCheckBox.setChecked(self.copy_X)
-        self.epsDoubleSpinBox.setValue(self.eps)
-        self.fitPathCheckBox.setChecked(self.fit_path)
+        # LassoLARS
+        ll = LassoLars()
+        self.alphaDoubleSpinBox.setValue(ll.alpha)
+        self.fit_interceptCheckBox.setChecked(ll.fit_intercept)
+        self.verboseCheckBox.setChecked(ll.verbose)
+        self.normalizeCheckBox.setChecked(ll.normalize)
+        self.setComboBox(self.precomputeComboBox, ['True', 'False', 'auto', 'array-like'])
+        self.defaultComboItem(self.precomputeComboBox, ll.precompute)
+        self.max_iterSpinBox.setValue(ll.max_iter)
+        self.copy_XCheckBox.setChecked(ll.copy_X)
+        self.fit_pathCheckBox.setChecked(ll.fit_path)
+        self.positiveCheckBox.setChecked(ll.positive)
+
+        # LassoLarsCV
+        llcv = LassoLarsCV()
+        self.max_n_alphasSpinBox.setValue(llcv.max_n_alphas)
+        self.n_jobsSpinBox.setValue(llcv.n_jobs)
+
+        # LassoLarsIC
+        llic = LassoLarsIC()
+        self.setComboBox(self.criterionComboBox, ['aic', 'bic'])
+        self.defaultComboItem(self.criterionComboBox, llic.criterion)
 
     def function(self):
-        index = self.precomputeComboBox.currentIndex()
-        precomputeComboBox = self.precomputeComboBox.itemText(index)
+        model = self.modelComboBox.currentIndex()
+        if model == 0:
+            params = {
+                'alpha': self.alphaDoubleSpinBox.value(),
+                'fit_intercept': self.fit_interceptCheckBox.isChecked(),
+                'verbose': self.fit_interceptCheckBox.isChecked(),
+                'normalize': self.normalizeCheckBox.isChecked(),
+                'precompute': self.precomputeComboBox.currentText(),
+                'max_iter': self.max_iterSpinBox.value(),
+                'copy_X': self.copy_XCheckBox.isChecked(),
+                'fit_path': self.fit_pathCheckBox.isChecked(),
+                'positive': self.positiveCheckBox.isChecked(),
+                'model': model
+            }
+        elif model == 1:
+            params = {
+                'fit_intercept': self.fit_interceptCheckBox.isChecked(),
+                'verbose': self.fit_interceptCheckBox.isChecked(),
+                'max_iter': self.max_iterSpinBox.value(),
+                'normalize': self.normalizeCheckBox.isChecked(),
+                'precompute': self.precomputeComboBox.currentText(),
+                'cv': self.cvSpinBox.value(),
+                'max_n_alphas': self.max_n_alphasSpinBox.value(),
+                'n_jobs': self.n_jobsSpinBox.value(),
+                'copy_X': self.copy_XCheckBox.isChecked(),
+                'positive': self.positiveCheckBox.isChecked(),
+                'model': model
+            }
+        elif model == 2:
+            params = {
+                'criterion': self.criterionComboBox.currentText(),
+                'fit_intercept': self.fit_interceptCheckBox.isChecked(),
+                'verbose': self.fit_interceptCheckBox.isChecked(),
+                'normalize': self.normalizeCheckBox.isChecked(),
+                'precompute': self.precomputeComboBox.currentText(),
+                'max_iter': self.max_iterSpinBox.value(),
+                'copy_X': self.copy_XCheckBox.isChecked(),
+                'positive': self.positiveCheckBox.isChecked(),
+                'model': model
+            }
+        else:
+            params = {}
+            print("Error")
 
-        params = {'alpha': self.alphaDoubleSpinBox.value(),
-                  'fit_intercept': self.fitInterceptCheckBox.isChecked(),
-                  'positive': self.positiveCheckBox.isChecked(),
-                  'verbose': self.verboseCheckBox.isChecked(),
-                  'normalize': self.normalizeCheckBox.isChecked(),
-                  'copy_X': self.copyXCheckBox.isChecked(),
-                  'precompute': self.p_attrib[precomputeComboBox],
-                  'max_iter': int(self.maxIterationsSpinBox.value()),
-                  'eps': self.epsDoubleSpinBox.value(),
-                  'fit_path': self.fitInterceptCheckBox.isChecked(),
-                  'model': self.modelComboBox.currentIndex()}
         modelkey = str(params)
         return params, modelkey
 

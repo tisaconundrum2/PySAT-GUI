@@ -6,7 +6,7 @@ from point_spectra_gui.ui.LARS import Ui_Form
 from point_spectra_gui.util.BasicFunctionality import Basics
 
 
-class Ui_Form(Ui_Form, Lars, LarsCV, Basics):
+class Ui_Form(Ui_Form, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
         self.checkMinAndMax()
@@ -19,39 +19,52 @@ class Ui_Form(Ui_Form, Lars, LarsCV, Basics):
         self.get_widget().setHidden(bool)
 
     def connectWidgets(self):
-        # LARS
-        lars = Lars()
-        lars.fit_intercept
-        lars.verbose
-        lars.normalize
-        lars.precompute
-        lars.n_nonzero_coefs
-        lars.eps
-        lars.copy_X
-        lars.fit_path
-        lars.positive
+        # LARS/         # LARSCV
 
-        # LARSCV
+        lars = Lars()
         larscv = LarsCV()
-        larscv.max_iter
-        larscv.max_n_alphas
-        larscv.n_jobs
+        self.fit_interceptCheckBox.setChecked(lars.fit_intercept)
+        self.verboseCheckBox.setChecked(lars.verbose)
+        self.normalizeCheckBox.setChecked(lars.normalize)
+        self.setComboBox(self.precomputeComboBox, ['True', 'False', 'auto', 'array-like'])
+        self.defaultComboItem(self.precomputeComboBox, lars.precompute)
+        self.n_nonzero_coefsSpinBox.setValue(lars.n_nonzero_coefs)
+        self.copy_XCheckBox.setChecked(lars.copy_X)
+        self.fit_pathCheckBox.setChecked(lars.fit_path)
+        self.positiveCheckBox.setChecked(lars.positive)
+        self.max_iterSpinBox.setValue(larscv.max_iter)
+        self.max_n_alphasSpinBox.setValue(larscv.max_n_alphas)
+        self.n_jobsSpinBox.setValue(larscv.n_jobs)
 
     def function(self):
-        params = {'n_nonzero_coefs': self.numOfNonzeroCoeffsSpinBox.value(),
-                  'fit_intercept': self.fitInterceptCheckBox.isChecked(),
-                  'positive': self.positiveCheckBox.isChecked(),
-                  'verbose': self.verboseCheckBox.isChecked(),
-                  'normalize': self.normalizeCheckBox.isChecked(),
-                  'precompute': {'True': True, 'False': False, 'array': 'array'}.get(
-                      self.precomputeComboBox.currentText()),
-                  'copy_X': self.copyXCheckBox.isChecked(),
-                  'eps': float(self.epsDoubleLineEdit.text()),
-                  'fit_path': self.fitPathCheckBox.isChecked(),
-                  'CV': self.crossValidateCheckBox.isChecked()}
+        if self.cVCheckBox.isChecked():
+            params = {
+                'fit_intercept': self.fit_interceptCheckBox.isChecked(),
+                'positive': self.positiveCheckBox.isChecked(),
+                'max_iter': self.max_iterSpinBox.value(),
+                'verbose': self.verboseCheckBox.isChecked(),
+                'normalize': self.normalizeCheckBox.isChecked(),
+                'precompute': self.precomputeComboBox.currentText(),
+                'copy_X': self.copy_XCheckBox.isChecked(),
+                'cv': self.cvSpinBox.value(),
+                'max_n_alphas': self.max_n_alphasSpinBox.value(),
+                'n_jobs': self.n_jobsSpinBox.value(),
+                'CV': self.cVCheckBox.isChecked(),
+            }
+        else:
+            params = {
+                'fit_intercept': self.fit_interceptCheckBox.isChecked(),
+                'verbose': self.verboseCheckBox.isChecked(),
+                'normalize': self.normalizeCheckBox.isChecked(),
+                'precompute': {'True': True, 'False': False, 'auto': 'auto', 'array-like': 'array-like'}.get(
+                    self.precomputeComboBox.currentText()),
+                'n_nonzero_coefs': self.n_nonzero_coefsSpinBox.value(),
+                'copy_X': self.copy_XCheckBox.isChecked(),
+                'fit_path': self.fit_pathCheckBox.isChecked(),
+                'positive': self.positiveCheckBox.isChecked(),
+                'CV': self.cVCheckBox.isChecked(),
+            }
 
-        self.numOfNonzeroCoeffsSpinBox.setDisabled(params['CV'])
-        self.fitPathCheckBox.setDisabled(params['CV'])
         modelkey = str(params)
         return params, modelkey
 
