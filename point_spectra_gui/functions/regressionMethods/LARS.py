@@ -1,11 +1,12 @@
 from PyQt5 import QtWidgets
 from sklearn.linear_model.least_angle import Lars
+from sklearn.linear_model.least_angle import LarsCV
 
 from point_spectra_gui.ui.LARS import Ui_Form
 from point_spectra_gui.util.BasicFunctionality import Basics
 
 
-class Ui_Form(Ui_Form, Lars, Basics):
+class Ui_Form(Ui_Form, Lars, LarsCV, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
         self.checkMinAndMax()
@@ -18,15 +19,23 @@ class Ui_Form(Ui_Form, Lars, Basics):
         self.get_widget().setHidden(bool)
 
     def connectWidgets(self):
-        self.fitInterceptCheckBox.setChecked(self.fit_intercept)
-        self.verboseCheckBox.setChecked(self.verbose)
-        self.normalizeCheckBox.setChecked(self.normalize)
-        self.defaultComboItem(self.precomputeComboBox, self.precompute)
-        self.numOfNonzeroCoeffsSpinBox.setValue(self.n_nonzero_coefs)
-        self.positiveCheckBox.setChecked(self.positive)
-        self.epsDoubleLineEdit.setText(str(self.eps))
-        self.copyXCheckBox.setChecked(self.copy_X)
-        self.fitPathCheckBox.setChecked(self.fit_path)
+        # LARS
+        lars = Lars()
+        lars.fit_intercept
+        lars.verbose
+        lars.normalize
+        lars.precompute
+        lars.n_nonzero_coefs
+        lars.eps
+        lars.copy_X
+        lars.fit_path
+        lars.positive
+
+        # LARSCV
+        larscv = LarsCV()
+        larscv.max_iter
+        larscv.max_n_alphas
+        larscv.n_jobs
 
     def function(self):
         params = {'n_nonzero_coefs': self.numOfNonzeroCoeffsSpinBox.value(),
@@ -37,7 +46,7 @@ class Ui_Form(Ui_Form, Lars, Basics):
                   'precompute': {'True': True, 'False': False, 'array': 'array'}.get(
                       self.precomputeComboBox.currentText()),
                   'copy_X': self.copyXCheckBox.isChecked(),
-                  'eps': int(self.epsDoubleLineEdit.text()),
+                  'eps': float(self.epsDoubleLineEdit.text()),
                   'fit_path': self.fitPathCheckBox.isChecked(),
                   'CV': self.crossValidateCheckBox.isChecked()}
 
