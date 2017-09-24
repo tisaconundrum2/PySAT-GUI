@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>698</width>
-    <height>856</height>
+    <width>513</width>
+    <height>637</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,8 +25,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>678</width>
-         <height>661</height>
+         <width>493</width>
+         <height>442</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -108,7 +108,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>698</width>
+     <width>513</width>
      <height>21</height>
     </rect>
    </property>
@@ -150,8 +150,8 @@
     </property>
     <addaction name="actionCross_Validation"/>
     <addaction name="actionTrain"/>
-    <addaction name="actionSubmodel_Predict"/>
     <addaction name="actionPredict"/>
+    <addaction name="actionSubmodel_Predict"/>
    </widget>
    <widget class="QMenu" name="menuVisualization">
     <property name="title">
@@ -294,7 +294,7 @@
   </action>
   <action name="actionTrain">
    <property name="text">
-    <string>Train</string>
+    <string>Regression Train</string>
    </property>
   </action>
   <action name="actionSubmodel_Predict">
@@ -304,7 +304,7 @@
   </action>
   <action name="actionPredict">
    <property name="text">
-    <string>Predict</string>
+    <string>Regression Predict</string>
    </property>
   </action>
   <action name="actionPlot">
