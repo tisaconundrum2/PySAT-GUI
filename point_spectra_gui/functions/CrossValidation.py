@@ -29,17 +29,6 @@ class Ui_Form(Ui_Form, Basics):
         self.algorithm_list = ['Choose an algorithm',
                                'PLS',
                                'GP',
-                               'OLS',
-                               'OMP',
-                               'Lasso',
-                               'Elastic Net',
-                               'Ridge',
-                               'Bayesian Ridge',
-                               'ARD',
-                               'LARS',
-                               'Lasso LARS',
-                               'SVR',
-                               'KRR',
                                'More to come...']
         self.setComboBox(self.chooseDataComboBox, self.datakeys)
         self.setComboBox(self.chooseAlgorithmComboBox, self.algorithm_list)
@@ -114,17 +103,7 @@ class Ui_Form(Ui_Form, Basics):
         self.alg = []
         list_forms = [PLS,
                       GP,
-                      OLS,
-                      OMP,
-                      Lasso,
-                      ElasticNet,
-                      Ridge,
-                      BayesianRidge,
-                      ARD,
-                      LARS,
-                      LassoLARS,
-                      SVR,
-                      KRR]
+                      ]
         for items in list_forms:
             self.alg.append(items.Ui_Form())
             self.alg[-1].setupUi(self.Form)
