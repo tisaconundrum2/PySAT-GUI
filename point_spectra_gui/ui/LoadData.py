@@ -46,8 +46,10 @@ class Ui_loadData(object):
         self.groupBox.setTitle(("Load Data"))
         self.fileNameLabel.setText(("File Name"))
         self.fileNameLineEdit.setText(("*.csv"))
+        self.newFilePushButton.setToolTip(("<html><head/><body><p>Press this to select a file</p></body></html>"))
         self.newFilePushButton.setText(("..."))
         self.dataSetNameLabel.setText(("Data Set Name"))
+        self.dataSetNameLineEdit.setToolTip(("<html><head/><body><p>Give your dataset a name</p></body></html>"))
 
 
 if __name__ == "__main__":
