@@ -9,6 +9,7 @@ from point_spectra_gui.util.BasicFunctionality import Basics
 class Ui_Form(Ui_Form, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
+        self.checkMinAndMax()
         self.connectWidgets()
 
     def get_widget(self):
