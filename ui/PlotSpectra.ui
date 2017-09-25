@@ -46,9 +46,6 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="1" colspan="2">
-       <widget class="QListView" name="xVariableListView"/>
-      </item>
       <item row="4" column="0">
        <widget class="QLabel" name="chooseColumnLabel">
         <property name="text">
@@ -62,9 +59,6 @@
          <string>Choose Rows:</string>
         </property>
        </widget>
-      </item>
-      <item row="5" column="1" colspan="2">
-       <widget class="QListView" name="chooseRowsListView"/>
       </item>
       <item row="7" column="0">
        <widget class="QLabel" name="colorLabel">
@@ -171,6 +165,12 @@
       <item row="0" column="1" colspan="2">
        <widget class="QComboBox" name="chooseDataComboBox"/>
       </item>
+      <item row="5" column="1" colspan="2">
+       <widget class="QListWidget" name="chooseRowsListWidget"/>
+      </item>
+      <item row="3" column="1" colspan="2">
+       <widget class="QListWidget" name="xVariableListWidget"/>
+      </item>
      </layout>
     </widget>
    </item>
@@ -180,9 +180,9 @@
   <tabstop>chooseDataComboBox</tabstop>
   <tabstop>figureNameLineEdit</tabstop>
   <tabstop>plotTitleLineEdit</tabstop>
-  <tabstop>xVariableListView</tabstop>
+  <tabstop>xVariableListWidget</tabstop>
   <tabstop>chooseColumnComboBox</tabstop>
-  <tabstop>chooseRowsListView</tabstop>
+  <tabstop>chooseRowsListWidget</tabstop>
   <tabstop>minSpinBox</tabstop>
   <tabstop>maxSpinBox</tabstop>
   <tabstop>colorComboBox</tabstop>
