@@ -8,7 +8,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(566, 637)
+        MainWindow.resize(808, 637)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
@@ -17,7 +17,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 546, 442))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 788, 442))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
@@ -58,7 +58,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.addLayout(self.progress_OK)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 566, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 808, 21))
         self.menubar.setObjectName("menubar")
         self.menuFile = QtWidgets.QMenu(self.menubar)
         self.menuFile.setObjectName("menuFile")
@@ -196,7 +196,6 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(("PYSAT Point Spectra GUI"))
-        self.scrollArea.setToolTip(("<html><head/><body><p><br/></p></body></html>"))
         self.textBrowser.setToolTip(("<html><head/><body><p>Console window</p><p>This window gives you information about your running module</p><p>Errors will also show up here, if they occur</p></body></html>"))
         self.progressBar.setToolTip(("<html><head/><body><p>Your current progression.</p></body></html>"))
         self.progressBar.setFormat(("%p%"))

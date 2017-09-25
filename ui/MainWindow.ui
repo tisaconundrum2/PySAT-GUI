@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>566</width>
+    <width>808</width>
     <height>637</height>
    </rect>
   </property>
@@ -17,9 +17,6 @@
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QScrollArea" name="scrollArea">
-      <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
       <property name="widgetResizable">
        <bool>true</bool>
       </property>
@@ -28,7 +25,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>546</width>
+         <width>788</width>
          <height>442</height>
         </rect>
        </property>
@@ -129,7 +126,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>566</width>
+     <width>808</width>
      <height>21</height>
     </rect>
    </property>
