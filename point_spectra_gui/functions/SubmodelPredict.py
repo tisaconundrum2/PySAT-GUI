@@ -59,6 +59,8 @@ class Ui_Form(Ui_Form, Basics):
         self.setComboBox(self.lowModelMaxSpinBox, self.modelkeys)
         self.setComboBox(self.highModelMaxSpinBox, self.modelkeys)
         self.setComboBox(self.chooseDataComboBox, self.datakeys)
+        self.addSubModelPushButton.clicked.connect(self.on_addRange_pushed)
+        self.deleteSubModelPushButton.clicked.connect(self.on_deleteRange_pushed)
         self.setupWidgets()
         self.setHidden(self.subwidgets)
 
