@@ -39,14 +39,14 @@ class Ui_Form(Ui_Form, ElasticNet, ElasticNetCV, Basics):
         self.l1_ratioDoubleSpinBox.setValue(encv.l1_ratio)
         self.epsDoubleSpinBox.setValue(encv.eps)
         self.n_alphasSpinBox.setValue(encv.n_alphas)
-        self.alphasLineEdit.setText(encv.alphas)
+        self.alphasLineEdit.setText('None')
         self.fit_interceptCheckBox.setChecked(encv.fit_intercept)
         self.normalizeCheckBox.setChecked(encv.normalize)
         self.setComboBox(self.precomputeComboBox, ['True', 'False', 'auto', 'array-like'])
         self.defaultComboItem(self.precomputeComboBox, encv.precompute)
         self.max_iterSpinBox.setValue(encv.max_iter)
         self.tolDoubleSpinBox.setValue(encv.tol)
-        # (encv.cv)
+        self.cVSpinBox.setValue(3)
         self.copy_XCheckBox.setChecked(encv.copy_X)
         self.verboseCheckBox.setChecked(encv.verbose)
         self.n_jobsSpinBox.setValue(encv.n_jobs)
@@ -71,18 +71,18 @@ class Ui_Form(Ui_Form, ElasticNet, ElasticNetCV, Basics):
                 'l1_ratio': self.l1_ratioDoubleSpinBox.value(),
                 'eps': self.epsDoubleSpinBox.value(),
                 'n_alphas': self.n_alphasSpinBox.value(),
-                'alphas': self.alphasLineEdit.text(),
+                'alphas': {'None': None}.get(self.alphasLineEdit.text()),
                 'fit_intercept': self.fit_interceptCheckBox.isChecked(),
                 'normalize': self.normalizeCheckBox.isChecked(),
-                'precompute': self.precomputeComboBox.currentIndex(),
+                'precompute': self.precomputeComboBox.currentText(),
                 'max_iter': self.max_iterSpinBox.value(),
                 'tol': self.max_iterSpinBox.value(),
-                'cv': self.tolDoubleSpinBox.value(),
+                'cv': self.cVSpinBox.value(),
                 'copy_X': self.copy_XCheckBox.isChecked(),
                 'verbose': self.verboseCheckBox.isChecked(),
                 'n_jobs': self.n_jobsSpinBox.value(),
                 'positive': self.positiveCheckBox.isChecked(),
-                'selection': self.selectionComboBox.currentIndex(),
+                'selection': self.selectionComboBox.currentText(),
                 'CV': self.CVCheckBox.isChecked()}
         else:
             params = {

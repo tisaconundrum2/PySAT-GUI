@@ -70,33 +70,33 @@ class Ui_Form(Ui_Form, Basics):
         yrange = [self.yMinDoubleSpinBox.value(), self.yMaxDoubleSpinBox.value()]
 
         params, modelkey = self.getMethodParams(self.chooseAlgorithmComboBox.currentIndex())
+        # try:
+        modelkey = "{} - {} - ({}, {}) {}".format(method, yvars[0][-1], yrange[0], yrange[1], params)
+        self.modelkeys.append(modelkey)
+        print(params, modelkey)
+        self.models[modelkey] = regression.regression([method], [params])
+        x = self.data[datakey].df[xvars]
+        y = self.data[datakey].df[yvars]
+        x = np.array(x)
+        y = np.array(y)
+        ymask = np.squeeze((y > yrange[0]) & (y < yrange[1]))
+        y = y[ymask]
+        x = x[ymask, :]
+        self.models[modelkey].fit(x, y)
+        self.model_xvars[modelkey] = xvars
+        self.model_yvars[modelkey] = yvars
+        coef = np.squeeze(self.models[modelkey].model.coef_)
+        coef = pd.DataFrame(coef)
+        coef.index = pd.MultiIndex.from_tuples(self.data[datakey].df[xvars].columns.values)
+        coef = coef.T
+        coef[('meta', 'Model')] = modelkey
         try:
-            modelkey = "{} - {} - ({}, {})".format(method, yvars[0][-1], yrange[0], yrange[1])
-            self.modelkeys.append(modelkey)
-            print(params, modelkey)
-            self.models[modelkey] = regression.regression([method], [params])
-            x = self.data[datakey].df[xvars]
-            y = self.data[datakey].df[yvars]
-            x = np.array(x)
-            y = np.array(y)
-            ymask = np.squeeze((y > yrange[0]) & (y < yrange[1]))
-            y = y[ymask]
-            x = x[ymask, :]
-            self.models[modelkey].fit(x, y)
-            self.model_xvars[modelkey] = xvars
-            self.model_yvars[modelkey] = yvars
-            coef = np.squeeze(self.models[modelkey].model.coef_)
-            coef = pd.DataFrame(coef)
-            coef.index = pd.MultiIndex.from_tuples(self.data[datakey].df[xvars].columns.values)
-            coef = coef.T
-            coef[('meta', 'Model')] = modelkey
-            try:
-                self.data[modelkey] = spectral_data(pd.concat([self.data['Model Coefficients'].df, coef]))
-            except:
-                self.data['Model Coefficients'] = spectral_data(coef)
-        except IndexError:
-            print("Error: Did you remember to select an X Variable and Y Variable?")
-            pass
+            self.data[modelkey] = spectral_data(pd.concat([self.data['Model Coefficients'].df, coef]))
+        except:
+            self.data['Model Coefficients'] = spectral_data(coef)
+        # except IndexError:
+        #     print("Error: Did you remember to select an X Variable and Y Variable?")
+        #     pass
 
     def yvar_choices(self):
         try:

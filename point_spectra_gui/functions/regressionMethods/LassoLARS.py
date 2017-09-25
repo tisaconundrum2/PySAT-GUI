@@ -38,6 +38,7 @@ class Ui_Form(Ui_Form, Basics):
 
         # LassoLarsIC
         llic = LassoLarsIC()
+        self.cvSpinBox.setValue(3)
         self.setComboBox(self.criterionComboBox, ['aic', 'bic'])
         self.defaultComboItem(self.criterionComboBox, llic.criterion)
 
