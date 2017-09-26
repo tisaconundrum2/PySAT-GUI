@@ -8,6 +8,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
+        Form.resize(689, 791)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Ignored)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -47,9 +48,9 @@ class Ui_Form(object):
         self.deleteSubModelPushButton = QtWidgets.QPushButton(self.groupBox)
         self.deleteSubModelPushButton.setObjectName("deleteSubModelPushButton")
         self.horizontalLayout.addWidget(self.deleteSubModelPushButton)
-        self.checkBox = QtWidgets.QCheckBox(self.groupBox)
-        self.checkBox.setObjectName("checkBox")
-        self.horizontalLayout.addWidget(self.checkBox)
+        self.optimizeCheckBox = QtWidgets.QCheckBox(self.groupBox)
+        self.optimizeCheckBox.setObjectName("optimizeCheckBox")
+        self.horizontalLayout.addWidget(self.optimizeCheckBox)
         self.gridLayout_2.addLayout(self.horizontalLayout, 18, 0, 1, 6)
         self.maxSpinBox_3 = QtWidgets.QSpinBox(self.groupBox)
         self.maxSpinBox_3.setMinimumSize(QtCore.QSize(130, 0))
@@ -355,8 +356,8 @@ class Ui_Form(object):
         self.gridLayout.addWidget(self.groupBox, 0, 0, 1, 1)
 
         self.retranslateUi(Form)
-        self.checkBox.toggled['bool'].connect(self.optimizeSubmodelRangesComboBox_2.setVisible)
-        self.checkBox.toggled['bool'].connect(self.optimizeSubmodelRangesLabel_2.setVisible)
+        self.optimizeCheckBox.toggled['bool'].connect(self.optimizeSubmodelRangesComboBox_2.setVisible)
+        self.optimizeCheckBox.toggled['bool'].connect(self.optimizeSubmodelRangesLabel_2.setVisible)
         QtCore.QMetaObject.connectSlotsByName(Form)
         Form.setTabOrder(self.referenceModelComboBox, self.lowModelComboBox)
         Form.setTabOrder(self.lowModelComboBox, self.lowModelMaxSpinBox)
@@ -409,8 +410,8 @@ class Ui_Form(object):
         Form.setTabOrder(self.highModelComboBox, self.highModelMinSpinBox)
         Form.setTabOrder(self.highModelMinSpinBox, self.addSubModelPushButton)
         Form.setTabOrder(self.addSubModelPushButton, self.deleteSubModelPushButton)
-        Form.setTabOrder(self.deleteSubModelPushButton, self.checkBox)
-        Form.setTabOrder(self.checkBox, self.optimizeSubmodelRangesComboBox_2)
+        Form.setTabOrder(self.deleteSubModelPushButton, self.optimizeCheckBox)
+        Form.setTabOrder(self.optimizeCheckBox, self.optimizeSubmodelRangesComboBox_2)
         Form.setTabOrder(self.optimizeSubmodelRangesComboBox_2, self.chooseDataComboBox)
 
     def retranslateUi(self, Form):
@@ -420,7 +421,7 @@ class Ui_Form(object):
         self.minLabel_5.setText(("Min"))
         self.addSubModelPushButton.setText(("Add submodel"))
         self.deleteSubModelPushButton.setText(("Delete submodel"))
-        self.checkBox.setText(("Optimize "))
+        self.optimizeCheckBox.setText(("Optimize "))
         self.maxLabel_4.setText(("Max"))
         self.referenceModelLabel.setText(("Choose reference model: "))
         self.lowModelMaxLabel.setText(("Max"))

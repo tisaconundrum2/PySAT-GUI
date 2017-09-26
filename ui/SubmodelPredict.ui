@@ -2,6 +2,14 @@
 <ui version="4.0">
  <class>Form</class>
  <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>689</width>
+    <height>791</height>
+   </rect>
+  </property>
   <property name="sizePolicy">
    <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
     <horstretch>0</horstretch>
@@ -87,7 +95,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="checkBox">
+         <widget class="QCheckBox" name="optimizeCheckBox">
           <property name="text">
            <string>Optimize </string>
           </property>
@@ -858,14 +866,14 @@
   <tabstop>highModelMinSpinBox</tabstop>
   <tabstop>addSubModelPushButton</tabstop>
   <tabstop>deleteSubModelPushButton</tabstop>
-  <tabstop>checkBox</tabstop>
+  <tabstop>optimizeCheckBox</tabstop>
   <tabstop>optimizeSubmodelRangesComboBox_2</tabstop>
   <tabstop>chooseDataComboBox</tabstop>
  </tabstops>
  <resources/>
  <connections>
   <connection>
-   <sender>checkBox</sender>
+   <sender>optimizeCheckBox</sender>
    <signal>toggled(bool)</signal>
    <receiver>optimizeSubmodelRangesComboBox_2</receiver>
    <slot>setVisible(bool)</slot>
@@ -881,7 +889,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>checkBox</sender>
+   <sender>optimizeCheckBox</sender>
    <signal>toggled(bool)</signal>
    <receiver>optimizeSubmodelRangesLabel_2</receiver>
    <slot>setVisible(bool)</slot>
