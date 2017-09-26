@@ -2,6 +2,14 @@
 <ui version="4.0">
  <class>Form</class>
  <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>374</width>
+    <height>706</height>
+   </rect>
+  </property>
   <property name="sizePolicy">
    <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
     <horstretch>0</horstretch>
@@ -136,7 +144,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="minSpinBox"/>
+         <widget class="QDoubleSpinBox" name="minDoubleSpinBox"/>
         </item>
         <item>
          <widget class="QLabel" name="maxLabel">
@@ -146,7 +154,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="maxSpinBox"/>
+         <widget class="QDoubleSpinBox" name="maxDoubleSpinBox"/>
         </item>
        </layout>
       </item>
@@ -183,8 +191,8 @@
   <tabstop>xVariableListWidget</tabstop>
   <tabstop>chooseColumnComboBox</tabstop>
   <tabstop>chooseRowsListWidget</tabstop>
-  <tabstop>minSpinBox</tabstop>
-  <tabstop>maxSpinBox</tabstop>
+  <tabstop>minDoubleSpinBox</tabstop>
+  <tabstop>maxDoubleSpinBox</tabstop>
   <tabstop>colorComboBox</tabstop>
   <tabstop>lineComboBox</tabstop>
   <tabstop>alphaDoubleSpinBox</tabstop>
