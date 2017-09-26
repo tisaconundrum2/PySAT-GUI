@@ -69,25 +69,19 @@ target/
 *.swp
 
 #Data and output files
-.png
 .SAV
 *.user
 *.xml
 *.iml
-point_spectra_gui/ui/FINISHED/*.*
-point_spectra_gui/ui/PythonUI/*.*
-!"./images/Flowchart (Draw.io).xml"
-!"./images/Flowchart.png"
-!"./images/splash.png"
 *.png
+*.csv
 *.wrf
 *.dat
-*.csv
+!images/*
+!inputs/*
 
 # Pysat
 pysat/
-point_spectra_gui/ui/Finished/01_mainwindow_file_out.py
 auto_gitter.bat
-point_spectra_gui/saved.ini
 *.ini
 
