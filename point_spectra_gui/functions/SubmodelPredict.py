@@ -13,6 +13,15 @@ class subWidgets:
         self.maxLabel = maxLabel
         self.maxSpinBox = maxSpinBox
 
+    def get_modelComboBox(self):
+        return self.modelComboBox
+
+    def get_minSpinBox(self):
+        return self.minSpinBox
+
+    def get_maxSpinBox(self):
+        return self.maxSpinBox
+
     def setHidden(self, bool):
         self.modelComboBox.setHidden(bool)
         self.minLabel.setHidden(bool)
@@ -21,7 +30,7 @@ class subWidgets:
         self.maxSpinBox.setHidden(bool)
 
     def getValues(self):
-        return int(self.minSpinBox.text()), int(self.maxSpinBox.text())
+        return [self.modelComboBox.currentText(), [int(self.minSpinBox.value()), int(self.maxSpinBox.value())]]
 
     def setMaximum(self, int_):
         self.minSpinBox.setMaximum(int_)
@@ -56,58 +65,59 @@ class Ui_Form(Ui_Form, Basics):
 
     def connectWidgets(self):
         self.setComboBox(self.referenceModelComboBox, self.modelkeys)
-        self.setComboBox(self.lowModelMaxSpinBox, self.modelkeys)
-        self.setComboBox(self.highModelMaxSpinBox, self.modelkeys)
+        self.setComboBox(self.lowModelComboBox, self.modelkeys)
+        self.setComboBox(self.highModelComboBox, self.modelkeys)
         self.setComboBox(self.chooseDataComboBox, self.datakeys)
         self.addSubModelPushButton.clicked.connect(self.on_addRange_pushed)
         self.deleteSubModelPushButton.clicked.connect(self.on_deleteRange_pushed)
         self.setupWidgets()
         self.setHidden(self.subwidgets)
 
-    def isEnabled(self):
-        return self.get_widget().isEnabled()
+        def isEnabled(self):
+            return self.get_widget().isEnabled()
 
     def setDisabled(self, bool):
         self.get_widget().setDisabled(bool)
+
+    def isEnabled(self):
+        return self.get_widget().isEnabled()
 
     def setHidden(self, list):
         for i in range(0, len(list)):
             list[i].setHidden(True)
 
-    def functions(self):
-        ui_list = "do_submodel_predict"
-        fun_list = "do_submodel_predict"
-        modelranges = []
+    def function(self):
+        blendranges = []
         submodel_names = []
-        kws = {}
+
+        self.submodel_gui_info = [[self.lowModelComboBox.currentText(), [-9999, int(self.lowModelMaxSpinBox.value())]]]
+        for i in range(1, self.index):
+            self.submodel_gui_info.append(self.subwidgets[i].getValues())
+        self.submodel_gui_info.append(
+            [self.highModelComboBox.currentText(), [int(self.highModelMinSpinBox.value()), 9999]])
+        self.submodel_gui_info.append([self.referenceModelComboBox.currentText(), [-9999, 9999]])
 
         try:
             datakey = self.chooseDataComboBox.currentText()
         except:
             datakey = None
 
-        for i in self.submodel_gui_info:
-            try:
-                min_temp = i[1][0].value()
-            except:
-                min_temp = i[1][0]
-
-            try:
-                max_temp = i[1][1].value()
-            except:
-                max_temp = i[1][1]
-
-            modelranges.append([min_temp, max_temp])
-            submodel_names.append(i[0].currentText())
+        for sub_gui in self.submodel_gui_info:
+            min_temp = sub_gui[1][0]
+            max_temp = sub_gui[1][1]
+            blendranges.append([min_temp, max_temp])
+            submodel_names.append(sub_gui[0])
 
         try:
-            trueval_data = self.chooseDataComboBox.currentText()
+            trueval_data = self.choosedata.currentText()
         except:
             trueval_data = None
 
+        # Check if reference data name has been provided
+        # if so, get reference data values
+        x_ref = []
         if trueval_data is not None:
             truevals = self.data[trueval_data].df[self.model_yvars[submodel_names[0]]]
-            x_ref = []
         else:
             truevals = None
 
@@ -121,7 +131,7 @@ class Ui_Form(Ui_Form, Basics):
                 x_ref.append(self.data[trueval_data].df[self.model_xvars[i]])
 
         # create the submodel object
-        sm_obj = sm.sm(modelranges, submodels)
+        sm_obj = sm.sm(blendranges, submodels)
 
         # optimize blending if reference data is provided (otherwise, modelranges will be used as blending ranges)
         if truevals is not None:
@@ -138,11 +148,33 @@ class Ui_Form(Ui_Form, Basics):
         for i, j in enumerate(predictions):
             self.data[datakey].df[('predict', submodel_names[i] + '-Predict')] = j
         self.data[datakey].df[('predict', 'Blended-Predict')] = predictions_blended
-        pass
+
+    def optimize_ranges(self, ischecked, datachoices):
+        if not ischecked:
+            self.choosedata_label.deleteLater()
+            self.choosedata.deleteLater()
+
+        else:
+            font = QtGui.QFont()
+            font.setPointSize(10)
+            self.choosedata_label = QtWidgets.QLabel(self.submodel_predict)
+            self.choosedata_label.setText(
+                "Choose known data to optimize submodel ranges:")
+            self.choosedata_label.setFont(font)
+            self.choosedata_hlayout.addWidget(self.choosedata_label)
+            self.choosedata_label.setObjectName("self.choosedata_label")
+
+            self.choosedata = make_combobox(datachoices)
+            self.choosedata_hlayout.addWidget(self.choosedata)
+            self.choosedata.setObjectName("self.choosedata")
+            self.choosedata.currentIndexChanged.connect(lambda: self.get_sm_params())
+
+        self.get_sm_params()
 
     def on_addRange_pushed(self):
         if self.index < len(self.subwidgets):
             self.subwidgets[self.index].setHidden(False)
+            self.setComboBox(self.subwidgets[self.index].get_modelComboBox(), self.modelkeys)
             self.index += 1
         else:
             print("Cannot add more wavelengths")

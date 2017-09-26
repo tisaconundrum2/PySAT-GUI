@@ -726,7 +726,7 @@
        </widget>
       </item>
       <item row="17" column="1">
-       <widget class="QComboBox" name="lowModelComboBox_2"/>
+       <widget class="QComboBox" name="highModelComboBox"/>
       </item>
       <item row="17" column="2">
        <widget class="QLabel" name="highModelMinLabel">
@@ -736,7 +736,7 @@
        </widget>
       </item>
       <item row="17" column="3">
-       <widget class="QSpinBox" name="highModelMaxSpinBox">
+       <widget class="QSpinBox" name="highModelMinSpinBox">
         <property name="minimumSize">
          <size>
           <width>130</width>
@@ -780,12 +780,6 @@
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
          <widget class="QLabel" name="chooseDataLabel">
-          <property name="maximumSize">
-           <size>
-            <width>150</width>
-            <height>16777215</height>
-           </size>
-          </property>
           <property name="text">
            <string>Choose data to predict</string>
           </property>
