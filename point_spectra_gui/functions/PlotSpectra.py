@@ -51,7 +51,7 @@ class Ui_Form(Ui_Form, Basics):
         self.chooseDataComboBox.activated[int].connect(lambda: self.plot_spect_update_list(self.chooseRowsListWidget))
         try:
             self.xVariableListWidget.itemSelectionChanged.connect(
-                lambda: self.set_spect_minmax(self.minSpinBox, self.maxSpinBox,
+                lambda: self.set_spect_minmax(self.minDoubleSpinBox, self.maxDoubleSpinBox,
                                               self.xVariableListWidget.selectedItems()[0].text()))
         except:
             pass
@@ -120,8 +120,8 @@ class Ui_Form(Ui_Form, Basics):
         else:
             linestyle = '-'
 
-        xmin = self.minSpinBox.value()
-        xmax = self.maxSpinBox.value()
+        xmin = self.minDoubleSpinBox.value()
+        xmax = self.maxDoubleSpinBox.value()
         xrange = [xmin, xmax]
         self.data[datakey].enumerate_duplicates(col)
         data = self.data[datakey].df
