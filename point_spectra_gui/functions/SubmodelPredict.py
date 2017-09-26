@@ -67,10 +67,13 @@ class Ui_Form(Ui_Form, Basics):
         self.setComboBox(self.referenceModelComboBox, self.modelkeys)
         self.setComboBox(self.lowModelComboBox, self.modelkeys)
         self.setComboBox(self.highModelComboBox, self.modelkeys)
+        self.setComboBox(self.optimizeSubmodelRangesComboBox, self.datakeys)
         self.setComboBox(self.chooseDataComboBox, self.datakeys)
         self.addSubModelPushButton.clicked.connect(self.on_addRange_pushed)
         self.deleteSubModelPushButton.clicked.connect(self.on_deleteRange_pushed)
         self.setupWidgets()
+        self.optimizeSubmodelRangesLabel.setHidden(True)
+        self.optimizeSubmodelRangesComboBox.setHidden(True)
         self.setHidden(self.subwidgets)
 
         def isEnabled(self):
@@ -89,7 +92,15 @@ class Ui_Form(Ui_Form, Basics):
     def function(self):
         blendranges = []
         submodel_names = []
+        x_ref = []
+        x = []
+        submodels = []
 
+        # TODO there are some inefficiencies with this code:103:111
+        # For example you are running through the UI to collect the data
+        # And then running through the data to collect more data
+        # You're doing this with seperate for loops. this could be done
+        # with just one for loop. Example lines 103 and 111.
         self.submodel_gui_info = [[self.lowModelComboBox.currentText(), [-9999, int(self.lowModelMaxSpinBox.value())]]]
         for i in range(1, self.index):
             self.submodel_gui_info.append(self.subwidgets[i].getValues())
@@ -97,10 +108,7 @@ class Ui_Form(Ui_Form, Basics):
             [self.highModelComboBox.currentText(), [int(self.highModelMinSpinBox.value()), 9999]])
         self.submodel_gui_info.append([self.referenceModelComboBox.currentText(), [-9999, 9999]])
 
-        try:
-            datakey = self.chooseDataComboBox.currentText()
-        except:
-            datakey = None
+        datakey = self.chooseDataComboBox.currentText()
 
         for sub_gui in self.submodel_gui_info:
             min_temp = sub_gui[1][0]
@@ -108,22 +116,19 @@ class Ui_Form(Ui_Form, Basics):
             blendranges.append([min_temp, max_temp])
             submodel_names.append(sub_gui[0])
 
-        try:
-            trueval_data = self.choosedata.currentText()
-        except:
+        if self.optimizeSubmodelRangesCheckBox.isChecked():
+            trueval_data = self.optimizeSubmodelRangesComboBox.currentText()
+        else:
             trueval_data = None
 
         # Check if reference data name has been provided
         # if so, get reference data values
-        x_ref = []
         if trueval_data is not None:
             truevals = self.data[trueval_data].df[self.model_yvars[submodel_names[0]]]
         else:
             truevals = None
 
         # step through the submodel names and get the actual models and the x data
-        x = []
-        submodels = []
         for i in submodel_names:
             x.append(self.data[datakey].df[self.model_xvars[i]])
             submodels.append(self.models[i])
@@ -148,28 +153,6 @@ class Ui_Form(Ui_Form, Basics):
         for i, j in enumerate(predictions):
             self.data[datakey].df[('predict', submodel_names[i] + '-Predict')] = j
         self.data[datakey].df[('predict', 'Blended-Predict')] = predictions_blended
-
-    def optimize_ranges(self, ischecked, datachoices):
-        if not ischecked:
-            self.choosedata_label.deleteLater()
-            self.choosedata.deleteLater()
-
-        else:
-            font = QtGui.QFont()
-            font.setPointSize(10)
-            self.choosedata_label = QtWidgets.QLabel(self.submodel_predict)
-            self.choosedata_label.setText(
-                "Choose known data to optimize submodel ranges:")
-            self.choosedata_label.setFont(font)
-            self.choosedata_hlayout.addWidget(self.choosedata_label)
-            self.choosedata_label.setObjectName("self.choosedata_label")
-
-            self.choosedata = make_combobox(datachoices)
-            self.choosedata_hlayout.addWidget(self.choosedata)
-            self.choosedata.setObjectName("self.choosedata")
-            self.choosedata.currentIndexChanged.connect(lambda: self.get_sm_params())
-
-        self.get_sm_params()
 
     def on_addRange_pushed(self):
         if self.index < len(self.subwidgets):
