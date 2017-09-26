@@ -199,21 +199,21 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         self.progressBar.setValue(1)  # displays 100% after process is finished.
 
     def run(self):
-        # try:
-        for modules in range(self.leftOff, len(self.widgetList)):
-            s = time.time()
-            print("Module Running...")
-            self.widgetList[modules].setProgressBar(self.progressBar)
-            self.widgetList[modules].function()
-            e = time.time()
-            print("Module executed in: {} seconds".format(e - s))
-            self.widgetList[modules].setDisabled(True)
-            self.leftOff = modules + 1
-        self.taskFinished.emit()
-        # except Exception as e:
-        #     print("Your module broke: please fix.", e)
-        #     self.widgetList[self.leftOff].setDisabled(False)
-        #     self.taskFinished.emit()
+        try:
+            for modules in range(self.leftOff, len(self.widgetList)):
+                s = time.time()
+                print("Module Running...")
+                self.widgetList[modules].setProgressBar(self.progressBar)
+                self.widgetList[modules].function()
+                e = time.time()
+                print("Module executed in: {} seconds".format(e - s))
+                self.widgetList[modules].setDisabled(True)
+                self.leftOff = modules + 1
+            self.taskFinished.emit()
+        except Exception as e:
+            print("Your module broke: please fix.", e)
+            self.widgetList[self.leftOff].setDisabled(False)
+            self.taskFinished.emit()
 
 
 def main():
