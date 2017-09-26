@@ -2,14 +2,6 @@
 <ui version="4.0">
  <class>Form</class>
  <widget class="QWidget" name="Form">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>689</width>
-    <height>791</height>
-   </rect>
-  </property>
   <property name="sizePolicy">
    <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
     <horstretch>0</horstretch>
@@ -95,7 +87,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="optimizeCheckBox">
+         <widget class="QCheckBox" name="optimizeSubmodelRangesCheckBox">
           <property name="text">
            <string>Optimize </string>
           </property>
@@ -787,14 +779,14 @@
       <item row="19" column="0" colspan="6">
        <layout class="QFormLayout" name="formLayout_3">
         <item row="0" column="0">
-         <widget class="QLabel" name="optimizeSubmodelRangesLabel_2">
+         <widget class="QLabel" name="optimizeSubmodelRangesLabel">
           <property name="text">
            <string>Choose known data to optimize submodel ranges:</string>
           </property>
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QComboBox" name="optimizeSubmodelRangesComboBox_2"/>
+         <widget class="QComboBox" name="optimizeSubmodelRangesComboBox"/>
         </item>
         <item row="1" column="0">
          <widget class="QLabel" name="chooseDataLabel">
@@ -866,16 +858,16 @@
   <tabstop>highModelMinSpinBox</tabstop>
   <tabstop>addSubModelPushButton</tabstop>
   <tabstop>deleteSubModelPushButton</tabstop>
-  <tabstop>optimizeCheckBox</tabstop>
-  <tabstop>optimizeSubmodelRangesComboBox_2</tabstop>
+  <tabstop>optimizeSubmodelRangesCheckBox</tabstop>
+  <tabstop>optimizeSubmodelRangesComboBox</tabstop>
   <tabstop>chooseDataComboBox</tabstop>
  </tabstops>
  <resources/>
  <connections>
   <connection>
-   <sender>optimizeCheckBox</sender>
+   <sender>optimizeSubmodelRangesCheckBox</sender>
    <signal>toggled(bool)</signal>
-   <receiver>optimizeSubmodelRangesComboBox_2</receiver>
+   <receiver>optimizeSubmodelRangesComboBox</receiver>
    <slot>setVisible(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -889,9 +881,9 @@
    </hints>
   </connection>
   <connection>
-   <sender>optimizeCheckBox</sender>
+   <sender>optimizeSubmodelRangesCheckBox</sender>
    <signal>toggled(bool)</signal>
-   <receiver>optimizeSubmodelRangesLabel_2</receiver>
+   <receiver>optimizeSubmodelRangesLabel</receiver>
    <slot>setVisible(bool)</slot>
    <hints>
     <hint type="sourcelabel">
