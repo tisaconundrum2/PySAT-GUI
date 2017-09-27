@@ -116,6 +116,7 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
             self.actionStratified_Folds.triggered.connect(lambda: self.addWidget(functions.StratifiedFolds.Ui_Form))
             self.actionSubmodel_Predict.triggered.connect(lambda: self.addWidget(functions.SubmodelPredict.Ui_Form))
             self.actionSave_Current_Workflow.triggered.connect(self.on_save_clicked)
+            self.actionRestore_Workflow.triggered.connect(self.on_restore_clicked)
             self.deleteModulePushButton.clicked.connect(self.on_delete_module_clicked)
             self.okPushButton.clicked.connect(self.on_okButton_clicked)
             self.undoModulePushButton.clicked.connect(self.on_undoButton_clicked)
@@ -144,6 +145,10 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
             ui_items.append(dat.getGuiParams())
         return ui_items
 
+    def setWidgetItems(self, dict):
+        for i in range(len(self.widgetList)):
+            self.widgetList[i].setGuiParams(dict[i])
+
     def on_save_clicked(self):
         """
         Save the workflow to a *.wrf file
@@ -157,6 +162,18 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
             print(filename)
             with open(filename, 'wb') as fp:
                 pickle.dump(self.getWidgetItems(), fp)
+        except:
+            print("File not loaded")
+
+    def on_restore_clicked(self):
+        try:
+            filename, _filter = QtWidgets.QFileDialog.getOpenFileName(None,
+                                                                      "Open Workflow File",
+                                                                      self.outpath,
+                                                                      '(*.wrf)')
+            print(filename)
+            with open(filename, 'rb') as fp:
+                self.setWidgetItems(pickle.load(fp))
         except:
             print("File not loaded")
 
