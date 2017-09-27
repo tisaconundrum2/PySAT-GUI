@@ -191,7 +191,7 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
             Part of the reason why we're doing this is because we're saving function
             names to a list, you can't save function instances. So this is the next
             best thing.
-            """s
+            """
             self.addWidget(getattr(getattr(functions, f_items), f_items))
 
         for i in range(1, len(dict)):
