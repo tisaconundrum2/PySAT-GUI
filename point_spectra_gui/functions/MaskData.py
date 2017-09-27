@@ -4,7 +4,7 @@ from point_spectra_gui.ui.MaskData import Ui_Form
 from point_spectra_gui.util.BasicFunctionality import Basics
 
 
-class Ui_Form(Ui_Form, Basics):
+class MaskData(Ui_Form, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
         self.connectWidgets()
@@ -44,7 +44,7 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     
     Form = QtWidgets.QWidget()
-    ui = Ui_Form()
+    ui = MaskData()
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())

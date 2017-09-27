@@ -49,7 +49,7 @@ class subWidgets:
             return "Not a valid number"
 
 
-class Ui_Form(Ui_Form, Basics):
+class SubmodelPredict(Ui_Form, Basics):
     def __init__(self):
         super().__init__()
         self.subwidgets = []
@@ -209,7 +209,7 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
 
     Form = QtWidgets.QWidget()
-    ui = Ui_Form()
+    ui = SubmodelPredict()
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())

@@ -9,7 +9,7 @@ from point_spectra_gui.ui.RegressionTrain import Ui_Form
 from point_spectra_gui.util.BasicFunctionality import Basics
 
 
-class Ui_Form(Ui_Form, Basics):
+class RegressionTrain(Ui_Form, Basics):
     def setupUi(self, Form):
         self.Form = Form
         super().setupUi(Form)
@@ -147,7 +147,7 @@ if __name__ == "__main__":
 
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
-    ui = Ui_Form()
+    ui = RegressionTrain()
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())

@@ -6,7 +6,7 @@ from point_spectra_gui.ui.LoadData import Ui_loadData
 from point_spectra_gui.util.BasicFunctionality import Basics
 
 
-class Ui_Form(Ui_loadData, Basics):
+class LoadData(Ui_loadData, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
         self.connectWidgets()
@@ -49,7 +49,7 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     
     Form = QtWidgets.QWidget()
-    ui = Ui_Form()
+    ui = LoadData()
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())

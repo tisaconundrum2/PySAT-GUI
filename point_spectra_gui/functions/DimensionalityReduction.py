@@ -4,7 +4,7 @@ from point_spectra_gui.ui.DimensionalityReduction import Ui_Form
 from point_spectra_gui.util.BasicFunctionality import Basics
 
 
-class Ui_Form(Ui_Form, Basics):
+class DimensionalityReduction(Ui_Form, Basics):
     _methods = [
         'PCA',
         'ICA',
@@ -123,7 +123,7 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
 
     Form = QtWidgets.QWidget()
-    ui = Ui_Form()
+    ui = DimensionalityReduction()
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())
