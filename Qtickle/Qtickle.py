@@ -152,7 +152,7 @@ class Qtickle(object):
                             obj.addItem(list_item)
                     index = dict[name + "_index"]
                     try:
-                        obj.setCurrentItem(obj.findItems(index, QtCore.Qt.MatchExactly)[0])
+                        obj.setCurrentItem(obj.findItems(index[0], QtCore.Qt.MatchExactly)[0])
                     except:
                         pass
 
