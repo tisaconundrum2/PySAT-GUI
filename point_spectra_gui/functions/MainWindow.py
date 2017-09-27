@@ -92,29 +92,50 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         """
         # TODO figure out how to get this code into `MainWindow.py`
         try:
-            self.actionRead_ChemCam_Data.triggered.connect(lambda: self.addWidget(functions.ReadChemCamData.ReadChemCamData))
-            self.actionRemove_Baseline.triggered.connect(lambda: self.addWidget(functions.BaselineRemoval.BaselineRemoval))
-            self.actionCross_Validation.triggered.connect(lambda: self.addWidget(functions.CrossValidation.CrossValidation))
+            self.actionRead_ChemCam_Data.triggered.connect(
+                lambda: self.addWidget(functions.ReadChemCamData.ReadChemCamData))
+            self.actionRemove_Baseline.triggered.connect(
+                lambda: self.addWidget(functions.BaselineRemoval.BaselineRemoval))
+            self.actionCross_Validation.triggered.connect(
+                lambda: self.addWidget(functions.CrossValidation.CrossValidation))
             self.actionDimensionality_Reduction.triggered.connect(
                 lambda: self.addWidget(functions.DimensionalityReduction.DimensionalityReduction))
-            self.actionInterpolate.triggered.connect(lambda: self.addWidget(functions.Interpolation.Interpolation))
-            self.actionLoad_Data.triggered.connect(lambda: self.addWidget(functions.LoadData.LoadData))
-            self.actionSave_Current_Data.triggered.connect(lambda: self.addWidget(functions.WriteToCSV.WriteToCSV))
-            self.actionRename_Data.triggered.connect(lambda: self.addWidget(functions.RenameData.RenameData))
-            self.actionApply_Mask.triggered.connect(lambda: self.addWidget(functions.MaskData.MaskData))
-            self.actionMultiply_by_Vector.triggered.connect(lambda: self.addWidget(functions.MultiplyByVector.MultiplyByVector))
-            self.actionNormalization.triggered.connect(lambda: self.addWidget(functions.Normalization.Normalization))
-            self.actionSet_Output_Path.triggered.connect(lambda: self.addWidget(functions.OutputFolder.OutputFolder))
-            self.actionPeak_Areas.triggered.connect(lambda: self.addWidget(functions.PeakAreas.PeakAreas))
-            self.actionPlot.triggered.connect(lambda: self.addWidget(functions.Plot.Plot))
-            self.actionPlot_ICA_PCA.triggered.connect(lambda: self.addWidget(functions.Plot_ICA_PCA.Plot_ICA_PCA))
-            self.actionPlot_Spectra.triggered.connect(lambda: self.addWidget(functions.PlotSpectra.PlotSpectra))
-            self.actionTrain.triggered.connect(lambda: self.addWidget(functions.RegressionTrain.RegressionTrain))
-            self.actionPredict.triggered.connect(lambda: self.addWidget(functions.RegressionPredict.RegressionPredict))
-            self.actionRemove_Rows.triggered.connect(lambda: self.addWidget(functions.RemoveRows.RemoveRows))
-            self.actionSplit_Data.triggered.connect(lambda: self.addWidget(functions.SplitDataset.SplitDataset))
-            self.actionStratified_Folds.triggered.connect(lambda: self.addWidget(functions.StratifiedFolds.StratifiedFolds))
-            self.actionSubmodel_Predict.triggered.connect(lambda: self.addWidget(functions.SubmodelPredict.SubmodelPredict))
+            self.actionInterpolate.triggered.connect(
+                lambda: self.addWidget(functions.Interpolation.Interpolation))
+            self.actionLoad_Data.triggered.connect(
+                lambda: self.addWidget(functions.LoadData.LoadData))
+            self.actionSave_Current_Data.triggered.connect(
+                lambda: self.addWidget(functions.WriteToCSV.WriteToCSV))
+            self.actionRename_Data.triggered.connect(
+                lambda: self.addWidget(functions.RenameData.RenameData))
+            self.actionApply_Mask.triggered.connect(
+                lambda: self.addWidget(functions.MaskData.MaskData))
+            self.actionMultiply_by_Vector.triggered.connect(
+                lambda: self.addWidget(functions.MultiplyByVector.MultiplyByVector))
+            self.actionNormalization.triggered.connect(
+                lambda: self.addWidget(functions.Normalization.Normalization))
+            self.actionSet_Output_Path.triggered.connect(
+                lambda: self.addWidget(functions.OutputFolder.OutputFolder))
+            self.actionPeak_Areas.triggered.connect(
+                lambda: self.addWidget(functions.PeakAreas.PeakAreas))
+            self.actionPlot.triggered.connect(
+                lambda: self.addWidget(functions.Plot.Plot))
+            self.actionPlot_ICA_PCA.triggered.connect(
+                lambda: self.addWidget(functions.Plot_ICA_PCA.Plot_ICA_PCA))
+            self.actionPlot_Spectra.triggered.connect(
+                lambda: self.addWidget(functions.PlotSpectra.PlotSpectra))
+            self.actionTrain.triggered.connect(
+                lambda: self.addWidget(functions.RegressionTrain.RegressionTrain))
+            self.actionPredict.triggered.connect(
+                lambda: self.addWidget(functions.RegressionPredict.RegressionPredict))
+            self.actionRemove_Rows.triggered.connect(
+                lambda: self.addWidget(functions.RemoveRows.RemoveRows))
+            self.actionSplit_Data.triggered.connect(
+                lambda: self.addWidget(functions.SplitDataset.SplitDataset))
+            self.actionStratified_Folds.triggered.connect(
+                lambda: self.addWidget(functions.StratifiedFolds.StratifiedFolds))
+            self.actionSubmodel_Predict.triggered.connect(
+                lambda: self.addWidget(functions.SubmodelPredict.SubmodelPredict))
             self.actionSave_Current_Workflow.triggered.connect(self.on_save_clicked)
             self.actionRestore_Workflow.triggered.connect(self.on_restore_clicked)
             self.deleteModulePushButton.clicked.connect(self.on_delete_module_clicked)
@@ -218,15 +239,16 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
     def run(self):
         try:
             for modules in range(self.leftOff, len(self.widgetList)):
+                name_ = type(self.widgetList[modules]).__name__
                 s = time.time()
-                print("Module Running...")
+                print("{} Module is Running...".format(name_))
                 self.widgetList[modules].setProgressBar(self.progressBar)
                 self.widgetList[modules].function()
                 e = time.time()
-                print("Module executed in: {} seconds".format(e - s))
+                print("Module {} executed in: {} seconds".format(name_, e - s))
                 self.widgetList[modules].setDisabled(True)
                 self.leftOff = modules + 1
-            self.taskFinished.emit()
+                self.taskFinished.emit()
         except Exception as e:
             print("Your module broke: please fix.", e)
             self.widgetList[self.leftOff].setDisabled(False)
