@@ -275,7 +275,7 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
                 print("Module {} executed in: {} seconds".format(name_, e - s))
                 self.widgetList[modules].setDisabled(True)
                 self.leftOff = modules + 1
-                self.taskFinished.emit()
+            self.taskFinished.emit()
         except Exception as e:
             print("Your module broke: please fix.", e)
             self.widgetList[self.leftOff].setDisabled(False)
