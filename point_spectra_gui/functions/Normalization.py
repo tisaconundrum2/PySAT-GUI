@@ -62,12 +62,17 @@ class Normalization(Ui_Form, Basics):
         self.qt.isGuiChanged(self.checkForNewMax)
         self.addRangePushButton.clicked.connect(self.on_addRange_pushed)
         self.deleteRangePushButton.clicked.connect(self.on_deleteRange_pushed)
+        self.rangeCountPushButton.valueChanged.connect(self.on_change_rangeCountPushButton)
 
     def isEnabled(self):
         return self.get_widget().isEnabled()
 
     def setDisabled(self, bool):
         self.get_widget().setDisabled(bool)
+
+    def on_change_rangeCountPushButton(self):
+        for i in range(int(self.rangeCountPushButton.text())):
+            self.on_addRange_pushed()
 
     def setHidden(self, list):
         for i in range(1, len(list)):
