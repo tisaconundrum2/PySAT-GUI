@@ -353,9 +353,9 @@
       <item>
        <layout class="QHBoxLayout" name="addDelRangeLayout">
         <item>
-         <widget class="QPushButton" name="addRangePushButton">
+         <widget class="QLabel" name="label">
           <property name="text">
-           <string>Add Range</string>
+           <string>Number of wavelengths:</string>
           </property>
          </widget>
         </item>
@@ -363,13 +363,6 @@
          <widget class="QSpinBox" name="rangeCountSpinBox">
           <property name="maximum">
            <number>14</number>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="deleteRangePushButton">
-          <property name="text">
-           <string>Delete Range</string>
           </property>
          </widget>
         </item>

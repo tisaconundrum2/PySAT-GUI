@@ -222,16 +222,13 @@ class Ui_Form(object):
         self.Normalization.addLayout(self.waveLengthLayout)
         self.addDelRangeLayout = QtWidgets.QHBoxLayout()
         self.addDelRangeLayout.setObjectName("addDelRangeLayout")
-        self.addRangePushButton = QtWidgets.QPushButton(self.groupBox)
-        self.addRangePushButton.setObjectName("addRangePushButton")
-        self.addDelRangeLayout.addWidget(self.addRangePushButton)
+        self.label = QtWidgets.QLabel(self.groupBox)
+        self.label.setObjectName("label")
+        self.addDelRangeLayout.addWidget(self.label)
         self.rangeCountSpinBox = QtWidgets.QSpinBox(self.groupBox)
         self.rangeCountSpinBox.setMaximum(14)
         self.rangeCountSpinBox.setObjectName("rangeCountSpinBox")
         self.addDelRangeLayout.addWidget(self.rangeCountSpinBox)
-        self.deleteRangePushButton = QtWidgets.QPushButton(self.groupBox)
-        self.deleteRangePushButton.setObjectName("deleteRangePushButton")
-        self.addDelRangeLayout.addWidget(self.deleteRangePushButton)
         self.Normalization.addLayout(self.addDelRangeLayout)
         self.verticalLayout_3.addWidget(self.groupBox)
 
@@ -274,8 +271,7 @@ class Ui_Form(object):
         self.maximumWavelengthLabel_14.setText(("Maximum wavelength"))
         self.minimumWavelengthLabel_15.setText(("Minimum wavelength"))
         self.maximumWavelengthLabel_15.setText(("Maximum wavelength"))
-        self.addRangePushButton.setText(("Add Range"))
-        self.deleteRangePushButton.setText(("Delete Range"))
+        self.label.setText(("Number of wavelengths:"))
 
 
 if __name__ == "__main__":

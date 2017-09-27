@@ -60,9 +60,9 @@ class Normalization(Ui_Form, Basics):
         self.setMaximum(9999999)
         self.setHidden(self.normwidgets)
         self.qt.isGuiChanged(self.checkForNewMax)
-        self.addRangePushButton.clicked.connect(self.on_addRange_pushed)
-        self.deleteRangePushButton.clicked.connect(self.on_deleteRange_pushed)
-        self.rangeCountPushButton.valueChanged.connect(self.on_change_rangeCountPushButton)
+        self.rangeCountSpinBox.setMinimum(1)
+        self.rangeCountSpinBox.setMaximum(15)
+        self.rangeCountSpinBox.valueChanged.connect(self.on_change_rangeCountPushButton)
 
     def isEnabled(self):
         return self.get_widget().isEnabled()
@@ -71,8 +71,11 @@ class Normalization(Ui_Form, Basics):
         self.get_widget().setDisabled(bool)
 
     def on_change_rangeCountPushButton(self):
-        for i in range(int(self.rangeCountPushButton.text())):
+        spin = int(self.rangeCountSpinBox.value())
+        if self.index < spin:
             self.on_addRange_pushed()
+        elif self.index > spin:
+            self.on_deleteRange_pushed()
 
     def setHidden(self, list):
         for i in range(1, len(list)):
