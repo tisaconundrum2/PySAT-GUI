@@ -161,13 +161,17 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         This function iterates through widgetList
         gets the name of all the fuctions
         and then all of the parameters in the UI
-        :return:
+        and write it to a list to be returned
+
+        Iterate through widgetList
+        get the names of functions, add it to a temp l
+        add f list to be the first item in ui_items
         """
         f = []
         ui_items = []
-        for f_items in self.widgetList:  # Iterate through widgetList
-            f.append(type(f_items).__name__)  # get the names of functions, add it to a temp list
-        ui_items.append(f)  # add f list to be the first item in ui_items
+        for f_items in self.widgetList:
+            f.append(type(f_items).__name__)
+        ui_items.append(f)
 
         for dat in self.widgetList:
             ui_items.append(dat.getGuiParams())
@@ -187,10 +191,11 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
             Part of the reason why we're doing this is because we're saving function
             names to a list, you can't save function instances. So this is the next
             best thing.
-            """
+            """s
             self.addWidget(getattr(getattr(functions, f_items), f_items))
-        for i in range(1, len(self.widgetList)):
-            self.widgetList[i].setGuiParams(dict[i])
+
+        for i in range(1, len(dict)):
+            self.widgetList[i-1].setGuiParams(dict[i])
 
     def on_save_clicked(self):
         """
