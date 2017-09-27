@@ -35,7 +35,6 @@ class Basics:
     models = {}  # For regression training
     model_xvars = {}
     model_yvars = {}
-
     def __init__(self):
         self.qt = Qtickle.Qtickle(self)
 
@@ -73,10 +72,12 @@ class Basics:
         Return the contents from lineEdits, comboBoxes, etc.
         :return:
         """
+        self.qt = Qtickle.Qtickle(self)
         s = self.qt.guiSave()
         return s
 
     def setGuiParams(self, dict):
+        self.qt = Qtickle.Qtickle(self)
         self.qt.guiRestore(dict)
 
 
