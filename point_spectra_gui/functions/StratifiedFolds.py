@@ -16,8 +16,11 @@ class StratifiedFolds(Ui_Form, Basics):
         self.nFoldsSpinBox.setValue(2)
         self.testFoldsSpinBox.setValue(2)
         self.setComboBox(self.chooseDataToStratifyComboBox, self.datakeys)
-        data = self.data[self.chooseDataToStratifyComboBox.currentText()].df['comp'].columns.values
-        self.setComboBox(self.chooseVarComboBox, data)
+        try: # Some instances where perhaps there is no data to load
+            data = self.data[self.chooseDataToStratifyComboBox.currentText()].df['comp'].columns.values
+            self.setComboBox(self.chooseVarComboBox, data)
+        except:
+            pass
         self.chooseDataToStratifyComboBox.activated[int].connect(self.strat_fold_change_vars)
         self.nFoldsSpinBox.valueChanged.connect(self.strat_fold_change_testfolds)
 
