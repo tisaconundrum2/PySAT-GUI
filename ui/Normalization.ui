@@ -335,9 +335,6 @@
           </property>
          </widget>
         </item>
-        <item row="14" column="1">
-         <widget class="QSpinBox" name="minimumWavelengthSpinBox_15"/>
-        </item>
         <item row="14" column="2">
          <widget class="QLabel" name="maximumWavelengthLabel_15">
           <property name="text">
@@ -348,6 +345,9 @@
         <item row="14" column="3">
          <widget class="QSpinBox" name="maximumWavelengthSpinBox_15"/>
         </item>
+        <item row="14" column="1">
+         <widget class="QSpinBox" name="minimumWavelengthSpinBox_15"/>
+        </item>
        </layout>
       </item>
       <item>
@@ -356,6 +356,13 @@
          <widget class="QPushButton" name="addRangePushButton">
           <property name="text">
            <string>Add Range</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="rangeCountSpinBox">
+          <property name="maximum">
+           <number>14</number>
           </property>
          </widget>
         </item>
