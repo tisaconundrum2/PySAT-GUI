@@ -111,11 +111,11 @@ class RegressionTrain(Ui_Form, Basics):
         coef[('meta', 'Model')] = modelkey
         try:
             self.data[modelkey] = spectral_data(pd.concat([self.data['Model Coefficients'].df, coef]))
+        except IndexError:
+            print("Error: Did you remember to select an X Variable and Y Variable?")
+            pass
         except:
             self.data['Model Coefficients'] = spectral_data(coef)
-        # except IndexError:
-        #     print("Error: Did you remember to select an X Variable and Y Variable?")
-        #     pass
 
     def yvar_choices(self):
         try:
