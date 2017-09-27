@@ -72,9 +72,9 @@ class Normalization(Ui_Form, Basics):
 
     def on_change_rangeCountPushButton(self):
         spin = int(self.rangeCountSpinBox.value())
-        if self.index < spin:
+        while self.index < spin:
             self.on_addRange_pushed()
-        elif self.index > spin:
+        while self.index > spin:
             self.on_deleteRange_pushed()
 
     def setHidden(self, list):
