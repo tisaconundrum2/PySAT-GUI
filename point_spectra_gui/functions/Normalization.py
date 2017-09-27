@@ -156,7 +156,10 @@ class Normalization(Ui_Form, Basics):
         for i in range(self.index):
             ranges.append(self.normwidgets[i].getValues())
         datakey = self.chooseDataComboBox.currentText()
-        col_var = self.varToNormalizeListWidget.currentItem().text()
+        try:
+            col_var = self.varToNormalizeListWidget.currentItem().text()
+        except:
+            print("Did you remember to select a variable?")
         print("{}".format(ranges))
         try:
             self.data[datakey].norm(ranges)
