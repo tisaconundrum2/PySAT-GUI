@@ -148,13 +148,10 @@ class Normalization(Ui_Form, Basics):
         for i in range(self.index):
             ranges.append(self.normwidgets[i].getValues())
         datakey = self.chooseDataComboBox.currentText()
-        try:
-            col_var, filter_ = self.varToNormalizeListWidget.selectedItems().text()
-        except:
-            col_var = 'wvl'
+        col_var = self.varToNormalizeListWidget.currentItem().text()
         print("{}".format(ranges))
         try:
-            self.data[datakey].norm(ranges, col_var=col_var)
+            self.data[datakey].norm(ranges)
             print("Normalization has been applied to the ranges: " + str(ranges))
         except Exception as e:
             print("There was a problem: ", e)
