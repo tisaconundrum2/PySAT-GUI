@@ -5,7 +5,7 @@ from point_spectra_gui.ui.SVR import Ui_Form
 from point_spectra_gui.util.BasicFunctionality import Basics
 
 
-class Ui_Form(Ui_Form, SVR, Basics):
+class Ui_Form(Ui_Form, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
         self.connectWidgets()
@@ -17,17 +17,30 @@ class Ui_Form(Ui_Form, SVR, Basics):
         self.get_widget().setHidden(bool)
 
     def connectWidgets(self):
-        self.cDoubleSpinBox.setValue(self.C)
-        self.epsilonDoubleSpinBox.setValue(self.epsilon)
-        self.defaultComboItem(self.kernelComboBox, self.kernel)
-        self.degreeSpinBox.setValue(self.degree)
-        self.defaultComboItem(self.gammaComboBox, self.gamma)
-        self.coeff0DoubleSpinBox.setValue(self.coef0)
-        self.shrinkingCheckBox.setChecked(self.shrinking)
-        self.toleranceDoubleSpinBox.setValue(self.tol)
-        self.cacheSizeSpinBox.setValue(self.cache_size)
-        self.verboseCheckBox.setChecked(self.verbose)
-        self.maxIterationsSpinBox.setValue(self.max_iter)
+        svr = SVR()
+        svr.kernel = 'rbf'
+        svr.degree = 3
+        svr.gamma = 'auto'
+        svr.coef0 = 0.0
+        svr.tol = 1e-3
+        svr.C = 1.0
+        svr.epsilon = 0.1
+        svr.shrinking = True
+        svr.cache_size = 200
+        svr.verbose = False
+        svr.max_iter = -1
+
+        self.cDoubleSpinBox.setValue(svr.C)
+        self.epsilonDoubleSpinBox.setValue(svr.epsilon)
+        self.defaultComboItem(self.kernelComboBox, svr.kernel)
+        self.degreeSpinBox.setValue(svr.degree)
+        self.defaultComboItem(self.gammaComboBox, svr.gamma)
+        self.coeff0DoubleSpinBox.setValue(svr.coef0)
+        self.shrinkingCheckBox.setChecked(svr.shrinking)
+        self.toleranceDoubleSpinBox.setValue(svr.tol)
+        self.cacheSizeSpinBox.setValue(svr.cache_size)
+        self.verboseCheckBox.setChecked(svr.verbose)
+        self.maxIterationsSpinBox.setValue(svr.max_iter)
 
     def function(self):
         gamma_index = self.gammaComboBox.currentIndex()

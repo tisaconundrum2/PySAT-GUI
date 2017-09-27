@@ -183,8 +183,8 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
             print(filename)
             with open(filename, 'wb') as fp:
                 pickle.dump(self.getWidgetItems(), fp)
-        except:
-            print("File not loaded")
+        except Exception as e:
+            print("File not loaded {}".format(e))
 
     def on_restore_clicked(self):
         try:
@@ -195,8 +195,8 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
             print(filename)
             with open(filename, 'rb') as fp:
                 self.setWidgetItems(pickle.load(fp))
-        except:
-            print("File not loaded")
+        except Exception as e:
+            print("File not loaded: {}".format(e))
 
     def on_delete_module_clicked(self):
         try:
