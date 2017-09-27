@@ -76,6 +76,10 @@ class Basics:
         s = self.qt.guiSave()
         return s
 
+    def setGuiParams(self, dict):
+        self.qt.guiRestore(dict)
+
+
     def function(self):
         """
         Each Module's functionality will be ran in this function.
