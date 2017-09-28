@@ -4,6 +4,8 @@ import sys
 import time
 import warnings
 
+import pickle
+
 try:
     import qtmodern.styles
 
@@ -21,23 +23,30 @@ from PyQt5.QtWidgets import *
 from point_spectra_gui.functions import MainWindow
 from point_spectra_gui.util.excepthook import my_exception_hook
 
-theme = False
-
 
 def new():
     p = mp.Process(target=main, args=())
     p.start()
 
 
-def darkmode():
-    global theme, q
-    theme = True
-    new()
+def setDarkmode(theme=True):
+    with open('conf.inf', 'wb') as fp:
+        pickle.dump(theme, fp)
+    p = mp.Process(target=main, args=())
+    p.start()
 
+def getDarkmode():
+    try:
+        with open('conf.inf', 'rb') as fp:
+            return pickle.load(fp)
+    except:
+        print("Conf file could not be found")
+        return False
 
 def connectWidgets(ui):
     ui.actionCreate_New_Workflow.triggered.connect(lambda: new())
-    ui.actionQtmodern.triggered.connect(lambda: darkmode())
+    ui.actionQtmodern.triggered.connect(lambda: setDarkmode(True))
+    ui.actionDefault.triggered.connect(lambda: setDarkmode(False))
 
 
 def get_splash(app):
@@ -65,7 +74,7 @@ def main():
 
     app = QtWidgets.QApplication(sys.argv)
     get_splash(app)
-    if q and theme:
+    if q and getDarkmode():
         qtmodern.styles.dark(app)
     mainWindow = QtWidgets.QMainWindow()
     ui = MainWindow.Ui_MainWindow()
