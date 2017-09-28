@@ -80,19 +80,16 @@ class CrossValidation(Ui_Form, Basics):
         modelkey = method + ' - ' + str(yvars[0][-1]) + ' (' + str(yrange[0]) + '-' + str(yrange[1]) + ') '
         print(params, modelkey)
 
-        try:
-            y = np.array(self.data[datakey].df[yvars])
-            match = np.squeeze((y > yrange[0]) & (y < yrange[1]))
-            data_for_cv = spectral_data(self.data[datakey].df.ix[match])
-            # Warning: Params passing through cv.cv(params) needs to be in lists
-            # Example: {'n_components': [4], 'scale': [False]}
-            cv_obj = cv.cv(params)
-            self.data[datakey].df, self.cv_results = cv_obj.do_cv(data_for_cv.df, xcols=xvars, ycol=yvars,
-                                                                  yrange=yrange, method=method)
-            self.datakeys.append('CV Results ' + modelkey)
-            self.data['CV Results ' + modelkey] = self.cv_results
-        except Exception as e:
-            print(e)
+        y = np.array(self.data[datakey].df[yvars])
+        match = np.squeeze((y > yrange[0]) & (y < yrange[1]))
+        data_for_cv = spectral_data(self.data[datakey].df.ix[match])
+        # Warning: Params passing through cv.cv(params) needs to be in lists
+        # Example: {'n_components': [4], 'scale': [False]}
+        cv_obj = cv.cv(params)
+        self.data[datakey].df, self.cv_results = cv_obj.do_cv(data_for_cv.df, xcols=xvars, ycol=yvars,
+                                                              yrange=yrange, method=method)
+        self.datakeys.append('CV Results ' + modelkey)
+        self.data['CV Results ' + modelkey] = self.cv_results
 
     def yvar_choices(self):
         try:
