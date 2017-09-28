@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\nfinch\Desktop\GitHub\PySAT_Point_Spectra_GUI\ui\StratifiedFolds.ui'
-#
-# Created by: PyQt5 UI code generator 5.6
-#
-# WARNING! All changes made in this file will be lost!
+# Automatically generated - don't edit.
+# Use `python setup.py build_ui` to update it.
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
+        Form.resize(277, 149)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Ignored)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -54,12 +52,12 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.formGroupBox.setTitle(_translate("Form", "Stratified Folds"))
-        self.chooseDataToStratifyLabel.setText(_translate("Form", "Choose data to stratify: "))
-        self.chooseVarLabel.setText(_translate("Form", "Choose variable on which to sort: "))
-        self.nFoldsLabel.setText(_translate("Form", "N Folds"))
-        self.testFoldsLabel.setText(_translate("Form", "Test Folds"))
+        Form.setWindowTitle(("Form"))
+        self.formGroupBox.setTitle(("Stratified Folds"))
+        self.chooseDataToStratifyLabel.setText(("Choose data to stratify: "))
+        self.chooseVarLabel.setText(("Choose variable on which to sort: "))
+        self.nFoldsLabel.setText(("N Folds"))
+        self.testFoldsLabel.setText(("Test Fold"))
 
 
 if __name__ == "__main__":

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>698</width>
-    <height>856</height>
+    <width>808</width>
+    <height>637</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,8 +25,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>678</width>
-         <height>764</height>
+         <width>788</width>
+         <height>442</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -38,9 +38,34 @@
      </widget>
     </item>
     <item>
+     <widget class="QTextBrowser" name="textBrowser">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>97</height>
+       </size>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Console window&lt;/p&gt;&lt;p&gt;This window gives you information about your running module&lt;/p&gt;&lt;p&gt;Errors will also show up here, if they occur&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </item>
+    <item>
      <layout class="QHBoxLayout" name="progress_OK">
       <item>
        <widget class="QProgressBar" name="progressBar">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Your current progression.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
         <property name="value">
          <number>0</number>
         </property>
@@ -50,7 +75,30 @@
        </widget>
       </item>
       <item>
+       <widget class="QPushButton" name="undoModulePushButton">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Undo your last ran module&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="text">
+         <string>Undo Module</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="stopPushButton">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Completely stop the module&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="text">
+         <string>Stop Module</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="deleteModulePushButton">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Delete a module that has not been ran&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
         <property name="text">
          <string>Delete Module</string>
         </property>
@@ -58,6 +106,12 @@
       </item>
       <item>
        <widget class="QPushButton" name="okPushButton">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Press this button when you are ready to run the modules in your workflow&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="whatsThis">
+         <string>Press this button when you're ready to run. (Ctrl+Enter)</string>
+        </property>
         <property name="text">
          <string>OK</string>
         </property>
@@ -72,7 +126,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>698</width>
+     <width>808</width>
      <height>21</height>
     </rect>
    </property>
@@ -80,14 +134,14 @@
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionRead_ChemCam_Data"/>
     <addaction name="actionLoad_Data"/>
-    <addaction name="actionSet_Output_Path"/>
-    <addaction name="separator"/>
+    <addaction name="actionRename_Data"/>
     <addaction name="actionSave_Current_Data"/>
     <addaction name="separator"/>
+    <addaction name="actionSet_Output_Path"/>
+    <addaction name="actionRead_ChemCam_Data"/>
+    <addaction name="separator"/>
     <addaction name="actionCreate_New_Workflow"/>
-    <addaction name="actionOpen_Workflow"/>
     <addaction name="actionRestore_Workflow"/>
     <addaction name="actionSave_Current_Workflow"/>
     <addaction name="separator"/>
@@ -114,8 +168,8 @@
     </property>
     <addaction name="actionCross_Validation"/>
     <addaction name="actionTrain"/>
-    <addaction name="actionSubmodel_Predict"/>
     <addaction name="actionPredict"/>
+    <addaction name="actionSubmodel_Predict"/>
    </widget>
    <widget class="QMenu" name="menuVisualization">
     <property name="title">
@@ -129,13 +183,35 @@
     <property name="title">
      <string>Help</string>
     </property>
+    <widget class="QMenu" name="menuDebug">
+     <property name="title">
+      <string>Debug Mode</string>
+     </property>
+     <addaction name="actionOn"/>
+     <addaction name="actionOff"/>
+    </widget>
     <addaction name="actionAbout"/>
     <addaction name="actionAbout_Qt"/>
+    <addaction name="menuDebug"/>
+   </widget>
+   <widget class="QMenu" name="menuOptions">
+    <property name="title">
+     <string>Options</string>
+    </property>
+    <widget class="QMenu" name="menuDark_Mode">
+     <property name="title">
+      <string>Theme</string>
+     </property>
+     <addaction name="actionDefault"/>
+     <addaction name="actionQtmodern"/>
+    </widget>
+    <addaction name="menuDark_Mode"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuPreprocessing"/>
    <addaction name="menuRegression"/>
    <addaction name="menuVisualization"/>
+   <addaction name="menuOptions"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -236,7 +312,7 @@
   </action>
   <action name="actionTrain">
    <property name="text">
-    <string>Train</string>
+    <string>Regression Train</string>
    </property>
   </action>
   <action name="actionSubmodel_Predict">
@@ -246,7 +322,7 @@
   </action>
   <action name="actionPredict">
    <property name="text">
-    <string>Predict</string>
+    <string>Regression Predict</string>
    </property>
   </action>
   <action name="actionPlot">
@@ -277,6 +353,31 @@
   <action name="actionOpen_Workflow">
    <property name="text">
     <string>Open Workflow</string>
+   </property>
+  </action>
+  <action name="actionOn">
+   <property name="text">
+    <string>On</string>
+   </property>
+  </action>
+  <action name="actionOff">
+   <property name="text">
+    <string>Off</string>
+   </property>
+  </action>
+  <action name="actionRename_Data">
+   <property name="text">
+    <string>Rename Data</string>
+   </property>
+  </action>
+  <action name="actionQtmodern">
+   <property name="text">
+    <string>qtmodern</string>
+   </property>
+  </action>
+  <action name="actionDefault">
+   <property name="text">
+    <string>Default</string>
    </property>
   </action>
  </widget>
