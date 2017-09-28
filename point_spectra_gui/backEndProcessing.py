@@ -405,6 +405,12 @@ class backEndProc(QThread):
                     coef[('meta', 'Model')] = modelkey
 
                     try:
+                        coef[('meta','intercept')]=self.models[modelkey].model.intercept_
+                    except:
+                        pass
+
+
+                    try:
                         self.data['Model Coefficients'] = spectral_data(
                             pd.concat([self.data['Model Coefficients'].df, coef]))
                     except:

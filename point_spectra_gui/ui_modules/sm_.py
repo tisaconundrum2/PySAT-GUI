@@ -215,9 +215,9 @@ class sm_:
         self.submodel_predict.setObjectName("self.submodel_predict")
 
         # put submodel objects in a list
-        self.submodel_gui_info = [[self.choose_low_model, [-9999, self.low_model_max]],
-                                  [self.choose_high_model, [self.high_model_min, 9999]],
-                                  [self.choosemodel, [-9999, 9999]]]
+        self.submodel_gui_info = [[self.choose_low_model, [-999999, self.low_model_max]],
+                                  [self.choose_high_model, [self.high_model_min, 999999]],
+                                  [self.choosemodel, [-999999, 999999]]]
 
         self.submodel_predict.setTitle("Submodel - Predict")
         self.choosemodel_label.setText("Choose reference model:")

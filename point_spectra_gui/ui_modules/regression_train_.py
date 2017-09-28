@@ -83,6 +83,7 @@ class regression_train_:
                           'selection': 'random',
                           'CV': self.lasso.optimizeWCrossValidaitonCheckBox.isChecked()}
                 self.lasso.alphaDoubleSpinBox.setDisabled(params['CV'])
+                modelkey = modelkey + str(params)
                 print(params)
 
             if method == 'Elastic Net':
@@ -111,6 +112,7 @@ class regression_train_:
                           'CV': self.elastic_net.crossValidateCheckBox.isChecked()}
                 self.elastic_net.alphaDoubleSpinBox.setDisabled(params['CV'])
                 self.elastic_net.l1RatioDoubleSpinBox.setDisabled(params['CV'])
+                modelkey = modelkey + str(params)
                 print(params)
 
             if method == 'Ridge':
@@ -135,6 +137,7 @@ class regression_train_:
                           'tol': self.ridge.toleranceDoubleSpinBox.value(),
                           'random_state': r_state}
 
+                modelkey = modelkey + str(params)
                 print(params)
 
             if method == 'Bayesian Ridge':
@@ -149,6 +152,7 @@ class regression_train_:
                           'normalize': self.br.normalizeCheckBox.isChecked(),
                           'copy_X': self.br.copyXCheckBox.isChecked(),
                           'verbose': self.br.verboseCheckBox.isChecked()}
+                modelkey = modelkey + str(params)
                 print(params)
 
             if method == 'ARD':
@@ -164,6 +168,7 @@ class regression_train_:
                           'normalize': self.ard.normalizeCheckBox.isChecked(),
                           'copy_X': self.ard.copyXCheckBox.isChecked(),
                           'verbose': self.ard.verboseCheckBox.isChecked()}
+                modelkey = modelkey + str(params)
                 print(params)
 
             if method == 'LARS':
@@ -179,6 +184,7 @@ class regression_train_:
                           'CV': self.lars.crossValidateCheckBox.isChecked()}
                 self.lars.numOfNonzeroCoeffsSpinBox.setDisabled(params['CV'])
                 self.lars.fitPathCheckBox.setDisabled(params['CV'])
+                modelkey = modelkey + str(params)
                 print(params)
 
             if method == 'Lasso LARS':
@@ -197,6 +203,7 @@ class regression_train_:
                           'eps': self.lassoLARS.epsDoubleSpinBox.value(),
                           'fit_path': self.lassoLARS.fitInterceptCheckBox.isChecked(),
                           'model': self.lassoLARS.modelComboBox.currentIndex()}
+                modelkey = modelkey + str(params)
                 print(params)
 
             if method == 'SVR':
@@ -213,6 +220,7 @@ class regression_train_:
                           'cache_size': self.svr.cacheSizeSpinBox.value(),
                           'verbose': self.svr.verboseCheckBox.isChecked(),
                           'max_iter': int(self.svr.maxIterationsSpinBox.value())}
+                modelkey = modelkey + str(params)
                 print(params)
 
             if method == 'KRR':
@@ -223,6 +231,7 @@ class regression_train_:
                           'degree': self.krr.degreeDoubleSpinBox.value(),
                           'coef0': self.krr.coeff0DoubleSpinBox.value(),
                           'kernel_params': k_attrib[self.krr.kernelParametersLineEdit.text()]}
+                modelkey = modelkey + str(params)
                 print(params)
 
             if method == 'PLS':
