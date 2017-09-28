@@ -2,14 +2,16 @@ import multiprocessing as mp
 import os.path
 import sys
 import time
+import warnings
 
 try:
     import qtmodern.styles
+
     q = True
 except:
     q = False
-    sys.stderr.write("Missing qtmodern package")
-    pass
+    warnings.warn("You're missing the qtmodern package."
+                  "to install it use pip install qtmodern")
 from PyQt5 import QtGui
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import *
@@ -19,14 +21,23 @@ from PyQt5.QtWidgets import *
 from point_spectra_gui.functions import MainWindow
 from point_spectra_gui.util.excepthook import my_exception_hook
 
+theme = False
+
 
 def new():
     p = mp.Process(target=main, args=())
     p.start()
 
 
+def darkmode():
+    global theme, q
+    theme = True
+    new()
+
+
 def connectWidgets(ui):
     ui.actionCreate_New_Workflow.triggered.connect(lambda: new())
+    ui.actionQtmodern.triggered.connect(lambda: darkmode())
 
 
 def get_splash(app):
@@ -54,7 +65,7 @@ def main():
 
     app = QtWidgets.QApplication(sys.argv)
     get_splash(app)
-    if q:
+    if q and theme:
         qtmodern.styles.dark(app)
     mainWindow = QtWidgets.QMainWindow()
     ui = MainWindow.Ui_MainWindow()
