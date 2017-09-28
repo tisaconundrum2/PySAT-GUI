@@ -118,7 +118,7 @@ class Qtickle(object):
                     name = obj.objectName()
                     value = dict[name]
                     if value is not None:
-                        obj.setValue(int(value))
+                        obj.setValue(float(value))
 
                 if isinstance(obj, QLabel):
                     name = obj.objectName()
