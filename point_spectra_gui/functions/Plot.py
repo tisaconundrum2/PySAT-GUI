@@ -9,7 +9,6 @@ from point_spectra_gui.util.BasicFunctionality import Basics
 class Plot(Ui_Form, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
-        self.checkMinAndMax()
         self.connectWidgets()
 
     def get_widget(self):
@@ -39,7 +38,12 @@ class Plot(Ui_Form, Basics):
         self.markerComboBox.addItem("Triangle Right")
         self.markerComboBox.addItem("None")
         self.alphaDoubleSpinBox.setValue(0.25)
+        self.alphaDoubleSpinBox.setSingleStep(0.25)
         self.alphaDoubleSpinBox.setMaximum(1)
+        self.xMinDoubleSpinBox.setMaximum(110)
+        self.xMaxDoubleSpinBox.setMaximum(110)
+        self.yMinDoubleSpinBox.setMaximum(110)
+        self.yMaxDoubleSpinBox.setMaximum(110)
         self.plotFilenamePushButton.clicked.connect(self.on_plotFilenamePushButton_clicked)
 
         self.chooseDataComboBox.activated[int].connect(
