@@ -3,6 +3,7 @@ from PyQt5 import QtWidgets
 from pysat.regression import cv
 from pysat.spectral.spectral_data import spectral_data
 
+from Qtickle import Qtickle
 from point_spectra_gui.functions.regressionMethods import *
 from point_spectra_gui.ui.CrossValidation import Ui_Form
 from point_spectra_gui.util.BasicFunctionality import Basics
@@ -45,6 +46,24 @@ class CrossValidation(Ui_Form, Basics):
         self.chooseDataComboBox.currentIndexChanged.connect(
             lambda: self.changeComboListVars(self.xVariableList, self.xvar_choices()))
 
+    def getGuiParams(self):
+        """
+        Overriding Basics' getGuiParams, because I'll need to do a list of lists
+        in order to obtain the regressionMethods' parameters
+        """
+        self.qt = Qtickle.Qtickle(self)
+        s = []
+        s.append(self.qt.guiSave())
+        for items in self.alg:
+            s.append(items.getGuiParams())
+        return s
+
+    def setGuiParams(self, dict):
+        self.qt = Qtickle.Qtickle(self)
+        self.qt.guiRestore(dict[0])
+        for i in range(len(dict)):
+            self.alg[i - 1].setGuiParams(dict[i])
+
     def isEnabled(self):
         return self.get_widget().isEnabled()
 
@@ -60,7 +79,6 @@ class CrossValidation(Ui_Form, Basics):
         params, modelkey = self.getMethodParams(self.chooseAlgorithmComboBox.currentIndex())
         modelkey = method + ' - ' + str(yvars[0][-1]) + ' (' + str(yrange[0]) + '-' + str(yrange[1]) + ') '
         print(params, modelkey)
-
 
         try:
             y = np.array(self.data[datakey].df[yvars])
