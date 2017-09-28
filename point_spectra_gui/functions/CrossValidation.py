@@ -4,7 +4,7 @@ from pysat.regression import cv
 from pysat.spectral.spectral_data import spectral_data
 
 from Qtickle import Qtickle
-from point_spectra_gui.functions.regressionMethods import *
+from point_spectra_gui.functions.crossValidateMethods import *
 from point_spectra_gui.ui.CrossValidation import Ui_Form
 from point_spectra_gui.util.BasicFunctionality import Basics
 
