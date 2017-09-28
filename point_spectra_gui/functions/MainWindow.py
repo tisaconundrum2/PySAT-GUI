@@ -34,6 +34,8 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
 
     def setupUi(self, MainWindow):
         super().setupUi(MainWindow)  # Run the basic window UI
+        self.MainWindow = MainWindow
+        self.winTitle = self.MainWindow.windowTitle()
         self.menu_item_shortcuts()  # set up the shortcuts
         self.connectWidgets()
         self.normal_mode()
@@ -209,6 +211,7 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
             print(filename)
             with open(filename, 'wb') as fp:
                 pickle.dump(self.getWidgetItems(), fp)
+            self.MainWindow.setWindowTitle(self.winTitle + " - " + filename.split('/')[-1])
         except Exception as e:
             print("File not loaded {}".format(e))
 
@@ -221,6 +224,7 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
             print(filename)
             with open(filename, 'rb') as fp:
                 self.setWidgetItems(pickle.load(fp))
+            self.MainWindow.setWindowTitle(self.winTitle + " - " + filename.split('/')[-1])
         except Exception as e:
             print("File not loaded: {}".format(e))
 
