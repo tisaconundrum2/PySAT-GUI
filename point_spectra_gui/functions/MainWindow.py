@@ -1,7 +1,22 @@
+import multiprocessing as mp
+import os.path
+import warnings
 import pickle
 import sys
 import time
 
+try:
+    import qtmodern.styles
+
+    q = True
+except:
+    q = False
+    warnings.warn("You're missing the qtmodern package."
+                  "to install it use pip install qtmodern")
+
+from PyQt5.QtCore import *
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtWidgets import *
 from PyQt5 import QtCore, QtWidgets, QtGui
 from PyQt5.QtCore import QSettings
 
@@ -9,6 +24,7 @@ from point_spectra_gui import functions
 from point_spectra_gui.ui import MainWindow
 from point_spectra_gui.util import delete
 from point_spectra_gui.util.BasicFunctionality import Basics
+from point_spectra_gui.util.excepthook import my_exception_hook
 
 
 class EmittingStream(QtCore.QObject):
@@ -57,14 +73,12 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         super().__init__()
         self.widgetList = []
         self.leftOff = 0
-        self.settings = QSettings(QSettings.IniFormat, QSettings.SystemScope, 'USGS', 'settings')
-        self.settings.setFallbacksEnabled(False)  # File only, not registry or or.
-        self.settings.setPath(QSettings.IniFormat, QSettings.SystemScope, './settings.ini')
 
     def setupUi(self, MainWindow):
         super().setupUi(MainWindow)  # Run the basic window UI
         self.MainWindow = MainWindow
         self.title = TitleWindow(self.MainWindow.windowTitle())
+        if self.settings.value("debug"): self.debug_mode()
         self.menu_item_shortcuts()  # set up the shortcuts
         self.connectWidgets()
         self.normal_mode()
@@ -76,6 +90,7 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         self.actionOn.setDisabled(False)
         self.actionOff.setDisabled(True)
         self.debug = False
+        self.settings.setValue("debug", self.debug)
         self.title.setDebugName(self.debug)
         self.MainWindow.setWindowTitle(self.title.display())
 
@@ -85,6 +100,7 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         self.actionOn.setDisabled(True)
         self.actionOff.setDisabled(False)
         self.debug = True
+        self.settings.setValue("debug", self.debug)
         self.title.setDebugName(self.debug)
         self.MainWindow.setWindowTitle(self.title.display())
 
@@ -172,6 +188,7 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
                 lambda: self.addWidget(functions.StratifiedFolds.StratifiedFolds))
             self.actionSubmodel_Predict.triggered.connect(
                 lambda: self.addWidget(functions.SubmodelPredict.SubmodelPredict))
+            self.actionCreate_New_Workflow.triggered.connect(self.new)
             self.actionSave_Current_Workflow.triggered.connect(self.on_save_clicked)
             self.actionRestore_Workflow.triggered.connect(self.on_restore_clicked)
             self.deleteModulePushButton.clicked.connect(self.on_delete_module_clicked)
@@ -303,6 +320,10 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         self.progressBar.setRange(0, 1)  # stop the bar pulsing green
         self.progressBar.setValue(1)  # displays 100% after process is finished.
 
+    def new(self):
+        p = mp.Process(target=main, args=())
+        p.start()
+
     def run(self):
         if self.debug:
             for modules in range(self.leftOff, len(self.widgetList)):
@@ -336,10 +357,33 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
                 self.taskFinished.emit()
 
 
+def get_splash(app):
+    """
+    Get the splash screen for the application
+    But check to see if the image even exists
+    :param app:
+    :return:
+    """
+    dir = '../images/'
+    if os.path.exists(dir + 'splash.png'):
+        splash_pix = QPixmap(dir + 'splash.png')  # default
+        app_icon = QtGui.QIcon(dir + 'icon.png')
+        app.setWindowIcon(app_icon)
+        splash = QSplashScreen(splash_pix, Qt.WindowStaysOnTopHint)
+        splash.setMask(splash_pix.mask())
+        splash.show()
+        time.sleep(0.5)
+        app.processEvents()
+
+
 def main():
+    sys._excepthook = sys.excepthook
+    sys.excepthook = my_exception_hook
+
     app = QtWidgets.QApplication(sys.argv)
+    get_splash(app)
     mainWindow = QtWidgets.QMainWindow()
-    ui = MainWindow.Ui_MainWindow()
+    ui = Ui_MainWindow()
     ui.setupUi(mainWindow)
     mainWindow.show()
     sys.exit(app.exec_())
