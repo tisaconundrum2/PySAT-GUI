@@ -2,7 +2,7 @@ import inspect
 import sys
 
 from PyQt5.QtWidgets import *
-
+from PyQt5.QtCore import QSettings
 from Qtickle import Qtickle
 
 
@@ -35,8 +35,10 @@ class Basics:
     models = {}  # For regression training
     model_xvars = {}
     model_yvars = {}
+
     def __init__(self):
         self.qt = Qtickle.Qtickle(self)
+        self.settings = QSettings('USGS', 'settings')
 
     def setupUi(self, Form):
         """
@@ -79,7 +81,6 @@ class Basics:
     def setGuiParams(self, dict):
         self.qt = Qtickle.Qtickle(self)
         self.qt.guiRestore(dict)
-
 
     def function(self):
         """
