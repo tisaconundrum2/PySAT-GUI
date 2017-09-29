@@ -32,6 +32,7 @@ class Basics:
     modelkeys = []
     outpath = './'  # Default outpath; can be changed with OutputFolder.py
     figs = {}
+    figname = ['Select a Figure or type a new one']
     models = {}  # For regression training
     model_xvars = {}
     model_yvars = {}
