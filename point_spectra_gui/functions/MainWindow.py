@@ -77,11 +77,15 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
     def setupUi(self, MainWindow):
         super().setupUi(MainWindow)  # Run the basic window UI
         self.MainWindow = MainWindow
+        self.MainWindow.closeEvent = self.closeEvent
         self.title = TitleWindow(self.MainWindow.windowTitle())
-        if self.settings.value("debug"): self.debug_mode()
+        self._readAndApplyWindowAttributeSettings()
         self.menu_item_shortcuts()  # set up the shortcuts
         self.connectWidgets()
-        self.normal_mode()
+        if self.settings.value("debug") == 'true':
+            self.debug_mode()
+        else:
+            self.normal_mode()
 
     def normal_mode(self):
         sys.stdout = EmittingStream(textWritten=self.normalOutputWritten)
@@ -201,17 +205,15 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
             self.stopPushButton.clicked.connect(self.on_stopButton_clicked)
             self.actionOn.triggered.connect(self.debug_mode)
             self.actionOff.triggered.connect(self.normal_mode)
-            self.actionExit.triggered.connect(lambda: sys.exit())
+            self.actionExit.triggered.connect(self.MainWindow.close)
 
         except Exception as e:
             print(e)
 
-    def closeEvent(self, e):
+    def closeEvent(self, event):
         # Write window size and position to config file
-        print("Closing application")
-        self.settings.setValue("size", self.size())
-        self.settings.setValue("pos", self.pos())
-        e.accept()
+        self._writeWindowAttributeSettings()
+        event.accept()
 
     def getWidgetItems(self):
         """
@@ -314,6 +316,39 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
             self.taskFinished.emit()
         else:
             print("There is nothing running right now")
+
+    def _writeWindowAttributeSettings(self):
+        '''
+        Save window attributes as settings.
+
+        Called when window moved, resized, or closed.
+        '''
+        self.settings.beginGroup("mainWindow")
+        self.settings.setValue("pos", self.MainWindow.pos())
+        self.settings.setValue("maximized", self.MainWindow.isMaximized())
+        if not self.MainWindow.isMaximized():
+            self.settings.setValue("size", self.MainWindow.size())
+
+        self.settings.endGroup()
+
+    def _readAndApplyWindowAttributeSettings(self):
+        '''
+        Read window attributes from settings,
+        using current attributes as defaults (if settings not exist.)
+
+        Called at QMainWindow initialization, before show().
+        '''
+        self.settings.beginGroup("mainWindow")
+        # No need for toPoint, etc. : PySide converts types
+        try:
+            self.MainWindow.move(self.settings.value("pos"))
+            if self.settings.value("maximized") in 'true':
+                self.MainWindow.showMaximized()
+            else:
+                self.MainWindow.resize(self.settings.value("size"))
+        except:
+            pass
+        self.settings.endGroup()
 
     def onStart(self):  # onStart function
         self.progressBar.setRange(0, 0)  # make the bar pulse green
