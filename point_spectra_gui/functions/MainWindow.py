@@ -188,6 +188,10 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
                 lambda: self.addWidget(functions.StratifiedFolds.StratifiedFolds))
             self.actionSubmodel_Predict.triggered.connect(
                 lambda: self.addWidget(functions.SubmodelPredict.SubmodelPredict))
+            self.actionQtmodern.triggered.connect(
+                lambda: self.settings.setValue('theme', 'qtmodern'))
+            self.actionDefault.triggered.connect(
+                lambda: self.settings.setValue('theme', 'default'))
             self.actionCreate_New_Workflow.triggered.connect(self.new)
             self.actionSave_Current_Workflow.triggered.connect(self.on_save_clicked)
             self.actionRestore_Workflow.triggered.connect(self.on_restore_clicked)
@@ -376,12 +380,19 @@ def get_splash(app):
         app.processEvents()
 
 
+def setDarkmode(app):
+    settings = QSettings('config.ini', QSettings.IniFormat)
+    p = settings.value('theme') == 'qtmodern'
+    if q and p:
+        qtmodern.styles.dark(app)
+
+
 def main():
     sys._excepthook = sys.excepthook
     sys.excepthook = my_exception_hook
-
     app = QtWidgets.QApplication(sys.argv)
     get_splash(app)
+    setDarkmode(app)
     mainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(mainWindow)
