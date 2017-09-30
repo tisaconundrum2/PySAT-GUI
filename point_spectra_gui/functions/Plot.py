@@ -149,12 +149,11 @@ class Plot(Ui_Form, Basics):
             x = self.data[datakey].df[xvar]
             y = self.data[datakey].df[yvar]
         except:
-            x = self.data[datakey][xvar]
-            y = self.data[datakey][yvar]
-        try:
+            x = self.data[datakey]['cv'][xvar]
+            y = self.data[datakey]['cv'][yvar]
+        loadfig = None
+        if figname in self.figs:
             loadfig = self.figs[figname]
-        except:
-            loadfig = None
 
         figpath = self.plotFilenameLineEdit.text()
         if self.plotFilenameLineEdit.text() == "" or self.plotFilenameLineEdit.text() == "*.png":
