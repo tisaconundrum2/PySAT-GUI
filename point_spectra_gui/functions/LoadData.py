@@ -28,13 +28,9 @@ class LoadData(Ui_loadData, Basics):
         params = self.getGuiParams()
         filename = params['fileNameLineEdit']
         keyname = params['dataSetNameLineEdit']
-        try:
-            print('Loading data file: ' + str(filename))
-            self.datakeys.append(keyname)
-            self.data[keyname] = spectral_data(pd.read_csv(filename, header=[0, 1], verbose=True))
-
-        except Exception as e:
-            print('Problem reading data: {}'.format(e))
+        print('Loading data file: ' + str(filename))
+        self.datakeys.append(keyname)
+        self.data[keyname] = spectral_data(pd.read_csv(filename, header=[0, 1], verbose=True))
 
     def isEnabled(self):
         return self.get_widget().isEnabled()
