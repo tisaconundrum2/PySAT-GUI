@@ -87,6 +87,7 @@ class PlotSpectra(Ui_Form, Basics):
         figname = self.figureNameLineEdit.text()
         title = self.plotTitleLineEdit.text()
         figfile = self.plotFilenameLineEdit.text()
+        figpath, figfile = '/'.join(figfile.split('/')[:-1]), figfile.split('/')[-1]
         color = self.colorComboBox.currentText()
         alpha = self.alphaDoubleSpinBox.value()
         linewidth = self.lineWidthDoubleSpinBox.value()
@@ -135,7 +136,7 @@ class PlotSpectra(Ui_Form, Basics):
         except:
             loadfig = None
 
-        self.figs[figname] = make_plot(x, y, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
+        self.figs[figname] = make_plot(x, y, figpath=figpath, figfile=figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
                                        ytitle=ytitle, title=title,
                                        lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
                                        annot_mask=annot_mask, cmap=cmap,
