@@ -31,11 +31,8 @@ class MaskData(Ui_Form, Basics):
     def function(self):
         datakey = self.chooseDataComboBox.currentText()
         maskfile = self.maskFileLineEdit.text()
-        try:
-            self.data[datakey].mask(maskfile)
-            print("Mask applied")
-        except Exception as e:
-            print(e)
+        self.data[datakey].mask(maskfile)
+        print("Mask applied")
 
 
 if __name__ == "__main__":

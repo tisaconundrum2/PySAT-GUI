@@ -1,7 +1,22 @@
+import multiprocessing as mp
+import os.path
+import warnings
 import pickle
 import sys
 import time
 
+try:
+    import qtmodern.styles
+
+    q = True
+except:
+    q = False
+    warnings.warn("You're missing the qtmodern package."
+                  "to install it use pip install qtmodern")
+
+from PyQt5.QtCore import *
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtWidgets import *
 from PyQt5 import QtCore, QtWidgets, QtGui
 from PyQt5.QtCore import QSettings
 
@@ -9,6 +24,7 @@ from point_spectra_gui import functions
 from point_spectra_gui.ui import MainWindow
 from point_spectra_gui.util import delete
 from point_spectra_gui.util.BasicFunctionality import Basics
+from point_spectra_gui.util.excepthook import my_exception_hook
 
 
 class EmittingStream(QtCore.QObject):
@@ -21,6 +37,35 @@ class EmittingStream(QtCore.QObject):
         pass
 
 
+class TitleWindow:
+    def __init__(self, mainName):
+        self.mainName = mainName
+        self.fileName = ''
+        self.debugName = ''
+
+    def setMainName(self, name):
+        self.mainName = name
+
+    def setFileName(self, name):
+        self.fileName = name
+
+    def setDebugName(self, bool):
+        if bool:
+            self.debugName = "Debug Mode"
+        else:
+            self.debugName = ''
+
+    def display(self):
+        if self.fileName == '' and self.debugName == '':
+            return "{}".format(self.mainName)
+        elif self.fileName == '':
+            return "{} - {}".format(self.mainName, self.debugName)
+        elif self.debugName == '':
+            return "{} - {}".format(self.mainName, self.fileName)
+        else:
+            return "{} - {} - {}".format(self.mainName, self.fileName, self.debugName)
+
+
 class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
     taskFinished = QtCore.pyqtSignal()
 
@@ -28,15 +73,19 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         super().__init__()
         self.widgetList = []
         self.leftOff = 0
-        self.settings = QSettings(QSettings.IniFormat, QSettings.SystemScope, 'USGS', 'settings')
-        self.settings.setFallbacksEnabled(False)  # File only, not registry or or.
-        self.settings.setPath(QSettings.IniFormat, QSettings.SystemScope, './settings.ini')
 
     def setupUi(self, MainWindow):
         super().setupUi(MainWindow)  # Run the basic window UI
+        self.MainWindow = MainWindow
+        self.MainWindow.closeEvent = self.closeEvent
+        self.title = TitleWindow(self.MainWindow.windowTitle())
+        self._readAndApplyWindowAttributeSettings()
         self.menu_item_shortcuts()  # set up the shortcuts
         self.connectWidgets()
-        self.normal_mode()
+        if self.settings.value("debug") == 'true':
+            self.debug_mode()
+        else:
+            self.normal_mode()
 
     def normal_mode(self):
         sys.stdout = EmittingStream(textWritten=self.normalOutputWritten)
@@ -44,12 +93,20 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         # sys.stderr = EmittingStream(textWritten=self.normalOutputWritten)
         self.actionOn.setDisabled(False)
         self.actionOff.setDisabled(True)
+        self.debug = False
+        self.settings.setValue("debug", self.debug)
+        self.title.setDebugName(self.debug)
+        self.MainWindow.setWindowTitle(self.title.display())
 
     def debug_mode(self):
         # Restore sys.stdout
         sys.stdout = sys.__stdout__
         self.actionOn.setDisabled(True)
         self.actionOff.setDisabled(False)
+        self.debug = True
+        self.settings.setValue("debug", self.debug)
+        self.title.setDebugName(self.debug)
+        self.MainWindow.setWindowTitle(self.title.display())
 
     def normalOutputWritten(self, text):
         """Append text to the QTextEdit."""
@@ -135,6 +192,11 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
                 lambda: self.addWidget(functions.StratifiedFolds.StratifiedFolds))
             self.actionSubmodel_Predict.triggered.connect(
                 lambda: self.addWidget(functions.SubmodelPredict.SubmodelPredict))
+            self.actionQtmodern.triggered.connect(
+                lambda: self.settings.setValue('theme', 'qtmodern'))
+            self.actionDefault.triggered.connect(
+                lambda: self.settings.setValue('theme', 'default'))
+            self.actionCreate_New_Workflow.triggered.connect(self.new)
             self.actionSave_Current_Workflow.triggered.connect(self.on_save_clicked)
             self.actionRestore_Workflow.triggered.connect(self.on_restore_clicked)
             self.deleteModulePushButton.clicked.connect(self.on_delete_module_clicked)
@@ -143,17 +205,15 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
             self.stopPushButton.clicked.connect(self.on_stopButton_clicked)
             self.actionOn.triggered.connect(self.debug_mode)
             self.actionOff.triggered.connect(self.normal_mode)
-            self.actionExit.triggered.connect(lambda: sys.exit())
+            self.actionExit.triggered.connect(self.MainWindow.close)
 
         except Exception as e:
             print(e)
 
-    def closeEvent(self, e):
+    def closeEvent(self, event):
         # Write window size and position to config file
-        print("Closing application")
-        self.settings.setValue("size", self.size())
-        self.settings.setValue("pos", self.pos())
-        e.accept()
+        self._writeWindowAttributeSettings()
+        event.accept()
 
     def getWidgetItems(self):
         """
@@ -194,7 +254,7 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
             self.addWidget(getattr(getattr(functions, f_items), f_items))
 
         for i in range(1, len(dict)):
-            self.widgetList[i-1].setGuiParams(dict[i])
+            self.widgetList[i - 1].setGuiParams(dict[i])
 
     def on_save_clicked(self):
         """
@@ -209,6 +269,8 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
             print(filename)
             with open(filename, 'wb') as fp:
                 pickle.dump(self.getWidgetItems(), fp)
+            self.title.setFileName(filename.split('/')[-1])
+            self.MainWindow.setWindowTitle(self.title.display())
         except Exception as e:
             print("File not loaded {}".format(e))
 
@@ -221,6 +283,8 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
             print(filename)
             with open(filename, 'rb') as fp:
                 self.setWidgetItems(pickle.load(fp))
+            self.title.setFileName(filename.split('/')[-1])
+            self.MainWindow.setWindowTitle(self.title.display())
         except Exception as e:
             print("File not loaded: {}".format(e))
 
@@ -253,6 +317,39 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         else:
             print("There is nothing running right now")
 
+    def _writeWindowAttributeSettings(self):
+        '''
+        Save window attributes as settings.
+
+        Called when window moved, resized, or closed.
+        '''
+        self.settings.beginGroup("mainWindow")
+        self.settings.setValue("pos", self.MainWindow.pos())
+        self.settings.setValue("maximized", self.MainWindow.isMaximized())
+        if not self.MainWindow.isMaximized():
+            self.settings.setValue("size", self.MainWindow.size())
+
+        self.settings.endGroup()
+
+    def _readAndApplyWindowAttributeSettings(self):
+        '''
+        Read window attributes from settings,
+        using current attributes as defaults (if settings not exist.)
+
+        Called at QMainWindow initialization, before show().
+        '''
+        self.settings.beginGroup("mainWindow")
+        # No need for toPoint, etc. : PySide converts types
+        try:
+            self.MainWindow.move(self.settings.value("pos"))
+            if self.settings.value("maximized") in 'true':
+                self.MainWindow.showMaximized()
+            else:
+                self.MainWindow.resize(self.settings.value("size"))
+        except:
+            pass
+        self.settings.endGroup()
+
     def onStart(self):  # onStart function
         self.progressBar.setRange(0, 0)  # make the bar pulse green
         self.start()  # TaskThread.start()
@@ -262,8 +359,12 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         self.progressBar.setRange(0, 1)  # stop the bar pulsing green
         self.progressBar.setValue(1)  # displays 100% after process is finished.
 
+    def new(self):
+        p = mp.Process(target=main, args=())
+        p.start()
+
     def run(self):
-        try:
+        if self.debug:
             for modules in range(self.leftOff, len(self.widgetList)):
                 name_ = type(self.widgetList[modules]).__name__
                 s = time.time()
@@ -275,16 +376,60 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
                 self.widgetList[modules].setDisabled(True)
                 self.leftOff = modules + 1
             self.taskFinished.emit()
-        except Exception as e:
-            print("Your module broke: please fix.", e)
-            self.widgetList[self.leftOff].setDisabled(False)
-            self.taskFinished.emit()
+
+        else:
+            try:
+                for modules in range(self.leftOff, len(self.widgetList)):
+                    name_ = type(self.widgetList[modules]).__name__
+                    s = time.time()
+                    print("{} Module is Running...".format(name_))
+                    self.widgetList[modules].setProgressBar(self.progressBar)
+                    self.widgetList[modules].function()
+                    e = time.time()
+                    print("Module {} executed in: {} seconds".format(name_, e - s))
+                    self.widgetList[modules].setDisabled(True)
+                    self.leftOff = modules + 1
+                self.taskFinished.emit()
+            except Exception as e:
+                print("Your module broke: please fix.", e)
+                self.widgetList[self.leftOff].setDisabled(False)
+                self.taskFinished.emit()
+
+
+def get_splash(app):
+    """
+    Get the splash screen for the application
+    But check to see if the image even exists
+    :param app:
+    :return:
+    """
+    dir = '../images/'
+    if os.path.exists(dir + 'splash.png'):
+        splash_pix = QPixmap(dir + 'splash.png')  # default
+        app_icon = QtGui.QIcon(dir + 'icon.png')
+        app.setWindowIcon(app_icon)
+        splash = QSplashScreen(splash_pix, Qt.WindowStaysOnTopHint)
+        splash.setMask(splash_pix.mask())
+        splash.show()
+        time.sleep(0.5)
+        app.processEvents()
+
+
+def setDarkmode(app):
+    settings = QSettings('config.ini', QSettings.IniFormat)
+    p = settings.value('theme') == 'qtmodern'
+    if q and p:
+        qtmodern.styles.dark(app)
 
 
 def main():
+    sys._excepthook = sys.excepthook
+    sys.excepthook = my_exception_hook
     app = QtWidgets.QApplication(sys.argv)
+    get_splash(app)
+    setDarkmode(app)
     mainWindow = QtWidgets.QMainWindow()
-    ui = MainWindow.Ui_MainWindow()
+    ui = Ui_MainWindow()
     ui.setupUi(mainWindow)
     mainWindow.show()
     sys.exit(app.exec_())

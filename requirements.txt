@@ -1,3 +1,4 @@
+qtmodern
 wheel
 pvl
 matplotlib

@@ -222,9 +222,9 @@ class Ui_Form(object):
         self.Normalization.addLayout(self.waveLengthLayout)
         self.addDelRangeLayout = QtWidgets.QHBoxLayout()
         self.addDelRangeLayout.setObjectName("addDelRangeLayout")
-        self.label = QtWidgets.QLabel(self.groupBox)
-        self.label.setObjectName("label")
-        self.addDelRangeLayout.addWidget(self.label)
+        self.nRangesLabel = QtWidgets.QLabel(self.groupBox)
+        self.nRangesLabel.setObjectName("nRangesLabel")
+        self.addDelRangeLayout.addWidget(self.nRangesLabel)
         self.rangeCountSpinBox = QtWidgets.QSpinBox(self.groupBox)
         self.rangeCountSpinBox.setMaximum(14)
         self.rangeCountSpinBox.setObjectName("rangeCountSpinBox")
@@ -271,7 +271,7 @@ class Ui_Form(object):
         self.maximumWavelengthLabel_14.setText(("Maximum wavelength"))
         self.minimumWavelengthLabel_15.setText(("Minimum wavelength"))
         self.maximumWavelengthLabel_15.setText(("Maximum wavelength"))
-        self.label.setText(("Number of wavelengths:"))
+        self.nRangesLabel.setText(("Number of Ranges:"))
 
 
 if __name__ == "__main__":
