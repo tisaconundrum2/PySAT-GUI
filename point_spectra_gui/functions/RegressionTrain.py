@@ -93,7 +93,7 @@ class RegressionTrain(Ui_Form, Basics):
         modelkey = "{} - {} - ({}, {}) {}".format(method, yvars[0][-1], yrange[0], yrange[1], params)
         self.modelkeys.append(modelkey)
         print(params, modelkey)
-        self.models[modelkey] = regression.regression([method], [params])
+        self.models[modelkey] = regression.regression([method], [yrange], [params])
         x = self.data[datakey].df[xvars]
         y = self.data[datakey].df[yvars]
         x = np.array(x)
@@ -109,13 +109,13 @@ class RegressionTrain(Ui_Form, Basics):
         coef.index = pd.MultiIndex.from_tuples(self.data[datakey].df[xvars].columns.values)
         coef = coef.T
         coef[('meta', 'Model')] = modelkey
+
         try:
-            self.data[modelkey] = spectral_data(pd.concat([self.data['Model Coefficients'].df, coef]))
-        except IndexError:
-            print("Error: Did you remember to select an X Variable and Y Variable?")
-            pass
+            self.data['Model Coefficients'] = spectral_data(
+                pd.concat([self.data['Model Coefficients'].df, coef]))
         except:
             self.data['Model Coefficients'] = spectral_data(coef)
+            self.datakeys.append('Model Coefficients')
 
     def yvar_choices(self):
         try:
