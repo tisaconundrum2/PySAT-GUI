@@ -41,8 +41,9 @@ class Plot_ICA_PCA(Ui_Form, Basics):
         else:
             colorvar = None
         filename = self.plotFilenameLineEdit.text()
+        figpath, figfile = '/'.join(filename.split('/')[:-1]), filename.split('/')[-1]
         pca_ica_plot(self.data[datakey], x_component, y_component, colorvar=colorvar, cmap=cmap, method=method,
-                     figpath=filename)
+                     figpath=figpath, figfile=figfile)
 
     def xychoices(self):
         try:

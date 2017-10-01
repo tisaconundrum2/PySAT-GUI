@@ -353,9 +353,9 @@
       <item>
        <layout class="QHBoxLayout" name="addDelRangeLayout">
         <item>
-         <widget class="QLabel" name="label">
+         <widget class="QLabel" name="nRangesLabel">
           <property name="text">
-           <string>Number of wavelengths:</string>
+           <string>Number of Ranges:</string>
           </property>
          </widget>
         </item>

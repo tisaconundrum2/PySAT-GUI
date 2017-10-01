@@ -151,15 +151,15 @@ class Plot(Ui_Form, Basics):
         except:
             x = self.data[datakey][xvar]
             y = self.data[datakey][yvar]
-        try:
+        loadfig = None
+        if figname in self.figs:
             loadfig = self.figs[figname]
-        except:
-            loadfig = None
 
         figpath = self.plotFilenameLineEdit.text()
+        figpath, figfile = '/'.join(figpath.split('/')[:-1]), figpath.split('/')[-1]
         if self.plotFilenameLineEdit.text() == "" or self.plotFilenameLineEdit.text() == "*.png":
-            figpath = self.outpath + '/' + figname
-        self.figs[figname] = make_plot(x, y, figpath, xrange=xrange, yrange=yrange, xtitle=xtitle,
+            figpath, figfile = self.outpath, figname
+        self.figs[figname] = make_plot(x, y, figpath, figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
                                        ytitle=ytitle, title=title,
                                        lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
                                        annot_mask=annot_mask, cmap=cmap,
@@ -222,7 +222,7 @@ if __name__ == "__main__":
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
-    
+
     Form = QtWidgets.QWidget()
     ui = Plot()
     ui.setupUi(Form)

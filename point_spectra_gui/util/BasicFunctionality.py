@@ -2,7 +2,7 @@ import inspect
 import sys
 
 from PyQt5.QtWidgets import *
-
+from PyQt5.QtCore import QSettings
 from Qtickle import Qtickle
 
 
@@ -32,11 +32,14 @@ class Basics:
     modelkeys = []
     outpath = './'  # Default outpath; can be changed with OutputFolder.py
     figs = {}
+    figname = ['Select a Figure or type a new one']
     models = {}  # For regression training
     model_xvars = {}
     model_yvars = {}
+
     def __init__(self):
         self.qt = Qtickle.Qtickle(self)
+        self.settings = QSettings('config.ini', QSettings.IniFormat)
 
     def setupUi(self, Form):
         """
@@ -79,7 +82,6 @@ class Basics:
     def setGuiParams(self, dict):
         self.qt = Qtickle.Qtickle(self)
         self.qt.guiRestore(dict)
-
 
     def function(self):
         """
