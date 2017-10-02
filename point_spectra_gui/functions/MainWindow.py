@@ -392,7 +392,6 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
                 name_ = type(self.widgetList[modules]).__name__
                 s = time.time()
                 print("{} Module is Running...".format(name_))
-                self.widgetList[modules].setProgressBar(self.progressBar)
                 self.widgetList[modules].function()
                 e = time.time()
                 print("Module {} executed in: {} seconds".format(name_, e - s))
@@ -406,7 +405,6 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
                     name_ = type(self.widgetList[modules]).__name__
                     s = time.time()
                     print("{} Module is Running...".format(name_))
-                    self.widgetList[modules].setProgressBar(self.progressBar)
                     self.widgetList[modules].function()
                     e = time.time()
                     print("Module {} executed in: {} seconds".format(name_, e - s))
