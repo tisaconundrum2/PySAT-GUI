@@ -88,6 +88,10 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
             self.normal_mode()
 
     def normal_mode(self):
+        """
+        Change the direction of stdout to print to the UI console instead
+        :return:
+        """
         sys.stdout = EmittingStream(textWritten=self.normalOutputWritten)
         sys.stderr = sys.__stderr__
         # sys.stderr = EmittingStream(textWritten=self.normalOutputWritten)
@@ -99,6 +103,10 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         self.MainWindow.setWindowTitle(self.title.display())
 
     def debug_mode(self):
+        """
+        Change the direction of stdout to print to the original console
+        :return:
+        """
         # Restore sys.stdout
         sys.stdout = sys.__stdout__
         self.actionOn.setDisabled(True)
@@ -121,9 +129,6 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         """
         Organize our widgets using a list
         Each widget is addressed separately due to being in a list
-        This makes deleting easier
-        In the future we will want to parse this list and pull
-        out necessary data
         :param obj:
         :return:
         """
@@ -275,6 +280,12 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
             print("File not loaded {}".format(e))
 
     def on_restore_clicked(self):
+        """
+        Choose a file
+        Set the file to be read
+        Pickle load our data and push it through the function setWidgetItems
+        :return:
+        """
         try:
             filename, _filter = QtWidgets.QFileDialog.getOpenFileName(None,
                                                                       "Open Workflow File",
@@ -289,6 +300,12 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
             print("File not loaded: {}".format(e))
 
     def on_delete_module_clicked(self):
+        """
+        Check to see if the last item is enabled
+        If it is, delete the last item in the list
+        And then call the del_layout function, which will remove the item from the UI
+        :return:
+        """
         try:
             if self.widgetList[-1].isEnabled():
                 del self.widgetList[-1]
@@ -303,6 +320,12 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         self.taskFinished.connect(self.onFinished)
 
     def on_undoButton_clicked(self):
+        """
+        Check to see if the last item in the list is enabled
+        subtract 1 from leftOff
+        enable the current leftOff item
+        :return:
+        """
         try:
             if not self.widgetList[-1].isEnabled():
                 self.leftOff -= 1
