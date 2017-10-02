@@ -93,7 +93,7 @@ class RegressionTrain(Ui_Form, Basics):
         modelkey = "{} - {} - ({}, {}) {}".format(method, yvars[0][-1], yrange[0], yrange[1], params)
         self.modelkeys.append(modelkey)
         print(params, modelkey)
-        self.models[modelkey] = regression.regression([method], [params])
+        self.models[modelkey] = regression.regression([method], [yrange], [params])
         x = self.data[datakey].df[xvars]
         y = self.data[datakey].df[yvars]
         x = np.array(x)
