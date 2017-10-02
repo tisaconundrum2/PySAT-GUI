@@ -34,7 +34,7 @@ class StratifiedFolds(Ui_Form, Basics):
         datakey = self.chooseDataToStratifyComboBox.currentText()
         nfolds = self.nFoldsSpinBox.value()
         try:
-            testfold = int(self.testFoldsSpinBox.currentText())
+            testfold = int(self.testFoldsSpinBox.value())
         except:
             testfold = 1
         colname = ('comp', self.chooseVarComboBox.currentText())
