@@ -162,7 +162,7 @@ class Normalization(Ui_Form, Basics):
             print("Did you remember to select a variable?")
         print("{}".format(ranges))
         try:
-            self.data[datakey].norm(ranges)
+            self.data[datakey].norm(ranges, col_var)
             print("Normalization has been applied to the ranges: " + str(ranges))
         except Exception as e:
             print("There was a problem: ", e)
