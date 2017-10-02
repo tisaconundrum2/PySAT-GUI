@@ -31,7 +31,7 @@ class MaskData(Ui_Form, Basics):
     def function(self):
         datakey = self.chooseDataComboBox.currentText()
         maskfile = self.maskFileLineEdit.text()
-        self.data[datakey].mask(maskfile)
+        self.data[datakey].mask(maskfile, maskvar='wvl')
         print("Mask applied")
 
 
