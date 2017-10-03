@@ -47,6 +47,7 @@ class Normalization(Ui_Form, Basics):
     def setupUi(self, Form):
         self.__init__()
         super().setupUi(Form)
+        Basics.setupUi(self, Form)
         self.connectWidgets()
 
     def get_widget(self):

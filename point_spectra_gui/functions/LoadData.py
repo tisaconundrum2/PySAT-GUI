@@ -9,6 +9,7 @@ from point_spectra_gui.util.BasicFunctionality import Basics
 class LoadData(Ui_loadData, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
+        Basics.setupUi(self, Form)
         self.connectWidgets()
 
     def get_widget(self):

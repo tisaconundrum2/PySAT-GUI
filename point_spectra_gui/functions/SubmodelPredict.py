@@ -57,6 +57,7 @@ class SubmodelPredict(Ui_Form, Basics):
 
     def setupUi(self, Form):
         super().setupUi(Form)
+        Basics.setupUi(self, Form)
         self.checkMinAndMax()
         self.connectWidgets()
 

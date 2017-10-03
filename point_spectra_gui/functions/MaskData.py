@@ -1,4 +1,5 @@
 from PyQt5 import QtWidgets
+from PyQt5.QtCore import Qt, QEvent
 
 from point_spectra_gui.ui.MaskData import Ui_Form
 from point_spectra_gui.util.BasicFunctionality import Basics
@@ -7,7 +8,9 @@ from point_spectra_gui.util.BasicFunctionality import Basics
 class MaskData(Ui_Form, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
+        Basics.setupUi(self, Form)
         self.connectWidgets()
+
 
     def get_widget(self):
         return self.groupBox
@@ -39,7 +42,7 @@ if __name__ == "__main__":
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
-    
+
     Form = QtWidgets.QWidget()
     ui = MaskData()
     ui.setupUi(Form)

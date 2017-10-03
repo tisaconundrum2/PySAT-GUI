@@ -10,6 +10,7 @@ class BaselineRemoval(Ui_Form, Basics):
     def setupUi(self, Form):
         self.Form = Form
         super().setupUi(Form)
+        Basics.setupUi(self, Form)
         self.connectWidgets()
         self.baselineMethods()
 

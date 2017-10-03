@@ -7,6 +7,7 @@ from point_spectra_gui.util.BasicFunctionality import Basics
 class MultiplyByVector(Ui_Form, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
+        Basics.setupUi(self, Form)
         self.connectWidgets()
 
     def get_widget(self):

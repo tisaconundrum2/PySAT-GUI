@@ -1,8 +1,9 @@
 import inspect
 import sys
 
+from PyQt5.QtCore import QSettings, Qt
 from PyQt5.QtWidgets import *
-from PyQt5.QtCore import QSettings
+
 from Qtickle import Qtickle
 
 
@@ -42,16 +43,12 @@ class Basics:
         self.settings = QSettings('config.ini', QSettings.IniFormat)
 
     def setupUi(self, Form):
-        """
-        Get the Ui_Form, it is like the HTML of the UI
-        It will show the styling of the UI. But buttons
-        and widgets have no function. connectWidgets
-        fixes this
-        :param Form:
-        :return:
-        """
-        sys.exit('Error: Application closed unexpectedly\n'
-                 'The method "SetupUI()" was not found in this module ')
+        self.Form = Form
+        self.Form.mousePressEvent = self.mousePressEvent
+
+    def mousePressEvent(self, QMouseEvent):
+            # do what you want here
+            print("Right Button Clicked {}".format(type(self).__name__))
 
     def get_widget(self):
         """
