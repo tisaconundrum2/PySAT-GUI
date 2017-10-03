@@ -16,6 +16,7 @@ class Plot(Ui_Form, Basics):
 
     def connectWidgets(self):
         self.setComboBox(self.chooseDataComboBox, self.datakeys)
+        self.setComboBox(self.figureNameComboBox, self.figname)
         self.changeComboListVars(self.chooseXVariableComboBox, self.get_choices())
         self.changeComboListVars(self.chooseYVariableComboBox, self.get_choices())
         self.colorComboBox.addItem("Red")
@@ -46,6 +47,8 @@ class Plot(Ui_Form, Basics):
         self.yMaxDoubleSpinBox.setMaximum(110)
         self.plotFilenamePushButton.clicked.connect(self.on_plotFilenamePushButton_clicked)
 
+        self.figureNameComboBox.activated[int].connect(
+            lambda: self.figureNameLineEdit.setText(self.figureNameComboBox.currentText()))
         self.chooseDataComboBox.activated[int].connect(
             lambda: self.changeComboListVars(self.chooseXVariableComboBox, self.get_choices()))
         self.chooseDataComboBox.activated[int].connect(
