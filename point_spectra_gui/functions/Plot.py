@@ -53,14 +53,12 @@ class Plot(Ui_Form, Basics):
             lambda: self.changeComboListVars(self.chooseXVariableComboBox, self.get_choices()))
         self.chooseDataComboBox.activated[int].connect(
             lambda: self.changeComboListVars(self.chooseYVariableComboBox, self.get_choices()))
-
         self.chooseDataComboBox.activated[int].connect(
             lambda: self.get_minmax(self.xMinDoubleSpinBox, self.xMaxDoubleSpinBox,
                                     self.chooseXVariableComboBox.currentText()))
         self.chooseDataComboBox.activated[int].connect(
             lambda: self.get_minmax(self.yMinDoubleSpinBox, self.yMaxDoubleSpinBox,
                                     self.chooseYVariableComboBox.currentText()))
-
         self.chooseXVariableComboBox.activated[int].connect(
             lambda: self.get_minmax(self.xMinDoubleSpinBox, self.xMaxDoubleSpinBox,
                                     self.chooseXVariableComboBox.currentText()))
