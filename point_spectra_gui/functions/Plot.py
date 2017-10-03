@@ -149,8 +149,8 @@ class Plot(Ui_Form, Basics):
             x = self.data[datakey].df[xvar]
             y = self.data[datakey].df[yvar]
         except:
-            x = self.data[datakey]['cv'][xvar]
-            y = self.data[datakey]['cv'][yvar]
+            x = self.data[datakey][xvar]
+            y = self.data[datakey][yvar]
         loadfig = None
         if figname in self.figs:
             loadfig = self.figs[figname]
