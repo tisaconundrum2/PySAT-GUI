@@ -25,8 +25,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>780</width>
-         <height>397</height>
+         <width>788</width>
+         <height>442</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -127,7 +127,7 @@
      <x>0</x>
      <y>0</y>
      <width>808</width>
-     <height>31</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -183,16 +183,8 @@
     <property name="title">
      <string>Help</string>
     </property>
-    <widget class="QMenu" name="menuDebug">
-     <property name="title">
-      <string>Debug Mode</string>
-     </property>
-     <addaction name="actionOn"/>
-     <addaction name="actionOff"/>
-    </widget>
     <addaction name="actionAbout"/>
     <addaction name="actionAbout_Qt"/>
-    <addaction name="menuDebug"/>
    </widget>
    <widget class="QMenu" name="menuOptions">
     <property name="title">
@@ -205,7 +197,15 @@
      <addaction name="actionDefault"/>
      <addaction name="actionQtmodern"/>
     </widget>
+    <widget class="QMenu" name="menuDebug_Mode">
+     <property name="title">
+      <string>Debug Mode</string>
+     </property>
+     <addaction name="actionOn"/>
+     <addaction name="actionOff"/>
+    </widget>
     <addaction name="menuDark_Mode"/>
+    <addaction name="menuDebug_Mode"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuPreprocessing"/>
@@ -355,12 +355,12 @@
     <string>Open Workflow</string>
    </property>
   </action>
-  <action name="actionOn">
+  <action name="actionOn_2">
    <property name="text">
     <string>On</string>
    </property>
   </action>
-  <action name="actionOff">
+  <action name="actionOff_2">
    <property name="text">
     <string>Off</string>
    </property>
@@ -378,6 +378,16 @@
   <action name="actionDefault">
    <property name="text">
     <string>Default</string>
+   </property>
+  </action>
+  <action name="actionOn">
+   <property name="text">
+    <string>On</string>
+   </property>
+  </action>
+  <action name="actionOff">
+   <property name="text">
+    <string>Off</string>
    </property>
   </action>
  </widget>
