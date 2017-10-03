@@ -142,7 +142,7 @@ class Plot(Ui_Form, Basics):
                 vars_level0 = list(vars_level0[vars_level0 != 'wvl'])
                 xvar = (vars_level0[vars_level1.index(xvar)], xvar)
                 yvar = (vars_level0[vars_level1.index(yvar)], yvar)
-        except:
+        except AttributeError: # df attribute doesn't exist.
             pass
 
         try:
