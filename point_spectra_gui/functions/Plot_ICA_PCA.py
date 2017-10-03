@@ -9,7 +9,6 @@ class Plot_ICA_PCA(Ui_Form, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
         Basics.setupUi(self, Form)
-        self.connectWidgets()
 
     def get_widget(self):
         return self.groupBox
@@ -24,12 +23,6 @@ class Plot_ICA_PCA(Ui_Form, Basics):
             lambda: self.changeComboListVars(self.chooseXVariableComboBox, self.xychoices()))
         self.chooseMethodComboBox.currentIndexChanged.connect(
             lambda: self.changeComboListVars(self.chooseYVariableComboBox, self.xychoices()))
-
-    def isEnabled(self):
-        return self.get_widget().isEnabled()
-
-    def setDisabled(self, bool):
-        self.get_widget().setDisabled(bool)
 
     def function(self):
         cmap = 'viridis'
@@ -97,6 +90,7 @@ class Plot_ICA_PCA(Ui_Form, Basics):
                 pass
         for i in choices:
             obj.addItem(str(i))
+
 
 if __name__ == "__main__":
     import sys

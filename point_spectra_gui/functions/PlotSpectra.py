@@ -10,7 +10,6 @@ class PlotSpectra(Ui_Form, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
         Basics.setupUi(self, Form)
-        self.connectWidgets()
 
     def get_widget(self):
         return self.groupBox
@@ -56,12 +55,6 @@ class PlotSpectra(Ui_Form, Basics):
                                               self.xVariableListWidget.selectedItems()[0].text()))
         except:
             pass
-
-    def isEnabled(self):
-        return self.get_widget().isEnabled()
-
-    def setDisabled(self, bool):
-        self.get_widget().setDisabled(bool)
 
     def function(self):
         yrange = None
@@ -137,7 +130,8 @@ class PlotSpectra(Ui_Form, Basics):
         except:
             loadfig = None
 
-        self.figs[figname] = make_plot(x, y, figpath=figpath, figfile=figfile, xrange=xrange, yrange=yrange, xtitle=xtitle,
+        self.figs[figname] = make_plot(x, y, figpath=figpath, figfile=figfile, xrange=xrange, yrange=yrange,
+                                       xtitle=xtitle,
                                        ytitle=ytitle, title=title,
                                        lbl=lbl, one_to_one=one_to_one, dpi=dpi, color=color,
                                        annot_mask=annot_mask, cmap=cmap,

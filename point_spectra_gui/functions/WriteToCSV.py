@@ -8,7 +8,6 @@ class WriteToCSV(Ui_Form, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
         Basics.setupUi(self, Form)
-        self.connectWidgets()
 
     def get_widget(self):
         return self.groupBox
@@ -17,7 +16,8 @@ class WriteToCSV(Ui_Form, Basics):
         self.setComboBox(self.chooseDataSetComboBox, self.datakeys)
         self.setListWidget(self.variablesToWriteListWidget, self.xvar_choices())
         self.variablesToWriteListWidget.setSelectionMode(QtWidgets.QAbstractItemView.MultiSelection)
-        self.chooseDataSetComboBox.currentIndexChanged.connect(lambda: self.changeComboListVars(self.variablesToWriteListWidget, self.xvar_choices()))
+        self.chooseDataSetComboBox.currentIndexChanged.connect(
+            lambda: self.changeComboListVars(self.variablesToWriteListWidget, self.xvar_choices()))
         self.pushButton.clicked.connect(self.on_pushButton_clicked)
 
     def function(self):
@@ -42,12 +42,6 @@ class WriteToCSV(Ui_Form, Basics):
         self.specifyAFilenameLineEdit.setText(filename)
         if self.specifyAFilenameLineEdit.text() == "":
             self.specifyAFilenameLineEdit.setText("output.csv")
-
-    def isEnabled(self):
-        return self.get_widget().isEnabled()
-
-    def setDisabled(self, bool):
-        self.get_widget().setDisabled(bool)
 
     def xvar_choices(self):
         try:

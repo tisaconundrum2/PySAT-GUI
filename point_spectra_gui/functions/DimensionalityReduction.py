@@ -14,7 +14,6 @@ class DimensionalityReduction(Ui_Form, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
         Basics.setupUi(self, Form)
-        self.connectWidgets()
 
     def get_widget(self):
         return self.formGroupBox
@@ -24,12 +23,6 @@ class DimensionalityReduction(Ui_Form, Basics):
         self.setComboBox(self.chooseMethodComboBox, ['Choose a method'] + self._methods)
         self.chooseMethodComboBox.currentIndexChanged.connect(
             lambda: self.method_ComboBox_IndexChanged(self.chooseMethodComboBox.currentText()))
-
-    def isEnabled(self):
-        return self.get_widget().isEnabled()
-
-    def setDisabled(self, bool):
-        self.get_widget().setDisabled(bool)
 
     def function(self):
         col = 'wvl'

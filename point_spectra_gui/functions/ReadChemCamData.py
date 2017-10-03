@@ -11,7 +11,6 @@ class ReadChemCamData(Ui_Form, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
         Basics.setupUi(self, Form)
-        self.connectWidgets()
 
     def get_widget(self):
         return self.groupBox
@@ -20,12 +19,6 @@ class ReadChemCamData(Ui_Form, Basics):
         self.searchStringLineEdit.setText("*ccs*.csv")
         self.searchDirectorypushButton.clicked.connect(self.on_searchpathButton_clicked)
         self.metadatapushButton.clicked.connect(self.on_metadataButton_clicked)
-
-    def isEnabled(self):
-        return self.get_widget().isEnabled()
-
-    def setDisabled(self, bool):
-        self.get_widget().setDisabled(bool)
 
     def on_searchpathButton_clicked(self):
         dirname = QtWidgets.QFileDialog.getExistingDirectory(parent=None, caption="Select Search Directory",

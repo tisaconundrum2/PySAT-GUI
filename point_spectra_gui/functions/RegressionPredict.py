@@ -8,7 +8,6 @@ class RegressionPredict(Ui_Form, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
         Basics.setupUi(self, Form)
-        self.connectWidgets()
 
     def get_widget(self):
         return self.formGroupBox
@@ -16,13 +15,6 @@ class RegressionPredict(Ui_Form, Basics):
     def connectWidgets(self):
         self.setComboBox(self.chooseDataComboBox, self.data)
         self.setComboBox(self.chooseModelComboBox, self.modelkeys)
-
-
-    def isEnabled(self):
-        return self.get_widget().isEnabled()
-
-    def setDisabled(self, bool):
-        self.get_widget().setDisabled(bool)
 
     def function(self):
         datakey = self.chooseDataComboBox.currentText()

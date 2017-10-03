@@ -11,7 +11,6 @@ class BaselineRemoval(Ui_Form, Basics):
         self.Form = Form
         super().setupUi(Form)
         Basics.setupUi(self, Form)
-        self.connectWidgets()
         self.baselineMethods()
 
     def get_widget(self):
@@ -37,12 +36,6 @@ class BaselineRemoval(Ui_Form, Basics):
         self.setComboBox(self.chooseAlgorithmComboBox, self.chooseAlgorithmList)
         self.chooseAlgorithmComboBox.currentIndexChanged.connect(
             lambda: self.make_regression_widget(self.chooseAlgorithmComboBox.currentText()))
-
-    def isEnabled(self):
-        return self.get_widget().isEnabled()
-
-    def setDisabled(self, bool):
-        self.get_widget().setDisabled(bool)
 
     def function(self):
         method = self.chooseAlgorithmComboBox.currentText()

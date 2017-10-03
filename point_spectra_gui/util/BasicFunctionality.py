@@ -1,7 +1,7 @@
 import inspect
 import sys
 
-from PyQt5.QtCore import QSettings, Qt
+from PyQt5.QtCore import QSettings
 from PyQt5.QtWidgets import *
 
 from Qtickle import Qtickle
@@ -45,10 +45,11 @@ class Basics:
     def setupUi(self, Form):
         self.Form = Form
         self.Form.mousePressEvent = self.mousePressEvent
+        self.connectWidgets()
 
     def mousePressEvent(self, QMouseEvent):
-            # do what you want here
-            print("Right Button Clicked {}".format(type(self).__name__))
+        # do what you want here
+        print("Right Button Clicked {}".format(type(self).__name__))
 
     def get_widget(self):
         """
@@ -94,8 +95,7 @@ class Basics:
         Checks to see if current widget isEnabled or not
         :return:
         """
-        sys.exit('Error: Application closed unexpectedly\n'
-                 'The method "isEnabled()" was not found in this module')
+        return self.get_widget().isEnabled()
 
     def setDisabled(self, bool):
         """
@@ -104,8 +104,7 @@ class Basics:
         :param bool:
         :return:
         """
-        sys.exit('Error: Application closed unexpectedly\n'
-                 'The method "setDisabled()" was not found in this module')
+        self.get_widget().setDisabled(bool)
 
     def setProgressBar(self, progressBar):
         """

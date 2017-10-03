@@ -1,6 +1,5 @@
-from PyQt5 import QtWidgets
-
 import numpy as np
+from PyQt5 import QtWidgets
 from pysat.spectral.spectral_data import spectral_data
 
 from point_spectra_gui.ui.SplitDataset import Ui_Form
@@ -11,19 +10,12 @@ class SplitDataset(Ui_Form, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
         Basics.setupUi(self, Form)
-        self.connectWidgets()
 
     def get_widget(self):
         return self.formGroupBox
 
     def connectWidgets(self):
         self.setComboBox(self.chooseDataComboBox, self.datakeys)
-
-    def isEnabled(self):
-        return self.get_widget().isEnabled()
-
-    def setDisabled(self, bool):
-        self.get_widget().setDisabled(bool)
 
     def function(self):
         params = self.getGuiParams()
@@ -50,7 +42,7 @@ if __name__ == "__main__":
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
-    
+
     Form = QtWidgets.QWidget()
     ui = SplitDataset()
     ui.setupUi(Form)

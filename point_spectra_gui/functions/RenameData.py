@@ -8,7 +8,6 @@ class RenameData(Ui_Form, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
         Basics.setupUi(self, Form)
-        self.connectWidgets()
 
     def get_widget(self):
         return self.groupBox
@@ -23,18 +22,12 @@ class RenameData(Ui_Form, Basics):
             if self.datakeys[i] == self.renameDataComboBox.currentText():
                 del self.datakeys[i]
 
-    def isEnabled(self):
-        return self.get_widget().isEnabled()
-
-    def setDisabled(self, bool):
-        self.get_widget().setDisabled(bool)
-
 
 if __name__ == "__main__":
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
-    
+
     Form = QtWidgets.QWidget()
     ui = RenameData()
     ui.setupUi(Form)

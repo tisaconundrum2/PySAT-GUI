@@ -57,9 +57,8 @@ class SubmodelPredict(Ui_Form, Basics):
 
     def setupUi(self, Form):
         super().setupUi(Form)
-        Basics.setupUi(self, Form)
         self.checkMinAndMax()
-        self.connectWidgets()
+        Basics.setupUi(self, Form)
 
     def get_widget(self):
         return self.groupBox
@@ -76,15 +75,6 @@ class SubmodelPredict(Ui_Form, Basics):
         self.optimizeSubmodelRangesLabel.setHidden(True)
         self.optimizeSubmodelRangesComboBox.setHidden(True)
         self.setHidden(self.subwidgets)
-
-        def isEnabled(self):
-            return self.get_widget().isEnabled()
-
-    def setDisabled(self, bool):
-        self.get_widget().setDisabled(bool)
-
-    def isEnabled(self):
-        return self.get_widget().isEnabled()
 
     def setHidden(self, list):
         for i in range(0, len(list)):

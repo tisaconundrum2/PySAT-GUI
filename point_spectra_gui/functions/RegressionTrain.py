@@ -16,7 +16,6 @@ class RegressionTrain(Ui_Form, Basics):
         super().setupUi(Form)
         Basics.setupUi(self, Form)
         self.regressionMethods()
-        self.connectWidgets()
 
     def get_widget(self):
         return self.groupLayout
@@ -75,12 +74,6 @@ class RegressionTrain(Ui_Form, Basics):
         self.qt.guiRestore(dict[0])
         for i in range(len(dict)):
             self.alg[i - 1].setGuiParams(dict[i])
-
-    def isEnabled(self):
-        return self.get_widget().isEnabled()
-
-    def setDisabled(self, bool):
-        self.get_widget().setDisabled(bool)
 
     def function(self):
         method = self.chooseAlgorithmComboBox.currentText()

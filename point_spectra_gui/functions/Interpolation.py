@@ -8,7 +8,6 @@ class Interpolation(Ui_Form, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
         Basics.setupUi(self, Form)
-        self.connectWidgets()
 
     def get_widget(self):
         return self.formGroupBox
@@ -16,12 +15,6 @@ class Interpolation(Ui_Form, Basics):
     def connectWidgets(self):
         self.setComboBox(self.interpolateDataComboBox, self.datakeys)
         self.setComboBox(self.referenceDataComboBox, self.datakeys)
-
-    def isEnabled(self):
-        return self.get_widget().isEnabled()
-
-    def setDisabled(self, bool):
-        self.get_widget().setDisabled(bool)
 
     def function(self):
         datakey_to_interp = self.interpolateDataComboBox.currentText()
@@ -37,7 +30,7 @@ if __name__ == "__main__":
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
-    
+
     Form = QtWidgets.QWidget()
     ui = Interpolation()
     ui.setupUi(Form)

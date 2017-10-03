@@ -1,5 +1,4 @@
 from PyQt5 import QtWidgets
-from PyQt5.QtCore import Qt, QEvent
 
 from point_spectra_gui.ui.MaskData import Ui_Form
 from point_spectra_gui.util.BasicFunctionality import Basics
@@ -9,8 +8,6 @@ class MaskData(Ui_Form, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
         Basics.setupUi(self, Form)
-        self.connectWidgets()
-
 
     def get_widget(self):
         return self.groupBox
@@ -24,12 +21,6 @@ class MaskData(Ui_Form, Basics):
     def connectWidgets(self):
         self.setComboBox(self.chooseDataComboBox, self.datakeys)
         self.pushButton.clicked.connect(lambda: self.on_getDataButton_clicked(self.maskFileLineEdit))
-
-    def isEnabled(self):
-        return self.get_widget().isEnabled()
-
-    def setDisabled(self, bool):
-        self.get_widget().setDisabled(bool)
 
     def function(self):
         datakey = self.chooseDataComboBox.currentText()

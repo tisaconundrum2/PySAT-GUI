@@ -8,7 +8,6 @@ class OutputFolder(Ui_Form, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
         Basics.setupUi(self, Form)
-        self.connectWidgets()
 
     def get_widget(self):
         return self.groupBox
@@ -33,18 +32,12 @@ class OutputFolder(Ui_Form, Basics):
         except Exception as e:
             print("Error: {}; using default outpath: {}".format(e, Basics.outpath))
 
-    def isEnabled(self):
-        return self.get_widget().isEnabled()
-
-    def setDisabled(self, bool):
-        self.get_widget().setDisabled(bool)
-
 
 if __name__ == "__main__":
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
-    
+
     Form = QtWidgets.QWidget()
     ui = OutputFolder()
     ui.setupUi(Form)

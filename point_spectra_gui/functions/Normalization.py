@@ -48,7 +48,6 @@ class Normalization(Ui_Form, Basics):
         self.__init__()
         super().setupUi(Form)
         Basics.setupUi(self, Form)
-        self.connectWidgets()
 
     def get_widget(self):
         return self.groupBox
@@ -56,7 +55,8 @@ class Normalization(Ui_Form, Basics):
     def connectWidgets(self):
         self.setupWidgets()
         self.setComboBox(self.chooseDataComboBox, self.datakeys)
-        self.chooseDataComboBox.currentIndexChanged.connect(lambda: self.changeComboListVars(self.varToNormalizeListWidget, self.xvar_choices()))
+        self.chooseDataComboBox.currentIndexChanged.connect(
+            lambda: self.changeComboListVars(self.varToNormalizeListWidget, self.xvar_choices()))
         self.setListWidget(self.varToNormalizeListWidget, self.xvar_choices())
         self.setMaximum(9999999)
         self.setHidden(self.normwidgets)
@@ -64,12 +64,6 @@ class Normalization(Ui_Form, Basics):
         self.rangeCountSpinBox.setMinimum(1)
         self.rangeCountSpinBox.setMaximum(15)
         self.rangeCountSpinBox.valueChanged.connect(self.on_change_rangeCountPushButton)
-
-    def isEnabled(self):
-        return self.get_widget().isEnabled()
-
-    def setDisabled(self, bool):
-        self.get_widget().setDisabled(bool)
 
     def on_change_rangeCountPushButton(self):
         spin = int(self.rangeCountSpinBox.value())

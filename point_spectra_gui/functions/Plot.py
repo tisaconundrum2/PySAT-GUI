@@ -10,7 +10,6 @@ class Plot(Ui_Form, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
         Basics.setupUi(self, Form)
-        self.connectWidgets()
 
     def get_widget(self):
         return self.groupBox
@@ -65,12 +64,6 @@ class Plot(Ui_Form, Basics):
         self.chooseYVariableComboBox.activated[int].connect(
             lambda: self.get_minmax(self.yMinDoubleSpinBox, self.yMaxDoubleSpinBox,
                                     self.chooseYVariableComboBox.currentText()))
-
-    def isEnabled(self):
-        return self.get_widget().isEnabled()
-
-    def setDisabled(self, bool):
-        self.get_widget().setDisabled(bool)
 
     def function(self):
 
@@ -143,7 +136,7 @@ class Plot(Ui_Form, Basics):
                 vars_level0 = list(vars_level0[vars_level0 != 'wvl'])
                 xvar = (vars_level0[vars_level1.index(xvar)], xvar)
                 yvar = (vars_level0[vars_level1.index(yvar)], yvar)
-        except AttributeError: # df attribute doesn't exist.
+        except AttributeError:  # df attribute doesn't exist.
             pass
 
         try:

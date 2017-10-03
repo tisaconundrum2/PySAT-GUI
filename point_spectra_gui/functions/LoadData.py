@@ -10,7 +10,6 @@ class LoadData(Ui_loadData, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
         Basics.setupUi(self, Form)
-        self.connectWidgets()
 
     def get_widget(self):
         return self.groupBox
@@ -19,7 +18,6 @@ class LoadData(Ui_loadData, Basics):
         self.newFilePushButton.clicked.connect(lambda: self.on_getDataButton_clicked(self.fileNameLineEdit))
 
     def on_getDataButton_clicked(self, lineEdit):
-        
         filename, _filter = QtWidgets.QFileDialog.getOpenFileName(None, "Open Data File", self.outpath, "(*.csv)")
         lineEdit.setText(filename)
         if lineEdit.text() == "":
@@ -33,18 +31,12 @@ class LoadData(Ui_loadData, Basics):
         self.datakeys.append(keyname)
         self.data[keyname] = spectral_data(pd.read_csv(filename, header=[0, 1], verbose=True))
 
-    def isEnabled(self):
-        return self.get_widget().isEnabled()
-
-    def setDisabled(self, bool):
-        self.get_widget().setDisabled(bool)
-
 
 if __name__ == "__main__":
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
-    
+
     Form = QtWidgets.QWidget()
     ui = LoadData()
     ui.setupUi(Form)

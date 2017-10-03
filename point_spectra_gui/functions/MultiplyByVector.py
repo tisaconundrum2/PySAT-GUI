@@ -8,7 +8,6 @@ class MultiplyByVector(Ui_Form, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
         Basics.setupUi(self, Form)
-        self.connectWidgets()
 
     def get_widget(self):
         return self.groupBox
@@ -16,12 +15,6 @@ class MultiplyByVector(Ui_Form, Basics):
     def connectWidgets(self):
         self.setComboBox(self.chooseDataComboBox, self.datakeys)
         self.pushButton.clicked.connect(lambda: self.on_getDataButton_clicked(self.vectorFileLineEdit))
-
-    def isEnabled(self):
-        return self.get_widget().isEnabled()
-
-    def setDisabled(self, bool):
-        self.get_widget().setDisabled(bool)
 
     def function(self):
         datakey = self.chooseDataComboBox.currentText()
@@ -39,12 +32,11 @@ class MultiplyByVector(Ui_Form, Basics):
             lineEdit.setText("*.csv")
 
 
-
 if __name__ == "__main__":
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
-    
+
     Form = QtWidgets.QWidget()
     ui = MultiplyByVector()
     ui.setupUi(Form)

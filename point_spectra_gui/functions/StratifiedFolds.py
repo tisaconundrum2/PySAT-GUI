@@ -8,7 +8,6 @@ class StratifiedFolds(Ui_Form, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
         Basics.setupUi(self, Form)
-        self.connectWidgets()
 
     def get_widget(self):
         return self.formGroupBox
@@ -17,19 +16,13 @@ class StratifiedFolds(Ui_Form, Basics):
         self.nFoldsSpinBox.setValue(2)
         self.testFoldsSpinBox.setValue(2)
         self.setComboBox(self.chooseDataToStratifyComboBox, self.datakeys)
-        try: # Some instances where perhaps there is no data to load
+        try:  # Some instances where perhaps there is no data to load
             data = self.data[self.chooseDataToStratifyComboBox.currentText()].df['comp'].columns.values
             self.setComboBox(self.chooseVarComboBox, data)
         except:
             pass
         self.chooseDataToStratifyComboBox.activated[int].connect(self.strat_fold_change_vars)
         self.nFoldsSpinBox.valueChanged.connect(self.strat_fold_change_testfolds)
-
-    def isEnabled(self):
-        return self.get_widget().isEnabled()
-
-    def setDisabled(self, bool):
-        self.get_widget().setDisabled(bool)
 
     def function(self):
         datakey = self.chooseDataToStratifyComboBox.currentText()
@@ -68,7 +61,7 @@ if __name__ == "__main__":
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
-    
+
     Form = QtWidgets.QWidget()
     ui = StratifiedFolds()
     ui.setupUi(Form)
