@@ -201,6 +201,8 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
                 lambda: self.settings.setValue('theme', 'qtmodern'))
             self.actionDefault.triggered.connect(
                 lambda: self.settings.setValue('theme', 'default'))
+            self.actionQtmodern.triggered.connect(self.new)
+            self.actionDefault.triggered.connect(self.new)
             self.actionCreate_New_Workflow.triggered.connect(self.new)
             self.actionSave_Current_Workflow.triggered.connect(self.on_save_clicked)
             self.actionRestore_Workflow.triggered.connect(self.on_restore_clicked)
