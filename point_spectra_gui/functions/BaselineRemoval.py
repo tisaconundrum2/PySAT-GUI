@@ -1,4 +1,5 @@
 from PyQt5 import QtWidgets
+from Qtickle import Qtickle
 from pysat.spectral.spectral_data import spectral_data
 
 from point_spectra_gui.functions.baselineRemovalMethods import *
@@ -61,10 +62,11 @@ class BaselineRemoval(Ui_Form, Basics):
 
         methodParameters = self.getMethodParams(self.chooseAlgorithmComboBox.currentIndex())
 
-        datakey_new = self.datakeys + '-Baseline Removed-' + method + str(methodParameters)
+        datakey_new = datakey + '-Baseline Removed-' + method + str(methodParameters)
         datakey_baseline = datakey + '-Baseline-' + method + str(methodParameters)
         self.datakeys.append(datakey_new)
         self.datakeys.append(datakey_baseline)
+        self.data[datakey_new] = spectral_data(self.data[datakey].df.copy(deep=True))
         self.data[datakey_new].remove_baseline(method, segment=True, params=methodParameters)
         self.data[datakey_baseline] = spectral_data(self.data[datakey_new].df_baseline)
 
