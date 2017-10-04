@@ -48,7 +48,9 @@ class Basics:
         self.connectWidgets()
 
     def mousePressEvent(self, QMouseEvent):
-        # do what you want here
+        """
+        Right click event
+        """
         print("Right Button Clicked {}".format(type(self).__name__))
 
     def get_widget(self):
@@ -78,6 +80,11 @@ class Basics:
         return s
 
     def setGuiParams(self, dict):
+        """
+        Using a dictionary, restore the UI
+        :param dict:
+        :return:
+        """
         self.qt = Qtickle.Qtickle(self)
         self.qt.guiRestore(dict)
 
