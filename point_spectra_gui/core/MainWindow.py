@@ -20,7 +20,7 @@ from PyQt5.QtWidgets import *
 from PyQt5 import QtCore, QtWidgets, QtGui
 from PyQt5.QtCore import QSettings
 
-from point_spectra_gui import functions
+from point_spectra_gui import core
 from point_spectra_gui.ui import MainWindow
 from point_spectra_gui.util import delete
 from point_spectra_gui.util.BasicFunctionality import Basics
@@ -154,49 +154,49 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         # TODO figure out how to get this code into `MainWindow.py`
         try:
             self.actionRead_ChemCam_Data.triggered.connect(
-                lambda: self.addWidget(functions.ReadChemCamData.ReadChemCamData))
+                lambda: self.addWidget(core.ReadChemCamData.ReadChemCamData))
             self.actionRemove_Baseline.triggered.connect(
-                lambda: self.addWidget(functions.BaselineRemoval.BaselineRemoval))
+                lambda: self.addWidget(core.BaselineRemoval.BaselineRemoval))
             self.actionCross_Validation.triggered.connect(
-                lambda: self.addWidget(functions.CrossValidation.CrossValidation))
+                lambda: self.addWidget(core.CrossValidation.CrossValidation))
             self.actionDimensionality_Reduction.triggered.connect(
-                lambda: self.addWidget(functions.DimensionalityReduction.DimensionalityReduction))
+                lambda: self.addWidget(core.DimensionalityReduction.DimensionalityReduction))
             self.actionInterpolate.triggered.connect(
-                lambda: self.addWidget(functions.Interpolation.Interpolation))
+                lambda: self.addWidget(core.Interpolation.Interpolation))
             self.actionLoad_Data.triggered.connect(
-                lambda: self.addWidget(functions.LoadData.LoadData))
+                lambda: self.addWidget(core.LoadData.LoadData))
             self.actionSave_Current_Data.triggered.connect(
-                lambda: self.addWidget(functions.WriteToCSV.WriteToCSV))
+                lambda: self.addWidget(core.WriteToCSV.WriteToCSV))
             self.actionRename_Data.triggered.connect(
-                lambda: self.addWidget(functions.RenameData.RenameData))
+                lambda: self.addWidget(core.RenameData.RenameData))
             self.actionApply_Mask.triggered.connect(
-                lambda: self.addWidget(functions.MaskData.MaskData))
+                lambda: self.addWidget(core.MaskData.MaskData))
             self.actionMultiply_by_Vector.triggered.connect(
-                lambda: self.addWidget(functions.MultiplyByVector.MultiplyByVector))
+                lambda: self.addWidget(core.MultiplyByVector.MultiplyByVector))
             self.actionNormalization.triggered.connect(
-                lambda: self.addWidget(functions.Normalization.Normalization))
+                lambda: self.addWidget(core.Normalization.Normalization))
             self.actionSet_Output_Path.triggered.connect(
-                lambda: self.addWidget(functions.OutputFolder.OutputFolder))
+                lambda: self.addWidget(core.OutputFolder.OutputFolder))
             self.actionPeak_Areas.triggered.connect(
-                lambda: self.addWidget(functions.PeakAreas.PeakAreas))
+                lambda: self.addWidget(core.PeakAreas.PeakAreas))
             self.actionPlot.triggered.connect(
-                lambda: self.addWidget(functions.Plot.Plot))
+                lambda: self.addWidget(core.Plot.Plot))
             self.actionPlot_ICA_PCA.triggered.connect(
-                lambda: self.addWidget(functions.Plot_ICA_PCA.Plot_ICA_PCA))
+                lambda: self.addWidget(core.Plot_ICA_PCA.Plot_ICA_PCA))
             self.actionPlot_Spectra.triggered.connect(
-                lambda: self.addWidget(functions.PlotSpectra.PlotSpectra))
+                lambda: self.addWidget(core.PlotSpectra.PlotSpectra))
             self.actionTrain.triggered.connect(
-                lambda: self.addWidget(functions.RegressionTrain.RegressionTrain))
+                lambda: self.addWidget(core.RegressionTrain.RegressionTrain))
             self.actionPredict.triggered.connect(
-                lambda: self.addWidget(functions.RegressionPredict.RegressionPredict))
+                lambda: self.addWidget(core.RegressionPredict.RegressionPredict))
             self.actionRemove_Rows.triggered.connect(
-                lambda: self.addWidget(functions.RemoveRows.RemoveRows))
+                lambda: self.addWidget(core.RemoveRows.RemoveRows))
             self.actionSplit_Data.triggered.connect(
-                lambda: self.addWidget(functions.SplitDataset.SplitDataset))
+                lambda: self.addWidget(core.SplitDataset.SplitDataset))
             self.actionStratified_Folds.triggered.connect(
-                lambda: self.addWidget(functions.StratifiedFolds.StratifiedFolds))
+                lambda: self.addWidget(core.StratifiedFolds.StratifiedFolds))
             self.actionSubmodel_Predict.triggered.connect(
-                lambda: self.addWidget(functions.SubmodelPredict.SubmodelPredict))
+                lambda: self.addWidget(core.SubmodelPredict.SubmodelPredict))
             self.actionQtmodern.triggered.connect(
                 lambda: self.settings.setValue('theme', 'qtmodern'))
             self.actionDefault.triggered.connect(
@@ -232,7 +232,7 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         and write it to a list to be returned
 
         Iterate through widgetList
-        get the names of functions, add it to a temp l
+        get the names of core, add it to a temp l
         add f list to be the first item in ui_items
         """
         f = []
@@ -255,12 +255,12 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         for f_items in dict[0]:
             """
             Really complex way of running essentially this:
-            `self.addWidget(functions.SplitDataset.SplitDataset))`
+            `self.addWidget(core.SplitDataset.SplitDataset))`
             Part of the reason why we're doing this is because we're saving function
             names to a list, you can't save function instances. So this is the next
             best thing.
             """
-            self.addWidget(getattr(getattr(functions, f_items), f_items))
+            self.addWidget(getattr(getattr(core, f_items), f_items))
 
         for i in range(1, len(dict)):
             self.widgetList[i - 1].setGuiParams(dict[i])

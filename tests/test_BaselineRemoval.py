@@ -2,7 +2,7 @@ from unittest import TestCase
 
 from PyQt5 import QtWidgets
 
-from point_spectra_gui.functions.BaselineRemoval import BaselineRemoval
+from point_spectra_gui.core.BaselineRemoval import BaselineRemoval
 
 
 class TestUi_Form(TestCase):
