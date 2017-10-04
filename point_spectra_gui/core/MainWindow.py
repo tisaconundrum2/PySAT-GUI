@@ -107,6 +107,14 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         self._mode(self.actionOff, self.actionOn, True)
 
     def _mode(self, obj1, obj2, debug):
+        """
+        Set the UI in debug or non-debug mode
+        Save all the settings and grey out the necessary boxes
+        :param obj1:
+        :param obj2:
+        :param debug:
+        :return:
+        """
         obj1.setDisabled(False)
         obj2.setDisabled(True)
         self.debug = debug
