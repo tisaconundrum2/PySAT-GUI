@@ -37,6 +37,24 @@ class BaselineRemoval(Ui_Form, Basics):
         self.chooseAlgorithmComboBox.currentIndexChanged.connect(
             lambda: self.make_regression_widget(self.chooseAlgorithmComboBox.currentText()))
 
+    def getGuiParams(self):
+        """
+        Overriding Basics' getGuiParams, because I'll need to do a list of lists
+        in order to obtain the regressionMethods' parameters
+        """
+        self.qt = Qtickle.Qtickle(self)
+        s = []
+        s.append(self.qt.guiSave())
+        for items in self.alg:
+            s.append(items.getGuiParams())
+        return s
+
+    def setGuiParams(self, dict):
+        self.qt = Qtickle.Qtickle(self)
+        self.qt.guiRestore(dict[0])
+        for i in range(len(dict)):
+            self.alg[i - 1].setGuiParams(dict[i])
+
     def function(self):
         method = self.chooseAlgorithmComboBox.currentText()
         datakey = self.chooseDataComboBox.currentText()
