@@ -218,7 +218,9 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
             print(e)
 
     def closeEvent(self, event):
-        # Write window size and position to config file
+        """
+        Write window size and position to config file
+        """
         self._writeWindowAttributeSettings()
         event.accept()
 
