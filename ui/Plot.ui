@@ -34,32 +34,39 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
+        <item row="2" column="0">
          <widget class="QLabel" name="figureNameLabel">
           <property name="text">
            <string>Figure name</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="1">
+        <item row="2" column="1">
          <widget class="QLineEdit" name="figureNameLineEdit"/>
         </item>
-        <item row="1" column="2">
-         <widget class="QComboBox" name="figureNameComboBox">
-          <property name="toolTip">
-           <string>Already have a figure, select from the ones available here</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
+        <item row="3" column="0">
          <widget class="QLabel" name="plotTitleLabel">
           <property name="text">
            <string>Plot Title</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="1">
+        <item row="3" column="1">
          <widget class="QLineEdit" name="plotTitleLineEdit"/>
+        </item>
+        <item row="1" column="1">
+         <widget class="QComboBox" name="figureNameComboBox">
+          <property name="toolTip">
+           <string>Already have a figure, select from the ones available here</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="figureLabel">
+          <property name="text">
+           <string>Select an existing figure name</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>

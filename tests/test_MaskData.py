@@ -2,7 +2,7 @@ from unittest import TestCase
 
 from PyQt5 import QtWidgets
 
-from point_spectra_gui.functions.MaskData import MaskData
+from point_spectra_gui.core.MaskData import MaskData
 
 
 class TestUi_Form(TestCase):
