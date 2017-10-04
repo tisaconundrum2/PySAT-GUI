@@ -1,4 +1,5 @@
 from PyQt5 import QtWidgets
+from spectral.baseline_code.mario import Mario
 
 from point_spectra_gui.ui.Mario import Ui_Form
 from point_spectra_gui.util.BasicFunctionality import Basics
@@ -7,6 +8,8 @@ from point_spectra_gui.util.BasicFunctionality import Basics
 class Ui_Form(Ui_Form, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
+        self.connectWidgets()
+        Basics.setupUi(self, Form)
 
     def get_widget(self):
         return self.groupbox
@@ -14,10 +17,18 @@ class Ui_Form(Ui_Form, Basics):
     def setHidden(self, bool):
         self.get_widget().setHidden(bool)
 
+    def connectWidgets(self):
+        br = Mario()
+        self.polynomialOrderSpinBox.setValue(br.poly_order_)
+        self.toleranceDoubleSpinBox.setValue(br.tol_)
+
     def function(self):
-        methodParameters = {'poly_order': int(self.polynomialOrderSpinBox.value()),
-                            'max_iters': float(self.maximumNumOfIterationsDoubleSpinBox.value()),
-                            'tol': float(self.toleranceDoubleSpinBox.value())}
+        maxNIDSpinBox = float(self.maximumNumOfIterationsDoubleSpinBox.value())
+        if maxNIDSpinBox == 0:
+            maxNIDSpinBox = None
+        methodParameters = {'poly_order_': int(self.polynomialOrderSpinBox.value()),
+                            'max_iters_': maxNIDSpinBox,
+                            'tol_': float(self.toleranceDoubleSpinBox.value())}
         return methodParameters
 
 

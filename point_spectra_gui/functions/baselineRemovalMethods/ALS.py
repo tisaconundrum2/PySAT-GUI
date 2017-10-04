@@ -1,5 +1,6 @@
 from PyQt5 import QtWidgets
 from spectral.baseline_code.als import ALS
+
 from point_spectra_gui.ui.ALS import Ui_Form
 from point_spectra_gui.util.BasicFunctionality import Basics
 
@@ -24,10 +25,10 @@ class Ui_Form(Ui_Form, Basics):
         self.convergenceThresholdDoubleSpinBox.setValue(als.conv_thresh_)
 
     def function(self):
-        methodParameters = {'asymmetry_param': float(self.asymmetryDoubleSpinBox.value()),
-                            'smoothness_param': float(self.smoothnessDoubleSpinBox.value()),
-                            'max_iters': int(self.maxNumOfIterationsSpinBox.value()),
-                            'conv_thresh': float(self.convergenceThresholdDoubleSpinBox.value())}
+        methodParameters = {'asymmetry_': float(self.asymmetryDoubleSpinBox.value()),
+                            'smoothness_': float(self.smoothnessDoubleSpinBox.value()),
+                            'max_iters_': int(self.maxNumOfIterationsSpinBox.value()),
+                            'conv_thresh_': float(self.convergenceThresholdDoubleSpinBox.value())}
         return methodParameters
 
 

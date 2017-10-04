@@ -2,7 +2,7 @@ from PyQt5 import QtWidgets
 
 from point_spectra_gui.ui.Dietrich import Ui_Form
 from point_spectra_gui.util.BasicFunctionality import Basics
-
+from spectral.baseline_code.dietrich import Dietrich
 
 class Ui_Form(Ui_Form, Basics):
     def setupUi(self, Form):
@@ -14,9 +14,14 @@ class Ui_Form(Ui_Form, Basics):
     def setHidden(self, bool):
         self.get_widget().setHidden(bool)
 
+    def connectWidgets(self):
+        br = Dietrich()
+        self.halfWindowSpinBox.setValue(br.half_window_)
+        self.numOfErosionsSpinBox.setValue(br.num_erosions_)
+
     def function(self):
-        methodParameters = {'half_window': int(self.halfWindowSpinBox.value()),
-                            'num_erosions': int(self.numOfErosionsSpinBox.value())}
+        methodParameters = {'half_window_': int(self.halfWindowSpinBox.value()),
+                            'num_erosions_': int(self.numOfErosionsSpinBox.value())}
         return methodParameters
 
 

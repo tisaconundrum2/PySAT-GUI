@@ -1,4 +1,5 @@
 from PyQt5 import QtWidgets
+from pysat.spectral.baseline_code.ccam_remove_continuum import ccam_br
 
 from point_spectra_gui.ui.CCAM import Ui_Form
 from point_spectra_gui.util.BasicFunctionality import Basics
@@ -7,6 +8,8 @@ from point_spectra_gui.util.BasicFunctionality import Basics
 class Ui_Form(Ui_Form, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
+        self.checkMinAndMax()
+        Basics.setupUi(self, Form)
 
     def get_widget(self):
         return self.groupbox
@@ -14,17 +17,22 @@ class Ui_Form(Ui_Form, Basics):
     def setHidden(self, bool):
         self.get_widget().setHidden(bool)
 
+    def connectWidgets(self):
+        CCAM = ccam_br()
+        self.lowestWaveletScaleSpinBox.setValue(CCAM.lvmin_)
+        self.largestWaveletScaleSpinBox.setValue(CCAM.lv_)
+
     def function(self):
-        methodParameters = {'scale1': int(self.lowestWaveletScaleSpinBox.value()),
-                            'scale2': int(self.largestWaveletScaleSpinBox.value())}
+        methodParameters = {'lv_': int(self.largestWaveletScaleSpinBox.value()),
+                            'lvmin_': int(self.lowestWaveletScaleSpinBox.value())}
 
         int_flag = self.interpolationMethodComboBox.currentText()
         if int_flag == 'Linear':
-            methodParameters['int_flag'] = 0
+            methodParameters.update({'int_flag_': 0})
         elif int_flag == 'Quadratic':
-            methodParameters['int_flag'] = 1
+            methodParameters.update({'int_flag_': 1})
         elif int_flag == 'Spline':
-            methodParameters['int_flag'] = 2
+            methodParameters.update({'int_flag_': 2})
 
 
 if __name__ == "__main__":
