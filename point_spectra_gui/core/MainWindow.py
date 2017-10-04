@@ -1,9 +1,9 @@
 import multiprocessing as mp
 import os.path
-import warnings
 import pickle
 import sys
 import time
+import warnings
 
 try:
     import qtmodern.styles
@@ -95,12 +95,7 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         sys.stdout = EmittingStream(textWritten=self.normalOutputWritten)
         sys.stderr = sys.__stderr__
         # sys.stderr = EmittingStream(textWritten=self.normalOutputWritten)
-        self.actionOn.setDisabled(False)
-        self.actionOff.setDisabled(True)
-        self.debug = False
-        self.settings.setValue("debug", self.debug)
-        self.title.setDebugName(self.debug)
-        self.MainWindow.setWindowTitle(self.title.display())
+        self._mode(self.actionOn, self.actionOff, False)
 
     def debug_mode(self):
         """
@@ -109,11 +104,14 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         """
         # Restore sys.stdout
         sys.stdout = sys.__stdout__
-        self.actionOn.setDisabled(True)
-        self.actionOff.setDisabled(False)
-        self.debug = True
+        self._mode(self.actionOff, self.actionOn, True)
+
+    def _mode(self, obj1, obj2, debug):
+        obj1.setDisabled(False)
+        obj2.setDisabled(True)
+        self.debug = debug
+        self.title.setDebugName(debug)
         self.settings.setValue("debug", self.debug)
-        self.title.setDebugName(self.debug)
         self.MainWindow.setWindowTitle(self.title.display())
 
     def normalOutputWritten(self, text):
