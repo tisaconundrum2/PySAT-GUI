@@ -251,6 +251,7 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
             self.actionDefault.triggered.connect(lambda: self.theme('default'))
             self.actionBrace_yourself.triggered.connect(lambda: self.theme('braceyourself'))
             self.actionCreate_New_Workflow.triggered.connect(self.new)
+            self.actionClear_Workflow.triggered.connect(self.clear)
             self.actionSave_Current_Workflow.triggered.connect(self.on_save_clicked)
             self.actionRestore_Workflow.triggered.connect(self.on_restore_clicked)
             self.deleteModulePushButton.clicked.connect(self.on_delete_module_clicked)
@@ -432,6 +433,13 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
     def onFinished(self):  # onFinished function
         self.progressBar.setRange(0, 1)  # stop the bar pulsing green
         self.progressBar.setValue(1)  # displays 100% after process is finished.
+
+    def clear(self):
+        while len(self.widgetList) > 0:
+            self.on_delete_module_clicked()
+        self.title.setFileName('')
+        self.MainWindow.setWindowTitle(self.title.display())
+        self.textBrowser.clear()
 
     def new(self):
         p = mp.Process(target=main, args=())
