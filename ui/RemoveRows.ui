@@ -1,26 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>RemoveRows</class>
- <widget class="QGroupBox" name="RemoveRows">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>408</width>
-    <height>463</height>
-   </rect>
-  </property>
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+   <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Remove Rows</string>
-  </property>
-  <property name="title">
-   <string>Remove Rows</string>
+   <string>Form</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -69,8 +58,6 @@
     </widget>
    </item>
   </layout>
-  <zorder>verticalLayoutWidget</zorder>
-  <zorder>horizontalLayoutWidget</zorder>
  </widget>
  <tabstops>
   <tabstop>chooseDataComboBox</tabstop>

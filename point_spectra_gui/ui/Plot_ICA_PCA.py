@@ -71,6 +71,7 @@ class Ui_Form(object):
         self.plotFilenameLabel.setObjectName("plotFilenameLabel")
         self.horizontalLayout_6.addWidget(self.plotFilenameLabel)
         self.plotFilenameLineEdit = QtWidgets.QLineEdit(self.groupBox)
+        self.plotFilenameLineEdit.setReadOnly(True)
         self.plotFilenameLineEdit.setObjectName("plotFilenameLineEdit")
         self.horizontalLayout_6.addWidget(self.plotFilenameLineEdit)
         self.pushButton = QtWidgets.QPushButton(self.groupBox)

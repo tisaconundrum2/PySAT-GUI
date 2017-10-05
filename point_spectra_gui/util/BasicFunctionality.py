@@ -1,8 +1,9 @@
 import inspect
 import sys
 
-from PyQt5.QtWidgets import *
 from PyQt5.QtCore import QSettings
+from PyQt5.QtWidgets import *
+
 from Qtickle import Qtickle
 
 
@@ -39,19 +40,19 @@ class Basics:
 
     def __init__(self):
         self.qt = Qtickle.Qtickle(self)
-        self.settings = QSettings('config.ini', QSettings.IniFormat)
+        self.settings = QSettings('USGS', 'PPSG')
 
     def setupUi(self, Form):
+        self.Form = Form
+        self.Form.mousePressEvent = self.mousePressEvent
+        self.connectWidgets()
+
+    def mousePressEvent(self, QMouseEvent):
         """
-        Get the Ui_Form, it is like the HTML of the UI
-        It will show the styling of the UI. But buttons
-        and widgets have no function. connectWidgets
-        fixes this
-        :param Form:
-        :return:
+        Right click event
         """
-        sys.exit('Error: Application closed unexpectedly\n'
-                 'The method "SetupUI()" was not found in this module ')
+        # TODO Add mouse Event
+        # print("Right Button Clicked {}".format(type(self).__name__))
 
     def get_widget(self):
         """
@@ -80,6 +81,11 @@ class Basics:
         return s
 
     def setGuiParams(self, dict):
+        """
+        Using a dictionary, restore the UI
+        :param dict:
+        :return:
+        """
         self.qt = Qtickle.Qtickle(self)
         self.qt.guiRestore(dict)
 
@@ -97,8 +103,7 @@ class Basics:
         Checks to see if current widget isEnabled or not
         :return:
         """
-        sys.exit('Error: Application closed unexpectedly\n'
-                 'The method "isEnabled()" was not found in this module')
+        return self.get_widget().isEnabled()
 
     def setDisabled(self, bool):
         """
@@ -107,8 +112,7 @@ class Basics:
         :param bool:
         :return:
         """
-        sys.exit('Error: Application closed unexpectedly\n'
-                 'The method "setDisabled()" was not found in this module')
+        self.get_widget().setDisabled(bool)
 
     def setProgressBar(self, progressBar):
         """
