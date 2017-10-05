@@ -7,4 +7,16 @@ sklearn
 numpy
 pandas
 PyQt5
-pysat
+json
+shutil
+tempfile
+yaml
+fnmatch
+unittest
+warnings
+copy
+glob
+mpl_toolkits
+pywt
+functools
+utils
