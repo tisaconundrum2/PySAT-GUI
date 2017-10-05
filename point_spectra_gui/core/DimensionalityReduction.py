@@ -49,11 +49,12 @@ class DimensionalityReduction(Ui_Form, Basics):
 
         try:
             if method == 'PCA' or method == 'ICA':
-                self.dim_reds[dim_red_key] = self.data[datakey].dim_red(col, method, params, method_kws,
-                                                                        load_fit=load_fit)
-                self.dim_red_keys.append(dim_red_key)
+                self.dim_reds[dim_red_key] = self.data[datakey].dim_red(
+                    col, method, params, method_kws, load_fit=load_fit)
             elif method == 'ICA-JADE':
                 self.dim_reds[dim_red_key] = self.data[datakey].ica_jade(col)
+            self.dim_red_keys.append(dim_red_key)
+
         except Exception as e:
             print(e)
 
