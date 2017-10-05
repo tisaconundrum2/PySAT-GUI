@@ -483,16 +483,18 @@ def get_splash(app):
     :param app:
     :return:
     """
-    dir = '../images/'
-    if os.path.exists(dir + 'splash.png'):
-        splash_pix = QPixmap(dir + 'splash.png')  # default
-        app_icon = QtGui.QIcon(dir + 'icon.png')
-        app.setWindowIcon(app_icon)
-        splash = QSplashScreen(splash_pix, Qt.WindowStaysOnTopHint)
-        splash.setMask(splash_pix.mask())
-        splash.show()
-        time.sleep(0.5)
-        app.processEvents()
+    dirs = ['../images/', '/PySAT_Point_Spectra_GUI/images', './PySAT_Point_Spectra_GUI/images']
+    for dir in dirs:
+        if os.path.exists(dir + 'splash.png'):
+            splash_pix = QPixmap(dir + 'splash.png')  # default
+            app_icon = QtGui.QIcon(dir + 'icon.png')
+            app.setWindowIcon(app_icon)
+            splash = QSplashScreen(splash_pix, Qt.WindowStaysOnTopHint)
+            splash.setMask(splash_pix.mask())
+            splash.show()
+            time.sleep(0.5)
+            app.processEvents()
+            return 0
 
 
 def setDarkmode(app):
