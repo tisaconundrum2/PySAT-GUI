@@ -77,12 +77,15 @@ target/
 *.csv
 *.wrf
 *.dat
-!images/*
-!inputs/*
 
 # Pysat
 pysat/
 auto_gitter.bat
 *.ini
-
 *.inf
+*.zip*
+
+# Don't ignore these files
+!images/*
+!inputs/*
+

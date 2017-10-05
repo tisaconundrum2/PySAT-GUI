@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>808</width>
-    <height>637</height>
+    <width>435</width>
+    <height>505</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,16 +17,31 @@
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QScrollArea" name="scrollArea">
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <property name="lineWidth">
+       <number>0</number>
+      </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOn</enum>
+      </property>
       <property name="widgetResizable">
        <bool>true</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
       <widget class="QWidget" name="scrollAreaWidgetContents">
        <property name="geometry">
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>788</width>
-         <height>442</height>
+         <width>400</width>
+         <height>312</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -126,7 +141,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>808</width>
+     <width>435</width>
      <height>21</height>
     </rect>
    </property>
@@ -142,6 +157,7 @@
     <addaction name="actionRead_ChemCam_Data"/>
     <addaction name="separator"/>
     <addaction name="actionCreate_New_Workflow"/>
+    <addaction name="actionClear_Workflow"/>
     <addaction name="actionRestore_Workflow"/>
     <addaction name="actionSave_Current_Workflow"/>
     <addaction name="separator"/>
@@ -195,6 +211,7 @@
       <string>Theme</string>
      </property>
      <addaction name="actionDefault"/>
+     <addaction name="actionBrace_yourself"/>
      <addaction name="actionQtmodern"/>
     </widget>
     <widget class="QMenu" name="menuDebug_Mode">
@@ -388,6 +405,16 @@
   <action name="actionOff">
    <property name="text">
     <string>Off</string>
+   </property>
+  </action>
+  <action name="actionBrace_yourself">
+   <property name="text">
+    <string>Brace yourself</string>
+   </property>
+  </action>
+  <action name="actionClear_Workflow">
+   <property name="text">
+    <string>Clear Workflow</string>
    </property>
   </action>
  </widget>

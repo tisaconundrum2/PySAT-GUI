@@ -105,8 +105,7 @@ class RegressionTrain(Ui_Form, Basics):
         coef[('meta', 'Model')] = modelkey
 
         try:
-            self.data['Model Coefficients'] = spectral_data(
-                pd.concat([self.data['Model Coefficients'].df, coef]))
+            self.data['Model Coefficients'] = spectral_data(pd.concat([self.data['Model Coefficients'].df, coef]))
         except:
             self.data['Model Coefficients'] = spectral_data(coef)
             self.datakeys.append('Model Coefficients')

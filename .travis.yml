@@ -34,4 +34,4 @@ script:
   - python setup.py clean
   - python setup.py build
   - python setup.py install
-  - python tests/test_main_.py
+  - python tests/test_MainWindow.py

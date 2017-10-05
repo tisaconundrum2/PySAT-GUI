@@ -1,4 +1,3 @@
-qtmodern
 wheel
 pvl
 matplotlib
@@ -7,4 +6,4 @@ sklearn
 numpy
 pandas
 PyQt5
-pysat
+pysat 

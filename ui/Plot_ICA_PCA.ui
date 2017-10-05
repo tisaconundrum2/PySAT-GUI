@@ -104,7 +104,11 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="plotFilenameLineEdit"/>
+         <widget class="QLineEdit" name="plotFilenameLineEdit">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QPushButton" name="pushButton">

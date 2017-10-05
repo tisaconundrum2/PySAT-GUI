@@ -40,7 +40,7 @@ class Basics:
 
     def __init__(self):
         self.qt = Qtickle.Qtickle(self)
-        self.settings = QSettings('config.ini', QSettings.IniFormat)
+        self.settings = QSettings('USGS', 'PPSG')
 
     def setupUi(self, Form):
         self.Form = Form
@@ -48,8 +48,11 @@ class Basics:
         self.connectWidgets()
 
     def mousePressEvent(self, QMouseEvent):
-        # do what you want here
-        print("Right Button Clicked {}".format(type(self).__name__))
+        """
+        Right click event
+        """
+        # TODO Add mouse Event
+        # print("Right Button Clicked {}".format(type(self).__name__))
 
     def get_widget(self):
         """
@@ -78,6 +81,11 @@ class Basics:
         return s
 
     def setGuiParams(self, dict):
+        """
+        Using a dictionary, restore the UI
+        :param dict:
+        :return:
+        """
         self.qt = Qtickle.Qtickle(self)
         self.qt.guiRestore(dict)
 
