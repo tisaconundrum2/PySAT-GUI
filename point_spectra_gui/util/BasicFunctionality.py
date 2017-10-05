@@ -51,7 +51,8 @@ class Basics:
         """
         Right click event
         """
-        print("Right Button Clicked {}".format(type(self).__name__))
+        # TODO Add mouse Event
+        # print("Right Button Clicked {}".format(type(self).__name__))
 
     def get_widget(self):
         """
