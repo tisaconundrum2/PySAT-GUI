@@ -142,6 +142,7 @@ class Ui_Form(object):
         self.lineLabel.setObjectName("lineLabel")
         self.botLayout.addWidget(self.lineLabel, 3, 0, 1, 1)
         self.plotFilenameLineEdit = QtWidgets.QLineEdit(self.groupBox)
+        self.plotFilenameLineEdit.setReadOnly(True)
         self.plotFilenameLineEdit.setObjectName("plotFilenameLineEdit")
         self.botLayout.addWidget(self.plotFilenameLineEdit, 6, 1, 1, 1)
         self.colorComboBox = QtWidgets.QComboBox(self.groupBox)
