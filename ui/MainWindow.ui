@@ -157,6 +157,7 @@
     <addaction name="actionRead_ChemCam_Data"/>
     <addaction name="separator"/>
     <addaction name="actionCreate_New_Workflow"/>
+    <addaction name="actionClear_Workflow"/>
     <addaction name="actionRestore_Workflow"/>
     <addaction name="actionSave_Current_Workflow"/>
     <addaction name="separator"/>
@@ -409,6 +410,11 @@
   <action name="actionBrace_yourself">
    <property name="text">
     <string>Brace yourself</string>
+   </property>
+  </action>
+  <action name="actionClear_Workflow">
+   <property name="text">
+    <string>Clear Workflow</string>
    </property>
   </action>
  </widget>

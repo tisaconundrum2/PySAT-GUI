@@ -157,6 +157,8 @@ class Ui_MainWindow(object):
         self.actionOff.setObjectName("actionOff")
         self.actionBrace_yourself = QtWidgets.QAction(MainWindow)
         self.actionBrace_yourself.setObjectName("actionBrace_yourself")
+        self.actionClear_Workflow = QtWidgets.QAction(MainWindow)
+        self.actionClear_Workflow.setObjectName("actionClear_Workflow")
         self.menuFile.addAction(self.actionLoad_Data)
         self.menuFile.addAction(self.actionRename_Data)
         self.menuFile.addAction(self.actionSave_Current_Data)
@@ -165,6 +167,7 @@ class Ui_MainWindow(object):
         self.menuFile.addAction(self.actionRead_ChemCam_Data)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionCreate_New_Workflow)
+        self.menuFile.addAction(self.actionClear_Workflow)
         self.menuFile.addAction(self.actionRestore_Workflow)
         self.menuFile.addAction(self.actionSave_Current_Workflow)
         self.menuFile.addSeparator()
@@ -264,6 +267,7 @@ class Ui_MainWindow(object):
         self.actionOn.setText(("On"))
         self.actionOff.setText(("Off"))
         self.actionBrace_yourself.setText(("Brace yourself"))
+        self.actionClear_Workflow.setText(("Clear Workflow"))
 
 
 if __name__ == "__main__":
