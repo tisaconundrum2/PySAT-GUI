@@ -92,8 +92,8 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
             self.normal_mode()
 
         # Check the theme for the UI
-        if self.settings.value('braceyourself'):
-            braceyourself(MainWindow)
+        if self.settings.value('theme') == 'braceyourself':
+            braceyourself(self.MainWindow)
 
     def normal_mode(self):
         """
