@@ -8,7 +8,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(562, 652)
+        MainWindow.resize(435, 505)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
@@ -17,10 +17,11 @@ class Ui_MainWindow(object):
         self.scrollArea.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.scrollArea.setFrameShadow(QtWidgets.QFrame.Plain)
         self.scrollArea.setLineWidth(0)
+        self.scrollArea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 544, 459))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 400, 312))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
@@ -61,7 +62,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.addLayout(self.progress_OK)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 562, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 435, 21))
         self.menubar.setObjectName("menubar")
         self.menuFile = QtWidgets.QMenu(self.menubar)
         self.menuFile.setObjectName("menuFile")
@@ -153,6 +154,8 @@ class Ui_MainWindow(object):
         self.actionOn.setObjectName("actionOn")
         self.actionOff = QtWidgets.QAction(MainWindow)
         self.actionOff.setObjectName("actionOff")
+        self.actionBrace_yourself = QtWidgets.QAction(MainWindow)
+        self.actionBrace_yourself.setObjectName("actionBrace_yourself")
         self.menuFile.addAction(self.actionLoad_Data)
         self.menuFile.addAction(self.actionRename_Data)
         self.menuFile.addAction(self.actionSave_Current_Data)
@@ -185,6 +188,7 @@ class Ui_MainWindow(object):
         self.menuHelp.addAction(self.actionAbout)
         self.menuHelp.addAction(self.actionAbout_Qt)
         self.menuDark_Mode.addAction(self.actionDefault)
+        self.menuDark_Mode.addAction(self.actionBrace_yourself)
         self.menuDark_Mode.addAction(self.actionQtmodern)
         self.menuDebug_Mode.addAction(self.actionOn)
         self.menuDebug_Mode.addAction(self.actionOff)
@@ -258,6 +262,7 @@ class Ui_MainWindow(object):
         self.actionDefault.setText(("Default"))
         self.actionOn.setText(("On"))
         self.actionOff.setText(("Off"))
+        self.actionBrace_yourself.setText(("Brace yourself"))
 
 
 if __name__ == "__main__":

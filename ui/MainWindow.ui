@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>562</width>
-    <height>652</height>
+    <width>435</width>
+    <height>505</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,6 +26,9 @@
       <property name="lineWidth">
        <number>0</number>
       </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOn</enum>
+      </property>
       <property name="widgetResizable">
        <bool>true</bool>
       </property>
@@ -34,8 +37,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>544</width>
-         <height>459</height>
+         <width>400</width>
+         <height>312</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -135,7 +138,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>562</width>
+     <width>435</width>
      <height>21</height>
     </rect>
    </property>
@@ -204,6 +207,7 @@
       <string>Theme</string>
      </property>
      <addaction name="actionDefault"/>
+     <addaction name="actionBrace_yourself"/>
      <addaction name="actionQtmodern"/>
     </widget>
     <widget class="QMenu" name="menuDebug_Mode">
@@ -397,6 +401,11 @@
   <action name="actionOff">
    <property name="text">
     <string>Off</string>
+   </property>
+  </action>
+  <action name="actionBrace_yourself">
+   <property name="text">
+    <string>Brace yourself</string>
    </property>
   </action>
  </widget>

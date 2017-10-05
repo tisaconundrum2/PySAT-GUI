@@ -5,6 +5,8 @@ import sys
 import time
 import warnings
 
+from point_spectra_gui.util.themes import braceyourself, default
+
 try:
     import qtmodern.styles
 
@@ -82,10 +84,16 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         self._readAndApplyWindowAttributeSettings()
         self.menu_item_shortcuts()  # set up the shortcuts
         self.connectWidgets()
+
+        # Check the mode for debugging
         if self.settings.value("debug") == 'true':
             self.debug_mode()
         else:
             self.normal_mode()
+
+        # Check the theme for the UI
+        if self.settings.value('braceyourself'):
+            braceyourself(MainWindow)
 
     def normal_mode(self):
         """
@@ -122,6 +130,42 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         self.settings.setValue("debug", self.debug)
         self.MainWindow.setWindowTitle(self.title.display())
 
+    def theme(self, name):
+        """
+        We have 3 themes
+        each has a different situation
+                   __________________
+                 /__               __\ new()   Something to note:
+               v    \            v    \ new()  As you can see whenever moving into or out of
+        default     braceyourself    qtmodern  qtmodern we will have to start a new session
+               \___^             \___^ new()   default and braceyourself can simply change
+                \___________________/ new()    there styling on the spot
+
+        :param name:
+        :return:
+        """
+        settings = self.settings.value('theme')
+        if name == settings:
+            print("This is already your current theme")
+
+        if name == 'qtmodern':  # User is entering into qtmodern
+            self.settings.setValue('theme', name)
+            self.new()
+
+        elif settings == 'qtmodern':  # User is leaving qtmodern
+            self.settings.setValue('theme', name)
+            self.new()
+
+        elif name == 'default':
+            self.settings.setValue('theme', name)
+            default(self.MainWindow)
+
+        elif name == 'braceyourself':
+            self.settings.setValue('theme', name)
+            braceyourself(self.MainWindow)
+        else:
+            print("Something went horribly wrong with your theme, try again?")
+
     def normalOutputWritten(self, text):
         """Append text to the QTextEdit."""
         # Maybe QTextEdit.append() works as well, but this is how I do it:
@@ -139,7 +183,7 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         :return:
         """
         self.widgetList.append(obj())
-        self.widgetList[-1].setupUi(self.scrollAreaWidgetContents)
+        self.widgetList[-1].setupUi(self.centralwidget)
         self.widgetLayout = QtWidgets.QVBoxLayout()
         self.widgetLayout.setObjectName("widgetLayout")
         self.verticalLayout_3.addLayout(self.widgetLayout)
@@ -203,12 +247,9 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
                 lambda: self.addWidget(core.StratifiedFolds.StratifiedFolds))
             self.actionSubmodel_Predict.triggered.connect(
                 lambda: self.addWidget(core.SubmodelPredict.SubmodelPredict))
-            self.actionQtmodern.triggered.connect(
-                lambda: self.settings.setValue('theme', 'qtmodern'))
-            self.actionDefault.triggered.connect(
-                lambda: self.settings.setValue('theme', 'default'))
-            self.actionQtmodern.triggered.connect(self.new)
-            self.actionDefault.triggered.connect(self.new)
+            self.actionQtmodern.triggered.connect(lambda: self.theme('qtmodern'))
+            self.actionDefault.triggered.connect(lambda: self.theme('default'))
+            self.actionBrace_yourself.triggered.connect(lambda: self.theme('braceyourself'))
             self.actionCreate_New_Workflow.triggered.connect(self.new)
             self.actionSave_Current_Workflow.triggered.connect(self.on_save_clicked)
             self.actionRestore_Workflow.triggered.connect(self.on_restore_clicked)
