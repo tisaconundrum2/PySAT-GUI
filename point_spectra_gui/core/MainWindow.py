@@ -435,7 +435,7 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         self.progressBar.setValue(1)  # displays 100% after process is finished.
 
     def clear(self):
-        while len(self.widgetList) > 0:
+        while len(self.widgetList) > 0 and self.widgetList[-1].isEnabled():
             self.on_delete_module_clicked()
         self.title.setFileName('')
         self.MainWindow.setWindowTitle(self.title.display())
