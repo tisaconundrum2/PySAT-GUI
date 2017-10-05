@@ -1,5 +1,5 @@
 from PyQt5 import QtWidgets
-from spectral.baseline_code.median import MedianFilter
+from pysat.spectral.baseline_code.median import MedianFilter
 
 from point_spectra_gui.ui.Median import Ui_Form
 from point_spectra_gui.util.BasicFunctionality import Basics
