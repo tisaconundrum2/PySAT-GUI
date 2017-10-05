@@ -496,7 +496,7 @@ def get_splash(app):
 
 
 def setDarkmode(app):
-    settings = QSettings('config.ini', QSettings.IniFormat)
+    settings = QSettings('USGS', 'PPSG')
     p = settings.value('theme') == 'qtmodern'
     if q and p:
         qtmodern.styles.dark(app)

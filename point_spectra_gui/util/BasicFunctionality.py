@@ -40,7 +40,7 @@ class Basics:
 
     def __init__(self):
         self.qt = Qtickle.Qtickle(self)
-        self.settings = QSettings('config.ini', QSettings.IniFormat)
+        self.settings = QSettings('USGS', 'PPSG')
 
     def setupUi(self, Form):
         self.Form = Form
