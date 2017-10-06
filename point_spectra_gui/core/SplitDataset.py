@@ -16,26 +16,35 @@ class SplitDataset(Ui_Form, Basics):
 
     def connectWidgets(self):
         self.setComboBox(self.chooseDataComboBox, self.datakeys)
+        self.setComboBox(self.splitOnUniqueValuesOfComboBox, self.get_choices())
 
     def function(self):
-        params = self.getGuiParams()
-        datakey = params['chooseDataComboBox']
-        colname = params['splitOnUniqueValuesOfComboBox']
-        try:
-            vars_level0 = self.data[datakey].df.columns.get_level_values(0)
-            vars_level1 = self.data[datakey].df.columns.get_level_values(1)
-            vars_level1 = list(vars_level1[vars_level0 != 'wvl'])
-            vars_level0 = list(vars_level0[vars_level0 != 'wvl'])
-            colname = (vars_level0[vars_level1.index(colname)], colname)
+        datakey = self.chooseDataComboBox.currentText()
+        colname = self.splitOnUniqueValuesOfComboBox.currentText()
+        vars_level0 = self.data[datakey].df.columns.get_level_values(0)
+        vars_level1 = self.data[datakey].df.columns.get_level_values(1)
+        vars_level1 = list(vars_level1[vars_level0 != 'wvl'])
+        vars_level0 = list(vars_level0[vars_level0 != 'wvl'])
+        colname = (vars_level0[vars_level1.index(colname)], colname)
 
-            coldata = np.array([str(i) for i in self.data[datakey].df[colname]])
-            unique_values = np.unique(coldata)
-            for i in unique_values:
-                new_datakey = datakey + ' - ' + str(i)
-                self.datakeys.append(new_datakey)
-                self.data[new_datakey] = spectral_data(self.data[datakey].df.ix[coldata == i])
-        except Exception as e:
-            print(e)
+        coldata = np.array([str(i) for i in self.data[datakey].df[colname]])
+        unique_values = np.unique(coldata)
+        for i in unique_values:
+            new_datakey = datakey + ' - ' + str(i)
+            self.datakeys.append(new_datakey)
+            self.data[new_datakey] = spectral_data(self.data[datakey].df.ix[coldata == i])
+
+    def get_choices(self):
+        try:
+            self.vars_level0 = self.data[self.chooseDataComboBox.currentText()].df.columns.get_level_values(0)
+            self.vars_level1 = self.data[self.chooseDataComboBox.currentText()].df.columns.get_level_values(1)
+            self.vars_level1 = list(self.vars_level1[self.vars_level0 != 'wvl'])
+            self.vars_level0 = list(self.vars_level0[self.vars_level0 != 'wvl'])
+            colnamechoices = self.vars_level1
+        except:
+            colnamechoices = self.data[self.chooseDataComboBox.currentText()].columns.values
+        colnamechoices = [i for i in colnamechoices if not 'Unnamed' in i]  # remove unnamed columns from choices
+        return colnamechoices
 
 
 if __name__ == "__main__":
