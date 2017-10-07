@@ -7,6 +7,7 @@ from pysat.spectral.baseline_code.dietrich import Dietrich
 class Ui_Form(Ui_Form, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
+        Basics.setupUi(self, Form)
 
     def get_widget(self):
         return self.groupbox
