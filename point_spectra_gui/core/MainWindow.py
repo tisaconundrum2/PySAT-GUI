@@ -148,7 +148,7 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         if name == settings:
             print("This is already your current theme")
 
-        if name == 'qtmodern':  # User is entering into qtmodern
+        elif name == 'qtmodern':  # User is entering into qtmodern
             self.settings.setValue('theme', name)
             self.new()
 
