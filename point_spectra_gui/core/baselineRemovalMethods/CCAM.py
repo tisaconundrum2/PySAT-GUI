@@ -34,6 +34,8 @@ class Ui_Form(Ui_Form, Basics):
         elif int_flag == 'Spline':
             methodParameters.update({'int_flag_': 2})
 
+        return methodParameters
+
 
 if __name__ == "__main__":
     import sys
