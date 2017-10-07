@@ -28,14 +28,14 @@ class BaselineRemoval(Ui_Form, Basics):
         self.chooseAlgorithmList = ['Choose an algorithm',
                                     'AirPLS',
                                     'ALS',
-                                    'CCAM',
                                     'Dietrich',
                                     'FABC',
                                     'KK',
-                                    'Mario',
                                     'Median',
                                     'Polyfit',
-                                    'Rubberband'
+                                    'Rubberband',
+                                    'CCAM (Coming soon)',
+                                    'Mario (Coming soon)',
                                     ]
         self.setComboBox(self.chooseDataComboBox, self.datakeys)
         self.setComboBox(self.chooseAlgorithmComboBox, self.chooseAlgorithmList)
@@ -86,14 +86,14 @@ class BaselineRemoval(Ui_Form, Basics):
         list_forms = [
             AirPLS,
             ALS,
-            CCAM,
             Dietrich,
             FABC,
             KK,
-            Mario,
             Median,
             Polyfit,
             Rubberband,
+            CCAM,
+            Mario,
         ]
         for items in list_forms:
             self.alg.append(items.Ui_Form())
