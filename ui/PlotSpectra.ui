@@ -166,14 +166,14 @@
       <item row="10" column="1" colspan="2">
        <widget class="QDoubleSpinBox" name="lineWidthDoubleSpinBox"/>
       </item>
-      <item row="0" column="1" colspan="2">
-       <widget class="QComboBox" name="chooseDataComboBox"/>
-      </item>
       <item row="5" column="1" colspan="2">
        <widget class="QListWidget" name="chooseRowsListWidget"/>
       </item>
       <item row="3" column="1" colspan="2">
        <widget class="QListWidget" name="xVariableListWidget"/>
+      </item>
+      <item row="0" column="1" colspan="2">
+       <widget class="QListView" name="chooseDataListView"/>
       </item>
      </layout>
     </widget>
@@ -181,7 +181,6 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>chooseDataComboBox</tabstop>
   <tabstop>figureNameLineEdit</tabstop>
   <tabstop>plotTitleLineEdit</tabstop>
   <tabstop>xVariableListWidget</tabstop>
