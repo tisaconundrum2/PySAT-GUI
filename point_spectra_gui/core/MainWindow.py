@@ -191,6 +191,7 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
 
     def menu_item_shortcuts(self):
         self.actionExit.setShortcut("ctrl+Q")
+        self.actionClear_Workflow.setShortcut("ctrl+K")
         self.actionCreate_New_Workflow.setShortcut("ctrl+N")
         self.actionRestore_Workflow.setShortcut("ctrl+O")
         self.actionSave_Current_Workflow.setShortcut("ctrl+S")
