@@ -15,8 +15,11 @@ class SplitDataset(Ui_Form, Basics):
         return self.formGroupBox
 
     def connectWidgets(self):
-        self.setComboBox(self.chooseDataComboBox, self.datakeys)
-        self.setComboBox(self.splitOnUniqueValuesOfComboBox, self.get_choices())
+        try:
+            self.setComboBox(self.chooseDataComboBox, self.datakeys)
+            self.setComboBox(self.splitOnUniqueValuesOfComboBox, self.get_choices())
+        except:
+            pass
 
     def function(self):
         datakey = self.chooseDataComboBox.currentText()
@@ -41,10 +44,15 @@ class SplitDataset(Ui_Form, Basics):
             self.vars_level1 = list(self.vars_level1[self.vars_level0 != 'wvl'])
             self.vars_level0 = list(self.vars_level0[self.vars_level0 != 'wvl'])
             colnamechoices = self.vars_level1
+            return colnamechoices
         except:
-            colnamechoices = self.data[self.chooseDataComboBox.currentText()].columns.values
-        colnamechoices = [i for i in colnamechoices if not 'Unnamed' in i]  # remove unnamed columns from choices
-        return colnamechoices
+            try:
+                colnamechoices = self.data[self.chooseDataComboBox.currentText()].columns.values
+                colnamechoices = [i for i in colnamechoices if
+                                  not 'Unnamed' in i]  # remove unnamed columns from choices
+                return colnamechoices
+            except:
+                pass
 
 
 if __name__ == "__main__":
