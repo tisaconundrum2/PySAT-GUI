@@ -13,9 +13,11 @@
 
     ```bash
     conda install conda=3  # SKIP THIS LINE ON WINDOWS
-    conda env create -n PointSpectraGUI -f environment.yml
-    source activate PointSpectraGUI  # omit the `source` on Windows
+    git clone --depth=50 --branch=master https://github.com/USGS-Astrogeology/PySAT_Point_Spectra_GUI.git
     git clone --depth=50 --branch=master https://github.com/USGS-Astrogeology/PySAT.git
+    cd PySAT_Point_Spectra_GUI
+    conda env create -n pointspectragui -f environment.yml
+    source activate pointspectragui  # omit the `source` on Windows
     python PySAT/setup.py install
     python PySAT_Point_Spectra_GUI/point_spectra_gui
     ```
