@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets
-from Qtickle import Qtickle
 from pysat.spectral.spectral_data import spectral_data
 
+from Qtickle import Qtickle
 from point_spectra_gui.core.baselineRemovalMethods import *
 from point_spectra_gui.ui.BaselineRemoval import Ui_Form
 from point_spectra_gui.util.BasicFunctionality import Basics
@@ -26,12 +26,16 @@ class BaselineRemoval(Ui_Form, Basics):
 
     def connectWidgets(self):
         self.chooseAlgorithmList = ['Choose an algorithm',
+                                    'AirPLS',
+                                    'ALS',
+                                    'Dietrich',
                                     'FABC',
                                     'KK',
-                                    'Mario',
                                     'Median',
+                                    'Polyfit',
                                     'Rubberband',
-                                    'CCAM',
+                                    'CCAM (Coming soon)',
+                                    'Mario (Coming soon)',
                                     ]
         self.setComboBox(self.chooseDataComboBox, self.datakeys)
         self.setComboBox(self.chooseAlgorithmComboBox, self.chooseAlgorithmList)
@@ -79,12 +83,18 @@ class BaselineRemoval(Ui_Form, Basics):
 
     def baselineMethods(self):
         self.alg = []
-        list_forms = [FABC,
-                      KK,
-                      Mario,
-                      Median,
-                      Rubberband,
-                      CCAM]
+        list_forms = [
+            AirPLS,
+            ALS,
+            Dietrich,
+            FABC,
+            KK,
+            Median,
+            Polyfit,
+            Rubberband,
+            CCAM,
+            Mario,
+        ]
         for items in list_forms:
             self.alg.append(items.Ui_Form())
             self.alg[-1].setupUi(self.Form)

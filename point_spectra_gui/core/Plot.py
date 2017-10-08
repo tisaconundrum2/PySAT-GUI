@@ -147,6 +147,8 @@ class Plot(Ui_Form, Basics):
             x = self.data[datakey]['cv'][xvar]
             y = self.data[datakey]['cv'][yvar]
         loadfig = None
+        if not figname in self.figname:
+            self.figname.append(figname)
         if figname in self.figs:
             loadfig = self.figs[figname]
 
