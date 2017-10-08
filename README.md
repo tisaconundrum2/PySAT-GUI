@@ -2,7 +2,7 @@
 
 # Easy Windows Installation
 
-1. Download the [**setup**](https://github.com/tisaconundrum2/PySAT_Point_Spectra_GUI_Windows/archive/master.zip) file
+1. Download the [**setup**](https://drive.google.com/file/d/0B51OpD0tMItxc0NqTG84UlVZaGs/view?usp=sharing) file
 2. Click and Install
 
 # Installation with Miniconda
