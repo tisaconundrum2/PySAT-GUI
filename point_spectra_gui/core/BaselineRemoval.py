@@ -34,7 +34,7 @@ class BaselineRemoval(Ui_Form, Basics):
                                     'Median',
                                     'Polyfit',
                                     'Rubberband',
-                                    'CCAM (Coming soon)',
+                                    'CCAM',
                                     'Mario (Coming soon)',
                                     ]
         self.setComboBox(self.chooseDataComboBox, self.datakeys)

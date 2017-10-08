@@ -19,8 +19,6 @@ class Ui_Form(Ui_Form, Basics):
 
     def connectWidgets(self):
         CCAM = ccam_br()
-        # This algorithm doesn't work for now, but let the user get a sneak peek of it.
-        self.get_widget().setDisabled(True)
         self.lowestWaveletScaleSpinBox.setValue(CCAM.lvmin_)
         self.largestWaveletScaleSpinBox.setValue(CCAM.lv_)
 
