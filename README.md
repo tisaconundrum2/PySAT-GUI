@@ -1,12 +1,27 @@
 [![Build Status](https://travis-ci.org/USGS-Astrogeology/PySAT_Point_Spectra_GUI.svg?branch=master)](https://travis-ci.org/USGS-Astrogeology/PySAT_Point_Spectra_GUI) [![Join the chat at https://gitter.im/USGS-Astrogeology/PySAT](https://badges.gitter.im/USGS-Astrogeology/PySAT.svg)](https://gitter.im/USGS-Astrogeology/PySAT?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-# Installation
+# Easy Windows Installation
 
-  - Click and download for Windows [Anaconda Python 4.3.X 64-Bit installer](https://repo.continuum.io/archive/Anaconda3-4.3.1-Windows-x86_64.exe).
-  - You can also go here to Anaconda's [download page](https://www.continuum.io/downloads)
-  - Download or clone this repository
-  - Download the PYSAT library from here [github.com/USGS-Astrogeology/PySAT](https://github.com/USGS-Astrogeology/PySAT)
-  - For more on how to install go [here](https://github.com/USGS-Astrogeology/PySAT_Point_Spectra_GUI/wiki/How-To-Install).
+1. Download the [**setup**](https://github.com/tisaconundrum2/PySAT_Point_Spectra_GUI_Windows/archive/master.zip) file
+2. Click and Install
+
+# Installation with Miniconda
+
+1. Make sure that you have [**miniconda**](http://conda.pydata.org/miniconda.html) installed
+
+2. Open a terminal (on Windows, `cmd`, not Powershell) in the directory where you saved the file and type:
+
+    ```bash
+    $ conda install conda=3  # SKIP THIS LINE ON WINDOWS
+    $ conda env create -n PointSpectraGUI -f environment.yml
+    $ source activate PointSpectraGUI  # omit the `source` on Windows
+    $ git clone --depth=50 --branch=master https://github.com/USGS-Astrogeology/PySAT.git
+    $ python PySAT/setup.py install
+    $ python PySAT_Point_Spectra_GUI/point_spectra_gui
+    ```
+
+4. **Done**! Now, to use *PySAT Point Spectra GUI*, you have to first type `source activate PointSpectraGUI` in a terminal (omit the `source` on Windows), and then call `python PySAT_Point_Spectra_GUI/point_spectra_gui`.
+
 
 # PYSAT UI
 ![PYSAT splash](./images/splash.png)  
