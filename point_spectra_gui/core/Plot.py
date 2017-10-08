@@ -144,8 +144,8 @@ class Plot(Ui_Form, Basics):
             x = self.data[datakey].df[xvar]
             y = self.data[datakey].df[yvar]
         except:
-            x = self.data[datakey][xvar]
-            y = self.data[datakey][yvar]
+            x = self.data[datakey]['cv'][xvar]
+            y = self.data[datakey]['cv'][yvar]
         loadfig = None
         if figname in self.figs:
             loadfig = self.figs[figname]
@@ -194,7 +194,7 @@ class Plot(Ui_Form, Basics):
             vardata = self.data[self.chooseDataComboBox.currentText()].df[vartuple]
         except:
             try:
-                vardata = self.data[self.chooseDataComboBox.currentText()][var]
+                vardata = self.data[self.chooseDataComboBox.currentText()]['cv'][var]
             except:
                 vardata = [0, 0]
         try:

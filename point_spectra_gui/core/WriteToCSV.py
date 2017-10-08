@@ -30,7 +30,7 @@ class WriteToCSV(Ui_Form, Basics):
         try:
             datatemp = self.data[datakey].df[cols]
         except:
-            datatemp = self.data[datakey][cols]
+            datatemp = self.data[datakey]['cv'][cols]
 
         try:
             datatemp.to_csv(self.outpath + '/' + filename)
