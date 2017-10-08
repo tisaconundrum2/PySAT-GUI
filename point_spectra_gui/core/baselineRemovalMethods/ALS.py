@@ -8,7 +8,6 @@ from point_spectra_gui.util.BasicFunctionality import Basics
 class Ui_Form(Ui_Form, Basics):
     def setupUi(self, Form):
         super().setupUi(Form)
-        self.checkMinAndMax()
         Basics.setupUi(self, Form)
 
     def get_widget(self):
@@ -19,6 +18,11 @@ class Ui_Form(Ui_Form, Basics):
 
     def connectWidgets(self):
         als = ALS()
+
+        self.asymmetryDoubleSpinBox.setDecimals(2)
+        self.smoothnessDoubleSpinBox.setMaximum(10000000)
+        self.convergenceThresholdDoubleSpinBox.setDecimals(6)
+
         self.asymmetryDoubleSpinBox.setValue(als.asymmetry_)
         self.smoothnessDoubleSpinBox.setValue(als.smoothness_)
         self.maxNumOfIterationsSpinBox.setValue(als.max_iters_)

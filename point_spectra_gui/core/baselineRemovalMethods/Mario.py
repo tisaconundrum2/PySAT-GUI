@@ -19,6 +19,8 @@ class Ui_Form(Ui_Form, Basics):
 
     def connectWidgets(self):
         br = Mario()
+        # This algorithm doesn't work for now, but let the user get a sneak peek of it.
+        self.get_widget().setDisabled(True)
         self.polynomialOrderSpinBox.setValue(br.poly_order_)
         self.toleranceDoubleSpinBox.setValue(br.tol_)
 

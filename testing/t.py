@@ -148,7 +148,7 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         if name == settings:
             print("This is already your current theme")
 
-        elif name == 'qtmodern':  # User is entering into qtmodern
+        if name == 'qtmodern':  # User is entering into qtmodern
             self.settings.setValue('theme', name)
             self.new()
 
@@ -191,7 +191,6 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
 
     def menu_item_shortcuts(self):
         self.actionExit.setShortcut("ctrl+Q")
-        self.actionClear_Workflow.setShortcut("ctrl+K")
         self.actionCreate_New_Workflow.setShortcut("ctrl+N")
         self.actionRestore_Workflow.setShortcut("ctrl+O")
         self.actionSave_Current_Workflow.setShortcut("ctrl+S")
@@ -203,68 +202,30 @@ class Ui_MainWindow(MainWindow.Ui_MainWindow, QtCore.QThread, Basics):
         :return:
         """
         # TODO figure out how to get this code into `MainWindow.py`
-        try:
-            self.actionRead_ChemCam_Data.triggered.connect(
-                lambda: self.addWidget(core.ReadChemCamData.ReadChemCamData))
-            self.actionRemove_Baseline.triggered.connect(
-                lambda: self.addWidget(core.BaselineRemoval.BaselineRemoval))
-            self.actionCross_Validation.triggered.connect(
-                lambda: self.addWidget(core.CrossValidation.CrossValidation))
-            self.actionDimensionality_Reduction.triggered.connect(
-                lambda: self.addWidget(core.DimensionalityReduction.DimensionalityReduction))
-            self.actionInterpolate.triggered.connect(
-                lambda: self.addWidget(core.Interpolation.Interpolation))
-            self.actionLoad_Data.triggered.connect(
-                lambda: self.addWidget(core.LoadData.LoadData))
-            self.actionSave_Current_Data.triggered.connect(
-                lambda: self.addWidget(core.WriteToCSV.WriteToCSV))
-            self.actionRename_Data.triggered.connect(
-                lambda: self.addWidget(core.RenameData.RenameData))
-            self.actionApply_Mask.triggered.connect(
-                lambda: self.addWidget(core.MaskData.MaskData))
-            self.actionMultiply_by_Vector.triggered.connect(
-                lambda: self.addWidget(core.MultiplyByVector.MultiplyByVector))
-            self.actionNormalization.triggered.connect(
-                lambda: self.addWidget(core.Normalization.Normalization))
-            self.actionSet_Output_Path.triggered.connect(
-                lambda: self.addWidget(core.OutputFolder.OutputFolder))
-            self.actionPeak_Areas.triggered.connect(
-                lambda: self.addWidget(core.PeakAreas.PeakAreas))
-            self.actionPlot.triggered.connect(
-                lambda: self.addWidget(core.Plot.Plot))
-            self.actionPlot_ICA_PCA.triggered.connect(
-                lambda: self.addWidget(core.Plot_ICA_PCA.Plot_ICA_PCA))
-            self.actionPlot_Spectra.triggered.connect(
-                lambda: self.addWidget(core.PlotSpectra.PlotSpectra))
-            self.actionTrain.triggered.connect(
-                lambda: self.addWidget(core.RegressionTrain.RegressionTrain))
-            self.actionPredict.triggered.connect(
-                lambda: self.addWidget(core.RegressionPredict.RegressionPredict))
-            self.actionRemove_Rows.triggered.connect(
-                lambda: self.addWidget(core.RemoveRows.RemoveRows))
-            self.actionSplit_Data.triggered.connect(
-                lambda: self.addWidget(core.SplitDataset.SplitDataset))
-            self.actionStratified_Folds.triggered.connect(
-                lambda: self.addWidget(core.StratifiedFolds.StratifiedFolds))
-            self.actionSubmodel_Predict.triggered.connect(
-                lambda: self.addWidget(core.SubmodelPredict.SubmodelPredict))
-            self.actionQtmodern.triggered.connect(lambda: self.theme('qtmodern'))
-            self.actionDefault.triggered.connect(lambda: self.theme('default'))
-            self.actionBrace_yourself.triggered.connect(lambda: self.theme('braceyourself'))
-            self.actionCreate_New_Workflow.triggered.connect(self.new)
-            self.actionClear_Workflow.triggered.connect(self.clear)
-            self.actionSave_Current_Workflow.triggered.connect(self.on_save_clicked)
-            self.actionRestore_Workflow.triggered.connect(self.on_restore_clicked)
-            self.deleteModulePushButton.clicked.connect(self.on_delete_module_clicked)
-            self.okPushButton.clicked.connect(self.on_okButton_clicked)
-            self.undoModulePushButton.clicked.connect(self.on_undoButton_clicked)
-            self.stopPushButton.clicked.connect(self.on_stopButton_clicked)
-            self.actionOn.triggered.connect(self.debug_mode)
-            self.actionOff.triggered.connect(self.normal_mode)
-            self.actionExit.triggered.connect(self.MainWindow.close)
-
-        except Exception as e:
-            print(e)
+        self.addWidget(core.ReadChemCamData.ReadChemCamData)
+        self.addWidget(core.BaselineRemoval.BaselineRemoval)
+        self.addWidget(core.CrossValidation.CrossValidation)
+        self.addWidget(core.DimensionalityReduction.DimensionalityReduction)
+        self.addWidget(core.Interpolation.Interpolation)
+        self.addWidget(core.LoadData.LoadData)
+        self.addWidget(core.WriteToCSV.WriteToCSV)
+        self.addWidget(core.RenameData.RenameData)
+        self.addWidget(core.MaskData.MaskData)
+        self.addWidget(core.MultiplyByVector.MultiplyByVector)
+        self.addWidget(core.Normalization.Normalization)
+        self.addWidget(core.OutputFolder.OutputFolder)
+        self.addWidget(core.PeakAreas.PeakAreas)
+        self.addWidget(core.Plot.Plot)
+        self.addWidget(core.Plot_ICA_PCA.Plot_ICA_PCA)
+        self.addWidget(core.PlotSpectra.PlotSpectra)
+        self.addWidget(core.RegressionTrain.RegressionTrain)
+        self.addWidget(core.RegressionPredict.RegressionPredict)
+        self.addWidget(core.RemoveRows.RemoveRows)
+        self.addWidget(core.SplitDataset.SplitDataset)
+        self.addWidget(core.StratifiedFolds.StratifiedFolds)
+        self.addWidget(core.SubmodelPredict.SubmodelPredict)
+        time.sleep(5)
+        sys.exit()
 
     def closeEvent(self, event):
         """

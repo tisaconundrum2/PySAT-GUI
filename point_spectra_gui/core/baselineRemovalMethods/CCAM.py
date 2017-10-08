@@ -19,6 +19,8 @@ class Ui_Form(Ui_Form, Basics):
 
     def connectWidgets(self):
         CCAM = ccam_br()
+        # This algorithm doesn't work for now, but let the user get a sneak peek of it.
+        self.get_widget().setDisabled(True)
         self.lowestWaveletScaleSpinBox.setValue(CCAM.lvmin_)
         self.largestWaveletScaleSpinBox.setValue(CCAM.lv_)
 
@@ -33,6 +35,8 @@ class Ui_Form(Ui_Form, Basics):
             methodParameters.update({'int_flag_': 1})
         elif int_flag == 'Spline':
             methodParameters.update({'int_flag_': 2})
+
+        return methodParameters
 
 
 if __name__ == "__main__":
