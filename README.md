@@ -7,22 +7,54 @@
 
 # Installation with Miniconda
 
-1. Make sure that you have [**miniconda**](http://conda.pydata.org/miniconda.html) installed
+You can also copy and paste the code into your terminal
 
-2. Open a terminal (on Windows, `cmd`, not Powershell) in the directory where you saved the file and type:
+## Things you'll need
 
-    ```bash
-    conda install conda=3  # SKIP THIS LINE ON WINDOWS
-    git clone --depth=50 --branch=master https://github.com/USGS-Astrogeology/PySAT_Point_Spectra_GUI.git
-    git clone --depth=50 --branch=master https://github.com/USGS-Astrogeology/PySAT.git
-    cd PySAT_Point_Spectra_GUI
-    conda env create -n pointspectragui -f environment.yml
-    source activate pointspectragui  # omit the `source` on Windows
-    python PySAT/setup.py install
-    python PySAT_Point_Spectra_GUI/point_spectra_gui
-    ```
+<a href="https://git-scm.com/downloads">git-bash </a>
+<a href="https://conda.io/miniconda.html">Miniconda</a>
 
-4. **Done**! Now, to use *PySAT Point Spectra GUI*, you have to first type `source activate PointSpectraGUI` in a terminal (omit the `source` on Windows), and then call `python PySAT_Point_Spectra_GUI/point_spectra_gui`.
+## 1. Fresh install of Miniconda (Skip to step 2 if you have Anaconda/Miniconda)
+
+Install <a href="https://conda.io/miniconda.html">Miniconda</a>
+
+## 2. Download necessary libraries
+
+```bash
+git clone --depth=50 --branch=master https://github.com/USGS-Astrogeology/PySAT_Point_Spectra_GUI.git
+git clone --depth=50 --branch=master https://github.com/USGS-Astrogeology/PySAT.git
+```
+
+## 3. Python install libraries
+
+```bash
+cd PySAT
+python setup.py install
+cd ..
+cd PySAT_Point_Spectra_GUI
+python setup.py install
+cd ..
+```
+
+## 4. Pip/Conda install necessary libraries
+
+```bash
+conda install pyqt
+conda install numpy
+conda install pandas
+conda install scipy
+pip install sklearn
+conda install matplotlib
+pip install qtmodern
+```
+
+##5 Start the application
+
+```bash
+python PySAT_Point_Spectra_GUI\point_spectra_gui
+```
+
+if the application fails to start because of a missing dependency try `pip` or `conda` installing it.
 
 
 # PYSAT UI
