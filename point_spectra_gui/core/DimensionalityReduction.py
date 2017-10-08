@@ -7,8 +7,8 @@ from point_spectra_gui.util.BasicFunctionality import Basics
 class DimensionalityReduction(Ui_Form, Basics):
     _methods = [
         'PCA',
-        'ICA',
-        'ICA-JADE',
+        'FastICA'#,
+        #'ICA-JADE',
     ]
 
     def setupUi(self, Form):
@@ -38,7 +38,7 @@ class DimensionalityReduction(Ui_Form, Basics):
             if method == 'PCA':
                 method_kws = {'n_components': self.dim_red_widget.pca_nc_spinbox.value()}
 
-            if method == 'ICA':
+            if method == 'FastICA':
                 method_kws = {'n_components': self.dim_red_widget.ica_nc_spinbox.value()}
 
             if method == 'ICA-JADE':
@@ -48,7 +48,7 @@ class DimensionalityReduction(Ui_Form, Basics):
             print(e)
 
         try:
-            if method == 'PCA' or method == 'ICA':
+            if method == 'PCA' or method == 'FastICA':
                 self.dim_reds[dim_red_key] = self.data[datakey].dim_red(
                     col, method, params, method_kws, load_fit=load_fit)
             elif method == 'ICA-JADE':
@@ -80,7 +80,7 @@ class DimensionalityReduction(Ui_Form, Basics):
             self.dim_red_widget.pca_hlayout.addItem(self.dim_red_widget.pca_spacer)
             self.dim_red_widget.pca_nc_spinbox.setValue(2)
 
-        if method == 'ICA':
+        if method == 'FastICA':
             self.dim_red_widget.ica_hlayout = QtWidgets.QHBoxLayout(self.dim_red_widget)
             self.dim_red_widget.ica_nc_label = QtWidgets.QLabel(self.dim_red_widget)
             self.dim_red_widget.ica_nc_label.setText('# of components:')
