@@ -11,7 +11,7 @@ You can also copy and paste the code into your terminal
 
 ### Things you'll need
 
-<a href="https://git-scm.com/downloads">git-bash </a>
+<a href="https://git-scm.com/downloads">git-bash </a><br>
 <a href="https://conda.io/miniconda.html">Miniconda</a>
 
 ### 1. Fresh install of Miniconda (Skip to step 2 if you have Anaconda/Miniconda)
