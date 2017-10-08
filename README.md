@@ -12,12 +12,12 @@
 2. Open a terminal (on Windows, `cmd`, not Powershell) in the directory where you saved the file and type:
 
     ```bash
-    $ conda install conda=3  # SKIP THIS LINE ON WINDOWS
-    $ conda env create -n PointSpectraGUI -f environment.yml
-    $ source activate PointSpectraGUI  # omit the `source` on Windows
-    $ git clone --depth=50 --branch=master https://github.com/USGS-Astrogeology/PySAT.git
-    $ python PySAT/setup.py install
-    $ python PySAT_Point_Spectra_GUI/point_spectra_gui
+    conda install conda=3  # SKIP THIS LINE ON WINDOWS
+    conda env create -n PointSpectraGUI -f environment.yml
+    source activate PointSpectraGUI  # omit the `source` on Windows
+    git clone --depth=50 --branch=master https://github.com/USGS-Astrogeology/PySAT.git
+    python PySAT/setup.py install
+    python PySAT_Point_Spectra_GUI/point_spectra_gui
     ```
 
 4. **Done**! Now, to use *PySAT Point Spectra GUI*, you have to first type `source activate PointSpectraGUI` in a terminal (omit the `source` on Windows), and then call `python PySAT_Point_Spectra_GUI/point_spectra_gui`.
