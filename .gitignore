@@ -90,3 +90,4 @@ auto_gitter.bat
 !inputs/*
 
 *.stackdump
+.pypirc
