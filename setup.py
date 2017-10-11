@@ -150,7 +150,6 @@ args = {
     'keywords': 'MusicBrainz metadata tagger point_spectra_gui',
     'package_dir': {'point_spectra_gui': 'point_spectra_gui'},
     'packages': find_packages(),
-    'console_scripts': ['point_spectra_gui = point_spectra_gui.__main__:main'],
     'cmdclass': {
         'build_ui': point_spectra_gui_build_ui,
         'clean_ui': point_spectra_gui_clean_ui,
