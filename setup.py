@@ -144,7 +144,7 @@ setup(
     author="Ryan B. Anderson, Nicholas Finch",
     author_email='rbanderson@usgs.gov, ngf4@nau.edu',
     license="Public Domain",
-    keywords='MusicBrainz metadata tagger point_spectra_gui',
+    keywords='point_spectra_gui',
     package_dir={'point_spectra_gui': 'point_spectra_gui'},
     packages=find_packages(),
     cmdclass={
